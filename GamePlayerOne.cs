@@ -89,7 +89,39 @@ namespace Battleship
             Button selectedButton = sender as Button;
             string tip = Position.GetButtonTextCoords(selectedButton, out int playerID);
             string tag = Support.GetTagFromButton(selectedButton);
-            int delta;
+            int[] deltas = new int[0];
+            switch (Data.ShipPlaceMode)
+            {
+                case "Frigate":
+                    {
+                        Array.Resize(ref deltas, 1);
+                        break;
+                    }
+                case "Destroyer":
+                    {
+                        Array.Resize(ref deltas, 2);
+                        break;
+                    }
+                case "Cruiser":
+                    {
+                        Array.Resize(ref deltas, 3);
+                        break;
+                    }
+                case "Battleship":
+                    {
+                        Array.Resize(ref deltas, 4);
+                        break;
+                    }
+                default:
+                    {
+                        Array.Resize(ref deltas, 0);
+                        break;
+                    }
+            }
+            for (int d = 0; d < deltas.Length; d++)
+            {
+                deltas[d] = d;
+            }
             switch (playerID - 1)
             {
                 case 0:

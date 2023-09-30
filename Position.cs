@@ -87,6 +87,10 @@ namespace Battleship
         public bool IsValidShipPosition(string cellposition,string shipType, string orientation, string tag)
         {
             GetCoordsFromTag(tag, out int x, out int y, out int p);
+            if (shipType == "Frigate")
+            {
+                return true;
+            }
             switch (cellposition)
             {
                 case "center":
@@ -95,7 +99,7 @@ namespace Battleship
                         {
                             case "Destroyer":
                                 {
-                                    return true; //?
+                                    return true;
                                 }
                             case "Cruiser":
                                 {
