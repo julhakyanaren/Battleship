@@ -7,6 +7,8 @@ namespace Battleship
     {
         Support Support = new Support();
         ColorMethods ColorMethods = new ColorMethods();
+        Position Position = new Position();
+
         public char[,] MapPlayer = new char[10, 10];
         public char[,] MapEnemy = new char[10, 10];
         public char[][,] Maps = new char[2][,];

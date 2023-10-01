@@ -61,7 +61,6 @@ namespace Battleship
                     button.Margin = new Padding(0);
                   //targetButton.Text = targetButton.Name.ToString();
                     button.Click += Button_Click;
-                    button.MouseHover += Button_MouseHover;
                     button.MouseLeave += Button_MouseLeave;
                     button.MouseEnter += Button_MouseEnter;
                     MapButtons[f, b] = button;
@@ -89,27 +88,32 @@ namespace Battleship
             Button selectedButton = sender as Button;
             string tip = Position.GetButtonTextCoords(selectedButton, out int playerID);
             string tag = Support.GetTagFromButton(selectedButton);
+            string cellPosition = Position.GetCellPosition(tag);
+            Button[] playerButton = Support.GetPlayerButtons(MapButtons);
+            int index = playerID - 1;
             int[] deltas = new int[0];
+            int[] nextButtonsTags = new int[0];
+            Support.StringToInt(tag, out int currentTag);
             switch (Data.ShipPlaceMode)
             {
                 case "Frigate":
                     {
-                        Array.Resize(ref deltas, 1);
+                        Array.Resize(ref deltas, 0);
                         break;
                     }
                 case "Destroyer":
                     {
-                        Array.Resize(ref deltas, 2);
+                        Array.Resize(ref deltas, 1);
                         break;
                     }
                 case "Cruiser":
                     {
-                        Array.Resize(ref deltas, 3);
+                        Array.Resize(ref deltas, 2);
                         break;
                     }
                 case "Battleship":
                     {
-                        Array.Resize(ref deltas, 4);
+                        Array.Resize(ref deltas, 3);
                         break;
                     }
                 default:
@@ -118,11 +122,30 @@ namespace Battleship
                         break;
                     }
             }
+            Array.Resize(ref nextButtonsTags, deltas.Length);
             for (int d = 0; d < deltas.Length; d++)
             {
-                deltas[d] = d;
+                switch (Data.Orientation)
+                {
+                    case "H":
+                        {
+                            deltas[d] = (d + 1) * 10; 
+                            break;
+                        }
+                    case "V":
+                        {
+                            deltas[d] = (d + 1) * (-1);
+                            break;
+                        }
+                    default:
+                        {
+                            deltas[d] = 0;
+                            break;
+                        }
+
+                }
             }
-            switch (playerID - 1)
+            switch (index)
             {
                 case 0:
                     {
@@ -163,21 +186,107 @@ namespace Battleship
                         break;
                     }
             }
+            Data.CanRaplaceShip = Position.IsValidShipPosition(cellPosition, Data.ShipPlaceMode, Data.Orientation, tag);
+            if (Data.ShipPlaceMode == "Frigate")
+            {
+                if (Data.CanRaplaceShip)
+                {
+                    selectedButton.ForeColor = Design.MouseOverColor[index];
+                    selectedButton.FlatAppearance.BorderColor = Design.BorderColor[index];
+                }
+            }
+            else
+            {
+                if (Data.CanRaplaceShip)
+                {
+                    selectedButton.ForeColor = Design.MouseOverColor[index];
+                    selectedButton.FlatAppearance.BorderColor = Design.BorderColor[index];
+                    for (int nb = 0; nb < nextButtonsTags.Length; nb++)
+                    {
+                        nextButtonsTags[nb] = currentTag + deltas[nb];
+                        foreach (Button button in playerButton)
+                        {
+                            if ((int)button.Tag == nextButtonsTags[nb])
+                            {
+                                int buttonIndex = Array.IndexOf(playerButton, button);
+                                playerButton[buttonIndex].BackColor = Design.MouseOverColor[index];
+                                playerButton[buttonIndex].FlatAppearance.BorderColor = Design.BorderColor[index];
+                            }
+                        }
+                    }
+                }
+                else
+                {
+                    selectedButton.BackColor = Design.MouseOverColor[1];
+                    selectedButton.FlatAppearance.BorderColor = Design.BorderColor[1];
+                }
+            }
         }
         private async void Button_MouseLeave(object sender, EventArgs e)
         {
             await Task.Delay(0);
-            BS_PlayerSchema_Index.Text = null;
-            BS_EnemySchema_Index.Text = null;
+            bool orientationChanged = false;
             Button unselectedButton = sender as Button;
-            unselectedButton.BackColor = Color.White;
-            unselectedButton.ForeColor = Color.Black;
-            unselectedButton.FlatAppearance.BorderColor = Color.Black;
             string tip = Position.GetButtonTextCoords(unselectedButton, out int playerID);
             string tag = Support.GetTagFromButton(unselectedButton);
-            string position = Position.GetCellPosition(tag);
-            int delta;
-            switch (playerID - 1)
+            string cellPosition = Position.GetCellPosition(tag);
+            Button[] playerButton = Support.GetPlayerButtons(MapButtons);
+            int index = playerID - 1;
+            int[] deltas = new int[0];
+            int[] nextButtonsTags = new int[0];
+            Support.StringToInt(tag, out int currentTag);
+            switch (Data.ShipPlaceMode)
+            {
+                case "Frigate":
+                    {
+                        Array.Resize(ref deltas, 0);
+                        break;
+                    }
+                case "Destroyer":
+                    {
+                        Array.Resize(ref deltas, 1);
+                        break;
+                    }
+                case "Cruiser":
+                    {
+                        Array.Resize(ref deltas, 2);
+                        break;
+                    }
+                case "Battleship":
+                    {
+                        Array.Resize(ref deltas, 3);
+                        break;
+                    }
+                default:
+                    {
+                        Array.Resize(ref deltas, 0);
+                        break;
+                    }
+            }
+            Array.Resize(ref nextButtonsTags, deltas.Length);
+            for (int d = 0; d < deltas.Length; d++)
+            {
+                switch (Data.Orientation)
+                {
+                    case "H":
+                        {
+                            deltas[d] = (d + 1) * 10;
+                            break;
+                        }
+                    case "V":
+                        {
+                            deltas[d] = (d + 1) * (-1);
+                            break;
+                        }
+                    default:
+                        {
+                            deltas[d] = 0;
+                            break;
+                        }
+
+                }
+            }
+            switch (index)
             {
                 case 0:
                     {
@@ -192,200 +301,63 @@ namespace Battleship
                             if (ModifierKeys == Keys.Shift)
                             {
                                 Data.Orientation = "V";
+                                orientationChanged = true;
                             }
                             else
                             {
                                 Data.Orientation = "H";
+                                orientationChanged = true;
                             }
                         }
-                        switch (Data.ShipPlaceMode)
+                        if (orientationChanged)
                         {
-                            case "Destroyer":
-                                {
-                                    switch (position)
-                                    {
-                                        case "center":
-                                            {
-                                                if (Support.StringToInt(tag, out int currentTag))
-                                                {
-                                                    switch (Data.Orientation)
-                                                    {
-                                                        case "H":
-                                                            {
-                                                                delta = 10;
-                                                                break;
-                                                            }
-                                                        case "V":
-                                                            {
-                                                                delta = -1;
-                                                                break;
-                                                            }
-                                                        default:
-                                                            {
-                                                                delta = 0;
-                                                                break;
-                                                            }
-                                                    }
-                                                    int nextTag1 = currentTag + delta;
-                                                    foreach (Button button in playerButtons)
-                                                    {
-                                                        if ((int)button.Tag == nextTag1)
-                                                        {
-                                                            int index = Array.IndexOf(playerButtons, button);
-                                                            playerButtons[index].BackColor = Color.White;
-                                                            unselectedButton.BackColor = Color.White;
-                                                            playerButtons[index].FlatAppearance.BorderColor = Color.Black;
-                                                        }
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    //Error_Catch
-                                                }
-                                                break;
-                                            }
-                                    }
-                                    break;
-                                }
-                            case "Cruiser":
-                                {
-                                    switch (position)
-                                    {
-                                        case "center":
-                                            {
-                                                if (Support.StringToInt(tag, out int currentTag))
-                                                {
-                                                    switch (Data.Orientation)
-                                                    {
-                                                        case "H":
-                                                            {
-                                                                delta = 10;
-                                                                break;
-                                                            }
-                                                        case "V":
-                                                            {
-                                                                delta = -1;
-                                                                break;
-                                                            }
-                                                        default:
-                                                            {
-                                                                delta = 0;
-                                                                break;
-                                                            }
-                                                    }
-                                                    int nextTag1 = currentTag + delta;
-                                                    int nextTag2 = currentTag + (2 * delta);
-                                                    if (Position.IsValidShipPosition(position, Data.ShipPlaceMode, Data.Orientation, tag))
-                                                    {
-                                                        foreach (Button button in playerButtons)
-                                                        {
-                                                            if ((int)button.Tag == nextTag1)
-                                                            {
-                                                                int index = Array.IndexOf(playerButtons, button);
-                                                                playerButtons[index].BackColor = Color.White; //ChangeThis
-                                                                playerButtons[index].FlatAppearance.BorderColor = Color.Black;
-                                                            }
-                                                            if ((int)button.Tag == nextTag2)
-                                                            {
-                                                                int index = Array.IndexOf(playerButtons, button);
-                                                                playerButtons[index].BackColor = Color.White; //ChangeThis
-                                                                playerButtons[index].FlatAppearance.BorderColor = Color.Black;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    //Error_Catch
-                                                }
-                                                break;
-                                            }
-                                    }
-                                    break;
-                                }
-                            case "Battleship":
-                                {
-                                    unselectedButton.BackColor = Color.White; //Change This
-                                    unselectedButton.FlatAppearance.BorderColor = Color.Black;
-                                    switch (position)
-                                    {
-                                        case "center":
-                                            {
-                                                if (Support.StringToInt(tag, out int currentTag))
-                                                {
-                                                    switch (Data.Orientation)
-                                                    {
-                                                        case "H":
-                                                            {
-                                                                delta = 10;
-                                                                break;
-                                                            }
-                                                        case "V":
-                                                            {
-                                                                delta = -1;
-                                                                break;
-                                                            }
-                                                        default:
-                                                            {
-                                                                delta = 0;
-                                                                break;
-                                                            }
-                                                    }
-                                                    int nextTag1 = currentTag + delta;
-                                                    int nextTag2 = currentTag + (2 * delta);
-                                                    int nextTag3 = currentTag + (3 * delta);
-                                                    if (Position.IsValidShipPosition(position, Data.ShipPlaceMode, Data.Orientation, tag))
-                                                    {
-                                                        foreach (Button button in playerButtons)
-                                                        {
-                                                            if ((int)button.Tag == nextTag1)
-                                                            {
-                                                                int index = Array.IndexOf(playerButtons, button);
-                                                                playerButtons[index].BackColor = Color.White;
-                                                                playerButtons[index].FlatAppearance.BorderColor = Color.Black;
-                                                            }
-                                                            if ((int)button.Tag == nextTag2)
-                                                            {
-                                                                int index = Array.IndexOf(playerButtons, button);
-                                                                playerButtons[index].BackColor = Color.White;
-                                                                playerButtons[index].FlatAppearance.BorderColor = Color.Black;
-                                                            }
-                                                            if ((int)button.Tag == nextTag3)
-                                                            {
-                                                                int index = Array.IndexOf(playerButtons, button);
-                                                                playerButtons[index].BackColor = Color.White;
-                                                                playerButtons[index].FlatAppearance.BorderColor = Color.Black;
-                                                            }
-                                                        }
-                                                    }
-                                                }
-                                                else
-                                                {
-                                                    //Error_Catch
-                                                }
-                                                break;
-                                            }
-                                    }
-                                    break;
-                                }
+                            ClearOldMarking();
                         }
                         break;
                     }
                 case 1:
                     {
+                        BS_EnemySchema_Index.Text = tip;
+                        break;
+                    }
+                default:
+                    {
+                        BS_PlayerSchema_Index.Text = null;
+                        BS_EnemySchema_Index.Text = null;
                         break;
                     }
             }
+            Data.CanRaplaceShip = !Position.IsValidShipPosition(cellPosition, Data.ShipPlaceMode, Data.Orientation, tag);
+            if (Data.ShipPlaceMode == "Frigate")
+            {
+                if (!Data.CanRaplaceShip)
+                {
+                    unselectedButton.ForeColor = Color.White;
+                    unselectedButton.FlatAppearance.BorderColor = Color.Black;
+                }
+            }
+            else
+            {
+                if (!Data.CanRaplaceShip)
+                {
+                    unselectedButton.ForeColor = Design.MouseOverColor[index];
+                    unselectedButton.FlatAppearance.BorderColor = Design.BorderColor[index];
+                    for (int nb = 0; nb < nextButtonsTags.Length; nb++)
+                    {
+                        nextButtonsTags[nb] = currentTag + deltas[nb];
+                        foreach (Button button in playerButton)
+                        {
+                            if ((int)button.Tag == nextButtonsTags[nb])
+                            {
+                                int buttonIndex = Array.IndexOf(playerButton, button);
+                                playerButton[buttonIndex].BackColor = Color.White;
+                                playerButton[buttonIndex].FlatAppearance.BorderColor = Color.Black;
+                            }
+                        }
+                    }
+                }
+            }
         }
-        private async void Button_MouseHover(object sender, EventArgs e)
-        {
-            await Task.Delay(0);
-            Button selectedButton = sender as Button;
-            string tip = Position.GetButtonTextCoords(selectedButton, out int playerID);
-            selectedButton.BackColor = Design.MouseOverColor[playerID - 1];
-            GPO_ToolTip.SetToolTip(selectedButton, $"{tip}");
-        }
-
         int[,] GenerateButtonsTags()
         {
             int tag;

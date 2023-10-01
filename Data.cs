@@ -14,6 +14,7 @@ namespace Battleship
         public static int Turn;
         public static string ShipPlaceMode = "N";
         public static string Orientation = "Null";
+        public static bool CanRaplaceShip;
 
         public static char[,] SetShipsChars()
         {
