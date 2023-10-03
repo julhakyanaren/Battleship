@@ -26,5 +26,7 @@ namespace Battleship
             Color.White,
             Color.FromArgb(255, 128, 128)
         };
+
+        public static Color[] ShipsColor = { Color.Silver, Color.DarkGray, Color.Gray, Color.DimGray };
     }
 }

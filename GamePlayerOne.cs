@@ -380,6 +380,48 @@ namespace Battleship
         public void Button_Click(object sender, EventArgs e)
         {
             Button clickedButton = sender as Button;
+            Support.StringToInt(Support.GetTagFromButton(clickedButton), out int tag);
+            if (tag / 100 == 1)
+            {
+                Button[] playerButtons = Support.GetPlayerButtons(MapButtons);
+                Color shipColor = Design.MouseOverColor[0];
+                foreach (Button button in playerButtons)
+                {
+                    switch (Data.ShipPlaceMode)
+                    {
+                        case "Frigate":
+                            {
+                                shipColor = Design.ShipsColor[0];
+                                break;
+                            }
+                        case "Destroyer":
+                            {
+                                shipColor = Design.ShipsColor[1];
+                                break;
+                            }
+                        case "Cruiser":
+                            {
+                                shipColor = Design.ShipsColor[2];
+                                break;
+                            }
+                        case "Battleship":
+                            {
+                                shipColor = Design.ShipsColor[3];
+                                break;
+                            }
+                        default:
+                            {
+                                break;
+                            }
+                    }
+                    if (button.ForeColor == Design.MouseOverColor[0])
+                    {
+                        button.ForeColor = shipColor;
+                        button.FlatAppearance.BorderColor = Color.Black;
+                    }
+                }
+            }
+
         }
         private void BS_Test_Generate_Click(object sender, EventArgs e)
         {
