@@ -19,7 +19,7 @@ namespace Battleship
             Color.FromArgb(255, 255, 128),
             Color.FromArgb(255, 128, 128)
         };
-        public static Color[] BorderColor = { Color.Orange, Color.Red };
+        public static Color[] BorderColor = { Color.Orange, Color.Black };
 
         public static Color[] MouseOverColorDefault =
         {

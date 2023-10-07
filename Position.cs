@@ -1,8 +1,6 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace Battleship
@@ -10,6 +8,7 @@ namespace Battleship
     public class Position
     {
         Support Support = new Support();
+        ColorMethods ColorMethods = new ColorMethods();
         public void GetCoordsFromTag(string tag, out int x, out int y, out int playerID)
         {
             int tagInt = -1;
@@ -84,14 +83,14 @@ namespace Battleship
             }
             return position;
         }
-        public bool IsValidShipPosition(string cellposition,string shipType, string orientation, string tag)
+        public bool IsValidShipPosition(string cellPosition,string shipType, string orientation, string tag)
         {
             GetCoordsFromTag(tag, out int x, out int y, out int p);
             if (shipType == "Frigate")
             {
                 return true;
             }
-            switch (cellposition)
+            switch (cellPosition)
             {
                 case "center":
                     {
@@ -330,54 +329,25 @@ namespace Battleship
                             {
                                 case "H":
                                     {
-                                        switch (shipType)
+                                        if (shipType != "Frigate")
                                         {
-                                            case "Destroyer":
-                                                {
-                                                    if (x >= 1)
-                                                    {
-                                                        return true;
-                                                    }
-                                                    else
-                                                    {
-                                                        return false;
-                                                    }
-                                                }
-                                            case "Cruiser":
-                                                {
-                                                    if (x >= 2)
-                                                    {
-                                                        return true;
-                                                    }
-                                                    else
-                                                    {
-                                                        return false;
-                                                    }
-                                                }
-                                            case "Battleship":
-                                                {
-                                                    if (x >= 3)
-                                                    {
-                                                        return true;
-                                                    }
-                                                    else
-                                                    {
-                                                        return false;
-                                                    }
-                                                }
-                                            case "Frigate":
-                                                {
-                                                    return true;
-                                                }
-                                            default:
-                                                {
-                                                    return false;
-                                                }
+                                            return false;
+                                        }
+                                        else
+                                        {
+                                            return true;
                                         }
                                     }
                                 case "V":
                                     {
-                                        return false;
+                                        if (x >= 1)
+                                        {
+                                            return true;
+                                        }
+                                        else
+                                        {
+                                            return false;
+                                        }
                                     }
                                 default:
                                     {
@@ -443,6 +413,18 @@ namespace Battleship
                     }
             }
             return false;
+        }
+        public bool IsEmptyPosition(Button selectedButton)
+        {
+            Color selectedColor = ColorMethods.CellCollor(selectedButton);
+            if (selectedColor != Color.White)
+            {
+                return false;
+            }
+            else
+            {
+                return true;
+            }
         }
     }
 }

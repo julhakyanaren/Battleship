@@ -27,6 +27,8 @@ namespace Battleship
 
         public static int Score;
 
+        public static char[] Map;
+
         public static void ResetShipsCount()
         {
             FrigatesCountCurrent = 0;

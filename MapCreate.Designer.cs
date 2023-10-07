@@ -1,6 +1,6 @@
 ﻿namespace Battleship
 {
-    partial class SettingsForm
+    partial class MapCreate
     {
         /// <summary>
         /// Required designer variable.
@@ -30,19 +30,19 @@
         {
             this.SuspendLayout();
             // 
-            // SettingsForm
+            // MapCreate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 17F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(594, 340);
-            this.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 9.75F);
+            this.ClientSize = new System.Drawing.Size(1028, 609);
+            this.Font = new System.Drawing.Font("Franklin Gothic Demi", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.White;
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
-            this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.Name = "SettingsForm";
-            this.Text = "Settings Manager";
-            this.Load += new System.EventHandler(this.SettingsForm_Load);
+            this.Margin = new System.Windows.Forms.Padding(4);
+            this.Name = "MapCreate";
+            this.Text = "MapCreate";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MapCreate_FormClosed);
+            this.Load += new System.EventHandler(this.MapCreate_Load);
             this.ResumeLayout(false);
 
         }

@@ -38,7 +38,7 @@
             // 
             this.L_MM_Title.AutoSize = true;
             this.L_MM_Title.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_MM_Title.Location = new System.Drawing.Point(120, 42);
+            this.L_MM_Title.Location = new System.Drawing.Point(147, 44);
             this.L_MM_Title.Name = "L_MM_Title";
             this.L_MM_Title.Size = new System.Drawing.Size(251, 61);
             this.L_MM_Title.TabIndex = 0;

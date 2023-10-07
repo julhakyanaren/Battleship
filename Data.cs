@@ -11,11 +11,19 @@ namespace Battleship
     {
         static Support sp = new Support();
         static ColorMethods cm = new ColorMethods();
+
         public static int Turn;
+
         public static string ShipPlaceMode = "N";
         public static string Orientation = "Null";
+
         public static bool CanRaplaceShip;
+        public static bool IsEmptyPosition;
         public static bool ShipPlaced;
+        public static bool[] DoesMapChanged = /**/{ false, false };
+
+        public static char[] PlayerMap;
+        public static char[] EnemyMap;
 
         public static char[,] SetShipsChars()
         {
@@ -30,25 +38,14 @@ namespace Battleship
             }
             return chars;
         }
-        public static char[] ButtonsMapToCharArray(Button[,] allButtons, int index)
+        public static char[] TargetButtonsToCharArray(Button[] targetButton, int playerID)
         {
-            Button[] buttonInWork = new Button[0];
-            char[] buttonsChar = new char[buttonInWork.Length];
-            if (index == 0)
+            char[] resultArray = new char[targetButton.Length];
+            for (int i = 0; i < resultArray.Length; i++)
             {
-                buttonInWork = sp.GetPlayerButtons(allButtons);
-                buttonsChar = new char[buttonInWork.Length];
+                resultArray[i] = cm.SetCharThrowColor(playerID - 1, targetButton[i].BackColor);
             }
-            else
-            {
-                buttonInWork = sp.GetEnemyButtons(allButtons);
-                buttonsChar = new char[buttonInWork.Length];
-            }
-            for (int b = 0; b < buttonInWork.Length; b++)
-            {
-                buttonsChar[b] = cm.SetCharThrowColor(index, buttonInWork[b].BackColor);
-            }
-            return buttonsChar;
+            return resultArray;
         }
         public static Button[] CharArrayToButtonsMap(char[] buttonsChar, int index)
         {

@@ -1,5 +1,8 @@
 ﻿using System;
 using System.Drawing;
+using System.Security.Cryptography.X509Certificates;
+using System.Windows.Forms;
+
 namespace Battleship
 {
     public class ColorMethods
@@ -47,12 +50,16 @@ namespace Battleship
         }
         public char SetCharThrowColor(int index, Color buttonBackColor)
         {
-            string color = buttonBackColor.Name.ToString();
+            string colorName = buttonBackColor.Name.ToString();
+            string[] activeButtonColor =
+            {
+                Design.MouseOverColor[0].Name.ToString()
+            };
             switch (index)
             {
                 case 0: //Player
                     {
-                        switch (color)
+                        switch (colorName)
                         {
                             case "Silver":
                                 {
@@ -84,13 +91,20 @@ namespace Battleship
                                 }
                             default:
                                 {
-                                    return 'n';
+                                    if (colorName == activeButtonColor[0])
+                                    {
+                                        return 'A';
+                                    }
+                                    else
+                                    {
+                                        return 'n';
+                                    }
                                 }
                         }
                     }
                 case 1: //Enemy
                     {
-                        switch (color)
+                        switch (colorName)
                         {
                             case "Silver":
                                 {
@@ -140,6 +154,10 @@ namespace Battleship
                 colors[c] = SetColorThrowChar(inputMap[c]);
             }
             return colors;
+        }
+        public Color CellCollor(Button selectedButton)
+        {
+            return selectedButton.BackColor;
         }
     }
 }

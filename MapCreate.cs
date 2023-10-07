@@ -4,22 +4,26 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Battleship
 {
-    public partial class SettingsForm : Form
+    public partial class MapCreate : Form
     {
-        public SettingsForm()
+        public MapCreate()
         {
             InitializeComponent();
         }
 
-        public void SettingsForm_Load(object sender, EventArgs e)
+        private void MapCreate_FormClosed(object sender, FormClosedEventArgs e)
         {
+            DebugTools.MCF.Opened = false;
+        }
+        private void MapCreate_Load(object sender, EventArgs e)
+        {
+            DebugTools.MCF.Opened = true;
         }
     }
 }
