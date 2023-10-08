@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Remoting.Channels;
@@ -35,8 +36,28 @@ namespace Battleship
             CB_Coord_Letter.SelectedItem = 0;
             CB_Coord_Number.SelectedItem = 0;
         }
+        int[,] GenerateButtonsTags()
+        {
+            int tag;
+            int index;
+            int[,] tags = new int[2, 100];
+            for (int f = 3; f <= 4; f++)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        tag = Convert.ToInt32(Convert.ToString($"{f}{j}{i}"));
+                        index = Convert.ToInt32(Convert.ToString($"{i}{j}"));
+                        tags[f - 3, index] = tag;
+                    }
+                }
+            }
+            return tags;
+        }
         public void GenerateButtons()
         {
+            int[,] tags = GenerateButtonsTags();
             int x;
             int y;
             string[] name = { "BS_MC_", "BS_ShipPlace_" };
@@ -57,7 +78,7 @@ namespace Battleship
                     button.FlatStyle = FlatStyle.Flat;
                     button.ForeColor = Color.Black;
                     button.BackColor = Color.White;
-                    button.Tag = b + (f+ 3) * 100;
+                    button.Tag = tags[f, b];
                     button.Margin = new Padding(0);
                     if (f == 0)
                     {
@@ -700,14 +721,11 @@ namespace Battleship
         }
         public bool EmtyShipCell(string MapTag, string tag)
         {
-            Button[] buttons_MC = Buttons;
-            foreach (Button button in buttons_MC)
-            {
-
-            }
+            return true; //
         }
         private void BS_Coords_Check_Click(object sender, EventArgs e)
         {
+            int[] deltas = new int[0];
             if (CB_Coord_Letter.Text != null && CB_Coord_Number.Text != null)
             {
                 ps.TextCoordToPosition(Data.FirstCoord_Final, out int halfTag);
@@ -716,7 +734,59 @@ namespace Battleship
                 ps.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
                 if (CanShipPlace(tag, ShipData.Orientation, ShipData.ChoosenShipType))
                 {
-                    
+                    Array.Resize(ref deltas, ShipData.ChoosenShipType);
+                    for (int d = 0; d < deltas.Length; d++)
+                    {
+                        switch (ShipData.Orientation)
+                        {
+                            case "H":
+                                {
+                                    deltas[d] = (d + 1) * 10;
+                                    break;
+                                }
+                            case "V":
+                                {
+                                    deltas[d] = (d + 1) * (-1);
+                                    break;
+                                }
+                            default:
+                                {
+                                    deltas[d] = 0;
+                                    break;
+                                }
+                        }
+                    }
+                    Button[] exampleButtons = ShipPlaceMap;
+                    switch (ShipData.ChoosenShipType)
+                    {
+                        case 1:
+                            {
+                                foreach (Button ex_Button in exampleButtons)
+                                {
+                                    if (ex_Button.Tag.ToString() == tag)
+                                    {
+                                        ex_Button.BackColor = Color.Khaki;
+                                        break;
+                                    }
+                                }
+                                break;
+                            }
+                        case 2:
+                            {
+                                
+                                foreach (Button ex_Button in exampleButtons)
+                                {
+                                    for (int nt = 0; nt < deltas.Length; nt++)
+                                    {
+                                        if (ex_Button.Tag.ToString() == tag)
+                                        {
+                                            ex_Button.BackColor = Color.Khaki;
+                                        }
+                                    }
+                                }
+                                break;
+                            }
+                    }
                 }
             }
         }

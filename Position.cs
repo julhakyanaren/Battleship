@@ -30,11 +30,11 @@ namespace Battleship
             int letter = (int)textToChar[0] - 65;
             if (textToChar.Length == 3)
             {
-                halfTag = Convert.ToInt32(textToChar[1].ToString()) * 10 + Convert.ToInt32(textToChar[2].ToString());
+                halfTag = Convert.ToInt32(textToChar[1].ToString()) * 10 + Convert.ToInt32(textToChar[2].ToString()) - 1;
             }
             else
             {
-                halfTag = Convert.ToInt32(textToChar[1].ToString());
+                halfTag = Convert.ToInt32(textToChar[1].ToString()) - 1;
             }
             halfTag = Convert.ToInt32(Convert.ToString($"{letter}{halfTag}"));
         }
