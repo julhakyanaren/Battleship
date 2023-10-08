@@ -12,11 +12,17 @@ namespace Battleship
 {
     public partial class MapCreate : Form
     {
+        Support sp = new Support();
+        Position ps = new Position();
         public MapCreate()
         {
             InitializeComponent();
         }
-
+        Button[] ExampleButtons = new Button[5];
+        Button[] Buttons = new Button[100];
+        Button[] ShowButtons = new Button[100];
+        Button[] ShipPlaceMap = new Button[100];
+        bool ShowExampleInMap = false;
         private void MapCreate_FormClosed(object sender, FormClosedEventArgs e)
         {
             DebugTools.MCF.Opened = false;
@@ -24,6 +30,358 @@ namespace Battleship
         private void MapCreate_Load(object sender, EventArgs e)
         {
             DebugTools.MCF.Opened = true;
+            GenerateButtons();
+            CB_Coord_Letter.SelectedItem = 0;
+            CB_Coord_Number.SelectedItem = 0;
+        }
+        public void GenerateButtons()
+        {
+            int x;
+            int y;
+            string[] name = { "BS_MC_", "BS_ShipPlace_" };
+            TableLayoutPanel[] tlp = { TLP_MC_Schema, TLP_ShipPlaceMap };
+            for (int f = 0; f < 2; f++)
+            {
+                for (int b = 0; b < 100; b++)
+                {
+                    x = b / 10;
+                    y = (b % 10 - 1) * 60 + 1;
+                    Button button = new Button
+                    {
+                        Name = name[f],
+                        Location = new Point(x, y),
+                        Dock = DockStyle.Fill
+                    };
+                    tlp[f].Controls.Add(button);
+                    button.FlatStyle = FlatStyle.Flat;
+                    button.ForeColor = Color.Black;
+                    button.BackColor = Color.White;
+                    button.Tag = b + (f+ 3) * 100;
+                    button.Margin = new Padding(0);
+                    if (f == 0)
+                    {
+                        Buttons[b] = button;
+                    }
+                    else
+                    {
+                        ShipPlaceMap[b] = button;
+                    }
+                }
+            }
+        }
+        public void ShowExample()
+        {
+            Random random = new Random();
+            ExampleButtons[0] = BS_Example_1;
+            ExampleButtons[1] = BS_Example_2;
+            ExampleButtons[2] = BS_Example_3;
+            ExampleButtons[3] = BS_Example_4;
+            ExampleButtons[4] = BS_Example_5;
+            for (int b = 0; b < ExampleButtons.Length; b++)
+            {
+                ExampleButtons[b].BackColor = Color.White;
+            }
+            switch (ShipData.ChoosenShipType)
+            {
+                case 1:
+                    {
+                        int num = random.Next(0, 5);
+                        ExampleButtons[num].BackColor = Color.Gray;
+                        break;
+                    }
+                case 2:
+                    {
+                        int num = random.Next(0, 4);
+                        for (int i = num; i <= num + 1; i++)
+                        {
+                            ExampleButtons[i].BackColor = Color.Gray;
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        int num = random.Next(0, 3);
+                        for (int i = num; i <= num + 2; i++)
+                        {
+                            ExampleButtons[i].BackColor = Color.Gray;
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        int num = random.Next(0, 2);
+                        for (int i = num; i <= num + 3; i++)
+                        {
+                            ExampleButtons[i].BackColor = Color.Gray;
+                        }
+                        break;
+                    }
+            }
+        }
+        private void RB_ShipType_Frigate_CheckedChanged(object sender, EventArgs e)
+        {
+            string[] orientations = { "None", "Horizontal", "Vertical" };
+            RadioButton checkedRadioButton = sender as RadioButton;
+            ShipData.ChoosenShipType = Convert.ToInt32(checkedRadioButton.Tag);
+            TB_ShipSize.Text = ShipData.ChoosenShipType.ToString();
+            CB_Orientation.Enabled = false;
+            CB_Orientation.Items.Clear();
+            if (ShipData.ChoosenShipType == 1)
+            {
+                CB_Orientation.Items.Add(orientations[0]);
+            }
+            else if (ShipData.ChoosenShipType > 1)
+            {
+                for (int i = 1; i < 3; i++)
+                {
+                    CB_Orientation.Items.Add(orientations[i]);
+                }
+                CB_Orientation.Enabled = true;
+            }
+            CB_Orientation.SelectedIndex = 0;
+            switch (ShipData.ChoosenShipType)
+            {
+                case 1:
+                    {
+                        TB_MaxCount.Text = ShipData.FrigateCount.ToString();
+                        break;
+                    }
+                case 2:
+                    {
+                        TB_MaxCount.Text = ShipData.DestroyerCount.ToString();
+                        break;
+                    }
+                case 3:
+                    {
+                        TB_MaxCount.Text = ShipData.CruiserCount.ToString();
+                        break;
+                    }
+                case 4:
+                    {
+                        TB_MaxCount.Text = ShipData.BattleshipCount.ToString();
+                        break;
+                    }
+                default:
+                    {
+                        TB_MaxCount.Text = "";
+                        break;
+                    }
+            }
+            if (ShowExampleInMap)
+            {
+                ShowExample();
+                SetExample();
+            }
+        }
+        public void SetExample()
+        {
+            switch (ShipData.ChoosenShipType)
+            {
+                case 1:
+                    {
+                        if (ShowExampleInMap)
+                        {
+                            for (int i = 0; i < 100; i++)
+                            {
+                                Button button = Buttons[i];
+                                button.BackColor = Color.LightGreen;
+                            }
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        for (int i = 0; i < 100; i++)
+                        {
+                            Button button = Buttons[i];
+                            ps.GetCoordsFromTag(sp.GetTagFromButton(button), out int x, out int y, out int p);
+                            if (x == 9)
+                            {
+                                if (y == 0)
+                                {
+                                    button.BackColor = Color.Firebrick;
+                                }
+                                else
+                                {
+                                    button.BackColor = Color.Khaki;
+                                }
+                            }
+                            else
+                            {
+                                if (y == 0)
+                                {
+                                    button.BackColor = Color.SkyBlue;
+                                }
+                                else
+                                {
+                                    button.BackColor = Color.LightGreen;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                case 3:
+                    {
+                        for (int i = 0; i < 100; i++)
+                        {
+                            Button button = Buttons[i];
+                            ps.GetCoordsFromTag(sp.GetTagFromButton(button), out int x, out int y, out int p);
+                            if (x >= 8)
+                            {
+                                if (y <= 1)
+                                {
+                                    button.BackColor = Color.Firebrick;
+                                }
+                                else
+                                {
+                                    button.BackColor = Color.Khaki;
+                                }
+                            }
+                            else
+                            {
+                                if (y <= 1)
+                                {
+                                    button.BackColor = Color.SkyBlue;
+                                }
+                                else
+                                {
+                                    button.BackColor = Color.LightGreen;
+                                }
+                            }
+                        }
+                        break;
+                    }
+                case 4:
+                    {
+                        for (int i = 0; i < 100; i++)
+                        {
+                            Button button = Buttons[i];
+                            ps.GetCoordsFromTag(sp.GetTagFromButton(button), out int x, out int y, out int p);
+                            if (x >= 7)
+                            {
+                                if (y <= 2)
+                                {
+                                    button.BackColor = Color.Firebrick;
+                                }
+                                else
+                                {
+                                    button.BackColor = Color.Khaki;
+                                }
+                            }
+                            else
+                            {
+                                if (y <= 2)
+                                {
+                                    button.BackColor = Color.SkyBlue;
+                                }
+                                else
+                                {
+                                    button.BackColor = Color.LightGreen;
+                                }
+                            }
+                        }
+                        break;
+                    }
+            }
+        }
+        private async void CHB_ShowExample_CheckedChanged(object sender, EventArgs e)
+        {
+            await Task.Delay(0);
+            CHB_ShowExample.Enabled = false;
+            ShowExampleInMap = CHB_ShowExample.Checked;
+            switch (ShowExampleInMap)
+            {
+                case true:
+                    {
+                        PNL_Example.Visible = true;
+                        for (int b = 0; b < ShowButtons.Length; b++)
+                        {
+                            int x;
+                            int y;
+                            x = b / 10;
+                            y = (b % 10 - 1) * 60 + 1;
+                            Button button = new Button
+                            {
+                                Name = $"BS_MC_Example_{b}",
+                                Location = new Point(x, y),
+                                Dock = DockStyle.Fill
+                            };
+                            TLP_Example.Controls.Add(button);
+                            button.FlatStyle = FlatStyle.Flat;
+                            button.ForeColor = Color.Black;
+                            button.BackColor = Color.White;
+                            button.Tag = b + 100;
+                            button.Margin = new Padding(0);
+                            button.MouseHover += ShowButtons_MouseHover;
+                            Buttons[b] = button;
+                        }
+                        SetExample();
+                        break;
+                    }
+                case false:
+                    {
+                        PNL_Example.Visible = false;
+                        for (int b = 0; b < ShowButtons.Length; b++)
+                        {
+                            Button button = Buttons[b];
+                            if (button != null)
+                            {
+                                TLP_Example.Controls.Remove(button);
+                                button.Dispose();
+                                Buttons[b] = null;
+                            }
+                        }
+                        break;
+                    }
+            }
+            CHB_ShowExample.Enabled = true;
+        }
+        private void ShowButtons_MouseHover(object sender, EventArgs e)
+        {
+            Button selectedButton = sender as Button;
+            string tip = "";
+            if (selectedButton.BackColor == Color.Firebrick)
+            {
+                tip = "Can't place";
+            }
+            else if (selectedButton.BackColor == Color.SkyBlue)
+            {
+               tip = "Can place only \"Horizontal\"";
+            }
+            else if (selectedButton.BackColor == Color.Khaki)
+            {
+                tip = "Can place only \"Vertical\"";
+            }
+            else if (selectedButton.BackColor == Color.LightGreen)
+            {
+                tip = "Can place \"Horizontar\" & \"Vertical\"";
+            }
+            TT_MapCreate.Show(tip, selectedButton);
+        }
+        private void BS_ResetMap_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < 100; i++)
+            {
+                Button button = ShipPlaceMap[i];
+                button.BackColor = Color.White;
+            }
+        }
+        private void CB_Coord_Letter_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Data.FirstCoord_Letter = CB_Coord_Letter.Text;
+            Data.FirstCoord_Final = $"{Data.FirstCoord_Letter}{Data.FirstCoord_Number}";
+            TB_Coords.Text = Data.FirstCoord_Final;
+        }
+        private void CB_Coord_Number_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            Data.FirstCoord_Number = Convert.ToInt32(CB_Coord_Number.Text);
+            Data.FirstCoord_Final = $"{Data.FirstCoord_Letter}{Data.FirstCoord_Number}";
+            TB_Coords.Text = Data.FirstCoord_Final;
+        }
+        private void BS_Coords_Check_Click(object sender, EventArgs e)
+        {
+            ps.TextCoordToPosition(Data.FirstCoord_Final, out int halfTag);
+            TB_Coords.Text = halfTag.ToString();
         }
     }
 }

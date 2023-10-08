@@ -25,6 +25,10 @@ namespace Battleship
         public static char[] PlayerMap;
         public static char[] EnemyMap;
 
+        public static string FirstCoord_Letter;
+        public static int FirstCoord_Number;
+        public static string FirstCoord_Final;
+
         public static char[,] SetShipsChars()
         {
             char[,] chars = new char[2, 4];

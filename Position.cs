@@ -23,6 +23,21 @@ namespace Battleship
                 y = tagInt / 10;
             }
         }
+        public void TextCoordToPosition(string textCoord, out int halfTag)
+        {
+            //FIX BUG
+            char[] textToChar = textCoord.ToCharArray();
+            int letter = Convert.ToInt32(textToChar[0] - 65);
+            if (textToChar.Length == 3)
+            {
+                halfTag = Convert.ToInt32(textToChar[1] * 10) + Convert.ToInt32(textToChar[2]);
+            }
+            else
+            {
+                halfTag = Convert.ToInt32(textToChar[1]);
+            }
+            halfTag = Convert.ToInt32(Convert.ToString($"{letter}{halfTag}"));
+        }
         public string GetButtonTextCoords(Button button, out int id)
         {
             string tag = Support.GetTagFromButton(button);
