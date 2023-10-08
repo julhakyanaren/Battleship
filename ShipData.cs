@@ -15,5 +15,6 @@ namespace Battleship
         public static int CruiserCount = 2;
         public static int BattleshipCount = 1;
 
+        public static string Orientation = "N";
     }
 }

@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Runtime.Remoting.Channels;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -378,10 +379,369 @@ namespace Battleship
             Data.FirstCoord_Final = $"{Data.FirstCoord_Letter}{Data.FirstCoord_Number}";
             TB_Coords.Text = Data.FirstCoord_Final;
         }
+        public bool CanShipPlace(string tag, string orientation, int shipType)
+        {
+            string pos = ps.GetCellPosition(tag);
+            ps.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
+            switch (pos)
+            {
+                case "center":
+                    {
+                        switch (shipType)
+                        {
+                            case 1:
+                            case 2:
+                                {
+                                    return true;
+                                }
+                            case 3:
+                                {
+                                    switch (orientation)
+                                    {
+                                        case "V":
+                                            {
+                                                if (x >= 2)
+                                                {
+                                                    return true;
+                                                }
+                                                return false;
+                                            }
+                                        case "H":
+                                            {
+                                                if (y <= 7)
+                                                {
+                                                    return true;
+                                                }
+                                                return false;
+                                            }
+                                        default:
+                                            {
+                                                return false;
+                                            }
+                                    }
+                                }
+                            case 4:
+                                {
+                                    switch (orientation)
+                                    {
+                                        case "V":
+                                            {
+                                                if (x >= 3)
+                                                {
+                                                    return true;
+                                                }
+                                                return false;
+                                            }
+                                        case "H":
+                                            {
+                                                if (y <= 6)
+                                                {
+                                                    return true;
+                                                }
+                                                return false;
+                                            }
+                                        default:
+                                            {
+                                                return false;
+                                            }
+                                    }
+                                }
+                        }
+                        break;
+                    }
+                case "top":
+                    {
+                        switch (shipType)
+                        {
+                            case 1:
+                                {
+                                    return true;
+                                }
+                            case 2:
+                                {
+                                    if (orientation == "H" && y <= 8)
+                                    {
+                                        return true;
+                                    }
+                                    else
+                                    {
+                                        return false;
+                                    }
+                                }
+                            case 3:
+                                {
+                                    if (orientation == "H" && y <= 7)
+                                    {
+                                        return true;
+                                    }
+                                    else
+                                    {
+                                        return false;
+                                    }
+                                }
+                            case 4:
+                                {
+                                    if (orientation == "H" && y <= 6)
+                                    {
+                                        return true;
+                                    }
+                                    else
+                                    {
+                                        return false;
+                                    }
+                                }
+                        }
+                        break;
+                    }
+                case "bottom":
+                    {
+                        switch (shipType)
+                        {
+                            case 1:
+                                {
+                                    return true;
+                                }
+                            case 2:
+                                {
+                                    return true;
+                                }
+                            case 3:
+                                {
+                                    if (orientation == "V")
+                                    {
+                                        return true;
+                                    }
+                                    else
+                                    {
+                                        if (y <= 7)
+                                        {
+                                            return true;
+                                        }
+                                        else
+                                        {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            case 4:
+                                {
+                                    if (orientation == "V")
+                                    {
+                                        return true;
+                                    }
+                                    else
+                                    {
+                                        if (y <= 6)
+                                        {
+                                            return true;
+                                        }
+                                        else
+                                        {
+                                            return false;
+                                        }
+                                    }
+                                }
+                            default:
+                                {
+                                    return false;
+                                }
+                        }
+                    }
+                case "left":
+                    {
+                        if (orientation == "H")
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            switch (shipType)
+                            {
+                                case 1:
+                                    {
+                                        return true;
+                                    }
+                                case 2:
+                                    {
+                                        if (x >= 1)
+                                        {
+                                            return true;
+                                        }
+                                        else
+                                        {
+                                            return false;
+                                        }
+                                    }
+                                case 3:
+                                    {
+                                        if (x >= 2)
+                                        {
+                                            return true;
+                                        }
+                                        else
+                                        {
+                                            return false;
+                                        }
+                                    }
+                                case 4:
+                                    {
+                                        if (x >= 3)
+                                        {
+                                            return true;
+                                        }
+                                        else
+                                        {
+                                            return false;
+                                        }
+                                    }
+                                default:
+                                    {
+                                        return false;
+                                    }
+                            }
+                        }
+                    }
+                case "right":
+                    {
+                        if (shipType == 1)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            switch (orientation)
+                            {
+                                case "H":
+                                    {
+                                        if (shipType != 1)
+                                        {
+                                            return false;
+                                        }
+                                        else
+                                        {
+                                            return true;
+                                        }
+                                    }
+                                case "V":
+                                    {
+                                        if (x >= 1)
+                                        {
+                                            return true;
+                                        }
+                                        else
+                                        {
+                                            return false;
+                                        }
+                                    }
+                                default:
+                                    {
+                                        return false;
+                                    }
+                            }
+                        }
+                    }
+                case "corner1":
+                    {
+                        if (shipType == 1)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            if (orientation == "H")
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                case "corner2":
+                    {
+                        if (shipType == 1)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            return false;
+                        }
+                    }
+                case "corner3":
+                    {
+                        if (shipType == 1)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            if (orientation == "V")
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                return false;
+                            }
+                        }
+                    }
+                case "corner4":
+                    {
+                        return true;
+                    }
+                default:
+                    {
+                        return false;
+                    }
+            }
+            return false;
+        }
+        public bool EmtyShipCell(string MapTag, string tag)
+        {
+            Button[] buttons_MC = Buttons;
+            foreach (Button button in buttons_MC)
+            {
+
+            }
+        }
         private void BS_Coords_Check_Click(object sender, EventArgs e)
         {
-            ps.TextCoordToPosition(Data.FirstCoord_Final, out int halfTag);
-            TB_Coords.Text = halfTag.ToString();
+            if (CB_Coord_Letter.Text != null && CB_Coord_Number.Text != null)
+            {
+                ps.TextCoordToPosition(Data.FirstCoord_Final, out int halfTag);
+                string tag = $"{halfTag + 400}";
+                string mapTag = $"{halfTag + 300}";
+                ps.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
+                if (CanShipPlace(tag, ShipData.Orientation, ShipData.ChoosenShipType))
+                {
+                    
+                }
+            }
+        }
+
+        private void CB_Orientation_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            string orientation = CB_Orientation.SelectedItem.ToString();
+            switch (orientation)
+            {
+                case "None":
+                    {
+                        ShipData.Orientation = "N";
+                        break;
+                    }
+                case "Horizontal":
+                    {
+                        ShipData.Orientation = "H";
+                        break;
+                    }
+                case "Vertical":
+                    {
+                        ShipData.Orientation = "V";
+                        break;
+                    }
+            }
         }
     }
 }
