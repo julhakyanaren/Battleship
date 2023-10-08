@@ -773,7 +773,7 @@ namespace Battleship
                             }
                         case 2:
                             {
-                                
+                                //Next Tags
                                 foreach (Button ex_Button in exampleButtons)
                                 {
                                     for (int nt = 0; nt < deltas.Length; nt++)
