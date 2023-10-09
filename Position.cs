@@ -441,5 +441,9 @@ namespace Battleship
                 return true;
             }
         }
+        public int NewTagBuilder(int oldTag, int dx= 0, int dy = 0)
+        {
+            return oldTag + (10 * dy) + dx;
+        }
     }
 }

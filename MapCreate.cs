@@ -15,7 +15,7 @@ namespace Battleship
     public partial class MapCreate : Form
     {
         Support sp = new Support();
-        Position ps = new Position();
+        Position pos = new Position();
         public MapCreate()
         {
             InitializeComponent();
@@ -24,7 +24,9 @@ namespace Battleship
         Button[] Buttons = new Button[100];
         Button[] ShowButtons = new Button[100];
         Button[] ShipPlaceMap = new Button[100];
+        Button[] CanPlaceButton = new Button[100];
         bool ShowExampleInMap = false;
+        List<int> Indexes = new List<int>();
         private void MapCreate_FormClosed(object sender, FormClosedEventArgs e)
         {
             DebugTools.MCF.Opened = false;
@@ -33,8 +35,8 @@ namespace Battleship
         {
             DebugTools.MCF.Opened = true;
             GenerateButtons();
-            CB_Coord_Letter.SelectedItem = 0;
-            CB_Coord_Number.SelectedItem = 0;
+            CB_Coord_Letter.Select(0,0);
+            CB_Coord_Number.Select(0,0);
         }
         int[,] GenerateButtonsTags()
         {
@@ -205,7 +207,7 @@ namespace Battleship
                         {
                             for (int i = 0; i < 100; i++)
                             {
-                                Button button = Buttons[i];
+                                Button button = CanPlaceButton[i];
                                 button.BackColor = Color.LightGreen;
                             }
                         }
@@ -215,8 +217,8 @@ namespace Battleship
                     {
                         for (int i = 0; i < 100; i++)
                         {
-                            Button button = Buttons[i];
-                            ps.GetCoordsFromTag(sp.GetTagFromButton(button), out int x, out int y, out int p);
+                            Button button = CanPlaceButton[i];
+                            pos.GetCoordsFromTag(sp.GetTagFromButton(button), out int x, out int y, out int p);
                             if (x == 9)
                             {
                                 if (y == 0)
@@ -247,7 +249,7 @@ namespace Battleship
                         for (int i = 0; i < 100; i++)
                         {
                             Button button = Buttons[i];
-                            ps.GetCoordsFromTag(sp.GetTagFromButton(button), out int x, out int y, out int p);
+                            pos.GetCoordsFromTag(sp.GetTagFromButton(button), out int x, out int y, out int p);
                             if (x >= 8)
                             {
                                 if (y <= 1)
@@ -277,8 +279,8 @@ namespace Battleship
                     {
                         for (int i = 0; i < 100; i++)
                         {
-                            Button button = Buttons[i];
-                            ps.GetCoordsFromTag(sp.GetTagFromButton(button), out int x, out int y, out int p);
+                            Button button = CanPlaceButton[i];
+                            pos.GetCoordsFromTag(sp.GetTagFromButton(button), out int x, out int y, out int p);
                             if (x >= 7)
                             {
                                 if (y <= 2)
@@ -332,10 +334,10 @@ namespace Battleship
                             button.FlatStyle = FlatStyle.Flat;
                             button.ForeColor = Color.Black;
                             button.BackColor = Color.White;
-                            button.Tag = b + 100;
+                            button.Tag = b + 500;
                             button.Margin = new Padding(0);
                             button.MouseHover += ShowButtons_MouseHover;
-                            Buttons[b] = button;
+                            CanPlaceButton[b] = button;
                         }
                         SetExample();
                         break;
@@ -345,12 +347,12 @@ namespace Battleship
                         PNL_Example.Visible = false;
                         for (int b = 0; b < ShowButtons.Length; b++)
                         {
-                            Button button = Buttons[b];
+                            Button button = CanPlaceButton[b];
                             if (button != null)
                             {
                                 TLP_Example.Controls.Remove(button);
                                 button.Dispose();
-                                Buttons[b] = null;
+                                CanPlaceButton[b] = null;
                             }
                         }
                         break;
@@ -387,6 +389,8 @@ namespace Battleship
                 Button button = ShipPlaceMap[i];
                 button.BackColor = Color.White;
             }
+            BS_Coords_Apply.Visible = false;
+            BS_Insert.Visible = true;
         }
         private void CB_Coord_Letter_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -402,8 +406,8 @@ namespace Battleship
         }
         public bool CanShipPlace(string tag, string orientation, int shipType)
         {
-            string pos = ps.GetCellPosition(tag);
-            ps.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
+            string pos = this.pos.GetCellPosition(tag);
+            this.pos.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
             switch (pos)
             {
                 case "center":
@@ -726,12 +730,14 @@ namespace Battleship
         private void BS_Coords_Check_Click(object sender, EventArgs e)
         {
             int[] deltas = new int[0];
+            int[] nextTag = new int[0];
+            bool cellPainted = false;
             if (CB_Coord_Letter.Text != null && CB_Coord_Number.Text != null)
             {
-                ps.TextCoordToPosition(Data.FirstCoord_Final, out int halfTag);
+                pos.TextCoordToPosition(Data.FirstCoord_Final, out int halfTag);
                 string tag = $"{halfTag + 400}";
                 string mapTag = $"{halfTag + 300}";
-                ps.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
+                pos.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
                 if (CanShipPlace(tag, ShipData.Orientation, ShipData.ChoosenShipType))
                 {
                     Array.Resize(ref deltas, ShipData.ChoosenShipType);
@@ -756,36 +762,55 @@ namespace Battleship
                                 }
                         }
                     }
+                    Array.Resize(ref nextTag, deltas.Length);
                     Button[] exampleButtons = ShipPlaceMap;
-                    switch (ShipData.ChoosenShipType)
+                    try
                     {
-                        case 1:
+                        if (ShipData.ChoosenShipType >= 1)
+                        {
+                            foreach (Button ex_Button in exampleButtons)
                             {
-                                foreach (Button ex_Button in exampleButtons)
+                                if (ex_Button.Tag.ToString() == tag)
                                 {
-                                    if (ex_Button.Tag.ToString() == tag)
-                                    {
-                                        ex_Button.BackColor = Color.Khaki;
-                                        break;
-                                    }
+                                    ex_Button.BackColor = Color.Khaki;
+                                    int buttonIndex = Array.IndexOf(exampleButtons, ex_Button);
+                                    Indexes.Add(buttonIndex);
+                                    break;
                                 }
-                                break;
                             }
-                        case 2:
+                        }
+                        if (ShipData.ChoosenShipType <= 4)
+                        {
+                            for (int nb = 0; nb < nextTag.Length - 1; nb++)
                             {
-                                //Next Tags
-                                foreach (Button ex_Button in exampleButtons)
+                                if (sp.StringToInt(tag, out int currentTag))
                                 {
-                                    for (int nt = 0; nt < deltas.Length; nt++)
+                                    nextTag[nb] = currentTag + deltas[nb];
+                                    foreach (Button ex_Button in exampleButtons)
                                     {
-                                        if (ex_Button.Tag.ToString() == tag)
+                                        if ((int)ex_Button.Tag == nextTag[nb])
                                         {
-                                            ex_Button.BackColor = Color.Khaki;
+                                            int buttonIndex = Array.IndexOf(exampleButtons, ex_Button);
+                                            exampleButtons[buttonIndex].BackColor = Color.Khaki;
+                                            Indexes.Add(buttonIndex);
+                                            break;
                                         }
                                     }
                                 }
-                                break;
                             }
+                        }
+                        cellPainted = true;
+                    }
+                    catch
+                    {
+                        cellPainted = false;
+                    }
+                    finally
+                    {
+                        if (cellPainted) 
+                        {
+                            BS_Coords_Apply.Visible = true;
+                        }
                     }
                 }
             }
@@ -811,6 +836,133 @@ namespace Battleship
                         ShipData.Orientation = "V";
                         break;
                     }
+            }
+        }
+
+        private void BS_Coords_Apply_Click(object sender, EventArgs e)
+        {
+            Button[] mapButtons = Buttons;
+            bool allCellsEmpty = true;
+            for (int i = 0; i < Indexes.Count; i++)
+            {
+                if (mapButtons[i].BackColor != Color.White)
+                {
+                    allCellsEmpty = false;
+                    break;
+                }
+            }
+            if (allCellsEmpty)
+            {
+                string shipType;
+                switch (ShipData.ChoosenShipType)
+                {
+                    case 1:
+                        {
+                            shipType = "Frigate";
+                            break;
+                        }
+                    case 2:
+                        {
+                            shipType = "Destroyer";
+                            break;
+                        }
+                    case 3:
+                        {
+                            shipType = "Cruiser";
+                            break;
+                        }
+                    case 4:
+                        {
+                            shipType = "Battleship";
+                            break;
+                        }
+                    default:
+                        {
+                            shipType = "Null";
+                            break;
+                        }
+                }
+                if (shipType != "Null")
+                {
+                    string lastCoord = pos.GetButtonTextCoords(mapButtons[Indexes[Indexes.Count - 1]], out int ID);
+                    string cellsRange = $"{Data.FirstCoord_Final}:{lastCoord}";
+                    TB_Range.Text = cellsRange;
+                    TB_ShipType.Text = shipType;
+                    BS_Insert.Visible = true;
+                }
+            }
+        }
+        private void BS_Insert_Click(object sender, EventArgs e)
+        {
+            Button[] mapButton = Buttons;
+            Color cellColor;
+            switch (ShipData.ChoosenShipType)
+            {
+                case 1:
+                    {
+                        cellColor = Color.Silver;
+                        break;
+                    }
+                case 2:
+                    {
+                        cellColor = Color.DarkGray;
+                        break;
+                    }
+                case 3:
+                    {
+                        cellColor = Color.Gray;
+                        break;
+                    }
+                case 4:
+                    {
+                        cellColor = Color.DimGray;
+                        break;
+                    }
+                default:
+                    {
+                        cellColor = Color.White;
+                        break;
+                    }
+            }
+            for (int i = 0; i < Indexes.Count; i++)
+            {
+                mapButton[Indexes[i]].BackColor = cellColor;
+            }
+            string tag = mapButton[Indexes[0]].Tag.ToString();
+            if (sp.StringToInt(tag, out int tagButton))
+            {
+                string cellPos = pos.GetCellPosition(tag);
+                pos.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
+                switch (cellPos)
+                {
+                    case "corner1":
+                        {
+                            switch (ShipData.ChoosenShipType)
+                            {
+                                default:
+                                    {
+                                        int[] mineTags = new int[3];
+                                        mineTags[0] = pos.NewTagBuilder(tagButton,dy:1);
+                                        mineTags[1] = pos.NewTagBuilder(tagButton,dx:1);
+                                        mineTags[2] = pos.NewTagBuilder(tagButton, 1, 1);
+                                        foreach (Button b in mapButton)
+                                        {
+                                            for (int i = 0; i < mineTags.Length; i++)
+                                            {
+                                                if (b.Tag.ToString() == mineTags[i].ToString())
+                                                {
+                                                    int buttonIndex = Array.IndexOf(mapButton, b);
+                                                    mapButton[buttonIndex].BackColor = Color.Firebrick;
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        break;
+                                    }
+                            }
+                            break;
+                        }
+                }
             }
         }
     }
