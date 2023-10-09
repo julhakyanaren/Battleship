@@ -1,4 +1,5 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -933,15 +934,40 @@ namespace Battleship
             {
                 string cellPos = pos.GetCellPosition(tag);
                 pos.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
+                int[] mineTags = new int[0];
+                //Update Code
+                switch (cellPos)
+                {
+                    case "corner1":
+                    case "corner2":
+                    case "corner3":
+                    case "corner4":
+                        {
+                            Array.Resize(ref mineTags, 3);
+                            break;
+                        }
+                    case "top":
+                    case "bottom":
+                    case "left":
+                    case "right":
+                        {
+                            Array.Resize(ref mineTags, 5);
+                            break;
+                        }
+                    case "center":
+                        {
+                            Array.Resize(ref mineTags, 8);
+                            break;
+                        }
+                }
                 switch (cellPos)
                 {
                     case "corner1":
                         {
                             switch (ShipData.ChoosenShipType)
                             {
-                                default:
+                                case 1:
                                     {
-                                        int[] mineTags = new int[3];
                                         mineTags[0] = pos.NewTagBuilder(tagButton,dy:1);
                                         mineTags[1] = pos.NewTagBuilder(tagButton,dx:1);
                                         mineTags[2] = pos.NewTagBuilder(tagButton, 1, 1);
@@ -958,6 +984,10 @@ namespace Battleship
                                             }
                                         }
                                         break;
+                                    }
+                                case 2:
+                                    {
+                                        int mineTags = 
                                     }
                             }
                             break;
