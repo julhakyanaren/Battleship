@@ -25,7 +25,6 @@ namespace Battleship
         }
         public void TextCoordToPosition(string textCoord, out int halfTag)
         {
-            //FIX BUG
             char[] textToChar = textCoord.ToCharArray();
             int letter = (int)textToChar[0] - 65;
             if (textToChar.Length == 3)

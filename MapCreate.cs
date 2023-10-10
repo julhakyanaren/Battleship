@@ -939,31 +939,18 @@ namespace Battleship
                 if (mineTagsSize != -1)
                 {
                     int[] mineTags = new int[mineTagsSize];
-                    switch (cellPos)
+                    mineTags = ShipData.MineTagsFill(mineTags, cellPos, ShipData.ChoosenShipType, tagButton, ShipData.Orientation);
+                    foreach (Button mineButton in mapButton)
                     {
-                        case "corner1":
+                        for (int b = 0; b < mineTags.Length; b++)
+                        {
+                            if (mineButton.Tag.ToString() == mineTags[b].ToString())
                             {
-                                switch (ShipData.ChoosenShipType)
-                                {
-                                    case 1:
-                                        {
-                                            foreach (Button b in mapButton)
-                                            {
-                                                for (int i = 0; i < mineTags.Length; i++)
-                                                {
-                                                    if (b.Tag.ToString() == mineTags[i].ToString())
-                                                    {
-                                                        int buttonIndex = Array.IndexOf(mapButton, b);
-                                                        mapButton[buttonIndex].BackColor = Color.Firebrick;
-                                                        break;
-                                                    }
-                                                }
-                                            }
-                                            break;
-                                        }
-                                }
+                                int buttonIndex = Array.IndexOf(mapButton, mineButton);
+                                mapButton[buttonIndex].BackColor = Color.Aqua;
                                 break;
                             }
+                        }
                     }
                 }
             }
