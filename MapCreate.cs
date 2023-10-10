@@ -947,9 +947,6 @@ namespace Battleship
                                 {
                                     case 1:
                                         {
-                                            mineTags[0] = pos.NewTagBuilder(tagButton, dy: 1);
-                                            mineTags[1] = pos.NewTagBuilder(tagButton, dx: 1);
-                                            mineTags[2] = pos.NewTagBuilder(tagButton, 1, 1);
                                             foreach (Button b in mapButton)
                                             {
                                                 for (int i = 0; i < mineTags.Length; i++)

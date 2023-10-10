@@ -5,6 +5,7 @@ using System.Net.Http.Headers;
 using System.Resources;
 using System.Text;
 using System.Threading.Tasks;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Battleship
 {
@@ -452,12 +453,200 @@ namespace Battleship
                     }
             }
         }
-        public static int[] MineTagsFill(int[] mineTags, string cellPos, int shipSize, int firstButtonTag, string orientation)
+        public static int[] MineTagsFill(int[] mineTags, string cellPos, int shipSize, int tag, string orientation)
         {
+            Position pos = new Position();
             int size = mineTags.Length;
-            /**/
-            return mineTags;
-            /**/
+            pos.GetCoordsFromTag(tag.ToString(), out int x, out int y, out int playerID);
+            switch (shipSize)
+            {
+                case 1:
+                    {
+                        switch (cellPos)
+                        {
+                            case "corner1":
+                                {
+                                    mineTags[0] = pos.NewTagBuilder(tag, dy: 1);
+                                    mineTags[1] = pos.NewTagBuilder(tag, dx: 1);
+                                    mineTags[2] = pos.NewTagBuilder(tag, 1, 1);
+                                    return mineTags;
+                                }
+                            case "top":
+                                {
+                                    mineTags[0] = pos.NewTagBuilder(tag, dy: -1);
+                                    mineTags[1] = pos.NewTagBuilder(tag, dy: 1);
+                                    mineTags[2] = pos.NewTagBuilder(tag, dx: 1);
+                                    mineTags[3] = pos.NewTagBuilder(tag, 1, -1);
+                                    mineTags[4] = pos.NewTagBuilder(tag, 1, 1);
+                                    return mineTags;
+                                }
+                            case "corner2":
+                                {
+                                    mineTags[0] = pos.NewTagBuilder(tag, dy:-1);
+                                    mineTags[1] = pos.NewTagBuilder(tag, dx: 1);
+                                    mineTags[2] = pos.NewTagBuilder(tag, 1, -1);
+                                    return mineTags;
+                                }
+                            case "left":
+                                {
+                                    mineTags[0] = pos.NewTagBuilder(tag, dx: -1);
+                                    mineTags[1] = pos.NewTagBuilder(tag, dx: 1);
+                                    mineTags[2] = pos.NewTagBuilder(tag, dy: 1);
+                                    mineTags[3] = pos.NewTagBuilder(tag, -1, 1);
+                                    mineTags[4] = pos.NewTagBuilder(tag, 1, 1);
+                                    return mineTags;
+                                }
+                            case "center":
+                                {
+                                    mineTags[0] = pos.NewTagBuilder(tag, dx: -1);
+                                    mineTags[1] = pos.NewTagBuilder(tag, dx: 1);
+                                    mineTags[2] = pos.NewTagBuilder(tag, dy: -1);
+                                    mineTags[3] = pos.NewTagBuilder(tag, dy: 1);
+                                    mineTags[4] = pos.NewTagBuilder(tag, -1, -1);
+                                    mineTags[5] = pos.NewTagBuilder(tag, -1, 1);
+                                    mineTags[6] = pos.NewTagBuilder(tag, 1, 1);
+                                    mineTags[7] = pos.NewTagBuilder(tag, 1, -1);
+                                    return mineTags;
+                                }
+                            case "right":
+                                {
+                                    mineTags[0] = pos.NewTagBuilder(tag, dx: -1);
+                                    mineTags[1] = pos.NewTagBuilder(tag, dx: 1);
+                                    mineTags[2] = pos.NewTagBuilder(tag, dy: -1);
+                                    mineTags[3] = pos.NewTagBuilder(tag, -1, -1);
+                                    mineTags[4] = pos.NewTagBuilder(tag, 1, -1);
+                                    return mineTags;
+                                }
+                            case "corner3":
+                                {
+                                    mineTags[0] = pos.NewTagBuilder(tag, dx: -1);
+                                    mineTags[1] = pos.NewTagBuilder(tag, dy: -1);
+                                    mineTags[2] = pos.NewTagBuilder(tag, -1, -1);
+                                    return mineTags;
+                                }
+                            case "bottom":
+                                {
+                                    mineTags[0] = pos.NewTagBuilder(tag, dy: -1);
+                                    mineTags[1] = pos.NewTagBuilder(tag, dy: 1);
+                                    mineTags[2] = pos.NewTagBuilder(tag, dx: -1);
+                                    mineTags[3] = pos.NewTagBuilder(tag, -1, -1);
+                                    mineTags[4] = pos.NewTagBuilder(tag, -1, 1);
+                                    return mineTags;
+                                }
+                            case "corner4":
+                                {
+                                    mineTags[0] = pos.NewTagBuilder(tag, dx: -1);
+                                    mineTags[1] = pos.NewTagBuilder(tag, dy: 1);
+                                    mineTags[2] = pos.NewTagBuilder(tag, -1, 1);
+                                    return mineTags;
+                                }
+                        }
+                        break;
+                    }
+                case 2:
+                    {
+                        switch (cellPos)
+                        {
+                            case "corner1":
+                                {
+                                    mineTags[0] = pos.NewTagBuilder(tag, dx: 1);
+                                    mineTags[1] = pos.NewTagBuilder(tag, dy: 2);
+                                    mineTags[2] = pos.NewTagBuilder(tag, 1, 1);
+                                    mineTags[3] = pos.NewTagBuilder(tag, 1, 2);
+                                    return mineTags;
+                                }
+                            case "top":
+                                {
+                                    mineTags[0] = pos.NewTagBuilder(tag, dy: -1);
+                                    mineTags[1] = pos.NewTagBuilder(tag, dy: 2);
+                                    mineTags[2] = pos.NewTagBuilder(tag, 1, -1);
+                                    mineTags[3] = pos.NewTagBuilder(tag, dx: 1);
+                                    mineTags[4] = pos.NewTagBuilder(tag, 1, 1);
+                                    mineTags[5] = pos.NewTagBuilder(tag, 1, 2);
+                                    return mineTags;
+                                }
+                            case "left":
+                                {
+                                    if (orientation == "V")
+                                    {
+                                        if (x > 1)
+                                        {
+                                            mineTags[0] = pos.NewTagBuilder(tag, dy: 1);
+                                            mineTags[1] = pos.NewTagBuilder(tag, -1, 1);
+                                            mineTags[2] = pos.NewTagBuilder(tag, dx: 1);
+                                            mineTags[3] = pos.NewTagBuilder(tag, 1, 1);
+                                            return mineTags;
+                                        }
+                                        else
+                                        {
+                                            mineTags[0] = pos.NewTagBuilder(tag, dx: 1);
+                                            mineTags[1] = pos.NewTagBuilder(tag, 1, 1);
+                                            mineTags[2] = pos.NewTagBuilder(tag, dy: 1);
+                                            mineTags[3] = pos.NewTagBuilder(tag, -1, 1);
+                                            mineTags[4] = pos.NewTagBuilder(tag, -2, 1);
+                                            mineTags[5] = pos.NewTagBuilder(tag, dx: -2);
+                                            return mineTags;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        mineTags[0] = pos.NewTagBuilder(tag, dx: -1);
+                                        mineTags[1] = pos.NewTagBuilder(tag, -1, 1);
+                                        mineTags[2] = pos.NewTagBuilder(tag, -1, 2);
+                                        mineTags[3] = pos.NewTagBuilder(tag, dy: 2);
+                                        mineTags[4] = pos.NewTagBuilder(tag, 1, 2);
+                                        mineTags[5] = pos.NewTagBuilder(tag, 1, 1);
+                                        mineTags[6] = pos.NewTagBuilder(tag, dx: 1);
+                                    }
+                                    return mineTags;
+                                }
+                            case "center":
+                                {
+                                    switch (orientation)
+                                    {
+                                        case "H":
+                                            {
+                                                if (y == 8)
+                                                {
+                                                    mineTags[0] = pos.NewTagBuilder(tag, -1, -1);
+                                                    mineTags[1] = pos.NewTagBuilder(tag, dx: -1);
+                                                    mineTags[2] = pos.NewTagBuilder(tag, -1, 1);
+                                                    mineTags[3] = pos.NewTagBuilder(tag, 1, 1);
+                                                    mineTags[4] = pos.NewTagBuilder(tag, dx: 1);
+                                                    mineTags[5] = pos.NewTagBuilder(tag, 1, -1);
+                                                    mineTags[6] = pos.NewTagBuilder(tag, dy: -1);
+                                                }
+                                                else
+                                                {
+                                                    mineTags[0] = pos.NewTagBuilder(tag, -1, -1);
+                                                    mineTags[1] = pos.NewTagBuilder(tag, dx: -1);
+                                                    mineTags[2] = pos.NewTagBuilder(tag, -1, 1);
+                                                    mineTags[3] = pos.NewTagBuilder(tag, -1, 2);
+                                                    mineTags[4] = pos.NewTagBuilder(tag, dy: 2);
+                                                    mineTags[5] = pos.NewTagBuilder(tag, 1, 2);
+                                                    mineTags[6] = pos.NewTagBuilder(tag, 1, 1);
+                                                    mineTags[7] = pos.NewTagBuilder(tag, dx: 1);
+                                                    mineTags[8] = pos.NewTagBuilder(tag, 1, -1);
+                                                    mineTags[9] = pos.NewTagBuilder(tag, dy: -1);
+                                                }
+                                                return mineTags;
+                                            }
+                                        case "V":
+                                            {
+                                                if (y == 8)
+                                                {
+
+                                                }
+                                                else
+                                                {
+
+                                                }
+                                            }
+                                    }
+                                }
+                        }
+                    }
+            }
         }
     }
 }
