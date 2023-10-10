@@ -934,64 +934,40 @@ namespace Battleship
             {
                 string cellPos = pos.GetCellPosition(tag);
                 pos.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
-                int[] mineTags = new int[0];
                 //Update Code
-                switch (cellPos)
+                int mineTagsSize = ShipData.GetMineCount(cellPos, ShipData.ChoosenShipType, x, y, ShipData.Orientation);
+                if (mineTagsSize != -1)
                 {
-                    case "corner1":
-                    case "corner2":
-                    case "corner3":
-                    case "corner4":
-                        {
-                            Array.Resize(ref mineTags, 3);
-                            break;
-                        }
-                    case "top":
-                    case "bottom":
-                    case "left":
-                    case "right":
-                        {
-                            Array.Resize(ref mineTags, 5);
-                            break;
-                        }
-                    case "center":
-                        {
-                            Array.Resize(ref mineTags, 8);
-                            break;
-                        }
-                }
-                switch (cellPos)
-                {
-                    case "corner1":
-                        {
-                            switch (ShipData.ChoosenShipType)
+                    int[] mineTags = new int[mineTagsSize];
+                    switch (cellPos)
+                    {
+                        case "corner1":
                             {
-                                case 1:
-                                    {
-                                        mineTags[0] = pos.NewTagBuilder(tagButton,dy:1);
-                                        mineTags[1] = pos.NewTagBuilder(tagButton,dx:1);
-                                        mineTags[2] = pos.NewTagBuilder(tagButton, 1, 1);
-                                        foreach (Button b in mapButton)
+                                switch (ShipData.ChoosenShipType)
+                                {
+                                    case 1:
                                         {
-                                            for (int i = 0; i < mineTags.Length; i++)
+                                            mineTags[0] = pos.NewTagBuilder(tagButton, dy: 1);
+                                            mineTags[1] = pos.NewTagBuilder(tagButton, dx: 1);
+                                            mineTags[2] = pos.NewTagBuilder(tagButton, 1, 1);
+                                            foreach (Button b in mapButton)
                                             {
-                                                if (b.Tag.ToString() == mineTags[i].ToString())
+                                                for (int i = 0; i < mineTags.Length; i++)
                                                 {
-                                                    int buttonIndex = Array.IndexOf(mapButton, b);
-                                                    mapButton[buttonIndex].BackColor = Color.Firebrick;
-                                                    break;
+                                                    if (b.Tag.ToString() == mineTags[i].ToString())
+                                                    {
+                                                        int buttonIndex = Array.IndexOf(mapButton, b);
+                                                        mapButton[buttonIndex].BackColor = Color.Firebrick;
+                                                        break;
+                                                    }
                                                 }
                                             }
+                                            break;
                                         }
-                                        break;
-                                    }
-                                case 2:
-                                    {
-                                        int mineTags = 
-                                    }
+                                }
+                                break;
                             }
-                            break;
-                        }
+                    }
                 }
             }
         }
