@@ -63,51 +63,6 @@ namespace Battleship
                         {
                             case "Silver":
                                 {
-                                    return 'f';
-                                }
-                            case "Darkgray":
-                                {
-                                    return 'd';
-                                }
-                            case "Gray":
-                                {
-                                    return 'c';
-                                }
-                            case "DimGray":
-                                {
-                                    return 'b';
-                                }
-                            case "Lightcoral":
-                                {
-                                    return 'h';
-                                }
-                            case "Firebrick":
-                                {
-                                    return 's';
-                                }
-                            case "Skyblue":
-                                {
-                                    return 'e';
-                                }
-                            default:
-                                {
-                                    if (colorName == activeButtonColor[0])
-                                    {
-                                        return 'A';
-                                    }
-                                    else
-                                    {
-                                        return 'n';
-                                    }
-                                }
-                        }
-                    }
-                case 1: //Enemy
-                    {
-                        switch (colorName)
-                        {
-                            case "Silver":
-                                {
                                     return 'F';
                                 }
                             case "Darkgray":
@@ -134,9 +89,62 @@ namespace Battleship
                                 {
                                     return 'E';
                                 }
+                            case "Aqua":
+                                {
+                                    return 'M';
+                                }
                             default:
                                 {
                                     return 'n';
+                                }
+                        }
+                    }
+                case 1: //Enemy
+                    {
+                        switch (colorName)
+                        {
+                            case "Silver":
+                                {
+                                    return 'f';
+                                }
+                            case "Darkgray":
+                                {
+                                    return 'd';
+                                }
+                            case "Gray":
+                                {
+                                    return 'c';
+                                }
+                            case "DimGray":
+                                {
+                                    return 'b';
+                                }
+                            case "Lightcoral":
+                                {
+                                    return 'h';
+                                }
+                            case "Firebrick":
+                                {
+                                    return 's';
+                                }
+                            case "Skyblue":
+                                {
+                                    return 'e';
+                                }
+                            case "Aqua":
+                                {
+                                    return 'm';
+                                }
+                            default:
+                                {
+                                    if (colorName == activeButtonColor[0])
+                                    {
+                                        return 'A';
+                                    }
+                                    else
+                                    {
+                                        return 'n';
+                                    }
                                 }
                         }
                     }

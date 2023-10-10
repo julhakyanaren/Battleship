@@ -4,6 +4,7 @@ using System.Data.Odbc;
 using System.Linq;
 using System.Net.Http.Headers;
 using System.Resources;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
@@ -18,8 +19,11 @@ namespace Battleship
         public static int DestroyerCount = 3;
         public static int CruiserCount = 2;
         public static int BattleshipCount = 1;
+        public static int[] ShipsCount = { FrigateCount, DestroyerCount, CruiserCount, BattleshipCount };
 
         public static string Orientation = "N";
+
+        public static bool MapAutoUpdate = false;
 
         public static int GetMineCount(string cellPos, int shipType, int x, int y, string orientation)
         {
@@ -1008,7 +1012,7 @@ namespace Battleship
                                         mineTags[4] = pos.NewTagBuilder(tag, 1, 2);
                                         mineTags[5] = pos.NewTagBuilder(tag, 1, 3);
                                         mineTags[6] = pos.NewTagBuilder(tag, 1, 4);
-                                        mineTags[6] = pos.NewTagBuilder(tag, dy: 4);
+                                        mineTags[7] = pos.NewTagBuilder(tag, dy: 4);
                                     }
                                     return mineTags;
                                 }

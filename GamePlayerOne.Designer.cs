@@ -257,7 +257,7 @@
             this.BS_Test_Generate.Name = "BS_Test_Generate";
             this.BS_Test_Generate.Size = new System.Drawing.Size(103, 27);
             this.BS_Test_Generate.TabIndex = 0;
-            this.BS_Test_Generate.Text = "Generate Buttons";
+            this.BS_Test_Generate.Text = "Generate Buttons_MC";
             this.BS_Test_Generate.UseVisualStyleBackColor = false;
             this.BS_Test_Generate.Click += new System.EventHandler(this.BS_Test_Generate_Click);
             // 

@@ -17,12 +17,14 @@ namespace Battleship
     {
         Support sp = new Support();
         Position pos = new Position();
+        ColorMethods cm = new ColorMethods();
+        Map map = new Map();
         public MapCreate()
         {
             InitializeComponent();
         }
         Button[] ExampleButtons = new Button[5];
-        Button[] Buttons = new Button[100];
+        Button[] Buttons_MC = new Button[100];
         Button[] ShowButtons = new Button[100];
         Button[] ShipPlaceMap = new Button[100];
         Button[] CanPlaceButton = new Button[100];
@@ -85,7 +87,7 @@ namespace Battleship
                     button.Margin = new Padding(0);
                     if (f == 0)
                     {
-                        Buttons[b] = button;
+                        Buttons_MC[b] = button;
                     }
                     else
                     {
@@ -249,7 +251,7 @@ namespace Battleship
                     {
                         for (int i = 0; i < 100; i++)
                         {
-                            Button button = Buttons[i];
+                            Button button = CanPlaceButton[i];
                             pos.GetCoordsFromTag(sp.GetTagFromButton(button), out int x, out int y, out int p);
                             if (x >= 8)
                             {
@@ -842,7 +844,7 @@ namespace Battleship
 
         private void BS_Coords_Apply_Click(object sender, EventArgs e)
         {
-            Button[] mapButtons = Buttons;
+            Button[] mapButtons = Buttons_MC;
             bool allCellsEmpty = true;
             for (int i = 0; i < Indexes.Count; i++)
             {
@@ -895,7 +897,7 @@ namespace Battleship
         }
         private void BS_Insert_Click(object sender, EventArgs e)
         {
-            Button[] mapButton = Buttons;
+            Button[] mapButton = Buttons_MC;
             Color cellColor;
             switch (ShipData.ChoosenShipType)
             {
@@ -934,7 +936,6 @@ namespace Battleship
             {
                 string cellPos = pos.GetCellPosition(tag);
                 pos.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
-                //Update Code
                 int mineTagsSize = ShipData.GetMineCount(cellPos, ShipData.ChoosenShipType, x, y, ShipData.Orientation);
                 if (mineTagsSize != -1)
                 {
@@ -952,8 +953,126 @@ namespace Battleship
                             }
                         }
                     }
+                    if (ShipData.MapAutoUpdate)
+                    {
+                        GenerateSchematic();
+                    }
                 }
             }
+        }
+        public void GenerateSchematic()
+        {
+            Button[] all_MC_Buttons = new Button[Buttons_MC.Length];
+            Array.Resize(ref Data.MapSchematic, all_MC_Buttons.Length);
+            for (int a = 0; a < all_MC_Buttons.Length; a++)
+            {
+                all_MC_Buttons[a] = Buttons_MC[a];
+                Data.MapSchematic[a] = cm.SetCharThrowColor(0, all_MC_Buttons[a].BackColor);
+            }
+            Data.Schematic = map.GenerateMapSchematic(Data.MapSchematic);
+            TB_MapSchematic.Text = Data.Schematic;
+        }
+        private async void BS_MC_Reset_Click(object sender, EventArgs e)
+        {
+            Button[] mapCreateButtons = Buttons_MC;
+            Color[] buttonColor = { Color.Black, Color.White };
+            BS_MC_Reset.Enabled = false;
+            for (int c = 0; c < 2; c++)
+            {
+                for (int mcb = 0; mcb < mapCreateButtons.Length; mcb++)
+                {
+                    await Task.Delay(4);
+                    mapCreateButtons[mcb].BackColor = buttonColor[c];
+                }
+            }
+            BS_MC_Reset.Enabled = true;
+        }
+
+        private void ShipsCount_TB_TextChanged(object sender, EventArgs e)
+        {
+            TextBox targetTB = (TextBox)sender;
+            targetTB.BackColor = Color.Black;
+            string textBoxText = targetTB.Text;
+            for (int t = 1; t < 5; t++)
+            {
+                if (targetTB.Tag.ToString() == t.ToString())
+                {
+                    for (int s = 0; s < 4; s++)
+                    {
+                        if (sp.StringToInt(textBoxText, out int textInt))
+                        {
+                            if (textInt == ShipData.ShipsCount[s])
+                            {
+                                targetTB.ForeColor = Color.Red;
+                            }
+                            else if (textInt <= ShipData.ShipsCount[s])
+                            {
+                                targetTB.ForeColor = Color.Lime;
+                            }
+                            else if (textInt > ShipData.ShipsCount[s])
+                            {
+                                targetTB.BackColor = Color.Firebrick;
+                                targetTB.ForeColor = Color.White;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private void CHB_MC_AutoUpdate_CheckedChanged(object sender, EventArgs e)
+        {
+            ShipData.MapAutoUpdate = Convert.ToBoolean(CHB_MC_AutoUpdate.Checked);
+        }
+
+        private void BS_MC_Update_Click(object sender, EventArgs e)
+        {
+            GenerateSchematic();
+        }
+
+        private void BS_MC_Apply_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void TSMI_MC_AdvancedOptions_CheckedChanged(object sender, EventArgs e)
+        {
+            GB_AdvancedOptions.Visible = TSMI_MC_AdvancedOptions.Checked;
+        }
+
+        private void GB_AdvancedOptions_VisibleChanged(object sender, EventArgs e)
+        {
+            if (GB_AdvancedOptions.Visible)
+            {
+                PNL_AO_ProgressUnit.Height = PNL_AO_ProgressBar.Height;
+                PNL_AO_ProgressUnit.Width = 0;
+            }
+        }
+        private void BS_AO_LoadSchematic_Click(object sender, EventArgs e)
+        {
+            /**/
+            ProgressLoad();
+            /**/
+        }
+        public async void ProgressLoad()
+        {
+            while (PNL_AO_ProgressUnit.Width <= PNL_AO_ProgressBar.Width)
+            {
+                PNL_AO_ProgressUnit.BackColor = Color.White;
+                await Task.Delay(2);
+                PNL_AO_ProgressUnit.Width += 1;
+            }
+            DialogResult = MessageBox.Show("Successfull", "File Manager", MessageBoxButtons.OK);
+            if (DialogResult == DialogResult.OK)
+            {
+                PNL_AO_ProgressUnit.Width = 0;
+            }
+
+        }
+
+        private void CHB_RandomMapCreate_CheckedChanged(object sender, EventArgs e)
+        {
+            BS_RandomSchemaCreate.Visible = CHB_RandomMapCreate.Checked;
         }
     }
 }

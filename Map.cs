@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Text;
 using System.Windows.Forms;
 
 namespace Battleship
@@ -12,6 +13,16 @@ namespace Battleship
         public char[,] MapPlayer = new char[10, 10];
         public char[,] MapEnemy = new char[10, 10];
         public char[][,] Maps = new char[2][,];
+
+        public string GenerateMapSchematic(char[] map)
+        {
+            string schematic = null;
+            for (int s = 0; s < map.Length; s++)
+            {
+                schematic += map[s].ToString();
+            }
+            return schematic;
+        }
         public void SetShipCharThrowColor(int index, Button[,] buttons)
         {
             bool successfull = true;
