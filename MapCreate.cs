@@ -7,6 +7,7 @@ using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Runtime.Remoting.Channels;
+using System.Security.Cryptography.X509Certificates;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -85,6 +86,9 @@ namespace Battleship
                     button.BackColor = Color.White;
                     button.Tag = tags[f, b];
                     button.Margin = new Padding(0);
+                    /**/
+                    button.Text = b.ToString();
+                    /**/
                     if (f == 0)
                     {
                         Buttons_MC[b] = button;
@@ -153,51 +157,59 @@ namespace Battleship
             TB_ShipSize.Text = ShipData.ChoosenShipType.ToString();
             CB_Orientation.Enabled = false;
             CB_Orientation.Items.Clear();
-            if (ShipData.ChoosenShipType == 1)
+            if (ShipData.ChoosenShipType != 0)
             {
-                CB_Orientation.Items.Add(orientations[0]);
-            }
-            else if (ShipData.ChoosenShipType > 1)
-            {
-                for (int i = 1; i < 3; i++)
+                GB_PlaceShip.Visible = true;
+                if (ShipData.ChoosenShipType == 1)
                 {
-                    CB_Orientation.Items.Add(orientations[i]);
+                    CB_Orientation.Items.Add(orientations[0]);
                 }
-                CB_Orientation.Enabled = true;
+                else if (ShipData.ChoosenShipType > 1)
+                {
+                    for (int i = 1; i < 3; i++)
+                    {
+                        CB_Orientation.Items.Add(orientations[i]);
+                    }
+                    CB_Orientation.Enabled = true;
+                }
+                CB_Orientation.SelectedIndex = 0;
+                switch (ShipData.ChoosenShipType)
+                {
+                    case 1:
+                        {
+                            TB_MaxCount.Text = ShipData.FrigateCount.ToString();
+                            break;
+                        }
+                    case 2:
+                        {
+                            TB_MaxCount.Text = ShipData.DestroyerCount.ToString();
+                            break;
+                        }
+                    case 3:
+                        {
+                            TB_MaxCount.Text = ShipData.CruiserCount.ToString();
+                            break;
+                        }
+                    case 4:
+                        {
+                            TB_MaxCount.Text = ShipData.BattleshipCount.ToString();
+                            break;
+                        }
+                    default:
+                        {
+                            TB_MaxCount.Text = "";
+                            break;
+                        }
+                }
+                if (ShowExampleInMap)
+                {
+                    ShowExample();
+                    SetExample();
+                }
             }
-            CB_Orientation.SelectedIndex = 0;
-            switch (ShipData.ChoosenShipType)
+            else
             {
-                case 1:
-                    {
-                        TB_MaxCount.Text = ShipData.FrigateCount.ToString();
-                        break;
-                    }
-                case 2:
-                    {
-                        TB_MaxCount.Text = ShipData.DestroyerCount.ToString();
-                        break;
-                    }
-                case 3:
-                    {
-                        TB_MaxCount.Text = ShipData.CruiserCount.ToString();
-                        break;
-                    }
-                case 4:
-                    {
-                        TB_MaxCount.Text = ShipData.BattleshipCount.ToString();
-                        break;
-                    }
-                default:
-                    {
-                        TB_MaxCount.Text = "";
-                        break;
-                    }
-            }
-            if (ShowExampleInMap)
-            {
-                ShowExample();
-                SetExample();
+                GB_PlaceShip.Visible = false;
             }
         }
         public void SetExample()
@@ -385,7 +397,52 @@ namespace Battleship
             }
             TT_MapCreate.Show(tip, selectedButton);
         }
-        private void BS_ResetMap_Click(object sender, EventArgs e)
+        public void RadioButtonsLock(int radioButton_ID)
+        {
+            bool[] radioButtonsState = {true, true, true, true};
+            radioButtonsState[radioButton_ID - 1] = false;
+            switch (radioButton_ID)
+            {
+                case 1:
+                    {
+                        RB_ShipType_Frigate.Visible = false;
+                        break;
+                    }
+                case 2:
+                    {
+                        RB_ShipType_Destroyer.Visible = false;
+                        break;
+                    }
+                case 3:
+                    {
+                        RB_ShipType_Cruiser.Visible = false;
+                        break;
+                    }
+                case 4:
+                    {
+                        RB_ShipType_Battleship.Visible = false;
+                        break;
+                    }
+            }
+            ShipData.ChoosenShipType = 0;
+            GB_PlaceShip.Visible = false;
+            for (int i = 0; i < radioButtonsState.Length; i++)
+            {
+                if (radioButtonsState[i] == true)
+                {
+                    break;
+                }
+                else
+                {
+                    if (i == radioButtonsState.Length - 1)
+                    {
+                        ShipData.AllShipPlaced = true;
+                    }
+                }
+            }
+            BS_MC_Apply.Visible = ShipData.AllShipPlaced;
+        }
+        public void ResetExampleMap()
         {
             for (int i = 0; i < 100; i++)
             {
@@ -393,7 +450,16 @@ namespace Battleship
                 button.BackColor = Color.White;
             }
             BS_Coords_Apply.Visible = false;
-            BS_Insert.Visible = true;
+            BS_Insert.Visible = false;
+            TB_Range.Clear();
+            TB_ShipType.Clear();
+            TB_Status.Clear();
+            TB_Status.ForeColor = Color.Lime;
+            Indexes.Clear();
+        }
+        private void BS_ResetMap_Click(object sender, EventArgs e)
+        {
+            ResetExampleMap();
         }
         private void CB_Coord_Letter_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -409,9 +475,9 @@ namespace Battleship
         }
         public bool CanShipPlace(string tag, string orientation, int shipType)
         {
-            string pos = this.pos.GetCellPosition(tag);
+            string cellPos = pos.GetCellPosition(tag);
             this.pos.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
-            switch (pos)
+            switch (cellPos)
             {
                 case "center":
                     {
@@ -726,15 +792,28 @@ namespace Battleship
             }
             return false;
         }
-        public bool EmtyShipCell(string MapTag, string tag)
+        public bool EmptyShipCell(string mapTargetTag)
         {
-            return true; //
+            Button[] bmc = Buttons_MC;
+            foreach (Button button in bmc)
+            {
+                if (button.Tag.ToString() == mapTargetTag)
+                {
+                    if (button.BackColor == Color.White)
+                    {
+                        return true;
+                    }
+                }
+            }
+            return false;
         }
         private void BS_Coords_Check_Click(object sender, EventArgs e)
         {
             int[] deltas = new int[0];
             int[] nextTag = new int[0];
             bool cellPainted = false;
+            bool canReplace = true;
+            bool successfullPainting = true;
             if (CB_Coord_Letter.Text != null && CB_Coord_Number.Text != null)
             {
                 pos.TextCoordToPosition(Data.FirstCoord_Final, out int halfTag);
@@ -743,82 +822,123 @@ namespace Battleship
                 pos.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
                 if (CanShipPlace(tag, ShipData.Orientation, ShipData.ChoosenShipType))
                 {
-                    Array.Resize(ref deltas, ShipData.ChoosenShipType);
-                    for (int d = 0; d < deltas.Length; d++)
+                    if (EmptyShipCell(mapTag))
                     {
-                        switch (ShipData.Orientation)
+                        Array.Resize(ref deltas, ShipData.ChoosenShipType);
+                        for (int d = 0; d < deltas.Length; d++)
                         {
-                            case "H":
-                                {
-                                    deltas[d] = (d + 1) * 10;
-                                    break;
-                                }
-                            case "V":
-                                {
-                                    deltas[d] = (d + 1) * (-1);
-                                    break;
-                                }
-                            default:
-                                {
-                                    deltas[d] = 0;
-                                    break;
-                                }
-                        }
-                    }
-                    Array.Resize(ref nextTag, deltas.Length);
-                    Button[] exampleButtons = ShipPlaceMap;
-                    try
-                    {
-                        if (ShipData.ChoosenShipType >= 1)
-                        {
-                            foreach (Button ex_Button in exampleButtons)
+                            switch (ShipData.Orientation)
                             {
-                                if (ex_Button.Tag.ToString() == tag)
-                                {
-                                    ex_Button.BackColor = Color.Khaki;
-                                    int buttonIndex = Array.IndexOf(exampleButtons, ex_Button);
-                                    Indexes.Add(buttonIndex);
-                                    break;
-                                }
+                                case "H":
+                                    {
+                                        deltas[d] = (d + 1) * 10;
+                                        break;
+                                    }
+                                case "V":
+                                    {
+                                        deltas[d] = (d + 1) * (-1);
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        deltas[d] = 0;
+                                        break;
+                                    }
                             }
                         }
-                        if (ShipData.ChoosenShipType <= 4)
+                        Array.Resize(ref nextTag, deltas.Length);
+                        Button[] exampleButtons = ShipPlaceMap;
+                        try
                         {
-                            for (int nb = 0; nb < nextTag.Length - 1; nb++)
+                            if (ShipData.ChoosenShipType >= 1)
                             {
-                                if (sp.StringToInt(tag, out int currentTag))
+                                foreach (Button ex_Button in exampleButtons)
                                 {
-                                    nextTag[nb] = currentTag + deltas[nb];
-                                    foreach (Button ex_Button in exampleButtons)
+                                    if (ex_Button.Tag.ToString() == tag)
                                     {
-                                        if ((int)ex_Button.Tag == nextTag[nb])
-                                        {
-                                            int buttonIndex = Array.IndexOf(exampleButtons, ex_Button);
-                                            exampleButtons[buttonIndex].BackColor = Color.Khaki;
-                                            Indexes.Add(buttonIndex);
-                                            break;
-                                        }
+                                        ex_Button.BackColor = Color.Khaki;
+                                        int buttonIndex = Array.IndexOf(exampleButtons, ex_Button);
+                                        Indexes.Add(buttonIndex);
+                                        break;
                                     }
                                 }
                             }
+                            if (ShipData.ChoosenShipType <= 4)
+                            {
+                                for (int nb = 0; nb < nextTag.Length - 1; nb++)
+                                {
+                                    if (successfullPainting)
+                                    {
+                                        if (sp.StringToInt(tag, out int currentTag))
+                                        {
+                                            nextTag[nb] = currentTag + deltas[nb];
+                                            foreach (Button ex_Button in exampleButtons)
+                                            {
+                                                if ((int)ex_Button.Tag == nextTag[nb])
+                                                {
+                                                    int targetMapTag = Convert.ToInt32(ex_Button.Tag.ToString()) - 100;
+                                                    int buttonIndex = Array.IndexOf(exampleButtons, ex_Button);
+                                                    if (EmptyShipCell($"{targetMapTag}"))
+                                                    {
+                                                        exampleButtons[buttonIndex].BackColor = Color.Khaki;
+                                                        Indexes.Add(buttonIndex);
+                                                        break;
+                                                    }
+                                                    else
+                                                    {
+                                                        successfullPainting = false;
+                                                        break;
+                                                    }
+                                                }
+                                            }
+                                        }
+                                    }
+                                    else
+                                    {
+                                        break;
+                                    }
+                                }
+                            }
+                            cellPainted = true;
                         }
-                        cellPainted = true;
-                    }
-                    catch
-                    {
-                        cellPainted = false;
-                    }
-                    finally
-                    {
-                        if (cellPainted) 
+                        catch
                         {
-                            BS_Coords_Apply.Visible = true;
+                            cellPainted = false;
                         }
+                        finally
+                        {
+                            canReplace = successfullPainting && cellPainted;
+                        }
+                    }
+                    else
+                    {
+                        canReplace = false;
                     }
                 }
+                else
+                {
+                    canReplace = false;
+                }
+            }
+            switch (canReplace)
+            {
+                case true:
+                    {
+                        TB_Status.ForeColor = Color.Lime;
+                        TB_Status.Text = "Position is available";
+                        BS_Coords_Apply.Visible = true;
+                        break;
+                    }
+                case false:
+                    {
+                        TB_Status.ForeColor = Color.Red;
+                        TB_Status.Text = "Position is not available";
+                        BS_Coords_Apply.Visible = false;
+                        break;
+
+                    }
             }
         }
-
         private void CB_Orientation_SelectedIndexChanged(object sender, EventArgs e)
         {
             string orientation = CB_Orientation.SelectedItem.ToString();
@@ -841,14 +961,13 @@ namespace Battleship
                     }
             }
         }
-
         private void BS_Coords_Apply_Click(object sender, EventArgs e)
         {
             Button[] mapButtons = Buttons_MC;
             bool allCellsEmpty = true;
             for (int i = 0; i < Indexes.Count; i++)
             {
-                if (mapButtons[i].BackColor != Color.White)
+                if (mapButtons[Indexes[i]].BackColor != Color.White)
                 {
                     allCellsEmpty = false;
                     break;
@@ -957,6 +1076,30 @@ namespace Battleship
                     {
                         GenerateSchematic();
                     }
+                    ResetExampleMap();
+                    switch (ShipData.ChoosenShipType)
+                    {
+                        case 1:
+                            {
+                                TB_MC_FrigateCount.Text = Convert.ToString(Convert.ToInt32(TB_MC_FrigateCount.Text) + 1);
+                                break;
+                            }
+                        case 2:
+                            {
+                                TB_MC_DestroyerCount.Text = Convert.ToString(Convert.ToInt32(TB_MC_DestroyerCount.Text) + 1);
+                                break;
+                            }
+                        case 3:
+                            {
+                                TB_MC_CruiserCount.Text = Convert.ToString(Convert.ToInt32(TB_MC_CruiserCount.Text) + 1);
+                                break;
+                            }
+                        case 4:
+                            {
+                                TB_MC_BattleshipCount.Text = Convert.ToString(Convert.ToInt32(TB_MC_BattleshipCount.Text) + 1);
+                                break;
+                            }
+                    }
                 }
             }
         }
@@ -986,40 +1129,75 @@ namespace Battleship
                 }
             }
             BS_MC_Reset.Enabled = true;
+            RB_ShipType_Frigate.Visible = true;
+            RB_ShipType_Destroyer.Visible = true;
+            RB_ShipType_Cruiser.Visible = true;
+            RB_ShipType_Battleship.Visible = true;
+            RB_ShipType_Frigate.Checked = true;
+            TB_MC_FrigateCount.Text = "0";
+            TB_MC_DestroyerCount.Text = "0";
+            TB_MC_CruiserCount.Text = "0";
+            TB_MC_BattleshipCount.Text = "0";
+            ShipData.ChoosenShipType = 1;
         }
-
         private void ShipsCount_TB_TextChanged(object sender, EventArgs e)
         {
             TextBox targetTB = (TextBox)sender;
             targetTB.BackColor = Color.Black;
             string textBoxText = targetTB.Text;
-            for (int t = 1; t < 5; t++)
+            int shipsCount = 0;
+            int shipType;
+            switch (targetTB)
             {
-                if (targetTB.Tag.ToString() == t.ToString())
-                {
-                    for (int s = 0; s < 4; s++)
+                case TextBox target when target == TB_MC_FrigateCount:
                     {
-                        if (sp.StringToInt(textBoxText, out int textInt))
-                        {
-                            if (textInt == ShipData.ShipsCount[s])
-                            {
-                                targetTB.ForeColor = Color.Red;
-                            }
-                            else if (textInt <= ShipData.ShipsCount[s])
-                            {
-                                targetTB.ForeColor = Color.Lime;
-                            }
-                            else if (textInt > ShipData.ShipsCount[s])
-                            {
-                                targetTB.BackColor = Color.Firebrick;
-                                targetTB.ForeColor = Color.White;
-                            }
-                        }
+                        shipsCount = Convert.ToInt32(target.Text);
+                        shipType = 1;
+                        break;
                     }
+                case TextBox target when target == TB_MC_DestroyerCount:
+                    {
+                        shipsCount = Convert.ToInt32(target.Text);
+                        shipType = 2;
+                        break;
+                    }
+                case TextBox target when target == TB_MC_CruiserCount:
+                    {
+                        shipsCount = Convert.ToInt32(target.Text);
+                        shipType = 3;
+                        break;
+                    }
+                case TextBox target when target == TB_MC_BattleshipCount:
+                    {
+                        shipsCount = Convert.ToInt32(target.Text);
+                        shipType = 4;
+                        break;
+                    }
+                default:
+                    {
+                        shipType = 0;
+                        break;
+                    }
+            }
+            if (shipType != 0)
+            {
+                targetTB.BackColor = Color.Black;
+                if (shipsCount == ShipData.ShipsCount[shipType - 1])
+                {
+                    targetTB.ForeColor = Color.Red;
+                    RadioButtonsLock(shipType);
+                }
+                else if (shipsCount < ShipData.ShipsCount[shipType - 1])
+                {
+                    targetTB.ForeColor = Color.Lime;
+                }
+                else if (shipsCount > ShipData.ShipsCount[shipType - 1])
+                {
+                    targetTB.BackColor = Color.Firebrick;
+                    targetTB.ForeColor = Color.White;
                 }
             }
         }
-
         private void CHB_MC_AutoUpdate_CheckedChanged(object sender, EventArgs e)
         {
             ShipData.MapAutoUpdate = Convert.ToBoolean(CHB_MC_AutoUpdate.Checked);
@@ -1029,17 +1207,14 @@ namespace Battleship
         {
             GenerateSchematic();
         }
-
         private void BS_MC_Apply_Click(object sender, EventArgs e)
         {
             
         }
-
         private void TSMI_MC_AdvancedOptions_CheckedChanged(object sender, EventArgs e)
         {
             GB_AdvancedOptions.Visible = TSMI_MC_AdvancedOptions.Checked;
         }
-
         private void GB_AdvancedOptions_VisibleChanged(object sender, EventArgs e)
         {
             if (GB_AdvancedOptions.Visible)
@@ -1067,12 +1242,6 @@ namespace Battleship
             {
                 PNL_AO_ProgressUnit.Width = 0;
             }
-
-        }
-
-        private void CHB_RandomMapCreate_CheckedChanged(object sender, EventArgs e)
-        {
-            BS_RandomSchemaCreate.Visible = CHB_RandomMapCreate.Checked;
         }
     }
 }

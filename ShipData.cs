@@ -25,6 +25,7 @@ namespace Battleship
 
         public static bool MapAutoUpdate = false;
 
+        public static bool AllShipPlaced = false;
         public static int GetMineCount(string cellPos, int shipType, int x, int y, string orientation)
         {
             switch (cellPos)
@@ -990,7 +991,7 @@ namespace Battleship
                                     mineTags[2] = pos.NewTagBuilder(tag, 1, 2);
                                     mineTags[3] = pos.NewTagBuilder(tag, 1, 3);
                                     mineTags[4] = pos.NewTagBuilder(tag, 1, 4);
-                                    mineTags[4] = pos.NewTagBuilder(tag, dy: 4);
+                                    mineTags[5] = pos.NewTagBuilder(tag, dy: 4);
                                     return mineTags;
                                 }
                             case "top":
