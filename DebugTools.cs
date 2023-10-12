@@ -9,7 +9,7 @@ namespace Battleship
     public static class DebugTools
     {
         public static bool DebugMode = false;
-        public static string Version = "InDev 0.1.15.1";
+        public static string Version = "InDev 0.1.15.2";
 
         public static class MCF
         {

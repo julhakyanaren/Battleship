@@ -28,21 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.L_MM_Title = new System.Windows.Forms.Label();
             this.BS_MM_NewGame = new System.Windows.Forms.Button();
             this.BS_MM_Options = new System.Windows.Forms.Button();
             this.BS_MM_About = new System.Windows.Forms.Button();
+            this.L_MM_Title = new System.Windows.Forms.Label();
             this.SuspendLayout();
-            // 
-            // L_MM_Title
-            // 
-            this.L_MM_Title.AutoSize = true;
-            this.L_MM_Title.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_MM_Title.Location = new System.Drawing.Point(147, 44);
-            this.L_MM_Title.Name = "L_MM_Title";
-            this.L_MM_Title.Size = new System.Drawing.Size(251, 61);
-            this.L_MM_Title.TabIndex = 0;
-            this.L_MM_Title.Text = "BATTLESHIP";
             // 
             // BS_MM_NewGame
             // 
@@ -78,16 +68,27 @@
             this.BS_MM_About.Text = "About";
             this.BS_MM_About.UseVisualStyleBackColor = true;
             // 
+            // L_MM_Title
+            // 
+            this.L_MM_Title.AutoSize = true;
+            this.L_MM_Title.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 36F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.L_MM_Title.Location = new System.Drawing.Point(110, 56);
+            this.L_MM_Title.Name = "L_MM_Title";
+            this.L_MM_Title.Size = new System.Drawing.Size(311, 75);
+            this.L_MM_Title.TabIndex = 0;
+            this.L_MM_Title.Text = "BATTLESHIP";
+            this.L_MM_Title.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            // 
             // MenuForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(531, 489);
+            this.Controls.Add(this.L_MM_Title);
             this.Controls.Add(this.BS_MM_About);
             this.Controls.Add(this.BS_MM_Options);
             this.Controls.Add(this.BS_MM_NewGame);
-            this.Controls.Add(this.L_MM_Title);
             this.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
@@ -101,11 +102,10 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.Label L_MM_Title;
         private System.Windows.Forms.Button BS_MM_NewGame;
         private System.Windows.Forms.Button BS_MM_Options;
         private System.Windows.Forms.Button BS_MM_About;
+        private System.Windows.Forms.Label L_MM_Title;
     }
 }
 
