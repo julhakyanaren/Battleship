@@ -3,6 +3,7 @@ using System.CodeDom;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Data.SqlTypes;
 using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
@@ -100,6 +101,7 @@ namespace Battleship
                     if (f == 0)
                     {
                         Buttons_MC[b] = button;
+                        button.Click += MC_Buttons_Click;
                     }
                     else
                     {
@@ -108,6 +110,34 @@ namespace Battleship
                 }
             }
         }
+
+        private void MC_Buttons_Click(object sender, EventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            string textCoord = pos.GetButtonTextCoords(clickedButton, out int buttonIndex);
+            if (buttonIndex == 3)
+            {
+                char[] coords = textCoord.ToCharArray();
+                string letter = null;
+                int number = 0;
+                letter = coords[0].ToString();
+                if (coords.Length == 3)
+                {
+                    number = Convert.ToInt32($"{coords[1]}{coords[2]}");
+                }
+                else
+                {
+                    number = Convert.ToInt32($"{coords[1]}");
+                }
+                Data.FirstCoord_Letter = letter;
+                Data.FirstCoord_Number = number;
+                Data.FirstCoord_Final = $"{letter}{number}";
+                CB_Coord_Letter.Text = Data.FirstCoord_Letter;
+                CB_Coord_Number.Text = Data.FirstCoord_Number.ToString();
+                TB_Coords.Text = Data.FirstCoord_Final;
+            }
+        }
+
         public void ShowExample()
         {
             Random random = new Random();
