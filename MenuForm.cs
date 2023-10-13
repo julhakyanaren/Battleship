@@ -16,14 +16,21 @@ namespace Battleship
         {
             InitializeComponent();
         }
-
+        public void SetElementsParameters()
+        {
+            L_Info_Version.Text = "Version: " + DebugTools.Version;
+            int x = L_Info_Version.Location.X;
+            int y = L_Info_Version.Location.Y;
+            x = (PB_MF_MainLogo.Size.Width - L_Info_Version.Size.Width) / 2;
+            L_Info_Version.Location = new Point(x, y);
+        }
         private void MenuForm_Load(object sender, EventArgs e)
         {
-            int w = Width;
-            int x = (w - L_MM_Title.Width) / 2;
-            L_MM_Title.Location = new Point(x, 6);
+            /**/
+            Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
+            /**/
+            SetElementsParameters();
         }
-
         private void BS_MM_NewGame_Click(object sender, EventArgs e)
         {
             DialogResult dr = new DialogResult();

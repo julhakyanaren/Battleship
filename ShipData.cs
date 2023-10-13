@@ -638,26 +638,26 @@ namespace Battleship
                                     {
                                         if (x == 1)
                                         {
-                                            mineTags[0] = pos.NewTagBuilder(tag, 1, -1);
+                                            mineTags[0] = pos.NewTagBuilder(tag, -1, -1);
                                             mineTags[1] = pos.NewTagBuilder(tag, dy: -1);
-                                            mineTags[2] = pos.NewTagBuilder(tag, -1, -1);
-                                            mineTags[3] = pos.NewTagBuilder(tag, -1, 1);
-                                            mineTags[4] = pos.NewTagBuilder(tag, dy: 1);
-                                            mineTags[5] = pos.NewTagBuilder(tag, 1, 1);
-                                            mineTags[6] = pos.NewTagBuilder(tag, dy: 1);
+                                            mineTags[2] = pos.NewTagBuilder(tag, 1, -1);
+                                            mineTags[3] = pos.NewTagBuilder(tag, dx: 1);
+                                            mineTags[4] = pos.NewTagBuilder(tag, 1, 1);
+                                            mineTags[5] = pos.NewTagBuilder(tag, dy: 1);
+                                            mineTags[6] = pos.NewTagBuilder(tag, -1, 1);
                                         }
                                         else
                                         {
-                                            mineTags[0] = pos.NewTagBuilder(tag, 1, -1);
+                                            mineTags[0] = pos.NewTagBuilder(tag, -1, -1);
                                             mineTags[1] = pos.NewTagBuilder(tag, dy: -1);
-                                            mineTags[2] = pos.NewTagBuilder(tag, -1, -1);
-                                            mineTags[3] = pos.NewTagBuilder(tag, -2, -1);
-                                            mineTags[4] = pos.NewTagBuilder(tag, dx: -2);
-                                            mineTags[5] = pos.NewTagBuilder(tag, -2, 1);
+                                            mineTags[2] = pos.NewTagBuilder(tag, 1, -1);
+                                            mineTags[3] = pos.NewTagBuilder(tag, dx: 1);
+                                            mineTags[4] = pos.NewTagBuilder(tag, 1, 1);
+                                            mineTags[5] = pos.NewTagBuilder(tag, dy: 1);
                                             mineTags[6] = pos.NewTagBuilder(tag, -1, 1);
-                                            mineTags[7] = pos.NewTagBuilder(tag, dy: 1);
-                                            mineTags[8] = pos.NewTagBuilder(tag, 1, 1);
-                                            mineTags[9] = pos.NewTagBuilder(tag, dy: 1);
+                                            mineTags[7] = pos.NewTagBuilder(tag, -2, 1);
+                                            mineTags[8] = pos.NewTagBuilder(tag, dx: -2);
+                                            mineTags[9] = pos.NewTagBuilder(tag, -2, -1);
                                         }
                                     }
                                     return mineTags;

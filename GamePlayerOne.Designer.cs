@@ -145,6 +145,7 @@
             this.MS_MainMenu = new System.Windows.Forms.MenuStrip();
             this.TSMI_MM_Options = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_MM_Settings = new System.Windows.Forms.ToolStripMenuItem();
+            this.PB_GPO_Logo = new System.Windows.Forms.PictureBox();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
@@ -178,6 +179,7 @@
             this.TLP_PlayerNumbers.SuspendLayout();
             this.PNL_PlayerMap_Schema.SuspendLayout();
             this.MS_MainMenu.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_GPO_Logo)).BeginInit();
             this.SuspendLayout();
             // 
             // TLP_Main
@@ -216,7 +218,7 @@
             this.TLP_GPO_Controls.Controls.Add(this.PNL_PlayerControl, 0, 0);
             this.TLP_GPO_Controls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TLP_GPO_Controls.Location = new System.Drawing.Point(0, 0);
-            this.TLP_GPO_Controls.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TLP_GPO_Controls.Margin = new System.Windows.Forms.Padding(2);
             this.TLP_GPO_Controls.Name = "TLP_GPO_Controls";
             this.TLP_GPO_Controls.RowCount = 1;
             this.TLP_GPO_Controls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -226,11 +228,12 @@
             // 
             // PNL_EnemyControl
             // 
+            this.PNL_EnemyControl.Controls.Add(this.PB_GPO_Logo);
             this.PNL_EnemyControl.Controls.Add(this.BS_Test_GenerateMap);
             this.PNL_EnemyControl.Controls.Add(this.BS_Test_Generate);
             this.PNL_EnemyControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PNL_EnemyControl.Location = new System.Drawing.Point(513, 2);
-            this.PNL_EnemyControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PNL_EnemyControl.Margin = new System.Windows.Forms.Padding(2);
             this.PNL_EnemyControl.Name = "PNL_EnemyControl";
             this.PNL_EnemyControl.Size = new System.Drawing.Size(507, 48);
             this.PNL_EnemyControl.TabIndex = 1;
@@ -266,7 +269,7 @@
             this.PNL_PlayerControl.Controls.Add(this.TLP_PlayerControl);
             this.PNL_PlayerControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PNL_PlayerControl.Location = new System.Drawing.Point(2, 2);
-            this.PNL_PlayerControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PNL_PlayerControl.Margin = new System.Windows.Forms.Padding(2);
             this.PNL_PlayerControl.Name = "PNL_PlayerControl";
             this.PNL_PlayerControl.Size = new System.Drawing.Size(507, 48);
             this.PNL_PlayerControl.TabIndex = 0;
@@ -288,7 +291,7 @@
             this.TLP_PlayerControl.Controls.Add(this.PNL_SelectCell, 5, 0);
             this.TLP_PlayerControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TLP_PlayerControl.Location = new System.Drawing.Point(0, 0);
-            this.TLP_PlayerControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TLP_PlayerControl.Margin = new System.Windows.Forms.Padding(2);
             this.TLP_PlayerControl.Name = "TLP_PlayerControl";
             this.TLP_PlayerControl.RowCount = 1;
             this.TLP_PlayerControl.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -304,7 +307,7 @@
             this.RB_PC_Destroyer.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.RB_PC_Destroyer.ForeColor = System.Drawing.Color.White;
             this.RB_PC_Destroyer.Location = new System.Drawing.Point(62, 2);
-            this.RB_PC_Destroyer.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RB_PC_Destroyer.Margin = new System.Windows.Forms.Padding(2);
             this.RB_PC_Destroyer.Name = "RB_PC_Destroyer";
             this.RB_PC_Destroyer.Size = new System.Drawing.Size(56, 44);
             this.RB_PC_Destroyer.TabIndex = 4;
@@ -323,7 +326,7 @@
             this.RB_PC_None.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.RB_PC_None.ForeColor = System.Drawing.Color.White;
             this.RB_PC_None.Location = new System.Drawing.Point(242, 2);
-            this.RB_PC_None.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RB_PC_None.Margin = new System.Windows.Forms.Padding(2);
             this.RB_PC_None.Name = "RB_PC_None";
             this.RB_PC_None.Size = new System.Drawing.Size(56, 44);
             this.RB_PC_None.TabIndex = 3;
@@ -342,7 +345,7 @@
             this.RB_PC_Battleship.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.RB_PC_Battleship.ForeColor = System.Drawing.Color.White;
             this.RB_PC_Battleship.Location = new System.Drawing.Point(182, 2);
-            this.RB_PC_Battleship.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RB_PC_Battleship.Margin = new System.Windows.Forms.Padding(2);
             this.RB_PC_Battleship.Name = "RB_PC_Battleship";
             this.RB_PC_Battleship.Size = new System.Drawing.Size(56, 44);
             this.RB_PC_Battleship.TabIndex = 2;
@@ -360,7 +363,7 @@
             this.RB_PC_Cruiser.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.RB_PC_Cruiser.ForeColor = System.Drawing.Color.White;
             this.RB_PC_Cruiser.Location = new System.Drawing.Point(122, 2);
-            this.RB_PC_Cruiser.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RB_PC_Cruiser.Margin = new System.Windows.Forms.Padding(2);
             this.RB_PC_Cruiser.Name = "RB_PC_Cruiser";
             this.RB_PC_Cruiser.Size = new System.Drawing.Size(56, 44);
             this.RB_PC_Cruiser.TabIndex = 1;
@@ -378,7 +381,7 @@
             this.RB_PC_Frigate.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.RB_PC_Frigate.ForeColor = System.Drawing.Color.White;
             this.RB_PC_Frigate.Location = new System.Drawing.Point(2, 2);
-            this.RB_PC_Frigate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.RB_PC_Frigate.Margin = new System.Windows.Forms.Padding(2);
             this.RB_PC_Frigate.Name = "RB_PC_Frigate";
             this.RB_PC_Frigate.Size = new System.Drawing.Size(56, 44);
             this.RB_PC_Frigate.TabIndex = 0;
@@ -1522,7 +1525,7 @@
             this.BS_PlayerSchema_G.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_G.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_G.Location = new System.Drawing.Point(266, 2);
-            this.BS_PlayerSchema_G.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_G.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_G.Name = "BS_PlayerSchema_G";
             this.BS_PlayerSchema_G.Size = new System.Drawing.Size(40, 33);
             this.BS_PlayerSchema_G.TabIndex = 11;
@@ -1538,7 +1541,7 @@
             this.BS_PlayerSchema_F.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_F.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_F.Location = new System.Drawing.Point(222, 2);
-            this.BS_PlayerSchema_F.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_F.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_F.Name = "BS_PlayerSchema_F";
             this.BS_PlayerSchema_F.Size = new System.Drawing.Size(40, 33);
             this.BS_PlayerSchema_F.TabIndex = 10;
@@ -1554,7 +1557,7 @@
             this.BS_PlayerSchema_H.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_H.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_H.Location = new System.Drawing.Point(310, 2);
-            this.BS_PlayerSchema_H.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_H.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_H.Name = "BS_PlayerSchema_H";
             this.BS_PlayerSchema_H.Size = new System.Drawing.Size(40, 33);
             this.BS_PlayerSchema_H.TabIndex = 9;
@@ -1570,7 +1573,7 @@
             this.BS_PlayerSchema_J.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_J.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_J.Location = new System.Drawing.Point(398, 2);
-            this.BS_PlayerSchema_J.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_J.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_J.Name = "BS_PlayerSchema_J";
             this.BS_PlayerSchema_J.Size = new System.Drawing.Size(47, 33);
             this.BS_PlayerSchema_J.TabIndex = 8;
@@ -1586,7 +1589,7 @@
             this.BS_PlayerSchema_I.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_I.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_I.Location = new System.Drawing.Point(354, 2);
-            this.BS_PlayerSchema_I.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_I.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_I.Name = "BS_PlayerSchema_I";
             this.BS_PlayerSchema_I.Size = new System.Drawing.Size(40, 33);
             this.BS_PlayerSchema_I.TabIndex = 7;
@@ -1602,7 +1605,7 @@
             this.BS_PlayerSchema_B.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_B.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_B.Location = new System.Drawing.Point(46, 2);
-            this.BS_PlayerSchema_B.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_B.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_B.Name = "BS_PlayerSchema_B";
             this.BS_PlayerSchema_B.Size = new System.Drawing.Size(40, 33);
             this.BS_PlayerSchema_B.TabIndex = 6;
@@ -1618,7 +1621,7 @@
             this.BS_PlayerSchema_A.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_A.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_A.Location = new System.Drawing.Point(2, 2);
-            this.BS_PlayerSchema_A.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_A.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_A.Name = "BS_PlayerSchema_A";
             this.BS_PlayerSchema_A.Size = new System.Drawing.Size(40, 33);
             this.BS_PlayerSchema_A.TabIndex = 5;
@@ -1634,7 +1637,7 @@
             this.BS_PlayerSchema_C.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_C.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_C.Location = new System.Drawing.Point(90, 2);
-            this.BS_PlayerSchema_C.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_C.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_C.Name = "BS_PlayerSchema_C";
             this.BS_PlayerSchema_C.Size = new System.Drawing.Size(40, 33);
             this.BS_PlayerSchema_C.TabIndex = 4;
@@ -1650,7 +1653,7 @@
             this.BS_PlayerSchema_E.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_E.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_E.Location = new System.Drawing.Point(178, 2);
-            this.BS_PlayerSchema_E.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_E.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_E.Name = "BS_PlayerSchema_E";
             this.BS_PlayerSchema_E.Size = new System.Drawing.Size(40, 33);
             this.BS_PlayerSchema_E.TabIndex = 3;
@@ -1666,7 +1669,7 @@
             this.BS_PlayerSchema_D.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_D.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_D.Location = new System.Drawing.Point(134, 2);
-            this.BS_PlayerSchema_D.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_D.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_D.Name = "BS_PlayerSchema_D";
             this.BS_PlayerSchema_D.Size = new System.Drawing.Size(40, 33);
             this.BS_PlayerSchema_D.TabIndex = 2;
@@ -1954,6 +1957,17 @@
             this.TSMI_MM_Settings.Text = "Settings";
             this.TSMI_MM_Settings.Click += new System.EventHandler(this.TSMI_MM_Settings_Click);
             // 
+            // PB_GPO_Logo
+            // 
+            this.PB_GPO_Logo.Dock = System.Windows.Forms.DockStyle.Right;
+            this.PB_GPO_Logo.Image = global::Battleship.Properties.Resources.Logo;
+            this.PB_GPO_Logo.Location = new System.Drawing.Point(230, 0);
+            this.PB_GPO_Logo.Name = "PB_GPO_Logo";
+            this.PB_GPO_Logo.Size = new System.Drawing.Size(277, 48);
+            this.PB_GPO_Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PB_GPO_Logo.TabIndex = 2;
+            this.PB_GPO_Logo.TabStop = false;
+            // 
             // GamePlayerOne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1962,7 +1976,7 @@
             this.Controls.Add(this.TLP_Main);
             this.Controls.Add(this.MS_MainMenu);
             this.MainMenuStrip = this.MS_MainMenu;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GamePlayerOne";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Battleship";
@@ -2005,6 +2019,7 @@
             this.PNL_PlayerMap_Schema.ResumeLayout(false);
             this.MS_MainMenu.ResumeLayout(false);
             this.MS_MainMenu.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_GPO_Logo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2129,5 +2144,6 @@
         private System.Windows.Forms.ToolStripMenuItem TSMI_MM_Options;
         private System.Windows.Forms.ToolStripMenuItem TSMI_MM_Settings;
         private System.Windows.Forms.Panel PNL_SelectCell;
+        private System.Windows.Forms.PictureBox PB_GPO_Logo;
     }
 }

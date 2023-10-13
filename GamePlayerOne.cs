@@ -32,6 +32,9 @@ namespace Battleship
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {
             SetScreenParametersAsMaximized();
+            /**/
+            Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
+            /**/
         }
 
         void GenerateButtons()

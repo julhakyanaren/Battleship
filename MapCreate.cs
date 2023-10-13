@@ -41,6 +41,13 @@ namespace Battleship
             GenerateButtons();
             CB_Coord_Letter.Select(0,0);
             CB_Coord_Number.Select(0,0);
+            /**/
+            Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
+            /**/
+            TB_MC_FrigateCount.ForeColor = Color.Lime;
+            TB_MC_DestroyerCount.ForeColor = Color.Lime;
+            TB_MC_CruiserCount.ForeColor = Color.Lime;
+            TB_MC_BattleshipCount.ForeColor = Color.Lime;
         }
         int[,] GenerateButtonsTags()
         {
@@ -84,6 +91,7 @@ namespace Battleship
                     button.FlatStyle = FlatStyle.Flat;
                     button.ForeColor = Color.Black;
                     button.BackColor = Color.White;
+                    button.FlatAppearance.BorderColor = Color.Black;
                     button.Tag = tags[f, b];
                     button.Margin = new Padding(0);
                     /**/
@@ -157,59 +165,66 @@ namespace Battleship
             TB_ShipSize.Text = ShipData.ChoosenShipType.ToString();
             CB_Orientation.Enabled = false;
             CB_Orientation.Items.Clear();
-            if (ShipData.ChoosenShipType != 0)
+            if (checkedRadioButton.ForeColor == Color.Firebrick)
             {
-                GB_PlaceShip.Visible = true;
-                if (ShipData.ChoosenShipType == 1)
-                {
-                    CB_Orientation.Items.Add(orientations[0]);
-                }
-                else if (ShipData.ChoosenShipType > 1)
-                {
-                    for (int i = 1; i < 3; i++)
-                    {
-                        CB_Orientation.Items.Add(orientations[i]);
-                    }
-                    CB_Orientation.Enabled = true;
-                }
-                CB_Orientation.SelectedIndex = 0;
-                switch (ShipData.ChoosenShipType)
-                {
-                    case 1:
-                        {
-                            TB_MaxCount.Text = ShipData.FrigateCount.ToString();
-                            break;
-                        }
-                    case 2:
-                        {
-                            TB_MaxCount.Text = ShipData.DestroyerCount.ToString();
-                            break;
-                        }
-                    case 3:
-                        {
-                            TB_MaxCount.Text = ShipData.CruiserCount.ToString();
-                            break;
-                        }
-                    case 4:
-                        {
-                            TB_MaxCount.Text = ShipData.BattleshipCount.ToString();
-                            break;
-                        }
-                    default:
-                        {
-                            TB_MaxCount.Text = "";
-                            break;
-                        }
-                }
-                if (ShowExampleInMap)
-                {
-                    ShowExample();
-                    SetExample();
-                }
+                checkedRadioButton.Checked = false;
             }
             else
             {
-                GB_PlaceShip.Visible = false;
+                if (ShipData.ChoosenShipType != 0)
+                {
+                    GB_PlaceShip.Visible = true;
+                    if (ShipData.ChoosenShipType == 1)
+                    {
+                        CB_Orientation.Items.Add(orientations[0]);
+                    }
+                    else if (ShipData.ChoosenShipType > 1)
+                    {
+                        for (int i = 1; i < 3; i++)
+                        {
+                            CB_Orientation.Items.Add(orientations[i]);
+                        }
+                        CB_Orientation.Enabled = true;
+                    }
+                    CB_Orientation.SelectedIndex = 0;
+                    switch (ShipData.ChoosenShipType)
+                    {
+                        case 1:
+                            {
+                                TB_MaxCount.Text = ShipData.FrigateCount.ToString();
+                                break;
+                            }
+                        case 2:
+                            {
+                                TB_MaxCount.Text = ShipData.DestroyerCount.ToString();
+                                break;
+                            }
+                        case 3:
+                            {
+                                TB_MaxCount.Text = ShipData.CruiserCount.ToString();
+                                break;
+                            }
+                        case 4:
+                            {
+                                TB_MaxCount.Text = ShipData.BattleshipCount.ToString();
+                                break;
+                            }
+                        default:
+                            {
+                                TB_MaxCount.Text = "";
+                                break;
+                            }
+                    }
+                    if (ShowExampleInMap)
+                    {
+                        ShowExample();
+                        SetExample();
+                    }
+                }
+                else
+                {
+                    GB_PlaceShip.Visible = false;
+                }
             }
         }
         public void SetExample()
@@ -405,22 +420,22 @@ namespace Battleship
             {
                 case 1:
                     {
-                        RB_ShipType_Frigate.Visible = false;
+                        RB_ShipType_Frigate.ForeColor = Color.Firebrick;
                         break;
                     }
                 case 2:
                     {
-                        RB_ShipType_Destroyer.Visible = false;
+                        RB_ShipType_Destroyer.ForeColor = Color.Firebrick;
                         break;
                     }
                 case 3:
                     {
-                        RB_ShipType_Cruiser.Visible = false;
+                        RB_ShipType_Cruiser.ForeColor = Color.Firebrick;
                         break;
                     }
                 case 4:
                     {
-                        RB_ShipType_Battleship.Visible = false;
+                        RB_ShipType_Battleship.ForeColor = Color.Firebrick;
                         break;
                     }
             }
@@ -1129,10 +1144,10 @@ namespace Battleship
                 }
             }
             BS_MC_Reset.Enabled = true;
-            RB_ShipType_Frigate.Visible = true;
-            RB_ShipType_Destroyer.Visible = true;
-            RB_ShipType_Cruiser.Visible = true;
-            RB_ShipType_Battleship.Visible = true;
+            RB_ShipType_Frigate.ForeColor = Design.DefaultForeColor;
+            RB_ShipType_Destroyer.ForeColor = Design.DefaultForeColor;
+            RB_ShipType_Cruiser.ForeColor = Design.DefaultForeColor;
+            RB_ShipType_Battleship.ForeColor = Design.DefaultForeColor;
             RB_ShipType_Frigate.Checked = true;
             TB_MC_FrigateCount.Text = "0";
             TB_MC_DestroyerCount.Text = "0";
@@ -1142,6 +1157,7 @@ namespace Battleship
         }
         private void ShipsCount_TB_TextChanged(object sender, EventArgs e)
         {
+            TextBox[] shipsCountArray = { TB_MC_FrigateCount, TB_MC_DestroyerCount, TB_MC_CruiserCount, TB_MC_BattleshipCount };
             TextBox targetTB = (TextBox)sender;
             targetTB.BackColor = Color.Black;
             string textBoxText = targetTB.Text;
@@ -1197,6 +1213,21 @@ namespace Battleship
                     targetTB.ForeColor = Color.White;
                 }
             }
+            bool allShipsPlaced = true;
+            for (int i = 0; i < shipsCountArray.Length; i++)
+            {
+                if (shipsCountArray[i].ForeColor == Color.Firebrick)
+                {
+                    continue;
+                }
+                else
+                {
+                    allShipsPlaced = false;
+                    break;
+                }
+            }
+            ShipData.AllShipPlaced = allShipsPlaced;
+            BS_MC_Apply.Visible = allShipsPlaced;
         }
         private void CHB_MC_AutoUpdate_CheckedChanged(object sender, EventArgs e)
         {

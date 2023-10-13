@@ -88,6 +88,8 @@
             this.L_Info_AO_MapSchematic = new System.Windows.Forms.Label();
             this.TB_AO_MapSchematic = new System.Windows.Forms.TextBox();
             this.GB_PlaceShip = new System.Windows.Forms.GroupBox();
+            this.TB_Status = new System.Windows.Forms.TextBox();
+            this.L_Info_Status = new System.Windows.Forms.Label();
             this.TB_ShipType = new System.Windows.Forms.TextBox();
             this.L_Info_ShipType = new System.Windows.Forms.Label();
             this.TB_Range = new System.Windows.Forms.TextBox();
@@ -133,8 +135,6 @@
             this.TT_MapCreate = new System.Windows.Forms.ToolTip(this.components);
             this.SFD_MapCreate = new System.Windows.Forms.SaveFileDialog();
             this.OFD_MapCreate = new System.Windows.Forms.OpenFileDialog();
-            this.L_Info_Status = new System.Windows.Forms.Label();
-            this.TB_Status = new System.Windows.Forms.TextBox();
             this.TLP_MapsDivision.SuspendLayout();
             this.PNL_MC_Field.SuspendLayout();
             this.TLP_MC_Main_One.SuspendLayout();
@@ -1051,6 +1051,29 @@
             this.GB_PlaceShip.TabStop = false;
             this.GB_PlaceShip.Text = "Placeship";
             // 
+            // TB_Status
+            // 
+            this.TB_Status.BackColor = System.Drawing.Color.Black;
+            this.TB_Status.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_Status.ForeColor = System.Drawing.Color.White;
+            this.TB_Status.Location = new System.Drawing.Point(323, 185);
+            this.TB_Status.Multiline = true;
+            this.TB_Status.Name = "TB_Status";
+            this.TB_Status.ReadOnly = true;
+            this.TB_Status.ScrollBars = System.Windows.Forms.ScrollBars.Both;
+            this.TB_Status.Size = new System.Drawing.Size(179, 46);
+            this.TB_Status.TabIndex = 39;
+            // 
+            // L_Info_Status
+            // 
+            this.L_Info_Status.AutoSize = true;
+            this.L_Info_Status.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.L_Info_Status.Location = new System.Drawing.Point(320, 165);
+            this.L_Info_Status.Name = "L_Info_Status";
+            this.L_Info_Status.Size = new System.Drawing.Size(46, 17);
+            this.L_Info_Status.TabIndex = 33;
+            this.L_Info_Status.Text = "Status";
+            // 
             // TB_ShipType
             // 
             this.TB_ShipType.BackColor = System.Drawing.Color.Black;
@@ -1667,29 +1690,6 @@
             // OFD_MapCreate
             // 
             this.OFD_MapCreate.FileName = "openFileDialog1";
-            // 
-            // L_Info_Status
-            // 
-            this.L_Info_Status.AutoSize = true;
-            this.L_Info_Status.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_Info_Status.Location = new System.Drawing.Point(320, 165);
-            this.L_Info_Status.Name = "L_Info_Status";
-            this.L_Info_Status.Size = new System.Drawing.Size(46, 17);
-            this.L_Info_Status.TabIndex = 33;
-            this.L_Info_Status.Text = "Status";
-            // 
-            // TB_Status
-            // 
-            this.TB_Status.BackColor = System.Drawing.Color.Black;
-            this.TB_Status.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_Status.ForeColor = System.Drawing.Color.White;
-            this.TB_Status.Location = new System.Drawing.Point(323, 185);
-            this.TB_Status.Multiline = true;
-            this.TB_Status.Name = "TB_Status";
-            this.TB_Status.ReadOnly = true;
-            this.TB_Status.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TB_Status.Size = new System.Drawing.Size(179, 46);
-            this.TB_Status.TabIndex = 39;
             // 
             // MapCreate
             // 
