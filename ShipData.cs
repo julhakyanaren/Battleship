@@ -26,6 +26,8 @@ namespace Battleship
         public static bool MapAutoUpdate = false;
 
         public static bool AllShipPlaced = false;
+
+        public static bool[] RadioButtonsState = { false, false, false, false };
         public static int GetMineCount(string cellPos, int shipType, int x, int y, string orientation)
         {
             switch (cellPos)
@@ -664,7 +666,7 @@ namespace Battleship
                                 }
                             case "right":
                                 {
-                                    if (orientation == "H")
+                                    if (orientation == "V")
                                     {
                                         if (x == 1)
                                         {

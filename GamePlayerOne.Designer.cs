@@ -33,6 +33,7 @@
             this.PNL_MenuField = new System.Windows.Forms.Panel();
             this.TLP_GPO_Controls = new System.Windows.Forms.TableLayoutPanel();
             this.PNL_EnemyControl = new System.Windows.Forms.Panel();
+            this.PB_GPO_Logo = new System.Windows.Forms.PictureBox();
             this.BS_Test_GenerateMap = new System.Windows.Forms.Button();
             this.BS_Test_Generate = new System.Windows.Forms.Button();
             this.PNL_PlayerControl = new System.Windows.Forms.Panel();
@@ -145,11 +146,11 @@
             this.MS_MainMenu = new System.Windows.Forms.MenuStrip();
             this.TSMI_MM_Options = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_MM_Settings = new System.Windows.Forms.ToolStripMenuItem();
-            this.PB_GPO_Logo = new System.Windows.Forms.PictureBox();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
             this.PNL_EnemyControl.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_GPO_Logo)).BeginInit();
             this.PNL_PlayerControl.SuspendLayout();
             this.TLP_PlayerControl.SuspendLayout();
             this.PNL_GameField.SuspendLayout();
@@ -179,7 +180,6 @@
             this.TLP_PlayerNumbers.SuspendLayout();
             this.PNL_PlayerMap_Schema.SuspendLayout();
             this.MS_MainMenu.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_GPO_Logo)).BeginInit();
             this.SuspendLayout();
             // 
             // TLP_Main
@@ -237,6 +237,17 @@
             this.PNL_EnemyControl.Name = "PNL_EnemyControl";
             this.PNL_EnemyControl.Size = new System.Drawing.Size(507, 48);
             this.PNL_EnemyControl.TabIndex = 1;
+            // 
+            // PB_GPO_Logo
+            // 
+            this.PB_GPO_Logo.Dock = System.Windows.Forms.DockStyle.Right;
+            this.PB_GPO_Logo.Image = global::Battleship.Properties.Resources.Logo;
+            this.PB_GPO_Logo.Location = new System.Drawing.Point(230, 0);
+            this.PB_GPO_Logo.Name = "PB_GPO_Logo";
+            this.PB_GPO_Logo.Size = new System.Drawing.Size(277, 48);
+            this.PB_GPO_Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.PB_GPO_Logo.TabIndex = 2;
+            this.PB_GPO_Logo.TabStop = false;
             // 
             // BS_Test_GenerateMap
             // 
@@ -1957,17 +1968,6 @@
             this.TSMI_MM_Settings.Text = "Settings";
             this.TSMI_MM_Settings.Click += new System.EventHandler(this.TSMI_MM_Settings_Click);
             // 
-            // PB_GPO_Logo
-            // 
-            this.PB_GPO_Logo.Dock = System.Windows.Forms.DockStyle.Right;
-            this.PB_GPO_Logo.Image = global::Battleship.Properties.Resources.Logo;
-            this.PB_GPO_Logo.Location = new System.Drawing.Point(230, 0);
-            this.PB_GPO_Logo.Name = "PB_GPO_Logo";
-            this.PB_GPO_Logo.Size = new System.Drawing.Size(277, 48);
-            this.PB_GPO_Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.PB_GPO_Logo.TabIndex = 2;
-            this.PB_GPO_Logo.TabStop = false;
-            // 
             // GamePlayerOne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -1986,6 +1986,7 @@
             this.PNL_MenuField.ResumeLayout(false);
             this.TLP_GPO_Controls.ResumeLayout(false);
             this.PNL_EnemyControl.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PB_GPO_Logo)).EndInit();
             this.PNL_PlayerControl.ResumeLayout(false);
             this.TLP_PlayerControl.ResumeLayout(false);
             this.TLP_PlayerControl.PerformLayout();
@@ -2019,7 +2020,6 @@
             this.PNL_PlayerMap_Schema.ResumeLayout(false);
             this.MS_MainMenu.ResumeLayout(false);
             this.MS_MainMenu.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_GPO_Logo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

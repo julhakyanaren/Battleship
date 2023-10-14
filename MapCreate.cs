@@ -444,8 +444,8 @@ namespace Battleship
         }
         public void RadioButtonsLock(int radioButton_ID)
         {
-            bool[] radioButtonsState = {true, true, true, true};
-            radioButtonsState[radioButton_ID - 1] = false;
+            RadioButton[] radioButtons = { RB_ShipType_Frigate, RB_ShipType_Destroyer, RB_ShipType_Cruiser, RB_ShipType_Battleship };
+            ShipData.RadioButtonsState[radioButton_ID - 1] = true;
             switch (radioButton_ID)
             {
                 case 1:
@@ -471,20 +471,12 @@ namespace Battleship
             }
             ShipData.ChoosenShipType = 0;
             GB_PlaceShip.Visible = false;
-            for (int i = 0; i < radioButtonsState.Length; i++)
+            bool allshipPlaced = true;
+            for (int r = 0; r < ShipData.RadioButtonsState.Length; r++)
             {
-                if (radioButtonsState[i] == true)
-                {
-                    break;
-                }
-                else
-                {
-                    if (i == radioButtonsState.Length - 1)
-                    {
-                        ShipData.AllShipPlaced = true;
-                    }
-                }
+                allshipPlaced &= ShipData.RadioButtonsState[r];
             }
+            ShipData.AllShipPlaced = allshipPlaced;
             BS_MC_Apply.Visible = ShipData.AllShipPlaced;
         }
         public void ResetExampleMap()
@@ -1187,7 +1179,6 @@ namespace Battleship
         }
         private void ShipsCount_TB_TextChanged(object sender, EventArgs e)
         {
-            TextBox[] shipsCountArray = { TB_MC_FrigateCount, TB_MC_DestroyerCount, TB_MC_CruiserCount, TB_MC_BattleshipCount };
             TextBox targetTB = (TextBox)sender;
             targetTB.BackColor = Color.Black;
             string textBoxText = targetTB.Text;
@@ -1243,21 +1234,6 @@ namespace Battleship
                     targetTB.ForeColor = Color.White;
                 }
             }
-            bool allShipsPlaced = true;
-            for (int i = 0; i < shipsCountArray.Length; i++)
-            {
-                if (shipsCountArray[i].ForeColor == Color.Firebrick)
-                {
-                    continue;
-                }
-                else
-                {
-                    allShipsPlaced = false;
-                    break;
-                }
-            }
-            ShipData.AllShipPlaced = allShipsPlaced;
-            BS_MC_Apply.Visible = allShipsPlaced;
         }
         private void CHB_MC_AutoUpdate_CheckedChanged(object sender, EventArgs e)
         {
@@ -1274,11 +1250,11 @@ namespace Battleship
         }
         private void TSMI_MC_AdvancedOptions_CheckedChanged(object sender, EventArgs e)
         {
-            GB_AdvancedOptions.Visible = TSMI_MC_AdvancedOptions.Checked;
+            GB_MapSchematicOptions.Visible = TSMI_MC_SchematicOptions.Checked;
         }
         private void GB_AdvancedOptions_VisibleChanged(object sender, EventArgs e)
         {
-            if (GB_AdvancedOptions.Visible)
+            if (GB_MapSchematicOptions.Visible)
             {
                 PNL_AO_ProgressUnit.Height = PNL_AO_ProgressBar.Height;
                 PNL_AO_ProgressUnit.Width = 0;
@@ -1298,10 +1274,123 @@ namespace Battleship
                 await Task.Delay(2);
                 PNL_AO_ProgressUnit.Width += 1;
             }
-            DialogResult = MessageBox.Show("Successfull", "File Manager", MessageBoxButtons.OK);
+            DialogResult = MessageBox.Show("Successfull", "Schematic Manager", MessageBoxButtons.OK);
             if (DialogResult == DialogResult.OK)
             {
                 PNL_AO_ProgressUnit.Width = 0;
+            }
+        }
+
+        private void BS_AO_SaveSchematic_Click(object sender, EventArgs e)
+        {
+            DialogResult drSave = new DialogResult();
+            drSave = MessageBox.Show("SaveSchematic", "Schematic Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+        }
+
+        private void BS_AO_GetMap_Click(object sender, EventArgs e)
+        {
+            DialogResult drGet = new DialogResult();
+            drGet = MessageBox.Show("Get a schematic map?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (drGet == DialogResult.Yes)
+            {
+                if (TB_MapSchematic.Text.Length > 0)
+                {
+                    char[] symbols = TB_MapSchematic.Text.ToCharArray();
+                    bool allSymbolsEquals = true;
+                    for (int s = 0; s < symbols.Length; s++)
+                    {
+                        if (symbols[s] != 'n')
+                        {
+                            allSymbolsEquals = false;
+                            break;
+                        }
+                    }
+                    if (!allSymbolsEquals)
+                    {
+                        if (!AllShipsTypeAreCorrect(symbols))
+                        {
+                            DialogResult = MessageBox.Show("Not all ships have been placed in this schematic map. Are you sure you want to continue?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            if (DialogResult == DialogResult.Yes)
+                            {
+                                TB_AO_MapSchematic.ForeColor = Color.Yellow;
+                                TB_AO_MapSchematic.Text = TB_MapSchematic.Text;
+                                Schematic.Map = TB_AO_MapSchematic.Text;
+                            }
+                        }
+                        else
+                        {
+                            TB_AO_MapSchematic.ForeColor = Color.Lime;
+                            TB_AO_MapSchematic.Text = TB_MapSchematic.Text;
+                            Schematic.Map = TB_AO_MapSchematic.Text;
+                        }
+                    }
+                    else
+                    {
+                        DialogResult = MessageBox.Show("This schematic map is completely empty, are you sure you want to continue?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (DialogResult == DialogResult.Yes)
+                        {
+                            TB_AO_MapSchematic.ForeColor = Color.Yellow;
+                            TB_AO_MapSchematic.Text = TB_MapSchematic.Text;
+                            Schematic.Map = TB_AO_MapSchematic.Text;
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Map schematic is empty!", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+            }
+        }
+        public bool AllShipsTypeAreCorrect(char[] symbols)
+        {
+            int f = 4;
+            int d = 6;
+            int c = 6;
+            int b = 4;
+            for (int s = 0; s < symbols.Length; s++)
+            {
+                switch(symbols[s].ToString().ToUpper())
+                {
+                    case "F":
+                        {
+                            f--;
+                            break;
+                        }
+                    case "D":
+                        {
+                            d--;
+                            break;
+                        }
+                    case "C":
+                        {
+                            c--;
+                            break;
+                        }
+                    case "B":
+                        {
+                            b--;
+                            break;
+                        }
+                }
+            }
+            if (f + d + c + b == 0)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        private void TB_AO_MapSchematic_TextChanged(object sender, EventArgs e)
+        {
+            if (TB_AO_MapSchematic.Text.Length == 0)
+            {
+                BS_AO_SaveSchematic.Visible = false;
+            }
+            else
+            {
+                BS_AO_SaveSchematic.Visible = true;
             }
         }
     }
