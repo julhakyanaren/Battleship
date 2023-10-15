@@ -233,7 +233,7 @@
             this.L_Info_MapSchematic.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_MapSchematic.Location = new System.Drawing.Point(131, 29);
             this.L_Info_MapSchematic.Name = "L_Info_MapSchematic";
-            this.L_Info_MapSchematic.Size = new System.Drawing.Size(82, 17);
+            this.L_Info_MapSchematic.Size = new System.Drawing.Size(109, 21);
             this.L_Info_MapSchematic.TabIndex = 37;
             this.L_Info_MapSchematic.Text = "Map Schematic";
             // 
@@ -273,7 +273,7 @@
             this.CHB_MC_AutoUpdate.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.CHB_MC_AutoUpdate.Location = new System.Drawing.Point(133, 4);
             this.CHB_MC_AutoUpdate.Name = "CHB_MC_AutoUpdate";
-            this.CHB_MC_AutoUpdate.Size = new System.Drawing.Size(208, 21);
+            this.CHB_MC_AutoUpdate.Size = new System.Drawing.Size(274, 25);
             this.CHB_MC_AutoUpdate.TabIndex = 34;
             this.CHB_MC_AutoUpdate.Text = "Automatically update map schematics";
             this.CHB_MC_AutoUpdate.UseVisualStyleBackColor = true;
@@ -320,7 +320,7 @@
             this.L_Info_BattleshipCount.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_BattleshipCount.Location = new System.Drawing.Point(12, 100);
             this.L_Info_BattleshipCount.Name = "L_Info_BattleshipCount";
-            this.L_Info_BattleshipCount.Size = new System.Drawing.Size(66, 17);
+            this.L_Info_BattleshipCount.Size = new System.Drawing.Size(87, 21);
             this.L_Info_BattleshipCount.TabIndex = 10;
             this.L_Info_BattleshipCount.Text = "Battleship";
             // 
@@ -332,7 +332,7 @@
             this.TB_MC_BattleshipCount.Location = new System.Drawing.Point(85, 97);
             this.TB_MC_BattleshipCount.Name = "TB_MC_BattleshipCount";
             this.TB_MC_BattleshipCount.ReadOnly = true;
-            this.TB_MC_BattleshipCount.Size = new System.Drawing.Size(37, 22);
+            this.TB_MC_BattleshipCount.Size = new System.Drawing.Size(37, 26);
             this.TB_MC_BattleshipCount.TabIndex = 9;
             this.TB_MC_BattleshipCount.Tag = "4";
             this.TB_MC_BattleshipCount.Text = "0";
@@ -345,7 +345,7 @@
             this.L_Info_CruiserCount.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_CruiserCount.Location = new System.Drawing.Point(12, 70);
             this.L_Info_CruiserCount.Name = "L_Info_CruiserCount";
-            this.L_Info_CruiserCount.Size = new System.Drawing.Size(49, 17);
+            this.L_Info_CruiserCount.Size = new System.Drawing.Size(64, 21);
             this.L_Info_CruiserCount.TabIndex = 8;
             this.L_Info_CruiserCount.Text = "Cruiser";
             // 
@@ -357,7 +357,7 @@
             this.TB_MC_CruiserCount.Location = new System.Drawing.Point(85, 67);
             this.TB_MC_CruiserCount.Name = "TB_MC_CruiserCount";
             this.TB_MC_CruiserCount.ReadOnly = true;
-            this.TB_MC_CruiserCount.Size = new System.Drawing.Size(37, 22);
+            this.TB_MC_CruiserCount.Size = new System.Drawing.Size(37, 26);
             this.TB_MC_CruiserCount.TabIndex = 7;
             this.TB_MC_CruiserCount.Tag = "3";
             this.TB_MC_CruiserCount.Text = "0";
@@ -370,7 +370,7 @@
             this.L_Info_DestroyerCount.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_DestroyerCount.Location = new System.Drawing.Point(12, 40);
             this.L_Info_DestroyerCount.Name = "L_Info_DestroyerCount";
-            this.L_Info_DestroyerCount.Size = new System.Drawing.Size(64, 17);
+            this.L_Info_DestroyerCount.Size = new System.Drawing.Size(82, 21);
             this.L_Info_DestroyerCount.TabIndex = 6;
             this.L_Info_DestroyerCount.Text = "Destroyer";
             // 
@@ -382,7 +382,7 @@
             this.TB_MC_DestroyerCount.Location = new System.Drawing.Point(85, 37);
             this.TB_MC_DestroyerCount.Name = "TB_MC_DestroyerCount";
             this.TB_MC_DestroyerCount.ReadOnly = true;
-            this.TB_MC_DestroyerCount.Size = new System.Drawing.Size(37, 22);
+            this.TB_MC_DestroyerCount.Size = new System.Drawing.Size(37, 26);
             this.TB_MC_DestroyerCount.TabIndex = 5;
             this.TB_MC_DestroyerCount.Tag = "2";
             this.TB_MC_DestroyerCount.Text = "0";
@@ -395,7 +395,7 @@
             this.L_Info_FrigateCount.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_FrigateCount.Location = new System.Drawing.Point(12, 12);
             this.L_Info_FrigateCount.Name = "L_Info_FrigateCount";
-            this.L_Info_FrigateCount.Size = new System.Drawing.Size(49, 17);
+            this.L_Info_FrigateCount.Size = new System.Drawing.Size(63, 21);
             this.L_Info_FrigateCount.TabIndex = 4;
             this.L_Info_FrigateCount.Text = "Frigate";
             // 
@@ -407,7 +407,7 @@
             this.TB_MC_FrigateCount.Location = new System.Drawing.Point(85, 7);
             this.TB_MC_FrigateCount.Name = "TB_MC_FrigateCount";
             this.TB_MC_FrigateCount.ReadOnly = true;
-            this.TB_MC_FrigateCount.Size = new System.Drawing.Size(37, 22);
+            this.TB_MC_FrigateCount.Size = new System.Drawing.Size(37, 26);
             this.TB_MC_FrigateCount.TabIndex = 0;
             this.TB_MC_FrigateCount.Tag = "1";
             this.TB_MC_FrigateCount.Text = "0";
@@ -461,7 +461,7 @@
             this.BS_MC_Map_Index.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BS_MC_Map_Index.FlatAppearance.BorderSize = 2;
             this.BS_MC_Map_Index.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_MC_Map_Index.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_MC_Map_Index.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_MC_Map_Index.Location = new System.Drawing.Point(0, 0);
             this.BS_MC_Map_Index.Name = "BS_MC_Map_Index";
             this.BS_MC_Map_Index.Size = new System.Drawing.Size(38, 37);
@@ -994,9 +994,9 @@
             // 
             this.PNL_Example.Controls.Add(this.TLP_Example);
             this.PNL_Example.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PNL_Example.Location = new System.Drawing.Point(3, 18);
+            this.PNL_Example.Location = new System.Drawing.Point(3, 22);
             this.PNL_Example.Name = "PNL_Example";
-            this.PNL_Example.Size = new System.Drawing.Size(160, 134);
+            this.PNL_Example.Size = new System.Drawing.Size(160, 130);
             this.PNL_Example.TabIndex = 7;
             // 
             // TLP_Example
@@ -1028,7 +1028,7 @@
             this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.Size = new System.Drawing.Size(160, 134);
+            this.TLP_Example.Size = new System.Drawing.Size(160, 130);
             this.TLP_Example.TabIndex = 2;
             // 
             // GB_MapSchematicOptions
@@ -1159,7 +1159,7 @@
             this.L_Info_AO_MapSchematic.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_AO_MapSchematic.Location = new System.Drawing.Point(271, 43);
             this.L_Info_AO_MapSchematic.Name = "L_Info_AO_MapSchematic";
-            this.L_Info_AO_MapSchematic.Size = new System.Drawing.Size(82, 17);
+            this.L_Info_AO_MapSchematic.Size = new System.Drawing.Size(109, 21);
             this.L_Info_AO_MapSchematic.TabIndex = 39;
             this.L_Info_AO_MapSchematic.Text = "Map Schematic";
             // 
@@ -1219,7 +1219,7 @@
             this.L_Info_Status.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_Status.Location = new System.Drawing.Point(320, 165);
             this.L_Info_Status.Name = "L_Info_Status";
-            this.L_Info_Status.Size = new System.Drawing.Size(46, 17);
+            this.L_Info_Status.Size = new System.Drawing.Size(58, 21);
             this.L_Info_Status.TabIndex = 33;
             this.L_Info_Status.Text = "Status";
             // 
@@ -1231,7 +1231,7 @@
             this.TB_ShipType.Location = new System.Drawing.Point(246, 209);
             this.TB_ShipType.Name = "TB_ShipType";
             this.TB_ShipType.ReadOnly = true;
-            this.TB_ShipType.Size = new System.Drawing.Size(68, 22);
+            this.TB_ShipType.Size = new System.Drawing.Size(68, 26);
             this.TB_ShipType.TabIndex = 30;
             this.TB_ShipType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1241,7 +1241,7 @@
             this.L_Info_ShipType.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_ShipType.Location = new System.Drawing.Point(182, 214);
             this.L_Info_ShipType.Name = "L_Info_ShipType";
-            this.L_Info_ShipType.Size = new System.Drawing.Size(62, 17);
+            this.L_Info_ShipType.Size = new System.Drawing.Size(81, 21);
             this.L_Info_ShipType.TabIndex = 31;
             this.L_Info_ShipType.Text = "Ship Type";
             // 
@@ -1253,7 +1253,7 @@
             this.TB_Range.Location = new System.Drawing.Point(246, 167);
             this.TB_Range.Name = "TB_Range";
             this.TB_Range.ReadOnly = true;
-            this.TB_Range.Size = new System.Drawing.Size(68, 22);
+            this.TB_Range.Size = new System.Drawing.Size(68, 26);
             this.TB_Range.TabIndex = 29;
             this.TB_Range.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1263,7 +1263,7 @@
             this.L_Info_Range.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_Range.Location = new System.Drawing.Point(182, 173);
             this.L_Info_Range.Name = "L_Info_Range";
-            this.L_Info_Range.Size = new System.Drawing.Size(45, 17);
+            this.L_Info_Range.Size = new System.Drawing.Size(57, 21);
             this.L_Info_Range.TabIndex = 29;
             this.L_Info_Range.Text = "Range";
             // 
@@ -1292,7 +1292,7 @@
             this.L_Info_Coords.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_Coords.Location = new System.Drawing.Point(6, 82);
             this.L_Info_Coords.Name = "L_Info_Coords";
-            this.L_Info_Coords.Size = new System.Drawing.Size(44, 17);
+            this.L_Info_Coords.Size = new System.Drawing.Size(60, 21);
             this.L_Info_Coords.TabIndex = 28;
             this.L_Info_Coords.Text = "Cell ID";
             // 
@@ -1304,7 +1304,7 @@
             this.TB_Coords.Location = new System.Drawing.Point(62, 79);
             this.TB_Coords.Name = "TB_Coords";
             this.TB_Coords.ReadOnly = true;
-            this.TB_Coords.Size = new System.Drawing.Size(55, 22);
+            this.TB_Coords.Size = new System.Drawing.Size(55, 26);
             this.TB_Coords.TabIndex = 27;
             this.TB_Coords.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1349,7 +1349,7 @@
             this.L_Info_Coord_Number.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_Coord_Number.Location = new System.Drawing.Point(6, 55);
             this.L_Info_Coord_Number.Name = "L_Info_Coord_Number";
-            this.L_Info_Coord_Number.Size = new System.Drawing.Size(53, 17);
+            this.L_Info_Coord_Number.Size = new System.Drawing.Size(68, 21);
             this.L_Info_Coord_Number.TabIndex = 24;
             this.L_Info_Coord_Number.Text = "Number";
             // 
@@ -1371,7 +1371,7 @@
             "10"});
             this.CB_Coord_Number.Location = new System.Drawing.Point(62, 48);
             this.CB_Coord_Number.Name = "CB_Coord_Number";
-            this.CB_Coord_Number.Size = new System.Drawing.Size(55, 25);
+            this.CB_Coord_Number.Size = new System.Drawing.Size(55, 29);
             this.CB_Coord_Number.TabIndex = 23;
             this.CB_Coord_Number.Text = "1";
             this.CB_Coord_Number.SelectedIndexChanged += new System.EventHandler(this.CB_Coord_Number_SelectedIndexChanged);
@@ -1382,7 +1382,7 @@
             this.L_Info_Coord_Letter.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_Coord_Letter.Location = new System.Drawing.Point(6, 29);
             this.L_Info_Coord_Letter.Name = "L_Info_Coord_Letter";
-            this.L_Info_Coord_Letter.Size = new System.Drawing.Size(44, 17);
+            this.L_Info_Coord_Letter.Size = new System.Drawing.Size(55, 21);
             this.L_Info_Coord_Letter.TabIndex = 22;
             this.L_Info_Coord_Letter.Text = "Letter";
             // 
@@ -1404,7 +1404,7 @@
             "J"});
             this.CB_Coord_Letter.Location = new System.Drawing.Point(62, 21);
             this.CB_Coord_Letter.Name = "CB_Coord_Letter";
-            this.CB_Coord_Letter.Size = new System.Drawing.Size(55, 25);
+            this.CB_Coord_Letter.Size = new System.Drawing.Size(55, 29);
             this.CB_Coord_Letter.TabIndex = 21;
             this.CB_Coord_Letter.Text = "A";
             this.CB_Coord_Letter.SelectedIndexChanged += new System.EventHandler(this.CB_Coord_Letter_SelectedIndexChanged);
@@ -1416,7 +1416,7 @@
             this.CB_Orientation.FormattingEnabled = true;
             this.CB_Orientation.Location = new System.Drawing.Point(329, 21);
             this.CB_Orientation.Name = "CB_Orientation";
-            this.CB_Orientation.Size = new System.Drawing.Size(173, 25);
+            this.CB_Orientation.Size = new System.Drawing.Size(173, 29);
             this.CB_Orientation.TabIndex = 19;
             this.CB_Orientation.SelectedIndexChanged += new System.EventHandler(this.CB_Orientation_SelectedIndexChanged);
             // 
@@ -1426,7 +1426,7 @@
             this.L_Info_Orientation.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_Orientation.Location = new System.Drawing.Point(195, 24);
             this.L_Info_Orientation.Name = "L_Info_Orientation";
-            this.L_Info_Orientation.Size = new System.Drawing.Size(106, 17);
+            this.L_Info_Orientation.Size = new System.Drawing.Size(138, 21);
             this.L_Info_Orientation.TabIndex = 18;
             this.L_Info_Orientation.Text = "Place orientation";
             // 
@@ -1528,7 +1528,7 @@
             this.CHB_ShowExample.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.CHB_ShowExample.Location = new System.Drawing.Point(9, 73);
             this.CHB_ShowExample.Name = "CHB_ShowExample";
-            this.CHB_ShowExample.Size = new System.Drawing.Size(159, 21);
+            this.CHB_ShowExample.Size = new System.Drawing.Size(211, 25);
             this.CHB_ShowExample.TabIndex = 10;
             this.CHB_ShowExample.Text = "Show where ship can placed";
             this.CHB_ShowExample.UseVisualStyleBackColor = true;
@@ -1635,7 +1635,7 @@
             this.L_Info_ShipSize.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_ShipSize.Location = new System.Drawing.Point(6, 47);
             this.L_Info_ShipSize.Name = "L_Info_ShipSize";
-            this.L_Info_ShipSize.Size = new System.Drawing.Size(60, 17);
+            this.L_Info_ShipSize.Size = new System.Drawing.Size(78, 21);
             this.L_Info_ShipSize.TabIndex = 8;
             this.L_Info_ShipSize.Text = "Ship Size";
             // 
@@ -1645,7 +1645,7 @@
             this.L_Info_Ship_MaxCount.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_Ship_MaxCount.Location = new System.Drawing.Point(6, 21);
             this.L_Info_Ship_MaxCount.Name = "L_Info_Ship_MaxCount";
-            this.L_Info_Ship_MaxCount.Size = new System.Drawing.Size(110, 17);
+            this.L_Info_Ship_MaxCount.Size = new System.Drawing.Size(142, 21);
             this.L_Info_Ship_MaxCount.TabIndex = 6;
             this.L_Info_Ship_MaxCount.Text = "Acceptable Count";
             // 
@@ -1657,7 +1657,7 @@
             this.TB_ShipSize.Location = new System.Drawing.Point(122, 42);
             this.TB_ShipSize.Name = "TB_ShipSize";
             this.TB_ShipSize.ReadOnly = true;
-            this.TB_ShipSize.Size = new System.Drawing.Size(44, 22);
+            this.TB_ShipSize.Size = new System.Drawing.Size(44, 26);
             this.TB_ShipSize.TabIndex = 7;
             this.TB_ShipSize.Text = "0";
             this.TB_ShipSize.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1670,7 +1670,7 @@
             this.TB_MaxCount.Location = new System.Drawing.Point(122, 16);
             this.TB_MaxCount.Name = "TB_MaxCount";
             this.TB_MaxCount.ReadOnly = true;
-            this.TB_MaxCount.Size = new System.Drawing.Size(44, 22);
+            this.TB_MaxCount.Size = new System.Drawing.Size(44, 26);
             this.TB_MaxCount.TabIndex = 5;
             this.TB_MaxCount.Text = "0";
             this.TB_MaxCount.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1700,7 +1700,7 @@
             this.RB_ShipType_Battleship.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.RB_ShipType_Battleship.Location = new System.Drawing.Point(6, 108);
             this.RB_ShipType_Battleship.Name = "RB_ShipType_Battleship";
-            this.RB_ShipType_Battleship.Size = new System.Drawing.Size(76, 21);
+            this.RB_ShipType_Battleship.Size = new System.Drawing.Size(97, 25);
             this.RB_ShipType_Battleship.TabIndex = 3;
             this.RB_ShipType_Battleship.TabStop = true;
             this.RB_ShipType_Battleship.Tag = "4";
@@ -1720,7 +1720,7 @@
             this.RB_ShipType_Cruiser.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.RB_ShipType_Cruiser.Location = new System.Drawing.Point(6, 79);
             this.RB_ShipType_Cruiser.Name = "RB_ShipType_Cruiser";
-            this.RB_ShipType_Cruiser.Size = new System.Drawing.Size(61, 21);
+            this.RB_ShipType_Cruiser.Size = new System.Drawing.Size(77, 25);
             this.RB_ShipType_Cruiser.TabIndex = 2;
             this.RB_ShipType_Cruiser.TabStop = true;
             this.RB_ShipType_Cruiser.Tag = "3";
@@ -1740,7 +1740,7 @@
             this.RB_ShipType_Destroyer.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.RB_ShipType_Destroyer.Location = new System.Drawing.Point(6, 50);
             this.RB_ShipType_Destroyer.Name = "RB_ShipType_Destroyer";
-            this.RB_ShipType_Destroyer.Size = new System.Drawing.Size(73, 21);
+            this.RB_ShipType_Destroyer.Size = new System.Drawing.Size(93, 25);
             this.RB_ShipType_Destroyer.TabIndex = 1;
             this.RB_ShipType_Destroyer.TabStop = true;
             this.RB_ShipType_Destroyer.Tag = "2";
@@ -1760,7 +1760,7 @@
             this.RB_ShipType_Frigate.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Teal;
             this.RB_ShipType_Frigate.Location = new System.Drawing.Point(6, 21);
             this.RB_ShipType_Frigate.Name = "RB_ShipType_Frigate";
-            this.RB_ShipType_Frigate.Size = new System.Drawing.Size(61, 21);
+            this.RB_ShipType_Frigate.Size = new System.Drawing.Size(76, 25);
             this.RB_ShipType_Frigate.TabIndex = 0;
             this.RB_ShipType_Frigate.TabStop = true;
             this.RB_ShipType_Frigate.Tag = "1";
@@ -1774,11 +1774,12 @@
             // 
             this.MS_MapCreate.BackColor = System.Drawing.Color.Black;
             this.MS_MapCreate.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MS_MapCreate.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MS_MapCreate.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_MC_File});
             this.MS_MapCreate.Location = new System.Drawing.Point(0, 0);
             this.MS_MapCreate.Name = "MS_MapCreate";
-            this.MS_MapCreate.Size = new System.Drawing.Size(530, 24);
+            this.MS_MapCreate.Size = new System.Drawing.Size(530, 28);
             this.MS_MapCreate.TabIndex = 10;
             this.MS_MapCreate.Text = "menuStrip1";
             // 
@@ -1789,7 +1790,7 @@
             this.TSMI_MC_File.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TSMI_MC_File.ForeColor = System.Drawing.Color.White;
             this.TSMI_MC_File.Name = "TSMI_MC_File";
-            this.TSMI_MC_File.Size = new System.Drawing.Size(36, 20);
+            this.TSMI_MC_File.Size = new System.Drawing.Size(45, 24);
             this.TSMI_MC_File.Text = "File";
             // 
             // TSMI_MC_SchematicOptions
@@ -1800,7 +1801,7 @@
             this.TSMI_MC_SchematicOptions.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TSMI_MC_SchematicOptions.ForeColor = System.Drawing.Color.Black;
             this.TSMI_MC_SchematicOptions.Name = "TSMI_MC_SchematicOptions";
-            this.TSMI_MC_SchematicOptions.Size = new System.Drawing.Size(200, 22);
+            this.TSMI_MC_SchematicOptions.Size = new System.Drawing.Size(244, 26);
             this.TSMI_MC_SchematicOptions.Text = "Disable schematic options";
             this.TSMI_MC_SchematicOptions.CheckedChanged += new System.EventHandler(this.TSMI_MC_SchematicOptions_CheckedChanged);
             // 
@@ -1810,7 +1811,7 @@
             // 
             // MapCreate
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(1028, 609);

@@ -95,13 +95,12 @@ namespace Battleship
                     button.FlatAppearance.BorderColor = Color.Black;
                     button.Tag = tags[f, b];
                     button.Margin = new Padding(0);
-                    /**/
-                    button.Text = b.ToString();
-                    /**/
                     if (f == 0)
                     {
                         Buttons_MC[b] = button;
                         button.Click += MC_Buttons_Click;
+                        button.MouseEnter += MapButtons_MouseEnter;
+                        button.MouseLeave += MapButtons_MouseLeave;
                     }
                     else
                     {
@@ -109,6 +108,28 @@ namespace Battleship
                     }
                 }
             }
+        }
+
+        private async void MapButtons_MouseLeave(object sender, EventArgs e)
+        {
+            await Task.Delay(0);
+            Button button = sender as Button;
+            pos.GetButtonTextCoords(button, out int id);
+            if (id == 3)
+            {
+                BS_MC_Map_Index.Text = null;
+            }
+        }
+        private async void MapButtons_MouseEnter(object sender, EventArgs e)
+        {
+            await Task.Delay(0);
+            Button button = sender as Button;
+            string coord = pos.GetButtonTextCoords(button, out int id);
+            if (id == 3)
+            {
+                BS_MC_Map_Index.Text = coord;
+            }
+
         }
 
         private void MC_Buttons_Click(object sender, EventArgs e)
@@ -195,7 +216,7 @@ namespace Battleship
             TB_ShipSize.Text = ShipData.ChoosenShipType.ToString();
             CB_Orientation.Enabled = false;
             CB_Orientation.Items.Clear();
-            if (checkedRadioButton.ForeColor == Color.Firebrick)
+            if (checkedRadioButton.ForeColor == Color.Red)
             {
                 checkedRadioButton.Checked = false;
             }
@@ -450,27 +471,31 @@ namespace Battleship
             {
                 case 1:
                     {
-                        RB_ShipType_Frigate.ForeColor = Color.Firebrick;
+                        RB_ShipType_Frigate.ForeColor = Color.Red;
                         break;
                     }
                 case 2:
                     {
-                        RB_ShipType_Destroyer.ForeColor = Color.Firebrick;
+                        RB_ShipType_Destroyer.ForeColor = Color.Red;
                         break;
                     }
                 case 3:
                     {
-                        RB_ShipType_Cruiser.ForeColor = Color.Firebrick;
+                        RB_ShipType_Cruiser.ForeColor = Color.Red;
                         break;
                     }
                 case 4:
                     {
-                        RB_ShipType_Battleship.ForeColor = Color.Firebrick;
+                        RB_ShipType_Battleship.ForeColor = Color.Red;
                         break;
                     }
             }
             ShipData.ChoosenShipType = 0;
             GB_PlaceShip.Visible = false;
+            RB_ShipType_Frigate.Checked = false;
+            RB_ShipType_Destroyer.Checked = false;
+            RB_ShipType_Cruiser.Checked = false;
+            RB_ShipType_Battleship.Checked = false;
             bool allshipPlaced = true;
             for (int r = 0; r < ShipData.RadioButtonsState.Length; r++)
             {
