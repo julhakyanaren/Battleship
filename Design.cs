@@ -48,5 +48,37 @@ namespace Battleship
                 }
             }
         }
+        public static void ChangeButtonEnabledDesign(Button inputButton, int mode)
+        {
+            Color old_ForeColor = inputButton.ForeColor;
+            Color old_BackColor = inputButton.BackColor;
+            Color new_BackColor = old_BackColor;
+            Color new_ForeColor = old_ForeColor;
+            switch (mode)
+            {
+                case 0:
+                    {
+                        new_BackColor = old_ForeColor;
+                        new_ForeColor = old_BackColor;
+                        inputButton.Enabled = Convert.ToBoolean(mode);
+                        break;
+                    }
+                case 1:
+                    {
+                        new_BackColor = old_ForeColor;
+                        new_ForeColor = old_BackColor;
+                        inputButton.Enabled = Convert.ToBoolean(mode);
+                        break;
+                    }
+                default:
+                    {
+                        new_ForeColor = old_ForeColor;
+                        new_BackColor = old_BackColor;
+                        break;
+                    }
+            }
+            inputButton.ForeColor = new_ForeColor;
+            inputButton.BackColor = new_BackColor;
+        }
     }
 }

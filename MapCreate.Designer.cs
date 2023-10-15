@@ -78,7 +78,11 @@
             this.PNL_MC_Map_Schema = new System.Windows.Forms.Panel();
             this.TLP_MC_Schema = new System.Windows.Forms.TableLayoutPanel();
             this.PNL_MC_Left = new System.Windows.Forms.Panel();
+            this.GB_Example = new System.Windows.Forms.GroupBox();
+            this.PNL_Example = new System.Windows.Forms.Panel();
+            this.TLP_Example = new System.Windows.Forms.TableLayoutPanel();
             this.GB_MapSchematicOptions = new System.Windows.Forms.GroupBox();
+            this.BS_AO_GetMap = new System.Windows.Forms.Button();
             this.PNL_AO_ProgressBar = new System.Windows.Forms.Panel();
             this.PNL_AO_ProgressUnit = new System.Windows.Forms.Panel();
             this.BS_AO_LoadSchematic = new System.Windows.Forms.Button();
@@ -109,8 +113,6 @@
             this.BS_Insert = new System.Windows.Forms.Button();
             this.PNL_ShipPlaceMap = new System.Windows.Forms.Panel();
             this.TLP_ShipPlaceMap = new System.Windows.Forms.TableLayoutPanel();
-            this.PNL_Example = new System.Windows.Forms.Panel();
-            this.TLP_Example = new System.Windows.Forms.TableLayoutPanel();
             this.GB_MC_ShipData = new System.Windows.Forms.GroupBox();
             this.CHB_ShowExample = new System.Windows.Forms.CheckBox();
             this.TLP_Ships_Example = new System.Windows.Forms.TableLayoutPanel();
@@ -134,8 +136,6 @@
             this.TT_MapCreate = new System.Windows.Forms.ToolTip(this.components);
             this.SFD_MapCreate = new System.Windows.Forms.SaveFileDialog();
             this.OFD_MapCreate = new System.Windows.Forms.OpenFileDialog();
-            this.GB_Example = new System.Windows.Forms.GroupBox();
-            this.BS_AO_GetMap = new System.Windows.Forms.Button();
             this.TLP_MapsDivision.SuspendLayout();
             this.PNL_MC_Field.SuspendLayout();
             this.TLP_MC_Main_One.SuspendLayout();
@@ -149,17 +149,17 @@
             this.TLP_MC_Numbers.SuspendLayout();
             this.PNL_MC_Map_Schema.SuspendLayout();
             this.PNL_MC_Left.SuspendLayout();
+            this.GB_Example.SuspendLayout();
+            this.PNL_Example.SuspendLayout();
             this.GB_MapSchematicOptions.SuspendLayout();
             this.PNL_AO_ProgressBar.SuspendLayout();
             this.GB_PlaceShip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.PNL_ShipPlaceMap.SuspendLayout();
-            this.PNL_Example.SuspendLayout();
             this.GB_MC_ShipData.SuspendLayout();
             this.TLP_Ships_Example.SuspendLayout();
             this.GB_MC_ShipType.SuspendLayout();
             this.MS_MapCreate.SuspendLayout();
-            this.GB_Example.SuspendLayout();
             this.SuspendLayout();
             // 
             // TLP_MapsDivision
@@ -264,6 +264,8 @@
             this.BS_MC_Update.Text = "Update Map Shematic";
             this.BS_MC_Update.UseVisualStyleBackColor = false;
             this.BS_MC_Update.Click += new System.EventHandler(this.BS_MC_Update_Click);
+            this.BS_MC_Update.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
+            this.BS_MC_Update.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // CHB_MC_AutoUpdate
             // 
@@ -292,6 +294,8 @@
             this.BS_MC_Apply.UseVisualStyleBackColor = false;
             this.BS_MC_Apply.Visible = false;
             this.BS_MC_Apply.Click += new System.EventHandler(this.BS_MC_Apply_Click);
+            this.BS_MC_Apply.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
+            this.BS_MC_Apply.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // BS_MC_Reset
             // 
@@ -307,6 +311,8 @@
             this.BS_MC_Reset.Text = "Reset Map";
             this.BS_MC_Reset.UseVisualStyleBackColor = false;
             this.BS_MC_Reset.Click += new System.EventHandler(this.BS_MC_Reset_Click);
+            this.BS_MC_Reset.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
+            this.BS_MC_Reset.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // L_Info_BattleshipCount
             // 
@@ -516,8 +522,11 @@
             this.BS_MC_Map_G.Name = "BS_MC_Map_G";
             this.BS_MC_Map_G.Size = new System.Drawing.Size(37, 31);
             this.BS_MC_Map_G.TabIndex = 21;
+            this.BS_MC_Map_G.Tag = "L6";
             this.BS_MC_Map_G.Text = "G";
             this.BS_MC_Map_G.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_G.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_G.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_F
             // 
@@ -531,8 +540,11 @@
             this.BS_MC_Map_F.Name = "BS_MC_Map_F";
             this.BS_MC_Map_F.Size = new System.Drawing.Size(37, 31);
             this.BS_MC_Map_F.TabIndex = 20;
+            this.BS_MC_Map_F.Tag = "L5";
             this.BS_MC_Map_F.Text = "F";
             this.BS_MC_Map_F.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_F.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_F.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_H
             // 
@@ -546,8 +558,11 @@
             this.BS_MC_Map_H.Name = "BS_MC_Map_H";
             this.BS_MC_Map_H.Size = new System.Drawing.Size(37, 31);
             this.BS_MC_Map_H.TabIndex = 19;
+            this.BS_MC_Map_H.Tag = "L7";
             this.BS_MC_Map_H.Text = "H";
             this.BS_MC_Map_H.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_H.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_H.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_J
             // 
@@ -561,8 +576,11 @@
             this.BS_MC_Map_J.Name = "BS_MC_Map_J";
             this.BS_MC_Map_J.Size = new System.Drawing.Size(39, 31);
             this.BS_MC_Map_J.TabIndex = 18;
+            this.BS_MC_Map_J.Tag = "L9";
             this.BS_MC_Map_J.Text = "J";
             this.BS_MC_Map_J.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_J.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_J.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_I
             // 
@@ -576,8 +594,11 @@
             this.BS_MC_Map_I.Name = "BS_MC_Map_I";
             this.BS_MC_Map_I.Size = new System.Drawing.Size(37, 31);
             this.BS_MC_Map_I.TabIndex = 17;
+            this.BS_MC_Map_I.Tag = "L8";
             this.BS_MC_Map_I.Text = "I";
             this.BS_MC_Map_I.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_I.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_I.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_B
             // 
@@ -591,8 +612,11 @@
             this.BS_MC_Map_B.Name = "BS_MC_Map_B";
             this.BS_MC_Map_B.Size = new System.Drawing.Size(37, 31);
             this.BS_MC_Map_B.TabIndex = 16;
+            this.BS_MC_Map_B.Tag = "L1";
             this.BS_MC_Map_B.Text = "B";
             this.BS_MC_Map_B.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_B.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_B.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_A
             // 
@@ -606,8 +630,11 @@
             this.BS_MC_Map_A.Name = "BS_MC_Map_A";
             this.BS_MC_Map_A.Size = new System.Drawing.Size(35, 31);
             this.BS_MC_Map_A.TabIndex = 15;
+            this.BS_MC_Map_A.Tag = "L0";
             this.BS_MC_Map_A.Text = "A";
             this.BS_MC_Map_A.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_A.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_A.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_C
             // 
@@ -621,8 +648,11 @@
             this.BS_MC_Map_C.Name = "BS_MC_Map_C";
             this.BS_MC_Map_C.Size = new System.Drawing.Size(37, 31);
             this.BS_MC_Map_C.TabIndex = 14;
+            this.BS_MC_Map_C.Tag = "L2";
             this.BS_MC_Map_C.Text = "C";
             this.BS_MC_Map_C.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_C.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_C.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_E
             // 
@@ -636,8 +666,11 @@
             this.BS_MC_Map_E.Name = "BS_MC_Map_E";
             this.BS_MC_Map_E.Size = new System.Drawing.Size(37, 31);
             this.BS_MC_Map_E.TabIndex = 13;
+            this.BS_MC_Map_E.Tag = "L4";
             this.BS_MC_Map_E.Text = "E";
             this.BS_MC_Map_E.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_E.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_E.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_D
             // 
@@ -651,8 +684,11 @@
             this.BS_MC_Map_D.Name = "BS_MC_Map_D";
             this.BS_MC_Map_D.Size = new System.Drawing.Size(37, 31);
             this.BS_MC_Map_D.TabIndex = 12;
+            this.BS_MC_Map_D.Tag = "L3";
             this.BS_MC_Map_D.Text = "D";
             this.BS_MC_Map_D.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_D.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_D.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // PNL_MC_Map_Numbers
             // 
@@ -717,8 +753,11 @@
             this.BS_MC_Map_1.Name = "BS_MC_Map_1";
             this.BS_MC_Map_1.Size = new System.Drawing.Size(32, 35);
             this.BS_MC_Map_1.TabIndex = 16;
+            this.BS_MC_Map_1.Tag = "N0";
             this.BS_MC_Map_1.Text = "1";
             this.BS_MC_Map_1.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_1.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_1.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_2
             // 
@@ -732,8 +771,11 @@
             this.BS_MC_Map_2.Name = "BS_MC_Map_2";
             this.BS_MC_Map_2.Size = new System.Drawing.Size(32, 35);
             this.BS_MC_Map_2.TabIndex = 16;
+            this.BS_MC_Map_2.Tag = "N1";
             this.BS_MC_Map_2.Text = "2";
             this.BS_MC_Map_2.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_2.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_2.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_3
             // 
@@ -747,8 +789,11 @@
             this.BS_MC_Map_3.Name = "BS_MC_Map_3";
             this.BS_MC_Map_3.Size = new System.Drawing.Size(32, 35);
             this.BS_MC_Map_3.TabIndex = 16;
+            this.BS_MC_Map_3.Tag = "N2";
             this.BS_MC_Map_3.Text = "3";
             this.BS_MC_Map_3.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_3.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_3.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_4
             // 
@@ -762,8 +807,11 @@
             this.BS_MC_Map_4.Name = "BS_MC_Map_4";
             this.BS_MC_Map_4.Size = new System.Drawing.Size(32, 35);
             this.BS_MC_Map_4.TabIndex = 16;
+            this.BS_MC_Map_4.Tag = "N3";
             this.BS_MC_Map_4.Text = "4";
             this.BS_MC_Map_4.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_4.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_4.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_5
             // 
@@ -777,8 +825,11 @@
             this.BS_MC_Map_5.Name = "BS_MC_Map_5";
             this.BS_MC_Map_5.Size = new System.Drawing.Size(32, 35);
             this.BS_MC_Map_5.TabIndex = 16;
+            this.BS_MC_Map_5.Tag = "N4";
             this.BS_MC_Map_5.Text = "5";
             this.BS_MC_Map_5.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_5.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_5.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_6
             // 
@@ -792,8 +843,11 @@
             this.BS_MC_Map_6.Name = "BS_MC_Map_6";
             this.BS_MC_Map_6.Size = new System.Drawing.Size(32, 35);
             this.BS_MC_Map_6.TabIndex = 16;
+            this.BS_MC_Map_6.Tag = "N5";
             this.BS_MC_Map_6.Text = "6";
             this.BS_MC_Map_6.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_6.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_6.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_7
             // 
@@ -807,8 +861,11 @@
             this.BS_MC_Map_7.Name = "BS_MC_Map_7";
             this.BS_MC_Map_7.Size = new System.Drawing.Size(32, 35);
             this.BS_MC_Map_7.TabIndex = 16;
+            this.BS_MC_Map_7.Tag = "N6";
             this.BS_MC_Map_7.Text = "7";
             this.BS_MC_Map_7.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_7.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_7.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_8
             // 
@@ -822,8 +879,11 @@
             this.BS_MC_Map_8.Name = "BS_MC_Map_8";
             this.BS_MC_Map_8.Size = new System.Drawing.Size(32, 35);
             this.BS_MC_Map_8.TabIndex = 16;
+            this.BS_MC_Map_8.Tag = "N7";
             this.BS_MC_Map_8.Text = "8";
             this.BS_MC_Map_8.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_8.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_8.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_9
             // 
@@ -837,8 +897,11 @@
             this.BS_MC_Map_9.Name = "BS_MC_Map_9";
             this.BS_MC_Map_9.Size = new System.Drawing.Size(32, 35);
             this.BS_MC_Map_9.TabIndex = 16;
+            this.BS_MC_Map_9.Tag = "N8";
             this.BS_MC_Map_9.Text = "9";
             this.BS_MC_Map_9.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_9.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_9.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // BS_MC_Map_10
             // 
@@ -852,8 +915,11 @@
             this.BS_MC_Map_10.Name = "BS_MC_Map_10";
             this.BS_MC_Map_10.Size = new System.Drawing.Size(32, 38);
             this.BS_MC_Map_10.TabIndex = 16;
+            this.BS_MC_Map_10.Tag = "N9";
             this.BS_MC_Map_10.Text = "10";
             this.BS_MC_Map_10.UseVisualStyleBackColor = false;
+            this.BS_MC_Map_10.MouseEnter += new System.EventHandler(this.BS_MC_Map_A_MouseEnter);
+            this.BS_MC_Map_10.MouseLeave += new System.EventHandler(this.BS_MC_Map_A_MouseLeave);
             // 
             // PNL_MC_Map_Schema
             // 
@@ -912,6 +978,59 @@
             this.PNL_MC_Left.Size = new System.Drawing.Size(530, 603);
             this.PNL_MC_Left.TabIndex = 0;
             // 
+            // GB_Example
+            // 
+            this.GB_Example.Controls.Add(this.PNL_Example);
+            this.GB_Example.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.GB_Example.ForeColor = System.Drawing.Color.White;
+            this.GB_Example.Location = new System.Drawing.Point(357, 202);
+            this.GB_Example.Name = "GB_Example";
+            this.GB_Example.Size = new System.Drawing.Size(166, 155);
+            this.GB_Example.TabIndex = 11;
+            this.GB_Example.TabStop = false;
+            this.GB_Example.Text = "Where can place";
+            // 
+            // PNL_Example
+            // 
+            this.PNL_Example.Controls.Add(this.TLP_Example);
+            this.PNL_Example.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PNL_Example.Location = new System.Drawing.Point(3, 18);
+            this.PNL_Example.Name = "PNL_Example";
+            this.PNL_Example.Size = new System.Drawing.Size(160, 134);
+            this.PNL_Example.TabIndex = 7;
+            // 
+            // TLP_Example
+            // 
+            this.TLP_Example.BackColor = System.Drawing.Color.Black;
+            this.TLP_Example.ColumnCount = 10;
+            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TLP_Example.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TLP_Example.Location = new System.Drawing.Point(0, 0);
+            this.TLP_Example.Name = "TLP_Example";
+            this.TLP_Example.RowCount = 10;
+            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
+            this.TLP_Example.Size = new System.Drawing.Size(160, 134);
+            this.TLP_Example.TabIndex = 2;
+            // 
             // GB_MapSchematicOptions
             // 
             this.GB_MapSchematicOptions.BackColor = System.Drawing.Color.Black;
@@ -931,8 +1050,24 @@
             this.GB_MapSchematicOptions.TabIndex = 9;
             this.GB_MapSchematicOptions.TabStop = false;
             this.GB_MapSchematicOptions.Text = "Map schematic options";
-            this.GB_MapSchematicOptions.Visible = false;
             this.GB_MapSchematicOptions.VisibleChanged += new System.EventHandler(this.GB_AdvancedOptions_VisibleChanged);
+            // 
+            // BS_AO_GetMap
+            // 
+            this.BS_AO_GetMap.BackColor = System.Drawing.Color.Black;
+            this.BS_AO_GetMap.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.BS_AO_GetMap.FlatAppearance.BorderSize = 2;
+            this.BS_AO_GetMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_AO_GetMap.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_AO_GetMap.Location = new System.Drawing.Point(381, 26);
+            this.BS_AO_GetMap.Name = "BS_AO_GetMap";
+            this.BS_AO_GetMap.Size = new System.Drawing.Size(126, 31);
+            this.BS_AO_GetMap.TabIndex = 45;
+            this.BS_AO_GetMap.Text = "Get map schema";
+            this.BS_AO_GetMap.UseVisualStyleBackColor = false;
+            this.BS_AO_GetMap.Click += new System.EventHandler(this.BS_AO_GetMap_Click);
+            this.BS_AO_GetMap.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
+            this.BS_AO_GetMap.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // PNL_AO_ProgressBar
             // 
@@ -964,6 +1099,8 @@
             this.BS_AO_LoadSchematic.Text = "Load schematic";
             this.BS_AO_LoadSchematic.UseVisualStyleBackColor = false;
             this.BS_AO_LoadSchematic.Click += new System.EventHandler(this.BS_AO_LoadSchematic_Click);
+            this.BS_AO_LoadSchematic.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
+            this.BS_AO_LoadSchematic.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // BS_AO_CheckSchematic
             // 
@@ -978,6 +1115,9 @@
             this.BS_AO_CheckSchematic.TabIndex = 42;
             this.BS_AO_CheckSchematic.Text = "Check schematic";
             this.BS_AO_CheckSchematic.UseVisualStyleBackColor = false;
+            this.BS_AO_CheckSchematic.Click += new System.EventHandler(this.BS_AO_CheckSchematic_Click);
+            this.BS_AO_CheckSchematic.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
+            this.BS_AO_CheckSchematic.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // BS_AO_SaveSchematic
             // 
@@ -994,6 +1134,8 @@
             this.BS_AO_SaveSchematic.UseVisualStyleBackColor = false;
             this.BS_AO_SaveSchematic.Visible = false;
             this.BS_AO_SaveSchematic.Click += new System.EventHandler(this.BS_AO_SaveSchematic_Click);
+            this.BS_AO_SaveSchematic.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
+            this.BS_AO_SaveSchematic.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // BS_AO_UploadSchematic
             // 
@@ -1008,6 +1150,8 @@
             this.BS_AO_UploadSchematic.TabIndex = 40;
             this.BS_AO_UploadSchematic.Text = "Upload Schematic";
             this.BS_AO_UploadSchematic.UseVisualStyleBackColor = false;
+            this.BS_AO_UploadSchematic.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
+            this.BS_AO_UploadSchematic.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // L_Info_AO_MapSchematic
             // 
@@ -1157,10 +1301,10 @@
             this.TB_Coords.BackColor = System.Drawing.Color.Black;
             this.TB_Coords.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TB_Coords.ForeColor = System.Drawing.Color.White;
-            this.TB_Coords.Location = new System.Drawing.Point(70, 79);
+            this.TB_Coords.Location = new System.Drawing.Point(62, 79);
             this.TB_Coords.Name = "TB_Coords";
             this.TB_Coords.ReadOnly = true;
-            this.TB_Coords.Size = new System.Drawing.Size(68, 22);
+            this.TB_Coords.Size = new System.Drawing.Size(55, 22);
             this.TB_Coords.TabIndex = 27;
             this.TB_Coords.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1170,15 +1314,17 @@
             this.BS_Coords_Apply.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BS_Coords_Apply.FlatAppearance.BorderSize = 2;
             this.BS_Coords_Apply.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_Coords_Apply.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_Coords_Apply.Location = new System.Drawing.Point(147, 68);
+            this.BS_Coords_Apply.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_Coords_Apply.Location = new System.Drawing.Point(123, 68);
             this.BS_Coords_Apply.Name = "BS_Coords_Apply";
-            this.BS_Coords_Apply.Size = new System.Drawing.Size(173, 33);
+            this.BS_Coords_Apply.Size = new System.Drawing.Size(197, 33);
             this.BS_Coords_Apply.TabIndex = 26;
             this.BS_Coords_Apply.Text = "Apply ship position";
             this.BS_Coords_Apply.UseVisualStyleBackColor = false;
             this.BS_Coords_Apply.Visible = false;
             this.BS_Coords_Apply.Click += new System.EventHandler(this.BS_Coords_Apply_Click);
+            this.BS_Coords_Apply.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
+            this.BS_Coords_Apply.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // BS_Coords_Check
             // 
@@ -1186,14 +1332,16 @@
             this.BS_Coords_Check.FlatAppearance.BorderColor = System.Drawing.Color.White;
             this.BS_Coords_Check.FlatAppearance.BorderSize = 2;
             this.BS_Coords_Check.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_Coords_Check.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_Coords_Check.Location = new System.Drawing.Point(147, 21);
+            this.BS_Coords_Check.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_Coords_Check.Location = new System.Drawing.Point(123, 21);
             this.BS_Coords_Check.Name = "BS_Coords_Check";
-            this.BS_Coords_Check.Size = new System.Drawing.Size(173, 33);
+            this.BS_Coords_Check.Size = new System.Drawing.Size(197, 33);
             this.BS_Coords_Check.TabIndex = 25;
             this.BS_Coords_Check.Text = "Coordinate availability checking";
             this.BS_Coords_Check.UseVisualStyleBackColor = false;
             this.BS_Coords_Check.Click += new System.EventHandler(this.BS_Coords_Check_Click);
+            this.BS_Coords_Check.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
+            this.BS_Coords_Check.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // L_Info_Coord_Number
             // 
@@ -1221,9 +1369,9 @@
             "8",
             "9",
             "10"});
-            this.CB_Coord_Number.Location = new System.Drawing.Point(70, 48);
+            this.CB_Coord_Number.Location = new System.Drawing.Point(62, 48);
             this.CB_Coord_Number.Name = "CB_Coord_Number";
-            this.CB_Coord_Number.Size = new System.Drawing.Size(68, 25);
+            this.CB_Coord_Number.Size = new System.Drawing.Size(55, 25);
             this.CB_Coord_Number.TabIndex = 23;
             this.CB_Coord_Number.Text = "1";
             this.CB_Coord_Number.SelectedIndexChanged += new System.EventHandler(this.CB_Coord_Number_SelectedIndexChanged);
@@ -1254,9 +1402,9 @@
             "H",
             "I",
             "J"});
-            this.CB_Coord_Letter.Location = new System.Drawing.Point(70, 21);
+            this.CB_Coord_Letter.Location = new System.Drawing.Point(62, 21);
             this.CB_Coord_Letter.Name = "CB_Coord_Letter";
-            this.CB_Coord_Letter.Size = new System.Drawing.Size(68, 25);
+            this.CB_Coord_Letter.Size = new System.Drawing.Size(55, 25);
             this.CB_Coord_Letter.TabIndex = 21;
             this.CB_Coord_Letter.Text = "A";
             this.CB_Coord_Letter.SelectedIndexChanged += new System.EventHandler(this.CB_Coord_Letter_SelectedIndexChanged);
@@ -1296,6 +1444,8 @@
             this.BS_ResetMap.Text = "Reset";
             this.BS_ResetMap.UseVisualStyleBackColor = false;
             this.BS_ResetMap.Click += new System.EventHandler(this.BS_ResetMap_Click);
+            this.BS_ResetMap.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
+            this.BS_ResetMap.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // BS_Insert
             // 
@@ -1312,6 +1462,8 @@
             this.BS_Insert.UseVisualStyleBackColor = false;
             this.BS_Insert.Visible = false;
             this.BS_Insert.Click += new System.EventHandler(this.BS_Insert_Click);
+            this.BS_Insert.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
+            this.BS_Insert.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // PNL_ShipPlaceMap
             // 
@@ -1352,47 +1504,6 @@
             this.TLP_ShipPlaceMap.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TLP_ShipPlaceMap.Size = new System.Drawing.Size(161, 131);
             this.TLP_ShipPlaceMap.TabIndex = 2;
-            // 
-            // PNL_Example
-            // 
-            this.PNL_Example.Controls.Add(this.TLP_Example);
-            this.PNL_Example.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PNL_Example.Location = new System.Drawing.Point(3, 18);
-            this.PNL_Example.Name = "PNL_Example";
-            this.PNL_Example.Size = new System.Drawing.Size(160, 134);
-            this.PNL_Example.TabIndex = 7;
-            // 
-            // TLP_Example
-            // 
-            this.TLP_Example.BackColor = System.Drawing.Color.Black;
-            this.TLP_Example.ColumnCount = 10;
-            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TLP_Example.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TLP_Example.Location = new System.Drawing.Point(0, 0);
-            this.TLP_Example.Name = "TLP_Example";
-            this.TLP_Example.RowCount = 10;
-            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_Example.Size = new System.Drawing.Size(160, 134);
-            this.TLP_Example.TabIndex = 2;
             // 
             // GB_MC_ShipData
             // 
@@ -1596,6 +1707,8 @@
             this.RB_ShipType_Battleship.Text = "Battleship";
             this.RB_ShipType_Battleship.UseVisualStyleBackColor = true;
             this.RB_ShipType_Battleship.CheckedChanged += new System.EventHandler(this.RB_ShipType_Frigate_CheckedChanged);
+            this.RB_ShipType_Battleship.MouseEnter += new System.EventHandler(this.RB_ShipType_Frigate_MouseEnter);
+            this.RB_ShipType_Battleship.MouseLeave += new System.EventHandler(this.RB_ShipType_Frigate_MouseLeave);
             // 
             // RB_ShipType_Cruiser
             // 
@@ -1614,6 +1727,8 @@
             this.RB_ShipType_Cruiser.Text = "Cruiser";
             this.RB_ShipType_Cruiser.UseVisualStyleBackColor = true;
             this.RB_ShipType_Cruiser.CheckedChanged += new System.EventHandler(this.RB_ShipType_Frigate_CheckedChanged);
+            this.RB_ShipType_Cruiser.MouseEnter += new System.EventHandler(this.RB_ShipType_Frigate_MouseEnter);
+            this.RB_ShipType_Cruiser.MouseLeave += new System.EventHandler(this.RB_ShipType_Frigate_MouseLeave);
             // 
             // RB_ShipType_Destroyer
             // 
@@ -1632,6 +1747,8 @@
             this.RB_ShipType_Destroyer.Text = "Destroyer";
             this.RB_ShipType_Destroyer.UseVisualStyleBackColor = true;
             this.RB_ShipType_Destroyer.CheckedChanged += new System.EventHandler(this.RB_ShipType_Frigate_CheckedChanged);
+            this.RB_ShipType_Destroyer.MouseEnter += new System.EventHandler(this.RB_ShipType_Frigate_MouseEnter);
+            this.RB_ShipType_Destroyer.MouseLeave += new System.EventHandler(this.RB_ShipType_Frigate_MouseLeave);
             // 
             // RB_ShipType_Frigate
             // 
@@ -1650,6 +1767,8 @@
             this.RB_ShipType_Frigate.Text = "Frigate";
             this.RB_ShipType_Frigate.UseVisualStyleBackColor = true;
             this.RB_ShipType_Frigate.CheckedChanged += new System.EventHandler(this.RB_ShipType_Frigate_CheckedChanged);
+            this.RB_ShipType_Frigate.MouseEnter += new System.EventHandler(this.RB_ShipType_Frigate_MouseEnter);
+            this.RB_ShipType_Frigate.MouseLeave += new System.EventHandler(this.RB_ShipType_Frigate_MouseLeave);
             // 
             // MS_MapCreate
             // 
@@ -1676,43 +1795,18 @@
             // TSMI_MC_SchematicOptions
             // 
             this.TSMI_MC_SchematicOptions.BackColor = System.Drawing.Color.White;
+            this.TSMI_MC_SchematicOptions.Checked = true;
             this.TSMI_MC_SchematicOptions.CheckOnClick = true;
+            this.TSMI_MC_SchematicOptions.CheckState = System.Windows.Forms.CheckState.Checked;
             this.TSMI_MC_SchematicOptions.ForeColor = System.Drawing.Color.Black;
             this.TSMI_MC_SchematicOptions.Name = "TSMI_MC_SchematicOptions";
-            this.TSMI_MC_SchematicOptions.Size = new System.Drawing.Size(180, 22);
-            this.TSMI_MC_SchematicOptions.Text = "Schematic options";
-            this.TSMI_MC_SchematicOptions.CheckedChanged += new System.EventHandler(this.TSMI_MC_AdvancedOptions_CheckedChanged);
+            this.TSMI_MC_SchematicOptions.Size = new System.Drawing.Size(200, 22);
+            this.TSMI_MC_SchematicOptions.Text = "Disable schematic options";
+            this.TSMI_MC_SchematicOptions.CheckedChanged += new System.EventHandler(this.TSMI_MC_SchematicOptions_CheckedChanged);
             // 
             // OFD_MapCreate
             // 
             this.OFD_MapCreate.FileName = "openFileDialog1";
-            // 
-            // GB_Example
-            // 
-            this.GB_Example.Controls.Add(this.PNL_Example);
-            this.GB_Example.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GB_Example.ForeColor = System.Drawing.Color.White;
-            this.GB_Example.Location = new System.Drawing.Point(357, 202);
-            this.GB_Example.Name = "GB_Example";
-            this.GB_Example.Size = new System.Drawing.Size(166, 155);
-            this.GB_Example.TabIndex = 11;
-            this.GB_Example.TabStop = false;
-            this.GB_Example.Text = "Where can place";
-            // 
-            // BS_AO_GetMap
-            // 
-            this.BS_AO_GetMap.BackColor = System.Drawing.Color.Black;
-            this.BS_AO_GetMap.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.BS_AO_GetMap.FlatAppearance.BorderSize = 2;
-            this.BS_AO_GetMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_AO_GetMap.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_AO_GetMap.Location = new System.Drawing.Point(381, 26);
-            this.BS_AO_GetMap.Name = "BS_AO_GetMap";
-            this.BS_AO_GetMap.Size = new System.Drawing.Size(126, 31);
-            this.BS_AO_GetMap.TabIndex = 45;
-            this.BS_AO_GetMap.Text = "Get map schema";
-            this.BS_AO_GetMap.UseVisualStyleBackColor = false;
-            this.BS_AO_GetMap.Click += new System.EventHandler(this.BS_AO_GetMap_Click);
             // 
             // MapCreate
             // 
@@ -1745,6 +1839,8 @@
             this.PNL_MC_Map_Schema.ResumeLayout(false);
             this.PNL_MC_Left.ResumeLayout(false);
             this.PNL_MC_Left.PerformLayout();
+            this.GB_Example.ResumeLayout(false);
+            this.PNL_Example.ResumeLayout(false);
             this.GB_MapSchematicOptions.ResumeLayout(false);
             this.GB_MapSchematicOptions.PerformLayout();
             this.PNL_AO_ProgressBar.ResumeLayout(false);
@@ -1753,7 +1849,6 @@
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.PNL_ShipPlaceMap.ResumeLayout(false);
-            this.PNL_Example.ResumeLayout(false);
             this.GB_MC_ShipData.ResumeLayout(false);
             this.GB_MC_ShipData.PerformLayout();
             this.TLP_Ships_Example.ResumeLayout(false);
@@ -1761,7 +1856,6 @@
             this.GB_MC_ShipType.PerformLayout();
             this.MS_MapCreate.ResumeLayout(false);
             this.MS_MapCreate.PerformLayout();
-            this.GB_Example.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }

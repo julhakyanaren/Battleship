@@ -1248,10 +1248,6 @@ namespace Battleship
         {
             
         }
-        private void TSMI_MC_AdvancedOptions_CheckedChanged(object sender, EventArgs e)
-        {
-            GB_MapSchematicOptions.Visible = TSMI_MC_SchematicOptions.Checked;
-        }
         private void GB_AdvancedOptions_VisibleChanged(object sender, EventArgs e)
         {
             if (GB_MapSchematicOptions.Visible)
@@ -1391,6 +1387,147 @@ namespace Battleship
             else
             {
                 BS_AO_SaveSchematic.Visible = true;
+            }
+        }
+        private void BS_AO_CheckSchematic_Click(object sender, EventArgs e)
+        {
+            
+        }
+        private void TSMI_MC_SchematicOptions_CheckedChanged(object sender, EventArgs e)
+        {
+            int checkedToInt = Convert.ToInt32(TSMI_MC_SchematicOptions.Checked);
+            if (checkedToInt == 0)
+            {
+                TSMI_MC_SchematicOptions.Text = "Enable schematic options";
+            }
+            else
+            {
+                TSMI_MC_SchematicOptions.Text = "Disable schematic options";
+            }
+            Design.ChangeButtonEnabledDesign(BS_AO_UploadSchematic, checkedToInt);
+            Design.ChangeButtonEnabledDesign(BS_AO_SaveSchematic, checkedToInt);
+            Design.ChangeButtonEnabledDesign(BS_AO_CheckSchematic, checkedToInt);
+            Design.ChangeButtonEnabledDesign(BS_AO_LoadSchematic, checkedToInt);
+            Design.ChangeButtonEnabledDesign(BS_AO_GetMap, checkedToInt);
+        }
+        private async void BS_AO_GetMap_MouseEnter(object sender, EventArgs e)
+        {
+            await Task.Delay(0);
+            Button enteredButton = sender as Button;
+            enteredButton.Font = new Font("Franklin Gothic Demi Cond", 8.3F);
+        }
+
+        private async void BS_AO_GetMap_MouseLeave(object sender, EventArgs e)
+        {
+            await Task.Delay(0);
+            Button leavedButton = sender as Button;
+            leavedButton.Font = new Font("Franklin Gothic Medium Cond", 8.25F);
+        }
+
+        private async void RB_ShipType_Frigate_MouseEnter(object sender, EventArgs e)
+        {
+            await Task.Delay(0);
+            RadioButton entered_RB = sender as RadioButton;
+            entered_RB.Font = new Font("Franklin Gothic Demi Cond", 10F);
+        }
+
+        private async void RB_ShipType_Frigate_MouseLeave(object sender, EventArgs e)
+        {
+            await Task.Delay(0);
+            RadioButton leaved_RB = sender as RadioButton;
+            leaved_RB.Font = new Font("Franklin Gothic Medium Cond", 9.75F);
+        }
+
+        private async void BS_MC_Map_A_MouseEnter(object sender, EventArgs e)
+        {
+            await Task.Delay(0);
+            Button selectedButton = sender as Button;
+            string tag = selectedButton.Tag.ToString();
+            char selector = tag[0];
+            int number = Convert.ToInt32(tag[1].ToString());
+            switch (selector)
+            {
+                case 'L':
+                    {
+                        int count = 0;
+                        foreach (Button b in Buttons_MC)
+                        {
+                            if (count >= 10)
+                            {
+                                break;
+                            }
+                            pos.GetCoordsFromTag(b.Tag.ToString(), out int x, out int y, out int p);
+                            if (y == number)
+                            {
+                                b.FlatAppearance.BorderColor = Color.Orange;
+                                count++;
+                            }
+                        }
+                        break;
+                    }
+                case 'N':
+                    {
+                        int count = 0;
+                        foreach (Button b in Buttons_MC)
+                        {
+                            if (count >= 10)
+                            {
+                                break;
+                            }
+                            pos.GetCoordsFromTag(b.Tag.ToString(), out int x, out int y, out int p);
+                            if (x == number)
+                            {
+                                b.FlatAppearance.BorderColor = Color.Orange;
+                            }
+                        }
+                        break;
+                    }
+            }
+        }
+
+        private async void BS_MC_Map_A_MouseLeave(object sender, EventArgs e)
+        {
+            await Task.Delay(0);
+            Button selectedButton = sender as Button;
+            string tag = selectedButton.Tag.ToString();
+            char selector = tag[0];
+            int number = Convert.ToInt32(tag[1].ToString());
+            switch (selector)
+            {
+                case 'L':
+                    {
+                        int count = 0;
+                        if (count >= 10)
+                        {
+                            break;
+                        }
+                        foreach (Button b in Buttons_MC)
+                        {
+                            pos.GetCoordsFromTag(b.Tag.ToString(), out int x, out int y, out int p);
+                            if (y == number)
+                            {
+                                b.FlatAppearance.BorderColor = Color.Black;
+                            }
+                        }
+                        break;
+                    }
+                case 'N':
+                    {
+                        int count = 0;
+                        if (count >= 10)
+                        {
+                            break;
+                        }
+                        foreach (Button b in Buttons_MC)
+                        {
+                            pos.GetCoordsFromTag(b.Tag.ToString(), out int x, out int y, out int p);
+                            if (x == number)
+                            {
+                                b.FlatAppearance.BorderColor = Color.Black;
+                            }
+                        }
+                        break;
+                    }
             }
         }
     }
