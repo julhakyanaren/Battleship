@@ -1271,7 +1271,54 @@ namespace Battleship
         }
         private void BS_MC_Apply_Click(object sender, EventArgs e)
         {
-            
+            if (TB_MapSchematic.Text.Length > 0)
+            {
+                char[] symbols = TB_MapSchematic.Text.ToCharArray();
+                bool allSymbolsEquals = true;
+                for (int s = 0; s < symbols.Length; s++)
+                {
+                    if (symbols[s] != 'n')
+                    {
+                        allSymbolsEquals = false;
+                        break;
+                    }
+                }
+                if (!allSymbolsEquals)
+                {
+                    if (!AllShipsTypeAreCorrect(symbols))
+                    {
+                        DialogResult = MessageBox.Show("Not all ships have been placed in this schematic map. Are you sure you want to continue?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                        if (DialogResult == DialogResult.Yes)
+                        {
+                            TB_MapSchematic.ForeColor = Color.Yellow;
+                            Schematic.Map = TB_MapSchematic.Text;
+                        }
+                    }
+                    else
+                    {
+                        TB_MapSchematic.ForeColor = Color.Lime;
+                        Schematic.Map = TB_MapSchematic.Text;
+                        DialogResult = MessageBox.Show("The schematic map has been successfully created and saved.\r\n Close the map editor?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (DialogResult == DialogResult.Yes)
+                        {
+                            this.Dispose();
+                        }
+                    }
+                }
+                else
+                {
+                    DialogResult = MessageBox.Show("This schematic map is completely empty, are you sure you want to continue?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                    if (DialogResult == DialogResult.Yes)
+                    {
+                        TB_MapSchematic.ForeColor = Color.Yellow;
+                        Schematic.Map = TB_MapSchematic.Text;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Map schematic is empty!", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+            }
         }
         private void GB_AdvancedOptions_VisibleChanged(object sender, EventArgs e)
         {
