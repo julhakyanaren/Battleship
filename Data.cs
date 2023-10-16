@@ -32,6 +32,7 @@ namespace Battleship
         public static char[] MapSchematic = new char[0];
         public static string Schematic;
 
+        public static bool RandomMap = false;
 
         public static char[,] SetShipsChars()
         {

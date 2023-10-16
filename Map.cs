@@ -163,6 +163,12 @@ namespace Battleship
             MapEnemy = PlaceShips(MapEnemy);
             return MapEnemy;
         }
+        public char[,] GeneratePlayerMap(Button[,] mapbuttons)
+        {
+            SetShipCharThrowColor(0, mapbuttons);
+            MapPlayer = PlaceShips(MapPlayer);
+            return MapPlayer;
+        }
         public void SetShipsCountThrowMap(char[] map)
         {
             for (int c = 0; c < map.Length; c++)

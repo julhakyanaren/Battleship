@@ -1271,6 +1271,7 @@ namespace Battleship
         }
         private void BS_MC_Apply_Click(object sender, EventArgs e)
         {
+            Schematic.CorrectSchematic = false;
             if (TB_MapSchematic.Text.Length > 0)
             {
                 char[] symbols = TB_MapSchematic.Text.ToCharArray();
@@ -1298,6 +1299,7 @@ namespace Battleship
                     {
                         TB_MapSchematic.ForeColor = Color.Lime;
                         Schematic.Map = TB_MapSchematic.Text;
+                        Schematic.CorrectSchematic = true;
                         DialogResult = MessageBox.Show("The schematic map has been successfully created and saved.\r\n Close the map editor?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (DialogResult == DialogResult.Yes)
                         {

@@ -18,6 +18,7 @@ namespace Battleship
         public const string FileЕxtension = "msch";
         public static string FileName = $"Name.{FileЕxtension}"; // Change
         public static string FilePath;
+        public static bool CorrectSchematic = false;
 
         public static Dictionary<string, string> StringMap = new Dictionary<string, string>();
         public static void MapToCharSchematic(string map)

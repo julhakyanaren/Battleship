@@ -37,7 +37,7 @@ namespace Battleship
             /**/
         }
 
-        void GenerateButtons()
+        async void GenerateButtons()
         {
             int[,] tags = GenerateButtonsTags();
             int x;
@@ -62,9 +62,8 @@ namespace Battleship
                     button.BackColor = Color.White;
                     button.Tag = tags[f, b];
                     button.Margin = new Padding(0);
-                    //targetButton.Text = targetButton.Name.ToString();
+                    button.Visible = false;
                     button.Click += Button_Click;
-                    //button.MouseLeave += Button_MouseLeave;
                     button.MouseEnter += Button_MouseEnter;
                     MapButtons[f, b] = button;
                     button.FlatAppearance.MouseOverBackColor = Design.MouseOverColor[f];
@@ -74,6 +73,14 @@ namespace Battleship
             {
                 Map.SetShipCharThrowColor(id, MapButtons);
             }
+            for (int vb = 0; vb < 100; vb++)
+            {
+                await Task.Delay(1);
+                MapButtons[0, vb].Visible = true;
+                MapButtons[1, vb].Visible = true;
+            }
+            CHB_RandomMapGenerate.Visible = true;
+            BS_GeneratePlayerMap.Visible = true;
         }
 
         private async void Button_MouseEnter(object sender, EventArgs e)
@@ -231,22 +238,39 @@ namespace Battleship
             }
 
         }
-        private void BS_Test_Generate_Click(object sender, EventArgs e)
-        {
-            GenerateButtons();
-            BS_Test_Generate.Enabled = false;
-        }
-
         private void GamePlayerOne_FormClosing(object sender, FormClosingEventArgs e)
         {
             Environment.Exit(0);  
         }
-        private void BS_Test_GenerateMap_Click(object sender, EventArgs e)
+        public void GeneratePlayerRandomMap()
+        {
+            ResetPlayerMap(false, MapButtons);
+            char[,] playerMap = Map.GeneratePlayerMap(MapButtons);
+            Button[] playerButtons = Support.GetPlayerButtons(MapButtons);
+            SetPlayerButtonsColors(playerButtons, playerMap);
+        }
+        public void GenerateEnemyRandomMap()
         {
             ResetEnemyMap(MapButtons);
             char[,] enemyMap = Map.GenerateEnemyMap(MapButtons);
             Button[] enemyButtons = Support.GetEnemyButtons(MapButtons);
             SetEnemyButtonsColors(enemyButtons, enemyMap);
+        }
+        public void SetPlayerButtonsColors(Button[] playerButtons, char[,] playerMap)
+        {
+            PlayerData.ResetShipsCount();
+            char[] map = Support.CharArrayRedimension(playerMap);
+            Color[] colors = ColorMethods.SetButtonColors(map);
+            for (int b = 0; b < playerButtons.Length; b++)
+            {
+                playerButtons[b].BackColor = colors[b];
+            }
+            Map.SetShipsCountThrowMap(map);
+            /**/
+            TB_PlayerFrigate.Text = $"{PlayerData.FrigatesCountCurrent}";
+            TB_PlayerDestroyer.Text = $"{PlayerData.DestroyersCountCurrent}";
+            TB_PlayerCruiser.Text = $"{PlayerData.CruiserCountCurrent}";
+            TB_PlayerBattleship.Text = $"{PlayerData.BattleshipCountCurrent}";
         }
         public void SetEnemyButtonsColors(Button[] enemyButtons, char[,]enemyMap)
         {
@@ -272,58 +296,67 @@ namespace Battleship
                 enemyButtons[b].BackColor = Color.White;
             }
         }
-
-        private void SwitchShipPlaceMode(object sender, EventArgs e)
+        public void ResetPlayerMap(bool gameStarted, Button[,] buttons)
         {
-            RadioButton checkedRadioButton = sender as RadioButton;
-            if (checkedRadioButton.Checked)
+            if (!gameStarted)
             {
-                switch (Convert.ToInt32(checkedRadioButton.Tag))
+                Button[] playerButtons = Support.GetPlayerButtons(buttons);
+                for(int b =  0; b < playerButtons.Length; b++)
                 {
-                    case 1:
-                        {
-                            Data.ShipPlaceMode = "Frigate";
-                            break;
-                        }
-                    case 2:
-                        {
-                            Data.ShipPlaceMode = "Destroyer";
-                            break;
-                        }
-                    case 3:
-                        {
-                            Data.ShipPlaceMode = "Cruiser";
-                            break;
-                        }
-                    case 4:
-                        {
-                            Data.ShipPlaceMode = "Battleship";
-                            break;
-                        }
-                    default:
-                        {
-                            Data.ShipPlaceMode = "None";
-                            break;
-                        }
+                    playerButtons[b].BackColor = Color.White;
+                }
+            }
+        }
+        private void CHB_RandomMapGenerate_CheckedChanged(object sender, EventArgs e)
+        {
+            switch (CHB_RandomMapGenerate.Checked)
+            {
+                case true:
+                    {
+                        Data.RandomMap = true;
+                        BS_GeneratePlayerMap.Text = "Generate random map";
+                        break;
+                    }
+                case false:
+                    {
+                        BS_GeneratePlayerMap.Text = "Generate map";
+                        Data.RandomMap = false;
+                        break;
+                    }
+            }
+        }
+
+        private void BS_GeneratePlayerMap_Click(object sender, EventArgs e)
+        {
+            if (Data.RandomMap == true)
+            {
+                //Check
+                GenerateEnemyRandomMap();
+                ResetPlayerMap(false, MapButtons);
+                GeneratePlayerRandomMap();
+            }
+            else
+            {
+                if (!Schematic.CorrectSchematic)
+                {
+                    DialogResult = MessageBox.Show("Schematic map not complete generation not possible", "Map Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                }
+                else
+                {
+
                 }
             }
         }
 
-        private void TSMI_MM_Settings_Click(object sender, EventArgs e)
+        private void TSMI_StartNewGame_Click(object sender, EventArgs e)
         {
-            DialogResult dr = new DialogResult();
-            dr = MessageBox.Show("Open \'Setting Manager?\'", "Settings Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            switch (dr)
+            try
             {
-                case DialogResult.Yes:
-                    {
-                        MessageBox.Show("Plugin don't included", "Settings Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    }
-                case DialogResult.No:
-                    {
-                        break;
-                    }
+                GenerateButtons();
+            }
+            catch
+            {
+                //Error_Catch
             }
         }
     }
