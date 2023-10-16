@@ -331,9 +331,24 @@ namespace Battleship
             if (Data.RandomMap == true)
             {
                 //Check
-                GenerateEnemyRandomMap();
-                ResetPlayerMap(false, MapButtons);
-                GeneratePlayerRandomMap();
+                for (int j = 0; j < 2; j++)
+                {
+                    int i = 1;
+                    while (true)
+                    {
+                        if (i > 0)
+                        {
+                            GeneratePlayerRandomMap();
+                            GenerateEnemyRandomMap();
+                            i--;
+                        }
+                        else
+                        {
+                            GenerateEnemyRandomMap();
+                            break;
+                        }
+                    }
+                }
             }
             else
             {

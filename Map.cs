@@ -114,17 +114,15 @@ namespace Battleship
 
             return true;
         }
-        static void PlaceShip(char[,] map, char shipSymbol, int shipSize)
+        static void PlacePlayerShip(char[,] map, char shipSymbol, int shipSize)
         {
             Random random = new Random();
             bool placed = false;
-
             while (!placed)
             {
                 int x = random.Next(10);
                 int y = random.Next(10);
                 int orientation = random.Next(2);
-
                 if (IsValidPlacement(map, x, y, shipSize, orientation))
                 {
                     for (int i = 0; i < shipSize; i++)
@@ -142,31 +140,73 @@ namespace Battleship
                 }
             }
         }
-        public char[,] PlaceShips(char[,] map)
+        static void PlaceEnemyShip(char[,] map, char shipSymbol, int shipSize)
+        {
+            Random random = new Random();
+            bool placed = false;
+
+            while (!placed)
+            {
+                int x = random.Next(10);
+                int y = random.Next(10);
+                int orientation = random.Next(2);
+                if (IsValidPlacement(map, x, y, shipSize, orientation))
+                {
+                    for (int i = 0; i < shipSize; i++)
+                    {
+                        if (orientation == 0)
+                        {
+                            map[x + i, y] = shipSymbol;
+                        }
+                        else
+                        {
+                            map[x, y + i] = shipSymbol;
+                        }
+                    }
+                    placed = true;
+                }
+            }
+        }
+        public char[,] PlaceEnemyShips(char[,] map)
         {
             char[,] ships = Data.SetShipsChars();
-            PlaceShip(map, 'b', 4);
-            PlaceShip(map, 'c', 3);
-            PlaceShip(map, 'c', 3);
-            PlaceShip(map, 'd', 2);
-            PlaceShip(map, 'd', 2);
-            PlaceShip(map, 'd', 2);
-            PlaceShip(map, 'f', 1);
-            PlaceShip(map, 'f', 1);
-            PlaceShip(map, 'f', 1);
-            PlaceShip(map, 'f', 1);
+            PlaceEnemyShip(map, 'b', 4);
+            PlaceEnemyShip(map, 'c', 3);
+            PlaceEnemyShip(map, 'c', 3);
+            PlaceEnemyShip(map, 'd', 2);
+            PlaceEnemyShip(map, 'd', 2);
+            PlaceEnemyShip(map, 'd', 2);
+            PlaceEnemyShip(map, 'f', 1);
+            PlaceEnemyShip(map, 'f', 1);
+            PlaceEnemyShip(map, 'f', 1);
+            PlaceEnemyShip(map, 'f', 1);
+            return map;
+        }
+        public char[,] PlacePlayerShips(char[,] map)
+        {
+            char[,] ships = Data.SetShipsChars();
+            PlacePlayerShip(map, 'B', 4);
+            PlacePlayerShip(map, 'C', 3);
+            PlacePlayerShip(map, 'C', 3);
+            PlacePlayerShip(map, 'D', 2);
+            PlacePlayerShip(map, 'D', 2);
+            PlacePlayerShip(map, 'D', 2);
+            PlacePlayerShip(map, 'F', 1);
+            PlacePlayerShip(map, 'F', 1);
+            PlacePlayerShip(map, 'F', 1);
+            PlacePlayerShip(map, 'F', 1);
             return map;
         }
         public char[,] GenerateEnemyMap(Button[,] mapButtons)
         {
             SetShipCharThrowColor(1, mapButtons);
-            MapEnemy = PlaceShips(MapEnemy);
+            MapEnemy = PlaceEnemyShips(MapEnemy);
             return MapEnemy;
         }
         public char[,] GeneratePlayerMap(Button[,] mapbuttons)
         {
             SetShipCharThrowColor(0, mapbuttons);
-            MapPlayer = PlaceShips(MapPlayer);
+            MapPlayer = PlacePlayerShips(MapPlayer);
             return MapPlayer;
         }
         public void SetShipsCountThrowMap(char[] map)
