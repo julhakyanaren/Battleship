@@ -1486,16 +1486,22 @@ namespace Battleship
         }
         private async void BS_AO_GetMap_MouseEnter(object sender, EventArgs e)
         {
-            await Task.Delay(0);
-            Button enteredButton = sender as Button;
-            enteredButton.Font = new Font("Franklin Gothic Demi Cond", 8.3F);
+            if (false)
+            {
+                await Task.Delay(0);
+                Button enteredButton = sender as Button;
+                enteredButton.Font = new Font("Franklin Gothic Demi Cond", 8.3F);
+            }
         }
 
         private async void BS_AO_GetMap_MouseLeave(object sender, EventArgs e)
         {
-            await Task.Delay(0);
-            Button leavedButton = sender as Button;
-            leavedButton.Font = new Font("Franklin Gothic Medium Cond", 8.25F);
+            if (false)
+            {
+                await Task.Delay(0);
+                Button leavedButton = sender as Button;
+                leavedButton.Font = new Font("Franklin Gothic Medium Cond", 8.25F);
+            }
         }
 
         private async void RB_ShipType_Frigate_MouseEnter(object sender, EventArgs e)

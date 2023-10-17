@@ -53,6 +53,7 @@
     <Compile Include="DebugTools.cs" />
     <Compile Include="Design.cs" />
     <Compile Include="EnemyData.cs" />
+    <Compile Include="Fight.cs" />
     <Compile Include="Map.cs" />
     <Compile Include="MapCreate.cs">
       <SubType>Form</SubType>
