@@ -32,7 +32,8 @@ namespace Battleship
         }
         public void SetComponentCustomParamaters()
         {
-            L_Info_Turn.Location = new Point((PNL_InfoStatus.Width - L_Info_Turn.Width) / 2, L_Info_Turn.Location.Y);
+            Design.SetComponentLocation(L_Info_Turn, PNL_InfoTurn);
+            Design.SetComponentLocation(TB_Turn, PNL_InfoTurn);
         }
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {
