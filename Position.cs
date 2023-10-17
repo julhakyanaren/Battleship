@@ -428,18 +428,6 @@ namespace Battleship
             }
             return false;
         }
-        public bool IsEmptyPosition(Button selectedButton)
-        {
-            Color selectedColor = ColorMethods.CellCollor(selectedButton);
-            if (selectedColor != Color.White)
-            {
-                return false;
-            }
-            else
-            {
-                return true;
-            }
-        }
         public int NewTagBuilder(int oldTag, int dx= 0, int dy = 0)
         {
             return oldTag + (10 * dy) + dx;

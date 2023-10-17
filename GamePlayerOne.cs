@@ -5,6 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.VisualStyles;
 
 namespace Battleship
 {
@@ -29,14 +30,18 @@ namespace Battleship
             Location = new Point(0,0);
             MaximizeBox = false;
         }
+        public void SetComponentCustomParamaters()
+        {
+            L_Info_Turn.Location = new Point((PNL_InfoStatus.Width - L_Info_Turn.Width) / 2, L_Info_Turn.Location.Y);
+        }
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {
             SetScreenParametersAsMaximized();
             /**/
             Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
             /**/
+            SetComponentCustomParamaters();
         }
-
         async void GenerateButtons()
         {
             int[,] tags = GenerateButtonsTags();
@@ -78,7 +83,7 @@ namespace Battleship
                 MapButtons[0, vb].Visible = true;
                 MapButtons[1, vb].Visible = true;
             }
-            PNL_PlayerControl.Visible = true;
+            TSMI_Map.Enabled = true;
         }
 
         private async void Button_MouseEnter(object sender, EventArgs e)
@@ -228,25 +233,63 @@ namespace Battleship
                 }
             }
         }
-        private void CHB_RandomMapGenerate_CheckedChanged(object sender, EventArgs e)
+        public void StartBattleShip()
         {
-            switch (CHB_RandomMapGenerate.Checked)
+            for (int i = 0; i < MapButtons.GetLength(1); i++)
+            {
+                GenerateEnemyRandomMap();
+                Button targetButton = MapButtons[1, i];
+                Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
+                EnemyData.Map[i] = ColorMethods.SetCharThrowColor(1, targetButton.BackColor);
+            }
+            Fight.GameStarted = true;
+        }
+        private void TSMI_StartNewGame_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                GenerateButtons();
+            }
+            catch
+            {
+                //Error_Catch
+            }
+        }
+        private void BS_OpenMapEditor_Click(object sender, EventArgs e)
+        {
+
+        }
+        private void TSMI_StartBattleShip_Click(object sender, EventArgs e)
+        {
+            StartBattleShip();
+            for (int i = 0; i < MapButtons.GetLength(1); i++)
+            {
+                Button targetButton = MapButtons[1, i];
+                targetButton.BackColor = Color.White;
+                targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
+            }
+        }
+
+        private void TSMI_GenerationType_CheckedChanged(object sender, EventArgs e)
+        {
+            switch (TSMI_GenerationType.Checked)
             {
                 case true:
                     {
+                        TSMI_TB_GenType.Text = "Generate random map";
                         Data.RandomMap = true;
-                        BS_GeneratePlayerMap.Text = "Generate random map";
                         break;
                     }
                 case false:
                     {
-                        BS_GeneratePlayerMap.Text = "Generate map";
+                        TSMI_TB_GenType.Text = "Generate with schematic";
                         Data.RandomMap = false;
                         break;
                     }
             }
         }
-        private async void BS_GeneratePlayerMap_Click(object sender, EventArgs e)
+
+        private async void TSMI_GenerateMap_Click(object sender, EventArgs e)
         {
             bool playerMapCreated = true;
             if (Data.RandomMap == true)
@@ -339,32 +382,11 @@ namespace Battleship
                 Fight.GameStarted = false;
             }
         }
-        public void StartBattleShip()
+
+        private void TSMI_OpenMapEditor_Click(object sender, EventArgs e)
         {
-            for (int i = 0; i < MapButtons.GetLength(1); i++)
-            {
-                GenerateEnemyRandomMap();
-                Button targetButton = MapButtons[1, i];
-                Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
-                EnemyData.Map[i] = ColorMethods.SetCharThrowColor(1, targetButton.BackColor);
-            }
-            Fight.GameStarted = true;
-        }
-        private void TSMI_StartNewGame_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                GenerateButtons();
-            }
-            catch
-            {
-                //Error_Catch
-            }
-        }
-        private void BS_OpenMapEditor_Click(object sender, EventArgs e)
-        {
-            DialogResult = MessageBox.Show("Open 'Map Editor'","Map Editor",MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            if(DialogResult == DialogResult.OK)
+            DialogResult = MessageBox.Show("Open 'Map Editor'", "Map Editor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (DialogResult == DialogResult.OK)
             {
                 MapCreate MCF = new MapCreate();
                 if (!DebugTools.MCF.Opened)
@@ -373,15 +395,10 @@ namespace Battleship
                 }
             }
         }
-        private void TSMI_StartBattleShip_Click(object sender, EventArgs e)
+
+        private void TSMI_AllwaysOnTop_CheckedChanged(object sender, EventArgs e)
         {
-            StartBattleShip();
-            for (int i = 0; i < MapButtons.GetLength(1); i++)
-            {
-                Button targetButton = MapButtons[1, i];
-                targetButton.BackColor = Color.White;
-                targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
-            }
+            TopMost = TSMI_AllwaysOnTop.Checked;
         }
     }
 }

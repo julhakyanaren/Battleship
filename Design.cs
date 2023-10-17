@@ -80,5 +80,9 @@ namespace Battleship
             inputButton.ForeColor = new_ForeColor;
             inputButton.BackColor = new_BackColor;
         }
+        public static void SetComponentLocation(Control control, Panel pnl)
+        {
+
+        }
     }
 }
