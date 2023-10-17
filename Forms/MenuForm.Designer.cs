@@ -29,10 +29,10 @@
         private void InitializeComponent()
         {
             this.BS_MM_NewGame = new System.Windows.Forms.Button();
-            this.BS_MM_Options = new System.Windows.Forms.Button();
             this.BS_MM_About = new System.Windows.Forms.Button();
             this.PB_MF_MainLogo = new System.Windows.Forms.PictureBox();
             this.L_Info_Version = new System.Windows.Forms.Label();
+            this.BS_MM_Options = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.PB_MF_MainLogo)).BeginInit();
             this.SuspendLayout();
             // 
@@ -48,18 +48,6 @@
             this.BS_MM_NewGame.Text = "New Game";
             this.BS_MM_NewGame.UseVisualStyleBackColor = true;
             this.BS_MM_NewGame.Click += new System.EventHandler(this.BS_MM_NewGame_Click);
-            // 
-            // BS_MM_Options
-            // 
-            this.BS_MM_Options.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_MM_Options.Font = new System.Drawing.Font("Franklin Gothic Heavy", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_MM_Options.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_MM_Options.Location = new System.Drawing.Point(58, 256);
-            this.BS_MM_Options.Name = "BS_MM_Options";
-            this.BS_MM_Options.Size = new System.Drawing.Size(417, 57);
-            this.BS_MM_Options.TabIndex = 2;
-            this.BS_MM_Options.Text = "Options";
-            this.BS_MM_Options.UseVisualStyleBackColor = true;
             // 
             // BS_MM_About
             // 
@@ -94,6 +82,18 @@
             this.L_Info_Version.TabIndex = 5;
             this.L_Info_Version.Text = "Version";
             // 
+            // BS_MM_Options
+            // 
+            this.BS_MM_Options.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_MM_Options.Font = new System.Drawing.Font("Franklin Gothic Heavy", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_MM_Options.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.BS_MM_Options.Location = new System.Drawing.Point(58, 256);
+            this.BS_MM_Options.Name = "BS_MM_Options";
+            this.BS_MM_Options.Size = new System.Drawing.Size(417, 57);
+            this.BS_MM_Options.TabIndex = 2;
+            this.BS_MM_Options.Text = "Options";
+            this.BS_MM_Options.UseVisualStyleBackColor = true;
+            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
@@ -120,10 +120,10 @@
 
         #endregion
         private System.Windows.Forms.Button BS_MM_NewGame;
-        private System.Windows.Forms.Button BS_MM_Options;
         private System.Windows.Forms.Button BS_MM_About;
         private System.Windows.Forms.PictureBox PB_MF_MainLogo;
         private System.Windows.Forms.Label L_Info_Version;
+        private System.Windows.Forms.Button BS_MM_Options;
     }
 }
 

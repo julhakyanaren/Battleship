@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleship.Forms;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -39,8 +40,8 @@ namespace Battleship
             {
                 case DialogResult.Yes:
                     {
-                        GamePlayerOne GPO = new GamePlayerOne();
-                        GPO.Show();
+                        PlayerOptions PO = new PlayerOptions();
+                        PO.Show();
                         Hide();
                         break;
                     }

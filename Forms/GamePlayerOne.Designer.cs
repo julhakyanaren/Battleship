@@ -32,7 +32,9 @@
             this.TLP_Main = new System.Windows.Forms.TableLayoutPanel();
             this.PNL_MenuField = new System.Windows.Forms.Panel();
             this.TLP_GPO_Controls = new System.Windows.Forms.TableLayoutPanel();
-            this.PNL_EnemyControl = new System.Windows.Forms.Panel();
+            this.PNL_Options = new System.Windows.Forms.Panel();
+            this.TB_DIfficulty = new System.Windows.Forms.TextBox();
+            this.L_Info_Difficulty = new System.Windows.Forms.Label();
             this.PB_GPO_Logo = new System.Windows.Forms.PictureBox();
             this.PNL_PlayerControl = new System.Windows.Forms.Panel();
             this.TLP_GameInfo = new System.Windows.Forms.TableLayoutPanel();
@@ -158,10 +160,12 @@
             this.TSMI_GenerateMap = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_MapEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_OpenMapEditor = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Info = new System.Windows.Forms.ToolStripMenuItem();
+            this.gameInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
-            this.PNL_EnemyControl.SuspendLayout();
+            this.PNL_Options.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_GPO_Logo)).BeginInit();
             this.PNL_PlayerControl.SuspendLayout();
             this.TLP_GameInfo.SuspendLayout();
@@ -229,7 +233,7 @@
             this.TLP_GPO_Controls.ColumnCount = 2;
             this.TLP_GPO_Controls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
             this.TLP_GPO_Controls.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.TLP_GPO_Controls.Controls.Add(this.PNL_EnemyControl, 1, 0);
+            this.TLP_GPO_Controls.Controls.Add(this.PNL_Options, 1, 0);
             this.TLP_GPO_Controls.Controls.Add(this.PNL_PlayerControl, 0, 0);
             this.TLP_GPO_Controls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TLP_GPO_Controls.Location = new System.Drawing.Point(0, 0);
@@ -241,23 +245,48 @@
             this.TLP_GPO_Controls.Size = new System.Drawing.Size(1022, 67);
             this.TLP_GPO_Controls.TabIndex = 2;
             // 
-            // PNL_EnemyControl
+            // PNL_Options
             // 
-            this.PNL_EnemyControl.Controls.Add(this.PB_GPO_Logo);
-            this.PNL_EnemyControl.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PNL_EnemyControl.Location = new System.Drawing.Point(513, 2);
-            this.PNL_EnemyControl.Margin = new System.Windows.Forms.Padding(2);
-            this.PNL_EnemyControl.Name = "PNL_EnemyControl";
-            this.PNL_EnemyControl.Size = new System.Drawing.Size(507, 63);
-            this.PNL_EnemyControl.TabIndex = 1;
+            this.PNL_Options.Controls.Add(this.TB_DIfficulty);
+            this.PNL_Options.Controls.Add(this.L_Info_Difficulty);
+            this.PNL_Options.Controls.Add(this.PB_GPO_Logo);
+            this.PNL_Options.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PNL_Options.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.PNL_Options.Location = new System.Drawing.Point(513, 2);
+            this.PNL_Options.Margin = new System.Windows.Forms.Padding(2);
+            this.PNL_Options.Name = "PNL_Options";
+            this.PNL_Options.Size = new System.Drawing.Size(507, 63);
+            this.PNL_Options.TabIndex = 1;
+            // 
+            // TB_DIfficulty
+            // 
+            this.TB_DIfficulty.BackColor = System.Drawing.Color.Black;
+            this.TB_DIfficulty.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_DIfficulty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TB_DIfficulty.Location = new System.Drawing.Point(4, 27);
+            this.TB_DIfficulty.Name = "TB_DIfficulty";
+            this.TB_DIfficulty.ReadOnly = true;
+            this.TB_DIfficulty.Size = new System.Drawing.Size(88, 22);
+            this.TB_DIfficulty.TabIndex = 40;
+            this.TB_DIfficulty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // L_Info_Difficulty
+            // 
+            this.L_Info_Difficulty.AutoSize = true;
+            this.L_Info_Difficulty.Font = new System.Drawing.Font("Franklin Gothic Medium", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.L_Info_Difficulty.Location = new System.Drawing.Point(4, 3);
+            this.L_Info_Difficulty.Name = "L_Info_Difficulty";
+            this.L_Info_Difficulty.Size = new System.Drawing.Size(67, 20);
+            this.L_Info_Difficulty.TabIndex = 34;
+            this.L_Info_Difficulty.Text = "Difficulty";
             // 
             // PB_GPO_Logo
             // 
-            this.PB_GPO_Logo.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.PB_GPO_Logo.Dock = System.Windows.Forms.DockStyle.Right;
             this.PB_GPO_Logo.Image = global::Battleship.Properties.Resources.Logo;
-            this.PB_GPO_Logo.Location = new System.Drawing.Point(0, 0);
+            this.PB_GPO_Logo.Location = new System.Drawing.Point(259, 0);
             this.PB_GPO_Logo.Name = "PB_GPO_Logo";
-            this.PB_GPO_Logo.Size = new System.Drawing.Size(507, 63);
+            this.PB_GPO_Logo.Size = new System.Drawing.Size(248, 63);
             this.PB_GPO_Logo.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.PB_GPO_Logo.TabIndex = 2;
             this.PB_GPO_Logo.TabStop = false;
@@ -335,6 +364,7 @@
             this.TB_EnemyScore.ReadOnly = true;
             this.TB_EnemyScore.Size = new System.Drawing.Size(114, 22);
             this.TB_EnemyScore.TabIndex = 30;
+            this.TB_EnemyScore.Text = "0";
             this.TB_EnemyScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // PNL_InfoPlayer
@@ -381,6 +411,7 @@
             this.TB_PlayerScore.ReadOnly = true;
             this.TB_PlayerScore.Size = new System.Drawing.Size(114, 22);
             this.TB_PlayerScore.TabIndex = 31;
+            this.TB_PlayerScore.Text = "0";
             this.TB_PlayerScore.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // PNL_InfoTurn
@@ -1953,7 +1984,8 @@
             this.TSMI_File,
             this.TSMI_Game,
             this.TSMI_Map,
-            this.TSMI_MapEditor});
+            this.TSMI_MapEditor,
+            this.TSMI_Info});
             this.PNL_GameInfoEnemy.Location = new System.Drawing.Point(0, 0);
             this.PNL_GameInfoEnemy.Name = "PNL_GameInfoEnemy";
             this.PNL_GameInfoEnemy.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -1996,7 +2028,7 @@
             this.TSMI_StartNewGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_StartNewGame.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartNewGame.Name = "TSMI_StartNewGame";
-            this.TSMI_StartNewGame.Size = new System.Drawing.Size(153, 22);
+            this.TSMI_StartNewGame.Size = new System.Drawing.Size(180, 22);
             this.TSMI_StartNewGame.Text = "Start new game";
             this.TSMI_StartNewGame.Click += new System.EventHandler(this.TSMI_StartNewGame_Click);
             // 
@@ -2006,7 +2038,7 @@
             this.TSMI_StartBattleShip.Enabled = false;
             this.TSMI_StartBattleShip.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartBattleShip.Name = "TSMI_StartBattleShip";
-            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(153, 22);
+            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(180, 22);
             this.TSMI_StartBattleShip.Text = "Start Battleship";
             this.TSMI_StartBattleShip.Click += new System.EventHandler(this.TSMI_StartBattleShip_Click);
             // 
@@ -2068,6 +2100,22 @@
             this.TSMI_OpenMapEditor.Text = "Open Map Editor";
             this.TSMI_OpenMapEditor.Click += new System.EventHandler(this.TSMI_OpenMapEditor_Click);
             // 
+            // TSMI_Info
+            // 
+            this.TSMI_Info.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.gameInfoToolStripMenuItem});
+            this.TSMI_Info.Name = "TSMI_Info";
+            this.TSMI_Info.Size = new System.Drawing.Size(38, 21);
+            this.TSMI_Info.Text = "Info";
+            // 
+            // gameInfoToolStripMenuItem
+            // 
+            this.gameInfoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.gameInfoToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
+            this.gameInfoToolStripMenuItem.Name = "gameInfoToolStripMenuItem";
+            this.gameInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.gameInfoToolStripMenuItem.Text = "Game info";
+            // 
             // GamePlayerOne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2076,6 +2124,7 @@
             this.ClientSize = new System.Drawing.Size(1028, 609);
             this.Controls.Add(this.TLP_Main);
             this.Controls.Add(this.PNL_GameInfoEnemy);
+            this.ForeColor = System.Drawing.Color.Black;
             this.MainMenuStrip = this.PNL_GameInfoEnemy;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GamePlayerOne";
@@ -2086,7 +2135,8 @@
             this.TLP_Main.ResumeLayout(false);
             this.PNL_MenuField.ResumeLayout(false);
             this.TLP_GPO_Controls.ResumeLayout(false);
-            this.PNL_EnemyControl.ResumeLayout(false);
+            this.PNL_Options.ResumeLayout(false);
+            this.PNL_Options.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_GPO_Logo)).EndInit();
             this.PNL_PlayerControl.ResumeLayout(false);
             this.TLP_GameInfo.ResumeLayout(false);
@@ -2236,7 +2286,7 @@
         private System.Windows.Forms.Label L_EnemySunken;
         private System.Windows.Forms.Label L_EnemyMiss;
         private System.Windows.Forms.TableLayoutPanel TLP_GPO_Controls;
-        private System.Windows.Forms.Panel PNL_EnemyControl;
+        private System.Windows.Forms.Panel PNL_Options;
         private System.Windows.Forms.PictureBox PB_GPO_Logo;
         private System.Windows.Forms.MenuStrip PNL_GameInfoEnemy;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Game;
@@ -2263,5 +2313,9 @@
         public System.Windows.Forms.TextBox TB_EnemyScore;
         private System.Windows.Forms.Label L_Info_Turn;
         public System.Windows.Forms.TextBox TB_Turn;
+        private System.Windows.Forms.Label L_Info_Difficulty;
+        public System.Windows.Forms.TextBox TB_DIfficulty;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Info;
+        private System.Windows.Forms.ToolStripMenuItem gameInfoToolStripMenuItem;
     }
 }

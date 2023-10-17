@@ -34,6 +34,44 @@ namespace Battleship
         {
             Design.SetComponentLocation(L_Info_Turn, PNL_InfoTurn);
             Design.SetComponentLocation(TB_Turn, PNL_InfoTurn);
+            L_Info_PlayerScore.Text = $"Score: {Options.SP_PlayerName}";
+            TB_DIfficulty.Text = Options.DifficultyName;
+            switch (Options.Difficulty)
+            {
+                case 0:
+                    {
+                        TB_DIfficulty.ForeColor = Color.Lime;
+                        break;
+                    }
+                case 1:
+                    {
+                        TB_DIfficulty.ForeColor = Color.Yellow;
+                        break;
+                    }
+                case 2:
+                    {
+                        TB_DIfficulty.ForeColor = Color.Red;
+                        break;
+                    }
+                case 3:
+                    {
+                        TB_DIfficulty.ForeColor = Color.DarkRed;
+                        break;
+                    }
+                default:
+                    {
+                        TB_DIfficulty.ForeColor = Design.DefaultForeColor;
+                        break;
+                    }
+            }
+            if (Options.Difficulty != 3)
+            {
+                TB_DIfficulty.Font = new Font("Franklin Gothic Medium", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            }
+            else
+            {
+                TB_DIfficulty.Font = new Font("Franklin Gothic Demi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            }
         }
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {
@@ -400,6 +438,11 @@ namespace Battleship
         private void TSMI_AllwaysOnTop_CheckedChanged(object sender, EventArgs e)
         {
             TopMost = TSMI_AllwaysOnTop.Checked;
+        }
+
+        private void TB_DIfficulty_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }
