@@ -322,12 +322,35 @@ namespace Battleship
                 }
             }
         }
-        public void Move(string tag)
+        public void Move(string buttonTag)
         {
             if (Fight.Turn == 1)
             {
-                Fight.TargetCoord = tag;
-                //Can Hith (do with charMap)
+                if (Support.StringToInt(buttonTag, out int index))
+                {
+                    index %= 100;
+                    Fight.TargetCoord = index;
+                    Fight.PlayerHited = IsCellWhite(index);
+                    Fight.ReverseTurn(Fight.PlayerHited);
+                }
+                else
+                {
+                    //Error_Catch
+                }
+            }
+        }
+        public bool IsCellWhite(int index)
+        {
+            if (EnemyData.Map[index] == 'e')
+            {
+                return true;
+            }
+            else
+            {
+                switch (EnemyData.Map[index])
+                {
+                    case
+                }
             }
         }
         private void TSMI_StartNewGame_Click(object sender, EventArgs e)

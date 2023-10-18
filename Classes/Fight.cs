@@ -9,10 +9,10 @@ namespace Battleship
     public static class Fight
     {
         public static bool GameStarted = false;
-        public static string TargetCoord;
+        public static int TargetCoord;
         public static int Turn = 0;
         public static bool FirstTurn = true;
-        public static bool Hited = false;
+        public static bool PlayerHited = false;
 
         public static double SuccessThreshold(int difficulty)
         {
