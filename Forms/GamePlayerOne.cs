@@ -35,6 +35,7 @@ namespace Battleship
             Design.SetComponentLocation(L_Info_Turn, PNL_InfoTurn);
             Design.SetComponentLocation(TB_Turn, PNL_InfoTurn);
             L_Info_PlayerScore.Text = $"Score: {Options.SP_PlayerName}";
+            TSMI_Difficulty_Level.Text = Options.DifficultyName;
             TB_DIfficulty.Text = Options.DifficultyName;
             switch (Options.Difficulty)
             {
@@ -67,11 +68,15 @@ namespace Battleship
             if (Options.Difficulty != 3)
             {
                 TB_DIfficulty.Font = new Font("Franklin Gothic Medium", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+                TSMI_Difficulty_Level.Font = new Font("Franklin Gothic Medium", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             }
             else
             {
                 TB_DIfficulty.Font = new Font("Franklin Gothic Demi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
+                TSMI_Difficulty_Level.Font = new Font("Franklin Gothic Demi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
             }
+            TSMI_Difficulty_Level.ForeColor = TB_DIfficulty.ForeColor;
+            TSMI_ChancePercent.Text = $"{Fight.SuccessThreshold(Options.Difficulty) * 100} %";
         }
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {

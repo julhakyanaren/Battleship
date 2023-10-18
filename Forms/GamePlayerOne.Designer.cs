@@ -148,7 +148,7 @@
             this.PNL_PlayerMap_Schema = new System.Windows.Forms.Panel();
             this.TLP_PlayerSchema = new System.Windows.Forms.TableLayoutPanel();
             this.GPO_ToolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.PNL_GameInfoEnemy = new System.Windows.Forms.MenuStrip();
+            this.MS_MenuPanel = new System.Windows.Forms.MenuStrip();
             this.TSMI_File = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_AllwaysOnTop = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Game = new System.Windows.Forms.ToolStripMenuItem();
@@ -161,7 +161,11 @@
             this.TSMI_MapEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_OpenMapEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Info = new System.Windows.Forms.ToolStripMenuItem();
-            this.gameInfoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_GameInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Difficulty = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_HitChance = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Difficulty_Level = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_ChancePercent = new System.Windows.Forms.ToolStripMenuItem();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
@@ -198,7 +202,7 @@
             this.PNL_PlayerMap_Numbers.SuspendLayout();
             this.TLP_PlayerNumbers.SuspendLayout();
             this.PNL_PlayerMap_Schema.SuspendLayout();
-            this.PNL_GameInfoEnemy.SuspendLayout();
+            this.MS_MenuPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // TLP_Main
@@ -266,7 +270,7 @@
             this.TB_DIfficulty.Location = new System.Drawing.Point(4, 27);
             this.TB_DIfficulty.Name = "TB_DIfficulty";
             this.TB_DIfficulty.ReadOnly = true;
-            this.TB_DIfficulty.Size = new System.Drawing.Size(88, 22);
+            this.TB_DIfficulty.Size = new System.Drawing.Size(132, 22);
             this.TB_DIfficulty.TabIndex = 40;
             this.TB_DIfficulty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1975,23 +1979,23 @@
             this.TLP_PlayerSchema.Size = new System.Drawing.Size(447, 403);
             this.TLP_PlayerSchema.TabIndex = 0;
             // 
-            // PNL_GameInfoEnemy
+            // MS_MenuPanel
             // 
-            this.PNL_GameInfoEnemy.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.PNL_GameInfoEnemy.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.PNL_GameInfoEnemy.ImageScalingSize = new System.Drawing.Size(20, 20);
-            this.PNL_GameInfoEnemy.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.MS_MenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.MS_MenuPanel.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MS_MenuPanel.ImageScalingSize = new System.Drawing.Size(20, 20);
+            this.MS_MenuPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_File,
             this.TSMI_Game,
             this.TSMI_Map,
             this.TSMI_MapEditor,
             this.TSMI_Info});
-            this.PNL_GameInfoEnemy.Location = new System.Drawing.Point(0, 0);
-            this.PNL_GameInfoEnemy.Name = "PNL_GameInfoEnemy";
-            this.PNL_GameInfoEnemy.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
-            this.PNL_GameInfoEnemy.Size = new System.Drawing.Size(1028, 25);
-            this.PNL_GameInfoEnemy.TabIndex = 1;
-            this.PNL_GameInfoEnemy.Text = "menuStrip1";
+            this.MS_MenuPanel.Location = new System.Drawing.Point(0, 0);
+            this.MS_MenuPanel.Name = "MS_MenuPanel";
+            this.MS_MenuPanel.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
+            this.MS_MenuPanel.Size = new System.Drawing.Size(1028, 25);
+            this.MS_MenuPanel.TabIndex = 1;
+            this.MS_MenuPanel.Text = "menuStrip1";
             // 
             // TSMI_File
             // 
@@ -2028,7 +2032,7 @@
             this.TSMI_StartNewGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_StartNewGame.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartNewGame.Name = "TSMI_StartNewGame";
-            this.TSMI_StartNewGame.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_StartNewGame.Size = new System.Drawing.Size(153, 22);
             this.TSMI_StartNewGame.Text = "Start new game";
             this.TSMI_StartNewGame.Click += new System.EventHandler(this.TSMI_StartNewGame_Click);
             // 
@@ -2038,7 +2042,7 @@
             this.TSMI_StartBattleShip.Enabled = false;
             this.TSMI_StartBattleShip.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartBattleShip.Name = "TSMI_StartBattleShip";
-            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(153, 22);
             this.TSMI_StartBattleShip.Text = "Start Battleship";
             this.TSMI_StartBattleShip.Click += new System.EventHandler(this.TSMI_StartBattleShip_Click);
             // 
@@ -2103,18 +2107,56 @@
             // TSMI_Info
             // 
             this.TSMI_Info.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.gameInfoToolStripMenuItem});
+            this.TSMI_GameInfo});
+            this.TSMI_Info.ForeColor = System.Drawing.Color.Black;
             this.TSMI_Info.Name = "TSMI_Info";
             this.TSMI_Info.Size = new System.Drawing.Size(38, 21);
             this.TSMI_Info.Text = "Info";
             // 
-            // gameInfoToolStripMenuItem
+            // TSMI_GameInfo
             // 
-            this.gameInfoToolStripMenuItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.gameInfoToolStripMenuItem.ForeColor = System.Drawing.Color.Black;
-            this.gameInfoToolStripMenuItem.Name = "gameInfoToolStripMenuItem";
-            this.gameInfoToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.gameInfoToolStripMenuItem.Text = "Game info";
+            this.TSMI_GameInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_GameInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_Difficulty,
+            this.TSMI_HitChance});
+            this.TSMI_GameInfo.ForeColor = System.Drawing.Color.Black;
+            this.TSMI_GameInfo.Name = "TSMI_GameInfo";
+            this.TSMI_GameInfo.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_GameInfo.Text = "Game info";
+            // 
+            // TSMI_Difficulty
+            // 
+            this.TSMI_Difficulty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_Difficulty.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_Difficulty_Level});
+            this.TSMI_Difficulty.Name = "TSMI_Difficulty";
+            this.TSMI_Difficulty.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_Difficulty.Text = "Difficulty:";
+            // 
+            // TSMI_HitChance
+            // 
+            this.TSMI_HitChance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_HitChance.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_ChancePercent});
+            this.TSMI_HitChance.Name = "TSMI_HitChance";
+            this.TSMI_HitChance.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_HitChance.Text = "Opponent hit chance";
+            // 
+            // TSMI_Difficulty_Level
+            // 
+            this.TSMI_Difficulty_Level.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_Difficulty_Level.ForeColor = System.Drawing.Color.Black;
+            this.TSMI_Difficulty_Level.Name = "TSMI_Difficulty_Level";
+            this.TSMI_Difficulty_Level.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_Difficulty_Level.Text = "Level";
+            // 
+            // TSMI_ChancePercent
+            // 
+            this.TSMI_ChancePercent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_ChancePercent.ForeColor = System.Drawing.Color.Black;
+            this.TSMI_ChancePercent.Name = "TSMI_ChancePercent";
+            this.TSMI_ChancePercent.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_ChancePercent.Text = "0%";
             // 
             // GamePlayerOne
             // 
@@ -2123,9 +2165,9 @@
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.ClientSize = new System.Drawing.Size(1028, 609);
             this.Controls.Add(this.TLP_Main);
-            this.Controls.Add(this.PNL_GameInfoEnemy);
+            this.Controls.Add(this.MS_MenuPanel);
             this.ForeColor = System.Drawing.Color.Black;
-            this.MainMenuStrip = this.PNL_GameInfoEnemy;
+            this.MainMenuStrip = this.MS_MenuPanel;
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GamePlayerOne";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
@@ -2174,8 +2216,8 @@
             this.PNL_PlayerMap_Numbers.ResumeLayout(false);
             this.TLP_PlayerNumbers.ResumeLayout(false);
             this.PNL_PlayerMap_Schema.ResumeLayout(false);
-            this.PNL_GameInfoEnemy.ResumeLayout(false);
-            this.PNL_GameInfoEnemy.PerformLayout();
+            this.MS_MenuPanel.ResumeLayout(false);
+            this.MS_MenuPanel.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2288,7 +2330,7 @@
         private System.Windows.Forms.TableLayoutPanel TLP_GPO_Controls;
         private System.Windows.Forms.Panel PNL_Options;
         private System.Windows.Forms.PictureBox PB_GPO_Logo;
-        private System.Windows.Forms.MenuStrip PNL_GameInfoEnemy;
+        private System.Windows.Forms.MenuStrip MS_MenuPanel;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Game;
         private System.Windows.Forms.ToolStripMenuItem TSMI_StartNewGame;
         private System.Windows.Forms.ToolStripMenuItem TSMI_StartBattleShip;
@@ -2316,6 +2358,10 @@
         private System.Windows.Forms.Label L_Info_Difficulty;
         public System.Windows.Forms.TextBox TB_DIfficulty;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Info;
-        private System.Windows.Forms.ToolStripMenuItem gameInfoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_GameInfo;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Difficulty;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_HitChance;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Difficulty_Level;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_ChancePercent;
     }
 }
