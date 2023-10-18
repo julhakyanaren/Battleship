@@ -1,11 +1,8 @@
 ﻿using System;
-using System.CodeDom;
 using System.Drawing;
-using System.Runtime.CompilerServices;
-using System.Security.Cryptography;
+using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.VisualStyles;
 
 namespace Battleship
 {
@@ -113,6 +110,7 @@ namespace Battleship
                     button.Margin = new Padding(0);
                     button.Visible = false;
                     button.MouseEnter += Button_MouseEnter;
+                    button.MouseClick += Button_Click;
                     MapButtons[f, b] = button;
                     button.FlatAppearance.MouseOverBackColor = Design.MouseOverColor[f];
                 }
@@ -129,7 +127,19 @@ namespace Battleship
             }
             TSMI_Map.Enabled = true;
         }
-
+        private void Button_Click(object sender, MouseEventArgs e)
+        {
+            Button clickedButton = sender as Button;
+            string tagButton = clickedButton.Tag.ToString();
+            Position.GetCoordsFromTag(tagButton, out int x, out int y, out int playerID);
+            if (playerID == 2)
+            {
+                if (Fight.GameStarted)
+                {
+                    Move(tagButton);
+                }
+            }
+        }
         private async void Button_MouseEnter(object sender, EventArgs e)
         {
             await Task.Delay(0);
@@ -287,6 +297,38 @@ namespace Battleship
                 EnemyData.Map[i] = ColorMethods.SetCharThrowColor(1, targetButton.BackColor);
             }
             Fight.GameStarted = true;
+            int turn = Fight.WhoStartGame();
+            if (Fight.FirstTurn)
+            {
+                switch (turn)
+                {
+                    case 0:
+                        {
+                            TB_Turn.Text = Options.SP_PlayerName;
+                            Fight.FirstTurn = false;
+                            break;
+                        }
+                    case 1:
+                        {
+                            TB_Turn.Text = "Enemy";
+                            Fight.FirstTurn = false;
+                            break;
+                        }
+                    default:
+                        {
+                            TB_Turn.Clear();
+                            break;
+                        }
+                }
+            }
+        }
+        public void Move(string tag)
+        {
+            if (Fight.Turn == 1)
+            {
+                Fight.TargetCoord = tag;
+                //Can Hith (do with charMap)
+            }
         }
         private void TSMI_StartNewGame_Click(object sender, EventArgs e)
         {
@@ -299,10 +341,6 @@ namespace Battleship
                 //Error_Catch
             }
         }
-        private void BS_OpenMapEditor_Click(object sender, EventArgs e)
-        {
-
-        }
         private void TSMI_StartBattleShip_Click(object sender, EventArgs e)
         {
             StartBattleShip();
@@ -313,7 +351,6 @@ namespace Battleship
                 targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
             }
         }
-
         private void TSMI_GenerationType_CheckedChanged(object sender, EventArgs e)
         {
             switch (TSMI_GenerationType.Checked)
@@ -332,7 +369,6 @@ namespace Battleship
                     }
             }
         }
-
         private async void TSMI_GenerateMap_Click(object sender, EventArgs e)
         {
             bool playerMapCreated = true;
@@ -426,7 +462,6 @@ namespace Battleship
                 Fight.GameStarted = false;
             }
         }
-
         private void TSMI_OpenMapEditor_Click(object sender, EventArgs e)
         {
             DialogResult = MessageBox.Show("Open 'Map Editor'", "Map Editor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -439,15 +474,9 @@ namespace Battleship
                 }
             }
         }
-
         private void TSMI_AllwaysOnTop_CheckedChanged(object sender, EventArgs e)
         {
             TopMost = TSMI_AllwaysOnTop.Checked;
-        }
-
-        private void TB_DIfficulty_TextChanged(object sender, EventArgs e)
-        {
-            
         }
     }
 }

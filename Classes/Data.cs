@@ -12,8 +12,6 @@ namespace Battleship
         static Support sp = new Support();
         static ColorMethods cm = new ColorMethods();
 
-        public static int Turn;
-
         public static string ShipPlaceMode = "N";
         public static string Orientation = "Null";
 
