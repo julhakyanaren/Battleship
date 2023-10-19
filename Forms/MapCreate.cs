@@ -1108,10 +1108,6 @@ namespace Battleship
                         break;
                     }
             }
-            for (int i = 0; i < Indexes.Count; i++)
-            {
-                mapButton[Indexes[i]].BackColor = cellColor;
-            }
             string tag = mapButton[Indexes[0]].Tag.ToString();
             if (sp.StringToInt(tag, out int tagButton))
             {
