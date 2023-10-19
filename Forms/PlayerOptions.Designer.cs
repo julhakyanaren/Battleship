@@ -29,17 +29,18 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(PlayerOptions));
             this.TLP_PO_Main = new System.Windows.Forms.TableLayoutPanel();
             this.PNL_PO_Main = new System.Windows.Forms.Panel();
+            this.CHB_UseUsername = new System.Windows.Forms.CheckBox();
+            this.BS_ApplyPlayerData = new System.Windows.Forms.Button();
+            this.L_Info_DifficultyStatus = new System.Windows.Forms.Label();
+            this.L_Info_Difficulty = new System.Windows.Forms.Label();
             this.CB_Difficulty = new System.Windows.Forms.ComboBox();
             this.L_Info_PlayerName = new System.Windows.Forms.Label();
             this.TB_PlayerName = new System.Windows.Forms.TextBox();
             this.PB_PO_Logo = new System.Windows.Forms.PictureBox();
             this.TT_PO = new System.Windows.Forms.ToolTip(this.components);
-            this.L_Info_Difficulty = new System.Windows.Forms.Label();
-            this.L_Info_DifficultyStatus = new System.Windows.Forms.Label();
-            this.BS_ApplyPlayerData = new System.Windows.Forms.Button();
-            this.CHB_UseUsername = new System.Windows.Forms.CheckBox();
             this.TLP_PO_Main.SuspendLayout();
             this.PNL_PO_Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_PO_Logo)).BeginInit();
@@ -79,6 +80,53 @@
             this.PNL_PO_Main.Name = "PNL_PO_Main";
             this.PNL_PO_Main.Size = new System.Drawing.Size(372, 332);
             this.PNL_PO_Main.TabIndex = 0;
+            // 
+            // CHB_UseUsername
+            // 
+            this.CHB_UseUsername.AutoSize = true;
+            this.CHB_UseUsername.Checked = true;
+            this.CHB_UseUsername.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.CHB_UseUsername.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CHB_UseUsername.Location = new System.Drawing.Point(72, 144);
+            this.CHB_UseUsername.Name = "CHB_UseUsername";
+            this.CHB_UseUsername.Size = new System.Drawing.Size(140, 21);
+            this.CHB_UseUsername.TabIndex = 44;
+            this.CHB_UseUsername.Text = "Use computer username";
+            this.CHB_UseUsername.UseVisualStyleBackColor = true;
+            this.CHB_UseUsername.CheckedChanged += new System.EventHandler(this.CHB_UseUsername_CheckedChanged);
+            // 
+            // BS_ApplyPlayerData
+            // 
+            this.BS_ApplyPlayerData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_ApplyPlayerData.Font = new System.Drawing.Font("Franklin Gothic Medium", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_ApplyPlayerData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.BS_ApplyPlayerData.Location = new System.Drawing.Point(114, 235);
+            this.BS_ApplyPlayerData.Name = "BS_ApplyPlayerData";
+            this.BS_ApplyPlayerData.Size = new System.Drawing.Size(135, 29);
+            this.BS_ApplyPlayerData.TabIndex = 43;
+            this.BS_ApplyPlayerData.Text = "Apply";
+            this.BS_ApplyPlayerData.UseVisualStyleBackColor = true;
+            this.BS_ApplyPlayerData.Click += new System.EventHandler(this.BS_ApplyPlayerData_Click);
+            // 
+            // L_Info_DifficultyStatus
+            // 
+            this.L_Info_DifficultyStatus.AutoSize = true;
+            this.L_Info_DifficultyStatus.Font = new System.Drawing.Font("Franklin Gothic Medium", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.L_Info_DifficultyStatus.Location = new System.Drawing.Point(124, 311);
+            this.L_Info_DifficultyStatus.Name = "L_Info_DifficultyStatus";
+            this.L_Info_DifficultyStatus.Size = new System.Drawing.Size(74, 21);
+            this.L_Info_DifficultyStatus.TabIndex = 42;
+            this.L_Info_DifficultyStatus.Text = "Difficulty:";
+            // 
+            // L_Info_Difficulty
+            // 
+            this.L_Info_Difficulty.AutoSize = true;
+            this.L_Info_Difficulty.Font = new System.Drawing.Font("Franklin Gothic Medium", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.L_Info_Difficulty.Location = new System.Drawing.Point(144, 168);
+            this.L_Info_Difficulty.Name = "L_Info_Difficulty";
+            this.L_Info_Difficulty.Size = new System.Drawing.Size(105, 20);
+            this.L_Info_Difficulty.TabIndex = 41;
+            this.L_Info_Difficulty.Text = "Difficulty Level";
             // 
             // CB_Difficulty
             // 
@@ -131,53 +179,6 @@
             this.PB_PO_Logo.TabIndex = 0;
             this.PB_PO_Logo.TabStop = false;
             // 
-            // L_Info_Difficulty
-            // 
-            this.L_Info_Difficulty.AutoSize = true;
-            this.L_Info_Difficulty.Font = new System.Drawing.Font("Franklin Gothic Medium", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_Info_Difficulty.Location = new System.Drawing.Point(144, 168);
-            this.L_Info_Difficulty.Name = "L_Info_Difficulty";
-            this.L_Info_Difficulty.Size = new System.Drawing.Size(105, 20);
-            this.L_Info_Difficulty.TabIndex = 41;
-            this.L_Info_Difficulty.Text = "Difficulty Level";
-            // 
-            // L_Info_DifficultyStatus
-            // 
-            this.L_Info_DifficultyStatus.AutoSize = true;
-            this.L_Info_DifficultyStatus.Font = new System.Drawing.Font("Franklin Gothic Medium", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_Info_DifficultyStatus.Location = new System.Drawing.Point(124, 311);
-            this.L_Info_DifficultyStatus.Name = "L_Info_DifficultyStatus";
-            this.L_Info_DifficultyStatus.Size = new System.Drawing.Size(74, 21);
-            this.L_Info_DifficultyStatus.TabIndex = 42;
-            this.L_Info_DifficultyStatus.Text = "Difficulty:";
-            // 
-            // BS_ApplyPlayerData
-            // 
-            this.BS_ApplyPlayerData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_ApplyPlayerData.Font = new System.Drawing.Font("Franklin Gothic Medium", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_ApplyPlayerData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_ApplyPlayerData.Location = new System.Drawing.Point(114, 235);
-            this.BS_ApplyPlayerData.Name = "BS_ApplyPlayerData";
-            this.BS_ApplyPlayerData.Size = new System.Drawing.Size(135, 29);
-            this.BS_ApplyPlayerData.TabIndex = 43;
-            this.BS_ApplyPlayerData.Text = "Apply";
-            this.BS_ApplyPlayerData.UseVisualStyleBackColor = true;
-            this.BS_ApplyPlayerData.Click += new System.EventHandler(this.BS_ApplyPlayerData_Click);
-            // 
-            // CHB_UseUsername
-            // 
-            this.CHB_UseUsername.AutoSize = true;
-            this.CHB_UseUsername.Checked = true;
-            this.CHB_UseUsername.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHB_UseUsername.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CHB_UseUsername.Location = new System.Drawing.Point(72, 144);
-            this.CHB_UseUsername.Name = "CHB_UseUsername";
-            this.CHB_UseUsername.Size = new System.Drawing.Size(140, 21);
-            this.CHB_UseUsername.TabIndex = 44;
-            this.CHB_UseUsername.Text = "Use computer username";
-            this.CHB_UseUsername.UseVisualStyleBackColor = true;
-            this.CHB_UseUsername.CheckedChanged += new System.EventHandler(this.CHB_UseUsername_CheckedChanged);
-            // 
             // PlayerOptions
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 17F);
@@ -188,6 +189,7 @@
             this.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "PlayerOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

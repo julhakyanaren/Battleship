@@ -347,10 +347,14 @@ namespace Battleship
             }
             else
             {
-                switch (EnemyData.Map[index])
+                switch (EnemyData.Map[index].ToString().ToUpper())
                 {
-                    case
+                    case "F":
+                        {
+                            break;
+                        }
                 }
+                return false; //
             }
         }
         private void TSMI_StartNewGame_Click(object sender, EventArgs e)

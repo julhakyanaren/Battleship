@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MapCreate));
             this.TLP_MapsDivision = new System.Windows.Forms.TableLayoutPanel();
             this.PNL_MC_Field = new System.Windows.Forms.Panel();
             this.TLP_MC_Main_One = new System.Windows.Forms.TableLayoutPanel();
@@ -1820,6 +1821,7 @@
             this.Controls.Add(this.TLP_MapsDivision);
             this.Font = new System.Drawing.Font("Franklin Gothic Demi", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.White;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MS_MapCreate;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MapCreate";
