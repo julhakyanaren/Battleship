@@ -77,5 +77,11 @@ namespace Battleship
             return finalButtons;
         }
 
+        public static void ResetDataToDefault()
+        {
+            PlayerData.ResetData();
+            EnemyData.ResetData();
+        }
+
     }
 }

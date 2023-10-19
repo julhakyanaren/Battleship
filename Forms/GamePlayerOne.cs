@@ -136,7 +136,7 @@ namespace Battleship
             {
                 if (Fight.GameStarted)
                 {
-                    Move(tagButton);
+                    NextTurn(tagButton);
                 }
             }
         }
@@ -296,7 +296,19 @@ namespace Battleship
                 Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
                 EnemyData.Map[i] = ColorMethods.SetCharThrowColor(1, targetButton.BackColor);
             }
+            for (int j = 0; j < MapButtons.GetLength(1); j++)
+            {
+                if (PlayerData.Map[j] == 'N')
+                {
+                    PlayerData.Map[j] = 'E';
+                }
+                if (EnemyData.Map[j] == 'n')
+                {
+                    EnemyData.Map[j] = 'e';
+                }
+            }
             Fight.GameStarted = true;
+            Data.ResetDataToDefault();
             int turn = Fight.WhoStartGame();
             if (Fight.FirstTurn)
             {
@@ -322,16 +334,57 @@ namespace Battleship
                 }
             }
         }
-        public void Move(string buttonTag)
+        public void SetStatusTextBoxesValues()
         {
-            if (Fight.Turn == 1)
+            TB_PlayerFrigate.Text = PlayerData.FrigatesCountCurrent.ToString();
+            TB_EnemyFrigate.Text = EnemyData.FrigatesCountCurrent.ToString();
+            TB_PlayerDestroyer.Text = PlayerData.DestroyersCountCurrent.ToString();
+            TB_EnemyDestroyer.Text = EnemyData.DestroyersCountCurrent.ToString();
+            TB_PlayerCruiser.Text = PlayerData.CruiserCountCurrent.ToString();
+            TB_EnemyCruiser.Text = EnemyData.CruiserCountCurrent.ToString();
+            TB_PlayerBattleship.Text = PlayerData.BattleshipCountCurrent.ToString();
+            TB_EnemyBattleship.Text = EnemyData.BattleshipCountCurrent.ToString();
+            TB_PlayerHit.Text = PlayerData.HitCountCurrent.ToString();
+            TB_EnemyHit.Text = EnemyData.HitCountCurrent.ToString();
+            TB_PlayerSunken.Text = PlayerData.SunkenCountCurrent.ToString();
+            TB_EnemySunken.Text = EnemyData.SunkenCountCurrent.ToString();
+            TB_PlayerMiss.Text = PlayerData.MissedShotsCount.ToString();
+            TB_EnemyMiss.Text = EnemyData.MissedShotsCount.ToString();
+
+        }
+        public void NextTurn(string buttonTag)
+        {
+            int turn = 0;
+            if (Fight.Turn == 0)
             {
                 if (Support.StringToInt(buttonTag, out int index))
                 {
                     index %= 100;
                     Fight.TargetCoord = index;
-                    Fight.PlayerHited = IsCellWhite(index);
-                    Fight.ReverseTurn(Fight.PlayerHited);
+                    Fight.PlayerHited = !IsCellWhite(index, out char celChar);
+                    Fight.Turn = Fight.ReverseTurn(Fight.PlayerHited);
+                    if (celChar != 'e')
+                    {
+                        switch (celChar)
+                        {
+                            case 'f':
+                                {
+                                    break;
+                                }
+                            case 'd':
+                                {
+                                    break;
+                                }
+                            case 'c':
+                                {
+                                    break;
+                                }
+                            case 'b':
+                                {
+                                    break;
+                                }
+                        }
+                    }
                 }
                 else
                 {
@@ -339,22 +392,17 @@ namespace Battleship
                 }
             }
         }
-        public bool IsCellWhite(int index)
+        public bool IsCellWhite(int index, out char cellChar)
         {
             if (EnemyData.Map[index] == 'e')
             {
+                cellChar = 'e';
                 return true;
             }
             else
             {
-                switch (EnemyData.Map[index].ToString().ToUpper())
-                {
-                    case "F":
-                        {
-                            break;
-                        }
-                }
-                return false; //
+                cellChar = EnemyData.Map[index];
+                return false;
             }
         }
         private void TSMI_StartNewGame_Click(object sender, EventArgs e)
@@ -418,6 +466,10 @@ namespace Battleship
                     if (!Schematic.CorrectSchematic)
                     {
                         DialogResult = MessageBox.Show("Schematic map not complete generation not possible", "Map Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                        if (DialogResult == DialogResult.OK)
+                        {
+                            playerMapCreated = false;
+                        }
                     }
                     else
                     {
@@ -455,10 +507,12 @@ namespace Battleship
                             Array.Resize(ref PlayerData.Map, schematicMapEditor.Length);
                             PlayerData.Map[c] = ColorMethods.SetCharThrowColor(0, buttonColor);
                         }
-                        TB_PlayerFrigate.Text = Convert.ToString(ships[0]);
-                        TB_PlayerDestroyer.Text = Convert.ToString(ships[1] / 2);
-                        TB_PlayerCruiser.Text = Convert.ToString(ships[2] / 3);
-                        TB_PlayerBattleship.Text = Convert.ToString(ships[3] / 4);
+                        Data.ResetDataToDefault();
+                        PlayerData.FrigatesCountCurrent = ships[0];
+                        PlayerData.DestroyersCountCurrent = ships[1] / 2;
+                        PlayerData.CruiserCountCurrent = ships[2] / 3;
+                        PlayerData.BattleshipCountCurrent = ships[3] / 4;
+                        SetStatusTextBoxesValues();
                     }
                 }
                 catch

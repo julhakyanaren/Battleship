@@ -242,7 +242,7 @@
             this.TLP_GPO_Controls.Controls.Add(this.PNL_PlayerControl, 0, 0);
             this.TLP_GPO_Controls.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TLP_GPO_Controls.Location = new System.Drawing.Point(0, 0);
-            this.TLP_GPO_Controls.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.TLP_GPO_Controls.Margin = new System.Windows.Forms.Padding(2);
             this.TLP_GPO_Controls.Name = "TLP_GPO_Controls";
             this.TLP_GPO_Controls.RowCount = 1;
             this.TLP_GPO_Controls.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
@@ -258,7 +258,7 @@
             this.PNL_Options.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PNL_Options.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.PNL_Options.Location = new System.Drawing.Point(513, 2);
-            this.PNL_Options.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PNL_Options.Margin = new System.Windows.Forms.Padding(2);
             this.PNL_Options.Name = "PNL_Options";
             this.PNL_Options.Size = new System.Drawing.Size(507, 63);
             this.PNL_Options.TabIndex = 1;
@@ -301,7 +301,7 @@
             this.PNL_PlayerControl.Controls.Add(this.TLP_GameInfo);
             this.PNL_PlayerControl.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PNL_PlayerControl.Location = new System.Drawing.Point(2, 2);
-            this.PNL_PlayerControl.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.PNL_PlayerControl.Margin = new System.Windows.Forms.Padding(2);
             this.PNL_PlayerControl.Name = "PNL_PlayerControl";
             this.PNL_PlayerControl.Size = new System.Drawing.Size(507, 63);
             this.PNL_PlayerControl.TabIndex = 0;
@@ -1580,7 +1580,7 @@
             this.BS_PlayerSchema_G.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_G.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_G.Location = new System.Drawing.Point(266, 2);
-            this.BS_PlayerSchema_G.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_G.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_G.Name = "BS_PlayerSchema_G";
             this.BS_PlayerSchema_G.Size = new System.Drawing.Size(40, 32);
             this.BS_PlayerSchema_G.TabIndex = 11;
@@ -1596,7 +1596,7 @@
             this.BS_PlayerSchema_F.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_F.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_F.Location = new System.Drawing.Point(222, 2);
-            this.BS_PlayerSchema_F.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_F.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_F.Name = "BS_PlayerSchema_F";
             this.BS_PlayerSchema_F.Size = new System.Drawing.Size(40, 32);
             this.BS_PlayerSchema_F.TabIndex = 10;
@@ -1612,7 +1612,7 @@
             this.BS_PlayerSchema_H.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_H.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_H.Location = new System.Drawing.Point(310, 2);
-            this.BS_PlayerSchema_H.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_H.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_H.Name = "BS_PlayerSchema_H";
             this.BS_PlayerSchema_H.Size = new System.Drawing.Size(40, 32);
             this.BS_PlayerSchema_H.TabIndex = 9;
@@ -1628,7 +1628,7 @@
             this.BS_PlayerSchema_J.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_J.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_J.Location = new System.Drawing.Point(398, 2);
-            this.BS_PlayerSchema_J.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_J.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_J.Name = "BS_PlayerSchema_J";
             this.BS_PlayerSchema_J.Size = new System.Drawing.Size(47, 32);
             this.BS_PlayerSchema_J.TabIndex = 8;
@@ -1644,7 +1644,7 @@
             this.BS_PlayerSchema_I.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_I.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_I.Location = new System.Drawing.Point(354, 2);
-            this.BS_PlayerSchema_I.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_I.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_I.Name = "BS_PlayerSchema_I";
             this.BS_PlayerSchema_I.Size = new System.Drawing.Size(40, 32);
             this.BS_PlayerSchema_I.TabIndex = 7;
@@ -1660,7 +1660,7 @@
             this.BS_PlayerSchema_B.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_B.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_B.Location = new System.Drawing.Point(46, 2);
-            this.BS_PlayerSchema_B.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_B.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_B.Name = "BS_PlayerSchema_B";
             this.BS_PlayerSchema_B.Size = new System.Drawing.Size(40, 32);
             this.BS_PlayerSchema_B.TabIndex = 6;
@@ -1676,7 +1676,7 @@
             this.BS_PlayerSchema_A.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_A.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_A.Location = new System.Drawing.Point(2, 2);
-            this.BS_PlayerSchema_A.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_A.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_A.Name = "BS_PlayerSchema_A";
             this.BS_PlayerSchema_A.Size = new System.Drawing.Size(40, 32);
             this.BS_PlayerSchema_A.TabIndex = 5;
@@ -1692,7 +1692,7 @@
             this.BS_PlayerSchema_C.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_C.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_C.Location = new System.Drawing.Point(90, 2);
-            this.BS_PlayerSchema_C.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_C.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_C.Name = "BS_PlayerSchema_C";
             this.BS_PlayerSchema_C.Size = new System.Drawing.Size(40, 32);
             this.BS_PlayerSchema_C.TabIndex = 4;
@@ -1708,7 +1708,7 @@
             this.BS_PlayerSchema_E.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_E.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_E.Location = new System.Drawing.Point(178, 2);
-            this.BS_PlayerSchema_E.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_E.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_E.Name = "BS_PlayerSchema_E";
             this.BS_PlayerSchema_E.Size = new System.Drawing.Size(40, 32);
             this.BS_PlayerSchema_E.TabIndex = 3;
@@ -1724,7 +1724,7 @@
             this.BS_PlayerSchema_D.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_PlayerSchema_D.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_PlayerSchema_D.Location = new System.Drawing.Point(134, 2);
-            this.BS_PlayerSchema_D.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.BS_PlayerSchema_D.Margin = new System.Windows.Forms.Padding(2);
             this.BS_PlayerSchema_D.Name = "BS_PlayerSchema_D";
             this.BS_PlayerSchema_D.Size = new System.Drawing.Size(40, 32);
             this.BS_PlayerSchema_D.TabIndex = 2;
@@ -2170,7 +2170,7 @@
             this.ForeColor = System.Drawing.Color.Black;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.MS_MenuPanel;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "GamePlayerOne";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Battleship";

@@ -66,7 +66,7 @@ namespace Battleship
         }
         public static int ReverseTurn(bool hited)
         {
-            if (Fight.Turn >= 0)
+            if (Turn < 0)
             {
                 return -1;
             }
