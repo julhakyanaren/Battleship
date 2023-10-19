@@ -57,18 +57,16 @@
             this.PNL_EnemyStatus = new System.Windows.Forms.Panel();
             this.TLP_EnemyShipsInfo = new System.Windows.Forms.TableLayoutPanel();
             this.TB_EnemyFrigate = new System.Windows.Forms.TextBox();
-            this.TB_EnemyBattleship = new System.Windows.Forms.TextBox();
             this.TB_EnemyCruiser = new System.Windows.Forms.TextBox();
             this.TB_EnemyDestroyer = new System.Windows.Forms.TextBox();
+            this.TB_EnemyBattleship = new System.Windows.Forms.TextBox();
             this.TB_EnemyMiss = new System.Windows.Forms.TextBox();
-            this.TB_EnemySunken = new System.Windows.Forms.TextBox();
             this.TB_EnemyHit = new System.Windows.Forms.TextBox();
             this.L_EnemyBattleship = new System.Windows.Forms.Label();
             this.L_EnemyCruiser = new System.Windows.Forms.Label();
             this.L_EnemyDestroyer = new System.Windows.Forms.Label();
             this.L_EnemyFrigate = new System.Windows.Forms.Label();
             this.L_EnemyHit = new System.Windows.Forms.Label();
-            this.L_EnemySunken = new System.Windows.Forms.Label();
             this.L_EnemyMiss = new System.Windows.Forms.Label();
             this.PNL_EnemyMapField = new System.Windows.Forms.Panel();
             this.TLP_EnemyMain = new System.Windows.Forms.TableLayoutPanel();
@@ -105,18 +103,16 @@
             this.PNL_PlayerStatus = new System.Windows.Forms.Panel();
             this.TLP_PlayerShipsInfo = new System.Windows.Forms.TableLayoutPanel();
             this.TB_PlayerFrigate = new System.Windows.Forms.TextBox();
-            this.TB_PlayerBattleship = new System.Windows.Forms.TextBox();
             this.TB_PlayerCruiser = new System.Windows.Forms.TextBox();
             this.TB_PlayerDestroyer = new System.Windows.Forms.TextBox();
+            this.TB_PlayerBattleship = new System.Windows.Forms.TextBox();
             this.TB_PlayerMiss = new System.Windows.Forms.TextBox();
-            this.TB_PlayerSunken = new System.Windows.Forms.TextBox();
             this.TB_PlayerHit = new System.Windows.Forms.TextBox();
             this.L_PlayerBattleship = new System.Windows.Forms.Label();
             this.L_PlayerCruiser = new System.Windows.Forms.Label();
             this.L_PlayerDestroyer = new System.Windows.Forms.Label();
             this.L_PlayerFrigate = new System.Windows.Forms.Label();
             this.L_PlayerHit = new System.Windows.Forms.Label();
-            this.L_PlayerSunken = new System.Windows.Forms.Label();
             this.L_PlayerMiss = new System.Windows.Forms.Label();
             this.PNL_PlayerMap = new System.Windows.Forms.Panel();
             this.PNL_PlayerMapField = new System.Windows.Forms.TableLayoutPanel();
@@ -442,6 +438,7 @@
             this.TB_Turn.Size = new System.Drawing.Size(132, 22);
             this.TB_Turn.TabIndex = 39;
             this.TB_Turn.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_Turn.TextChanged += new System.EventHandler(this.TB_Turn_TextChanged);
             // 
             // L_Info_Turn
             // 
@@ -519,27 +516,25 @@
             // TLP_EnemyShipsInfo
             // 
             this.TLP_EnemyShipsInfo.ColumnCount = 7;
-            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
+            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6F));
+            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6F));
+            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6F));
+            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6F));
+            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6F));
+            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6F));
+            this.TLP_EnemyShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0.4F));
             this.TLP_EnemyShipsInfo.Controls.Add(this.TB_EnemyFrigate, 0, 1);
-            this.TLP_EnemyShipsInfo.Controls.Add(this.TB_EnemyBattleship, 0, 1);
             this.TLP_EnemyShipsInfo.Controls.Add(this.TB_EnemyCruiser, 0, 1);
             this.TLP_EnemyShipsInfo.Controls.Add(this.TB_EnemyDestroyer, 0, 1);
+            this.TLP_EnemyShipsInfo.Controls.Add(this.TB_EnemyBattleship, 0, 1);
             this.TLP_EnemyShipsInfo.Controls.Add(this.TB_EnemyMiss, 0, 1);
-            this.TLP_EnemyShipsInfo.Controls.Add(this.TB_EnemySunken, 0, 1);
             this.TLP_EnemyShipsInfo.Controls.Add(this.TB_EnemyHit, 0, 1);
             this.TLP_EnemyShipsInfo.Controls.Add(this.L_EnemyBattleship, 3, 0);
             this.TLP_EnemyShipsInfo.Controls.Add(this.L_EnemyCruiser, 2, 0);
             this.TLP_EnemyShipsInfo.Controls.Add(this.L_EnemyDestroyer, 1, 0);
             this.TLP_EnemyShipsInfo.Controls.Add(this.L_EnemyFrigate, 0, 0);
             this.TLP_EnemyShipsInfo.Controls.Add(this.L_EnemyHit, 4, 0);
-            this.TLP_EnemyShipsInfo.Controls.Add(this.L_EnemySunken, 5, 0);
-            this.TLP_EnemyShipsInfo.Controls.Add(this.L_EnemyMiss, 6, 0);
+            this.TLP_EnemyShipsInfo.Controls.Add(this.L_EnemyMiss, 5, 0);
             this.TLP_EnemyShipsInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TLP_EnemyShipsInfo.Location = new System.Drawing.Point(0, 0);
             this.TLP_EnemyShipsInfo.Name = "TLP_EnemyShipsInfo";
@@ -558,24 +553,10 @@
             this.TB_EnemyFrigate.Location = new System.Drawing.Point(3, 15);
             this.TB_EnemyFrigate.Name = "TB_EnemyFrigate";
             this.TB_EnemyFrigate.ReadOnly = true;
-            this.TB_EnemyFrigate.Size = new System.Drawing.Size(65, 21);
+            this.TB_EnemyFrigate.Size = new System.Drawing.Size(76, 21);
             this.TB_EnemyFrigate.TabIndex = 15;
             this.TB_EnemyFrigate.Text = "0";
             this.TB_EnemyFrigate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // TB_EnemyBattleship
-            // 
-            this.TB_EnemyBattleship.BackColor = System.Drawing.Color.Black;
-            this.TB_EnemyBattleship.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TB_EnemyBattleship.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
-            this.TB_EnemyBattleship.ForeColor = System.Drawing.Color.White;
-            this.TB_EnemyBattleship.Location = new System.Drawing.Point(216, 15);
-            this.TB_EnemyBattleship.Name = "TB_EnemyBattleship";
-            this.TB_EnemyBattleship.ReadOnly = true;
-            this.TB_EnemyBattleship.Size = new System.Drawing.Size(65, 21);
-            this.TB_EnemyBattleship.TabIndex = 14;
-            this.TB_EnemyBattleship.Text = "0";
-            this.TB_EnemyBattleship.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TB_EnemyCruiser
             // 
@@ -583,11 +564,11 @@
             this.TB_EnemyCruiser.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TB_EnemyCruiser.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
             this.TB_EnemyCruiser.ForeColor = System.Drawing.Color.White;
-            this.TB_EnemyCruiser.Location = new System.Drawing.Point(145, 15);
+            this.TB_EnemyCruiser.Location = new System.Drawing.Point(167, 15);
             this.TB_EnemyCruiser.Name = "TB_EnemyCruiser";
             this.TB_EnemyCruiser.ReadOnly = true;
-            this.TB_EnemyCruiser.Size = new System.Drawing.Size(65, 21);
-            this.TB_EnemyCruiser.TabIndex = 13;
+            this.TB_EnemyCruiser.Size = new System.Drawing.Size(76, 21);
+            this.TB_EnemyCruiser.TabIndex = 14;
             this.TB_EnemyCruiser.Text = "0";
             this.TB_EnemyCruiser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -597,13 +578,27 @@
             this.TB_EnemyDestroyer.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TB_EnemyDestroyer.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
             this.TB_EnemyDestroyer.ForeColor = System.Drawing.Color.White;
-            this.TB_EnemyDestroyer.Location = new System.Drawing.Point(74, 15);
+            this.TB_EnemyDestroyer.Location = new System.Drawing.Point(85, 15);
             this.TB_EnemyDestroyer.Name = "TB_EnemyDestroyer";
             this.TB_EnemyDestroyer.ReadOnly = true;
-            this.TB_EnemyDestroyer.Size = new System.Drawing.Size(65, 21);
-            this.TB_EnemyDestroyer.TabIndex = 9;
+            this.TB_EnemyDestroyer.Size = new System.Drawing.Size(76, 21);
+            this.TB_EnemyDestroyer.TabIndex = 13;
             this.TB_EnemyDestroyer.Text = "0";
             this.TB_EnemyDestroyer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TB_EnemyBattleship
+            // 
+            this.TB_EnemyBattleship.BackColor = System.Drawing.Color.Black;
+            this.TB_EnemyBattleship.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.TB_EnemyBattleship.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
+            this.TB_EnemyBattleship.ForeColor = System.Drawing.Color.White;
+            this.TB_EnemyBattleship.Location = new System.Drawing.Point(249, 15);
+            this.TB_EnemyBattleship.Name = "TB_EnemyBattleship";
+            this.TB_EnemyBattleship.ReadOnly = true;
+            this.TB_EnemyBattleship.Size = new System.Drawing.Size(76, 21);
+            this.TB_EnemyBattleship.TabIndex = 9;
+            this.TB_EnemyBattleship.Text = "0";
+            this.TB_EnemyBattleship.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TB_EnemyMiss
             // 
@@ -611,27 +606,13 @@
             this.TB_EnemyMiss.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TB_EnemyMiss.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
             this.TB_EnemyMiss.ForeColor = System.Drawing.Color.White;
-            this.TB_EnemyMiss.Location = new System.Drawing.Point(429, 15);
+            this.TB_EnemyMiss.Location = new System.Drawing.Point(413, 15);
             this.TB_EnemyMiss.Name = "TB_EnemyMiss";
             this.TB_EnemyMiss.ReadOnly = true;
-            this.TB_EnemyMiss.Size = new System.Drawing.Size(67, 21);
-            this.TB_EnemyMiss.TabIndex = 8;
+            this.TB_EnemyMiss.Size = new System.Drawing.Size(76, 21);
+            this.TB_EnemyMiss.TabIndex = 7;
             this.TB_EnemyMiss.Text = "0";
             this.TB_EnemyMiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // TB_EnemySunken
-            // 
-            this.TB_EnemySunken.BackColor = System.Drawing.Color.Black;
-            this.TB_EnemySunken.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TB_EnemySunken.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
-            this.TB_EnemySunken.ForeColor = System.Drawing.Color.White;
-            this.TB_EnemySunken.Location = new System.Drawing.Point(358, 15);
-            this.TB_EnemySunken.Name = "TB_EnemySunken";
-            this.TB_EnemySunken.ReadOnly = true;
-            this.TB_EnemySunken.Size = new System.Drawing.Size(65, 21);
-            this.TB_EnemySunken.TabIndex = 7;
-            this.TB_EnemySunken.Text = "0";
-            this.TB_EnemySunken.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TB_EnemyHit
             // 
@@ -639,10 +620,10 @@
             this.TB_EnemyHit.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TB_EnemyHit.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
             this.TB_EnemyHit.ForeColor = System.Drawing.Color.White;
-            this.TB_EnemyHit.Location = new System.Drawing.Point(287, 15);
+            this.TB_EnemyHit.Location = new System.Drawing.Point(331, 15);
             this.TB_EnemyHit.Name = "TB_EnemyHit";
             this.TB_EnemyHit.ReadOnly = true;
-            this.TB_EnemyHit.Size = new System.Drawing.Size(65, 21);
+            this.TB_EnemyHit.Size = new System.Drawing.Size(76, 21);
             this.TB_EnemyHit.TabIndex = 6;
             this.TB_EnemyHit.Text = "0";
             this.TB_EnemyHit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -652,9 +633,9 @@
             this.L_EnemyBattleship.AutoSize = true;
             this.L_EnemyBattleship.Dock = System.Windows.Forms.DockStyle.Top;
             this.L_EnemyBattleship.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_EnemyBattleship.Location = new System.Drawing.Point(216, 0);
+            this.L_EnemyBattleship.Location = new System.Drawing.Point(249, 0);
             this.L_EnemyBattleship.Name = "L_EnemyBattleship";
-            this.L_EnemyBattleship.Size = new System.Drawing.Size(65, 12);
+            this.L_EnemyBattleship.Size = new System.Drawing.Size(76, 12);
             this.L_EnemyBattleship.TabIndex = 3;
             this.L_EnemyBattleship.Text = "Battleship";
             this.L_EnemyBattleship.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -664,9 +645,9 @@
             this.L_EnemyCruiser.AutoSize = true;
             this.L_EnemyCruiser.Dock = System.Windows.Forms.DockStyle.Top;
             this.L_EnemyCruiser.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_EnemyCruiser.Location = new System.Drawing.Point(145, 0);
+            this.L_EnemyCruiser.Location = new System.Drawing.Point(167, 0);
             this.L_EnemyCruiser.Name = "L_EnemyCruiser";
-            this.L_EnemyCruiser.Size = new System.Drawing.Size(65, 12);
+            this.L_EnemyCruiser.Size = new System.Drawing.Size(76, 12);
             this.L_EnemyCruiser.TabIndex = 2;
             this.L_EnemyCruiser.Text = "Cruiser";
             this.L_EnemyCruiser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -676,9 +657,9 @@
             this.L_EnemyDestroyer.AutoSize = true;
             this.L_EnemyDestroyer.Dock = System.Windows.Forms.DockStyle.Top;
             this.L_EnemyDestroyer.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_EnemyDestroyer.Location = new System.Drawing.Point(74, 0);
+            this.L_EnemyDestroyer.Location = new System.Drawing.Point(85, 0);
             this.L_EnemyDestroyer.Name = "L_EnemyDestroyer";
-            this.L_EnemyDestroyer.Size = new System.Drawing.Size(65, 12);
+            this.L_EnemyDestroyer.Size = new System.Drawing.Size(76, 12);
             this.L_EnemyDestroyer.TabIndex = 1;
             this.L_EnemyDestroyer.Text = "Destroyer";
             this.L_EnemyDestroyer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -690,7 +671,7 @@
             this.L_EnemyFrigate.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_EnemyFrigate.Location = new System.Drawing.Point(3, 0);
             this.L_EnemyFrigate.Name = "L_EnemyFrigate";
-            this.L_EnemyFrigate.Size = new System.Drawing.Size(65, 12);
+            this.L_EnemyFrigate.Size = new System.Drawing.Size(76, 12);
             this.L_EnemyFrigate.TabIndex = 0;
             this.L_EnemyFrigate.Text = "Frigate";
             this.L_EnemyFrigate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -700,36 +681,23 @@
             this.L_EnemyHit.AutoSize = true;
             this.L_EnemyHit.Dock = System.Windows.Forms.DockStyle.Top;
             this.L_EnemyHit.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_EnemyHit.Location = new System.Drawing.Point(287, 0);
+            this.L_EnemyHit.Location = new System.Drawing.Point(331, 0);
             this.L_EnemyHit.Name = "L_EnemyHit";
-            this.L_EnemyHit.Size = new System.Drawing.Size(65, 12);
+            this.L_EnemyHit.Size = new System.Drawing.Size(76, 12);
             this.L_EnemyHit.TabIndex = 10;
             this.L_EnemyHit.Text = "Hit";
             this.L_EnemyHit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
-            // L_EnemySunken
-            // 
-            this.L_EnemySunken.AutoSize = true;
-            this.L_EnemySunken.Dock = System.Windows.Forms.DockStyle.Top;
-            this.L_EnemySunken.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_EnemySunken.Location = new System.Drawing.Point(358, 0);
-            this.L_EnemySunken.Name = "L_EnemySunken";
-            this.L_EnemySunken.Size = new System.Drawing.Size(65, 12);
-            this.L_EnemySunken.TabIndex = 11;
-            this.L_EnemySunken.Text = "Sunken";
-            this.L_EnemySunken.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
             // L_EnemyMiss
             // 
             this.L_EnemyMiss.AutoSize = true;
-            this.L_EnemyMiss.BackColor = System.Drawing.Color.Black;
             this.L_EnemyMiss.Dock = System.Windows.Forms.DockStyle.Top;
             this.L_EnemyMiss.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_EnemyMiss.Location = new System.Drawing.Point(429, 0);
+            this.L_EnemyMiss.Location = new System.Drawing.Point(413, 0);
             this.L_EnemyMiss.Name = "L_EnemyMiss";
-            this.L_EnemyMiss.Size = new System.Drawing.Size(67, 12);
-            this.L_EnemyMiss.TabIndex = 12;
-            this.L_EnemyMiss.Text = "Miss";
+            this.L_EnemyMiss.Size = new System.Drawing.Size(76, 12);
+            this.L_EnemyMiss.TabIndex = 11;
+            this.L_EnemyMiss.Text = "Missed shots";
             this.L_EnemyMiss.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PNL_EnemyMapField
@@ -1260,34 +1228,31 @@
             // TLP_PlayerShipsInfo
             // 
             this.TLP_PlayerShipsInfo.ColumnCount = 7;
-            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.28571F));
-            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.02806F));
-            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 14.82966F));
+            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6F));
+            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6F));
+            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6F));
+            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6F));
+            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6F));
+            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 16.6F));
+            this.TLP_PlayerShipsInfo.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 0.4F));
             this.TLP_PlayerShipsInfo.Controls.Add(this.TB_PlayerFrigate, 0, 1);
-            this.TLP_PlayerShipsInfo.Controls.Add(this.TB_PlayerBattleship, 0, 1);
             this.TLP_PlayerShipsInfo.Controls.Add(this.TB_PlayerCruiser, 0, 1);
             this.TLP_PlayerShipsInfo.Controls.Add(this.TB_PlayerDestroyer, 0, 1);
+            this.TLP_PlayerShipsInfo.Controls.Add(this.TB_PlayerBattleship, 0, 1);
             this.TLP_PlayerShipsInfo.Controls.Add(this.TB_PlayerMiss, 0, 1);
-            this.TLP_PlayerShipsInfo.Controls.Add(this.TB_PlayerSunken, 0, 1);
             this.TLP_PlayerShipsInfo.Controls.Add(this.TB_PlayerHit, 0, 1);
             this.TLP_PlayerShipsInfo.Controls.Add(this.L_PlayerBattleship, 3, 0);
             this.TLP_PlayerShipsInfo.Controls.Add(this.L_PlayerCruiser, 2, 0);
             this.TLP_PlayerShipsInfo.Controls.Add(this.L_PlayerDestroyer, 1, 0);
             this.TLP_PlayerShipsInfo.Controls.Add(this.L_PlayerFrigate, 0, 0);
             this.TLP_PlayerShipsInfo.Controls.Add(this.L_PlayerHit, 4, 0);
-            this.TLP_PlayerShipsInfo.Controls.Add(this.L_PlayerSunken, 5, 0);
-            this.TLP_PlayerShipsInfo.Controls.Add(this.L_PlayerMiss, 6, 0);
+            this.TLP_PlayerShipsInfo.Controls.Add(this.L_PlayerMiss, 5, 0);
             this.TLP_PlayerShipsInfo.Dock = System.Windows.Forms.DockStyle.Fill;
             this.TLP_PlayerShipsInfo.Location = new System.Drawing.Point(0, 0);
             this.TLP_PlayerShipsInfo.Name = "TLP_PlayerShipsInfo";
             this.TLP_PlayerShipsInfo.RowCount = 2;
             this.TLP_PlayerShipsInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 35F));
             this.TLP_PlayerShipsInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 65F));
-            this.TLP_PlayerShipsInfo.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TLP_PlayerShipsInfo.Size = new System.Drawing.Size(499, 36);
             this.TLP_PlayerShipsInfo.TabIndex = 2;
             // 
@@ -1300,24 +1265,10 @@
             this.TB_PlayerFrigate.Location = new System.Drawing.Point(3, 15);
             this.TB_PlayerFrigate.Name = "TB_PlayerFrigate";
             this.TB_PlayerFrigate.ReadOnly = true;
-            this.TB_PlayerFrigate.Size = new System.Drawing.Size(65, 21);
+            this.TB_PlayerFrigate.Size = new System.Drawing.Size(76, 21);
             this.TB_PlayerFrigate.TabIndex = 15;
             this.TB_PlayerFrigate.Text = "0";
             this.TB_PlayerFrigate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // TB_PlayerBattleship
-            // 
-            this.TB_PlayerBattleship.BackColor = System.Drawing.Color.Black;
-            this.TB_PlayerBattleship.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TB_PlayerBattleship.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
-            this.TB_PlayerBattleship.ForeColor = System.Drawing.Color.White;
-            this.TB_PlayerBattleship.Location = new System.Drawing.Point(216, 15);
-            this.TB_PlayerBattleship.Name = "TB_PlayerBattleship";
-            this.TB_PlayerBattleship.ReadOnly = true;
-            this.TB_PlayerBattleship.Size = new System.Drawing.Size(65, 21);
-            this.TB_PlayerBattleship.TabIndex = 14;
-            this.TB_PlayerBattleship.Text = "0";
-            this.TB_PlayerBattleship.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TB_PlayerCruiser
             // 
@@ -1325,11 +1276,11 @@
             this.TB_PlayerCruiser.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TB_PlayerCruiser.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
             this.TB_PlayerCruiser.ForeColor = System.Drawing.Color.White;
-            this.TB_PlayerCruiser.Location = new System.Drawing.Point(145, 15);
+            this.TB_PlayerCruiser.Location = new System.Drawing.Point(167, 15);
             this.TB_PlayerCruiser.Name = "TB_PlayerCruiser";
             this.TB_PlayerCruiser.ReadOnly = true;
-            this.TB_PlayerCruiser.Size = new System.Drawing.Size(65, 21);
-            this.TB_PlayerCruiser.TabIndex = 13;
+            this.TB_PlayerCruiser.Size = new System.Drawing.Size(76, 21);
+            this.TB_PlayerCruiser.TabIndex = 14;
             this.TB_PlayerCruiser.Text = "0";
             this.TB_PlayerCruiser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1339,13 +1290,27 @@
             this.TB_PlayerDestroyer.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TB_PlayerDestroyer.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
             this.TB_PlayerDestroyer.ForeColor = System.Drawing.Color.White;
-            this.TB_PlayerDestroyer.Location = new System.Drawing.Point(74, 15);
+            this.TB_PlayerDestroyer.Location = new System.Drawing.Point(85, 15);
             this.TB_PlayerDestroyer.Name = "TB_PlayerDestroyer";
             this.TB_PlayerDestroyer.ReadOnly = true;
-            this.TB_PlayerDestroyer.Size = new System.Drawing.Size(65, 21);
-            this.TB_PlayerDestroyer.TabIndex = 9;
+            this.TB_PlayerDestroyer.Size = new System.Drawing.Size(76, 21);
+            this.TB_PlayerDestroyer.TabIndex = 13;
             this.TB_PlayerDestroyer.Text = "0";
             this.TB_PlayerDestroyer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TB_PlayerBattleship
+            // 
+            this.TB_PlayerBattleship.BackColor = System.Drawing.Color.Black;
+            this.TB_PlayerBattleship.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.TB_PlayerBattleship.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
+            this.TB_PlayerBattleship.ForeColor = System.Drawing.Color.White;
+            this.TB_PlayerBattleship.Location = new System.Drawing.Point(249, 15);
+            this.TB_PlayerBattleship.Name = "TB_PlayerBattleship";
+            this.TB_PlayerBattleship.ReadOnly = true;
+            this.TB_PlayerBattleship.Size = new System.Drawing.Size(76, 21);
+            this.TB_PlayerBattleship.TabIndex = 9;
+            this.TB_PlayerBattleship.Text = "0";
+            this.TB_PlayerBattleship.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TB_PlayerMiss
             // 
@@ -1353,27 +1318,13 @@
             this.TB_PlayerMiss.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TB_PlayerMiss.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
             this.TB_PlayerMiss.ForeColor = System.Drawing.Color.White;
-            this.TB_PlayerMiss.Location = new System.Drawing.Point(427, 15);
+            this.TB_PlayerMiss.Location = new System.Drawing.Point(413, 15);
             this.TB_PlayerMiss.Name = "TB_PlayerMiss";
             this.TB_PlayerMiss.ReadOnly = true;
-            this.TB_PlayerMiss.Size = new System.Drawing.Size(69, 21);
-            this.TB_PlayerMiss.TabIndex = 8;
+            this.TB_PlayerMiss.Size = new System.Drawing.Size(76, 21);
+            this.TB_PlayerMiss.TabIndex = 7;
             this.TB_PlayerMiss.Text = "0";
             this.TB_PlayerMiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // TB_PlayerSunken
-            // 
-            this.TB_PlayerSunken.BackColor = System.Drawing.Color.Black;
-            this.TB_PlayerSunken.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.TB_PlayerSunken.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
-            this.TB_PlayerSunken.ForeColor = System.Drawing.Color.White;
-            this.TB_PlayerSunken.Location = new System.Drawing.Point(358, 15);
-            this.TB_PlayerSunken.Name = "TB_PlayerSunken";
-            this.TB_PlayerSunken.ReadOnly = true;
-            this.TB_PlayerSunken.Size = new System.Drawing.Size(63, 21);
-            this.TB_PlayerSunken.TabIndex = 7;
-            this.TB_PlayerSunken.Text = "0";
-            this.TB_PlayerSunken.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TB_PlayerHit
             // 
@@ -1381,10 +1332,10 @@
             this.TB_PlayerHit.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TB_PlayerHit.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F);
             this.TB_PlayerHit.ForeColor = System.Drawing.Color.White;
-            this.TB_PlayerHit.Location = new System.Drawing.Point(287, 15);
+            this.TB_PlayerHit.Location = new System.Drawing.Point(331, 15);
             this.TB_PlayerHit.Name = "TB_PlayerHit";
             this.TB_PlayerHit.ReadOnly = true;
-            this.TB_PlayerHit.Size = new System.Drawing.Size(65, 21);
+            this.TB_PlayerHit.Size = new System.Drawing.Size(76, 21);
             this.TB_PlayerHit.TabIndex = 6;
             this.TB_PlayerHit.Text = "0";
             this.TB_PlayerHit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
@@ -1394,9 +1345,9 @@
             this.L_PlayerBattleship.AutoSize = true;
             this.L_PlayerBattleship.Dock = System.Windows.Forms.DockStyle.Top;
             this.L_PlayerBattleship.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_PlayerBattleship.Location = new System.Drawing.Point(216, 0);
+            this.L_PlayerBattleship.Location = new System.Drawing.Point(249, 0);
             this.L_PlayerBattleship.Name = "L_PlayerBattleship";
-            this.L_PlayerBattleship.Size = new System.Drawing.Size(65, 12);
+            this.L_PlayerBattleship.Size = new System.Drawing.Size(76, 12);
             this.L_PlayerBattleship.TabIndex = 3;
             this.L_PlayerBattleship.Text = "Battleship";
             this.L_PlayerBattleship.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1406,9 +1357,9 @@
             this.L_PlayerCruiser.AutoSize = true;
             this.L_PlayerCruiser.Dock = System.Windows.Forms.DockStyle.Top;
             this.L_PlayerCruiser.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_PlayerCruiser.Location = new System.Drawing.Point(145, 0);
+            this.L_PlayerCruiser.Location = new System.Drawing.Point(167, 0);
             this.L_PlayerCruiser.Name = "L_PlayerCruiser";
-            this.L_PlayerCruiser.Size = new System.Drawing.Size(65, 12);
+            this.L_PlayerCruiser.Size = new System.Drawing.Size(76, 12);
             this.L_PlayerCruiser.TabIndex = 2;
             this.L_PlayerCruiser.Text = "Cruiser";
             this.L_PlayerCruiser.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1418,9 +1369,9 @@
             this.L_PlayerDestroyer.AutoSize = true;
             this.L_PlayerDestroyer.Dock = System.Windows.Forms.DockStyle.Top;
             this.L_PlayerDestroyer.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_PlayerDestroyer.Location = new System.Drawing.Point(74, 0);
+            this.L_PlayerDestroyer.Location = new System.Drawing.Point(85, 0);
             this.L_PlayerDestroyer.Name = "L_PlayerDestroyer";
-            this.L_PlayerDestroyer.Size = new System.Drawing.Size(65, 12);
+            this.L_PlayerDestroyer.Size = new System.Drawing.Size(76, 12);
             this.L_PlayerDestroyer.TabIndex = 1;
             this.L_PlayerDestroyer.Text = "Destroyer";
             this.L_PlayerDestroyer.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1432,7 +1383,7 @@
             this.L_PlayerFrigate.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_PlayerFrigate.Location = new System.Drawing.Point(3, 0);
             this.L_PlayerFrigate.Name = "L_PlayerFrigate";
-            this.L_PlayerFrigate.Size = new System.Drawing.Size(65, 12);
+            this.L_PlayerFrigate.Size = new System.Drawing.Size(76, 12);
             this.L_PlayerFrigate.TabIndex = 0;
             this.L_PlayerFrigate.Text = "Frigate";
             this.L_PlayerFrigate.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
@@ -1442,35 +1393,23 @@
             this.L_PlayerHit.AutoSize = true;
             this.L_PlayerHit.Dock = System.Windows.Forms.DockStyle.Top;
             this.L_PlayerHit.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_PlayerHit.Location = new System.Drawing.Point(287, 0);
+            this.L_PlayerHit.Location = new System.Drawing.Point(331, 0);
             this.L_PlayerHit.Name = "L_PlayerHit";
-            this.L_PlayerHit.Size = new System.Drawing.Size(65, 12);
+            this.L_PlayerHit.Size = new System.Drawing.Size(76, 12);
             this.L_PlayerHit.TabIndex = 10;
             this.L_PlayerHit.Text = "Hit";
             this.L_PlayerHit.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // L_PlayerSunken
-            // 
-            this.L_PlayerSunken.AutoSize = true;
-            this.L_PlayerSunken.Dock = System.Windows.Forms.DockStyle.Top;
-            this.L_PlayerSunken.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_PlayerSunken.Location = new System.Drawing.Point(358, 0);
-            this.L_PlayerSunken.Name = "L_PlayerSunken";
-            this.L_PlayerSunken.Size = new System.Drawing.Size(63, 12);
-            this.L_PlayerSunken.TabIndex = 11;
-            this.L_PlayerSunken.Text = "Sunken";
-            this.L_PlayerSunken.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // L_PlayerMiss
             // 
             this.L_PlayerMiss.AutoSize = true;
             this.L_PlayerMiss.Dock = System.Windows.Forms.DockStyle.Top;
             this.L_PlayerMiss.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_PlayerMiss.Location = new System.Drawing.Point(427, 0);
+            this.L_PlayerMiss.Location = new System.Drawing.Point(413, 0);
             this.L_PlayerMiss.Name = "L_PlayerMiss";
-            this.L_PlayerMiss.Size = new System.Drawing.Size(69, 12);
-            this.L_PlayerMiss.TabIndex = 12;
-            this.L_PlayerMiss.Text = "Miss";
+            this.L_PlayerMiss.Size = new System.Drawing.Size(76, 12);
+            this.L_PlayerMiss.TabIndex = 11;
+            this.L_PlayerMiss.Text = "Missed shots";
             this.L_PlayerMiss.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // PNL_PlayerMap
@@ -2066,7 +2005,7 @@
             this.TSMI_GenerationType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_TB_GenType});
             this.TSMI_GenerationType.Name = "TSMI_GenerationType";
-            this.TSMI_GenerationType.Size = new System.Drawing.Size(176, 22);
+            this.TSMI_GenerationType.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GenerationType.Text = "Map Generation type";
             this.TSMI_GenerationType.CheckedChanged += new System.EventHandler(this.TSMI_GenerationType_CheckedChanged);
             // 
@@ -2083,7 +2022,7 @@
             // 
             this.TSMI_GenerateMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GenerateMap.Name = "TSMI_GenerateMap";
-            this.TSMI_GenerateMap.Size = new System.Drawing.Size(176, 22);
+            this.TSMI_GenerateMap.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GenerateMap.Text = "Generate Map";
             this.TSMI_GenerateMap.Click += new System.EventHandler(this.TSMI_GenerateMap_Click);
             // 
@@ -2304,30 +2243,25 @@
         private System.Windows.Forms.Label L_PlayerCruiser;
         private System.Windows.Forms.Label L_PlayerDestroyer;
         private System.Windows.Forms.Label L_PlayerFrigate;
-        private System.Windows.Forms.TextBox TB_PlayerDestroyer;
+        private System.Windows.Forms.TextBox TB_PlayerBattleship;
         private System.Windows.Forms.TextBox TB_PlayerMiss;
-        private System.Windows.Forms.TextBox TB_PlayerSunken;
         private System.Windows.Forms.TextBox TB_PlayerHit;
         private System.Windows.Forms.TextBox TB_PlayerFrigate;
-        private System.Windows.Forms.TextBox TB_PlayerBattleship;
         private System.Windows.Forms.TextBox TB_PlayerCruiser;
+        private System.Windows.Forms.TextBox TB_PlayerDestroyer;
         private System.Windows.Forms.Label L_PlayerHit;
-        private System.Windows.Forms.Label L_PlayerSunken;
         private System.Windows.Forms.Label L_PlayerMiss;
         private System.Windows.Forms.TableLayoutPanel TLP_EnemyShipsInfo;
         private System.Windows.Forms.TextBox TB_EnemyFrigate;
-        private System.Windows.Forms.TextBox TB_EnemyBattleship;
         private System.Windows.Forms.TextBox TB_EnemyCruiser;
         private System.Windows.Forms.TextBox TB_EnemyDestroyer;
-        private System.Windows.Forms.TextBox TB_EnemyMiss;
-        private System.Windows.Forms.TextBox TB_EnemySunken;
+        private System.Windows.Forms.TextBox TB_EnemyBattleship;
         private System.Windows.Forms.TextBox TB_EnemyHit;
         private System.Windows.Forms.Label L_EnemyBattleship;
         private System.Windows.Forms.Label L_EnemyCruiser;
         private System.Windows.Forms.Label L_EnemyDestroyer;
         private System.Windows.Forms.Label L_EnemyFrigate;
         private System.Windows.Forms.Label L_EnemyHit;
-        private System.Windows.Forms.Label L_EnemySunken;
         private System.Windows.Forms.Label L_EnemyMiss;
         private System.Windows.Forms.TableLayoutPanel TLP_GPO_Controls;
         private System.Windows.Forms.Panel PNL_Options;
@@ -2365,5 +2299,6 @@
         private System.Windows.Forms.ToolStripMenuItem TSMI_HitChance;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Difficulty_Level;
         private System.Windows.Forms.ToolStripMenuItem TSMI_ChancePercent;
+        private System.Windows.Forms.TextBox TB_EnemyMiss;
     }
 }

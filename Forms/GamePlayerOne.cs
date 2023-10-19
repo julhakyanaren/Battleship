@@ -23,8 +23,8 @@ namespace Battleship
             int width = Width;
             int height = Height;
             Width = width;
-            Height = height;  
-            Location = new Point(0,0);
+            Height = height;
+            Location = new Point(0, 0);
             MaximizeBox = false;
         }
         public void SetComponentCustomParamaters()
@@ -137,7 +137,33 @@ namespace Battleship
                 if (Fight.GameStarted)
                 {
                     NextTurn(tagButton);
+                    if (SetTurnText() == "ERROR")
+                    {
+                        //Error_Catch
+                    }
+                    else
+                    {
+                        TB_Turn.Text = SetTurnText();
+                    }
                 }
+            }
+        }
+        string SetTurnText()
+        {
+            switch (Fight.Turn)
+            {
+                case 0:
+                    {
+                        return Options.SP_PlayerName;
+                    }
+                case 1:
+                    {
+                        return "Enemy";
+                    }
+                default:
+                    {
+                        return "ERROR";
+                    }
             }
         }
         private async void Button_MouseEnter(object sender, EventArgs e)
@@ -220,7 +246,7 @@ namespace Battleship
         }
         private void GamePlayerOne_FormClosing(object sender, FormClosingEventArgs e)
         {
-            Environment.Exit(0);  
+            Environment.Exit(0);
         }
         public void GeneratePlayerRandomMap()
         {
@@ -246,13 +272,13 @@ namespace Battleship
                 playerButtons[b].BackColor = colors[b];
             }
             Map.SetShipsCountThrowMap(map);
-            /**/
+            PlayerData.Map = map;
             TB_PlayerFrigate.Text = $"{PlayerData.FrigatesCountCurrent}";
             TB_PlayerDestroyer.Text = $"{PlayerData.DestroyersCountCurrent}";
             TB_PlayerCruiser.Text = $"{PlayerData.CruiserCountCurrent}";
             TB_PlayerBattleship.Text = $"{PlayerData.BattleshipCountCurrent}";
         }
-        public void SetEnemyButtonsColors(Button[] enemyButtons, char[,]enemyMap)
+        public void SetEnemyButtonsColors(Button[] enemyButtons, char[,] enemyMap)
         {
             EnemyData.ResetShipsCount();
             char[] map = Support.CharArrayRedimension(enemyMap);
@@ -281,7 +307,7 @@ namespace Battleship
             if (!gameStarted)
             {
                 Button[] playerButtons = Support.GetPlayerButtons(buttons);
-                for(int b =  0; b < playerButtons.Length; b++)
+                for (int b = 0; b < playerButtons.Length; b++)
                 {
                     playerButtons[b].BackColor = Color.White;
                 }
@@ -295,16 +321,13 @@ namespace Battleship
                 Button targetButton = MapButtons[1, i];
                 Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
                 EnemyData.Map[i] = ColorMethods.SetCharThrowColor(1, targetButton.BackColor);
-            }
-            for (int j = 0; j < MapButtons.GetLength(1); j++)
-            {
-                if (PlayerData.Map[j] == 'N')
+                if (PlayerData.Map[i] == 'N')
                 {
-                    PlayerData.Map[j] = 'E';
+                    PlayerData.Map[i] = 'E';
                 }
-                if (EnemyData.Map[j] == 'n')
+                if (EnemyData.Map[i] == 'n')
                 {
-                    EnemyData.Map[j] = 'e';
+                    EnemyData.Map[i] = 'e';
                 }
             }
             Fight.GameStarted = true;
@@ -339,22 +362,19 @@ namespace Battleship
             TB_PlayerFrigate.Text = PlayerData.FrigatesCountCurrent.ToString();
             TB_EnemyFrigate.Text = EnemyData.FrigatesCountCurrent.ToString();
             TB_PlayerDestroyer.Text = PlayerData.DestroyersCountCurrent.ToString();
-            TB_EnemyDestroyer.Text = EnemyData.DestroyersCountCurrent.ToString();
+            TB_EnemyBattleship.Text = EnemyData.DestroyersCountCurrent.ToString();
             TB_PlayerCruiser.Text = PlayerData.CruiserCountCurrent.ToString();
-            TB_EnemyCruiser.Text = EnemyData.CruiserCountCurrent.ToString();
+            TB_EnemyDestroyer.Text = EnemyData.CruiserCountCurrent.ToString();
             TB_PlayerBattleship.Text = PlayerData.BattleshipCountCurrent.ToString();
-            TB_EnemyBattleship.Text = EnemyData.BattleshipCountCurrent.ToString();
+            TB_EnemyCruiser.Text = EnemyData.BattleshipCountCurrent.ToString();
             TB_PlayerHit.Text = PlayerData.HitCountCurrent.ToString();
             TB_EnemyHit.Text = EnemyData.HitCountCurrent.ToString();
-            TB_PlayerSunken.Text = PlayerData.SunkenCountCurrent.ToString();
-            TB_EnemySunken.Text = EnemyData.SunkenCountCurrent.ToString();
             TB_PlayerMiss.Text = PlayerData.MissedShotsCount.ToString();
             TB_EnemyMiss.Text = EnemyData.MissedShotsCount.ToString();
 
         }
         public void NextTurn(string buttonTag)
         {
-            int turn = 0;
             if (Fight.Turn == 0)
             {
                 if (Support.StringToInt(buttonTag, out int index))
@@ -365,10 +385,12 @@ namespace Battleship
                     Fight.Turn = Fight.ReverseTurn(Fight.PlayerHited);
                     if (celChar != 'e')
                     {
+                        PlayerData.HitCountCurrent++;
                         switch (celChar)
                         {
                             case 'f':
                                 {
+                                    EnemyData.FrigatesCountCurrent--;
                                     break;
                                 }
                             case 'd':
@@ -385,6 +407,11 @@ namespace Battleship
                                 }
                         }
                     }
+                    else
+                    {
+                        PlayerData.MissedShotsCount++;
+                    }
+                    SetStatusTextBoxesValues();
                 }
                 else
                 {
@@ -558,6 +585,23 @@ namespace Battleship
         private void TSMI_AllwaysOnTop_CheckedChanged(object sender, EventArgs e)
         {
             TopMost = TSMI_AllwaysOnTop.Checked;
+        }
+
+        private void TB_Turn_TextChanged(object sender, EventArgs e)
+        {
+            if (TB_Turn.Text == "Enemy")
+            {
+                TB_Turn.ForeColor = Color.Firebrick;
+            }
+            else if (TB_Turn.Text == Options.SP_PlayerName)
+            {
+                TB_Turn.ForeColor = Color.Lime;
+            }
+            else
+            {
+                TB_Turn.ForeColor = Design.DefaultForeColor;
+
+            }
         }
     }
 }
