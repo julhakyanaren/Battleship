@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +37,12 @@ namespace Battleship
         public static int Score;
 
         public static char[] Map;
+
+        public static int[,] FrigateCoords = new int[4,1];
+        public static int[,] DestroyerCoords = new int[3, 2];
+        public static int[,] CruiserCoords = new int[2, 3];
+        public static int[,] BattleshipCoords = new int[1,4];
+        public static int[][,] ShipsCoords = {FrigateCoords, DestroyerCoords, CruiserCoords, BattleshipCoords };
 
         public static void ResetShipsCount()
         {

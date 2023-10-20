@@ -9,7 +9,7 @@ namespace Battleship
     public static class DebugTools
     {
         public static bool DebugMode = false;
-        public static string Version = "Alpha 0.3.4.1";
+        public static string Version = "Alpha 0.3.4.2";
 
         public static class MCF
         {
