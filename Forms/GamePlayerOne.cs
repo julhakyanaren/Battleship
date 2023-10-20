@@ -74,6 +74,10 @@ namespace Battleship
             }
             TSMI_Difficulty_Level.ForeColor = TB_DIfficulty.ForeColor;
             TSMI_ChancePercent.Text = $"{Fight.SuccessThreshold(Options.Difficulty) * 100} %";
+            if (DebugTools.DebugMode)
+            {
+                TSMI_DEBUG.Visible = true;
+            }
         }
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {
@@ -215,6 +219,47 @@ namespace Battleship
                     {
                         targetButtons = Support.GetEnemyButtons(MapButtons);
                         BS_EnemySchema_Index.Text = textID;
+                        if (DebugTools.DebugMode == true)
+                        {
+                            string ship = "Empty";
+                            int coord = Convert.ToInt32(selectedButton.Tag.ToString()) % 100;
+                            char sym = EnemyData.Map[coord];
+                            switch (sym)
+                            {
+                                case 'f':
+                                    {
+                                        ship = "Frigate";
+                                        break;
+                                    }
+                                case 'd':
+                                    {
+                                        ship = "Destroyer";
+                                        break;
+                                    }
+                                case 'c':
+                                    {
+                                        ship = "Cruiser";
+                                        break;
+                                    }
+                                case 'b':
+                                    {
+                                        ship = "Battleship";
+                                        break;
+                                    }
+                                case 'e':
+                                case 'n':
+                                    {
+                                        ship = "Empty";
+                                        break;
+                                    }
+                                default:
+                                    {
+                                        ship = "Null";
+                                        break;
+                                    }
+                            }
+                            TB_DebugShowShip.Text = ship;
+                        }
                         break;
                     }
                 default:
@@ -601,6 +646,44 @@ namespace Battleship
             {
                 TB_Turn.ForeColor = Design.DefaultForeColor;
 
+            }
+        }
+
+        private void TSMI_ShowEnemyShipsCoords_Click(object sender, EventArgs e)
+        {
+            if (DebugTools.DebugMode)
+            {
+                string f_coords = "Frigates:\r\n";
+                string d_coords = "Destroyers:\r\n";
+                string c_coords = "Cruisers:\r\n";
+                string b_coords = "Battleships\r\n";
+                for (int f = 0; f < 4; f++)
+                {
+                    f_coords += $"{EnemyData.FrigateCoords[f, 0]}\r\n";
+                }
+                for (int d0 = 0; d0 < 3; d0++)
+                {
+                    for (int d1 = 0; d1 < 2; d1++)
+                    {
+                        d_coords += $"{EnemyData.DestroyerCoords[d0, d1]}\r\n";
+                    }
+                    d_coords += "////\r\n";
+                }
+                for (int c0 = 0; c0 < 2; c0++)
+                {
+                    for (int c1 = 0; c1 < 3; c1++)
+                    {
+                        c_coords += $"{EnemyData.CruiserCoords[c0, c1]}\r\n";
+                    }
+                    c_coords += "////\r\n";
+                }
+                for (int b = 0; b < 4; b++)
+                {
+                    b_coords += $"{EnemyData.BattleshipCoords[0, b]}\r\n";
+                }
+                string message = $"{f_coords}\r\n{d_coords}\r\n{c_coords}\r\n{b_coords}";
+                MessageBox.Show($"{message}", "Battleship Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                TB_DebugShowShip.Visible = true;
             }
         }
     }

@@ -8,7 +8,7 @@ namespace Battleship
 {
     public static class EnemyData
     {
-        public const int FirgatesCountMax = 4;
+        public const int FrigatesCountMax = 4;
         public static int SunkenFrigatesCount = 0;
         public static int FrigatesCountCurrent;
 
