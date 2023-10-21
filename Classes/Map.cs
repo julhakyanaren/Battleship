@@ -114,7 +114,7 @@ namespace Battleship
 
             return true;
         }
-        static void PlacePlayerShip(char[,] map, char shipSymbol, int shipSize)
+        static void PlacePlayerShip(char[,] map, char shipSymbol, int shipSize, int count)
         {
             Random random = new Random();
             bool placed = false;
@@ -122,6 +122,7 @@ namespace Battleship
             {
                 int x = random.Next(10);
                 int y = random.Next(10);
+                int coord = 0;
                 int orientation = random.Next(2);
                 if (IsValidPlacement(map, x, y, shipSize, orientation))
                 {
@@ -130,10 +131,35 @@ namespace Battleship
                         if (orientation == 0)
                         {
                             map[x + i, y] = shipSymbol;
+                            coord = (x + i) * 10 + y;
                         }
                         else
                         {
                             map[x, y + i] = shipSymbol;
+                            coord = (x * 10) + y + i;
+                        }
+                        switch (shipSymbol)
+                        {
+                            case 'F':
+                                {
+                                    PlayerData.FrigateCoords[count, i] = coord;
+                                    break;
+                                }
+                            case 'D':
+                                {
+                                    PlayerData.DestroyerCoords[count, i] = coord;
+                                    break;
+                                }
+                            case 'C':
+                                {
+                                    PlayerData.CruiserCoords[count, i] = coord;
+                                    break;
+                                }
+                            case 'B':
+                                {
+                                    PlayerData.BattleshipCoords[count, i] = coord;
+                                    break;
+                                }
                         }
                     }
                     placed = true;
@@ -210,16 +236,16 @@ namespace Battleship
         public char[,] PlacePlayerShips(char[,] map)
         {
             char[,] ships = Data.SetShipsChars();
-            PlacePlayerShip(map, 'B', 4);
-            PlacePlayerShip(map, 'C', 3);
-            PlacePlayerShip(map, 'C', 3);
-            PlacePlayerShip(map, 'D', 2);
-            PlacePlayerShip(map, 'D', 2);
-            PlacePlayerShip(map, 'D', 2);
-            PlacePlayerShip(map, 'F', 1);
-            PlacePlayerShip(map, 'F', 1);
-            PlacePlayerShip(map, 'F', 1);
-            PlacePlayerShip(map, 'F', 1);
+            PlacePlayerShip(map, 'B', 4, 0);
+            PlacePlayerShip(map, 'C', 3, 0);
+            PlacePlayerShip(map, 'C', 3, 1);
+            PlacePlayerShip(map, 'D', 2, 0);
+            PlacePlayerShip(map, 'D', 2, 1);
+            PlacePlayerShip(map, 'D', 2, 2);
+            PlacePlayerShip(map, 'F', 1, 0);
+            PlacePlayerShip(map, 'F', 1, 1);
+            PlacePlayerShip(map, 'F', 1, 2);
+            PlacePlayerShip(map, 'F', 1, 3);
             return map;
         }
         public char[,] GenerateEnemyMap(Button[,] mapButtons)

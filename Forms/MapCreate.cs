@@ -1,15 +1,7 @@
-﻿using System;
-using System.CodeDom;
+﻿using Battleship.Forms;
+using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Data.SqlTypes;
-using System.Diagnostics;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.Remoting.Channels;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -33,13 +25,68 @@ namespace Battleship
             {
                 case Keys.Insert:
                     {
-                        if (BS_Insert.Visible)
+                        if (BS_Insert.Visible == true)
                         {
-                            BS_Insert_Click(sender, new EventArgs());
+                            BS_Insert_Click(sender, e);
                         }
                         break;
                     }
-                default: break;
+                case Keys.Divide:
+                    {
+                        if (ShipData.ChoosenShipType > 1)
+                        {
+                            if (CB_Orientation.Text == "Horizontal")
+                            {
+                                CB_Orientation.SelectedIndex = 1;
+                            }
+                            else if (CB_Orientation.Text == "Vertical")
+                            {
+                                CB_Orientation.SelectedIndex = 0;
+                            }
+                        }
+                        break;
+                    }
+                case Keys.D1:
+                    {
+                        if (RB_ShipType_Frigate.ForeColor != Color.Red)
+                        {
+                            RB_ShipType_Frigate.Select();
+                            ShipData.ChoosenShipType = 1;
+                        }
+                        break;
+                    }
+                case Keys.D2:
+                    {
+                        if (RB_ShipType_Destroyer.ForeColor != Color.Red)
+                        {
+                            RB_ShipType_Destroyer.Select();
+                            ShipData.ChoosenShipType = 2;
+                        }
+                        break;
+                    }
+                case Keys.D3:
+                    {
+                        if (RB_ShipType_Cruiser.ForeColor != Color.Red)
+                        {
+                            RB_ShipType_Cruiser.Select();
+                            ShipData.ChoosenShipType = 3;
+                        }
+                        break;
+                    }
+                case Keys.D4:
+                    {
+                        if (RB_ShipType_Battleship.ForeColor != Color.Red)
+                        {
+                            RB_ShipType_Battleship.Select();
+                            ShipData.ChoosenShipType = 4;
+                        }
+                        break;
+                    }
+                case Keys.Delete:
+                    {
+                        BS_ResetMap_Click(sender, e);
+                        break;
+                    }
             }
         }
         Button[] ExampleButtons = new Button[5];
@@ -64,6 +111,7 @@ namespace Battleship
             TB_MC_DestroyerCount.ForeColor = Color.Lime;
             TB_MC_CruiserCount.ForeColor = Color.Lime;
             TB_MC_BattleshipCount.ForeColor = Color.Lime;
+            ShipData.ChoosenShipType = 1;
         }
         int[,] GenerateButtonsTags()
         {
@@ -1133,6 +1181,29 @@ namespace Battleship
                     for (int p = 0; p < Indexes.Count; p++)
                     {
                         mapButton[Indexes[p]].BackColor = cellColor;
+                        switch (ShipData.ChoosenShipType)
+                        {
+                            case 1:
+                                {
+                                    PlayerData.FrigateCoords[Convert.ToInt32(TB_MC_FrigateCount.Text), p] = Indexes[p];
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    PlayerData.DestroyerCoords[Convert.ToInt32(TB_MC_DestroyerCount.Text), p] = Indexes[p];
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    PlayerData.CruiserCoords[Convert.ToInt32(TB_MC_CruiserCount.Text), p] = Indexes[p];
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    PlayerData.BattleshipCoords[Convert.ToInt32(TB_MC_BattleshipCount.Text), p] = Indexes[p];
+                                    break;
+                                }
+                        }
                     }
                     int mineTagsSize = ShipData.GetMineCount(cellPos, ShipData.ChoosenShipType, x, y, ShipData.Orientation);
                     if (mineTagsSize != -1)
@@ -1325,6 +1396,7 @@ namespace Battleship
                         DialogResult = MessageBox.Show("The schematic map has been successfully created and saved.\r\n Close the map editor?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (DialogResult == DialogResult.Yes)
                         {
+                            DebugTools.MCF.Opened = false;
                             this.Dispose();
                         }
                     }
@@ -1619,7 +1691,8 @@ namespace Battleship
 
         private void TSMI_MC_OpenManual_Click(object sender, EventArgs e)
         {
-
+            ManualInfo manualInfo = new ManualInfo();
+            manualInfo.Show();
         }
     }
 }

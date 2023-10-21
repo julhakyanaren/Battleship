@@ -144,7 +144,7 @@
             this.CB_Difficulty.Size = new System.Drawing.Size(221, 25);
             this.CB_Difficulty.TabIndex = 40;
             this.TT_PO.SetToolTip(this.CB_Difficulty, "Choose game difficulty");
-            this.CB_Difficulty.SelectedIndexChanged += new System.EventHandler(this.CB_Difficulty_SelectedIndexChanged_1);
+            this.CB_Difficulty.SelectedIndexChanged += new System.EventHandler(this.CB_Difficulty_SelectedIndexChanged);
             // 
             // L_Info_PlayerName
             // 

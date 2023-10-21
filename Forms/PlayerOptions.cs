@@ -39,51 +39,9 @@ namespace Battleship.Forms
             TextBox hover = sender as TextBox;
             TT_PO.Show("Enter your name", hover);;
         }
-
-        private void CB_Difficulty_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            
-        }
-
         private void CB_Difficulty_SelectedIndexChanged_1(object sender, EventArgs e)
         {
-            switch(CB_Difficulty.SelectedIndex)
-            {
-                case 0:
-                    {
-                        L_Info_DifficultyStatus.Text = "Difficulty: Easy";
-                        L_Info_DifficultyStatus.ForeColor = Color.Lime;
-                        break;
-                    }
-                case 1:
-                    {
-                        L_Info_DifficultyStatus.Text = "Difficulty: Medium";
-                        L_Info_DifficultyStatus.ForeColor = Color.Yellow;
-                        break;
-                    }
-                case 2:
-                    {
-                        L_Info_DifficultyStatus.Text = "Difficulty: Hard";
-                        L_Info_DifficultyStatus.ForeColor = Color.Red;
-                        break;
-                    }
-                case 3:
-                    {
-                        L_Info_DifficultyStatus.Text = "Difficulty: Extrimal";
-                        L_Info_DifficultyStatus.ForeColor = Color.DarkRed;
-
-                        break;
-                    }
-            }
-            if (CB_Difficulty.SelectedIndex != 3)
-            {
-                L_Info_DifficultyStatus.Font = new Font("Franklin Gothic Medium", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            }
-            else
-            {
-                L_Info_DifficultyStatus.Font = new Font("Franklin Gothic Demi", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            }
-            Design.SetComponentLocation(L_Info_DifficultyStatus, PNL_PO_Main);
+            
         }
         public void SetOptions()
         {
@@ -163,6 +121,47 @@ namespace Battleship.Forms
                         break;
                     }
             }
+        }
+
+        private void CB_Difficulty_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            switch (CB_Difficulty.SelectedIndex)
+            {
+                case 0:
+                    {
+                        L_Info_DifficultyStatus.Text = "Difficulty: Easy";
+                        L_Info_DifficultyStatus.ForeColor = Color.Lime;
+                        break;
+                    }
+                case 1:
+                    {
+                        L_Info_DifficultyStatus.Text = "Difficulty: Medium";
+                        L_Info_DifficultyStatus.ForeColor = Color.Yellow;
+                        break;
+                    }
+                case 2:
+                    {
+                        L_Info_DifficultyStatus.Text = "Difficulty: Hard";
+                        L_Info_DifficultyStatus.ForeColor = Color.Red;
+                        break;
+                    }
+                case 3:
+                    {
+                        L_Info_DifficultyStatus.Text = "Difficulty: Extrimal";
+                        L_Info_DifficultyStatus.ForeColor = Color.DarkRed;
+
+                        break;
+                    }
+            }
+            if (CB_Difficulty.SelectedIndex != 3)
+            {
+                L_Info_DifficultyStatus.Font = new Font("Franklin Gothic Medium", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            }
+            else
+            {
+                L_Info_DifficultyStatus.Font = new Font("Franklin Gothic Demi", 12F, FontStyle.Regular, GraphicsUnit.Point, 204);
+            }
+            Design.SetComponentLocation(L_Info_DifficultyStatus, PNL_PO_Main);
         }
     }
 }
