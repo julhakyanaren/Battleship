@@ -129,8 +129,6 @@ namespace Battleship
             {
                 await Task.Delay(0);
                 MapButtons[0, vb].Visible = true;
-                //PlayerData.Map[vb] = ColorMethods.SetCharThrowColor(0, MapButtons[0, vb].BackColor);
-                //EnemyData.Map[vb] = ColorMethods.SetCharThrowColor(1, MapButtons[1, vb].BackColor);
                 MapButtons[1, vb].Visible = true;
             }
             TSMI_Map.Enabled = true;
@@ -697,6 +695,9 @@ namespace Battleship
             {
                 MessageBox.Show($"{ex1}", "Exception",MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
+        }
+        private void TSMI_GPO_OpenManual_Click(object sender, EventArgs e)
+        {
         }
     }
 }

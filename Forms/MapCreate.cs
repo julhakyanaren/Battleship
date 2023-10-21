@@ -24,6 +24,23 @@ namespace Battleship
         public MapCreate()
         {
             InitializeComponent();
+            this.KeyDown += FormKeyDown;
+        }
+
+        private void FormKeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.Insert:
+                    {
+                        if (BS_Insert.Visible)
+                        {
+                            BS_Insert_Click(sender, new EventArgs());
+                        }
+                        break;
+                    }
+                default: break;
+            }
         }
         Button[] ExampleButtons = new Button[5];
         Button[] Buttons_MC = new Button[100];
@@ -42,9 +59,7 @@ namespace Battleship
             GenerateButtons();
             CB_Coord_Letter.Select(0,0);
             CB_Coord_Number.Select(0,0);
-            /**/
             Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
-            /**/
             TB_MC_FrigateCount.ForeColor = Color.Lime;
             TB_MC_DestroyerCount.ForeColor = Color.Lime;
             TB_MC_CruiserCount.ForeColor = Color.Lime;
@@ -1113,51 +1128,62 @@ namespace Battleship
             {
                 string cellPos = pos.GetCellPosition(tag);
                 pos.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
-                int mineTagsSize = ShipData.GetMineCount(cellPos, ShipData.ChoosenShipType, x, y, ShipData.Orientation);
-                if (mineTagsSize != -1)
+                try
                 {
-                    int[] mineTags = new int[mineTagsSize];
-                    mineTags = ShipData.MineTagsFill(mineTags, cellPos, ShipData.ChoosenShipType, tagButton, ShipData.Orientation);
-                    foreach (Button mineButton in mapButton)
+                    for (int p = 0; p < Indexes.Count; p++)
                     {
-                        for (int b = 0; b < mineTags.Length; b++)
+                        mapButton[Indexes[p]].BackColor = cellColor;
+                    }
+                    int mineTagsSize = ShipData.GetMineCount(cellPos, ShipData.ChoosenShipType, x, y, ShipData.Orientation);
+                    if (mineTagsSize != -1)
+                    {
+                        int[] mineTags = new int[mineTagsSize];
+                        mineTags = ShipData.MineTagsFill(mineTags, cellPos, ShipData.ChoosenShipType, tagButton, ShipData.Orientation);
+                        foreach (Button mineButton in mapButton)
                         {
-                            if (mineButton.Tag.ToString() == mineTags[b].ToString())
+                            for (int b = 0; b < mineTags.Length; b++)
                             {
-                                int buttonIndex = Array.IndexOf(mapButton, mineButton);
-                                mapButton[buttonIndex].BackColor = Color.Aqua;
-                                break;
+                                if (mineButton.Tag.ToString() == mineTags[b].ToString())
+                                {
+                                    int buttonIndex = Array.IndexOf(mapButton, mineButton);
+                                    mapButton[buttonIndex].BackColor = Color.Aqua;
+                                    break;
+                                }
                             }
                         }
+                        if (ShipData.MapAutoUpdate)
+                        {
+                            GenerateSchematic();
+                        }
+                        ResetExampleMap();
+                        switch (ShipData.ChoosenShipType)
+                        {
+                            case 1:
+                                {
+                                    TB_MC_FrigateCount.Text = Convert.ToString(Convert.ToInt32(TB_MC_FrigateCount.Text) + 1);
+                                    break;
+                                }
+                            case 2:
+                                {
+                                    TB_MC_DestroyerCount.Text = Convert.ToString(Convert.ToInt32(TB_MC_DestroyerCount.Text) + 1);
+                                    break;
+                                }
+                            case 3:
+                                {
+                                    TB_MC_CruiserCount.Text = Convert.ToString(Convert.ToInt32(TB_MC_CruiserCount.Text) + 1);
+                                    break;
+                                }
+                            case 4:
+                                {
+                                    TB_MC_BattleshipCount.Text = Convert.ToString(Convert.ToInt32(TB_MC_BattleshipCount.Text) + 1);
+                                    break;
+                                }
+                        }
                     }
-                    if (ShipData.MapAutoUpdate)
-                    {
-                        GenerateSchematic();
-                    }
-                    ResetExampleMap();
-                    switch (ShipData.ChoosenShipType)
-                    {
-                        case 1:
-                            {
-                                TB_MC_FrigateCount.Text = Convert.ToString(Convert.ToInt32(TB_MC_FrigateCount.Text) + 1);
-                                break;
-                            }
-                        case 2:
-                            {
-                                TB_MC_DestroyerCount.Text = Convert.ToString(Convert.ToInt32(TB_MC_DestroyerCount.Text) + 1);
-                                break;
-                            }
-                        case 3:
-                            {
-                                TB_MC_CruiserCount.Text = Convert.ToString(Convert.ToInt32(TB_MC_CruiserCount.Text) + 1);
-                                break;
-                            }
-                        case 4:
-                            {
-                                TB_MC_BattleshipCount.Text = Convert.ToString(Convert.ToInt32(TB_MC_BattleshipCount.Text) + 1);
-                                break;
-                            }
-                    }
+                }
+                catch
+                {
+                    //Error_Catch
                 }
             }
         }
@@ -1480,33 +1506,12 @@ namespace Battleship
             Design.ChangeButtonEnabledDesign(BS_AO_LoadSchematic, checkedToInt);
             Design.ChangeButtonEnabledDesign(BS_AO_GetMap, checkedToInt);
         }
-        private async void BS_AO_GetMap_MouseEnter(object sender, EventArgs e)
-        {
-            if (false)
-            {
-                await Task.Delay(0);
-                Button enteredButton = sender as Button;
-                enteredButton.Font = new Font("Franklin Gothic Demi Cond", 8.3F);
-            }
-        }
-
-        private async void BS_AO_GetMap_MouseLeave(object sender, EventArgs e)
-        {
-            if (false)
-            {
-                await Task.Delay(0);
-                Button leavedButton = sender as Button;
-                leavedButton.Font = new Font("Franklin Gothic Medium Cond", 8.25F);
-            }
-        }
-
         private async void RB_ShipType_Frigate_MouseEnter(object sender, EventArgs e)
         {
             await Task.Delay(0);
             RadioButton entered_RB = sender as RadioButton;
             entered_RB.Font = new Font("Franklin Gothic Demi Cond", 10F);
         }
-
         private async void RB_ShipType_Frigate_MouseLeave(object sender, EventArgs e)
         {
             await Task.Delay(0);
@@ -1605,6 +1610,16 @@ namespace Battleship
                         break;
                     }
             }
+        }
+
+        private void TSMI_MC_AllwaysOnTop_CheckedChanged(object sender, EventArgs e)
+        {
+            TopMost = TSMI_MC_AllwaysOnTop.Checked;
+        }
+
+        private void TSMI_MC_OpenManual_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

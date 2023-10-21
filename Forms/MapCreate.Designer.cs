@@ -133,7 +133,10 @@
             this.RB_ShipType_Frigate = new System.Windows.Forms.RadioButton();
             this.MS_MapCreate = new System.Windows.Forms.MenuStrip();
             this.TSMI_MC_File = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_MC_AllwaysOnTop = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_MC_SchematicOptions = new System.Windows.Forms.ToolStripMenuItem();
+            this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_MC_OpenManual = new System.Windows.Forms.ToolStripMenuItem();
             this.TT_MapCreate = new System.Windows.Forms.ToolTip(this.components);
             this.SFD_MapCreate = new System.Windows.Forms.SaveFileDialog();
             this.OFD_MapCreate = new System.Windows.Forms.OpenFileDialog();
@@ -265,8 +268,6 @@
             this.BS_MC_Update.Text = "Update Map Shematic";
             this.BS_MC_Update.UseVisualStyleBackColor = false;
             this.BS_MC_Update.Click += new System.EventHandler(this.BS_MC_Update_Click);
-            this.BS_MC_Update.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
-            this.BS_MC_Update.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // CHB_MC_AutoUpdate
             // 
@@ -296,8 +297,6 @@
             this.BS_MC_Apply.UseVisualStyleBackColor = false;
             this.BS_MC_Apply.Visible = false;
             this.BS_MC_Apply.Click += new System.EventHandler(this.BS_MC_Apply_Click);
-            this.BS_MC_Apply.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
-            this.BS_MC_Apply.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // BS_MC_Reset
             // 
@@ -313,8 +312,6 @@
             this.BS_MC_Reset.Text = "Reset Map";
             this.BS_MC_Reset.UseVisualStyleBackColor = false;
             this.BS_MC_Reset.Click += new System.EventHandler(this.BS_MC_Reset_Click);
-            this.BS_MC_Reset.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
-            this.BS_MC_Reset.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // L_Info_BattleshipCount
             // 
@@ -1068,8 +1065,6 @@
             this.BS_AO_GetMap.Text = "Get map schema";
             this.BS_AO_GetMap.UseVisualStyleBackColor = false;
             this.BS_AO_GetMap.Click += new System.EventHandler(this.BS_AO_GetMap_Click);
-            this.BS_AO_GetMap.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
-            this.BS_AO_GetMap.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // PNL_AO_ProgressBar
             // 
@@ -1101,8 +1096,6 @@
             this.BS_AO_LoadSchematic.Text = "Load schematic";
             this.BS_AO_LoadSchematic.UseVisualStyleBackColor = false;
             this.BS_AO_LoadSchematic.Click += new System.EventHandler(this.BS_AO_LoadSchematic_Click);
-            this.BS_AO_LoadSchematic.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
-            this.BS_AO_LoadSchematic.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // BS_AO_CheckSchematic
             // 
@@ -1118,8 +1111,6 @@
             this.BS_AO_CheckSchematic.Text = "Check schematic";
             this.BS_AO_CheckSchematic.UseVisualStyleBackColor = false;
             this.BS_AO_CheckSchematic.Click += new System.EventHandler(this.BS_AO_CheckSchematic_Click);
-            this.BS_AO_CheckSchematic.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
-            this.BS_AO_CheckSchematic.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // BS_AO_SaveSchematic
             // 
@@ -1136,8 +1127,6 @@
             this.BS_AO_SaveSchematic.UseVisualStyleBackColor = false;
             this.BS_AO_SaveSchematic.Visible = false;
             this.BS_AO_SaveSchematic.Click += new System.EventHandler(this.BS_AO_SaveSchematic_Click);
-            this.BS_AO_SaveSchematic.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
-            this.BS_AO_SaveSchematic.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // BS_AO_UploadSchematic
             // 
@@ -1152,8 +1141,6 @@
             this.BS_AO_UploadSchematic.TabIndex = 40;
             this.BS_AO_UploadSchematic.Text = "Upload Schematic";
             this.BS_AO_UploadSchematic.UseVisualStyleBackColor = false;
-            this.BS_AO_UploadSchematic.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
-            this.BS_AO_UploadSchematic.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // L_Info_AO_MapSchematic
             // 
@@ -1325,8 +1312,6 @@
             this.BS_Coords_Apply.UseVisualStyleBackColor = false;
             this.BS_Coords_Apply.Visible = false;
             this.BS_Coords_Apply.Click += new System.EventHandler(this.BS_Coords_Apply_Click);
-            this.BS_Coords_Apply.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
-            this.BS_Coords_Apply.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // BS_Coords_Check
             // 
@@ -1342,8 +1327,6 @@
             this.BS_Coords_Check.Text = "Coordinate availability checking";
             this.BS_Coords_Check.UseVisualStyleBackColor = false;
             this.BS_Coords_Check.Click += new System.EventHandler(this.BS_Coords_Check_Click);
-            this.BS_Coords_Check.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
-            this.BS_Coords_Check.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // L_Info_Coord_Number
             // 
@@ -1446,8 +1429,6 @@
             this.BS_ResetMap.Text = "Reset";
             this.BS_ResetMap.UseVisualStyleBackColor = false;
             this.BS_ResetMap.Click += new System.EventHandler(this.BS_ResetMap_Click);
-            this.BS_ResetMap.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
-            this.BS_ResetMap.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // BS_Insert
             // 
@@ -1464,8 +1445,6 @@
             this.BS_Insert.UseVisualStyleBackColor = false;
             this.BS_Insert.Visible = false;
             this.BS_Insert.Click += new System.EventHandler(this.BS_Insert_Click);
-            this.BS_Insert.MouseEnter += new System.EventHandler(this.BS_AO_GetMap_MouseEnter);
-            this.BS_Insert.MouseLeave += new System.EventHandler(this.BS_AO_GetMap_MouseLeave);
             // 
             // PNL_ShipPlaceMap
             // 
@@ -1705,7 +1684,6 @@
             this.RB_ShipType_Battleship.Name = "RB_ShipType_Battleship";
             this.RB_ShipType_Battleship.Size = new System.Drawing.Size(76, 21);
             this.RB_ShipType_Battleship.TabIndex = 3;
-            this.RB_ShipType_Battleship.TabStop = true;
             this.RB_ShipType_Battleship.Tag = "4";
             this.RB_ShipType_Battleship.Text = "Battleship";
             this.RB_ShipType_Battleship.UseVisualStyleBackColor = true;
@@ -1725,7 +1703,6 @@
             this.RB_ShipType_Cruiser.Name = "RB_ShipType_Cruiser";
             this.RB_ShipType_Cruiser.Size = new System.Drawing.Size(61, 21);
             this.RB_ShipType_Cruiser.TabIndex = 2;
-            this.RB_ShipType_Cruiser.TabStop = true;
             this.RB_ShipType_Cruiser.Tag = "3";
             this.RB_ShipType_Cruiser.Text = "Cruiser";
             this.RB_ShipType_Cruiser.UseVisualStyleBackColor = true;
@@ -1745,7 +1722,6 @@
             this.RB_ShipType_Destroyer.Name = "RB_ShipType_Destroyer";
             this.RB_ShipType_Destroyer.Size = new System.Drawing.Size(73, 21);
             this.RB_ShipType_Destroyer.TabIndex = 1;
-            this.RB_ShipType_Destroyer.TabStop = true;
             this.RB_ShipType_Destroyer.Tag = "2";
             this.RB_ShipType_Destroyer.Text = "Destroyer";
             this.RB_ShipType_Destroyer.UseVisualStyleBackColor = true;
@@ -1756,6 +1732,7 @@
             // RB_ShipType_Frigate
             // 
             this.RB_ShipType_Frigate.AutoSize = true;
+            this.RB_ShipType_Frigate.Checked = true;
             this.RB_ShipType_Frigate.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(0)))), ((int)(((byte)(0)))));
             this.RB_ShipType_Frigate.FlatAppearance.BorderSize = 2;
             this.RB_ShipType_Frigate.FlatAppearance.CheckedBackColor = System.Drawing.Color.Maroon;
@@ -1779,7 +1756,8 @@
             this.MS_MapCreate.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.MS_MapCreate.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MS_MapCreate.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_MC_File});
+            this.TSMI_MC_File,
+            this.infoToolStripMenuItem});
             this.MS_MapCreate.Location = new System.Drawing.Point(0, 0);
             this.MS_MapCreate.Name = "MS_MapCreate";
             this.MS_MapCreate.Size = new System.Drawing.Size(530, 24);
@@ -1789,12 +1767,21 @@
             // TSMI_MC_File
             // 
             this.TSMI_MC_File.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_MC_AllwaysOnTop,
             this.TSMI_MC_SchematicOptions});
             this.TSMI_MC_File.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TSMI_MC_File.ForeColor = System.Drawing.Color.White;
+            this.TSMI_MC_File.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_MC_File.Name = "TSMI_MC_File";
             this.TSMI_MC_File.Size = new System.Drawing.Size(36, 20);
             this.TSMI_MC_File.Text = "File";
+            // 
+            // TSMI_MC_AllwaysOnTop
+            // 
+            this.TSMI_MC_AllwaysOnTop.CheckOnClick = true;
+            this.TSMI_MC_AllwaysOnTop.Name = "TSMI_MC_AllwaysOnTop";
+            this.TSMI_MC_AllwaysOnTop.Size = new System.Drawing.Size(200, 22);
+            this.TSMI_MC_AllwaysOnTop.Text = "Allways on top";
+            this.TSMI_MC_AllwaysOnTop.CheckedChanged += new System.EventHandler(this.TSMI_MC_AllwaysOnTop_CheckedChanged);
             // 
             // TSMI_MC_SchematicOptions
             // 
@@ -1807,6 +1794,23 @@
             this.TSMI_MC_SchematicOptions.Size = new System.Drawing.Size(200, 22);
             this.TSMI_MC_SchematicOptions.Text = "Disable schematic options";
             this.TSMI_MC_SchematicOptions.CheckedChanged += new System.EventHandler(this.TSMI_MC_SchematicOptions_CheckedChanged);
+            // 
+            // infoToolStripMenuItem
+            // 
+            this.infoToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_MC_OpenManual});
+            this.infoToolStripMenuItem.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 9F);
+            this.infoToolStripMenuItem.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.infoToolStripMenuItem.Name = "infoToolStripMenuItem";
+            this.infoToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.infoToolStripMenuItem.Text = "Info";
+            // 
+            // TSMI_MC_OpenManual
+            // 
+            this.TSMI_MC_OpenManual.Name = "TSMI_MC_OpenManual";
+            this.TSMI_MC_OpenManual.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_MC_OpenManual.Text = "Open manual";
+            this.TSMI_MC_OpenManual.Click += new System.EventHandler(this.TSMI_MC_OpenManual_Click);
             // 
             // OFD_MapCreate
             // 
@@ -1822,6 +1826,7 @@
             this.Font = new System.Drawing.Font("Franklin Gothic Demi", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.KeyPreview = true;
             this.MainMenuStrip = this.MS_MapCreate;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MapCreate";
@@ -1974,5 +1979,8 @@
         private System.Windows.Forms.Label L_Info_Status;
         private System.Windows.Forms.GroupBox GB_Example;
         private System.Windows.Forms.Button BS_AO_GetMap;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_MC_AllwaysOnTop;
+        private System.Windows.Forms.ToolStripMenuItem infoToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_MC_OpenManual;
     }
 }
