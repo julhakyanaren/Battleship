@@ -149,7 +149,7 @@ namespace Battleship
                 int x = random.Next(10);
                 int y = random.Next(10);
                 int coord = 0;
-                int orientation = random.Next(2);
+                int orientation = /*random.Next(2);*/ 1;
                 if (IsValidPlacement(map, x, y, shipSize, orientation))
                 {
                     for (int i = 0; i < shipSize; i++)
@@ -162,7 +162,7 @@ namespace Battleship
                         else
                         {
                             map[x, y + i] = shipSymbol;
-                            coord = (y + i) * 10 + x;
+                            coord = (x + i) * 10 + y;
                         }
                         switch (shipSymbol)
                         {
@@ -198,7 +198,6 @@ namespace Battleship
             PlaceEnemyShip(map, 'b', 4, 0);
             PlaceEnemyShip(map, 'c', 3, 0);
             PlaceEnemyShip(map, 'c', 3, 1);
-            PlaceEnemyShip(map, 'c', 3, 2);
             PlaceEnemyShip(map, 'd', 2, 0);
             PlaceEnemyShip(map, 'd', 2, 1);
             PlaceEnemyShip(map, 'd', 2, 2);

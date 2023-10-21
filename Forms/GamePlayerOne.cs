@@ -333,7 +333,6 @@ namespace Battleship
                 enemyButtons[b].BackColor = colors[b];
             }
             Map.SetShipsCountThrowMap(map);
-            /**/
             TB_EnemyFrigate.Text = $"{EnemyData.FrigatesCountCurrent}";
             TB_EnemyDestroyer.Text = $"{EnemyData.DestroyersCountCurrent}";
             TB_EnemyCruiser.Text = $"{EnemyData.CruiserCountCurrent}";
@@ -598,11 +597,16 @@ namespace Battleship
                 if (DialogResult == DialogResult.Yes)
                 {
                     StartBattleShip();
+                    //for (int i = 0; i < MapButtons.GetLength(1); i++)
+                    //{
+                    //    Button targetButton = MapButtons[1, i];
+                    //    targetButton.BackColor = Color.White;
+                    //    targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
+                    //}
                     for (int i = 0; i < MapButtons.GetLength(1); i++)
                     {
-                        Button targetButton = MapButtons[1, i];
-                        targetButton.BackColor = Color.White;
-                        targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
+                        Button targetButtonTest = MapButtons[1, i];
+                        targetButtonTest.Text = (Convert.ToInt32(targetButtonTest.Tag.ToString()) % 100).ToString();
                     }
                 }
                 else
@@ -659,13 +663,15 @@ namespace Battleship
                 string b_coords = "Battleships\r\n";
                 for (int f = 0; f < 4; f++)
                 {
-                    f_coords += $"{EnemyData.FrigateCoords[f, 0]}\r\n";
+                    f_coords += $"{EnemyData.FrigateCoords[f, 0]}\t";
+                    f_coords += Position.GetButtonTextCoords(MapButtons[1, EnemyData.FrigateCoords[f, 0]], out int id) + "\r\n";
                 }
                 for (int d0 = 0; d0 < 3; d0++)
                 {
                     for (int d1 = 0; d1 < 2; d1++)
                     {
-                        d_coords += $"{EnemyData.DestroyerCoords[d0, d1]}\r\n";
+                        d_coords += $"{EnemyData.DestroyerCoords[d0, d1]}\t";
+                        d_coords += Position.GetButtonTextCoords(MapButtons[1, EnemyData.DestroyerCoords[d0, d1]], out int id) + "\r\n";
                     }
                     d_coords += "////\r\n";
                 }
@@ -673,13 +679,15 @@ namespace Battleship
                 {
                     for (int c1 = 0; c1 < 3; c1++)
                     {
-                        c_coords += $"{EnemyData.CruiserCoords[c0, c1]}\r\n";
+                        c_coords += $"{EnemyData.CruiserCoords[c0, c1]}\t";
+                        c_coords += Position.GetButtonTextCoords(MapButtons[1, EnemyData.CruiserCoords[c0, c1]], out int id) + "\r\n";
                     }
                     c_coords += "////\r\n";
                 }
                 for (int b = 0; b < 4; b++)
                 {
-                    b_coords += $"{EnemyData.BattleshipCoords[0, b]}\r\n";
+                    b_coords += $"{EnemyData.BattleshipCoords[0, b]}\t";
+                    b_coords += Position.GetButtonTextCoords(MapButtons[1, EnemyData.BattleshipCoords[0, b]], out int id) + "\r\n";
                 }
                 string message = $"{f_coords}\r\n{d_coords}\r\n{c_coords}\r\n{b_coords}";
                 MessageBox.Show($"{message}", "Battleship Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
