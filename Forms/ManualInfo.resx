@@ -133,4 +133,7 @@ There are 4 types of boats.
 Between the cells of two ships there must be a distance of at least 1 cell.
 </value>
   </data>
+  <metadata name="SFD_ManualInfo.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
+  </metadata>
 </root>

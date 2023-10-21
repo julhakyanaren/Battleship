@@ -44,8 +44,9 @@
             this.L_MI_SelectDestroyer = new System.Windows.Forms.Label();
             this.L_MI_SelectFrigate = new System.Windows.Forms.Label();
             this.TB_Info = new System.Windows.Forms.TextBox();
-            this.PB_IMB_DownloadPDF = new System.Windows.Forms.PictureBox();
             this.L_Info_DownloadPDF = new System.Windows.Forms.Label();
+            this.PB_IMB_DownloadPDF = new System.Windows.Forms.PictureBox();
+            this.SFD_ManualInfo = new System.Windows.Forms.SaveFileDialog();
             this.GB_MI_MapEditor.SuspendLayout();
             this.GB_MI_ShipType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).BeginInit();
@@ -245,21 +246,6 @@
             this.TB_Info.Tag = "1";
             this.TB_Info.Text = resources.GetString("TB_Info.Text");
             // 
-            // PB_IMB_DownloadPDF
-            // 
-            this.PB_IMB_DownloadPDF.BackColor = System.Drawing.Color.Orange;
-            this.PB_IMB_DownloadPDF.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.PB_IMB_DownloadPDF.Image = global::Battleship.Properties.Resources.Download_PDF;
-            this.PB_IMB_DownloadPDF.Location = new System.Drawing.Point(239, 253);
-            this.PB_IMB_DownloadPDF.Name = "PB_IMB_DownloadPDF";
-            this.PB_IMB_DownloadPDF.Size = new System.Drawing.Size(33, 33);
-            this.PB_IMB_DownloadPDF.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.PB_IMB_DownloadPDF.TabIndex = 6;
-            this.PB_IMB_DownloadPDF.TabStop = false;
-            this.PB_IMB_DownloadPDF.WaitOnLoad = true;
-            this.PB_IMB_DownloadPDF.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PB_IMB_DownloadPDF_MouseDown);
-            this.PB_IMB_DownloadPDF.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PB_IMB_DownloadPDF_MouseUp);
-            // 
             // L_Info_DownloadPDF
             // 
             this.L_Info_DownloadPDF.AutoSize = true;
@@ -269,6 +255,22 @@
             this.L_Info_DownloadPDF.Size = new System.Drawing.Size(153, 17);
             this.L_Info_DownloadPDF.TabIndex = 6;
             this.L_Info_DownloadPDF.Text = "Insert ship in selected position";
+            // 
+            // PB_IMB_DownloadPDF
+            // 
+            this.PB_IMB_DownloadPDF.BackColor = System.Drawing.Color.Black;
+            this.PB_IMB_DownloadPDF.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.PB_IMB_DownloadPDF.Image = global::Battleship.Properties.Resources.Download_PDF;
+            this.PB_IMB_DownloadPDF.Location = new System.Drawing.Point(239, 253);
+            this.PB_IMB_DownloadPDF.Name = "PB_IMB_DownloadPDF";
+            this.PB_IMB_DownloadPDF.Size = new System.Drawing.Size(33, 33);
+            this.PB_IMB_DownloadPDF.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.PB_IMB_DownloadPDF.TabIndex = 6;
+            this.PB_IMB_DownloadPDF.TabStop = false;
+            this.PB_IMB_DownloadPDF.WaitOnLoad = true;
+            this.PB_IMB_DownloadPDF.Click += new System.EventHandler(this.PB_IMB_DownloadPDF_Click);
+            this.PB_IMB_DownloadPDF.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PB_IMB_DownloadPDF_MouseDown);
+            this.PB_IMB_DownloadPDF.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PB_IMB_DownloadPDF_MouseUp);
             // 
             // ManualInfo
             // 
@@ -315,5 +317,6 @@
         public System.Windows.Forms.TextBox TB_Info;
         private System.Windows.Forms.PictureBox PB_IMB_DownloadPDF;
         private System.Windows.Forms.Label L_Info_DownloadPDF;
+        private System.Windows.Forms.SaveFileDialog SFD_ManualInfo;
     }
 }
