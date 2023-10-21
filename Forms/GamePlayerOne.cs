@@ -123,10 +123,14 @@ namespace Battleship
             {
                 Map.SetShipCharThrowColor(id, MapButtons);
             }
+            Array.Resize(ref PlayerData.Map, MapButtons.GetLength(1));
+            Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
             for (int vb = 0; vb < 100; vb++)
             {
                 await Task.Delay(0);
                 MapButtons[0, vb].Visible = true;
+                //PlayerData.Map[vb] = ColorMethods.SetCharThrowColor(0, MapButtons[0, vb].BackColor);
+                //EnemyData.Map[vb] = ColorMethods.SetCharThrowColor(1, MapButtons[1, vb].BackColor);
                 MapButtons[1, vb].Visible = true;
             }
             TSMI_Map.Enabled = true;
@@ -258,7 +262,6 @@ namespace Battleship
                                         break;
                                     }
                             }
-                            TB_DebugShowShip.Text = ship;
                         }
                         break;
                     }
@@ -597,16 +600,11 @@ namespace Battleship
                 if (DialogResult == DialogResult.Yes)
                 {
                     StartBattleShip();
-                    //for (int i = 0; i < MapButtons.GetLength(1); i++)
-                    //{
-                    //    Button targetButton = MapButtons[1, i];
-                    //    targetButton.BackColor = Color.White;
-                    //    targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
-                    //}
                     for (int i = 0; i < MapButtons.GetLength(1); i++)
                     {
-                        Button targetButtonTest = MapButtons[1, i];
-                        targetButtonTest.Text = (Convert.ToInt32(targetButtonTest.Tag.ToString()) % 100).ToString();
+                        Button targetButton = MapButtons[1, i];
+                        targetButton.BackColor = Color.White;
+                        targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
                     }
                 }
                 else
@@ -655,43 +653,49 @@ namespace Battleship
 
         private void TSMI_ShowEnemyShipsCoords_Click(object sender, EventArgs e)
         {
-            if (DebugTools.DebugMode)
+            try
             {
-                string f_coords = "Frigates:\r\n";
-                string d_coords = "Destroyers:\r\n";
-                string c_coords = "Cruisers:\r\n";
-                string b_coords = "Battleships\r\n";
-                for (int f = 0; f < 4; f++)
+                if (DebugTools.DebugMode)
                 {
-                    f_coords += $"{EnemyData.FrigateCoords[f, 0]}\t";
-                    f_coords += Position.GetButtonTextCoords(MapButtons[1, EnemyData.FrigateCoords[f, 0]], out int id) + "\r\n";
-                }
-                for (int d0 = 0; d0 < 3; d0++)
-                {
-                    for (int d1 = 0; d1 < 2; d1++)
+                    string f_coords = "Frigates:\r\n";
+                    string d_coords = "Destroyers:\r\n";
+                    string c_coords = "Cruisers:\r\n";
+                    string b_coords = "Battleships\r\n";
+                    for (int f = 0; f < 4; f++)
                     {
-                        d_coords += $"{EnemyData.DestroyerCoords[d0, d1]}\t";
-                        d_coords += Position.GetButtonTextCoords(MapButtons[1, EnemyData.DestroyerCoords[d0, d1]], out int id) + "\r\n";
+                        f_coords += $"{EnemyData.FrigateCoords[f, 0]}\t";
+                        f_coords += Position.TextCoordThrowIndex(EnemyData.FrigateCoords[f, 0]) + "\r\n";
                     }
-                    d_coords += "////\r\n";
-                }
-                for (int c0 = 0; c0 < 2; c0++)
-                {
-                    for (int c1 = 0; c1 < 3; c1++)
+                    for (int d0 = 0; d0 < 3; d0++)
                     {
-                        c_coords += $"{EnemyData.CruiserCoords[c0, c1]}\t";
-                        c_coords += Position.GetButtonTextCoords(MapButtons[1, EnemyData.CruiserCoords[c0, c1]], out int id) + "\r\n";
+                        for (int d1 = 0; d1 < 2; d1++)
+                        {
+                            d_coords += $"{EnemyData.DestroyerCoords[d0, d1]}\t";
+                            d_coords += Position.TextCoordThrowIndex(EnemyData.DestroyerCoords[d0,d1]) + "\r\n";
+                        }
+                        d_coords += "////\r\n";
                     }
-                    c_coords += "////\r\n";
+                    for (int c0 = 0; c0 < 2; c0++)
+                    {
+                        for (int c1 = 0; c1 < 3; c1++)
+                        {
+                            c_coords += $"{EnemyData.CruiserCoords[c0, c1]}\t";
+                            c_coords += Position.TextCoordThrowIndex(EnemyData.CruiserCoords[c0, c1]) + "\r\n";
+                        }
+                        c_coords += "////\r\n";
+                    }
+                    for (int b = 0; b < 4; b++)
+                    {
+                        b_coords += $"{EnemyData.BattleshipCoords[0, b]}\t";
+                        b_coords += Position.TextCoordThrowIndex(EnemyData.BattleshipCoords[0, b]) + "\r\n";
+                    }
+                    string message = $"{f_coords}\r\n{d_coords}\r\n{c_coords}\r\n{b_coords}";
+                    MessageBox.Show($"{message}", "Battleship Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-                for (int b = 0; b < 4; b++)
-                {
-                    b_coords += $"{EnemyData.BattleshipCoords[0, b]}\t";
-                    b_coords += Position.GetButtonTextCoords(MapButtons[1, EnemyData.BattleshipCoords[0, b]], out int id) + "\r\n";
-                }
-                string message = $"{f_coords}\r\n{d_coords}\r\n{c_coords}\r\n{b_coords}";
-                MessageBox.Show($"{message}", "Battleship Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                TB_DebugShowShip.Visible = true;
+            }
+            catch(Exception ex1)
+            {
+                MessageBox.Show($"{ex1}", "Exception",MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
     }

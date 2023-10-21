@@ -432,5 +432,11 @@ namespace Battleship
         {
             return oldTag + (10 * dy) + dx;
         }
+        public string TextCoordThrowIndex(int index)
+        {
+            int y = index / 10;
+            int x = index % 10;
+            return $"{Convert.ToChar(y + 65)}{x+1}";
+        }
     }
 }
