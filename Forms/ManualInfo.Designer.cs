@@ -48,6 +48,7 @@
             this.PB_IMB_DownloadPDF = new System.Windows.Forms.PictureBox();
             this.PGB_Progress = new System.Windows.Forms.ProgressBar();
             this.L_Info_Progress = new System.Windows.Forms.Label();
+            this.TB_Info = new System.Windows.Forms.TextBox();
             this.GB_MI_MapEditor.SuspendLayout();
             this.GB_MI_ShipType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).BeginInit();
@@ -276,16 +277,31 @@
             this.L_Info_Progress.TabIndex = 47;
             this.L_Info_Progress.Text = "0% complete";
             // 
+            // TB_Info
+            // 
+            this.TB_Info.BackColor = System.Drawing.Color.Black;
+            this.TB_Info.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_Info.ForeColor = System.Drawing.Color.Orange;
+            this.TB_Info.Location = new System.Drawing.Point(284, 18);
+            this.TB_Info.Multiline = true;
+            this.TB_Info.Name = "TB_Info";
+            this.TB_Info.ReadOnly = true;
+            this.TB_Info.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
+            this.TB_Info.Size = new System.Drawing.Size(466, 333);
+            this.TB_Info.TabIndex = 5;
+            this.TB_Info.Tag = "1";
+            // 
             // ManualInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(5F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(762, 455);
+            this.ClientSize = new System.Drawing.Size(762, 360);
             this.Controls.Add(this.L_Info_Progress);
             this.Controls.Add(this.PGB_Progress);
             this.Controls.Add(this.L_Info_DownloadPDF);
             this.Controls.Add(this.PB_IMB_DownloadPDF);
+            this.Controls.Add(this.TB_Info);
             this.Controls.Add(this.GB_MI_MapEditor);
             this.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.Orange;
@@ -325,5 +341,6 @@
         private System.Windows.Forms.SaveFileDialog SFD_ManualInfo;
         private System.Windows.Forms.ProgressBar PGB_Progress;
         private System.Windows.Forms.Label L_Info_Progress;
+        public System.Windows.Forms.TextBox TB_Info;
     }
 }

@@ -3,7 +3,6 @@ using System.Drawing;
 using System.IO;
 using System.Net.Http;
 using System.Windows.Forms;
-using PD
 
 namespace Battleship.Forms
 {
@@ -77,22 +76,13 @@ namespace Battleship.Forms
         }
         public void ShowPDF()
         {
-            using (var pdfDocument = PdfDocument.Load(localFilePath))
-            {
-                using (var form = new Form())
-                {
-                    form.Text = "PDF Viewer";
-                    form.Size = new System.Drawing.Size(800, 600);
+            string filename = Application.StartupPath;
 
-                    var pdfView = new PdfViewer();
-                    pdfView.Dock = DockStyle.Fill;
-                    pdfView.Load(pdfDocument);
+            filename = Path.GetFullPath(
 
-                    form.Controls.Add(pdfView);
+                Path.Combine(filename, ".\\Manual.pdf"));
 
-                    Application.Run(form);
-                }
-            }
+            webBrowser1.Navigate(filename);
         }
         private void PB_IMB_DownloadPDF_Click(object sender, EventArgs e)
         {
@@ -114,10 +104,16 @@ namespace Battleship.Forms
                     {
                         PGB_Progress.Value = 0;
                         L_Info_DownloadPDF.Text = "0% complete";
-                        PDF_Reader.Visible = true;
+                        webBrowser1.Visible = true;
+                        ShowPDF();
                     }
                 }
             }
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            ShowPDF();
         }
     }
 }
