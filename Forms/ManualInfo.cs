@@ -38,7 +38,7 @@ namespace Battleship.Forms
         }
         public async void DownloadPDF()
         {
-            SFD_ManualInfo.Filter = "PDF Files|*.pdf";
+            SFD_ManualInfo.Filter = "MS Word|*.docx";
             SFD_ManualInfo.FileName = Data.ManualName;
             if (SFD_ManualInfo.ShowDialog() == DialogResult.OK)
             {
@@ -87,8 +87,18 @@ namespace Battleship.Forms
             DialogResult = MessageBox.Show("Download manual?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (DialogResult == DialogResult.Yes)
             {
-                PNL_MI_ProgressUnit.Visible = true;
-                DownloadPDF();
+                try
+                {
+                    DownloadPDF();
+                }
+                catch
+                {
+                    //Error_Catch
+                }
+                finally
+                {
+                    PGB_Progress.Value = 0;
+                }
             }
         }
     }

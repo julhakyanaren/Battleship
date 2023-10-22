@@ -47,14 +47,11 @@
             this.L_Info_DownloadPDF = new System.Windows.Forms.Label();
             this.SFD_ManualInfo = new System.Windows.Forms.SaveFileDialog();
             this.PB_IMB_DownloadPDF = new System.Windows.Forms.PictureBox();
-            this.PNL_MI_ProgressBar = new System.Windows.Forms.Panel();
-            this.PNL_MI_ProgressUnit = new System.Windows.Forms.Panel();
             this.PGB_Progress = new System.Windows.Forms.ProgressBar();
             this.L_Info_Progress = new System.Windows.Forms.Label();
             this.GB_MI_MapEditor.SuspendLayout();
             this.GB_MI_ShipType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).BeginInit();
-            this.PNL_MI_ProgressBar.SuspendLayout();
             this.SuspendLayout();
             // 
             // L_MI_OrientationChanger
@@ -277,23 +274,6 @@
             this.PB_IMB_DownloadPDF.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PB_IMB_DownloadPDF_MouseDown);
             this.PB_IMB_DownloadPDF.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PB_IMB_DownloadPDF_MouseUp);
             // 
-            // PNL_MI_ProgressBar
-            // 
-            this.PNL_MI_ProgressBar.Controls.Add(this.PNL_MI_ProgressUnit);
-            this.PNL_MI_ProgressBar.Location = new System.Drawing.Point(12, 329);
-            this.PNL_MI_ProgressBar.Name = "PNL_MI_ProgressBar";
-            this.PNL_MI_ProgressBar.Size = new System.Drawing.Size(266, 22);
-            this.PNL_MI_ProgressBar.TabIndex = 45;
-            // 
-            // PNL_MI_ProgressUnit
-            // 
-            this.PNL_MI_ProgressUnit.BackColor = System.Drawing.Color.Orange;
-            this.PNL_MI_ProgressUnit.Location = new System.Drawing.Point(0, 0);
-            this.PNL_MI_ProgressUnit.Name = "PNL_MI_ProgressUnit";
-            this.PNL_MI_ProgressUnit.Size = new System.Drawing.Size(10, 22);
-            this.PNL_MI_ProgressUnit.TabIndex = 45;
-            this.PNL_MI_ProgressUnit.Visible = false;
-            // 
             // PGB_Progress
             // 
             this.PGB_Progress.ForeColor = System.Drawing.Color.DarkOrange;
@@ -320,7 +300,6 @@
             this.ClientSize = new System.Drawing.Size(762, 455);
             this.Controls.Add(this.L_Info_Progress);
             this.Controls.Add(this.PGB_Progress);
-            this.Controls.Add(this.PNL_MI_ProgressBar);
             this.Controls.Add(this.L_Info_DownloadPDF);
             this.Controls.Add(this.PB_IMB_DownloadPDF);
             this.Controls.Add(this.TB_Info);
@@ -337,7 +316,6 @@
             this.GB_MI_ShipType.ResumeLayout(false);
             this.GB_MI_ShipType.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).EndInit();
-            this.PNL_MI_ProgressBar.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -363,8 +341,6 @@
         private System.Windows.Forms.PictureBox PB_IMB_DownloadPDF;
         private System.Windows.Forms.Label L_Info_DownloadPDF;
         private System.Windows.Forms.SaveFileDialog SFD_ManualInfo;
-        private System.Windows.Forms.Panel PNL_MI_ProgressBar;
-        private System.Windows.Forms.Panel PNL_MI_ProgressUnit;
         private System.Windows.Forms.ProgressBar PGB_Progress;
         private System.Windows.Forms.Label L_Info_Progress;
     }
