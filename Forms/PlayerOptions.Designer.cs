@@ -138,7 +138,7 @@
             "Easy",
             "Medium",
             "Hard",
-            "Extrimal"});
+            "Extremal"});
             this.CB_Difficulty.Location = new System.Drawing.Point(72, 191);
             this.CB_Difficulty.Name = "CB_Difficulty";
             this.CB_Difficulty.Size = new System.Drawing.Size(221, 25);

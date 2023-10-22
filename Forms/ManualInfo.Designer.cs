@@ -45,8 +45,8 @@
             this.L_MI_SelectFrigate = new System.Windows.Forms.Label();
             this.TB_Info = new System.Windows.Forms.TextBox();
             this.L_Info_DownloadPDF = new System.Windows.Forms.Label();
-            this.PB_IMB_DownloadPDF = new System.Windows.Forms.PictureBox();
             this.SFD_ManualInfo = new System.Windows.Forms.SaveFileDialog();
+            this.PB_IMB_DownloadPDF = new System.Windows.Forms.PictureBox();
             this.GB_MI_MapEditor.SuspendLayout();
             this.GB_MI_ShipType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).BeginInit();
@@ -284,6 +284,7 @@
             this.Controls.Add(this.GB_MI_MapEditor);
             this.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.Orange;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.Name = "ManualInfo";
             this.Text = "Manual";
