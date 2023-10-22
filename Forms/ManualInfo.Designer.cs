@@ -43,7 +43,6 @@
             this.TB_ShipType_Frigate = new System.Windows.Forms.TextBox();
             this.L_MI_SelectDestroyer = new System.Windows.Forms.Label();
             this.L_MI_SelectFrigate = new System.Windows.Forms.Label();
-            this.TB_Info = new System.Windows.Forms.TextBox();
             this.L_Info_DownloadPDF = new System.Windows.Forms.Label();
             this.SFD_ManualInfo = new System.Windows.Forms.SaveFileDialog();
             this.PB_IMB_DownloadPDF = new System.Windows.Forms.PictureBox();
@@ -233,21 +232,6 @@
             this.L_MI_SelectFrigate.TabIndex = 6;
             this.L_MI_SelectFrigate.Text = "Select ship type: Frigate";
             // 
-            // TB_Info
-            // 
-            this.TB_Info.BackColor = System.Drawing.Color.Black;
-            this.TB_Info.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_Info.ForeColor = System.Drawing.Color.Orange;
-            this.TB_Info.Location = new System.Drawing.Point(284, 18);
-            this.TB_Info.Multiline = true;
-            this.TB_Info.Name = "TB_Info";
-            this.TB_Info.ReadOnly = true;
-            this.TB_Info.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TB_Info.Size = new System.Drawing.Size(466, 333);
-            this.TB_Info.TabIndex = 5;
-            this.TB_Info.Tag = "1";
-            this.TB_Info.Text = resources.GetString("TB_Info.Text");
-            // 
             // L_Info_DownloadPDF
             // 
             this.L_Info_DownloadPDF.AutoSize = true;
@@ -302,7 +286,6 @@
             this.Controls.Add(this.PGB_Progress);
             this.Controls.Add(this.L_Info_DownloadPDF);
             this.Controls.Add(this.PB_IMB_DownloadPDF);
-            this.Controls.Add(this.TB_Info);
             this.Controls.Add(this.GB_MI_MapEditor);
             this.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.Orange;
@@ -337,7 +320,6 @@
         public System.Windows.Forms.TextBox TB_ShipType_Destroyer;
         public System.Windows.Forms.TextBox TB_ShipType_Frigate;
         private System.Windows.Forms.Label L_MI_SelectDestroyer;
-        public System.Windows.Forms.TextBox TB_Info;
         private System.Windows.Forms.PictureBox PB_IMB_DownloadPDF;
         private System.Windows.Forms.Label L_Info_DownloadPDF;
         private System.Windows.Forms.SaveFileDialog SFD_ManualInfo;

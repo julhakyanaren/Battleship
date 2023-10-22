@@ -1,15 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.IO;
-using System.Linq;
 using System.Net.Http;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using PD
 
 namespace Battleship.Forms
 {
@@ -81,7 +75,25 @@ namespace Battleship.Forms
                 L_Info_Progress.Text = $"{percenentage}% complete";
             }
         }
+        public void ShowPDF()
+        {
+            using (var pdfDocument = PdfDocument.Load(localFilePath))
+            {
+                using (var form = new Form())
+                {
+                    form.Text = "PDF Viewer";
+                    form.Size = new System.Drawing.Size(800, 600);
 
+                    var pdfView = new PdfViewer();
+                    pdfView.Dock = DockStyle.Fill;
+                    pdfView.Load(pdfDocument);
+
+                    form.Controls.Add(pdfView);
+
+                    Application.Run(form);
+                }
+            }
+        }
         private void PB_IMB_DownloadPDF_Click(object sender, EventArgs e)
         {
             DialogResult = MessageBox.Show("Download manual?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -97,7 +109,13 @@ namespace Battleship.Forms
                 }
                 finally
                 {
-                    PGB_Progress.Value = 0;
+                    DialogResult = MessageBox.Show("Manual Completed", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    if (DialogResult == DialogResult.OK)
+                    {
+                        PGB_Progress.Value = 0;
+                        L_Info_DownloadPDF.Text = "0% complete";
+                        PDF_Reader.Visible = true;
+                    }
                 }
             }
         }

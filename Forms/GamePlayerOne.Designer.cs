@@ -2044,7 +2044,7 @@
             this.TSMI_OpenMapEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_OpenMapEditor.ForeColor = System.Drawing.Color.Black;
             this.TSMI_OpenMapEditor.Name = "TSMI_OpenMapEditor";
-            this.TSMI_OpenMapEditor.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_OpenMapEditor.Size = new System.Drawing.Size(155, 22);
             this.TSMI_OpenMapEditor.Text = "Open Map Editor";
             this.TSMI_OpenMapEditor.Click += new System.EventHandler(this.TSMI_OpenMapEditor_Click);
             // 
