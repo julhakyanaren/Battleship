@@ -32,6 +32,10 @@ namespace Battleship
 
         public static bool RandomMap = false;
 
+        public static string ManualUrl = "https://github.com/julhakyanaren/Battleship/blob/3ef937970aaaea00e7608d921d506b951032e0c2/Battleship%20Manual.pdf";
+        public static string ManualName = "Manual.pdf";
+
+
         public static char[,] SetShipsChars()
         {
             char[,] chars = new char[2, 4];

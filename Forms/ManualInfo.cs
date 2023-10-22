@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.IO;
 using System.Linq;
+using System.Net.Http;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
@@ -40,7 +42,25 @@ namespace Battleship.Forms
             DialogResult = MessageBox.Show("Download manual?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (DialogResult == DialogResult.Yes)
             {
-
+                SFD_ManualInfo.Filter = "PDF Files|*.pdf";
+                SFD_ManualInfo.FileName = Data.ManualName;
+                if (SFD_ManualInfo.ShowDialog() == DialogResult.OK)
+                {
+                    string savePath = SFD_ManualInfo.FileName;
+                    using (HttpClient httpClient = new HttpClient())
+                    {
+                        var response = httpClient.GetAsync(Data.ManualUrl).Result;
+                        if (response.IsSuccessStatusCode)
+                        {
+                            using (var fileStream = new FileStream(savePath, FileMode.Create))
+                            {
+                                var contentStream = response.Content.ReadAsStreamAsync().Result;
+                                contentStream.CopyTo(fileStream);
+                            }
+                            MessageBox.Show("SUCCESS");
+                        }
+                    }
+                }
             }
         }
     }
