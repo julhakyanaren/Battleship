@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Plugins");
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManualInfo));
             this.L_MI_OrientationChanger = new System.Windows.Forms.Label();
             this.TB_MI_ChangeOrientation = new System.Windows.Forms.TextBox();
@@ -49,10 +50,13 @@
             this.L_Info_Progress = new System.Windows.Forms.Label();
             this.PNL_MI_ProgressUnit = new System.Windows.Forms.Panel();
             this.PNL_MI_ProgressBar = new System.Windows.Forms.Panel();
+            this.GB_MI_Plugins = new System.Windows.Forms.GroupBox();
+            this.TV_MI_Pligins = new System.Windows.Forms.TreeView();
             this.GB_MI_MapEditor.SuspendLayout();
             this.GB_MI_ShipType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).BeginInit();
             this.PNL_MI_ProgressBar.SuspendLayout();
+            this.GB_MI_Plugins.SuspendLayout();
             this.SuspendLayout();
             // 
             // L_MI_OrientationChanger
@@ -287,12 +291,41 @@
             this.PNL_MI_ProgressBar.Size = new System.Drawing.Size(244, 22);
             this.PNL_MI_ProgressBar.TabIndex = 48;
             // 
+            // GB_MI_Plugins
+            // 
+            this.GB_MI_Plugins.Controls.Add(this.TV_MI_Pligins);
+            this.GB_MI_Plugins.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.GB_MI_Plugins.ForeColor = System.Drawing.Color.Orange;
+            this.GB_MI_Plugins.Location = new System.Drawing.Point(262, 12);
+            this.GB_MI_Plugins.Name = "GB_MI_Plugins";
+            this.GB_MI_Plugins.Size = new System.Drawing.Size(256, 225);
+            this.GB_MI_Plugins.TabIndex = 49;
+            this.GB_MI_Plugins.TabStop = false;
+            this.GB_MI_Plugins.Text = "Plugins Manager";
+            // 
+            // TV_MI_Pligins
+            // 
+            this.TV_MI_Pligins.BackColor = System.Drawing.Color.Black;
+            this.TV_MI_Pligins.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TV_MI_Pligins.ForeColor = System.Drawing.Color.Orange;
+            this.TV_MI_Pligins.Location = new System.Drawing.Point(3, 18);
+            this.TV_MI_Pligins.Name = "TV_MI_Pligins";
+            treeNode1.BackColor = System.Drawing.Color.Black;
+            treeNode1.ForeColor = System.Drawing.Color.Orange;
+            treeNode1.Name = "TVK_Plugins";
+            treeNode1.Text = "Plugins";
+            this.TV_MI_Pligins.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
+            treeNode1});
+            this.TV_MI_Pligins.Size = new System.Drawing.Size(250, 204);
+            this.TV_MI_Pligins.TabIndex = 0;
+            // 
             // ManualInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(5F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(273, 331);
+            this.ClientSize = new System.Drawing.Size(530, 331);
+            this.Controls.Add(this.GB_MI_Plugins);
             this.Controls.Add(this.PNL_MI_ProgressBar);
             this.Controls.Add(this.GB_MI_ShipType);
             this.Controls.Add(this.L_Info_Progress);
@@ -312,6 +345,7 @@
             this.GB_MI_ShipType.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).EndInit();
             this.PNL_MI_ProgressBar.ResumeLayout(false);
+            this.GB_MI_Plugins.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -339,5 +373,7 @@
         private System.Windows.Forms.Label L_Info_Progress;
         private System.Windows.Forms.Panel PNL_MI_ProgressUnit;
         private System.Windows.Forms.Panel PNL_MI_ProgressBar;
+        private System.Windows.Forms.GroupBox GB_MI_Plugins;
+        private System.Windows.Forms.TreeView TV_MI_Pligins;
     }
 }

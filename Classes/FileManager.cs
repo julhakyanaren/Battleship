@@ -11,5 +11,7 @@ namespace Battleship.Classes
         public static string ManualUrl = "https://raw.githubusercontent.com/julhakyanaren/Battleship/master/Manual.pdf";
         public static string ManualName = "Manual.pdf";
         public static string ManualSavePath;
+
+        public static bool SchematicSaveTool = false;
     }
 }

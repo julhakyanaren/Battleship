@@ -1,4 +1,5 @@
-﻿using Battleship.Forms;
+﻿using Battleship.Classes;
+using Battleship.Forms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
@@ -1426,9 +1427,14 @@ namespace Battleship
         }
         private void BS_AO_LoadSchematic_Click(object sender, EventArgs e)
         {
-            /**/
-            ProgressLoad();
-            /**/
+            if (FileManager.SchematicSaveTool)
+            {
+
+            }
+            else
+            {
+                Handlers.PluginNotIncluded("\"Schematic Tools\" plugin not included", Handlers.Manager[5]);
+            }
         }
         public async void ProgressLoad()
         {
@@ -1447,33 +1453,59 @@ namespace Battleship
 
         private void BS_AO_SaveSchematic_Click(object sender, EventArgs e)
         {
-            DialogResult drSave = new DialogResult();
-            drSave = MessageBox.Show("SaveSchematic", "Schematic Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (FileManager.SchematicSaveTool)
+            {
+                DialogResult drSave = new DialogResult();
+                drSave = MessageBox.Show("SaveSchematic", "Schematic Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            }
+            else
+            {
+                Handlers.PluginNotIncluded("\"Schematic Tools\" plugin not included", Handlers.Manager[5]);
+            }
         }
 
         private void BS_AO_GetMap_Click(object sender, EventArgs e)
         {
-            DialogResult drGet = new DialogResult();
-            drGet = MessageBox.Show("Get a schematic map?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (drGet == DialogResult.Yes)
+            if (FileManager.SchematicSaveTool)
             {
-                if (TB_MapSchematic.Text.Length > 0)
+                DialogResult drGet = new DialogResult();
+                drGet = MessageBox.Show("Get a schematic map?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (drGet == DialogResult.Yes)
                 {
-                    char[] symbols = TB_MapSchematic.Text.ToCharArray();
-                    bool allSymbolsEquals = true;
-                    for (int s = 0; s < symbols.Length; s++)
+                    if (TB_MapSchematic.Text.Length > 0)
                     {
-                        if (symbols[s] != 'n')
+                        char[] symbols = TB_MapSchematic.Text.ToCharArray();
+                        bool allSymbolsEquals = true;
+                        for (int s = 0; s < symbols.Length; s++)
                         {
-                            allSymbolsEquals = false;
-                            break;
+                            if (symbols[s] != 'n')
+                            {
+                                allSymbolsEquals = false;
+                                break;
+                            }
                         }
-                    }
-                    if (!allSymbolsEquals)
-                    {
-                        if (!AllShipsTypeAreCorrect(symbols))
+                        if (!allSymbolsEquals)
                         {
-                            DialogResult = MessageBox.Show("Not all ships have been placed in this schematic map. Are you sure you want to continue?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                            if (!AllShipsTypeAreCorrect(symbols))
+                            {
+                                DialogResult = MessageBox.Show("Not all ships have been placed in this schematic map. Are you sure you want to continue?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+                                if (DialogResult == DialogResult.Yes)
+                                {
+                                    TB_AO_MapSchematic.ForeColor = Color.Yellow;
+                                    TB_AO_MapSchematic.Text = TB_MapSchematic.Text;
+                                    Schematic.Map = TB_AO_MapSchematic.Text;
+                                }
+                            }
+                            else
+                            {
+                                TB_AO_MapSchematic.ForeColor = Color.Lime;
+                                TB_AO_MapSchematic.Text = TB_MapSchematic.Text;
+                                Schematic.Map = TB_AO_MapSchematic.Text;
+                            }
+                        }
+                        else
+                        {
+                            DialogResult = MessageBox.Show("This schematic map is completely empty, are you sure you want to continue?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
                             if (DialogResult == DialogResult.Yes)
                             {
                                 TB_AO_MapSchematic.ForeColor = Color.Yellow;
@@ -1481,28 +1513,16 @@ namespace Battleship
                                 Schematic.Map = TB_AO_MapSchematic.Text;
                             }
                         }
-                        else
-                        {
-                            TB_AO_MapSchematic.ForeColor = Color.Lime;
-                            TB_AO_MapSchematic.Text = TB_MapSchematic.Text;
-                            Schematic.Map = TB_AO_MapSchematic.Text;
-                        }
                     }
                     else
                     {
-                        DialogResult = MessageBox.Show("This schematic map is completely empty, are you sure you want to continue?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-                        if (DialogResult == DialogResult.Yes)
-                        {
-                            TB_AO_MapSchematic.ForeColor = Color.Yellow;
-                            TB_AO_MapSchematic.Text = TB_MapSchematic.Text;
-                            Schematic.Map = TB_AO_MapSchematic.Text;
-                        }
+                        MessageBox.Show("Map schematic is empty!", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Map schematic is empty!", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                }
+            }
+            else
+            {
+                Handlers.PluginNotIncluded("\"Schematic Tools\" plugin not included", Handlers.Manager[5]);
             }
         }
         public bool AllShipsTypeAreCorrect(char[] symbols)
@@ -1559,7 +1579,14 @@ namespace Battleship
         }
         private void BS_AO_CheckSchematic_Click(object sender, EventArgs e)
         {
-            
+            if (FileManager.SchematicSaveTool)
+            {
+
+            }
+            else
+            {
+                Handlers.PluginNotIncluded("\"Schematic Tools\" plugin not included", Handlers.Manager[5]);
+            }
         }
         private void TSMI_MC_SchematicOptions_CheckedChanged(object sender, EventArgs e)
         {
@@ -1693,6 +1720,18 @@ namespace Battleship
         {
             ManualInfo manualInfo = new ManualInfo();
             manualInfo.Show();
+        }
+
+        private void BS_AO_UploadSchematic_Click(object sender, EventArgs e)
+        {
+            if (FileManager.SchematicSaveTool)
+            {
+
+            }
+            else
+            {
+                Handlers.PluginNotIncluded("\"Schematic Tools\" plugin not included", Handlers.Manager[5]);
+            }
         }
     }
 }

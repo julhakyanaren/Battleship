@@ -133,13 +133,13 @@
             this.RB_ShipType_Frigate = new System.Windows.Forms.RadioButton();
             this.MS_MapCreate = new System.Windows.Forms.MenuStrip();
             this.TSMI_MC_File = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_MC_AllwaysOnTop = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_MC_SchematicOptions = new System.Windows.Forms.ToolStripMenuItem();
             this.infoToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_MC_OpenManual = new System.Windows.Forms.ToolStripMenuItem();
             this.TT_MapCreate = new System.Windows.Forms.ToolTip(this.components);
             this.SFD_MapCreate = new System.Windows.Forms.SaveFileDialog();
             this.OFD_MapCreate = new System.Windows.Forms.OpenFileDialog();
-            this.TSMI_MC_AllwaysOnTop = new System.Windows.Forms.ToolStripMenuItem();
             this.TLP_MapsDivision.SuspendLayout();
             this.PNL_MC_Field.SuspendLayout();
             this.TLP_MC_Main_One.SuspendLayout();
@@ -1141,6 +1141,7 @@
             this.BS_AO_UploadSchematic.TabIndex = 40;
             this.BS_AO_UploadSchematic.Text = "Upload Schematic";
             this.BS_AO_UploadSchematic.UseVisualStyleBackColor = false;
+            this.BS_AO_UploadSchematic.Click += new System.EventHandler(this.BS_AO_UploadSchematic_Click);
             // 
             // L_Info_AO_MapSchematic
             // 
@@ -1775,6 +1776,14 @@
             this.TSMI_MC_File.Size = new System.Drawing.Size(36, 20);
             this.TSMI_MC_File.Text = "File";
             // 
+            // TSMI_MC_AllwaysOnTop
+            // 
+            this.TSMI_MC_AllwaysOnTop.CheckOnClick = true;
+            this.TSMI_MC_AllwaysOnTop.Name = "TSMI_MC_AllwaysOnTop";
+            this.TSMI_MC_AllwaysOnTop.Size = new System.Drawing.Size(200, 22);
+            this.TSMI_MC_AllwaysOnTop.Text = "Always on top";
+            this.TSMI_MC_AllwaysOnTop.CheckedChanged += new System.EventHandler(this.TSMI_MC_AllwaysOnTop_CheckedChanged);
+            // 
             // TSMI_MC_SchematicOptions
             // 
             this.TSMI_MC_SchematicOptions.BackColor = System.Drawing.Color.White;
@@ -1808,14 +1817,6 @@
             // 
             this.OFD_MapCreate.FileName = "openFileDialog1";
             // 
-            // TSMI_MC_AllwaysOnTop
-            // 
-            this.TSMI_MC_AllwaysOnTop.CheckOnClick = true;
-            this.TSMI_MC_AllwaysOnTop.Name = "TSMI_MC_AllwaysOnTop";
-            this.TSMI_MC_AllwaysOnTop.Size = new System.Drawing.Size(200, 22);
-            this.TSMI_MC_AllwaysOnTop.Text = "Always on top";
-            this.TSMI_MC_AllwaysOnTop.CheckedChanged += new System.EventHandler(this.TSMI_MC_AllwaysOnTop_CheckedChanged);
-            // 
             // MapCreate
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -1831,7 +1832,7 @@
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MapCreate";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "MapCreate";
+            this.Text = "Map Editor";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.MapCreate_FormClosed);
             this.Load += new System.EventHandler(this.MapCreate_Load);
             this.TLP_MapsDivision.ResumeLayout(false);

@@ -74,6 +74,7 @@
     <Compile Include="Classes\EnemyData.cs" />
     <Compile Include="Classes\Fight.cs" />
     <Compile Include="Classes\FileManager.cs" />
+    <Compile Include="Classes\Handlers.cs" />
     <Compile Include="Classes\Map.cs" />
     <Compile Include="Forms\ManualInfo.cs">
       <SubType>Form</SubType>
