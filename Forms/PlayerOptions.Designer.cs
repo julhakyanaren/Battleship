@@ -194,6 +194,7 @@
             this.Name = "PlayerOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User Data";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PlayerOptions_FormClosed);
             this.Load += new System.EventHandler(this.PlayerOptions_Load);
             this.TLP_PO_Main.ResumeLayout(false);
             this.PNL_PO_Main.ResumeLayout(false);

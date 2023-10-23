@@ -63,6 +63,26 @@ namespace Battleship.Properties {
         /// <summary>
         ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap About_MouseDown {
+            get {
+                object obj = ResourceManager.GetObject("About_MouseDown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap About_MouseUp {
+            get {
+                object obj = ResourceManager.GetObject("About_MouseUp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap Download_PDF {
             get {
                 object obj = ResourceManager.GetObject("Download_PDF", resourceCulture);
@@ -96,6 +116,46 @@ namespace Battleship.Properties {
         internal static System.Drawing.Bitmap Manual_Icon {
             get {
                 object obj = ResourceManager.GetObject("Manual_Icon", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NewGame_MouseDown {
+            get {
+                object obj = ResourceManager.GetObject("NewGame_MouseDown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap NewGame_MouseUp {
+            get {
+                object obj = ResourceManager.GetObject("NewGame_MouseUp", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Options_MouseDown {
+            get {
+                object obj = ResourceManager.GetObject("Options_MouseDown", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Поиск локализованного ресурса типа System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap Options_MouseUp {
+            get {
+                object obj = ResourceManager.GetObject("Options_MouseUp", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

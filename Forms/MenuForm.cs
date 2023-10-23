@@ -32,10 +32,15 @@ namespace Battleship
             /**/
             SetElementsParameters();
         }
-        private void BS_MM_NewGame_Click(object sender, EventArgs e)
+        private void BS_MM_About_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        private void PB_Button_NewGame_Click(object sender, EventArgs e)
         {
             DialogResult dr = new DialogResult();
-            dr = MessageBox.Show("Start new game ?","Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            dr = MessageBox.Show("Start new game ?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             switch (dr)
             {
                 case DialogResult.Yes:
@@ -52,7 +57,32 @@ namespace Battleship
             }
         }
 
-        private void BS_MM_About_Click(object sender, EventArgs e)
+        private void PB_Button_NewGame_MouseDown(object sender, MouseEventArgs e)
+        {
+            PB_Button_NewGame.Image = Properties.Resources.NewGame_MouseDown;
+        }
+
+        private void PB_Button_NewGame_MouseUp(object sender, MouseEventArgs e)
+        {
+            PB_Button_NewGame.Image = Properties.Resources.NewGame_MouseUp;
+        }
+        private void PB_Button_Options_MouseDown(object sender, MouseEventArgs e)
+        {
+            PB_Button_Options.Image = Properties.Resources.Options_MouseDown;
+        }
+        private void PB_Button_Options_MouseUp(object sender, MouseEventArgs e)
+        {
+            PB_Button_Options.Image = Properties.Resources.Options_MouseUp;
+        }
+        private void PB_Button_About_MouseDown(object sender, MouseEventArgs e)
+        {
+            PB_Button_About.Image = Properties.Resources.About_MouseDown;
+        }
+        private void PB_Button_About_MouseUp(object sender, MouseEventArgs e)
+        {
+            PB_Button_About.Image = Properties.Resources.About_MouseUp;
+        }
+        private void PB_Button_About_Click(object sender, EventArgs e)
         {
             DialogResult = MessageBox.Show("Opern manual ?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (DialogResult == DialogResult.Yes)

@@ -29,39 +29,61 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MenuForm));
-            this.BS_MM_NewGame = new System.Windows.Forms.Button();
-            this.BS_MM_About = new System.Windows.Forms.Button();
-            this.PB_MF_MainLogo = new System.Windows.Forms.PictureBox();
             this.L_Info_Version = new System.Windows.Forms.Label();
-            this.BS_MM_Options = new System.Windows.Forms.Button();
+            this.PB_Button_About = new System.Windows.Forms.PictureBox();
+            this.PB_Button_Options = new System.Windows.Forms.PictureBox();
+            this.PB_Button_NewGame = new System.Windows.Forms.PictureBox();
+            this.PB_MF_MainLogo = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Button_About)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Button_Options)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Button_NewGame)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.PB_MF_MainLogo)).BeginInit();
             this.SuspendLayout();
             // 
-            // BS_MM_NewGame
+            // L_Info_Version
             // 
-            this.BS_MM_NewGame.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_MM_NewGame.Font = new System.Drawing.Font("Franklin Gothic Heavy", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_MM_NewGame.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_MM_NewGame.Location = new System.Drawing.Point(58, 175);
-            this.BS_MM_NewGame.Name = "BS_MM_NewGame";
-            this.BS_MM_NewGame.Size = new System.Drawing.Size(417, 59);
-            this.BS_MM_NewGame.TabIndex = 1;
-            this.BS_MM_NewGame.Text = "New Game";
-            this.BS_MM_NewGame.UseVisualStyleBackColor = true;
-            this.BS_MM_NewGame.Click += new System.EventHandler(this.BS_MM_NewGame_Click);
+            this.L_Info_Version.AutoSize = true;
+            this.L_Info_Version.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.L_Info_Version.Location = new System.Drawing.Point(219, 434);
+            this.L_Info_Version.Name = "L_Info_Version";
+            this.L_Info_Version.Size = new System.Drawing.Size(52, 20);
+            this.L_Info_Version.TabIndex = 5;
+            this.L_Info_Version.Text = "Version";
             // 
-            // BS_MM_About
+            // PB_Button_About
             // 
-            this.BS_MM_About.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_MM_About.Font = new System.Drawing.Font("Franklin Gothic Heavy", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_MM_About.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_MM_About.Location = new System.Drawing.Point(58, 336);
-            this.BS_MM_About.Name = "BS_MM_About";
-            this.BS_MM_About.Size = new System.Drawing.Size(417, 57);
-            this.BS_MM_About.TabIndex = 3;
-            this.BS_MM_About.Text = "About";
-            this.BS_MM_About.UseVisualStyleBackColor = true;
-            this.BS_MM_About.Click += new System.EventHandler(this.BS_MM_About_Click);
+            this.PB_Button_About.Image = global::Battleship.Properties.Resources.About_MouseUp;
+            this.PB_Button_About.Location = new System.Drawing.Point(58, 338);
+            this.PB_Button_About.Name = "PB_Button_About";
+            this.PB_Button_About.Size = new System.Drawing.Size(417, 59);
+            this.PB_Button_About.TabIndex = 8;
+            this.PB_Button_About.TabStop = false;
+            this.PB_Button_About.Click += new System.EventHandler(this.PB_Button_About_Click);
+            this.PB_Button_About.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PB_Button_About_MouseDown);
+            this.PB_Button_About.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PB_Button_About_MouseUp);
+            // 
+            // PB_Button_Options
+            // 
+            this.PB_Button_Options.Image = global::Battleship.Properties.Resources.Options_MouseUp;
+            this.PB_Button_Options.Location = new System.Drawing.Point(58, 255);
+            this.PB_Button_Options.Name = "PB_Button_Options";
+            this.PB_Button_Options.Size = new System.Drawing.Size(417, 59);
+            this.PB_Button_Options.TabIndex = 7;
+            this.PB_Button_Options.TabStop = false;
+            this.PB_Button_Options.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PB_Button_Options_MouseDown);
+            this.PB_Button_Options.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PB_Button_Options_MouseUp);
+            // 
+            // PB_Button_NewGame
+            // 
+            this.PB_Button_NewGame.Image = global::Battleship.Properties.Resources.NewGame_MouseUp;
+            this.PB_Button_NewGame.Location = new System.Drawing.Point(58, 173);
+            this.PB_Button_NewGame.Name = "PB_Button_NewGame";
+            this.PB_Button_NewGame.Size = new System.Drawing.Size(417, 59);
+            this.PB_Button_NewGame.TabIndex = 6;
+            this.PB_Button_NewGame.TabStop = false;
+            this.PB_Button_NewGame.Click += new System.EventHandler(this.PB_Button_NewGame_Click);
+            this.PB_Button_NewGame.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PB_Button_NewGame_MouseDown);
+            this.PB_Button_NewGame.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PB_Button_NewGame_MouseUp);
             // 
             // PB_MF_MainLogo
             // 
@@ -74,47 +96,29 @@
             this.PB_MF_MainLogo.TabIndex = 4;
             this.PB_MF_MainLogo.TabStop = false;
             // 
-            // L_Info_Version
-            // 
-            this.L_Info_Version.AutoSize = true;
-            this.L_Info_Version.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_Info_Version.Location = new System.Drawing.Point(219, 434);
-            this.L_Info_Version.Name = "L_Info_Version";
-            this.L_Info_Version.Size = new System.Drawing.Size(52, 20);
-            this.L_Info_Version.TabIndex = 5;
-            this.L_Info_Version.Text = "Version";
-            // 
-            // BS_MM_Options
-            // 
-            this.BS_MM_Options.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_MM_Options.Font = new System.Drawing.Font("Franklin Gothic Heavy", 19.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_MM_Options.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_MM_Options.Location = new System.Drawing.Point(58, 256);
-            this.BS_MM_Options.Name = "BS_MM_Options";
-            this.BS_MM_Options.Size = new System.Drawing.Size(417, 57);
-            this.BS_MM_Options.TabIndex = 2;
-            this.BS_MM_Options.Text = "Options";
-            this.BS_MM_Options.UseVisualStyleBackColor = true;
-            // 
             // MenuForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(531, 489);
+            this.Controls.Add(this.PB_Button_About);
+            this.Controls.Add(this.PB_Button_Options);
+            this.Controls.Add(this.PB_Button_NewGame);
             this.Controls.Add(this.L_Info_Version);
             this.Controls.Add(this.PB_MF_MainLogo);
-            this.Controls.Add(this.BS_MM_About);
-            this.Controls.Add(this.BS_MM_Options);
-            this.Controls.Add(this.BS_MM_NewGame);
             this.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.White;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.MaximizeBox = false;
             this.Name = "MenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Battleship";
             this.Load += new System.EventHandler(this.MenuForm_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Button_About)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Button_Options)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_Button_NewGame)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PB_MF_MainLogo)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -122,11 +126,11 @@
         }
 
         #endregion
-        private System.Windows.Forms.Button BS_MM_NewGame;
-        private System.Windows.Forms.Button BS_MM_About;
         private System.Windows.Forms.PictureBox PB_MF_MainLogo;
         private System.Windows.Forms.Label L_Info_Version;
-        private System.Windows.Forms.Button BS_MM_Options;
+        private System.Windows.Forms.PictureBox PB_Button_NewGame;
+        private System.Windows.Forms.PictureBox PB_Button_Options;
+        private System.Windows.Forms.PictureBox PB_Button_About;
     }
 }
 

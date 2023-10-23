@@ -163,5 +163,18 @@ namespace Battleship.Forms
             }
             Design.SetComponentLocation(L_Info_DifficultyStatus, PNL_PO_Main);
         }
+
+        private void PlayerOptions_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            if (CB_Difficulty.SelectedIndex != -1)
+            {
+                Dispose();
+            }
+            else
+            {
+                MenuForm mf = new MenuForm();
+                mf.Show();
+            }
+        }
     }
 }

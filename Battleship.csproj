@@ -258,5 +258,23 @@
   <ItemGroup>
     <None Include="Resources\Manual_Icon.bmp" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewGame_MouseUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NewGame_MouseDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Options_MouseDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Options_MouseUp.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\About_MouseDown.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\About_MouseUp.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
