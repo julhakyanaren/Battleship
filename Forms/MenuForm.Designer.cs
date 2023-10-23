@@ -61,6 +61,7 @@
             this.BS_MM_About.TabIndex = 3;
             this.BS_MM_About.Text = "About";
             this.BS_MM_About.UseVisualStyleBackColor = true;
+            this.BS_MM_About.Click += new System.EventHandler(this.BS_MM_About_Click);
             // 
             // PB_MF_MainLogo
             // 

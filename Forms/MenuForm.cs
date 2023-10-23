@@ -51,5 +51,15 @@ namespace Battleship
                     }
             }
         }
+
+        private void BS_MM_About_Click(object sender, EventArgs e)
+        {
+            DialogResult = MessageBox.Show("Opern manual ?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (DialogResult == DialogResult.Yes)
+            {
+                ManualInfo mi = new ManualInfo();
+                mi.Show();
+            }
+        }
     }
 }

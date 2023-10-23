@@ -67,6 +67,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Classes\ColorMethods.cs" />
+    <Compile Include="Classes\Connection.cs" />
     <Compile Include="Classes\Data.cs" />
     <Compile Include="Classes\DebugTools.cs" />
     <Compile Include="Classes\Design.cs" />

@@ -2,7 +2,9 @@
 using System;
 using System.Drawing;
 using System.IO;
+using System.Net;
 using System.Net.Http;
+using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Battleship.Forms
@@ -45,11 +47,13 @@ namespace Battleship.Forms
                     using (FileStream fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write, FileShare.None))
                     {
                         byte[] buffer = new byte[8192];
+                        PNL_MI_ProgressUnit.Visible = true;
                         using (var contentStream = await response.Content.ReadAsStreamAsync())
                         {
                             int bytesRead;
                             while ((bytesRead = await contentStream.ReadAsync(buffer, 0, buffer.Length)) > 0)
                             {
+                                await Task.Delay(10);
                                 fileStream.Write(buffer, 0, bytesRead);
                                 readBytes += bytesRead;
                                 if (totalBytes > 0)
@@ -71,8 +75,8 @@ namespace Battleship.Forms
             }
             else
             {
-                PGB_Progress.Value = percenentage;
                 L_Info_Progress.Text = $"{percenentage}% complete";
+                SetCustomProgressBarValue(percenentage);
             }
         }
         public void ShowPDF()
@@ -88,25 +92,36 @@ namespace Battleship.Forms
             DialogResult = MessageBox.Show("Download manual?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (DialogResult == DialogResult.Yes)
             {
-                try
+                if (Connection.IsInternetAvailable())
                 {
-                    DownloadPDF();
-                }
-                catch
-                {
-                    //Error_Catch
-                }
-                finally
-                {
-                    DialogResult = MessageBox.Show("Manual Completed", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    if (DialogResult == DialogResult.OK)
+                    try
                     {
-                        PGB_Progress.Value = 0;
-                        L_Info_DownloadPDF.Text = "0% complete";
-                        ShowPDF();
+                        DownloadPDF();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Occurred due to a file download error. Code:{ex.HResult}");
+                    }
+                    finally
+                    {
+                        DialogResult = MessageBox.Show("Manual Completed", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (DialogResult == DialogResult.OK)
+                        {
+                            PNL_MI_ProgressUnit.Visible = false;
+                            L_Info_DownloadPDF.Text = "0% complete";
+                            ShowPDF();
+                        }
                     }
                 }
+                else
+                {
+                    MessageBox.Show("No internet connection", "Connections Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
             }
+        }
+        void SetCustomProgressBarValue(int percentage)
+        {
+            PNL_MI_ProgressUnit.Width = PNL_MI_ProgressBar.Width * percentage / 100;
         }
     }
 }

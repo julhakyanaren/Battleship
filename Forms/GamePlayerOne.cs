@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleship.Forms;
+using System;
 using System.Drawing;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
@@ -698,6 +699,8 @@ namespace Battleship
         }
         private void TSMI_GPO_OpenManual_Click(object sender, EventArgs e)
         {
+            ManualInfo mi = new ManualInfo();
+            mi.Show();
         }
     }
 }
