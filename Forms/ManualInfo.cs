@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleship.Classes;
+using System;
 using System.Drawing;
 using System.IO;
 using System.Net.Http;
@@ -31,14 +32,14 @@ namespace Battleship.Forms
         }
         public async void DownloadPDF()
         {
-            SFD_ManualInfo.Filter = "MS Word|*.docx";
-            SFD_ManualInfo.FileName = Data.ManualName;
+            SFD_ManualInfo.Filter = "PDF|*.pdf";
+            SFD_ManualInfo.FileName = FileManager.ManualName;
             if (SFD_ManualInfo.ShowDialog() == DialogResult.OK)
             {
                 string savePath = SFD_ManualInfo.FileName;
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    var response = httpClient.GetAsync(Data.ManualUrl).Result;
+                    var response = httpClient.GetAsync(FileManager.ManualUrl).Result;
                     var totalBytes = response.Content.Headers.ContentLength ?? -1;
                     var readBytes = 0;
                     using (FileStream fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write, FileShare.None))
@@ -81,8 +82,6 @@ namespace Battleship.Forms
             filename = Path.GetFullPath(
 
                 Path.Combine(filename, ".\\Manual.pdf"));
-
-            webBrowser1.Navigate(filename);
         }
         private void PB_IMB_DownloadPDF_Click(object sender, EventArgs e)
         {
@@ -104,16 +103,10 @@ namespace Battleship.Forms
                     {
                         PGB_Progress.Value = 0;
                         L_Info_DownloadPDF.Text = "0% complete";
-                        webBrowser1.Visible = true;
                         ShowPDF();
                     }
                 }
             }
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            ShowPDF();
         }
     }
 }

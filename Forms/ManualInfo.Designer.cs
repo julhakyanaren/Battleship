@@ -48,7 +48,6 @@
             this.PB_IMB_DownloadPDF = new System.Windows.Forms.PictureBox();
             this.PGB_Progress = new System.Windows.Forms.ProgressBar();
             this.L_Info_Progress = new System.Windows.Forms.Label();
-            this.TB_Info = new System.Windows.Forms.TextBox();
             this.GB_MI_MapEditor.SuspendLayout();
             this.GB_MI_ShipType.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).BeginInit();
@@ -69,7 +68,7 @@
             this.TB_MI_ChangeOrientation.BackColor = System.Drawing.Color.Black;
             this.TB_MI_ChangeOrientation.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TB_MI_ChangeOrientation.ForeColor = System.Drawing.Color.Orange;
-            this.TB_MI_ChangeOrientation.Location = new System.Drawing.Point(165, 15);
+            this.TB_MI_ChangeOrientation.Location = new System.Drawing.Point(159, 13);
             this.TB_MI_ChangeOrientation.Name = "TB_MI_ChangeOrientation";
             this.TB_MI_ChangeOrientation.ReadOnly = true;
             this.TB_MI_ChangeOrientation.Size = new System.Drawing.Size(79, 22);
@@ -83,7 +82,7 @@
             this.TB_MI_InsertShip.BackColor = System.Drawing.Color.Black;
             this.TB_MI_InsertShip.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TB_MI_InsertShip.ForeColor = System.Drawing.Color.Orange;
-            this.TB_MI_InsertShip.Location = new System.Drawing.Point(165, 43);
+            this.TB_MI_InsertShip.Location = new System.Drawing.Point(159, 43);
             this.TB_MI_InsertShip.Name = "TB_MI_InsertShip";
             this.TB_MI_InsertShip.ReadOnly = true;
             this.TB_MI_InsertShip.Size = new System.Drawing.Size(79, 22);
@@ -104,7 +103,6 @@
             // 
             // GB_MI_MapEditor
             // 
-            this.GB_MI_MapEditor.Controls.Add(this.GB_MI_ShipType);
             this.GB_MI_MapEditor.Controls.Add(this.TB_MI_InsertShip);
             this.GB_MI_MapEditor.Controls.Add(this.L_MI_OrientationChanger);
             this.GB_MI_MapEditor.Controls.Add(this.L_MI_InsertShip);
@@ -113,7 +111,7 @@
             this.GB_MI_MapEditor.ForeColor = System.Drawing.Color.Orange;
             this.GB_MI_MapEditor.Location = new System.Drawing.Point(12, 12);
             this.GB_MI_MapEditor.Name = "GB_MI_MapEditor";
-            this.GB_MI_MapEditor.Size = new System.Drawing.Size(266, 235);
+            this.GB_MI_MapEditor.Size = new System.Drawing.Size(244, 75);
             this.GB_MI_MapEditor.TabIndex = 4;
             this.GB_MI_MapEditor.TabStop = false;
             this.GB_MI_MapEditor.Text = "Map Editor";
@@ -130,9 +128,9 @@
             this.GB_MI_ShipType.Controls.Add(this.L_MI_SelectFrigate);
             this.GB_MI_ShipType.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.GB_MI_ShipType.ForeColor = System.Drawing.Color.Orange;
-            this.GB_MI_ShipType.Location = new System.Drawing.Point(6, 75);
+            this.GB_MI_ShipType.Location = new System.Drawing.Point(12, 93);
             this.GB_MI_ShipType.Name = "GB_MI_ShipType";
-            this.GB_MI_ShipType.Size = new System.Drawing.Size(254, 144);
+            this.GB_MI_ShipType.Size = new System.Drawing.Size(244, 144);
             this.GB_MI_ShipType.TabIndex = 5;
             this.GB_MI_ShipType.TabStop = false;
             this.GB_MI_ShipType.Text = "Map Editor";
@@ -237,18 +235,18 @@
             // 
             this.L_Info_DownloadPDF.AutoSize = true;
             this.L_Info_DownloadPDF.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_Info_DownloadPDF.Location = new System.Drawing.Point(80, 253);
+            this.L_Info_DownloadPDF.Location = new System.Drawing.Point(130, 307);
             this.L_Info_DownloadPDF.Name = "L_Info_DownloadPDF";
-            this.L_Info_DownloadPDF.Size = new System.Drawing.Size(153, 17);
+            this.L_Info_DownloadPDF.Size = new System.Drawing.Size(87, 17);
             this.L_Info_DownloadPDF.TabIndex = 6;
-            this.L_Info_DownloadPDF.Text = "Insert ship in selected position";
+            this.L_Info_DownloadPDF.Text = "Downlad Manual";
             // 
             // PB_IMB_DownloadPDF
             // 
             this.PB_IMB_DownloadPDF.BackColor = System.Drawing.Color.Black;
             this.PB_IMB_DownloadPDF.Cursor = System.Windows.Forms.Cursors.Hand;
             this.PB_IMB_DownloadPDF.Image = global::Battleship.Properties.Resources.Download_PDF;
-            this.PB_IMB_DownloadPDF.Location = new System.Drawing.Point(239, 253);
+            this.PB_IMB_DownloadPDF.Location = new System.Drawing.Point(223, 291);
             this.PB_IMB_DownloadPDF.Name = "PB_IMB_DownloadPDF";
             this.PB_IMB_DownloadPDF.Size = new System.Drawing.Size(33, 33);
             this.PB_IMB_DownloadPDF.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
@@ -262,46 +260,32 @@
             // PGB_Progress
             // 
             this.PGB_Progress.ForeColor = System.Drawing.Color.DarkOrange;
-            this.PGB_Progress.Location = new System.Drawing.Point(12, 300);
+            this.PGB_Progress.Location = new System.Drawing.Point(12, 258);
             this.PGB_Progress.Name = "PGB_Progress";
-            this.PGB_Progress.Size = new System.Drawing.Size(266, 23);
+            this.PGB_Progress.Size = new System.Drawing.Size(244, 23);
             this.PGB_Progress.TabIndex = 46;
             // 
             // L_Info_Progress
             // 
             this.L_Info_Progress.AutoSize = true;
-            this.L_Info_Progress.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_Info_Progress.Location = new System.Drawing.Point(15, 280);
+            this.L_Info_Progress.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.L_Info_Progress.Location = new System.Drawing.Point(12, 284);
             this.L_Info_Progress.Name = "L_Info_Progress";
-            this.L_Info_Progress.Size = new System.Drawing.Size(71, 17);
+            this.L_Info_Progress.Size = new System.Drawing.Size(72, 17);
             this.L_Info_Progress.TabIndex = 47;
             this.L_Info_Progress.Text = "0% complete";
-            // 
-            // TB_Info
-            // 
-            this.TB_Info.BackColor = System.Drawing.Color.Black;
-            this.TB_Info.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_Info.ForeColor = System.Drawing.Color.Orange;
-            this.TB_Info.Location = new System.Drawing.Point(284, 18);
-            this.TB_Info.Multiline = true;
-            this.TB_Info.Name = "TB_Info";
-            this.TB_Info.ReadOnly = true;
-            this.TB_Info.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TB_Info.Size = new System.Drawing.Size(466, 333);
-            this.TB_Info.TabIndex = 5;
-            this.TB_Info.Tag = "1";
             // 
             // ManualInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(5F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(762, 360);
+            this.ClientSize = new System.Drawing.Size(266, 331);
+            this.Controls.Add(this.GB_MI_ShipType);
             this.Controls.Add(this.L_Info_Progress);
             this.Controls.Add(this.PGB_Progress);
             this.Controls.Add(this.L_Info_DownloadPDF);
             this.Controls.Add(this.PB_IMB_DownloadPDF);
-            this.Controls.Add(this.TB_Info);
             this.Controls.Add(this.GB_MI_MapEditor);
             this.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.Orange;
@@ -341,6 +325,5 @@
         private System.Windows.Forms.SaveFileDialog SFD_ManualInfo;
         private System.Windows.Forms.ProgressBar PGB_Progress;
         private System.Windows.Forms.Label L_Info_Progress;
-        public System.Windows.Forms.TextBox TB_Info;
     }
 }

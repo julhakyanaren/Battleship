@@ -48,6 +48,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Octokit, Version=8.1.1.0, Culture=neutral, PublicKeyToken=0be8860aee462442, processorArchitecture=MSIL">
+      <HintPath>packages\Octokit.8.1.1\lib\netstandard2.0\Octokit.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Messaging" />
@@ -69,6 +72,7 @@
     <Compile Include="Classes\Design.cs" />
     <Compile Include="Classes\EnemyData.cs" />
     <Compile Include="Classes\Fight.cs" />
+    <Compile Include="Classes\FileManager.cs" />
     <Compile Include="Classes\Map.cs" />
     <Compile Include="Forms\ManualInfo.cs">
       <SubType>Form</SubType>
@@ -134,6 +138,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
