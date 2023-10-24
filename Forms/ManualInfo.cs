@@ -104,7 +104,7 @@ namespace Battleship.Forms
                     }
                     finally
                     {
-                        DialogResult = MessageBox.Show("Manual Completed", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        DialogResult = MessageBox.Show("Manual download completed", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (DialogResult == DialogResult.OK)
                         {
                             PNL_MI_ProgressUnit.Visible = false;
