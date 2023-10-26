@@ -82,5 +82,30 @@ namespace Battleship
                 }
             }
         }
+        public static void EnemyShot()
+        {
+            if (Turn == 1)
+            {
+                switch (Options.Difficulty)
+                {
+                    case 1:
+                        {
+                            break;
+                        }
+                    case 2:
+                        {
+                            break;
+                        }
+                    case 3:
+                        {
+                            break;
+                        }
+                    case 4:
+                        {
+                            break;
+                        }
+                }
+            }
+        }
     }
 }
