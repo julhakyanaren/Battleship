@@ -421,5 +421,17 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hit_Status_EnemyHited.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hit_Status_EnemyMissed.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hit_Status_YouHit.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Hit_Status_YouMissed.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

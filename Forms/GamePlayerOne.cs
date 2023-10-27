@@ -13,6 +13,7 @@ namespace Battleship
         Map Map = new Map();
         Support Support = new Support();
         ColorMethods ColorMethods = new ColorMethods();
+        HitStatus HS = new HitStatus();
         public GamePlayerOne()
         {
             InitializeComponent();
@@ -82,6 +83,7 @@ namespace Battleship
         }
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {
+            HS.Hide();
             SetScreenParametersAsMaximized();
             Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
             SetComponentCustomParamaters();
@@ -717,6 +719,16 @@ namespace Battleship
         {
             ManualInfo mi = new ManualInfo();
             mi.Show();
+        }
+        public async void ShowHitInfo()
+        {
+            HS.Show();
+            await Task.Delay(2000);
+            HS.Hide();
+        }
+        private void TSMI_ShowHitInfo_Click(object sender, EventArgs e)
+        {
+            ShowHitInfo();
         }
     }
 }

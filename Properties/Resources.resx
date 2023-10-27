@@ -121,6 +121,9 @@
   <data name="NewGame_MouseDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NewGame_MouseDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
+  <data name="Manual_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Manual_Icon.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
   <data name="NewGame_MouseUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\NewGame_MouseUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
@@ -130,22 +133,31 @@
   <data name="Options_MouseUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Options_MouseUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Manual_Icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Manual_Icon.bmp;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
-  <data name="Download_PDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Download_PDF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
-  </data>
   <data name="Download_PDF_Black" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\Download_PDF_Black.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="About_MouseUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\About_MouseUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="About_MouseDown" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\About_MouseDown.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
-  <data name="About_MouseUp" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\About_MouseUp.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  <data name="Download_PDF" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Download_PDF.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Hit_Status_EnemyHited" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Hit_Status_EnemyHited.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Hit_Status_EnemyMissed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Hit_Status_EnemyMissed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Hit_Status_YouHit" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Hit_Status_YouHit.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
+  </data>
+  <data name="Hit_Status_YouMissed" type="System.Resources.ResXFileRef, System.Windows.Forms">
+    <value>..\Resources\Hit_Status_YouMissed.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
 </root>
