@@ -83,9 +83,7 @@ namespace Battleship
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {
             SetScreenParametersAsMaximized();
-            /**/
             Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
-            /**/
             SetComponentCustomParamaters();
         }
         async void GenerateButtons()
@@ -463,6 +461,24 @@ namespace Battleship
                 {
                     //Error_Catch
                 }
+            }
+            else if (Fight.Turn == 1)
+            {
+                if (Fight.EnemyShot(out string targetTag, out bool successShot, out bool alreadyHited))
+                {
+                    if (successShot)
+                    {
+
+                    }
+                    else
+                    {
+
+                    }
+                }
+            }
+            else
+            {
+                //Error_Catch
             }
         }
         public bool IsCellWhite(int index, out char cellChar)
