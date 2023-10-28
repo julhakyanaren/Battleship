@@ -426,7 +426,7 @@ namespace Battleship
                     index %= 100;
                     int buttonIndex = Convert.ToInt32($"{index % 10}{index / 10}");
                     Fight.TargetCoord = index;
-                    Fight.PlayerHited = !IsCellWhite(buttonIndex, out char celChar);
+                    Fight.PlayerHited = !IsCellWhite(index, out char celChar);
                     Fight.Turn = Fight.ReverseTurn(Fight.PlayerHited);
                     if (celChar != 'e')
                     {
@@ -435,70 +435,23 @@ namespace Battleship
                         {
                             case 'f':
                                 {
-                                    for (int f0 = 0; f0 < EnemyData.FrigateCoords.GetLength(0); f0++)
-                                    {
-                                        for (int f1 = 0; f1 < EnemyData.FrigateCoords.GetLength(1); f1++)
-                                        {
-                                            if (EnemyData.FrigateCoords[f0, f1] == index)
-                                            {
-                                                EnemyData.FrigatesHited[f0, f1] = true;
-                                                MapButtons[1, buttonIndex].BackColor = Color.Red;
-                                                EnemyData.FrigatesCountCurrent--;
-                                                break;
-                                            }
-                                        }
-                                    }
+                                    EnemyData.FrigatesCountCurrent--;
+                                    MapButtons[1, buttonIndex].BackColor = Color.Red;
                                     break;
                                 }
                             case 'd':
                                 {
-                                    for (int d0 = 0; d0 < EnemyData.DestroyerCoords.GetLength(0); d0++)
-                                    {
-                                        for (int d1 = 0; d1 < EnemyData.DestroyerCoords.GetLength(1); d1++)
-                                        {
-                                            if (EnemyData.DestroyerCoords[d0, d1] == index)
-                                            {
-                                                EnemyData.DestroyersHited[d0, d1] = true;
-                                                MapButtons[1, buttonIndex].BackColor = Color.Red;
-                                                EnemyData.DestroyersCountCurrent--;
-                                                break;
-                                            }
-                                        }
-                                    }
+                                    MapButtons[1, buttonIndex].BackColor = Color.Red;
                                     break;
                                 }
                             case 'c':
                                 {
-                                    for (int c0 = 0; c0 < EnemyData.CruiserCoords.GetLength(0); c0++)
-                                    {
-                                        for (int c1 = 0; c1 < EnemyData.CruiserCoords.GetLength(1); c1++)
-                                        {
-                                            if (EnemyData.CruiserCoords[c0, c1] == index)
-                                            {
-                                                EnemyData.CruiserHited[c0, c1] = true;
-                                                MapButtons[1, buttonIndex].BackColor = Color.Red;
-                                                EnemyData.CruiserCountCurrent--;
-                                                break;
-                                            }
-                                        }
-                                    }
+                                    MapButtons[1, buttonIndex].BackColor = Color.Red;
                                     break;
                                 }
                             case 'b':
                                 {
-                                    for (int b0 = 0; b0 < EnemyData.BattleshipCoords.GetLength(0); b0++)
-                                    {
-                                        for (int b1 = 0; b1 < EnemyData.BattleshipCoords.GetLength(1); b1++)
-                                        {
-                                            if (EnemyData.BattleshipCoords[b0, b1] == index)
-                                            {
-                                                EnemyData.BattleshipHited[b0, b1] = true;
-                                                MapButtons[1, buttonIndex].BackColor = Color.Red;
-                                                EnemyData.BattleshipCountCurrent--;
-                                                break;
-                                            }
-                                        }
-                                    }
+                                    MapButtons[1, buttonIndex].BackColor = Color.Red;
                                     break;
                                 }
                         }
