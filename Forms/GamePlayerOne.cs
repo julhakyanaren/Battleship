@@ -13,7 +13,6 @@ namespace Battleship
         Map Map = new Map();
         Support Support = new Support();
         ColorMethods ColorMethods = new ColorMethods();
-        HitStatus HS = new HitStatus();
         public GamePlayerOne()
         {
             InitializeComponent();
@@ -83,7 +82,6 @@ namespace Battleship
         }
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {
-            HS.Hide();
             SetScreenParametersAsMaximized();
             Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
             SetComponentCustomParamaters();
@@ -441,6 +439,16 @@ namespace Battleship
                                 }
                             case 'd':
                                 {
+                                    for (int d0 = 0; d0 < PlayerData.DestroyerCoords.GetLength(0); d0++)
+                                    {
+                                        for (int d1 = 0; d1 < PlayerData.DestroyerCoords.GetLength(1); d1++)
+                                        {
+                                            if (PlayerData.DestroyerCoords[d0, d1] == index)
+                                            {
+
+                                            }
+                                        }
+                                    }
                                     break;
                                 }
                             case 'c':
@@ -470,7 +478,7 @@ namespace Battleship
                 {
                     if (successShot)
                     {
-
+                        ShowHitInfo();
                     }
                     else
                     {
@@ -722,9 +730,11 @@ namespace Battleship
         }
         public async void ShowHitInfo()
         {
-            HS.Show();
+            HitStatus hs = new HitStatus();
+            hs.Show();
             await Task.Delay(2000);
-            HS.Hide();
+            hs.Hide();
+            hs.Dispose();
         }
         private void TSMI_ShowHitInfo_Click(object sender, EventArgs e)
         {

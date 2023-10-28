@@ -19,7 +19,7 @@ namespace Battleship.Forms
 
         private void HitStatus_Load(object sender, EventArgs e)
         {
-            SetImage(Math.Abs(Fight.Turn - 1), "Hit", 0);
+            SetImage(Math.Abs(Fight.Turn - 1), "Hit");
             Width = 600;
             Height = 300;
             TransparencyKey = Color.Magenta;
@@ -28,7 +28,7 @@ namespace Battleship.Forms
             TopMost = true;
             BackColor = Color.Magenta;
         }
-        public void SetImage(int playerOrEnemy, string infoType, int sunkenShipType)
+        public void SetImage(int playerOrEnemy, string infoType)
         {
             switch (playerOrEnemy)
             {
@@ -44,33 +44,6 @@ namespace Battleship.Forms
                             case "Miss":
                                 {
                                     PB_HS_HitStatus.Image = Properties.Resources.Hit_Status_YouMissed;
-                                    break;
-                                }
-                            case "Sunken":
-                                {
-                                    switch (sunkenShipType)
-                                    {
-                                        case 1:
-                                            {
-                                                break;
-                                            }
-                                        case 2:
-                                            {
-                                                break;
-                                            }
-                                        case 3:
-                                            {
-                                                break;
-                                            }
-                                        case 4:
-                                            {
-                                                break;
-                                            }
-                                        default:
-                                            {
-                                                break;
-                                            }
-                                    }
                                     break;
                                 }
                             default:
@@ -92,33 +65,6 @@ namespace Battleship.Forms
                             case "Miss":
                                 {
                                     PB_HS_HitStatus.Image = Properties.Resources.Hit_Status_EnemyMissed;
-                                    break;
-                                }
-                            case "Sunken":
-                                {
-                                    switch (sunkenShipType)
-                                    {
-                                        case 1:
-                                            {
-                                                break;
-                                            }
-                                        case 2:
-                                            {
-                                                break;
-                                            }
-                                        case 3:
-                                            {
-                                                break;
-                                            }
-                                        case 4:
-                                            {
-                                                break;
-                                            }
-                                        default:
-                                            {
-                                                break;
-                                            }
-                                    }
                                     break;
                                 }
                             default:

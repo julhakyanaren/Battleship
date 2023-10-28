@@ -42,10 +42,11 @@
             this.PB_HS_HitStatus.SizeMode = System.Windows.Forms.PictureBoxSizeMode.CenterImage;
             this.PB_HS_HitStatus.TabIndex = 0;
             this.PB_HS_HitStatus.TabStop = false;
+            this.PB_HS_HitStatus.Click += new System.EventHandler(this.HitStatus_Load);
             // 
             // HitStatus
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 21F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
             this.ClientSize = new System.Drawing.Size(582, 253);

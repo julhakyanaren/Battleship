@@ -16,6 +16,8 @@ namespace Battleship
         public static int Turn = 0;
         public static bool FirstTurn = true;
         public static bool PlayerHited = false;
+        public static string InfoType = "Null";
+        public static int SunkenShipType = 0;
 
         public static double SuccessThreshold(int difficulty)
         {
