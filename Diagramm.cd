@@ -1,0 +1,165 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ClassDiagram MajorVersion="1" MinorVersion="1">
+  <Class Name="Battleship.ColorMethods">
+    <Position X="0.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAACgAAAQAAAAAAAAIAAAAgAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\ColorMethods.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Classes.Connection">
+    <Position X="2.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\Connection.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Data">
+    <Position X="4" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AEAAABAAAQIEgAUAEABIAAQAAQIAABAAAACAwAIAAAQ=</HashCode>
+      <FileName>Classes\Data.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.DebugTools">
+    <Position X="5.75" Y="0.5" Width="1.5" />
+    <NestedTypes>
+      <Class Name="Battleship.DebugTools.MCF" Collapsed="true">
+        <TypeIdentifier>
+          <NewMemberFileName>Classes\DebugTools.cs</NewMemberFileName>
+        </TypeIdentifier>
+      </Class>
+    </NestedTypes>
+    <TypeIdentifier>
+      <HashCode>IAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\DebugTools.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Design">
+    <Position X="0.5" Y="2.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CAAQQAAAAAAACACAAAAAACACAAAAAIAAAAAAQAAAAAQ=</HashCode>
+      <FileName>Classes\Design.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.EnemyData">
+    <Position X="0.5" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>A4QAAREgADEIAOgAoiEIBBBAIAAAIAAS0EGAKA6WUAA=</HashCode>
+      <FileName>Classes\EnemyData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Fight">
+    <Position X="2.25" Y="1.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAgAAACgEAAAAEIAAAACAAACAAAAAAQAAAAAAgAEAQU=</HashCode>
+      <FileName>Classes\Fight.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Classes.FileManager">
+    <Position X="5.75" Y="2.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAIAQAAAAAIAAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Classes\FileManager.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Classes.Handlers">
+    <Position X="5.75" Y="4" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAABAAAAAAAAA=</HashCode>
+      <FileName>Classes\Handlers.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Options">
+    <Position X="4" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAgABAAAAAAA=</HashCode>
+      <FileName>Classes\Options.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.PlayerData">
+    <Position X="2.25" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>A4QAAREgADEIAOgAogEIBBBAIAAAIAAS0EGAKA6WUAA=</HashCode>
+      <FileName>Classes\PlayerData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Position">
+    <Position X="4" Y="7.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAQAAAAAAIAAIAAAkAAEAAAAAAAAAAgAAAAAAAEIAAA=</HashCode>
+      <FileName>Classes\Position.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Schematic">
+    <Position X="5.75" Y="6" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAgIABAgAAMBAEAAAAEAAAAAAIAAAAFAAABAAAA=</HashCode>
+      <FileName>Classes\Schematic.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.ShipData">
+    <Position X="4" Y="10.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAgAAAAAQwAAAABAAAAFAkAACAAAAAAAAAIAAAAEAA=</HashCode>
+      <FileName>Classes\ShipData.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Support">
+    <Position X="5.75" Y="13.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>CCAAAAAAAgAAAAAAgAAAAAEAAACAFAAAACAAAAAAAgA=</HashCode>
+      <FileName>Classes\Support.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.GamePlayerOne">
+    <Position X="7.75" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>W70OARbvLn4b8Sz9J8/UlYn/1ycp/Z8wAACAHQoJUFk=</HashCode>
+      <FileName>Forms\GamePlayerOne.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.MapCreate">
+    <Position X="9.5" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>oiQsOgqEmDqmw4T3uouav5bTFhq4ugjZPHP21RKq35E=</HashCode>
+      <FileName>Forms\MapCreate.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.MenuForm">
+    <Position X="11.25" Y="0.5" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAhAAAQACAAACAAAYCIAAACAAgAAAQAAIAAACBABEE=</HashCode>
+      <FileName>Forms\MenuForm.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Forms.PlayerOptions">
+    <Position X="11.25" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>BAAAAAAAAGAQAgAAAFKAQAICAEAAAxAAQEAAAMgCAAA=</HashCode>
+      <FileName>Forms\PlayerOptions.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Forms.ManualInfo">
+    <Position X="11.25" Y="5.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>HBkAAAAIACSAiAIQACCIAwAGAAAEaBBBAAQAAgABAAA=</HashCode>
+      <FileName>Forms\ManualInfo.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.Forms.HitStatus">
+    <Position X="11.25" Y="20.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAAAACAAAAAAAACIAAECAEAAAAAAAAAAAAAAAAA=</HashCode>
+      <FileName>Forms\HitStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Enum Name="Battleship.Ship">
+    <Position X="5.75" Y="9.75" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>SACAAAAAQAAAAAEAAAgAAAAAACBAAiAgAAAAACEIAGA=</HashCode>
+      <FileName>Classes\Ship.cs</FileName>
+    </TypeIdentifier>
+  </Enum>
+  <Font Name="Segoe UI" Size="9" />
+</ClassDiagram>
