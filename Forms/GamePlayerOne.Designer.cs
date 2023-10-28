@@ -1957,7 +1957,7 @@
             this.TSMI_AllwaysOnTop.CheckOnClick = true;
             this.TSMI_AllwaysOnTop.ForeColor = System.Drawing.Color.Black;
             this.TSMI_AllwaysOnTop.Name = "TSMI_AllwaysOnTop";
-            this.TSMI_AllwaysOnTop.Size = new System.Drawing.Size(143, 22);
+            this.TSMI_AllwaysOnTop.Size = new System.Drawing.Size(180, 22);
             this.TSMI_AllwaysOnTop.Text = "Allways on top";
             this.TSMI_AllwaysOnTop.CheckedChanged += new System.EventHandler(this.TSMI_AllwaysOnTop_CheckedChanged);
             // 
@@ -1977,7 +1977,7 @@
             this.TSMI_StartNewGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_StartNewGame.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartNewGame.Name = "TSMI_StartNewGame";
-            this.TSMI_StartNewGame.Size = new System.Drawing.Size(153, 22);
+            this.TSMI_StartNewGame.Size = new System.Drawing.Size(180, 22);
             this.TSMI_StartNewGame.Text = "Start new game";
             this.TSMI_StartNewGame.Click += new System.EventHandler(this.TSMI_StartNewGame_Click);
             // 
@@ -1987,7 +1987,7 @@
             this.TSMI_StartBattleShip.Enabled = false;
             this.TSMI_StartBattleShip.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartBattleShip.Name = "TSMI_StartBattleShip";
-            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(153, 22);
+            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(180, 22);
             this.TSMI_StartBattleShip.Text = "Start Battleship";
             this.TSMI_StartBattleShip.Click += new System.EventHandler(this.TSMI_StartBattleShip_Click);
             // 
@@ -2035,6 +2035,7 @@
             // 
             this.TSMI_MapEditor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_OpenMapEditor});
+            this.TSMI_MapEditor.Enabled = false;
             this.TSMI_MapEditor.ForeColor = System.Drawing.Color.Black;
             this.TSMI_MapEditor.Name = "TSMI_MapEditor";
             this.TSMI_MapEditor.Size = new System.Drawing.Size(72, 21);
@@ -2045,7 +2046,7 @@
             this.TSMI_OpenMapEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_OpenMapEditor.ForeColor = System.Drawing.Color.Black;
             this.TSMI_OpenMapEditor.Name = "TSMI_OpenMapEditor";
-            this.TSMI_OpenMapEditor.Size = new System.Drawing.Size(155, 22);
+            this.TSMI_OpenMapEditor.Size = new System.Drawing.Size(180, 22);
             this.TSMI_OpenMapEditor.Text = "Open Map Editor";
             this.TSMI_OpenMapEditor.Click += new System.EventHandler(this.TSMI_OpenMapEditor_Click);
             // 
@@ -2067,7 +2068,7 @@
             this.TSMI_HitChance});
             this.TSMI_GameInfo.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GameInfo.Name = "TSMI_GameInfo";
-            this.TSMI_GameInfo.Size = new System.Drawing.Size(139, 22);
+            this.TSMI_GameInfo.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GameInfo.Text = "Game info";
             // 
             // TSMI_Difficulty
@@ -2109,7 +2110,7 @@
             this.TSMI_GPO_OpenManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GPO_OpenManual.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_OpenManual.Name = "TSMI_GPO_OpenManual";
-            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(139, 22);
+            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GPO_OpenManual.Text = "Open manual";
             this.TSMI_GPO_OpenManual.Click += new System.EventHandler(this.TSMI_GPO_OpenManual_Click);
             // 

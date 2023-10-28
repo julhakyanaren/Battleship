@@ -59,14 +59,32 @@ namespace Battleship
         }
         public static int WhoStartGame()
         {
-            if (!GameStarted)
+            Random randomStart = new Random();
+            int number = randomStart.Next(1, 101);
+            double numberDouble = Math.Sqrt(number);
+            bool perfectSqrt = (numberDouble == (int)numberDouble);
+            switch (Options.Difficulty)
             {
-                return -1;
-            }
-            else
-            {
-                Random rand = new Random();
-                return rand.Next(0, 2);
+                case 0:
+                    {
+                        return 0;
+                    }
+                case 1:
+                    {
+                        return Convert.ToInt32(!perfectSqrt);
+                    }
+                case 2:
+                    {
+                        return randomStart.Next(0, 2);
+                    }
+                case 3:
+                    {
+                        return Convert.ToInt32(perfectSqrt);
+                    }
+                default:
+                    {
+                        return -1;
+                    }
             }
         }
         public static int ReverseTurn(bool hited)
