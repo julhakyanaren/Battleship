@@ -84,5 +84,24 @@ namespace Battleship
         {
             control.Location = new Point((panel.Width - control.Width) / 2, control.Location.Y);
         }
+        public static void SetTextBoxValues(TextBox textBox, int value, int minNum, int maxNum)
+        {
+            if (value == minNum)
+            {
+                textBox.ForeColor = Color.Red;
+            }
+            else if (value > minNum && value < maxNum)
+            {
+                textBox.ForeColor = Color.Yellow;
+            }
+            else if (value == maxNum)
+            {
+                textBox.ForeColor = Color.Lime;
+            }
+            else
+            {
+                textBox.ForeColor = DefaultBackColor;
+            }
+        }
     }
 }

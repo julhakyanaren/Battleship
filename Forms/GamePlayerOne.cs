@@ -580,6 +580,18 @@ namespace Battleship
                 DialogResult = MessageBox.Show("Start fight?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (DialogResult == DialogResult.Yes)
                 {
+                    TB_EnemyFrigate.Text = "0";
+                    TB_PlayerFrigate.Text = "0";
+                    TB_EnemyDestroyer.Text = "0";
+                    TB_PlayerDestroyer.Text = "0";
+                    TB_EnemyCruiser.Text = "0";
+                    TB_PlayerCruiser.Text = "0";
+                    TB_EnemyBattleship.Text = "0";
+                    TB_PlayerBattleship.Text = "0";
+                    TB_EnemyHit.Text = "0";
+                    TB_PlayerHit.Text = "0";
+                    TB_PlayerMiss.Text = "0";
+                    TB_PlayerMiss.Text = "0";
                     StartBattleShip();
                     //SET ENEMY BUTTON COLOR TO WHITE
                     for (int i = 0; i < MapButtons.GetLength(1); i++)
@@ -697,6 +709,98 @@ namespace Battleship
         private void TSMI_ShowHitInfo_Click(object sender, EventArgs e)
         {
             ShowHitInfo();
+        }
+
+        private void TB_PlayerFrigate_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (Support.StringToInt(textBox.Text, out int value))
+            {
+                Design.SetTextBoxValues(textBox, value, 0, 4);
+            }
+            else
+            {
+                //Error_Catch
+            }
+        }
+
+        private void TB_PlayerDestroyer_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (Support.StringToInt(textBox.Text, out int value))
+            {
+                Design.SetTextBoxValues(textBox, value, 0, 3);
+            }
+            else
+            {
+                //Error_Catch
+            }
+        }
+
+        private void TB_EnemyCruiser_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (Support.StringToInt(textBox.Text, out int value))
+            {
+                Design.SetTextBoxValues(textBox, value, 0, 2);
+            }
+            else
+            {
+                //Error_Catch
+            }
+        }
+
+        private void TB_PlayerBattleship_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (Support.StringToInt(textBox.Text, out int value))
+            {
+                Design.SetTextBoxValues(textBox, value, 0, 1);
+            }
+            else
+            {
+                //Error_Catch
+            }
+        }
+
+        private void TB_EnemyMiss_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (Support.StringToInt(textBox.Text, out int value))
+            {
+                if (value > 0)
+                {
+                    textBox.ForeColor = Color.Red;
+                }
+                else
+                {
+                    textBox.ForeColor = Color.Lime;
+                }
+            }
+            else
+            {
+                //Error_Catch
+            }
+        }
+
+        private void TB_PlayerHit_TextChanged(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (Support.StringToInt(textBox.Text, out int value))
+            {
+                if (value < 0)
+                {
+                    textBox.ForeColor = Color.Red;
+                }
+                else
+                {
+                    textBox.ForeColor = Color.Lime;
+                }
+            }
+            else
+            {
+                //Error_Catch
+            }
         }
     }
 }
