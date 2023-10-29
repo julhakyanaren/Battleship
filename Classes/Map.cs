@@ -184,6 +184,7 @@ namespace Battleship
                         {
                             map[x + i, y] = shipSymbol;
                             coord = (x + i) * 10 + y;
+                            coord = Convert.ToInt32($"{coord % 10}{coord / 10}");
                         }
                         else
                         {
@@ -194,7 +195,15 @@ namespace Battleship
                         {
                             case 'f':
                                 {
-                                    EnemyData.FrigateCoords[count, i] = coord;
+                                    if (orientation != 0)
+                                    {
+                                        coord = Convert.ToInt32($"{coord % 10}{coord / 10}");
+                                        EnemyData.FrigateCoords[count, i] = coord;
+                                    }
+                                    else
+                                    {
+                                        EnemyData.FrigateCoords[count, i] = coord;
+                                    }
                                     break;
                                 }
                             case 'd':

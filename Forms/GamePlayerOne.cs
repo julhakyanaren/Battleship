@@ -218,48 +218,7 @@ namespace Battleship
                     }
                 case 1:
                     {
-                        targetButtons = Support.GetEnemyButtons(MapButtons);
                         BS_EnemySchema_Index.Text = textID;
-                        if (DebugTools.DebugMode == true)
-                        {
-                            string ship = "Empty";
-                            int coord = Convert.ToInt32(selectedButton.Tag.ToString()) % 100;
-                            char sym = EnemyData.Map[coord];
-                            switch (sym)
-                            {
-                                case 'f':
-                                    {
-                                        ship = "Frigate";
-                                        break;
-                                    }
-                                case 'd':
-                                    {
-                                        ship = "Destroyer";
-                                        break;
-                                    }
-                                case 'c':
-                                    {
-                                        ship = "Cruiser";
-                                        break;
-                                    }
-                                case 'b':
-                                    {
-                                        ship = "Battleship";
-                                        break;
-                                    }
-                                case 'e':
-                                case 'n':
-                                    {
-                                        ship = "Empty";
-                                        break;
-                                    }
-                                default:
-                                    {
-                                        ship = "Null";
-                                        break;
-                                    }
-                            }
-                        }
                         break;
                     }
                 default:
@@ -359,9 +318,9 @@ namespace Battleship
         }
         public void StartBattleShip()
         {
+            GenerateEnemyRandomMap();
             for (int i = 0; i < MapButtons.GetLength(1); i++)
             {
-                GenerateEnemyRandomMap();
                 Button targetButton = MapButtons[1, i];
                 Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
                 EnemyData.Map[i] = ColorMethods.SetCharThrowColor(1, targetButton.BackColor);
@@ -424,7 +383,7 @@ namespace Battleship
                 if (Support.StringToInt(buttonTag, out int index))
                 {
                     index %= 100;
-                    int buttonIndex = Convert.ToInt32($"{index % 10}{index / 10}");
+                    index = Convert.ToInt32($"{index % 10}{index / 10}");
                     Fight.TargetCoord = index;
                     Fight.PlayerHited = !IsCellWhite(index, out char celChar);
                     Fight.Turn = Fight.ReverseTurn(Fight.PlayerHited);
@@ -436,22 +395,22 @@ namespace Battleship
                             case 'f':
                                 {
                                     EnemyData.FrigatesCountCurrent--;
-                                    MapButtons[1, buttonIndex].BackColor = Color.Red;
+                                    MapButtons[1, index].BackColor = Color.Red;
                                     break;
                                 }
                             case 'd':
                                 {
-                                    MapButtons[1, buttonIndex].BackColor = Color.Red;
+                                    MapButtons[1, index].BackColor = Color.Red;
                                     break;
                                 }
                             case 'c':
                                 {
-                                    MapButtons[1, buttonIndex].BackColor = Color.Red;
+                                    MapButtons[1, index].BackColor = Color.Red;
                                     break;
                                 }
                             case 'b':
                                 {
-                                    MapButtons[1, buttonIndex].BackColor = Color.Red;
+                                    MapButtons[1, index].BackColor = Color.Red;
                                     break;
                                 }
                         }
@@ -459,7 +418,7 @@ namespace Battleship
                     else
                     {
                         PlayerData.MissedShotsCount++;
-                        MapButtons[1, buttonIndex].BackColor = Color.DeepSkyBlue;
+                        MapButtons[1, index].BackColor = Color.DeepSkyBlue;
                     }
                     SetStatusTextBoxesValues();
                 }
@@ -622,10 +581,12 @@ namespace Battleship
                 if (DialogResult == DialogResult.Yes)
                 {
                     StartBattleShip();
+                    //SET ENEMY BUTTON COLOR TO WHITE
                     for (int i = 0; i < MapButtons.GetLength(1); i++)
                     {
                         Button targetButton = MapButtons[1, i];
-                        targetButton.BackColor = Color.White;
+                        //targetButton.BackColor = Color.White;
+                        targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
                         targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
                     }
                 }
