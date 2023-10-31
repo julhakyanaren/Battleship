@@ -46,8 +46,7 @@ namespace Battleship
                 case DialogResult.Yes:
                     {
                         PlayerOptions PO = new PlayerOptions();
-                        PO.Show();
-                        Hide();
+                        Design.FormSwitching(this, PO, 1, false, 8);
                         break;
                     }
                 case DialogResult.No:
@@ -88,8 +87,26 @@ namespace Battleship
             if (DialogResult == DialogResult.Yes)
             {
                 ManualInfo mi = new ManualInfo();
-                mi.Show();
+                Design.OpenNewForm(mi, 1, 10);
             }
+        }
+
+        private void MenuForm_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (Opacity == 1)
+            {
+                DialogResult = MessageBox.Show("Are you sure you want to close programm ?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (DialogResult == DialogResult.Yes)
+                {
+                    Environment.Exit(0);
+                }
+            }
+        }
+
+        private void PB_Button_Options_Click(object sender, EventArgs e)
+        {
+            OptionsForm optionsForm = new OptionsForm();
+            Design.FormSwitching(this, optionsForm, 1, false, 8);
         }
     }
 }

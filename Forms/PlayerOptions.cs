@@ -22,6 +22,7 @@ namespace Battleship.Forms
         {
             Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
             SetFormComponentsLocations();
+            L_Info_DifficultyStatus.ForeColor = Color.Lime;
         }
         public void SetFormComponentsLocations()
         {
@@ -59,8 +60,7 @@ namespace Battleship.Forms
                 Options.Difficulty = CB_Difficulty.SelectedIndex;
             }
             GamePlayerOne GPO = new GamePlayerOne();
-            GPO.Show();
-            Hide();
+            Design.FormSwitching(this, GPO, 1, false, 8);
         }
         private void BS_ApplyPlayerData_Click(object sender, EventArgs e)
         {
@@ -164,16 +164,16 @@ namespace Battleship.Forms
             Design.SetComponentLocation(L_Info_DifficultyStatus, PNL_PO_Main);
         }
 
-        private void PlayerOptions_FormClosed(object sender, FormClosedEventArgs e)
+        private void PlayerOptions_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (CB_Difficulty.SelectedIndex != -1)
-            {
-                Dispose();
-            }
-            else
+            if (Opacity == 1)
             {
                 MenuForm mf = new MenuForm();
-                mf.Show();
+                Design.FormSwitching(this, mf, 1, false, 8);
+                if (CB_Difficulty.SelectedIndex != -1)
+                {
+                    Dispose();
+                }
             }
         }
     }

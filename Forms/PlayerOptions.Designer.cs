@@ -114,9 +114,9 @@
             this.L_Info_DifficultyStatus.Font = new System.Drawing.Font("Franklin Gothic Medium", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_DifficultyStatus.Location = new System.Drawing.Point(124, 311);
             this.L_Info_DifficultyStatus.Name = "L_Info_DifficultyStatus";
-            this.L_Info_DifficultyStatus.Size = new System.Drawing.Size(74, 21);
+            this.L_Info_DifficultyStatus.Size = new System.Drawing.Size(110, 21);
             this.L_Info_DifficultyStatus.TabIndex = 42;
-            this.L_Info_DifficultyStatus.Text = "Difficulty:";
+            this.L_Info_DifficultyStatus.Text = "Difficulty: Easy";
             // 
             // L_Info_Difficulty
             // 
@@ -143,6 +143,7 @@
             this.CB_Difficulty.Name = "CB_Difficulty";
             this.CB_Difficulty.Size = new System.Drawing.Size(221, 25);
             this.CB_Difficulty.TabIndex = 40;
+            this.CB_Difficulty.Text = "Easy";
             this.TT_PO.SetToolTip(this.CB_Difficulty, "Choose game difficulty");
             this.CB_Difficulty.SelectedIndexChanged += new System.EventHandler(this.CB_Difficulty_SelectedIndexChanged);
             // 
@@ -194,7 +195,7 @@
             this.Name = "PlayerOptions";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "User Data";
-            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.PlayerOptions_FormClosed);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.PlayerOptions_FormClosing);
             this.Load += new System.EventHandler(this.PlayerOptions_Load);
             this.TLP_PO_Main.ResumeLayout(false);
             this.PNL_PO_Main.ResumeLayout(false);

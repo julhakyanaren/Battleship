@@ -10,8 +10,8 @@ namespace Battleship
     {
         public static string GameMode = "Singleplayer";
         public static string SP_PlayerName = "Player";
-        public static int Difficulty = -1;
-        public static string DifficultyName = "None";
+        public static int Difficulty = 0;
+        public static string DifficultyName = "Easy";
 
     }
 }

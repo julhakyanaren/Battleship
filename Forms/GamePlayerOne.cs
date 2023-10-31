@@ -126,7 +126,7 @@ namespace Battleship
             Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
             for (int vb = 0; vb < 100; vb++)
             {
-                await Task.Delay(0);
+                await Task.Delay(5);
                 MapButtons[0, vb].Visible = true;
                 MapButtons[1, vb].Visible = true;
             }
@@ -465,6 +465,7 @@ namespace Battleship
             {
                 GenerateButtons();
                 TSMI_MapEditor.Enabled = true;
+                TSMI_RestartGame.Enabled = true;
             }
             catch
             {
@@ -620,7 +621,7 @@ namespace Battleship
                 MapCreate MCF = new MapCreate();
                 if (!DebugTools.MCF.Opened)
                 {
-                    MCF.Show();
+                    Design.OpenNewForm(MCF, 1, 6);
                 }
             }
         }
@@ -801,6 +802,24 @@ namespace Battleship
             {
                 //Error_Catch
             }
+        }
+        public async void RestartGame() //Don't Compete
+        {
+            Button[,] buttons = MapButtons;
+            for (int b = 0; b < buttons.GetLength(1); b++)
+            {
+                await Task.Delay(0);
+                buttons[0, b].BackColor = PNL_PlayerMap_Schema.BackColor;
+                buttons[1, b].BackColor = PNL_EnemyMap_Schema.BackColor;
+                buttons[0, b].Dispose();
+                buttons[1, b].Dispose();
+            }
+            GenerateButtons();
+
+        }
+        private void TSMI_RestartGame_Click(object sender, EventArgs e)
+        {
+            RestartGame();
         }
     }
 }

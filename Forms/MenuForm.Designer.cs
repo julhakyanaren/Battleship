@@ -70,6 +70,7 @@
             this.PB_Button_Options.Size = new System.Drawing.Size(417, 59);
             this.PB_Button_Options.TabIndex = 7;
             this.PB_Button_Options.TabStop = false;
+            this.PB_Button_Options.Click += new System.EventHandler(this.PB_Button_Options_Click);
             this.PB_Button_Options.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PB_Button_Options_MouseDown);
             this.PB_Button_Options.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PB_Button_Options_MouseUp);
             // 
@@ -109,12 +110,14 @@
             this.Controls.Add(this.PB_MF_MainLogo);
             this.Font = new System.Drawing.Font("Franklin Gothic Demi Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.SizableToolWindow;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MaximizeBox = false;
             this.Name = "MenuForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Battleship";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.MenuForm_FormClosing);
             this.Load += new System.EventHandler(this.MenuForm_Load);
             ((System.ComponentModel.ISupportInitialize)(this.PB_Button_About)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.PB_Button_Options)).EndInit();

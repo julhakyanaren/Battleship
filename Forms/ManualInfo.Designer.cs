@@ -70,17 +70,17 @@
             this.PNL_MI_ProgressUnit = new System.Windows.Forms.Panel();
             this.PNL_MI_ProgressBar = new System.Windows.Forms.Panel();
             this.GB_MI_Plugins = new System.Windows.Forms.GroupBox();
+            this.PNL_MI_ProgressBar_Plugins = new System.Windows.Forms.Panel();
+            this.PNL_MI_ProgressUnit_Plugins = new System.Windows.Forms.Panel();
+            this.BS_MI_CheckPlugins = new System.Windows.Forms.Button();
             this.TV_MI_Pligins = new System.Windows.Forms.TreeView();
             this.PB_IMB_DownloadPDF = new System.Windows.Forms.PictureBox();
-            this.BS_MI_CheckPlugins = new System.Windows.Forms.Button();
-            this.PNL_MI_ProgressUnit_Plugins = new System.Windows.Forms.Panel();
-            this.PNL_MI_ProgressBar_Plugins = new System.Windows.Forms.Panel();
             this.GB_MI_MapEditor.SuspendLayout();
             this.GB_MI_ShipType.SuspendLayout();
             this.PNL_MI_ProgressBar.SuspendLayout();
             this.GB_MI_Plugins.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).BeginInit();
             this.PNL_MI_ProgressBar_Plugins.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).BeginInit();
             this.SuspendLayout();
             // 
             // L_MI_OrientationChanger
@@ -313,6 +313,38 @@
             this.GB_MI_Plugins.TabStop = false;
             this.GB_MI_Plugins.Text = "Plugins Manager";
             // 
+            // PNL_MI_ProgressBar_Plugins
+            // 
+            this.PNL_MI_ProgressBar_Plugins.Controls.Add(this.PNL_MI_ProgressUnit_Plugins);
+            this.PNL_MI_ProgressBar_Plugins.Location = new System.Drawing.Point(3, 276);
+            this.PNL_MI_ProgressBar_Plugins.Name = "PNL_MI_ProgressBar_Plugins";
+            this.PNL_MI_ProgressBar_Plugins.Size = new System.Drawing.Size(138, 31);
+            this.PNL_MI_ProgressBar_Plugins.TabIndex = 49;
+            // 
+            // PNL_MI_ProgressUnit_Plugins
+            // 
+            this.PNL_MI_ProgressUnit_Plugins.BackColor = System.Drawing.Color.Orange;
+            this.PNL_MI_ProgressUnit_Plugins.ForeColor = System.Drawing.Color.White;
+            this.PNL_MI_ProgressUnit_Plugins.Location = new System.Drawing.Point(0, 0);
+            this.PNL_MI_ProgressUnit_Plugins.Name = "PNL_MI_ProgressUnit_Plugins";
+            this.PNL_MI_ProgressUnit_Plugins.Size = new System.Drawing.Size(10, 31);
+            this.PNL_MI_ProgressUnit_Plugins.TabIndex = 45;
+            this.PNL_MI_ProgressUnit_Plugins.Visible = false;
+            // 
+            // BS_MI_CheckPlugins
+            // 
+            this.BS_MI_CheckPlugins.BackColor = System.Drawing.Color.Black;
+            this.BS_MI_CheckPlugins.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
+            this.BS_MI_CheckPlugins.FlatAppearance.BorderSize = 2;
+            this.BS_MI_CheckPlugins.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_MI_CheckPlugins.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_MI_CheckPlugins.Location = new System.Drawing.Point(147, 276);
+            this.BS_MI_CheckPlugins.Name = "BS_MI_CheckPlugins";
+            this.BS_MI_CheckPlugins.Size = new System.Drawing.Size(101, 31);
+            this.BS_MI_CheckPlugins.TabIndex = 46;
+            this.BS_MI_CheckPlugins.Text = "Check Plugins";
+            this.BS_MI_CheckPlugins.UseVisualStyleBackColor = false;
+            // 
             // TV_MI_Pligins
             // 
             this.TV_MI_Pligins.BackColor = System.Drawing.Color.Black;
@@ -391,38 +423,6 @@
             this.PB_IMB_DownloadPDF.MouseDown += new System.Windows.Forms.MouseEventHandler(this.PB_IMB_DownloadPDF_MouseDown);
             this.PB_IMB_DownloadPDF.MouseUp += new System.Windows.Forms.MouseEventHandler(this.PB_IMB_DownloadPDF_MouseUp);
             // 
-            // BS_MI_CheckPlugins
-            // 
-            this.BS_MI_CheckPlugins.BackColor = System.Drawing.Color.Black;
-            this.BS_MI_CheckPlugins.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
-            this.BS_MI_CheckPlugins.FlatAppearance.BorderSize = 2;
-            this.BS_MI_CheckPlugins.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_MI_CheckPlugins.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_MI_CheckPlugins.Location = new System.Drawing.Point(147, 276);
-            this.BS_MI_CheckPlugins.Name = "BS_MI_CheckPlugins";
-            this.BS_MI_CheckPlugins.Size = new System.Drawing.Size(101, 31);
-            this.BS_MI_CheckPlugins.TabIndex = 46;
-            this.BS_MI_CheckPlugins.Text = "Check Plugins";
-            this.BS_MI_CheckPlugins.UseVisualStyleBackColor = false;
-            // 
-            // PNL_MI_ProgressUnit_Plugins
-            // 
-            this.PNL_MI_ProgressUnit_Plugins.BackColor = System.Drawing.Color.Orange;
-            this.PNL_MI_ProgressUnit_Plugins.ForeColor = System.Drawing.Color.White;
-            this.PNL_MI_ProgressUnit_Plugins.Location = new System.Drawing.Point(0, 0);
-            this.PNL_MI_ProgressUnit_Plugins.Name = "PNL_MI_ProgressUnit_Plugins";
-            this.PNL_MI_ProgressUnit_Plugins.Size = new System.Drawing.Size(10, 31);
-            this.PNL_MI_ProgressUnit_Plugins.TabIndex = 45;
-            this.PNL_MI_ProgressUnit_Plugins.Visible = false;
-            // 
-            // PNL_MI_ProgressBar_Plugins
-            // 
-            this.PNL_MI_ProgressBar_Plugins.Controls.Add(this.PNL_MI_ProgressUnit_Plugins);
-            this.PNL_MI_ProgressBar_Plugins.Location = new System.Drawing.Point(3, 276);
-            this.PNL_MI_ProgressBar_Plugins.Name = "PNL_MI_ProgressBar_Plugins";
-            this.PNL_MI_ProgressBar_Plugins.Size = new System.Drawing.Size(138, 31);
-            this.PNL_MI_ProgressBar_Plugins.TabIndex = 49;
-            // 
             // ManualInfo
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(5F, 15F);
@@ -449,8 +449,8 @@
             this.GB_MI_ShipType.PerformLayout();
             this.PNL_MI_ProgressBar.ResumeLayout(false);
             this.GB_MI_Plugins.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).EndInit();
             this.PNL_MI_ProgressBar_Plugins.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

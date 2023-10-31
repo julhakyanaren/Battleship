@@ -103,5 +103,58 @@ namespace Battleship
                 textBox.ForeColor = DefaultBackColor;
             }
         }
+        public static async void OpenNewForm(Form newForm, int duration, int step = 1)
+        {
+            newForm.Opacity = 0;
+            newForm.Show();
+            for (double o = 0; o < 1; o += 0.01 * step)
+            {
+                await Task.Delay(duration);
+                newForm.Opacity = o;
+            }
+            newForm.Opacity = 1;
+        }
+        public static async void FormSwitching(Form firstForm, Form secondForm, int duration, bool dispose, int step = 1)
+        {
+            secondForm.Opacity = 0;
+            secondForm.Show();
+            try
+            {
+                for (double o = 0; o < 1; o += 0.01 * step)
+                {
+                    await Task.Delay(duration);
+                    firstForm.Opacity = 1 - o;
+                }
+                firstForm.Hide();
+            }
+            catch
+            {
+                //Error_Catch
+            }
+            try
+            {
+                for (double o = 0; o < 1; o += 0.01 * step)
+                {
+                    await Task.Delay(duration);
+                    secondForm.Opacity = o;
+                }
+                secondForm.Opacity = 1;
+            }
+            catch
+            {
+                //Error_Catch
+            }
+            try
+            {
+                if (dispose)
+                {
+                    firstForm.Dispose();
+                }
+            }
+            catch
+            {
+                //Error_Catch
+            }
+        }
     }
 }
