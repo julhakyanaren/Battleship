@@ -46,7 +46,7 @@ namespace Battleship.Forms
         }
         public void SetOptions()
         {
-            if (Options.GameMode == "Singleplayer")
+            if (Options.SingleplayerMode == true)
             {
                 if (TB_PlayerName.Text == string.Empty)
                 {

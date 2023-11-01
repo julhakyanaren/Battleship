@@ -151,6 +151,7 @@
             this.TSMI_Game = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_StartNewGame = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_StartBattleShip = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_RestartGame = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Map = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GenerationType = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_TB_GenType = new System.Windows.Forms.ToolStripTextBox();
@@ -167,7 +168,6 @@
             this.TSMI_DEBUG = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowEnemyShipsCoords = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowHitInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_RestartGame = new System.Windows.Forms.ToolStripMenuItem();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
@@ -1963,6 +1963,8 @@
             this.TSMI_File.Name = "TSMI_File";
             this.TSMI_File.Size = new System.Drawing.Size(38, 21);
             this.TSMI_File.Text = "File";
+            this.TSMI_File.MouseEnter += new System.EventHandler(this.TSMI_File_MouseEnter);
+            this.TSMI_File.MouseLeave += new System.EventHandler(this.TSMI_File_MouseLeave);
             // 
             // TSMI_AllwaysOnTop
             // 
@@ -1985,13 +1987,15 @@
             this.TSMI_Game.Name = "TSMI_Game";
             this.TSMI_Game.Size = new System.Drawing.Size(48, 21);
             this.TSMI_Game.Text = "Game";
+            this.TSMI_Game.MouseEnter += new System.EventHandler(this.TSMI_File_MouseEnter);
+            this.TSMI_Game.MouseLeave += new System.EventHandler(this.TSMI_File_MouseLeave);
             // 
             // TSMI_StartNewGame
             // 
             this.TSMI_StartNewGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_StartNewGame.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartNewGame.Name = "TSMI_StartNewGame";
-            this.TSMI_StartNewGame.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_StartNewGame.Size = new System.Drawing.Size(153, 22);
             this.TSMI_StartNewGame.Text = "Start new game";
             this.TSMI_StartNewGame.Click += new System.EventHandler(this.TSMI_StartNewGame_Click);
             // 
@@ -2001,9 +2005,19 @@
             this.TSMI_StartBattleShip.Enabled = false;
             this.TSMI_StartBattleShip.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartBattleShip.Name = "TSMI_StartBattleShip";
-            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(153, 22);
             this.TSMI_StartBattleShip.Text = "Start Battleship";
             this.TSMI_StartBattleShip.Click += new System.EventHandler(this.TSMI_StartBattleShip_Click);
+            // 
+            // TSMI_RestartGame
+            // 
+            this.TSMI_RestartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_RestartGame.Enabled = false;
+            this.TSMI_RestartGame.ForeColor = System.Drawing.Color.Black;
+            this.TSMI_RestartGame.Name = "TSMI_RestartGame";
+            this.TSMI_RestartGame.Size = new System.Drawing.Size(153, 22);
+            this.TSMI_RestartGame.Text = "Restart game";
+            this.TSMI_RestartGame.Click += new System.EventHandler(this.TSMI_RestartGame_Click);
             // 
             // TSMI_Map
             // 
@@ -2016,6 +2030,8 @@
             this.TSMI_Map.Name = "TSMI_Map";
             this.TSMI_Map.Size = new System.Drawing.Size(41, 21);
             this.TSMI_Map.Text = "Map";
+            this.TSMI_Map.MouseEnter += new System.EventHandler(this.TSMI_File_MouseEnter);
+            this.TSMI_Map.MouseLeave += new System.EventHandler(this.TSMI_File_MouseLeave);
             // 
             // TSMI_GenerationType
             // 
@@ -2024,7 +2040,7 @@
             this.TSMI_GenerationType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_TB_GenType});
             this.TSMI_GenerationType.Name = "TSMI_GenerationType";
-            this.TSMI_GenerationType.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_GenerationType.Size = new System.Drawing.Size(176, 22);
             this.TSMI_GenerationType.Text = "Map Generation type";
             this.TSMI_GenerationType.CheckedChanged += new System.EventHandler(this.TSMI_GenerationType_CheckedChanged);
             // 
@@ -2041,7 +2057,7 @@
             // 
             this.TSMI_GenerateMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GenerateMap.Name = "TSMI_GenerateMap";
-            this.TSMI_GenerateMap.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_GenerateMap.Size = new System.Drawing.Size(176, 22);
             this.TSMI_GenerateMap.Text = "Generate Map";
             this.TSMI_GenerateMap.Click += new System.EventHandler(this.TSMI_GenerateMap_Click);
             // 
@@ -2054,13 +2070,15 @@
             this.TSMI_MapEditor.Name = "TSMI_MapEditor";
             this.TSMI_MapEditor.Size = new System.Drawing.Size(72, 21);
             this.TSMI_MapEditor.Text = "Map Editor";
+            this.TSMI_MapEditor.MouseEnter += new System.EventHandler(this.TSMI_File_MouseEnter);
+            this.TSMI_MapEditor.MouseLeave += new System.EventHandler(this.TSMI_File_MouseLeave);
             // 
             // TSMI_OpenMapEditor
             // 
             this.TSMI_OpenMapEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_OpenMapEditor.ForeColor = System.Drawing.Color.Black;
             this.TSMI_OpenMapEditor.Name = "TSMI_OpenMapEditor";
-            this.TSMI_OpenMapEditor.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_OpenMapEditor.Size = new System.Drawing.Size(155, 22);
             this.TSMI_OpenMapEditor.Text = "Open Map Editor";
             this.TSMI_OpenMapEditor.Click += new System.EventHandler(this.TSMI_OpenMapEditor_Click);
             // 
@@ -2073,6 +2091,8 @@
             this.TSMI_Info.Name = "TSMI_Info";
             this.TSMI_Info.Size = new System.Drawing.Size(38, 21);
             this.TSMI_Info.Text = "Info";
+            this.TSMI_Info.MouseEnter += new System.EventHandler(this.TSMI_File_MouseEnter);
+            this.TSMI_Info.MouseLeave += new System.EventHandler(this.TSMI_File_MouseLeave);
             // 
             // TSMI_GameInfo
             // 
@@ -2139,6 +2159,8 @@
             this.TSMI_DEBUG.Size = new System.Drawing.Size(59, 21);
             this.TSMI_DEBUG.Text = "DEBUG";
             this.TSMI_DEBUG.Visible = false;
+            this.TSMI_DEBUG.MouseEnter += new System.EventHandler(this.TSMI_File_MouseEnter);
+            this.TSMI_DEBUG.MouseLeave += new System.EventHandler(this.TSMI_File_MouseLeave);
             // 
             // TSMI_ShowEnemyShipsCoords
             // 
@@ -2157,16 +2179,6 @@
             this.TSMI_ShowHitInfo.Size = new System.Drawing.Size(220, 22);
             this.TSMI_ShowHitInfo.Text = "Show Hit Info";
             this.TSMI_ShowHitInfo.Click += new System.EventHandler(this.TSMI_ShowHitInfo_Click);
-            // 
-            // TSMI_RestartGame
-            // 
-            this.TSMI_RestartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_RestartGame.Enabled = false;
-            this.TSMI_RestartGame.ForeColor = System.Drawing.Color.Black;
-            this.TSMI_RestartGame.Name = "TSMI_RestartGame";
-            this.TSMI_RestartGame.Size = new System.Drawing.Size(180, 22);
-            this.TSMI_RestartGame.Text = "Restart game";
-            this.TSMI_RestartGame.Click += new System.EventHandler(this.TSMI_RestartGame_Click);
             // 
             // GamePlayerOne
             // 

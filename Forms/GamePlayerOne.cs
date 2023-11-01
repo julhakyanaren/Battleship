@@ -821,5 +821,19 @@ namespace Battleship
         {
             RestartGame();
         }
+
+        private async void TSMI_File_MouseEnter(object sender, EventArgs e)
+        {
+            await Task.Delay(0);
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            tsmi.BackColor = Color.RoyalBlue;
+        }
+
+        private async void TSMI_File_MouseLeave(object sender, EventArgs e)
+        {
+            await Task.Delay(0);
+            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
+            tsmi.BackColor = Design.DefaultBackColor;
+        }
     }
 }
