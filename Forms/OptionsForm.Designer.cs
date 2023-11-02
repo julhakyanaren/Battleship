@@ -32,7 +32,12 @@
             this.TB_OF_GameMode = new System.Windows.Forms.TextBox();
             this.CHB_OP_GameModeEducation = new System.Windows.Forms.CheckBox();
             this.CHB_OP_GameModeClassic = new System.Windows.Forms.CheckBox();
+            this.GB_OF_DevMode = new System.Windows.Forms.GroupBox();
+            this.TB_OF_DevPass = new System.Windows.Forms.TextBox();
+            this.L_Info_OF_Access = new System.Windows.Forms.Label();
+            this.BS_PO_CheckAccess = new System.Windows.Forms.Button();
             this.GB_GameMode.SuspendLayout();
+            this.GB_OF_DevMode.SuspendLayout();
             this.SuspendLayout();
             // 
             // GB_GameMode
@@ -91,12 +96,65 @@
             this.CHB_OP_GameModeClassic.UseVisualStyleBackColor = true;
             this.CHB_OP_GameModeClassic.CheckedChanged += new System.EventHandler(this.CHB_OP_GameModeClassic_CheckedChanged);
             // 
+            // GB_OF_DevMode
+            // 
+            this.GB_OF_DevMode.BackColor = System.Drawing.Color.Black;
+            this.GB_OF_DevMode.Controls.Add(this.BS_PO_CheckAccess);
+            this.GB_OF_DevMode.Controls.Add(this.L_Info_OF_Access);
+            this.GB_OF_DevMode.Controls.Add(this.TB_OF_DevPass);
+            this.GB_OF_DevMode.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.GB_OF_DevMode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.GB_OF_DevMode.Location = new System.Drawing.Point(158, 12);
+            this.GB_OF_DevMode.Name = "GB_OF_DevMode";
+            this.GB_OF_DevMode.Size = new System.Drawing.Size(155, 105);
+            this.GB_OF_DevMode.TabIndex = 44;
+            this.GB_OF_DevMode.TabStop = false;
+            this.GB_OF_DevMode.Text = "Developer mode";
+            // 
+            // TB_OF_DevPass
+            // 
+            this.TB_OF_DevPass.BackColor = System.Drawing.Color.Black;
+            this.TB_OF_DevPass.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_OF_DevPass.ForeColor = System.Drawing.Color.White;
+            this.TB_OF_DevPass.Location = new System.Drawing.Point(6, 39);
+            this.TB_OF_DevPass.Name = "TB_OF_DevPass";
+            this.TB_OF_DevPass.PasswordChar = '*';
+            this.TB_OF_DevPass.Size = new System.Drawing.Size(143, 22);
+            this.TB_OF_DevPass.TabIndex = 44;
+            this.TB_OF_DevPass.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // L_Info_OF_Access
+            // 
+            this.L_Info_OF_Access.AutoSize = true;
+            this.L_Info_OF_Access.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.L_Info_OF_Access.Location = new System.Drawing.Point(6, 19);
+            this.L_Info_OF_Access.Name = "L_Info_OF_Access";
+            this.L_Info_OF_Access.Size = new System.Drawing.Size(91, 17);
+            this.L_Info_OF_Access.TabIndex = 45;
+            this.L_Info_OF_Access.Text = "Developer Access";
+            // 
+            // BS_PO_CheckAccess
+            // 
+            this.BS_PO_CheckAccess.BackColor = System.Drawing.Color.Black;
+            this.BS_PO_CheckAccess.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.BS_PO_CheckAccess.FlatAppearance.BorderSize = 2;
+            this.BS_PO_CheckAccess.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_PO_CheckAccess.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_PO_CheckAccess.Location = new System.Drawing.Point(6, 67);
+            this.BS_PO_CheckAccess.Name = "BS_PO_CheckAccess";
+            this.BS_PO_CheckAccess.Size = new System.Drawing.Size(143, 30);
+            this.BS_PO_CheckAccess.TabIndex = 46;
+            this.BS_PO_CheckAccess.Text = "Check Access";
+            this.BS_PO_CheckAccess.UseVisualStyleBackColor = false;
+            this.BS_PO_CheckAccess.Click += new System.EventHandler(this.BS_PO_CheckAccess_Click);
+            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(403, 420);
+            this.ClientSize = new System.Drawing.Size(323, 420);
+            this.Controls.Add(this.GB_OF_DevMode);
             this.Controls.Add(this.GB_GameMode);
             this.Font = new System.Drawing.Font("Franklin Gothic Demi", 9F);
             this.ForeColor = System.Drawing.Color.White;
@@ -107,6 +165,8 @@
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsForm_FormClosing);
             this.GB_GameMode.ResumeLayout(false);
             this.GB_GameMode.PerformLayout();
+            this.GB_OF_DevMode.ResumeLayout(false);
+            this.GB_OF_DevMode.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -117,5 +177,9 @@
         private System.Windows.Forms.CheckBox CHB_OP_GameModeClassic;
         private System.Windows.Forms.CheckBox CHB_OP_GameModeEducation;
         public System.Windows.Forms.TextBox TB_OF_GameMode;
+        private System.Windows.Forms.GroupBox GB_OF_DevMode;
+        public System.Windows.Forms.TextBox TB_OF_DevPass;
+        private System.Windows.Forms.Label L_Info_OF_Access;
+        private System.Windows.Forms.Button BS_PO_CheckAccess;
     }
 }

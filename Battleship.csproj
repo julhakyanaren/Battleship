@@ -204,6 +204,7 @@
     <Compile Include="Classes\Data.cs" />
     <Compile Include="Classes\DebugTools.cs" />
     <Compile Include="Classes\Design.cs" />
+    <Compile Include="Classes\DeveloperData.cs" />
     <Compile Include="Classes\EnemyData.cs" />
     <Compile Include="Classes\Fight.cs" />
     <Compile Include="Classes\FileManager.cs" />

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleship.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -66,6 +67,27 @@ namespace Battleship.Forms
             }
             mf.Opacity = 1;
             Dispose();
+        }
+
+        private void BS_PO_CheckAccess_Click(object sender, EventArgs e)
+        {
+            if (TB_OF_DevPass.Text == DeveloperData.DevPass)
+            {
+                MessageBox.Show("Developer mode on", $"{Handlers.Manager[6]}", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            else
+            {
+                DeveloperData.AttemptsCount--;
+                if (DeveloperData.AttemptsCount >= 0)
+                {
+                    DialogResult = MessageBox.Show($"Access denied!\r\nAttempts Count: {DeveloperData.AttemptsCount}", $"{Handlers.Manager[6]}", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                }
+                else
+                {
+                    MessageBox.Show("Security error, the number of attempts to access the developer tools has been exceeded, the program is forced to close.", $"{Handlers.Manager[6]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    Environment.Exit(0);
+                }
+            }
         }
     }
 }

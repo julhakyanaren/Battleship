@@ -17,7 +17,8 @@ namespace Battleship.Classes
             "Map Editor",               //3
             "Game Manager",             //4
             "Configuration Manager",    //5
-            "Connection Manager"        //6
+            "Connection Manager",       //6
+            "Security Manager"          //7
             };
         public static DialogResult PluginNotIncluded(string message, string manager)
         {
