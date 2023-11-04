@@ -168,6 +168,12 @@
             this.TSMI_DEBUG = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowEnemyShipsCoords = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowHitInfo = new System.Windows.Forms.ToolStripMenuItem();
+            this.GB_Timer = new System.Windows.Forms.GroupBox();
+            this.TB_Timer_Hours = new System.Windows.Forms.TextBox();
+            this.TB_Timer_Minutes = new System.Windows.Forms.TextBox();
+            this.TB_Timer_Seconds = new System.Windows.Forms.TextBox();
+            this.L_Info_Colon_H_M = new System.Windows.Forms.Label();
+            this.L_Info_Colon_M_S = new System.Windows.Forms.Label();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
@@ -205,6 +211,7 @@
             this.TLP_PlayerNumbers.SuspendLayout();
             this.PNL_PlayerMap_Schema.SuspendLayout();
             this.MS_MenuPanel.SuspendLayout();
+            this.GB_Timer.SuspendLayout();
             this.SuspendLayout();
             // 
             // TLP_Main
@@ -253,6 +260,7 @@
             // 
             // PNL_Options
             // 
+            this.PNL_Options.Controls.Add(this.GB_Timer);
             this.PNL_Options.Controls.Add(this.TB_DIfficulty);
             this.PNL_Options.Controls.Add(this.L_Info_Difficulty);
             this.PNL_Options.Controls.Add(this.TEST);
@@ -267,22 +275,22 @@
             // TB_DIfficulty
             // 
             this.TB_DIfficulty.BackColor = System.Drawing.Color.Black;
-            this.TB_DIfficulty.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_DIfficulty.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.TB_DIfficulty.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TB_DIfficulty.Location = new System.Drawing.Point(4, 27);
             this.TB_DIfficulty.Name = "TB_DIfficulty";
             this.TB_DIfficulty.ReadOnly = true;
-            this.TB_DIfficulty.Size = new System.Drawing.Size(132, 22);
+            this.TB_DIfficulty.Size = new System.Drawing.Size(102, 22);
             this.TB_DIfficulty.TabIndex = 40;
             this.TB_DIfficulty.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // L_Info_Difficulty
             // 
             this.L_Info_Difficulty.AutoSize = true;
-            this.L_Info_Difficulty.Font = new System.Drawing.Font("Franklin Gothic Medium", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_Info_Difficulty.Location = new System.Drawing.Point(4, 3);
+            this.L_Info_Difficulty.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_Info_Difficulty.Location = new System.Drawing.Point(4, 7);
             this.L_Info_Difficulty.Name = "L_Info_Difficulty";
-            this.L_Info_Difficulty.Size = new System.Drawing.Size(67, 20);
+            this.L_Info_Difficulty.Size = new System.Drawing.Size(50, 17);
             this.L_Info_Difficulty.TabIndex = 34;
             this.L_Info_Difficulty.Text = "Difficulty";
             // 
@@ -290,9 +298,9 @@
             // 
             this.TEST.Dock = System.Windows.Forms.DockStyle.Right;
             this.TEST.Image = global::Battleship.Properties.Resources.Logo;
-            this.TEST.Location = new System.Drawing.Point(259, 0);
+            this.TEST.Location = new System.Drawing.Point(298, 0);
             this.TEST.Name = "TEST";
-            this.TEST.Size = new System.Drawing.Size(248, 63);
+            this.TEST.Size = new System.Drawing.Size(209, 63);
             this.TEST.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.TEST.TabIndex = 2;
             this.TEST.TabStop = false;
@@ -448,10 +456,10 @@
             // L_Info_Turn
             // 
             this.L_Info_Turn.AutoSize = true;
-            this.L_Info_Turn.Font = new System.Drawing.Font("Franklin Gothic Medium", 11.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_Info_Turn.Location = new System.Drawing.Point(49, 1);
+            this.L_Info_Turn.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_Info_Turn.Location = new System.Drawing.Point(5, 6);
             this.L_Info_Turn.Name = "L_Info_Turn";
-            this.L_Info_Turn.Size = new System.Drawing.Size(37, 20);
+            this.L_Info_Turn.Size = new System.Drawing.Size(29, 17);
             this.L_Info_Turn.TabIndex = 38;
             this.L_Info_Turn.Text = "Turn";
             // 
@@ -2180,6 +2188,82 @@
             this.TSMI_ShowHitInfo.Text = "Show Hit Info";
             this.TSMI_ShowHitInfo.Click += new System.EventHandler(this.TSMI_ShowHitInfo_Click);
             // 
+            // GB_Timer
+            // 
+            this.GB_Timer.BackColor = System.Drawing.Color.Black;
+            this.GB_Timer.Controls.Add(this.L_Info_Colon_M_S);
+            this.GB_Timer.Controls.Add(this.L_Info_Colon_H_M);
+            this.GB_Timer.Controls.Add(this.TB_Timer_Seconds);
+            this.GB_Timer.Controls.Add(this.TB_Timer_Minutes);
+            this.GB_Timer.Controls.Add(this.TB_Timer_Hours);
+            this.GB_Timer.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.GB_Timer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.GB_Timer.Location = new System.Drawing.Point(112, 4);
+            this.GB_Timer.Name = "GB_Timer";
+            this.GB_Timer.Size = new System.Drawing.Size(180, 45);
+            this.GB_Timer.TabIndex = 41;
+            this.GB_Timer.TabStop = false;
+            this.GB_Timer.Text = "Timer";
+            // 
+            // TB_Timer_Hours
+            // 
+            this.TB_Timer_Hours.BackColor = System.Drawing.Color.Black;
+            this.TB_Timer_Hours.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_Timer_Hours.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TB_Timer_Hours.Location = new System.Drawing.Point(7, 17);
+            this.TB_Timer_Hours.Name = "TB_Timer_Hours";
+            this.TB_Timer_Hours.ReadOnly = true;
+            this.TB_Timer_Hours.Size = new System.Drawing.Size(47, 22);
+            this.TB_Timer_Hours.TabIndex = 42;
+            this.TB_Timer_Hours.Text = "00";
+            this.TB_Timer_Hours.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TB_Timer_Minutes
+            // 
+            this.TB_Timer_Minutes.BackColor = System.Drawing.Color.Black;
+            this.TB_Timer_Minutes.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_Timer_Minutes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TB_Timer_Minutes.Location = new System.Drawing.Point(67, 17);
+            this.TB_Timer_Minutes.Name = "TB_Timer_Minutes";
+            this.TB_Timer_Minutes.ReadOnly = true;
+            this.TB_Timer_Minutes.Size = new System.Drawing.Size(47, 22);
+            this.TB_Timer_Minutes.TabIndex = 43;
+            this.TB_Timer_Minutes.Text = "00";
+            this.TB_Timer_Minutes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TB_Timer_Seconds
+            // 
+            this.TB_Timer_Seconds.BackColor = System.Drawing.Color.Black;
+            this.TB_Timer_Seconds.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_Timer_Seconds.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TB_Timer_Seconds.Location = new System.Drawing.Point(127, 17);
+            this.TB_Timer_Seconds.Name = "TB_Timer_Seconds";
+            this.TB_Timer_Seconds.ReadOnly = true;
+            this.TB_Timer_Seconds.Size = new System.Drawing.Size(47, 22);
+            this.TB_Timer_Seconds.TabIndex = 44;
+            this.TB_Timer_Seconds.Text = "00";
+            this.TB_Timer_Seconds.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // L_Info_Colon_H_M
+            // 
+            this.L_Info_Colon_H_M.AutoSize = true;
+            this.L_Info_Colon_H_M.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_Info_Colon_H_M.Location = new System.Drawing.Point(56, 20);
+            this.L_Info_Colon_H_M.Name = "L_Info_Colon_H_M";
+            this.L_Info_Colon_H_M.Size = new System.Drawing.Size(11, 17);
+            this.L_Info_Colon_H_M.TabIndex = 45;
+            this.L_Info_Colon_H_M.Text = ":";
+            // 
+            // L_Info_Colon_M_S
+            // 
+            this.L_Info_Colon_M_S.AutoSize = true;
+            this.L_Info_Colon_M_S.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_Info_Colon_M_S.Location = new System.Drawing.Point(116, 20);
+            this.L_Info_Colon_M_S.Name = "L_Info_Colon_M_S";
+            this.L_Info_Colon_M_S.Size = new System.Drawing.Size(11, 17);
+            this.L_Info_Colon_M_S.TabIndex = 46;
+            this.L_Info_Colon_M_S.Text = ":";
+            // 
             // GamePlayerOne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2241,6 +2325,8 @@
             this.PNL_PlayerMap_Schema.ResumeLayout(false);
             this.MS_MenuPanel.ResumeLayout(false);
             this.MS_MenuPanel.PerformLayout();
+            this.GB_Timer.ResumeLayout(false);
+            this.GB_Timer.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2387,5 +2473,11 @@
         private System.Windows.Forms.ToolStripMenuItem TSMI_GPO_OpenManual;
         private System.Windows.Forms.ToolStripMenuItem TSMI_ShowHitInfo;
         private System.Windows.Forms.ToolStripMenuItem TSMI_RestartGame;
+        private System.Windows.Forms.GroupBox GB_Timer;
+        private System.Windows.Forms.Label L_Info_Colon_M_S;
+        private System.Windows.Forms.Label L_Info_Colon_H_M;
+        public System.Windows.Forms.TextBox TB_Timer_Seconds;
+        public System.Windows.Forms.TextBox TB_Timer_Minutes;
+        public System.Windows.Forms.TextBox TB_Timer_Hours;
     }
 }
