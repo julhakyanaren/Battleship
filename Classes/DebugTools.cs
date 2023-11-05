@@ -9,7 +9,7 @@ namespace Battleship
     public static class DebugTools
     {
         public static bool DebugMode = true;
-        public static string Version = "Alpha 0.5.7.0";
+        public static string Version = "Alpha 0.5.7.1";
 
         //Change EnemyData PlayerData TextBoxes Forecolors throw text 
 

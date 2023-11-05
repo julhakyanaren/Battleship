@@ -34,6 +34,12 @@
             this.PNL_MenuField = new System.Windows.Forms.Panel();
             this.TLP_GPO_Controls = new System.Windows.Forms.TableLayoutPanel();
             this.PNL_Options = new System.Windows.Forms.Panel();
+            this.GB_Timer = new System.Windows.Forms.GroupBox();
+            this.L_Info_Colon_M_S = new System.Windows.Forms.Label();
+            this.L_Info_Colon_H_M = new System.Windows.Forms.Label();
+            this.TB_Timer_Seconds = new System.Windows.Forms.TextBox();
+            this.TB_Timer_Minutes = new System.Windows.Forms.TextBox();
+            this.TB_Timer_Hours = new System.Windows.Forms.TextBox();
             this.TB_DIfficulty = new System.Windows.Forms.TextBox();
             this.L_Info_Difficulty = new System.Windows.Forms.Label();
             this.TEST = new System.Windows.Forms.PictureBox();
@@ -168,16 +174,11 @@
             this.TSMI_DEBUG = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowEnemyShipsCoords = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowHitInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.GB_Timer = new System.Windows.Forms.GroupBox();
-            this.TB_Timer_Hours = new System.Windows.Forms.TextBox();
-            this.TB_Timer_Minutes = new System.Windows.Forms.TextBox();
-            this.TB_Timer_Seconds = new System.Windows.Forms.TextBox();
-            this.L_Info_Colon_H_M = new System.Windows.Forms.Label();
-            this.L_Info_Colon_M_S = new System.Windows.Forms.Label();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
             this.PNL_Options.SuspendLayout();
+            this.GB_Timer.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TEST)).BeginInit();
             this.PNL_PlayerControl.SuspendLayout();
             this.TLP_GameInfo.SuspendLayout();
@@ -211,7 +212,6 @@
             this.TLP_PlayerNumbers.SuspendLayout();
             this.PNL_PlayerMap_Schema.SuspendLayout();
             this.MS_MenuPanel.SuspendLayout();
-            this.GB_Timer.SuspendLayout();
             this.SuspendLayout();
             // 
             // TLP_Main
@@ -271,6 +271,82 @@
             this.PNL_Options.Name = "PNL_Options";
             this.PNL_Options.Size = new System.Drawing.Size(507, 63);
             this.PNL_Options.TabIndex = 1;
+            // 
+            // GB_Timer
+            // 
+            this.GB_Timer.BackColor = System.Drawing.Color.Black;
+            this.GB_Timer.Controls.Add(this.L_Info_Colon_M_S);
+            this.GB_Timer.Controls.Add(this.L_Info_Colon_H_M);
+            this.GB_Timer.Controls.Add(this.TB_Timer_Seconds);
+            this.GB_Timer.Controls.Add(this.TB_Timer_Minutes);
+            this.GB_Timer.Controls.Add(this.TB_Timer_Hours);
+            this.GB_Timer.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.GB_Timer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.GB_Timer.Location = new System.Drawing.Point(112, 4);
+            this.GB_Timer.Name = "GB_Timer";
+            this.GB_Timer.Size = new System.Drawing.Size(180, 45);
+            this.GB_Timer.TabIndex = 41;
+            this.GB_Timer.TabStop = false;
+            this.GB_Timer.Text = "Timer";
+            // 
+            // L_Info_Colon_M_S
+            // 
+            this.L_Info_Colon_M_S.AutoSize = true;
+            this.L_Info_Colon_M_S.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_Info_Colon_M_S.Location = new System.Drawing.Point(116, 20);
+            this.L_Info_Colon_M_S.Name = "L_Info_Colon_M_S";
+            this.L_Info_Colon_M_S.Size = new System.Drawing.Size(11, 17);
+            this.L_Info_Colon_M_S.TabIndex = 46;
+            this.L_Info_Colon_M_S.Text = ":";
+            // 
+            // L_Info_Colon_H_M
+            // 
+            this.L_Info_Colon_H_M.AutoSize = true;
+            this.L_Info_Colon_H_M.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_Info_Colon_H_M.Location = new System.Drawing.Point(56, 20);
+            this.L_Info_Colon_H_M.Name = "L_Info_Colon_H_M";
+            this.L_Info_Colon_H_M.Size = new System.Drawing.Size(11, 17);
+            this.L_Info_Colon_H_M.TabIndex = 45;
+            this.L_Info_Colon_H_M.Text = ":";
+            // 
+            // TB_Timer_Seconds
+            // 
+            this.TB_Timer_Seconds.BackColor = System.Drawing.Color.Black;
+            this.TB_Timer_Seconds.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_Timer_Seconds.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TB_Timer_Seconds.Location = new System.Drawing.Point(127, 17);
+            this.TB_Timer_Seconds.Name = "TB_Timer_Seconds";
+            this.TB_Timer_Seconds.ReadOnly = true;
+            this.TB_Timer_Seconds.Size = new System.Drawing.Size(47, 22);
+            this.TB_Timer_Seconds.TabIndex = 44;
+            this.TB_Timer_Seconds.Text = "00";
+            this.TB_Timer_Seconds.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TB_Timer_Minutes
+            // 
+            this.TB_Timer_Minutes.BackColor = System.Drawing.Color.Black;
+            this.TB_Timer_Minutes.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_Timer_Minutes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TB_Timer_Minutes.Location = new System.Drawing.Point(67, 17);
+            this.TB_Timer_Minutes.Name = "TB_Timer_Minutes";
+            this.TB_Timer_Minutes.ReadOnly = true;
+            this.TB_Timer_Minutes.Size = new System.Drawing.Size(47, 22);
+            this.TB_Timer_Minutes.TabIndex = 43;
+            this.TB_Timer_Minutes.Text = "00";
+            this.TB_Timer_Minutes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TB_Timer_Hours
+            // 
+            this.TB_Timer_Hours.BackColor = System.Drawing.Color.Black;
+            this.TB_Timer_Hours.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_Timer_Hours.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TB_Timer_Hours.Location = new System.Drawing.Point(7, 17);
+            this.TB_Timer_Hours.Name = "TB_Timer_Hours";
+            this.TB_Timer_Hours.ReadOnly = true;
+            this.TB_Timer_Hours.Size = new System.Drawing.Size(47, 22);
+            this.TB_Timer_Hours.TabIndex = 42;
+            this.TB_Timer_Hours.Text = "00";
+            this.TB_Timer_Hours.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TB_DIfficulty
             // 
@@ -2188,82 +2264,6 @@
             this.TSMI_ShowHitInfo.Text = "Show Hit Info";
             this.TSMI_ShowHitInfo.Click += new System.EventHandler(this.TSMI_ShowHitInfo_Click);
             // 
-            // GB_Timer
-            // 
-            this.GB_Timer.BackColor = System.Drawing.Color.Black;
-            this.GB_Timer.Controls.Add(this.L_Info_Colon_M_S);
-            this.GB_Timer.Controls.Add(this.L_Info_Colon_H_M);
-            this.GB_Timer.Controls.Add(this.TB_Timer_Seconds);
-            this.GB_Timer.Controls.Add(this.TB_Timer_Minutes);
-            this.GB_Timer.Controls.Add(this.TB_Timer_Hours);
-            this.GB_Timer.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.GB_Timer.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.GB_Timer.Location = new System.Drawing.Point(112, 4);
-            this.GB_Timer.Name = "GB_Timer";
-            this.GB_Timer.Size = new System.Drawing.Size(180, 45);
-            this.GB_Timer.TabIndex = 41;
-            this.GB_Timer.TabStop = false;
-            this.GB_Timer.Text = "Timer";
-            // 
-            // TB_Timer_Hours
-            // 
-            this.TB_Timer_Hours.BackColor = System.Drawing.Color.Black;
-            this.TB_Timer_Hours.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_Timer_Hours.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TB_Timer_Hours.Location = new System.Drawing.Point(7, 17);
-            this.TB_Timer_Hours.Name = "TB_Timer_Hours";
-            this.TB_Timer_Hours.ReadOnly = true;
-            this.TB_Timer_Hours.Size = new System.Drawing.Size(47, 22);
-            this.TB_Timer_Hours.TabIndex = 42;
-            this.TB_Timer_Hours.Text = "00";
-            this.TB_Timer_Hours.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // TB_Timer_Minutes
-            // 
-            this.TB_Timer_Minutes.BackColor = System.Drawing.Color.Black;
-            this.TB_Timer_Minutes.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_Timer_Minutes.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TB_Timer_Minutes.Location = new System.Drawing.Point(67, 17);
-            this.TB_Timer_Minutes.Name = "TB_Timer_Minutes";
-            this.TB_Timer_Minutes.ReadOnly = true;
-            this.TB_Timer_Minutes.Size = new System.Drawing.Size(47, 22);
-            this.TB_Timer_Minutes.TabIndex = 43;
-            this.TB_Timer_Minutes.Text = "00";
-            this.TB_Timer_Minutes.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // TB_Timer_Seconds
-            // 
-            this.TB_Timer_Seconds.BackColor = System.Drawing.Color.Black;
-            this.TB_Timer_Seconds.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_Timer_Seconds.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TB_Timer_Seconds.Location = new System.Drawing.Point(127, 17);
-            this.TB_Timer_Seconds.Name = "TB_Timer_Seconds";
-            this.TB_Timer_Seconds.ReadOnly = true;
-            this.TB_Timer_Seconds.Size = new System.Drawing.Size(47, 22);
-            this.TB_Timer_Seconds.TabIndex = 44;
-            this.TB_Timer_Seconds.Text = "00";
-            this.TB_Timer_Seconds.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // L_Info_Colon_H_M
-            // 
-            this.L_Info_Colon_H_M.AutoSize = true;
-            this.L_Info_Colon_H_M.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_Info_Colon_H_M.Location = new System.Drawing.Point(56, 20);
-            this.L_Info_Colon_H_M.Name = "L_Info_Colon_H_M";
-            this.L_Info_Colon_H_M.Size = new System.Drawing.Size(11, 17);
-            this.L_Info_Colon_H_M.TabIndex = 45;
-            this.L_Info_Colon_H_M.Text = ":";
-            // 
-            // L_Info_Colon_M_S
-            // 
-            this.L_Info_Colon_M_S.AutoSize = true;
-            this.L_Info_Colon_M_S.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_Info_Colon_M_S.Location = new System.Drawing.Point(116, 20);
-            this.L_Info_Colon_M_S.Name = "L_Info_Colon_M_S";
-            this.L_Info_Colon_M_S.Size = new System.Drawing.Size(11, 17);
-            this.L_Info_Colon_M_S.TabIndex = 46;
-            this.L_Info_Colon_M_S.Text = ":";
-            // 
             // GamePlayerOne
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2286,6 +2286,8 @@
             this.TLP_GPO_Controls.ResumeLayout(false);
             this.PNL_Options.ResumeLayout(false);
             this.PNL_Options.PerformLayout();
+            this.GB_Timer.ResumeLayout(false);
+            this.GB_Timer.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.TEST)).EndInit();
             this.PNL_PlayerControl.ResumeLayout(false);
             this.TLP_GameInfo.ResumeLayout(false);
@@ -2325,8 +2327,6 @@
             this.PNL_PlayerMap_Schema.ResumeLayout(false);
             this.MS_MenuPanel.ResumeLayout(false);
             this.MS_MenuPanel.PerformLayout();
-            this.GB_Timer.ResumeLayout(false);
-            this.GB_Timer.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
