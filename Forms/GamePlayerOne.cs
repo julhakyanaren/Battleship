@@ -359,7 +359,18 @@ namespace Battleship
                         }
                 }
             }
+            GameDuration.Enabled = true;
+            TimerData.TimerStarted = true;
+            TimerData.TimerInPause = false;
+            GameDuration.Tick += Timer_Tick;
         }
+
+        private async void Timer_Tick(object sender, EventArgs e)
+        {
+            TimerData.TimerTick(TimerData.TimerStarted);
+            TB_Timer.Text = Support.FormateTimeText(TimerData.Seconds, TimerData.Minutes, TimerData.Hours, "HH:MM:SS");
+        }
+
         public void SetStatusTextBoxesValues()
         {
             TB_PlayerFrigate.Text = PlayerData.FrigatesCountCurrent.ToString();
@@ -820,20 +831,6 @@ namespace Battleship
         private void TSMI_RestartGame_Click(object sender, EventArgs e)
         {
             RestartGame();
-        }
-
-        private async void TSMI_File_MouseEnter(object sender, EventArgs e)
-        {
-            await Task.Delay(0);
-            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-            tsmi.BackColor = Color.RoyalBlue;
-        }
-
-        private async void TSMI_File_MouseLeave(object sender, EventArgs e)
-        {
-            await Task.Delay(0);
-            ToolStripMenuItem tsmi = sender as ToolStripMenuItem;
-            tsmi.BackColor = Design.DefaultBackColor;
         }
     }
 }

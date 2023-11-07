@@ -1,7 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using System.Dynamic;
 using System.Linq;
+using System.Security.Policy;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -122,6 +124,28 @@ namespace Battleship
                 }
             }
             return outputArray;
+        }
+        public string FormateTimeText(int seconds, int minutes, int hours, string timeFormat)
+        {
+            switch (timeFormat)
+            {
+                case "HH:MM:SS":
+                    {
+                        return $"{hours:00}:{minutes:00}:{seconds:00}";
+                    }
+                case "HH:MM":
+                    {
+                        return $"{hours:00}:{minutes:00}";
+                    }
+                case "MM:SS":
+                    {
+                        return $"{minutes:00}:{seconds:00}";
+                    }
+                default:
+                    {
+                        return $"{hours}:{minutes}:{seconds}";
+                    }
+            }
         }
     }
 }

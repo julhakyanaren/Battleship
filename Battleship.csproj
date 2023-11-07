@@ -210,7 +210,6 @@
     <Compile Include="Classes\FileManager.cs" />
     <Compile Include="Classes\Handlers.cs" />
     <Compile Include="Classes\Map.cs" />
-    <Compile Include="Classes\Timer.cs" />
     <Compile Include="Forms\HitStatus.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -262,6 +261,7 @@
     <Compile Include="Classes\Ship.cs" />
     <Compile Include="Classes\ShipData.cs" />
     <Compile Include="Classes\Support.cs" />
+    <Compile Include="Classes\TimerData.cs" />
     <EmbeddedResource Include="Forms\GamePlayerOne.resx">
       <DependentUpon>GamePlayerOne.cs</DependentUpon>
     </EmbeddedResource>

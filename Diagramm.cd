@@ -38,7 +38,7 @@
   <Class Name="Battleship.Design">
     <Position X="0.5" Y="2.75" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>CAAQQAAAAAAACACAAAAAACACAAAAAIAAAAAAQAAAAAQ=</HashCode>
+      <HashCode>CAAQQAAAAAAACACIAAAAACACAAAAAIIAAAAAUAAAAAQ=</HashCode>
       <FileName>Classes\Design.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -73,7 +73,7 @@
   <Class Name="Battleship.Options">
     <Position X="4" Y="6" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAgABAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAQAAAAAAAAAAAAgAAAAAAkABAAAAAAA=</HashCode>
       <FileName>Classes\Options.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -115,7 +115,7 @@
   <Class Name="Battleship.GamePlayerOne">
     <Position X="7.75" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>W70OARbvLn4b8Sz9J8/UlYn/1ycp/Z8wAACAHQoJUFk=</HashCode>
+      <HashCode>W70PAxbvLn4b8Sz9J8/Ul4n/12dp/Z84AACBHQoZ0Fk=</HashCode>
       <FileName>Forms\GamePlayerOne.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -129,14 +129,14 @@
   <Class Name="Battleship.MenuForm">
     <Position X="11.25" Y="0.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAhAAAQACAAACAAAYCIAAACAAgAAAQAAIAAACBABEE=</HashCode>
+      <HashCode>EAAhAAAQACAAACAAAYCIAAACAAgAAAQAAIAAACBABEE=</HashCode>
       <FileName>Forms\MenuForm.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="Battleship.Forms.PlayerOptions">
     <Position X="11.25" Y="14.25" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>BAAAAAAAAGAQAgAAAFKAQAICAEAAAxAAQEAAAMgCAAA=</HashCode>
+      <HashCode>BAAAAAAAAGEQAgAAAFKAQAICAEAAAxAAQEAAAEgCAAA=</HashCode>
       <FileName>Forms\PlayerOptions.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -152,6 +152,13 @@
     <TypeIdentifier>
       <HashCode>AAAAAAAAACAAAAAAAACIAAECAEAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Forms\HitStatus.cs</FileName>
+    </TypeIdentifier>
+  </Class>
+  <Class Name="Battleship.TimerData">
+    <Position X="4" Y="14.25" Width="1.5" />
+    <TypeIdentifier>
+      <HashCode>AAAAAAEAQAARAEAAQAAEAAAAAAAAAAAAAAABAABAAAA=</HashCode>
+      <FileName>Classes\TimerData.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Enum Name="Battleship.Ship">
