@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Configuration;
+using System.Drawing;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -22,6 +23,7 @@ namespace Battleship
         public static int FirstHitCoord = 0;
         public static List<int> AllowedCoords = new List<int>();
         public static List<int> BlockedCoords = new List<int>();
+        public static bool FirstMove = true;
         public static double SuccessThreshold(int difficulty)
         {
             double successThreshold = 0.0;
@@ -102,6 +104,76 @@ namespace Battleship
                 }
             }
         }
+        static void Move()
+        {
+            if (FirstMove)
+            {
+                int target = FindShipCoord(false);
+                Button targetButton;
+                int index = 0;
+                int counter = 0;
+                using (GamePlayerOne gpo = new GamePlayerOne())
+                {
+                    foreach (Button b in gpo.MapButtons)
+                    {
+                        if (b.Tag.ToString() == Convert.ToString(target - 1551))
+                        {
+                            targetButton = b;
+                            index = counter;
+                            counter = 0;
+                            break;
+                        }
+                        else
+                        {
+                            counter++;
+                        }
+                    }
+                    switch (PlayerData.Map[index])
+                    {
+                        case 'E':
+                            {
+                                FirstHitCoord = 0;
+                                PlayerData.Map[index] = 'M';
+                                break;
+                            }
+                        case 'S':
+                        case 'M':
+                        case 'H':
+                            {
+                                MessageBox.Show("Checked position", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                FirstHitCoord = 0;
+                                break;
+                            }
+                        case 'F':
+                            {
+                                PlayerData.Map[index] = 'S';
+                                break;
+                            }
+                        case 'D':
+                        case 'C':
+                        case 'B':
+                            {
+                                break;
+                            }
+                        default:
+                            {
+                                MessageBox.Show("Incorrect Position", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                FirstHitCoord = 0;
+                                break;
+                            }
+
+                    }
+                }
+                FirstMove = false;
+            }
+            else
+            {
+                if (FirstHitCoord == 0)
+                {
+
+                }
+            }
+        }
         static int FindShipCoord(bool hitStatus)
         {
             if (!hitStatus)
@@ -114,8 +186,9 @@ namespace Battleship
             }
             else
             {
-                GenerateNearestCoords();
+                //GenerateNearestCoords();
             }
+            return 0;
         }
 
         static void GenerateNearestCoords(int firstCoords)

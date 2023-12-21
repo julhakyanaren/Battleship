@@ -17,7 +17,7 @@ namespace Battleship
         {
             InitializeComponent();
         }
-        Button[,] MapButtons = new Button[2, 100];
+        public Button[,] MapButtons = new Button[2, 100];
         void SetScreenParametersAsMaximized()
         {
             WindowState = FormWindowState.Maximized;
