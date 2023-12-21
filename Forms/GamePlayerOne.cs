@@ -440,17 +440,7 @@ namespace Battleship
             }
             else if (Fight.Turn == 1)
             {
-                if (Fight.EnemyShot(out string targetTag, out bool successShot, out bool alreadyHited))
-                {
-                    if (successShot)
-                    {
-                        ShowHitInfo();
-                    }
-                    else
-                    {
-
-                    }
-                }
+                //Enemy Shot
             }
             else
             {

@@ -6,6 +6,7 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Battleship
 {
@@ -18,7 +19,9 @@ namespace Battleship
         public static bool PlayerHited = false;
         public static string InfoType = "Null";
         public static int SunkenShipType = 0;
-
+        public static int FirstHitCoord = 0;
+        public static List<int> AllowedCoords = new List<int>();
+        public static List<int> BlockedCoords = new List<int>();
         public static double SuccessThreshold(int difficulty)
         {
             double successThreshold = 0.0;
@@ -50,12 +53,6 @@ namespace Battleship
                     }
             }
             return successThreshold;
-        }
-        public static bool CanHit(double successThreshold)
-        {
-            Random hitRandom = new Random();
-            double randomNumber = hitRandom.NextDouble();
-            return randomNumber <= successThreshold;
         }
         public static int WhoStartGame()
         {
@@ -105,112 +102,108 @@ namespace Battleship
                 }
             }
         }
-        public static bool FindEmptyCell(out string targetTag)
+        static int FindShipCoord(bool hitStatus)
         {
-            int[] emptyIndexes = new int[0];
-            int index = 0;
-            for (int c = 0; c < PlayerData.Map.Length; c++)
+            if (!hitStatus)
             {
-                if (PlayerData.Map[c] == 'N')
-                {
-                    index++;
-                    Array.Resize(ref emptyIndexes, index);
-                    emptyIndexes[index] = 100 + c;
-                }
-            }
-            if (emptyIndexes.Length == 0)
-            {
-                targetTag = "-100";
-                return false;
+                Random randCoord = new Random();
+                int vertical = randCoord.Next(65, 75);
+                int horizontal = randCoord.Next(1,11);
+                int target = vertical * 10 + horizontal + 1000;
+                return target;
             }
             else
             {
-                Random randomEmptyCell = new Random();
-                targetTag = randomEmptyCell.Next(0, emptyIndexes.Length).ToString();
-                return true;
+                GenerateNearestCoords();
             }
         }
-        public static char FindShipChar(out int randomShipType)
+
+        static void GenerateNearestCoords(int firstCoords)
         {
-            Random setRandomShip = new Random();
-            randomShipType = setRandomShip.Next(1, 5);
-            switch (randomShipType)
+            if (firstCoords != 0)
             {
-                case 1:
-                    {
-                        return 'F';
-                    }
-                case 2:
-                    {
-                        return 'D';
-                    }
-                case 3:
-                    {
-                        return 'C';
-                    }
-                case 4:
-                    {
-                        return 'B';
-                    }
-                default:
-                    {
-                        return 'N';
-                    }
-            }
-        }
-        public static string FindShipTag()
-        {
-            char shipChar = FindShipChar(out int shipIndex);
-            int index = -1;
-            if (shipIndex <= 0)
-            {
-                return "-100";
-                //Error_Catch
-            }
-            else
-            {
-                foreach (char c in PlayerData.Map)
+                Position pos = new Position(); 
+                AllowedCoords.Clear();
+                BlockedCoords.Clear();
+                switch (pos.GetCellPosition(firstCoords.ToString()))
                 {
-                    if (c == shipChar)
-                    {
-                        index = Array.IndexOf(PlayerData.Map, c);
-                        break;
-                    }
+                    case "center":
+                        {
+                            AllowedCoords.Add(firstCoords - 1);
+                            AllowedCoords.Add(firstCoords + 1);
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords + 10);
+                            BlockedCoords.Add(firstCoords + -11);
+                            BlockedCoords.Add(firstCoords - 9);
+                            BlockedCoords.Add(firstCoords + 9);
+                            BlockedCoords.Add(firstCoords - 11);
+                            break;
+                        }
+                    case "left":
+                        {
+                            AllowedCoords.Add(firstCoords - 1);
+                            AllowedCoords.Add(firstCoords + 10);
+                            AllowedCoords.Add(firstCoords + 1);
+                            BlockedCoords.Add(firstCoords + 9);
+                            BlockedCoords.Add(firstCoords + 11);
+                            break;
+                        }
+                    case "right":
+                        {
+                            AllowedCoords.Add(firstCoords + 1);
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords - 1);
+                            BlockedCoords.Add(firstCoords - 11);
+                            BlockedCoords.Add(firstCoords - 9);
+                            break;
+                        }
+                    case "top":
+                        {
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords + 1);
+                            AllowedCoords.Add(firstCoords + 10);
+                            BlockedCoords.Add(firstCoords - 9);
+                            BlockedCoords.Add(firstCoords + 11);
+                            break;
+                        }
+                    case "bottom":
+                        {
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords - 1);
+                            AllowedCoords.Add(firstCoords + 10);
+                            BlockedCoords.Add(firstCoords + 9);
+                            BlockedCoords.Add(firstCoords - 11);
+                            break;
+                        }
+                    case "corner1":
+                        {
+                            AllowedCoords.Add(firstCoords + 10);
+                            AllowedCoords.Add(firstCoords + 1);
+                            BlockedCoords.Add(firstCoords + 11);
+                            break;
+                        }
+                    case "corner2":
+                        {
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords + 1);
+                            BlockedCoords.Add(firstCoords -9);
+                            break;
+                        }
+                    case "corner3":
+                        {
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords - 1);
+                            BlockedCoords.Add(firstCoords - 11);
+                            break;
+                        }
+                    case "corner4":
+                        {   
+                            AllowedCoords.Add(firstCoords + 10);
+                            AllowedCoords.Add(firstCoords - 1);
+                            BlockedCoords.Add(firstCoords + 9);
+                            break;
+                        }
                 }
-                return $"1{index}";
-            }
-        }
-        public static bool EnemyShot(out string targetTag, out bool successShot, out bool alreadyHited)
-        {
-            alreadyHited = false;
-            successShot = CanHit(SuccessThreshold(Options.Difficulty));
-            targetTag = "-100";
-            if (Turn == 1)
-            {
-                if (successShot)
-                {
-                    targetTag = FindShipTag();
-                    if (targetTag != "-100")
-                    {
-                        return true;
-                    }
-                    return false;
-                }
-                else
-                {
-                    if (FindEmptyCell(out targetTag))
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
-            }
-            else
-            {
-                return false;
             }
         }
     }

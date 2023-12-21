@@ -2225,7 +2225,7 @@
             this.TSMI_HitChance});
             this.TSMI_GameInfo.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GameInfo.Name = "TSMI_GameInfo";
-            this.TSMI_GameInfo.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_GameInfo.Size = new System.Drawing.Size(179, 26);
             this.TSMI_GameInfo.Text = "Game info";
             // 
             // TSMI_Difficulty
@@ -2267,7 +2267,7 @@
             this.TSMI_GPO_OpenManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GPO_OpenManual.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_OpenManual.Name = "TSMI_GPO_OpenManual";
-            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(224, 26);
+            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(179, 26);
             this.TSMI_GPO_OpenManual.Text = "Open manual";
             this.TSMI_GPO_OpenManual.Click += new System.EventHandler(this.TSMI_GPO_OpenManual_Click);
             // 
