@@ -147,9 +147,35 @@ namespace Battleship
                         case 'F':
                             {
                                 PlayerData.Map[index] = 'S';
+                                PlayerData.FrigatesCountCurrent--;
+                                PlayerData.SunkenFrigatesCount++;
+                                PlayerData.FrigatesHited[PlayerData.SunkenFrigatesCount - 1, 0] = true;
                                 break;
                             }
                         case 'D':
+                            {
+                                PlayerData.Map[index] = 'H';
+                                for (int d0 = 0; d0 < 3; d0++)
+                                {
+                                    for (int d1 = 0; d1 < 2; d1++)
+                                    {
+                                        if (PlayerData.DestroyerCoords[d0, d1] == target - 1551)
+                                        {
+                                            PlayerData.DestroyersHited[d0, d1] = true;
+                                            break;
+                                        }
+                                    }
+                                }
+                                PlayerData.DoesDestroyerSunken();
+                                int sunkenDestroyers = 0;
+                                for (int d = 0; d < PlayerData.DestroyersSunken.Length; d++)
+                                {
+                                    sunkenDestroyers += Convert.ToInt32(PlayerData.DestroyersSunken[d]);
+                                }
+                                PlayerData.SunkenDestroyersCount = sunkenDestroyers;
+                                PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
+                                break;
+                            }
                         case 'C':
                         case 'B':
                             {
