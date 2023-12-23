@@ -1,18 +1,13 @@
-﻿using Octokit;
-using System;
+﻿using System;
 using System.Collections.Generic;
-using System.Configuration;
-using System.Drawing;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace Battleship
 {
     public static class Fight
     {
+        static ColorMethods cm;
+        static Position pos;
         public static bool GameStarted = false;
         public static int TargetCoord;
         public static int Turn = 0;
@@ -24,6 +19,7 @@ namespace Battleship
         public static List<int> AllowedCoords = new List<int>();
         public static List<int> BlockedCoords = new List<int>();
         public static bool NewMove = true;
+        public static char[] AllowedChars = { 'F', 'D', 'C', 'B' };
         public static double SuccessThreshold(int difficulty)
         {
             double successThreshold = 0.0;
@@ -106,9 +102,9 @@ namespace Battleship
         }
         static void Move()
         {
+            int target = FindShipCoord(false);
             if (NewMove)
             {
-                int target = FindShipCoord(false);
                 Button targetButton;
                 int index = 0;
                 int counter = 0;
@@ -244,16 +240,67 @@ namespace Battleship
                         GenerateNearestCoords(target, 1551);
                         for (int bl = 0; bl < BlockedCoords.Count; bl++)
                         {
-                            //Mark blocked coords
+                            PlayerData.Map[BlockedCoords[bl]] = 'E';
                         }
                     }
+                    cm.SetButtonColors(PlayerData.Map);
                 }
             }
             else
             {
                 if (FirstHitCoord == 0)
                 {
-
+                    GenerateNearestCoords(FirstHitCoord, 1551);
+                    Random randomShoot = new Random();
+                    int nextTarget = randomShoot.Next(1, AllowedCoords.Count + 1);
+                    bool allow = true;
+                    for (int s = 0; s < AllowedChars.Length; s++)
+                    {
+                        allow &= AllowedCoords[nextTarget] - 1551 != AllowedChars[s];
+                    }
+                    if (allow)
+                    {
+                        //Shoot on target
+                    }
+                    switch (pos.GetCellPosition((FirstHitCoord - 1551).ToString()))
+                    {
+                        case "center":
+                            {
+                                break;
+                            }
+                        case "top":
+                            {
+                                break;
+                            }
+                        case "bottom":
+                            {
+                                break;
+                            }
+                        case "left":
+                            {
+                                break;
+                            }
+                        case "right":
+                            {
+                                break;
+                            }
+                        case "corner1":
+                            {
+                                break;
+                            }
+                        case "corner2":
+                            {
+                                break;
+                            }
+                        case "corner3":
+                            {
+                                break;
+                            }
+                        case "corner4":
+                            {
+                                break;
+                            }
+                    }
                 }
             }
         }
@@ -274,12 +321,11 @@ namespace Battleship
             return 0;
         }
 
-        static void GenerateNearestCoords(int firstCoords, int reduction  = 0)
+        static void GenerateNearestCoords(int firstCoords, int reduction = 0)
         {
             if (firstCoords != 0)
             {
                 firstCoords -= reduction;
-                Position pos = new Position(); 
                 AllowedCoords.Clear();
                 BlockedCoords.Clear();
                 switch (pos.GetCellPosition(firstCoords.ToString()))
