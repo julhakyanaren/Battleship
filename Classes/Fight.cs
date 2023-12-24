@@ -100,151 +100,159 @@ namespace Battleship
                 }
             }
         }
-        static void Move()
+        static void EnemyShoot(int target, out bool successShoot)
         {
+            Button targetButton;
+            int index = 0;
+            int counter = 0;
+            bool incorrectValue = false;
+            using (GamePlayerOne gpo = new GamePlayerOne())
+            {
+                foreach (Button b in gpo.MapButtons)
+                {
+                    if (b.Tag.ToString() == Convert.ToString(target - 1551))
+                    {
+                        targetButton = b;
+                        index = counter;
+                        counter = 0;
+                        break;
+                    }
+                    else
+                    {
+                        counter++;
+                    }
+                }
+                successShoot = true;
+                switch (PlayerData.Map[index])
+                {
+                    case 'E':
+                        {
+                            FirstHitCoord = 0;
+                            PlayerData.Map[index] = 'M';
+                            NewMove = true;
+                            successShoot = false;
+                            break;
+                        }
+                    case 'S':
+                    case 'M':
+                    case 'H':
+                        {
+                            MessageBox.Show("Checked position", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                            FirstHitCoord = 0;
+                            successShoot = false;
+                            break;
+                        }
+                    case 'F':
+                        {
+                            PlayerData.Map[index] = 'S';
+                            PlayerData.FrigatesCountCurrent--;
+                            PlayerData.SunkenFrigatesCount++;
+                            PlayerData.FrigatesHited[PlayerData.SunkenFrigatesCount - 1, 0] = true;
+                            NewMove = true;
+                            break;
+                        }
+                    case 'D':
+                        {
+                            PlayerData.Map[index] = 'H';
+                            for (int d0 = 0; d0 < 3; d0++)
+                            {
+                                for (int d1 = 0; d1 < 2; d1++)
+                                {
+                                    if (PlayerData.DestroyerCoords[d0, d1] == target - 1551)
+                                    {
+                                        PlayerData.DestroyersHited[d0, d1] = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            PlayerData.DoesDestroyerSunken();
+                            int sunkenDestroyers = 0;
+                            for (int d = 0; d < PlayerData.DestroyersSunken.Length; d++)
+                            {
+                                sunkenDestroyers += Convert.ToInt32(PlayerData.DestroyersSunken[d]);
+                            }
+                            NewMove = PlayerData.SunkenDestroyersCount < sunkenDestroyers;
+                            PlayerData.SunkenDestroyersCount = sunkenDestroyers;
+                            PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
+                            break;
+                        }
+                    case 'C':
+                        {
+                            PlayerData.Map[index] = 'H';
+                            for (int c0 = 0; c0 < 2; c0++)
+                            {
+                                for (int c1 = 0; c1 < 3; c1++)
+                                {
+                                    if (PlayerData.CruiserCoords[c0, c1] == target - 1551)
+                                    {
+                                        PlayerData.CruiserHited[c0, c1] = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            PlayerData.DoesCruiserSunken();
+                            int sunkenCruisers = 0;
+                            for (int c = 0; c < PlayerData.CruisersSunken.Length; c++)
+                            {
+                                sunkenCruisers += Convert.ToInt32(PlayerData.CruisersSunken[c]);
+                            }
+                            NewMove = PlayerData.SunkenCruisersCount < sunkenCruisers;
+                            PlayerData.SunkenCruisersCount = sunkenCruisers;
+                            PlayerData.CruiserCountCurrent = PlayerData.CruiserCountMax - PlayerData.SunkenCruisersCount;
+                            break;
+                        }
+                    case 'B':
+                        {
+                            PlayerData.Map[index] = 'H';
+                            for (int b0 = 0; b0 < 1; b0++)
+                            {
+                                for (int b1 = 0; b1 < 4; b1++)
+                                {
+                                    if (PlayerData.BattleshipCoords[b0, b1] == target - 1551)
+                                    {
+                                        PlayerData.BattleshipHited[b0, b1] = true;
+                                        break;
+                                    }
+                                }
+                            }
+                            PlayerData.DoesBattleshipSunken();
+                            int sunkenBattleship = 0;
+                            for (int b = 0; b < PlayerData.BattleshipSunken.Length; b++)
+                            {
+                                sunkenBattleship += Convert.ToInt32(PlayerData.BattleshipSunken[b]);
+                            }
+                            NewMove = PlayerData.SunkenBattleshipCount < sunkenBattleship;
+                            PlayerData.SunkenBattleshipCount = sunkenBattleship;
+                            PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
+                            break;
+                        }
+                    default:
+                        {
+                            MessageBox.Show("Incorrect Position", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            FirstHitCoord = 0;
+                            incorrectValue = true;
+                            successShoot = false;
+                            break;
+                        }
+                }
+                if (!incorrectValue)
+                {
+                    GenerateNearestCoords(target, 1551);
+                    for (int bl = 0; bl < BlockedCoords.Count; bl++)
+                    {
+                        PlayerData.Map[BlockedCoords[bl]] = 'E';
+                    }
+                }
+                cm.SetButtonColors(PlayerData.Map);
+            }
+        }
+        static void Move(out bool successShoot)
+        {
+            successShoot = false;
             int target = FindShipCoord(false);
             if (NewMove)
             {
-                Button targetButton;
-                int index = 0;
-                int counter = 0;
-                bool incorrectValue = false;
-                using (GamePlayerOne gpo = new GamePlayerOne())
-                {
-                    foreach (Button b in gpo.MapButtons)
-                    {
-                        if (b.Tag.ToString() == Convert.ToString(target - 1551))
-                        {
-                            targetButton = b;
-                            index = counter;
-                            counter = 0;
-                            break;
-                        }
-                        else
-                        {
-                            counter++;
-                        }
-                    }
-                    switch (PlayerData.Map[index])
-                    {
-                        case 'E':
-                            {
-                                FirstHitCoord = 0;
-                                PlayerData.Map[index] = 'M';
-                                NewMove = true;
-                                break;
-                            }
-                        case 'S':
-                        case 'M':
-                        case 'H':
-                            {
-                                MessageBox.Show("Checked position", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                                FirstHitCoord = 0;
-                                break;
-                            }
-                        case 'F':
-                            {
-                                PlayerData.Map[index] = 'S';
-                                PlayerData.FrigatesCountCurrent--;
-                                PlayerData.SunkenFrigatesCount++;
-                                PlayerData.FrigatesHited[PlayerData.SunkenFrigatesCount - 1, 0] = true;
-                                NewMove = true;
-                                break;
-                            }
-                        case 'D':
-                            {
-                                PlayerData.Map[index] = 'H';
-                                for (int d0 = 0; d0 < 3; d0++)
-                                {
-                                    for (int d1 = 0; d1 < 2; d1++)
-                                    {
-                                        if (PlayerData.DestroyerCoords[d0, d1] == target - 1551)
-                                        {
-                                            PlayerData.DestroyersHited[d0, d1] = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                PlayerData.DoesDestroyerSunken();
-                                int sunkenDestroyers = 0;
-                                for (int d = 0; d < PlayerData.DestroyersSunken.Length; d++)
-                                {
-                                    sunkenDestroyers += Convert.ToInt32(PlayerData.DestroyersSunken[d]);
-                                }
-                                NewMove = PlayerData.SunkenDestroyersCount < sunkenDestroyers;
-                                PlayerData.SunkenDestroyersCount = sunkenDestroyers;
-                                PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
-                                break;
-                            }
-                        case 'C':
-                            {
-                                PlayerData.Map[index] = 'H';
-                                for (int c0 = 0; c0 < 2; c0++)
-                                {
-                                    for (int c1 = 0; c1 < 3; c1++)
-                                    {
-                                        if (PlayerData.CruiserCoords[c0, c1] == target - 1551)
-                                        {
-                                            PlayerData.CruiserHited[c0, c1] = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                PlayerData.DoesCruiserSunken();
-                                int sunkenCruisers = 0;
-                                for (int c = 0; c < PlayerData.CruisersSunken.Length; c++)
-                                {
-                                    sunkenCruisers += Convert.ToInt32(PlayerData.CruisersSunken[c]);
-                                }
-                                NewMove = PlayerData.SunkenCruisersCount < sunkenCruisers;
-                                PlayerData.SunkenCruisersCount = sunkenCruisers;
-                                PlayerData.CruiserCountCurrent = PlayerData.CruiserCountMax - PlayerData.SunkenCruisersCount;
-                                break;
-                            }
-                        case 'B':
-                            {
-                                PlayerData.Map[index] = 'H';
-                                for (int b0 = 0; b0 < 1; b0++)
-                                {
-                                    for (int b1 = 0; b1 < 4; b1++)
-                                    {
-                                        if (PlayerData.BattleshipCoords[b0, b1] == target - 1551)
-                                        {
-                                            PlayerData.BattleshipHited[b0, b1] = true;
-                                            break;
-                                        }
-                                    }
-                                }
-                                PlayerData.DoesBattleshipSunken();
-                                int sunkenBattleship = 0;
-                                for (int b = 0; b < PlayerData.BattleshipSunken.Length; b++)
-                                {
-                                    sunkenBattleship += Convert.ToInt32(PlayerData.BattleshipSunken[b]);
-                                }
-                                NewMove = PlayerData.SunkenBattleshipCount < sunkenBattleship;
-                                PlayerData.SunkenBattleshipCount = sunkenBattleship;
-                                PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
-                                break;
-                            }
-                        default:
-                            {
-                                MessageBox.Show("Incorrect Position", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                                FirstHitCoord = 0;
-                                incorrectValue = true;
-                                break;
-                            }
-
-                    }
-                    if (!incorrectValue)
-                    {
-                        GenerateNearestCoords(target, 1551);
-                        for (int bl = 0; bl < BlockedCoords.Count; bl++)
-                        {
-                            PlayerData.Map[BlockedCoords[bl]] = 'E';
-                        }
-                    }
-                    cm.SetButtonColors(PlayerData.Map);
-                }
+                EnemyShoot(target, out successShoot);
             }
             else
             {
@@ -260,46 +268,7 @@ namespace Battleship
                     }
                     if (allow)
                     {
-                        //Shoot on target
-                    }
-                    switch (pos.GetCellPosition((FirstHitCoord - 1551).ToString()))
-                    {
-                        case "center":
-                            {
-                                break;
-                            }
-                        case "top":
-                            {
-                                break;
-                            }
-                        case "bottom":
-                            {
-                                break;
-                            }
-                        case "left":
-                            {
-                                break;
-                            }
-                        case "right":
-                            {
-                                break;
-                            }
-                        case "corner1":
-                            {
-                                break;
-                            }
-                        case "corner2":
-                            {
-                                break;
-                            }
-                        case "corner3":
-                            {
-                                break;
-                            }
-                        case "corner4":
-                            {
-                                break;
-                            }
+                        EnemyShoot(AllowedCoords[nextTarget], out successShoot);
                     }
                 }
             }
@@ -320,7 +289,6 @@ namespace Battleship
             }
             return 0;
         }
-
         static void GenerateNearestCoords(int firstCoords, int reduction = 0)
         {
             if (firstCoords != 0)
