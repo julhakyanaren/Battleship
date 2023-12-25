@@ -100,7 +100,7 @@ namespace Battleship
                 }
             }
         }
-        static void EnemyShoot(int target, out bool successShoot)
+        public static void EnemyShoot(int target, out bool successShoot)
         {
             Button targetButton;
             int index = 0;
@@ -246,7 +246,7 @@ namespace Battleship
                 cm.SetButtonColors(PlayerData.Map);
             }
         }
-        static void Move(out bool successShoot)
+        public static void Move(out bool successShoot)
         {
             successShoot = false;
             int target = FindShipCoord(false);
@@ -273,7 +273,7 @@ namespace Battleship
                 }
             }
         }
-        static int FindShipCoord(bool hitStatus)
+        public static int FindShipCoord(bool hitStatus)
         {
             if (!hitStatus)
             {

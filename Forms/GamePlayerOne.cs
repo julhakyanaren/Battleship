@@ -152,6 +152,12 @@ namespace Battleship
                     }
                 }
             }
+            if (Fight.Turn == 1)
+            {
+                Fight.Move(out Fight.NewMove);
+                Fight.ReverseTurn(Fight.NewMove);
+            }
+
         }
         string SetTurnText()
         {
@@ -355,6 +361,7 @@ namespace Battleship
                     default:
                         {
                             TB_Turn.Clear();
+                            TB_Turn.Text = "Error";
                             break;
                         }
                 }
@@ -462,15 +469,22 @@ namespace Battleship
         }
         private void TSMI_StartNewGame_Click(object sender, EventArgs e)
         {
-            try
+            if (PlayerData.Map == null)
             {
-                GenerateButtons();
-                TSMI_MapEditor.Enabled = true;
-                TSMI_RestartGame.Enabled = true;
+                try
+                {
+                    GenerateButtons();
+                    TSMI_MapEditor.Enabled = true;
+                    TSMI_RestartGame.Enabled = true;
+                }
+                catch
+                {
+                    //Error_Catch
+                }
             }
-            catch
+            else
             {
-                //Error_Catch
+                MessageBox.Show("Maps allready created!", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void TSMI_StartBattleShip_Click(object sender, EventArgs e)
