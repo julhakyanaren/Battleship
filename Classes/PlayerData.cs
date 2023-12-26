@@ -4,6 +4,7 @@ using System.Linq;
 using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Battleship
 {
@@ -56,6 +57,7 @@ namespace Battleship
         public static bool[] BattleshipSunken = new bool[1];
         public static bool[][] ShipsSunkenArray = { FrigatesSunken, DestroyersSunken, CruisersSunken, BattleshipSunken };
 
+        public static Button[] MapButtons = new Button[100];
         public static void DoesDestroyerSunken()
         {
             for (int d0 = 0; d0 < DestroyersHited.GetLength(0); d0++)
@@ -70,7 +72,7 @@ namespace Battleship
         {
             for (int c0 = 0; c0 < CruiserHited.GetLength(0); c0++)
             {
-                for (int c1 = 0; c1 < CruiserHited.GetLength(1); c1++)
+                for (int c1 = 0; c1 < CruiserHited.GetLength(0); c1++)
                 {
                     CruisersSunken[c0] &= CruisersSunken[c1];
                 }

@@ -116,6 +116,14 @@ namespace Battleship
                     button.MouseClick += Button_Click;
                     MapButtons[f, b] = button;
                     button.FlatAppearance.MouseOverBackColor = Design.MouseOverColor[f];
+                    if (f == 0)
+                    {
+                        PlayerData.MapButtons[b] = button;
+                    }
+                    else
+                    {
+                        EnemyData.MapButtons[b] = button;
+                    }
                 }
             }
             for (int id = 0; id < MapButtons.GetLength(0); id++)

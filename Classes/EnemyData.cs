@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Battleship
 {
@@ -56,6 +57,7 @@ namespace Battleship
         public static bool[] BattleshipSunken = new bool[1];
         public static bool[][] ShipsSunkenArray = {FrigatesSunken, DestroyersSunken, CruisersSunken, BattleshipSunken };
 
+        public static Button[] MapButtons = new Button[100];
         public static void DoesDestroyerSunken()
         {
             for (int d0 = 0; d0 < DestroyersHited.GetLength(0); d0++)
