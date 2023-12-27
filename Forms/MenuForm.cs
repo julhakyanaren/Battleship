@@ -23,6 +23,8 @@ namespace Battleship
             if (!DebugTools.AlreadyRun)
             {
                 FileManager.ReadAssembyData();
+                DebugTools.RunsCount++;
+                FileManager.WriteAssemblyData();
                 DebugTools.AlreadyRun = true;
             }
             L_Info_Version.Text = $"Version: {DebugTools.Version}.{DebugTools.RunsCount}";

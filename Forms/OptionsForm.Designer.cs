@@ -37,23 +37,24 @@
             this.L_Info_OF_Access = new System.Windows.Forms.Label();
             this.TB_OF_DevPass = new System.Windows.Forms.TextBox();
             this.GB_Assembly = new System.Windows.Forms.GroupBox();
-            this.TB_AD_Stage = new System.Windows.Forms.Label();
-            this.CB_AD_Stage = new System.Windows.Forms.ComboBox();
-            this.L_AD_Version_Release = new System.Windows.Forms.Label();
-            this.NUD_AD_Version_Release = new System.Windows.Forms.NumericUpDown();
-            this.NUD_AD_Version_Assembly = new System.Windows.Forms.NumericUpDown();
-            this.L_AD_Version_Assembly = new System.Windows.Forms.Label();
-            this.L_AD_Version_Launches = new System.Windows.Forms.Label();
+            this.BS_AD_ApplyChanges = new System.Windows.Forms.Button();
+            this.TB_AD_Version_Launches = new System.Windows.Forms.TextBox();
             this.NUD_AD_Version_Edition = new System.Windows.Forms.NumericUpDown();
             this.L_AD_Version_Edition = new System.Windows.Forms.Label();
-            this.TB_AD_Version_Launches = new System.Windows.Forms.TextBox();
-            this.BS_AD_ApplyChanges = new System.Windows.Forms.Button();
+            this.L_AD_Version_Launches = new System.Windows.Forms.Label();
+            this.NUD_AD_Version_Assembly = new System.Windows.Forms.NumericUpDown();
+            this.L_AD_Version_Assembly = new System.Windows.Forms.Label();
+            this.NUD_AD_Version_Release = new System.Windows.Forms.NumericUpDown();
+            this.L_AD_Version_Release = new System.Windows.Forms.Label();
+            this.CB_AD_Stage = new System.Windows.Forms.ComboBox();
+            this.TB_AD_Stage = new System.Windows.Forms.Label();
+            this.TB_NoDev_Stage = new System.Windows.Forms.TextBox();
             this.GB_GameMode.SuspendLayout();
             this.GB_OF_DevMode.SuspendLayout();
             this.GB_Assembly.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Release)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Assembly)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Edition)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Assembly)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Release)).BeginInit();
             this.SuspendLayout();
             // 
             // GB_GameMode
@@ -167,6 +168,7 @@
             // GB_Assembly
             // 
             this.GB_Assembly.BackColor = System.Drawing.Color.Black;
+            this.GB_Assembly.Controls.Add(this.TB_NoDev_Stage);
             this.GB_Assembly.Controls.Add(this.BS_AD_ApplyChanges);
             this.GB_Assembly.Controls.Add(this.TB_AD_Version_Launches);
             this.GB_Assembly.Controls.Add(this.NUD_AD_Version_Edition);
@@ -187,92 +189,31 @@
             this.GB_Assembly.TabStop = false;
             this.GB_Assembly.Text = "Assembly Data";
             // 
-            // TB_AD_Stage
+            // BS_AD_ApplyChanges
             // 
-            this.TB_AD_Stage.AutoSize = true;
-            this.TB_AD_Stage.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_AD_Stage.Location = new System.Drawing.Point(6, 23);
-            this.TB_AD_Stage.Name = "TB_AD_Stage";
-            this.TB_AD_Stage.Size = new System.Drawing.Size(105, 17);
-            this.TB_AD_Stage.TabIndex = 46;
-            this.TB_AD_Stage.Text = "Development Stage ";
+            this.BS_AD_ApplyChanges.BackColor = System.Drawing.Color.Black;
+            this.BS_AD_ApplyChanges.FlatAppearance.BorderColor = System.Drawing.Color.White;
+            this.BS_AD_ApplyChanges.FlatAppearance.BorderSize = 2;
+            this.BS_AD_ApplyChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_AD_ApplyChanges.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_AD_ApplyChanges.Location = new System.Drawing.Point(9, 175);
+            this.BS_AD_ApplyChanges.Name = "BS_AD_ApplyChanges";
+            this.BS_AD_ApplyChanges.Size = new System.Drawing.Size(164, 30);
+            this.BS_AD_ApplyChanges.TabIndex = 47;
+            this.BS_AD_ApplyChanges.Text = "Apply Changes";
+            this.BS_AD_ApplyChanges.UseVisualStyleBackColor = false;
+            this.BS_AD_ApplyChanges.Click += new System.EventHandler(this.BS_AD_ApplyChanges_Click);
             // 
-            // CB_AD_Stage
+            // TB_AD_Version_Launches
             // 
-            this.CB_AD_Stage.BackColor = System.Drawing.Color.Black;
-            this.CB_AD_Stage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CB_AD_Stage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.CB_AD_Stage.FormattingEnabled = true;
-            this.CB_AD_Stage.Items.AddRange(new object[] {
-            "InDev",
-            "Alpha",
-            "Beta",
-            "Pre-Release",
-            "Release",
-            "Debug"});
-            this.CB_AD_Stage.Location = new System.Drawing.Point(9, 43);
-            this.CB_AD_Stage.Name = "CB_AD_Stage";
-            this.CB_AD_Stage.Size = new System.Drawing.Size(164, 25);
-            this.CB_AD_Stage.TabIndex = 47;
-            this.CB_AD_Stage.Text = "Alpha";
-            // 
-            // L_AD_Version_Release
-            // 
-            this.L_AD_Version_Release.AutoSize = true;
-            this.L_AD_Version_Release.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_AD_Version_Release.Location = new System.Drawing.Point(6, 75);
-            this.L_AD_Version_Release.Name = "L_AD_Version_Release";
-            this.L_AD_Version_Release.Size = new System.Drawing.Size(84, 17);
-            this.L_AD_Version_Release.TabIndex = 48;
-            this.L_AD_Version_Release.Text = "Release version";
-            // 
-            // NUD_AD_Version_Release
-            // 
-            this.NUD_AD_Version_Release.BackColor = System.Drawing.Color.Black;
-            this.NUD_AD_Version_Release.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.NUD_AD_Version_Release.Increment = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.NUD_AD_Version_Release.Location = new System.Drawing.Point(122, 73);
-            this.NUD_AD_Version_Release.Name = "NUD_AD_Version_Release";
-            this.NUD_AD_Version_Release.Size = new System.Drawing.Size(51, 22);
-            this.NUD_AD_Version_Release.TabIndex = 49;
-            // 
-            // NUD_AD_Version_Assembly
-            // 
-            this.NUD_AD_Version_Assembly.BackColor = System.Drawing.Color.Black;
-            this.NUD_AD_Version_Assembly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.NUD_AD_Version_Assembly.Increment = new decimal(new int[] {
-            0,
-            0,
-            0,
-            0});
-            this.NUD_AD_Version_Assembly.Location = new System.Drawing.Point(122, 97);
-            this.NUD_AD_Version_Assembly.Name = "NUD_AD_Version_Assembly";
-            this.NUD_AD_Version_Assembly.Size = new System.Drawing.Size(51, 22);
-            this.NUD_AD_Version_Assembly.TabIndex = 53;
-            // 
-            // L_AD_Version_Assembly
-            // 
-            this.L_AD_Version_Assembly.AutoSize = true;
-            this.L_AD_Version_Assembly.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_AD_Version_Assembly.Location = new System.Drawing.Point(6, 99);
-            this.L_AD_Version_Assembly.Name = "L_AD_Version_Assembly";
-            this.L_AD_Version_Assembly.Size = new System.Drawing.Size(90, 17);
-            this.L_AD_Version_Assembly.TabIndex = 52;
-            this.L_AD_Version_Assembly.Text = "Assembly version";
-            // 
-            // L_AD_Version_Launches
-            // 
-            this.L_AD_Version_Launches.AutoSize = true;
-            this.L_AD_Version_Launches.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_AD_Version_Launches.Location = new System.Drawing.Point(6, 147);
-            this.L_AD_Version_Launches.Name = "L_AD_Version_Launches";
-            this.L_AD_Version_Launches.Size = new System.Drawing.Size(94, 17);
-            this.L_AD_Version_Launches.TabIndex = 54;
-            this.L_AD_Version_Launches.Text = "Program launches";
+            this.TB_AD_Version_Launches.BackColor = System.Drawing.Color.Black;
+            this.TB_AD_Version_Launches.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.TB_AD_Version_Launches.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TB_AD_Version_Launches.Location = new System.Drawing.Point(122, 147);
+            this.TB_AD_Version_Launches.Name = "TB_AD_Version_Launches";
+            this.TB_AD_Version_Launches.ReadOnly = true;
+            this.TB_AD_Version_Launches.Size = new System.Drawing.Size(51, 22);
+            this.TB_AD_Version_Launches.TabIndex = 58;
             // 
             // NUD_AD_Version_Edition
             // 
@@ -298,31 +239,105 @@
             this.L_AD_Version_Edition.TabIndex = 56;
             this.L_AD_Version_Edition.Text = "Edition Version";
             // 
-            // TB_AD_Version_Launches
+            // L_AD_Version_Launches
             // 
-            this.TB_AD_Version_Launches.BackColor = System.Drawing.Color.Black;
-            this.TB_AD_Version_Launches.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_AD_Version_Launches.ForeColor = System.Drawing.Color.White;
-            this.TB_AD_Version_Launches.Location = new System.Drawing.Point(122, 147);
-            this.TB_AD_Version_Launches.Name = "TB_AD_Version_Launches";
-            this.TB_AD_Version_Launches.PasswordChar = '*';
-            this.TB_AD_Version_Launches.Size = new System.Drawing.Size(51, 22);
-            this.TB_AD_Version_Launches.TabIndex = 58;
-            this.TB_AD_Version_Launches.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.L_AD_Version_Launches.AutoSize = true;
+            this.L_AD_Version_Launches.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.L_AD_Version_Launches.Location = new System.Drawing.Point(6, 147);
+            this.L_AD_Version_Launches.Name = "L_AD_Version_Launches";
+            this.L_AD_Version_Launches.Size = new System.Drawing.Size(94, 17);
+            this.L_AD_Version_Launches.TabIndex = 54;
+            this.L_AD_Version_Launches.Text = "Program launches";
             // 
-            // BS_AD_ApplyChanges
+            // NUD_AD_Version_Assembly
             // 
-            this.BS_AD_ApplyChanges.BackColor = System.Drawing.Color.Black;
-            this.BS_AD_ApplyChanges.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.BS_AD_ApplyChanges.FlatAppearance.BorderSize = 2;
-            this.BS_AD_ApplyChanges.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_AD_ApplyChanges.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_AD_ApplyChanges.Location = new System.Drawing.Point(9, 175);
-            this.BS_AD_ApplyChanges.Name = "BS_AD_ApplyChanges";
-            this.BS_AD_ApplyChanges.Size = new System.Drawing.Size(164, 30);
-            this.BS_AD_ApplyChanges.TabIndex = 47;
-            this.BS_AD_ApplyChanges.Text = "Apply Changes";
-            this.BS_AD_ApplyChanges.UseVisualStyleBackColor = false;
+            this.NUD_AD_Version_Assembly.BackColor = System.Drawing.Color.Black;
+            this.NUD_AD_Version_Assembly.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.NUD_AD_Version_Assembly.Increment = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.NUD_AD_Version_Assembly.Location = new System.Drawing.Point(122, 97);
+            this.NUD_AD_Version_Assembly.Name = "NUD_AD_Version_Assembly";
+            this.NUD_AD_Version_Assembly.Size = new System.Drawing.Size(51, 22);
+            this.NUD_AD_Version_Assembly.TabIndex = 53;
+            // 
+            // L_AD_Version_Assembly
+            // 
+            this.L_AD_Version_Assembly.AutoSize = true;
+            this.L_AD_Version_Assembly.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.L_AD_Version_Assembly.Location = new System.Drawing.Point(6, 99);
+            this.L_AD_Version_Assembly.Name = "L_AD_Version_Assembly";
+            this.L_AD_Version_Assembly.Size = new System.Drawing.Size(90, 17);
+            this.L_AD_Version_Assembly.TabIndex = 52;
+            this.L_AD_Version_Assembly.Text = "Assembly version";
+            // 
+            // NUD_AD_Version_Release
+            // 
+            this.NUD_AD_Version_Release.BackColor = System.Drawing.Color.Black;
+            this.NUD_AD_Version_Release.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.NUD_AD_Version_Release.Increment = new decimal(new int[] {
+            0,
+            0,
+            0,
+            0});
+            this.NUD_AD_Version_Release.Location = new System.Drawing.Point(122, 73);
+            this.NUD_AD_Version_Release.Name = "NUD_AD_Version_Release";
+            this.NUD_AD_Version_Release.Size = new System.Drawing.Size(51, 22);
+            this.NUD_AD_Version_Release.TabIndex = 49;
+            // 
+            // L_AD_Version_Release
+            // 
+            this.L_AD_Version_Release.AutoSize = true;
+            this.L_AD_Version_Release.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.L_AD_Version_Release.Location = new System.Drawing.Point(6, 75);
+            this.L_AD_Version_Release.Name = "L_AD_Version_Release";
+            this.L_AD_Version_Release.Size = new System.Drawing.Size(84, 17);
+            this.L_AD_Version_Release.TabIndex = 48;
+            this.L_AD_Version_Release.Text = "Release version";
+            // 
+            // CB_AD_Stage
+            // 
+            this.CB_AD_Stage.BackColor = System.Drawing.Color.Black;
+            this.CB_AD_Stage.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.CB_AD_Stage.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.CB_AD_Stage.FormattingEnabled = true;
+            this.CB_AD_Stage.Items.AddRange(new object[] {
+            "InDev",
+            "Alpha",
+            "Beta",
+            "Pre-Release",
+            "Release",
+            "Debug"});
+            this.CB_AD_Stage.Location = new System.Drawing.Point(9, 43);
+            this.CB_AD_Stage.Name = "CB_AD_Stage";
+            this.CB_AD_Stage.Size = new System.Drawing.Size(164, 25);
+            this.CB_AD_Stage.TabIndex = 47;
+            this.CB_AD_Stage.Text = "Alpha";
+            // 
+            // TB_AD_Stage
+            // 
+            this.TB_AD_Stage.AutoSize = true;
+            this.TB_AD_Stage.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_AD_Stage.Location = new System.Drawing.Point(6, 23);
+            this.TB_AD_Stage.Name = "TB_AD_Stage";
+            this.TB_AD_Stage.Size = new System.Drawing.Size(105, 17);
+            this.TB_AD_Stage.TabIndex = 46;
+            this.TB_AD_Stage.Text = "Development Stage ";
+            // 
+            // TB_NoDev_Stage
+            // 
+            this.TB_NoDev_Stage.BackColor = System.Drawing.Color.Black;
+            this.TB_NoDev_Stage.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_NoDev_Stage.ForeColor = System.Drawing.Color.White;
+            this.TB_NoDev_Stage.Location = new System.Drawing.Point(9, 43);
+            this.TB_NoDev_Stage.Multiline = true;
+            this.TB_NoDev_Stage.Name = "TB_NoDev_Stage";
+            this.TB_NoDev_Stage.ReadOnly = true;
+            this.TB_NoDev_Stage.Size = new System.Drawing.Size(146, 25);
+            this.TB_NoDev_Stage.TabIndex = 59;
+            this.TB_NoDev_Stage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // OptionsForm
             // 
@@ -347,9 +362,9 @@
             this.GB_OF_DevMode.PerformLayout();
             this.GB_Assembly.ResumeLayout(false);
             this.GB_Assembly.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Release)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Assembly)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Edition)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Assembly)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Release)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -376,5 +391,6 @@
         private System.Windows.Forms.Label L_AD_Version_Assembly;
         private System.Windows.Forms.Button BS_AD_ApplyChanges;
         public System.Windows.Forms.TextBox TB_AD_Version_Launches;
+        public System.Windows.Forms.TextBox TB_NoDev_Stage;
     }
 }

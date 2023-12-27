@@ -1,4 +1,5 @@
-﻿using Octokit.Internal;
+﻿using Octokit;
+using Octokit.Internal;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,6 +18,7 @@ namespace Battleship
 
         public static string[] Stages = { "InDev", "Alpha", "Beta", "Pre-release", "Release", "Debug" };
         public static int V_Stage;
+        public static string V_StageName;
         public static int V_Release = 0;
         public static int V_Assembly = 7;
         public static int V_Edition = 3;

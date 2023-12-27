@@ -23,21 +23,26 @@ namespace Battleship.Classes
                 {
                     string[] data = File.ReadAllLines(AssemblyPath);
                     string stage = null;
-                    if (data.Length > 5)
+                    if (data.Length > 0)
                     {
                         string[] parts = data[0].Split('.');
-                        if (parts.Length == 1)
+                        if (parts.Length == 5)
                         {
                             stage = Options.Stages[int.Parse(parts[0])];
                             Options.V_Release = int.Parse(parts[1]);
                             Options.V_Assembly = int.Parse(parts[2]);
                             Options.V_Edition = int.Parse(parts[3]);
                             DebugTools.RunsCount = int.Parse(parts[4]);
+                            Options.V_StageName = stage;
                         }
-                        DebugTools.Version = $"{parts[0]} ";
-                        for (int p = 1; p < parts.Length; p++)
+                        DebugTools.Version = $"{Options.V_StageName} ";
+                        for (int p = 1; p < parts.Length-1; p++)
                         {
                             DebugTools.Version += parts[p];
+                            if (p < parts.Length - 2)
+                            {
+                                DebugTools.Version += ".";
+                            }
                         }
                     }
                 }
@@ -55,7 +60,7 @@ namespace Battleship.Classes
                 try
                 {
                     string[] parts = new string[5];
-                    parts[0] = Array.IndexOf(Options.Stages, Options.V_Stage).ToString();
+                    parts[0] = Array.IndexOf(Options.Stages, Options.V_StageName).ToString();
                     parts[1] = Options.V_Release.ToString();
                     parts[2] = Options.V_Assembly.ToString();
                     parts[3] = Options.V_Edition.ToString();
@@ -78,7 +83,7 @@ namespace Battleship.Classes
             try
             {
                 string[] parts = new string[5];
-                parts[0] = Array.IndexOf(Options.Stages, Options.V_Stage).ToString();
+                parts[0] = Array.IndexOf(Options.Stages, Options.V_StageName).ToString();
                 parts[1] = Options.V_Release.ToString();
                 parts[2] = Options.V_Assembly.ToString();
                 parts[3] = Options.V_Edition.ToString();
