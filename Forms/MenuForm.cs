@@ -22,7 +22,7 @@ namespace Battleship
         {
             if (!DebugTools.AlreadyRun)
             {
-                FileManager.COR_Read();
+                FileManager.ReadAssembyData();
                 DebugTools.AlreadyRun = true;
             }
             L_Info_Version.Text = $"Version: {DebugTools.Version}.{DebugTools.RunsCount}";

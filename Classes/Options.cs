@@ -14,5 +14,11 @@ namespace Battleship
         public static int Difficulty = 0;
         public static string DifficultyName = "Easy";
         public static string GameMode = "Classic";
+
+        public static string[] Stages = { "InDev", "Alpha", "Beta", "Pre-release", "Release", "Debug" };
+        public static int V_Stage;
+        public static int V_Release = 0;
+        public static int V_Assembly = 7;
+        public static int V_Edition = 3;
     }
 }

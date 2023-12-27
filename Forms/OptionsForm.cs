@@ -74,6 +74,7 @@ namespace Battleship.Forms
             if (TB_OF_DevPass.Text == DeveloperData.DevPass)
             {
                 MessageBox.Show("Developer mode on", $"{Handlers.Manager[6]}", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                DeveloperData.DeveloperModeON = true;
             }
             else
             {
@@ -88,6 +89,16 @@ namespace Battleship.Forms
                     Environment.Exit(0);
                 }
             }
+            if (DeveloperData.DeveloperModeON)
+            {
+                NUD_AD_Version_Release.Increment = 1;
+                NUD_AD_Version_Assembly.Increment = 1;
+                NUD_AD_Version_Edition.Increment = 1;
+            }
+        }
+        private void OptionsForm_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }
