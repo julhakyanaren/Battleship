@@ -21,6 +21,7 @@ namespace Battleship
         public static List<int> BlockedCoords = new List<int>();
         public static bool NewMove = true;
         public static char[] AllowedChars = { 'F', 'D', 'C', 'B' };
+        public static bool Hited = false;
         public static double SuccessThreshold(int difficulty)
         {
             double successThreshold = 0.0;
@@ -123,6 +124,7 @@ namespace Battleship
             }
             successShoot = true;
             char charter = Char.ToUpper(PlayerData.Map[index]);
+            bool hited = true;
             switch (charter)
             {
                 case 'N':
@@ -132,6 +134,7 @@ namespace Battleship
                         PlayerData.Map[index] = 'M';
                         NewMove = true;
                         successShoot = false;
+                        hited = false;
                         break;
                     }
                 case 'S':
@@ -140,7 +143,6 @@ namespace Battleship
                     {
                         MessageBox.Show("Checked position", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         FirstHitCoord = 0;
-                        successShoot = false;
                         break;
                     }
                 case 'F':
@@ -237,6 +239,7 @@ namespace Battleship
                         FirstHitCoord = 0;
                         incorrectValue = true;
                         successShoot = false;
+                        hited = false;
                         break;
                     }
             }
@@ -248,8 +251,9 @@ namespace Battleship
                     PlayerData.Map[BlockedCoords[bl] - 100] = 'E';
                 }
             }
+            Hited = hited;
         }
-        public static void Move(out bool successShoot)
+        public static void Shoot(out bool successShoot)
         {
             successShoot = true;
             int target = FindShipCoord(false);

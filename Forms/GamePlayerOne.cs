@@ -143,30 +143,50 @@ namespace Battleship
         }
         private void Button_Click(object sender, MouseEventArgs e)
         {
-            Button clickedButton = sender as Button;
-            string tagButton = clickedButton.Tag.ToString();
-            Position.GetCoordsFromTag(tagButton, out int x, out int y, out int playerID);
-            if (playerID == 2)
+            if (Fight.Turn == 0)
             {
-                if (Fight.GameStarted)
+                Button clickedButton = sender as Button;
+                string tagButton = clickedButton.Tag.ToString();
+                Position.GetCoordsFromTag(tagButton, out int x, out int y, out int playerID);
+                if (playerID == 2)
                 {
-                    NextTurn(tagButton);
-                    if (SetTurnText() == "ERROR")
+                    if (Fight.GameStarted)
                     {
-                        //Error_Catch
-                    }
-                    else
-                    {
-                        TB_Turn.Text = SetTurnText();
+                        NextTurn(tagButton);
+                        if (SetTurnText() == "ERROR")
+                        {
+                            //Error_Catch
+                        }
+                        else
+                        {
+                            TB_Turn.Text = SetTurnText();
+                        }
                     }
                 }
+                while (Fight.Turn == 1)
+                {
+                    EnemyTurn();
+                }
             }
-            if (Fight.Turn == 1)
+            else
             {
-                Fight.Move(out Fight.NewMove);
-                ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
-                UpdatePlayerMapColor(ColorMethods.PlayerMapColor);
-                Fight.ReverseTurn(Fight.NewMove);
+                MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+        }
+        async void EnemyTurn()
+        {
+            Fight.Shoot(out Fight.NewMove);
+            await Task.Delay(3000);
+            ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
+            UpdatePlayerMapColor(ColorMethods.PlayerMapColor);
+            Fight.Turn = Fight.ReverseTurn(Fight.Hited);
+            if (SetTurnText() == "ERROR")
+            {
+                //Error_Catch
+            }
+            else
+            {
+                TB_Turn.Text = SetTurnText();
             }
         }
         void UpdatePlayerMapColor(Color[] colors)
@@ -425,25 +445,25 @@ namespace Battleship
                     if (celChar != 'e')
                     {
                         PlayerData.HitCountCurrent++;
-                        switch (celChar)
+                        switch (Char.ToUpper(celChar))
                         {
-                            case 'f':
+                            case 'F':
                                 {
                                     EnemyData.FrigatesCountCurrent--;
                                     MapButtons[1, index].BackColor = Color.Red;
                                     break;
                                 }
-                            case 'd':
+                            case 'D':
                                 {
                                     MapButtons[1, index].BackColor = Color.Red;
                                     break;
                                 }
-                            case 'c':
+                            case 'C':
                                 {
                                     MapButtons[1, index].BackColor = Color.Red;
                                     break;
                                 }
-                            case 'b':
+                            case 'B':
                                 {
                                     MapButtons[1, index].BackColor = Color.Red;
                                     break;

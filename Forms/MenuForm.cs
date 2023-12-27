@@ -1,4 +1,5 @@
-﻿using Battleship.Forms;
+﻿using Battleship.Classes;
+using Battleship.Forms;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -19,7 +20,12 @@ namespace Battleship
         }
         public void SetElementsParameters()
         {
-            L_Info_Version.Text = "Version: " + DebugTools.Version;
+            if (!DebugTools.AlreadyRun)
+            {
+                FileManager.COR_Read();
+                DebugTools.AlreadyRun = true;
+            }
+            L_Info_Version.Text = $"Version: {DebugTools.Version}.{DebugTools.RunsCount}";
             int x = L_Info_Version.Location.X;
             int y = L_Info_Version.Location.Y;
             x = (PB_MF_MainLogo.Size.Width - L_Info_Version.Size.Width) / 2;
