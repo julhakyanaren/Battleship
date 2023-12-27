@@ -8,10 +8,11 @@ namespace Battleship
     public class ColorMethods
     {
         Support Support = new Support();
+        public Color[] PlayerMapColor = new Color[100];
         public Color SetColorThrowChar(char charter)
         {
             charter = Convert.ToChar(charter.ToString().ToUpper());
-            switch (charter)
+            switch (Char.ToUpper(charter))
             {
                 case 'F':
                     {
@@ -37,9 +38,10 @@ namespace Battleship
                     {
                         return Color.Firebrick;
                     }
+                case 'M':
                 case 'E':
                     {
-                        return Color.SkyBlue;
+                        return Color.DeepSkyBlue;
                     }
                 default:
                     {

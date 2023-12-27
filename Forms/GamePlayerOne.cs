@@ -1,6 +1,7 @@
 ﻿using Battleship.Forms;
 using System;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -163,9 +164,17 @@ namespace Battleship
             if (Fight.Turn == 1)
             {
                 Fight.Move(out Fight.NewMove);
+                ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
+                UpdatePlayerMapColor(ColorMethods.PlayerMapColor);
                 Fight.ReverseTurn(Fight.NewMove);
             }
-
+        }
+        void UpdatePlayerMapColor(Color[] colors)
+        {
+            for (int mc = 0; mc < colors.Length; mc++)
+            {
+                MapButtons[0, mc].BackColor = ColorMethods.PlayerMapColor[mc];
+            }
         }
         string SetTurnText()
         {

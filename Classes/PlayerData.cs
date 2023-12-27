@@ -80,7 +80,7 @@ namespace Battleship
         }
         public static void DoesBattleshipSunken()
         {
-            for (int b1 = 0; b1 < BattleshipHited.GetLength(1); b1++)
+            for (int b1 = 0; b1 < BattleshipHited.GetLength(0); b1++)
             {
                 BattleshipSunken[0] &= BattleshipSunken[b1];
             }

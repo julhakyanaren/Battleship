@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
 namespace Battleship
@@ -149,6 +150,7 @@ namespace Battleship
                         PlayerData.SunkenFrigatesCount++;
                         PlayerData.FrigatesHited[PlayerData.SunkenFrigatesCount - 1, 0] = true;
                         NewMove = true;
+                        successShoot = true;
                         break;
                     }
                 case 'D':
@@ -174,6 +176,7 @@ namespace Battleship
                         NewMove = PlayerData.SunkenDestroyersCount < sunkenDestroyers;
                         PlayerData.SunkenDestroyersCount = sunkenDestroyers;
                         PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
+                        successShoot = true;
                         break;
                     }
                 case 'C':
@@ -199,6 +202,7 @@ namespace Battleship
                         NewMove = PlayerData.SunkenCruisersCount < sunkenCruisers;
                         PlayerData.SunkenCruisersCount = sunkenCruisers;
                         PlayerData.CruiserCountCurrent = PlayerData.CruiserCountMax - PlayerData.SunkenCruisersCount;
+                        successShoot = true;
                         break;
                     }
                 case 'B':
@@ -224,6 +228,7 @@ namespace Battleship
                         NewMove = PlayerData.SunkenBattleshipCount < sunkenBattleship;
                         PlayerData.SunkenBattleshipCount = sunkenBattleship;
                         PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
+                        successShoot = true;
                         break;
                     }
                 default:
@@ -235,7 +240,7 @@ namespace Battleship
                         break;
                     }
             }
-            if (!incorrectValue)
+            if (!incorrectValue && successShoot)
             {
                 GenerateNearestCoords(target, 1551);
                 for (int bl = 0; bl < BlockedCoords.Count; bl++)
@@ -243,7 +248,6 @@ namespace Battleship
                     PlayerData.Map[BlockedCoords[bl] - 100] = 'E';
                 }
             }
-            cm.SetButtonColors(PlayerData.Map);
         }
         public static void Move(out bool successShoot)
         {
