@@ -22,6 +22,7 @@ namespace Battleship
         public static bool NewMove = true;
         public static char[] AllowedChars = { 'F', 'D', 'C', 'B' };
         public static bool Hited = false;
+        public static int[] TargetData = { 0, 0, 0 };
         public static double SuccessThreshold(int difficulty)
         {
             double successThreshold = 0.0;
@@ -288,6 +289,9 @@ namespace Battleship
                 int vertical = randCoord.Next(65, 75);
                 int horizontal = randCoord.Next(1,11);
                 int target = vertical * 10 + horizontal + 1000;
+                TargetData[0] = target;
+                TargetData[1] = vertical;
+                TargetData[2] = horizontal;
                 return target;
             }
             else

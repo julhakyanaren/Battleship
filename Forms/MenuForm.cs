@@ -40,11 +40,6 @@ namespace Battleship
             /**/
             SetElementsParameters();
         }
-        private void BS_MM_About_Click(object sender, EventArgs e)
-        {
-            
-        }
-
         private void PB_Button_NewGame_Click(object sender, EventArgs e)
         {
             DialogResult dr = new DialogResult();

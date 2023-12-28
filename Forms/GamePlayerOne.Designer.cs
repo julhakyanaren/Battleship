@@ -171,6 +171,7 @@
             this.TSMI_ShowEnemyShipsCoords = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowHitInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.GameDuration = new System.Windows.Forms.Timer(this.components);
+            this.TSMI_ShowBorder = new System.Windows.Forms.ToolStripMenuItem();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
@@ -2173,7 +2174,8 @@
             // 
             this.TSMI_DEBUG.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_ShowEnemyShipsCoords,
-            this.TSMI_ShowHitInfo});
+            this.TSMI_ShowHitInfo,
+            this.TSMI_ShowBorder});
             this.TSMI_DEBUG.Font = new System.Drawing.Font("Franklin Gothic Medium", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TSMI_DEBUG.ForeColor = System.Drawing.Color.Maroon;
             this.TSMI_DEBUG.Name = "TSMI_DEBUG";
@@ -2202,6 +2204,15 @@
             // GameDuration
             // 
             this.GameDuration.Interval = 1000;
+            // 
+            // TSMI_ShowBorder
+            // 
+            this.TSMI_ShowBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_ShowBorder.ForeColor = System.Drawing.Color.Maroon;
+            this.TSMI_ShowBorder.Name = "TSMI_ShowBorder";
+            this.TSMI_ShowBorder.Size = new System.Drawing.Size(220, 22);
+            this.TSMI_ShowBorder.Text = "Show Border";
+            this.TSMI_ShowBorder.Click += new System.EventHandler(this.TSMI_ShowBorder_Click);
             // 
             // GamePlayerOne
             // 
@@ -2415,5 +2426,6 @@
         private System.Windows.Forms.GroupBox GB_Timer;
         public System.Windows.Forms.TextBox TB_Timer;
         public System.Windows.Forms.Timer GameDuration;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_ShowBorder;
     }
 }

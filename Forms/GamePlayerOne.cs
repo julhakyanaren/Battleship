@@ -173,10 +173,31 @@ namespace Battleship
                 MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        async void EnemyTurn()
+        async void FindTarget(int duration = 200)
+        {
+            Fight.TargetData[1] = 2;
+            Fight.TargetData[2] = 73;
+            int access = 0;
+            for (int a = 0; a < Fight.TargetData.Length; a++)
+            {
+                access += Fight.TargetData[a];
+            }
+            if (access != 0)
+            {
+                for (int i = 0; i <= Fight.TargetData[1]; i++)
+                {
+                    await Task.Delay(300);
+                    if (Math.Abs(i - Fight.TargetData[1]) * 10 + Fight.TargetData[2] < MapButtons.GetLength(1))
+                    {
+                        MapButtons[0, Math.Abs(i - Fight.TargetData[1]) * 10 + Fight.TargetData[2]].FlatAppearance.BorderColor = Color.Orange;
+                    }
+                    MapButtons[0, Math.Abs(Fight.TargetData[1] - 9) * 10 + i].FlatAppearance.BorderColor = Color.Orange;
+                }
+            }
+        }
+        void EnemyTurn()
         {
             Fight.Shoot(out Fight.NewMove);
-            await Task.Delay(3000);
             ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
             UpdatePlayerMapColor(ColorMethods.PlayerMapColor);
             Fight.Turn = Fight.ReverseTurn(Fight.Hited);
@@ -408,13 +429,11 @@ namespace Battleship
             TimerData.TimerInPause = false;
             GameDuration.Tick += Timer_Tick;
         }
-
         private async void Timer_Tick(object sender, EventArgs e)
         {
             TimerData.TimerTick(TimerData.TimerStarted);
             TB_Timer.Text = Support.FormateTimeText(TimerData.Seconds, TimerData.Minutes, TimerData.Hours, "HH:MM:SS");
         }
-
         public void SetStatusTextBoxesValues()
         {
             TB_PlayerFrigate.Text = PlayerData.FrigatesCountCurrent.ToString();
@@ -681,7 +700,6 @@ namespace Battleship
         {
             TopMost = TSMI_AllwaysOnTop.Checked;
         }
-
         private void TB_Turn_TextChanged(object sender, EventArgs e)
         {
             if (TB_Turn.Text == "Enemy")
@@ -698,7 +716,6 @@ namespace Battleship
 
             }
         }
-
         private void TSMI_ShowEnemyShipsCoords_Click(object sender, EventArgs e)
         {
             try
@@ -763,7 +780,6 @@ namespace Battleship
         {
             ShowHitInfo();
         }
-
         private void TB_PlayerFrigate_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -776,7 +792,6 @@ namespace Battleship
                 //Error_Catch
             }
         }
-
         private void TB_PlayerDestroyer_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -789,7 +804,6 @@ namespace Battleship
                 //Error_Catch
             }
         }
-
         private void TB_EnemyCruiser_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -802,7 +816,6 @@ namespace Battleship
                 //Error_Catch
             }
         }
-
         private void TB_PlayerBattleship_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -815,7 +828,6 @@ namespace Battleship
                 //Error_Catch
             }
         }
-
         private void TB_EnemyMiss_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -835,7 +847,6 @@ namespace Battleship
                 //Error_Catch
             }
         }
-
         private void TB_PlayerHit_TextChanged(object sender, EventArgs e)
         {
             TextBox textBox = sender as TextBox;
@@ -872,6 +883,10 @@ namespace Battleship
         private void TSMI_RestartGame_Click(object sender, EventArgs e)
         {
             RestartGame();
+        }
+        private void TSMI_ShowBorder_Click(object sender, EventArgs e)
+        {
+            FindTarget(10);
         }
     }
 }

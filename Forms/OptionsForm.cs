@@ -137,8 +137,14 @@ namespace Battleship.Forms
                         Options.V_Edition = Convert.ToInt32(NUD_AD_Version_Edition.Value);
                         Options.V_StageName = CB_AD_Stage.Text;
                         Options.V_Stage = Array.IndexOf(Options.Stages, Options.V_StageName);
-                        DebugTools.RunsCount = 0;
+                        DebugTools.RunsCount = -1;
                         FileManager.WriteAssemblyData();
+                        DialogResult rp = MessageBox.Show("Changes applied. Please re-run the program for correct operation.", $"{Handlers.Manager[6]}", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        if (rp == DialogResult.OK)
+                        {
+                            Environment.Exit(0);
+                        }
+
                     }
                     catch
                     {
