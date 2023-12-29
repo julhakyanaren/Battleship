@@ -103,7 +103,7 @@ namespace Battleship
                 }
             }
         }
-        public static void EnemyShoot(int target, out bool successShoot)
+        public static void EnemyShoot(int target, out bool successShoot, out bool checkedPosition)
         {
             Button targetButton;
             int index = 0;
@@ -126,6 +126,7 @@ namespace Battleship
             successShoot = true;
             char charter = Char.ToUpper(PlayerData.Map[index]);
             bool hited = true;
+            checkedPosition = false;
             switch (charter)
             {
                 case 'N':
@@ -136,14 +137,16 @@ namespace Battleship
                         NewMove = true;
                         successShoot = false;
                         hited = false;
+                        checkedPosition = false;
                         break;
                     }
                 case 'S':
                 case 'M':
                 case 'H':
                     {
-                        MessageBox.Show("Checked position", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        //MessageBox.Show("Checked position", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         FirstHitCoord = 0;
+                        checkedPosition = true;
                         break;
                     }
                 case 'F':
@@ -154,6 +157,7 @@ namespace Battleship
                         PlayerData.FrigatesHited[PlayerData.SunkenFrigatesCount - 1, 0] = true;
                         NewMove = true;
                         successShoot = true;
+                        checkedPosition = false;
                         break;
                     }
                 case 'D':
@@ -180,6 +184,7 @@ namespace Battleship
                         PlayerData.SunkenDestroyersCount = sunkenDestroyers;
                         PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
                         successShoot = true;
+                        checkedPosition = false;
                         break;
                     }
                 case 'C':
@@ -206,6 +211,7 @@ namespace Battleship
                         PlayerData.SunkenCruisersCount = sunkenCruisers;
                         PlayerData.CruiserCountCurrent = PlayerData.CruiserCountMax - PlayerData.SunkenCruisersCount;
                         successShoot = true;
+                        checkedPosition = false;
                         break;
                     }
                 case 'B':
@@ -232,6 +238,7 @@ namespace Battleship
                         PlayerData.SunkenBattleshipCount = sunkenBattleship;
                         PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
                         successShoot = true;
+                        checkedPosition = false;
                         break;
                     }
                 default:
@@ -241,10 +248,11 @@ namespace Battleship
                         incorrectValue = true;
                         successShoot = false;
                         hited = false;
+                        checkedPosition = false;
                         break;
                     }
             }
-            if (!incorrectValue && successShoot)
+            if (!incorrectValue && successShoot && !checkedPosition)
             {
                 GenerateNearestCoords(target, 1551);
                 for (int bl = 0; bl < BlockedCoords.Count; bl++)
@@ -256,30 +264,36 @@ namespace Battleship
         }
         public static void Shoot(out bool successShoot)
         {
-            successShoot = true;
-            int target = FindShipCoord(false);
-            if (NewMove)
+            bool checkedPosition = false;
+            do
             {
-                EnemyShoot(target, out successShoot);
-            }
-            else
-            {
-                if (FirstHitCoord == 0)
+                successShoot = true;
+                int target = FindShipCoord(false);
+                if (NewMove)
                 {
-                    GenerateNearestCoords(FirstHitCoord, 1551);
-                    Random randomShoot = new Random();
-                    int nextTarget = randomShoot.Next(1, AllowedCoords.Count + 1);
-                    bool allow = true;
-                    for (int s = 0; s < AllowedChars.Length; s++)
+                    EnemyShoot(target, out successShoot, out checkedPosition);
+                }
+                else
+                {
+                    if (FirstHitCoord == 0)
                     {
-                        allow &= AllowedCoords[nextTarget] - 1551 != AllowedChars[s];
-                    }
-                    if (allow)
-                    {
-                        EnemyShoot(AllowedCoords[nextTarget], out successShoot);
+                        GenerateNearestCoords(FirstHitCoord, 1551);
+                        Random randomShoot = new Random();
+                        int nextTarget = randomShoot.Next(1, AllowedCoords.Count + 1);
+                        nextTarget--;
+                        bool allow = true;
+                        for (int s = 0; s < AllowedChars.Length; s++)
+                        {
+                            allow &= AllowedCoords[nextTarget] - 1551 != AllowedChars[s];
+                        }
+                        if (allow)
+                        {
+                            EnemyShoot(AllowedCoords[nextTarget], out successShoot, out checkedPosition);
+                        }
                     }
                 }
             }
+            while (checkedPosition);
         }
         public static int FindShipCoord(bool hitStatus)
         {

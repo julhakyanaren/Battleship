@@ -137,6 +137,7 @@ namespace Battleship
             {
                 await Task.Delay(5);
                 MapButtons[0, vb].Visible = true;
+                MapButtons[0, vb].Text = MapButtons[0, vb].Tag.ToString();
                 MapButtons[1, vb].Visible = true;
             }
             TSMI_Map.Enabled = true;
@@ -173,10 +174,8 @@ namespace Battleship
                 MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
-        async void FindTarget(int duration = 200)
+        public async void FindTarget(int duration = 200)
         {
-            Fight.TargetData[1] = 2;
-            Fight.TargetData[2] = 73;
             int access = 0;
             for (int a = 0; a < Fight.TargetData.Length; a++)
             {
@@ -184,30 +183,41 @@ namespace Battleship
             }
             if (access != 0)
             {
-                for (int i = 0; i <= Fight.TargetData[1]; i++)
+                for (int i = 0; i <= Fight.TargetData[1] - 74; i++)
                 {
-                    await Task.Delay(300);
+                    await Task.Delay(duration);
                     if (Math.Abs(i - Fight.TargetData[1]) * 10 + Fight.TargetData[2] < MapButtons.GetLength(1))
                     {
                         MapButtons[0, Math.Abs(i - Fight.TargetData[1]) * 10 + Fight.TargetData[2]].FlatAppearance.BorderColor = Color.Orange;
                     }
-                    MapButtons[0, Math.Abs(Fight.TargetData[1] - 9) * 10 + i].FlatAppearance.BorderColor = Color.Orange;
+                    MapButtons[0, Math.Abs(Fight.TargetData[1] - 74) * 10 + i].FlatAppearance.BorderColor = Color.Orange;
                 }
             }
         }
-        void EnemyTurn()
+        async void EnemyTurn()
         {
-            Fight.Shoot(out Fight.NewMove);
+            Fight.Shoot(out /*Fight.NewMove*/ Fight.Hited);
             ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
-            UpdatePlayerMapColor(ColorMethods.PlayerMapColor);
-            Fight.Turn = Fight.ReverseTurn(Fight.Hited);
-            if (SetTurnText() == "ERROR")
+            try
+            {
+                //await Task.Run(() =>
+                //{
+                //    FindTarget(300);
+                //});
+                UpdatePlayerMapColor(ColorMethods.PlayerMapColor);
+                Fight.Turn = Fight.ReverseTurn(Fight.Hited);
+                if (SetTurnText() == "ERROR")
+                {
+                    //Error_Catch
+                }
+                else
+                {
+                    TB_Turn.Text = SetTurnText();
+                }
+            }
+            catch
             {
                 //Error_Catch
-            }
-            else
-            {
-                TB_Turn.Text = SetTurnText();
             }
         }
         void UpdatePlayerMapColor(Color[] colors)
