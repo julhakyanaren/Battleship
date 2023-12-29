@@ -105,14 +105,21 @@ namespace Battleship
         }
         public static async void OpenNewForm(Form newForm, int duration, int step = 1)
         {
-            newForm.Opacity = 0;
-            newForm.Show();
-            for (double o = 0; o < 1; o += 0.01 * step)
+            try
             {
-                await Task.Delay(duration);
-                newForm.Opacity = o;
+                newForm.Opacity = 0;
+                newForm.Show();
+                for (double o = 0; o < 1; o += 0.01 * step)
+                {
+                    await Task.Delay(duration);
+                    newForm.Opacity = o;
+                }
+                newForm.Opacity = 1;
             }
-            newForm.Opacity = 1;
+            catch
+            {
+
+            }
         }
         public static async void FormSwitching(Form firstForm, Form secondForm, int duration, bool dispose, int step = 1)
         {

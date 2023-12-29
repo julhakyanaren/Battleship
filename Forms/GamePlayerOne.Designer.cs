@@ -38,7 +38,6 @@
             this.TB_Timer = new System.Windows.Forms.TextBox();
             this.TB_DIfficulty = new System.Windows.Forms.TextBox();
             this.L_Info_Difficulty = new System.Windows.Forms.Label();
-            this.TEST = new System.Windows.Forms.PictureBox();
             this.PNL_PlayerControl = new System.Windows.Forms.Panel();
             this.TLP_GameInfo = new System.Windows.Forms.TableLayoutPanel();
             this.PNL_InfoEnemy = new System.Windows.Forms.Panel();
@@ -155,10 +154,9 @@
             this.TSMI_StartBattleShip = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_RestartGame = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Map = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_GenerateMap = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GenerationType = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_TB_GenType = new System.Windows.Forms.ToolStripTextBox();
-            this.TSMI_GenerateMap = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_MapEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_OpenMapEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Info = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GameInfo = new System.Windows.Forms.ToolStripMenuItem();
@@ -170,14 +168,16 @@
             this.TSMI_DEBUG = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowEnemyShipsCoords = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowHitInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.GameDuration = new System.Windows.Forms.Timer(this.components);
             this.TSMI_ShowBorder = new System.Windows.Forms.ToolStripMenuItem();
+            this.GameDuration = new System.Windows.Forms.Timer(this.components);
+            this.TSMI_License = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_ActivateProduct = new System.Windows.Forms.ToolStripMenuItem();
+            this.TEST = new System.Windows.Forms.PictureBox();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
             this.PNL_Options.SuspendLayout();
             this.GB_Timer.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TEST)).BeginInit();
             this.PNL_PlayerControl.SuspendLayout();
             this.TLP_GameInfo.SuspendLayout();
             this.PNL_InfoEnemy.SuspendLayout();
@@ -210,6 +210,7 @@
             this.TLP_PlayerNumbers.SuspendLayout();
             this.PNL_PlayerMap_Schema.SuspendLayout();
             this.MS_MenuPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TEST)).BeginInit();
             this.SuspendLayout();
             // 
             // TLP_Main
@@ -317,17 +318,6 @@
             this.L_Info_Difficulty.Size = new System.Drawing.Size(50, 17);
             this.L_Info_Difficulty.TabIndex = 34;
             this.L_Info_Difficulty.Text = "Difficulty";
-            // 
-            // TEST
-            // 
-            this.TEST.Dock = System.Windows.Forms.DockStyle.Right;
-            this.TEST.Image = global::Battleship.Properties.Resources.Logo;
-            this.TEST.Location = new System.Drawing.Point(210, 0);
-            this.TEST.Name = "TEST";
-            this.TEST.Size = new System.Drawing.Size(297, 63);
-            this.TEST.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.TEST.TabIndex = 2;
-            this.TEST.TabStop = false;
             // 
             // PNL_PlayerControl
             // 
@@ -1977,8 +1967,8 @@
             this.TSMI_File,
             this.TSMI_Game,
             this.TSMI_Map,
-            this.TSMI_MapEditor,
             this.TSMI_Info,
+            this.TSMI_License,
             this.TSMI_DEBUG});
             this.MS_MenuPanel.Location = new System.Drawing.Point(0, 0);
             this.MS_MenuPanel.Name = "MS_MenuPanel";
@@ -2051,13 +2041,21 @@
             // 
             this.TSMI_Map.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_Map.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_GenerateMap,
             this.TSMI_GenerationType,
-            this.TSMI_GenerateMap});
-            this.TSMI_Map.Enabled = false;
+            this.TSMI_OpenMapEditor});
             this.TSMI_Map.ForeColor = System.Drawing.Color.Black;
             this.TSMI_Map.Name = "TSMI_Map";
             this.TSMI_Map.Size = new System.Drawing.Size(41, 21);
             this.TSMI_Map.Text = "Map";
+            // 
+            // TSMI_GenerateMap
+            // 
+            this.TSMI_GenerateMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_GenerateMap.Name = "TSMI_GenerateMap";
+            this.TSMI_GenerateMap.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_GenerateMap.Text = "Generate Map";
+            this.TSMI_GenerateMap.Click += new System.EventHandler(this.TSMI_GenerateMap_Click);
             // 
             // TSMI_GenerationType
             // 
@@ -2066,7 +2064,7 @@
             this.TSMI_GenerationType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_TB_GenType});
             this.TSMI_GenerationType.Name = "TSMI_GenerationType";
-            this.TSMI_GenerationType.Size = new System.Drawing.Size(176, 22);
+            this.TSMI_GenerationType.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GenerationType.Text = "Map Generation type";
             this.TSMI_GenerationType.CheckedChanged += new System.EventHandler(this.TSMI_GenerationType_CheckedChanged);
             // 
@@ -2079,30 +2077,11 @@
             this.TSMI_TB_GenType.Size = new System.Drawing.Size(180, 22);
             this.TSMI_TB_GenType.Text = "Generate with schematic";
             // 
-            // TSMI_GenerateMap
-            // 
-            this.TSMI_GenerateMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_GenerateMap.Name = "TSMI_GenerateMap";
-            this.TSMI_GenerateMap.Size = new System.Drawing.Size(176, 22);
-            this.TSMI_GenerateMap.Text = "Generate Map";
-            this.TSMI_GenerateMap.Click += new System.EventHandler(this.TSMI_GenerateMap_Click);
-            // 
-            // TSMI_MapEditor
-            // 
-            this.TSMI_MapEditor.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_OpenMapEditor});
-            this.TSMI_MapEditor.Enabled = false;
-            this.TSMI_MapEditor.ForeColor = System.Drawing.Color.Black;
-            this.TSMI_MapEditor.Name = "TSMI_MapEditor";
-            this.TSMI_MapEditor.Size = new System.Drawing.Size(72, 21);
-            this.TSMI_MapEditor.Text = "Map Editor";
-            // 
             // TSMI_OpenMapEditor
             // 
             this.TSMI_OpenMapEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_OpenMapEditor.ForeColor = System.Drawing.Color.Black;
             this.TSMI_OpenMapEditor.Name = "TSMI_OpenMapEditor";
-            this.TSMI_OpenMapEditor.Size = new System.Drawing.Size(155, 22);
+            this.TSMI_OpenMapEditor.Size = new System.Drawing.Size(180, 22);
             this.TSMI_OpenMapEditor.Text = "Open Map Editor";
             this.TSMI_OpenMapEditor.Click += new System.EventHandler(this.TSMI_OpenMapEditor_Click);
             // 
@@ -2201,10 +2180,6 @@
             this.TSMI_ShowHitInfo.Text = "Show Hit Info";
             this.TSMI_ShowHitInfo.Click += new System.EventHandler(this.TSMI_ShowHitInfo_Click);
             // 
-            // GameDuration
-            // 
-            this.GameDuration.Interval = 1000;
-            // 
             // TSMI_ShowBorder
             // 
             this.TSMI_ShowBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
@@ -2213,6 +2188,39 @@
             this.TSMI_ShowBorder.Size = new System.Drawing.Size(220, 22);
             this.TSMI_ShowBorder.Text = "Show Border";
             this.TSMI_ShowBorder.Click += new System.EventHandler(this.TSMI_ShowBorder_Click);
+            // 
+            // GameDuration
+            // 
+            this.GameDuration.Interval = 1000;
+            // 
+            // TSMI_License
+            // 
+            this.TSMI_License.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_ActivateProduct});
+            this.TSMI_License.ForeColor = System.Drawing.Color.Black;
+            this.TSMI_License.Name = "TSMI_License";
+            this.TSMI_License.Size = new System.Drawing.Size(56, 21);
+            this.TSMI_License.Text = "License";
+            // 
+            // TSMI_ActivateProduct
+            // 
+            this.TSMI_ActivateProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_ActivateProduct.ForeColor = System.Drawing.Color.Black;
+            this.TSMI_ActivateProduct.Name = "TSMI_ActivateProduct";
+            this.TSMI_ActivateProduct.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_ActivateProduct.Text = "Product activation";
+            this.TSMI_ActivateProduct.Click += new System.EventHandler(this.TSMI_ActivateProduct_Click);
+            // 
+            // TEST
+            // 
+            this.TEST.Dock = System.Windows.Forms.DockStyle.Right;
+            this.TEST.Image = global::Battleship.Properties.Resources.Logo;
+            this.TEST.Location = new System.Drawing.Point(210, 0);
+            this.TEST.Name = "TEST";
+            this.TEST.Size = new System.Drawing.Size(297, 63);
+            this.TEST.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.TEST.TabIndex = 2;
+            this.TEST.TabStop = false;
             // 
             // GamePlayerOne
             // 
@@ -2238,7 +2246,6 @@
             this.PNL_Options.PerformLayout();
             this.GB_Timer.ResumeLayout(false);
             this.GB_Timer.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TEST)).EndInit();
             this.PNL_PlayerControl.ResumeLayout(false);
             this.TLP_GameInfo.ResumeLayout(false);
             this.PNL_InfoEnemy.ResumeLayout(false);
@@ -2277,6 +2284,7 @@
             this.PNL_PlayerMap_Schema.ResumeLayout(false);
             this.MS_MenuPanel.ResumeLayout(false);
             this.MS_MenuPanel.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TEST)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -2392,8 +2400,6 @@
         private System.Windows.Forms.ToolStripMenuItem TSMI_GenerationType;
         private System.Windows.Forms.ToolStripMenuItem TSMI_GenerateMap;
         private System.Windows.Forms.ToolStripTextBox TSMI_TB_GenType;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_MapEditor;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_OpenMapEditor;
         private System.Windows.Forms.ToolStripMenuItem TSMI_File;
         private System.Windows.Forms.ToolStripMenuItem TSMI_AllwaysOnTop;
         private System.Windows.Forms.Panel PNL_PlayerControl;
@@ -2427,5 +2433,8 @@
         public System.Windows.Forms.TextBox TB_Timer;
         public System.Windows.Forms.Timer GameDuration;
         private System.Windows.Forms.ToolStripMenuItem TSMI_ShowBorder;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_OpenMapEditor;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_License;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_ActivateProduct;
     }
 }

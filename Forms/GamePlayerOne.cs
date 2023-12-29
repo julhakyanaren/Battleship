@@ -540,7 +540,7 @@ namespace Battleship
                 try
                 {
                     GenerateButtons();
-                    TSMI_MapEditor.Enabled = true;
+                    TSMI_OpenMapEditor.Enabled = true;
                     TSMI_RestartGame.Enabled = true;
                 }
                 catch
@@ -692,18 +692,6 @@ namespace Battleship
             else
             {
                 Fight.GameStarted = false;
-            }
-        }
-        private void TSMI_OpenMapEditor_Click(object sender, EventArgs e)
-        {
-            DialogResult = MessageBox.Show("Open 'Map Editor'", "Map Editor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            if (DialogResult == DialogResult.OK)
-            {
-                MapCreate MCF = new MapCreate();
-                if (!DebugTools.MCF.Opened)
-                {
-                    Design.OpenNewForm(MCF, 1, 6);
-                }
             }
         }
         private void TSMI_AllwaysOnTop_CheckedChanged(object sender, EventArgs e)
@@ -897,6 +885,28 @@ namespace Battleship
         private void TSMI_ShowBorder_Click(object sender, EventArgs e)
         {
             FindTarget(10);
+        }
+        private void TSMI_OpenMapEditor_Click(object sender, EventArgs e)
+        {
+            DialogResult = MessageBox.Show("Open 'Map Editor'", "Map Editor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (DialogResult == DialogResult.OK)
+            {
+                MapCreate MCF = new MapCreate();
+                if (!DebugTools.MCF.Opened)
+                {
+                    Design.OpenNewForm(MCF, 1, 6);
+                }
+            }
+        }
+        private void TSMI_ActivateProduct_Click(object sender, EventArgs e)
+        {
+            DialogResult = MessageBox.Show("Open product activation manager", "Security Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (DialogResult == DialogResult.Yes)
+            {
+                ProductActivation paf = new ProductActivation();
+                Design.OpenNewForm(paf, 1, 3);
+            }
+
         }
     }
 }
