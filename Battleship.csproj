@@ -257,10 +257,10 @@
     <Compile Include="Forms\PlayerOptions.Designer.cs">
       <DependentUpon>PlayerOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="ProductActivation.cs">
+    <Compile Include="Forms\ProductActivation.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ProductActivation.Designer.cs">
+    <Compile Include="Forms\ProductActivation.Designer.cs">
       <DependentUpon>ProductActivation.cs</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -290,7 +290,7 @@
     <EmbeddedResource Include="Forms\PlayerOptions.resx">
       <DependentUpon>PlayerOptions.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ProductActivation.resx">
+    <EmbeddedResource Include="Forms\ProductActivation.resx">
       <DependentUpon>ProductActivation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
