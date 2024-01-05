@@ -6,8 +6,30 @@ using System.Threading.Tasks;
 
 namespace Battleship.Classes
 {
-    public class LicenseData
+    public static class LicenseData
     {
-        public int SpacesCount = 0;
+        public static int SpacesCount = 0;
+        public static string EnteredKey;
+        static string FinalKey;
+
+        public static void SetFinalKey()
+        {
+            string final = null;
+            for (int k = 0; k < EnteredKey.Length; k++)
+            {
+                if (EnteredKey[k] != ' ')
+                {
+                    final += EnteredKey[k];
+                }
+                else
+                {
+                    continue;
+                }
+            }
+            if (final.Length == EnteredKey.Length - 3)
+            {
+                FinalKey = final;   
+            }
+        }
     }
 }
