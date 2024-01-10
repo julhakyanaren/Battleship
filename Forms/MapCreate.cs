@@ -1266,7 +1266,7 @@ namespace Battleship
             for (int a = 0; a < all_MC_Buttons.Length; a++)
             {
                 all_MC_Buttons[a] = Buttons_MC[a];
-                Data.MapSchematic[a] = cm.SetCharThrowColor(0, all_MC_Buttons[a].BackColor);
+                Data.MapSchematic[a] = cm.SetCharViaColor(0, all_MC_Buttons[a].BackColor);
             }
             Data.Schematic = map.GenerateMapSchematic(Data.MapSchematic);
             TB_MapSchematic.Text = Data.Schematic;

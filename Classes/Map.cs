@@ -34,7 +34,7 @@ namespace Battleship
                         char[] mapPlayer = new char[buttonsPlayer.Length];
                         for (int i = 0; i < buttonsPlayer.Length; i++)
                         {
-                            mapPlayer[i] = ColorMethods.SetCharThrowColor(index, buttonsPlayer[i].BackColor);
+                            mapPlayer[i] = ColorMethods.SetCharViaColor(index, buttonsPlayer[i].BackColor);
                         }
                         for (int c = 0; c < mapPlayer.Length; c++)
                         {
@@ -48,7 +48,7 @@ namespace Battleship
                         char[] mapEnemy = new char[buttonsEnemy.Length];
                         for (int i = 0; i < buttonsEnemy.Length; i++)
                         {
-                            mapEnemy[i] = ColorMethods.SetCharThrowColor(index, buttonsEnemy[i].BackColor);
+                            mapEnemy[i] = ColorMethods.SetCharViaColor(index, buttonsEnemy[i].BackColor);
                         }
                         for (int c = 0; c < mapEnemy.Length; c++)
                         {

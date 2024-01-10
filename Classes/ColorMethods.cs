@@ -9,7 +9,7 @@ namespace Battleship
     {
         Support Support = new Support();
         public Color[] PlayerMapColor = new Color[100];
-        public Color SetColorThrowChar(char charter)
+        public Color SetColorViaChar(char charter)
         {
             charter = Convert.ToChar(charter.ToString().ToUpper());
             switch (Char.ToUpper(charter))
@@ -39,6 +39,9 @@ namespace Battleship
                         return Color.Firebrick;
                     }
                 case 'M':
+                    {
+                        return Color.Aqua;
+                    }
                 case 'E':
                     {
                         return Color.DeepSkyBlue;
@@ -50,7 +53,7 @@ namespace Battleship
 
             }
         }
-        public char SetCharThrowColor(int index, Color buttonBackColor)
+        public char SetCharViaColor(int index, Color buttonBackColor)
         {
             string colorName = buttonBackColor.Name.ToString();
             string[] activeButtonColor =
@@ -79,7 +82,7 @@ namespace Battleship
                                 {
                                     return 'B';
                                 }
-                            case "Lightcoral":
+                            case "LightCoral":
                                 {
                                     return 'H';
                                 }
@@ -121,7 +124,7 @@ namespace Battleship
                                 {
                                     return 'b';
                                 }
-                            case "Lightcoral":
+                            case "LightCoral":
                                 {
                                     return 'h';
                                 }
@@ -161,7 +164,7 @@ namespace Battleship
             Color[] colors = new Color[inputMap.Length];
             for (int c = 0; c < colors.Length; c++)
             {
-                colors[c] = SetColorThrowChar(inputMap[c]);
+                colors[c] = SetColorViaChar(inputMap[c]);
             }
             return colors;
         }

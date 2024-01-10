@@ -50,68 +50,6 @@ namespace Battleship
             }
             return enemyButtons;
         }
-        public string[] GetButtonsTagPlayer(Button[,] buttons)
-        {
-            Button[] playerButtons = GetPlayerButtons(buttons);
-            string[] tags = new string[playerButtons.Length];
-            for (int p = 0; p < playerButtons.Length; p++)
-            {
-                tags[p] = Convert.ToString(playerButtons[p].Tag);
-            }
-            return tags;
-        }
-        public string[] GetButtonsTagEnemy(Button[,] buttons)
-        {
-            Button[] enemyButtons = GetEnemyButtons(buttons);
-            string[] tags = new string[enemyButtons.Length];
-            for (int e = 0; e < enemyButtons.Length; e++)
-            {
-                tags[e] = Convert.ToString(enemyButtons[e].Tag);
-            }
-            return tags;
-        }
-        public char GetShipSymbol(Ship ship)
-        {
-            return (char)ship;
-        }
-        public int GetShipCount(char shipSymbol)
-        {
-            switch (shipSymbol.ToString().ToUpper())
-            {
-                case "F":
-                    {
-                        return 4;
-                    }
-                case "D":
-                    {
-                        return 3;
-                    }
-                case "C":
-                    {
-                        return 2;
-                    }
-                case "B":
-                    {
-                        return 1;
-                    }
-                default:
-                    {
-                        return -1;
-                    }
-            }
-        }
-        public int GetShipSize(char shipSymbol)
-        {
-            int shipCount = GetShipCount(shipSymbol);
-            if (shipCount < 0)
-            {
-                return -1;
-            }
-            else
-            {
-                return 5 - shipCount;
-            }
-        }
         public char[] CharArrayRedimension(char[,] inputArray)
         {
             char[] outputArray = new char[inputArray.GetLength(0) * inputArray.GetLength(1)];

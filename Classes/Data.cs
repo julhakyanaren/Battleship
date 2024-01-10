@@ -50,7 +50,7 @@ namespace Battleship
             char[] resultArray = new char[targetButton.Length];
             for (int i = 0; i < resultArray.Length; i++)
             {
-                resultArray[i] = cm.SetCharThrowColor(playerID - 1, targetButton[i].BackColor);
+                resultArray[i] = cm.SetCharViaColor(playerID - 1, targetButton[i].BackColor);
             }
             return resultArray;
         }
@@ -59,7 +59,7 @@ namespace Battleship
             Button[] resultButtons = new Button[buttonsChar.Length];
             for (int b = 0; b < resultButtons.Length; b++)
             {
-                resultButtons[b].BackColor = cm.SetColorThrowChar(buttonsChar[b]);
+                resultButtons[b].BackColor = cm.SetColorViaChar(buttonsChar[b]);
             }
             return resultButtons;
         }

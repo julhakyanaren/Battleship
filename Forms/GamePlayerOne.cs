@@ -397,7 +397,7 @@ namespace Battleship
             {
                 Button targetButton = MapButtons[1, i];
                 Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
-                EnemyData.Map[i] = ColorMethods.SetCharThrowColor(1, targetButton.BackColor);
+                EnemyData.Map[i] = ColorMethods.SetCharViaColor(1, targetButton.BackColor);
                 if (PlayerData.Map[i] == 'N')
                 {
                     PlayerData.Map[i] = 'E';
@@ -615,7 +615,7 @@ namespace Battleship
                         char[] schematicMapEditor = Schematic.Map.ToCharArray();
                         for (int c = 0; c < schematicMapEditor.Length; c++)
                         {
-                            buttonColor = ColorMethods.SetColorThrowChar(schematicMapEditor[c]);
+                            buttonColor = ColorMethods.SetColorViaChar(schematicMapEditor[c]);
                             switch (schematicMapEditor[c])
                             {
                                 case 'F':
@@ -642,7 +642,7 @@ namespace Battleship
                             Button targetButtom = MapButtons[0, c];
                             targetButtom.BackColor = buttonColor;
                             Array.Resize(ref PlayerData.Map, schematicMapEditor.Length);
-                            PlayerData.Map[c] = ColorMethods.SetCharThrowColor(0, buttonColor);
+                            PlayerData.Map[c] = ColorMethods.SetCharViaColor(0, buttonColor);
                         }
                         Data.ResetDataToDefault();
                         PlayerData.FrigatesCountCurrent = ships[0];
