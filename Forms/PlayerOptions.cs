@@ -59,7 +59,7 @@ namespace Battleship.Forms
                 Options.DifficultyName = CB_Difficulty.Text;
                 Options.Difficulty = CB_Difficulty.SelectedIndex;
             }
-            GamePlayerOne GPO = new GamePlayerOne();
+            GameForm GPO = new GameForm();
             Design.FormSwitching(this, GPO, 1, false, 8);
         }
         private void BS_ApplyPlayerData_Click(object sender, EventArgs e)

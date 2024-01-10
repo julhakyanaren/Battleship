@@ -8,13 +8,13 @@ using System.Windows.Forms;
 
 namespace Battleship
 {
-    public partial class GamePlayerOne : Form
+    public partial class GameForm : Form
     {
         Position Position = new Position();
         Map Map = new Map();
         Support Support = new Support();
         ColorMethods ColorMethods = new ColorMethods();
-        public GamePlayerOne()
+        public GameForm()
         {
             InitializeComponent();
         }
