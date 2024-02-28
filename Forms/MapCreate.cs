@@ -193,7 +193,6 @@ namespace Battleship
             {
                 BS_MC_Map_Index.Text = coord;
             }
-
         }
 
         private void MC_Buttons_Click(object sender, EventArgs e)
@@ -1142,7 +1141,7 @@ namespace Battleship
         }
         private void BS_Insert_Click(object sender, EventArgs e)
         {
-            Button[] mapButton = Buttons_MC;
+                Button[] mapButton = Buttons_MC;
             Color cellColor;
             switch (ShipData.ChoosenShipType)
             {

@@ -129,7 +129,7 @@ namespace Battleship
             }
             for (int id = 0; id < MapButtons.GetLength(0); id++)
             {
-                Map.SetShipCharThrowColor(id, MapButtons);
+                Map.SetShipCharViaColor(id, MapButtons);
             }
             Array.Resize(ref PlayerData.Map, MapButtons.GetLength(1));
             Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));

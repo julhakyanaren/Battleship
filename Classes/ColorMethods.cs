@@ -112,7 +112,7 @@ namespace Battleship
                                 {
                                     return 'f';
                                 }
-                            case "Darkgray":
+                            case "DarkGray":
                                 {
                                     return 'd';
                                 }

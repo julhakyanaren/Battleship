@@ -23,7 +23,7 @@ namespace Battleship
             }
             return schematic;
         }
-        public void SetShipCharThrowColor(int index, Button[,] buttons)
+        public void SetShipCharViaColor(int index, Button[,] buttons)
         {
             bool successfull = true;
             switch (index)
@@ -259,13 +259,13 @@ namespace Battleship
         }
         public char[,] GenerateEnemyMap(Button[,] mapButtons)
         {
-            SetShipCharThrowColor(1, mapButtons);
+            SetShipCharViaColor(1, mapButtons);
             MapEnemy = PlaceEnemyShips(MapEnemy);
             return MapEnemy;
         }
         public char[,] GeneratePlayerMap(Button[,] mapbuttons)
         {
-            SetShipCharThrowColor(0, mapbuttons);
+            SetShipCharViaColor(0, mapbuttons);
             MapPlayer = PlacePlayerShips(MapPlayer);
             return MapPlayer;
         }
