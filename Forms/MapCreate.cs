@@ -1709,7 +1709,6 @@ namespace Battleship
                     }
             }
         }
-
         private void TSMI_MC_AllwaysOnTop_CheckedChanged(object sender, EventArgs e)
         {
             TopMost = TSMI_MC_AllwaysOnTop.Checked;
