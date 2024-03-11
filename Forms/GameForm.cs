@@ -31,9 +31,8 @@ namespace Battleship
         }
         public void SetComponentCustomParamaters()
         {
-            Design.SetComponentLocation(L_Info_Turn, PNL_InfoTurn);
-            Design.SetComponentLocation(TB_Turn, PNL_InfoTurn);
-            L_Info_PlayerScore.Text = $"Score: {Options.SP_PlayerName}";
+            Design.SetComponentLocation(L_Info_Turn, PNL_InfoTur);
+            Design.SetComponentLocation(TB_Turn, PNL_InfoTur);
             TSMI_Difficulty_Level.Text = Options.DifficultyName;
             TB_DIfficulty.Text = Options.DifficultyName;
             switch (Options.Difficulty)
@@ -434,15 +433,8 @@ namespace Battleship
                         }
                 }
             }
-            GameDuration.Enabled = true;
             TimerData.TimerStarted = true;
             TimerData.TimerInPause = false;
-            GameDuration.Tick += Timer_Tick;
-        }
-        private async void Timer_Tick(object sender, EventArgs e)
-        {
-            TimerData.TimerTick(TimerData.TimerStarted);
-            TB_Timer.Text = Support.FormateTimeText(TimerData.Seconds, TimerData.Minutes, TimerData.Hours, "HH:MM:SS");
         }
         public void SetStatusTextBoxesValues()
         {
