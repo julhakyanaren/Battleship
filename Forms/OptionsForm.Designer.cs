@@ -28,15 +28,12 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.GB_GameMode = new System.Windows.Forms.GroupBox();
-            this.TB_OF_GameMode = new System.Windows.Forms.TextBox();
-            this.CHB_OP_GameModeEducation = new System.Windows.Forms.CheckBox();
-            this.CHB_OP_GameModeClassic = new System.Windows.Forms.CheckBox();
             this.GB_OF_DevMode = new System.Windows.Forms.GroupBox();
             this.BS_PO_CheckAccess = new System.Windows.Forms.Button();
             this.L_Info_OF_Access = new System.Windows.Forms.Label();
             this.TB_OF_DevPass = new System.Windows.Forms.TextBox();
             this.GB_Assembly = new System.Windows.Forms.GroupBox();
+            this.TB_NoDev_Stage = new System.Windows.Forms.TextBox();
             this.BS_AD_ApplyChanges = new System.Windows.Forms.Button();
             this.TB_AD_Version_Launches = new System.Windows.Forms.TextBox();
             this.NUD_AD_Version_Edition = new System.Windows.Forms.NumericUpDown();
@@ -48,70 +45,12 @@
             this.L_AD_Version_Release = new System.Windows.Forms.Label();
             this.CB_AD_Stage = new System.Windows.Forms.ComboBox();
             this.TB_AD_Stage = new System.Windows.Forms.Label();
-            this.TB_NoDev_Stage = new System.Windows.Forms.TextBox();
-            this.GB_GameMode.SuspendLayout();
             this.GB_OF_DevMode.SuspendLayout();
             this.GB_Assembly.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Edition)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Assembly)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.NUD_AD_Version_Release)).BeginInit();
             this.SuspendLayout();
-            // 
-            // GB_GameMode
-            // 
-            this.GB_GameMode.BackColor = System.Drawing.Color.Black;
-            this.GB_GameMode.Controls.Add(this.TB_OF_GameMode);
-            this.GB_GameMode.Controls.Add(this.CHB_OP_GameModeEducation);
-            this.GB_GameMode.Controls.Add(this.CHB_OP_GameModeClassic);
-            this.GB_GameMode.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.GB_GameMode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.GB_GameMode.Location = new System.Drawing.Point(3, 12);
-            this.GB_GameMode.Name = "GB_GameMode";
-            this.GB_GameMode.Size = new System.Drawing.Size(155, 105);
-            this.GB_GameMode.TabIndex = 0;
-            this.GB_GameMode.TabStop = false;
-            this.GB_GameMode.Text = "Game mode";
-            // 
-            // TB_OF_GameMode
-            // 
-            this.TB_OF_GameMode.BackColor = System.Drawing.Color.Black;
-            this.TB_OF_GameMode.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_OF_GameMode.ForeColor = System.Drawing.Color.White;
-            this.TB_OF_GameMode.Location = new System.Drawing.Point(6, 75);
-            this.TB_OF_GameMode.Name = "TB_OF_GameMode";
-            this.TB_OF_GameMode.ReadOnly = true;
-            this.TB_OF_GameMode.Size = new System.Drawing.Size(143, 22);
-            this.TB_OF_GameMode.TabIndex = 43;
-            this.TB_OF_GameMode.Text = "Classic Mode";
-            this.TB_OF_GameMode.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // CHB_OP_GameModeEducation
-            // 
-            this.CHB_OP_GameModeEducation.AutoSize = true;
-            this.CHB_OP_GameModeEducation.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CHB_OP_GameModeEducation.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.CHB_OP_GameModeEducation.Location = new System.Drawing.Point(6, 48);
-            this.CHB_OP_GameModeEducation.Name = "CHB_OP_GameModeEducation";
-            this.CHB_OP_GameModeEducation.Size = new System.Drawing.Size(101, 21);
-            this.CHB_OP_GameModeEducation.TabIndex = 42;
-            this.CHB_OP_GameModeEducation.Text = "Education mode";
-            this.CHB_OP_GameModeEducation.UseVisualStyleBackColor = true;
-            this.CHB_OP_GameModeEducation.CheckedChanged += new System.EventHandler(this.CHB_OP_GameModeClassic_CheckedChanged);
-            // 
-            // CHB_OP_GameModeClassic
-            // 
-            this.CHB_OP_GameModeClassic.AutoSize = true;
-            this.CHB_OP_GameModeClassic.Checked = true;
-            this.CHB_OP_GameModeClassic.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHB_OP_GameModeClassic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CHB_OP_GameModeClassic.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.CHB_OP_GameModeClassic.Location = new System.Drawing.Point(6, 21);
-            this.CHB_OP_GameModeClassic.Name = "CHB_OP_GameModeClassic";
-            this.CHB_OP_GameModeClassic.Size = new System.Drawing.Size(87, 21);
-            this.CHB_OP_GameModeClassic.TabIndex = 41;
-            this.CHB_OP_GameModeClassic.Text = "Classic mode";
-            this.CHB_OP_GameModeClassic.UseVisualStyleBackColor = true;
-            this.CHB_OP_GameModeClassic.CheckedChanged += new System.EventHandler(this.CHB_OP_GameModeClassic_CheckedChanged);
             // 
             // GB_OF_DevMode
             // 
@@ -121,9 +60,9 @@
             this.GB_OF_DevMode.Controls.Add(this.TB_OF_DevPass);
             this.GB_OF_DevMode.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.GB_OF_DevMode.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.GB_OF_DevMode.Location = new System.Drawing.Point(3, 123);
+            this.GB_OF_DevMode.Location = new System.Drawing.Point(3, 12);
             this.GB_OF_DevMode.Name = "GB_OF_DevMode";
-            this.GB_OF_DevMode.Size = new System.Drawing.Size(155, 105);
+            this.GB_OF_DevMode.Size = new System.Drawing.Size(155, 216);
             this.GB_OF_DevMode.TabIndex = 44;
             this.GB_OF_DevMode.TabStop = false;
             this.GB_OF_DevMode.Text = "Developer mode";
@@ -188,6 +127,19 @@
             this.GB_Assembly.TabIndex = 45;
             this.GB_Assembly.TabStop = false;
             this.GB_Assembly.Text = "Assembly Data";
+            // 
+            // TB_NoDev_Stage
+            // 
+            this.TB_NoDev_Stage.BackColor = System.Drawing.Color.Black;
+            this.TB_NoDev_Stage.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_NoDev_Stage.ForeColor = System.Drawing.Color.White;
+            this.TB_NoDev_Stage.Location = new System.Drawing.Point(9, 43);
+            this.TB_NoDev_Stage.Multiline = true;
+            this.TB_NoDev_Stage.Name = "TB_NoDev_Stage";
+            this.TB_NoDev_Stage.ReadOnly = true;
+            this.TB_NoDev_Stage.Size = new System.Drawing.Size(146, 25);
+            this.TB_NoDev_Stage.TabIndex = 59;
+            this.TB_NoDev_Stage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // BS_AD_ApplyChanges
             // 
@@ -326,19 +278,6 @@
             this.TB_AD_Stage.TabIndex = 46;
             this.TB_AD_Stage.Text = "Development Stage ";
             // 
-            // TB_NoDev_Stage
-            // 
-            this.TB_NoDev_Stage.BackColor = System.Drawing.Color.Black;
-            this.TB_NoDev_Stage.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_NoDev_Stage.ForeColor = System.Drawing.Color.White;
-            this.TB_NoDev_Stage.Location = new System.Drawing.Point(9, 43);
-            this.TB_NoDev_Stage.Multiline = true;
-            this.TB_NoDev_Stage.Name = "TB_NoDev_Stage";
-            this.TB_NoDev_Stage.ReadOnly = true;
-            this.TB_NoDev_Stage.Size = new System.Drawing.Size(146, 25);
-            this.TB_NoDev_Stage.TabIndex = 59;
-            this.TB_NoDev_Stage.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // OptionsForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
@@ -347,7 +286,6 @@
             this.ClientSize = new System.Drawing.Size(348, 239);
             this.Controls.Add(this.GB_Assembly);
             this.Controls.Add(this.GB_OF_DevMode);
-            this.Controls.Add(this.GB_GameMode);
             this.Font = new System.Drawing.Font("Franklin Gothic Demi", 9F);
             this.ForeColor = System.Drawing.Color.White;
             this.Margin = new System.Windows.Forms.Padding(4);
@@ -356,8 +294,6 @@
             this.Text = "Options";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.OptionsForm_FormClosing);
             this.Load += new System.EventHandler(this.OptionsForm_Load);
-            this.GB_GameMode.ResumeLayout(false);
-            this.GB_GameMode.PerformLayout();
             this.GB_OF_DevMode.ResumeLayout(false);
             this.GB_OF_DevMode.PerformLayout();
             this.GB_Assembly.ResumeLayout(false);
@@ -370,11 +306,6 @@
         }
 
         #endregion
-
-        private System.Windows.Forms.GroupBox GB_GameMode;
-        private System.Windows.Forms.CheckBox CHB_OP_GameModeClassic;
-        private System.Windows.Forms.CheckBox CHB_OP_GameModeEducation;
-        public System.Windows.Forms.TextBox TB_OF_GameMode;
         private System.Windows.Forms.GroupBox GB_OF_DevMode;
         public System.Windows.Forms.TextBox TB_OF_DevPass;
         private System.Windows.Forms.Label L_Info_OF_Access;

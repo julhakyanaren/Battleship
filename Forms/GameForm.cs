@@ -31,59 +31,20 @@ namespace Battleship
         }
         public void SetComponentCustomParamaters()
         {
-            Design.SetComponentLocation(L_Info_Turn, PNL_InfoTur);
-            Design.SetComponentLocation(TB_Turn, PNL_InfoTur);
-            TSMI_Difficulty_Level.Text = Options.DifficultyName;
-            TB_DIfficulty.Text = Options.DifficultyName;
-            switch (Options.Difficulty)
-            {
-                case 0:
-                    {
-                        TB_DIfficulty.ForeColor = Color.Lime;
-                        break;
-                    }
-                case 1:
-                    {
-                        TB_DIfficulty.ForeColor = Color.Yellow;
-                        break;
-                    }
-                case 2:
-                    {
-                        TB_DIfficulty.ForeColor = Color.Red;
-                        break;
-                    }
-                case 3:
-                    {
-                        TB_DIfficulty.ForeColor = Color.DarkRed;
-                        break;
-                    }
-                default:
-                    {
-                        TB_DIfficulty.ForeColor = Design.DefaultForeColor;
-                        break;
-                    }
-            }
-            if (Options.Difficulty != 3)
-            {
-                TB_DIfficulty.Font = new Font("Franklin Gothic Medium", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-                TSMI_Difficulty_Level.Font = new Font("Franklin Gothic Medium", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            }
-            else
-            {
-                TB_DIfficulty.Font = new Font("Franklin Gothic Demi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-                TSMI_Difficulty_Level.Font = new Font("Franklin Gothic Demi", 9.75F, FontStyle.Regular, GraphicsUnit.Point, 204);
-            }
-            TSMI_Difficulty_Level.ForeColor = TB_DIfficulty.ForeColor;
-            TSMI_ChancePercent.Text = $"{Fight.SuccessThreshold(Options.Difficulty) * 100} %";
-            if (DebugTools.DebugMode)
-            {
-                TSMI_DEBUG.Visible = true;
-            }
+            Design.SetComponentLocation(L_Info_Turn, PNL_InfoChance);
+            Design.SetComponentLocation(TB_Turn, PNL_InfoChance);
+            Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
+            Design.SetComponentLocation(L_Info_HitChanceDatas, PNL_InfoChance);
+            Design.SetElementLocation(3, 20, TB_Turn);
+            Design.SetElementLocation(3, 1, L_Info_Turn);
+            Design.SetElementSize(TLP_Main, 1028, 400);
+            Design.SetElementLocation(3, 20, TB_GameModeType);
+            Design.SetElementLocation(3, 1, L_Info_GameMode);
+            TB_GameModeType.Text = $"{Options.GameMode} Mode";
         }
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {
             SetScreenParametersAsMaximized();
-            Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
             SetComponentCustomParamaters();
         }
         async void GenerateButtons()

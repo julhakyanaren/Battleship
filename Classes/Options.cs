@@ -13,8 +13,8 @@ namespace Battleship
         public static bool SingleplayerMode = false;
         public static string SP_PlayerName = "Player";
         public static int Difficulty = 0;
-        public static string DifficultyName = "Easy";
-        public static string GameMode = "Classic";
+        public static string GameMode = "Education";
+        public static int GameModeInt = 0;
 
         public static string[] Stages = { "InDev", "Alpha", "Beta", "Pre-release", "Release", "Debug" };
         public static int V_Stage;

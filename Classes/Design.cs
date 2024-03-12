@@ -48,6 +48,14 @@ namespace Battleship
                 }
             }
         }
+        public static void SetElementLocation(int loc_x, int loc_y, Control element = null, Control parentControl = null)
+        {
+            element.Location = new Point(loc_x, loc_y);
+        }
+        public static void SetElementSize(Control control, int width, int height)
+        {
+            control.Size = new Size(width, height);
+        }
         public static void ChangeButtonEnabledDesign(Button inputButton, int mode)
         {
             Color old_ForeColor = inputButton.ForeColor;
