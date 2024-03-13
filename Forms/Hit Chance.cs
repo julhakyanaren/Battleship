@@ -14,6 +14,8 @@ namespace Battleship.Forms
 {
     public partial class HitChance : Form
     {
+        Button[] exampleButtons = new Button[100];
+        ColorMethods cm = new ColorMethods();
         public HitChance()
         {
             InitializeComponent();
@@ -23,7 +25,6 @@ namespace Battleship.Forms
         {
             HitChanceData.FormClosed = false;
             HitChanceData.ExampleCraeted = false;
-            GenerateMap();
         }
         public void SetMaximumValues()
         {
@@ -32,19 +33,36 @@ namespace Battleship.Forms
         private void HitChance_FormClosed(object sender, FormClosedEventArgs e)
         {
             HitChanceData.FormClosed = true;
-            RemoveMap();
         }
         private void BS_HC_RestartMap_Click(object sender, EventArgs e)
         {
             RestartMap();
         }
-        async void RemoveMap()
-        {
-        }
         async void RestartMap()
         {
-            RemoveMap();
-            await Task.Delay(20);
+            for (int i = 0; i < 2; i++)
+            {
+                for (int b = 0; b < 100; b++)
+                {
+                    switch (i)
+                    {
+                        case 0:
+                            {
+                                await Task.Delay(10);
+                                exampleButtons[b].BackColor = Color.Black;
+                                break;
+                            }
+                        case 1:
+                            {
+                                await Task.Delay(10);
+                                exampleButtons[b].BackColor = HitChanceData.CurrentMap[b].BackColor;
+                                break;
+                            }
+                            
+                    }
+                } 
+            }
+            
         }
         async void GenerateMap()
         {
@@ -69,12 +87,24 @@ namespace Battleship.Forms
                     button.BackColor = Color.White;
                     button.Tag = b + 600;
                     button.Margin = new Padding(0);
+                    exampleButtons[b] = button;
                 }
                 if (TLP_HC_Schema.Controls.Count == 100)
                 {
                     HitChanceData.ExampleCraeted = true;
                 }
             }
+        }
+
+        private void CHB_HC_UseCustomCell_CheckedChanged(object sender, EventArgs e)
+        {
+            BS_HC_GenerateMap.Visible = CHB_HC_UseCustomCell.Checked;
+        }
+
+        private void BS_HC_GenerateMap_Click(object sender, EventArgs e)
+        {
+            GenerateMap();
+            BS_HC_GenerateMap.Visible = false;
         }
     }
 }
