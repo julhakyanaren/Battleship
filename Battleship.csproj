@@ -209,6 +209,7 @@
     <Compile Include="Classes\Fight.cs" />
     <Compile Include="Classes\FileManager.cs" />
     <Compile Include="Classes\Handlers.cs" />
+    <Compile Include="Classes\HitChanceData.cs" />
     <Compile Include="Classes\LicenseData.cs" />
     <Compile Include="Classes\Map.cs" />
     <Compile Include="Forms\Hit Chance.cs">

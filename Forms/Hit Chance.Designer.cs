@@ -79,6 +79,7 @@
             this.TB_EnemyShips_Destroyers = new System.Windows.Forms.TextBox();
             this.L_EnemyFrigates = new System.Windows.Forms.Label();
             this.TB_EnemyShips_Frigates = new System.Windows.Forms.TextBox();
+            this.BS_HC_RestartMap = new System.Windows.Forms.Button();
             this.TLP_MC_Map_Main.SuspendLayout();
             this.PNL_MC_Map_Letters.SuspendLayout();
             this.TLP_MC_Map_Letters.SuspendLayout();
@@ -94,8 +95,8 @@
             // 
             this.TLP_MC_Map_Main.BackColor = System.Drawing.Color.Black;
             this.TLP_MC_Map_Main.ColumnCount = 2;
-            this.TLP_MC_Map_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 88.02817F));
-            this.TLP_MC_Map_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11.97183F));
+            this.TLP_MC_Map_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89F));
+            this.TLP_MC_Map_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11F));
             this.TLP_MC_Map_Main.Controls.Add(this.PNL_MC_Map_Empty, 1, 1);
             this.TLP_MC_Map_Main.Controls.Add(this.PNL_MC_Map_Letters, 0, 1);
             this.TLP_MC_Map_Main.Controls.Add(this.PNL_MC_Map_Numbers, 1, 0);
@@ -104,19 +105,18 @@
             this.TLP_MC_Map_Main.Location = new System.Drawing.Point(3, 18);
             this.TLP_MC_Map_Main.Name = "TLP_MC_Map_Main";
             this.TLP_MC_Map_Main.RowCount = 2;
-            this.TLP_MC_Map_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 90.88785F));
-            this.TLP_MC_Map_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 9.112149F));
-            this.TLP_MC_Map_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TLP_MC_Map_Main.Size = new System.Drawing.Size(440, 429);
+            this.TLP_MC_Map_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89F));
+            this.TLP_MC_Map_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
+            this.TLP_MC_Map_Main.Size = new System.Drawing.Size(417, 429);
             this.TLP_MC_Map_Main.TabIndex = 1;
             // 
             // PNL_MC_Map_Empty
             // 
             this.PNL_MC_Map_Empty.BackColor = System.Drawing.Color.Black;
             this.PNL_MC_Map_Empty.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PNL_MC_Map_Empty.Location = new System.Drawing.Point(390, 392);
+            this.PNL_MC_Map_Empty.Location = new System.Drawing.Point(369, 389);
             this.PNL_MC_Map_Empty.Name = "PNL_MC_Map_Empty";
-            this.PNL_MC_Map_Empty.Size = new System.Drawing.Size(47, 34);
+            this.PNL_MC_Map_Empty.Size = new System.Drawing.Size(45, 37);
             this.PNL_MC_Map_Empty.TabIndex = 3;
             // 
             // PNL_MC_Map_Letters
@@ -124,9 +124,9 @@
             this.PNL_MC_Map_Letters.BackColor = System.Drawing.Color.White;
             this.PNL_MC_Map_Letters.Controls.Add(this.TLP_MC_Map_Letters);
             this.PNL_MC_Map_Letters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PNL_MC_Map_Letters.Location = new System.Drawing.Point(3, 392);
+            this.PNL_MC_Map_Letters.Location = new System.Drawing.Point(3, 389);
             this.PNL_MC_Map_Letters.Name = "PNL_MC_Map_Letters";
-            this.PNL_MC_Map_Letters.Size = new System.Drawing.Size(381, 34);
+            this.PNL_MC_Map_Letters.Size = new System.Drawing.Size(360, 37);
             this.PNL_MC_Map_Letters.TabIndex = 2;
             // 
             // TLP_MC_Map_Letters
@@ -158,7 +158,7 @@
             this.TLP_MC_Map_Letters.Name = "TLP_MC_Map_Letters";
             this.TLP_MC_Map_Letters.RowCount = 1;
             this.TLP_MC_Map_Letters.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.TLP_MC_Map_Letters.Size = new System.Drawing.Size(381, 34);
+            this.TLP_MC_Map_Letters.Size = new System.Drawing.Size(360, 37);
             this.TLP_MC_Map_Letters.TabIndex = 1;
             // 
             // BS_HC_Map_G
@@ -169,9 +169,9 @@
             this.BS_HC_Map_G.FlatAppearance.BorderSize = 2;
             this.BS_HC_Map_G.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_Map_G.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_Map_G.Location = new System.Drawing.Point(229, 3);
+            this.BS_HC_Map_G.Location = new System.Drawing.Point(217, 3);
             this.BS_HC_Map_G.Name = "BS_HC_Map_G";
-            this.BS_HC_Map_G.Size = new System.Drawing.Size(32, 28);
+            this.BS_HC_Map_G.Size = new System.Drawing.Size(30, 31);
             this.BS_HC_Map_G.TabIndex = 21;
             this.BS_HC_Map_G.Tag = "L6";
             this.BS_HC_Map_G.Text = "G";
@@ -185,9 +185,9 @@
             this.BS_HC_Map_F.FlatAppearance.BorderSize = 2;
             this.BS_HC_Map_F.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_Map_F.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_Map_F.Location = new System.Drawing.Point(191, 3);
+            this.BS_HC_Map_F.Location = new System.Drawing.Point(181, 3);
             this.BS_HC_Map_F.Name = "BS_HC_Map_F";
-            this.BS_HC_Map_F.Size = new System.Drawing.Size(32, 28);
+            this.BS_HC_Map_F.Size = new System.Drawing.Size(30, 31);
             this.BS_HC_Map_F.TabIndex = 20;
             this.BS_HC_Map_F.Tag = "L5";
             this.BS_HC_Map_F.Text = "F";
@@ -201,9 +201,9 @@
             this.BS_HC_Map_H.FlatAppearance.BorderSize = 2;
             this.BS_HC_Map_H.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_Map_H.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_Map_H.Location = new System.Drawing.Point(267, 3);
+            this.BS_HC_Map_H.Location = new System.Drawing.Point(253, 3);
             this.BS_HC_Map_H.Name = "BS_HC_Map_H";
-            this.BS_HC_Map_H.Size = new System.Drawing.Size(32, 28);
+            this.BS_HC_Map_H.Size = new System.Drawing.Size(30, 31);
             this.BS_HC_Map_H.TabIndex = 19;
             this.BS_HC_Map_H.Tag = "L7";
             this.BS_HC_Map_H.Text = "H";
@@ -217,9 +217,9 @@
             this.BS_HC_Map_J.FlatAppearance.BorderSize = 2;
             this.BS_HC_Map_J.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_Map_J.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_Map_J.Location = new System.Drawing.Point(343, 3);
+            this.BS_HC_Map_J.Location = new System.Drawing.Point(325, 3);
             this.BS_HC_Map_J.Name = "BS_HC_Map_J";
-            this.BS_HC_Map_J.Size = new System.Drawing.Size(35, 28);
+            this.BS_HC_Map_J.Size = new System.Drawing.Size(32, 31);
             this.BS_HC_Map_J.TabIndex = 18;
             this.BS_HC_Map_J.Tag = "L9";
             this.BS_HC_Map_J.Text = "J";
@@ -233,9 +233,9 @@
             this.BS_HC_Map_I.FlatAppearance.BorderSize = 2;
             this.BS_HC_Map_I.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_Map_I.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_Map_I.Location = new System.Drawing.Point(305, 3);
+            this.BS_HC_Map_I.Location = new System.Drawing.Point(289, 3);
             this.BS_HC_Map_I.Name = "BS_HC_Map_I";
-            this.BS_HC_Map_I.Size = new System.Drawing.Size(32, 28);
+            this.BS_HC_Map_I.Size = new System.Drawing.Size(30, 31);
             this.BS_HC_Map_I.TabIndex = 17;
             this.BS_HC_Map_I.Tag = "L8";
             this.BS_HC_Map_I.Text = "I";
@@ -249,9 +249,9 @@
             this.BS_HC_Map_B.FlatAppearance.BorderSize = 2;
             this.BS_HC_Map_B.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_Map_B.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_Map_B.Location = new System.Drawing.Point(39, 3);
+            this.BS_HC_Map_B.Location = new System.Drawing.Point(37, 3);
             this.BS_HC_Map_B.Name = "BS_HC_Map_B";
-            this.BS_HC_Map_B.Size = new System.Drawing.Size(32, 28);
+            this.BS_HC_Map_B.Size = new System.Drawing.Size(30, 31);
             this.BS_HC_Map_B.TabIndex = 16;
             this.BS_HC_Map_B.Tag = "L1";
             this.BS_HC_Map_B.Text = "B";
@@ -267,7 +267,7 @@
             this.BS_HC_Map_A.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_Map_A.Location = new System.Drawing.Point(3, 3);
             this.BS_HC_Map_A.Name = "BS_HC_Map_A";
-            this.BS_HC_Map_A.Size = new System.Drawing.Size(30, 28);
+            this.BS_HC_Map_A.Size = new System.Drawing.Size(28, 31);
             this.BS_HC_Map_A.TabIndex = 15;
             this.BS_HC_Map_A.Tag = "L0";
             this.BS_HC_Map_A.Text = "A";
@@ -281,9 +281,9 @@
             this.BS_HC_Map_C.FlatAppearance.BorderSize = 2;
             this.BS_HC_Map_C.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_Map_C.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_Map_C.Location = new System.Drawing.Point(77, 3);
+            this.BS_HC_Map_C.Location = new System.Drawing.Point(73, 3);
             this.BS_HC_Map_C.Name = "BS_HC_Map_C";
-            this.BS_HC_Map_C.Size = new System.Drawing.Size(32, 28);
+            this.BS_HC_Map_C.Size = new System.Drawing.Size(30, 31);
             this.BS_HC_Map_C.TabIndex = 14;
             this.BS_HC_Map_C.Tag = "L2";
             this.BS_HC_Map_C.Text = "C";
@@ -297,9 +297,9 @@
             this.BS_HC_Map_E.FlatAppearance.BorderSize = 2;
             this.BS_HC_Map_E.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_Map_E.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_Map_E.Location = new System.Drawing.Point(153, 3);
+            this.BS_HC_Map_E.Location = new System.Drawing.Point(145, 3);
             this.BS_HC_Map_E.Name = "BS_HC_Map_E";
-            this.BS_HC_Map_E.Size = new System.Drawing.Size(32, 28);
+            this.BS_HC_Map_E.Size = new System.Drawing.Size(30, 31);
             this.BS_HC_Map_E.TabIndex = 13;
             this.BS_HC_Map_E.Tag = "L4";
             this.BS_HC_Map_E.Text = "E";
@@ -313,9 +313,9 @@
             this.BS_HC_Map_D.FlatAppearance.BorderSize = 2;
             this.BS_HC_Map_D.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_Map_D.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_Map_D.Location = new System.Drawing.Point(115, 3);
+            this.BS_HC_Map_D.Location = new System.Drawing.Point(109, 3);
             this.BS_HC_Map_D.Name = "BS_HC_Map_D";
-            this.BS_HC_Map_D.Size = new System.Drawing.Size(32, 28);
+            this.BS_HC_Map_D.Size = new System.Drawing.Size(30, 31);
             this.BS_HC_Map_D.TabIndex = 12;
             this.BS_HC_Map_D.Tag = "L3";
             this.BS_HC_Map_D.Text = "D";
@@ -326,9 +326,9 @@
             this.PNL_MC_Map_Numbers.BackColor = System.Drawing.Color.White;
             this.PNL_MC_Map_Numbers.Controls.Add(this.TLP_MC_Numbers);
             this.PNL_MC_Map_Numbers.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PNL_MC_Map_Numbers.Location = new System.Drawing.Point(390, 3);
+            this.PNL_MC_Map_Numbers.Location = new System.Drawing.Point(369, 3);
             this.PNL_MC_Map_Numbers.Name = "PNL_MC_Map_Numbers";
-            this.PNL_MC_Map_Numbers.Size = new System.Drawing.Size(47, 383);
+            this.PNL_MC_Map_Numbers.Size = new System.Drawing.Size(45, 380);
             this.PNL_MC_Map_Numbers.TabIndex = 1;
             // 
             // TLP_MC_Numbers
@@ -369,7 +369,7 @@
             this.TLP_MC_Numbers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TLP_MC_Numbers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TLP_MC_Numbers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TLP_MC_Numbers.Size = new System.Drawing.Size(47, 383);
+            this.TLP_MC_Numbers.Size = new System.Drawing.Size(45, 380);
             this.TLP_MC_Numbers.TabIndex = 1;
             // 
             // BS_HC_Map_1
@@ -382,7 +382,7 @@
             this.BS_HC_Map_1.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_Map_1.Location = new System.Drawing.Point(3, 3);
             this.BS_HC_Map_1.Name = "BS_HC_Map_1";
-            this.BS_HC_Map_1.Size = new System.Drawing.Size(41, 32);
+            this.BS_HC_Map_1.Size = new System.Drawing.Size(39, 32);
             this.BS_HC_Map_1.TabIndex = 16;
             this.BS_HC_Map_1.Tag = "N0";
             this.BS_HC_Map_1.Text = "1";
@@ -398,7 +398,7 @@
             this.BS_HC_Map_2.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_Map_2.Location = new System.Drawing.Point(3, 41);
             this.BS_HC_Map_2.Name = "BS_HC_Map_2";
-            this.BS_HC_Map_2.Size = new System.Drawing.Size(41, 32);
+            this.BS_HC_Map_2.Size = new System.Drawing.Size(39, 32);
             this.BS_HC_Map_2.TabIndex = 16;
             this.BS_HC_Map_2.Tag = "N1";
             this.BS_HC_Map_2.Text = "2";
@@ -414,7 +414,7 @@
             this.BS_HC_Map_3.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_Map_3.Location = new System.Drawing.Point(3, 79);
             this.BS_HC_Map_3.Name = "BS_HC_Map_3";
-            this.BS_HC_Map_3.Size = new System.Drawing.Size(41, 32);
+            this.BS_HC_Map_3.Size = new System.Drawing.Size(39, 32);
             this.BS_HC_Map_3.TabIndex = 16;
             this.BS_HC_Map_3.Tag = "N2";
             this.BS_HC_Map_3.Text = "3";
@@ -430,7 +430,7 @@
             this.BS_HC_Map_4.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_Map_4.Location = new System.Drawing.Point(3, 117);
             this.BS_HC_Map_4.Name = "BS_HC_Map_4";
-            this.BS_HC_Map_4.Size = new System.Drawing.Size(41, 32);
+            this.BS_HC_Map_4.Size = new System.Drawing.Size(39, 32);
             this.BS_HC_Map_4.TabIndex = 16;
             this.BS_HC_Map_4.Tag = "N3";
             this.BS_HC_Map_4.Text = "4";
@@ -446,7 +446,7 @@
             this.BS_HC_Map_5.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_Map_5.Location = new System.Drawing.Point(3, 155);
             this.BS_HC_Map_5.Name = "BS_HC_Map_5";
-            this.BS_HC_Map_5.Size = new System.Drawing.Size(41, 32);
+            this.BS_HC_Map_5.Size = new System.Drawing.Size(39, 32);
             this.BS_HC_Map_5.TabIndex = 16;
             this.BS_HC_Map_5.Tag = "N4";
             this.BS_HC_Map_5.Text = "5";
@@ -462,7 +462,7 @@
             this.BS_HC_Map_6.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_Map_6.Location = new System.Drawing.Point(3, 193);
             this.BS_HC_Map_6.Name = "BS_HC_Map_6";
-            this.BS_HC_Map_6.Size = new System.Drawing.Size(41, 32);
+            this.BS_HC_Map_6.Size = new System.Drawing.Size(39, 32);
             this.BS_HC_Map_6.TabIndex = 16;
             this.BS_HC_Map_6.Tag = "N5";
             this.BS_HC_Map_6.Text = "6";
@@ -478,7 +478,7 @@
             this.BS_HC_Map_7.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_Map_7.Location = new System.Drawing.Point(3, 231);
             this.BS_HC_Map_7.Name = "BS_HC_Map_7";
-            this.BS_HC_Map_7.Size = new System.Drawing.Size(41, 32);
+            this.BS_HC_Map_7.Size = new System.Drawing.Size(39, 32);
             this.BS_HC_Map_7.TabIndex = 16;
             this.BS_HC_Map_7.Tag = "N6";
             this.BS_HC_Map_7.Text = "7";
@@ -494,7 +494,7 @@
             this.BS_HC_Map_8.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_Map_8.Location = new System.Drawing.Point(3, 269);
             this.BS_HC_Map_8.Name = "BS_HC_Map_8";
-            this.BS_HC_Map_8.Size = new System.Drawing.Size(41, 32);
+            this.BS_HC_Map_8.Size = new System.Drawing.Size(39, 32);
             this.BS_HC_Map_8.TabIndex = 16;
             this.BS_HC_Map_8.Tag = "N7";
             this.BS_HC_Map_8.Text = "8";
@@ -510,7 +510,7 @@
             this.BS_HC_Map_9.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_Map_9.Location = new System.Drawing.Point(3, 307);
             this.BS_HC_Map_9.Name = "BS_HC_Map_9";
-            this.BS_HC_Map_9.Size = new System.Drawing.Size(41, 32);
+            this.BS_HC_Map_9.Size = new System.Drawing.Size(39, 32);
             this.BS_HC_Map_9.TabIndex = 16;
             this.BS_HC_Map_9.Tag = "N8";
             this.BS_HC_Map_9.Text = "9";
@@ -526,7 +526,7 @@
             this.BS_HC_Map_10.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_Map_10.Location = new System.Drawing.Point(3, 345);
             this.BS_HC_Map_10.Name = "BS_HC_Map_10";
-            this.BS_HC_Map_10.Size = new System.Drawing.Size(41, 35);
+            this.BS_HC_Map_10.Size = new System.Drawing.Size(39, 32);
             this.BS_HC_Map_10.TabIndex = 16;
             this.BS_HC_Map_10.Tag = "N9";
             this.BS_HC_Map_10.Text = "10";
@@ -539,7 +539,7 @@
             this.PNL_MC_Map_Schema.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PNL_MC_Map_Schema.Location = new System.Drawing.Point(3, 3);
             this.PNL_MC_Map_Schema.Name = "PNL_MC_Map_Schema";
-            this.PNL_MC_Map_Schema.Size = new System.Drawing.Size(381, 383);
+            this.PNL_MC_Map_Schema.Size = new System.Drawing.Size(360, 380);
             this.PNL_MC_Map_Schema.TabIndex = 0;
             // 
             // TLP_HC_Schema
@@ -571,7 +571,7 @@
             this.TLP_HC_Schema.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TLP_HC_Schema.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TLP_HC_Schema.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_HC_Schema.Size = new System.Drawing.Size(381, 383);
+            this.TLP_HC_Schema.Size = new System.Drawing.Size(360, 380);
             this.TLP_HC_Schema.TabIndex = 1;
             // 
             // GB_HC_MapExample
@@ -580,9 +580,9 @@
             this.GB_HC_MapExample.Dock = System.Windows.Forms.DockStyle.Right;
             this.GB_HC_MapExample.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.GB_HC_MapExample.ForeColor = System.Drawing.Color.White;
-            this.GB_HC_MapExample.Location = new System.Drawing.Point(304, 0);
+            this.GB_HC_MapExample.Location = new System.Drawing.Point(262, 0);
             this.GB_HC_MapExample.Name = "GB_HC_MapExample";
-            this.GB_HC_MapExample.Size = new System.Drawing.Size(446, 450);
+            this.GB_HC_MapExample.Size = new System.Drawing.Size(423, 450);
             this.GB_HC_MapExample.TabIndex = 12;
             this.GB_HC_MapExample.TabStop = false;
             this.GB_HC_MapExample.Text = "Map Example";
@@ -590,6 +590,7 @@
             // GB_HC_CellData
             // 
             this.GB_HC_CellData.BackColor = System.Drawing.Color.Black;
+            this.GB_HC_CellData.Controls.Add(this.BS_HC_RestartMap);
             this.GB_HC_CellData.Controls.Add(this.BS_HC_ApplyCellData);
             this.GB_HC_CellData.Controls.Add(this.CHB_HC_UseCustomCell);
             this.GB_HC_CellData.Controls.Add(this.L_Info_HC_ChoosenCell);
@@ -597,7 +598,7 @@
             this.GB_HC_CellData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.GB_HC_CellData.Location = new System.Drawing.Point(12, 12);
             this.GB_HC_CellData.Name = "GB_HC_CellData";
-            this.GB_HC_CellData.Size = new System.Drawing.Size(286, 82);
+            this.GB_HC_CellData.Size = new System.Drawing.Size(244, 137);
             this.GB_HC_CellData.TabIndex = 13;
             this.GB_HC_CellData.TabStop = false;
             this.GB_HC_CellData.Text = "Cell Data";
@@ -605,11 +606,11 @@
             // BS_HC_ApplyCellData
             // 
             this.BS_HC_ApplyCellData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_HC_ApplyCellData.Font = new System.Drawing.Font("Franklin Gothic Medium", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_HC_ApplyCellData.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_ApplyCellData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_ApplyCellData.Location = new System.Drawing.Point(141, 47);
+            this.BS_HC_ApplyCellData.Location = new System.Drawing.Point(13, 77);
             this.BS_HC_ApplyCellData.Name = "BS_HC_ApplyCellData";
-            this.BS_HC_ApplyCellData.Size = new System.Drawing.Size(135, 24);
+            this.BS_HC_ApplyCellData.Size = new System.Drawing.Size(98, 24);
             this.BS_HC_ApplyCellData.TabIndex = 46;
             this.BS_HC_ApplyCellData.Text = "Apply cell data";
             this.BS_HC_ApplyCellData.UseVisualStyleBackColor = true;
@@ -643,7 +644,7 @@
             this.TB_HC_ChoosenCellData.Location = new System.Drawing.Point(87, 19);
             this.TB_HC_ChoosenCellData.Name = "TB_HC_ChoosenCellData";
             this.TB_HC_ChoosenCellData.ReadOnly = true;
-            this.TB_HC_ChoosenCellData.Size = new System.Drawing.Size(189, 22);
+            this.TB_HC_ChoosenCellData.Size = new System.Drawing.Size(149, 22);
             this.TB_HC_ChoosenCellData.TabIndex = 43;
             this.TB_HC_ChoosenCellData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -667,9 +668,9 @@
             this.GB_HC_EnemyShipData.Controls.Add(this.L_EnemyFrigates);
             this.GB_HC_EnemyShipData.Controls.Add(this.TB_EnemyShips_Frigates);
             this.GB_HC_EnemyShipData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.GB_HC_EnemyShipData.Location = new System.Drawing.Point(12, 100);
+            this.GB_HC_EnemyShipData.Location = new System.Drawing.Point(12, 155);
             this.GB_HC_EnemyShipData.Name = "GB_HC_EnemyShipData";
-            this.GB_HC_EnemyShipData.Size = new System.Drawing.Size(286, 169);
+            this.GB_HC_EnemyShipData.Size = new System.Drawing.Size(244, 169);
             this.GB_HC_EnemyShipData.TabIndex = 14;
             this.GB_HC_EnemyShipData.TabStop = false;
             this.GB_HC_EnemyShipData.Text = "Enemy ships data";
@@ -850,12 +851,25 @@
             this.TB_EnemyShips_Frigates.TabIndex = 40;
             this.TB_EnemyShips_Frigates.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
+            // BS_HC_RestartMap
+            // 
+            this.BS_HC_RestartMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_HC_RestartMap.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_HC_RestartMap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.BS_HC_RestartMap.Location = new System.Drawing.Point(138, 77);
+            this.BS_HC_RestartMap.Name = "BS_HC_RestartMap";
+            this.BS_HC_RestartMap.Size = new System.Drawing.Size(98, 24);
+            this.BS_HC_RestartMap.TabIndex = 47;
+            this.BS_HC_RestartMap.Text = "Restart Map";
+            this.BS_HC_RestartMap.UseVisualStyleBackColor = true;
+            this.BS_HC_RestartMap.Click += new System.EventHandler(this.BS_HC_RestartMap_Click);
+            // 
             // HitChance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(750, 450);
+            this.ClientSize = new System.Drawing.Size(685, 450);
             this.Controls.Add(this.GB_HC_EnemyShipData);
             this.Controls.Add(this.GB_HC_CellData);
             this.Controls.Add(this.GB_HC_MapExample);
@@ -864,6 +878,7 @@
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "HitChance";
             this.Text = "Hit Chance";
+            this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.HitChance_FormClosed);
             this.Load += new System.EventHandler(this.HitChance_Load);
             this.TLP_MC_Map_Main.ResumeLayout(false);
             this.PNL_MC_Map_Letters.ResumeLayout(false);
@@ -933,5 +948,6 @@
         private System.Windows.Forms.Label L_Info_Devive_Destroyers;
         private System.Windows.Forms.Label L_Info_Devive_Frigate;
         private System.Windows.Forms.Label L_EnemyFrigates;
+        private System.Windows.Forms.Button BS_HC_RestartMap;
     }
 }

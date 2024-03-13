@@ -1,10 +1,13 @@
-﻿using Battleship.Forms;
+﻿using Battleship.Classes;
+using Battleship.Forms;
 using System;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static Battleship.DebugTools;
 
 namespace Battleship
 {
@@ -860,6 +863,44 @@ namespace Battleship
                 Design.OpenNewForm(paf, 1, 3);
             }
 
+        }
+        void GetEnemyMap(out int count)
+        {
+            count = 0;
+            try
+            {
+                HitChanceData.CurrentMap.Clear();
+                foreach (Control ctrl in TLP_EnemySchema.Controls)
+                {
+                    if (ctrl is Button)
+                    {
+                        HitChanceData.CurrentMap.Add((Button)ctrl);
+                    }
+                }
+                count = HitChanceData.CurrentMap.Count;
+                
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Message:\r\n{ex.Message}\r\n\r\nException:\r\n{ex}", "Exception Manager");
+            }
+        }
+
+        private void BS_HitMoreInfo_Click(object sender, EventArgs e)
+        {
+            if (HitChanceData.FormClosed)
+            {
+                GetEnemyMap(out int count);
+                if (count != 100)
+                {
+                    MessageBox.Show("Incorrect count", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                }
+                else
+                {
+                    HitChance hcf = new HitChance();
+                    Design.OpenNewForm(hcf, 1, 6);
+                }
+            }
         }
     }
 }

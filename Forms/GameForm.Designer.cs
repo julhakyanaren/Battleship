@@ -36,6 +36,7 @@
             this.PNL_Options = new System.Windows.Forms.Panel();
             this.L_Info_GameMode = new System.Windows.Forms.Label();
             this.TB_GameModeType = new System.Windows.Forms.TextBox();
+            this.TEST = new System.Windows.Forms.PictureBox();
             this.PNL_PlayerControl = new System.Windows.Forms.Panel();
             this.TLP_GameInfo = new System.Windows.Forms.TableLayoutPanel();
             this.PNL_InfoTurn = new System.Windows.Forms.Panel();
@@ -169,11 +170,11 @@
             this.TSMI_ShowEnemyShipsCoords = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowHitInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowBorder = new System.Windows.Forms.ToolStripMenuItem();
-            this.TEST = new System.Windows.Forms.PictureBox();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
             this.PNL_Options.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TEST)).BeginInit();
             this.PNL_PlayerControl.SuspendLayout();
             this.TLP_GameInfo.SuspendLayout();
             this.PNL_InfoTurn.SuspendLayout();
@@ -205,7 +206,6 @@
             this.TLP_PlayerNumbers.SuspendLayout();
             this.PNL_PlayerMap_Schema.SuspendLayout();
             this.MS_MenuPanel.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TEST)).BeginInit();
             this.SuspendLayout();
             // 
             // TLP_Main
@@ -287,6 +287,17 @@
             this.TB_GameModeType.Size = new System.Drawing.Size(138, 22);
             this.TB_GameModeType.TabIndex = 41;
             this.TB_GameModeType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // TEST
+            // 
+            this.TEST.Dock = System.Windows.Forms.DockStyle.Right;
+            this.TEST.Image = global::Battleship.Properties.Resources.Logo;
+            this.TEST.Location = new System.Drawing.Point(142, 0);
+            this.TEST.Name = "TEST";
+            this.TEST.Size = new System.Drawing.Size(365, 62);
+            this.TEST.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.TEST.TabIndex = 2;
+            this.TEST.TabStop = false;
             // 
             // PNL_PlayerControl
             // 
@@ -377,6 +388,7 @@
             this.BS_HitMoreInfo.TabIndex = 46;
             this.BS_HitMoreInfo.Text = "More Info";
             this.BS_HitMoreInfo.UseVisualStyleBackColor = true;
+            this.BS_HitMoreInfo.Click += new System.EventHandler(this.BS_HitMoreInfo_Click);
             // 
             // L_Info_PressForInfo
             // 
@@ -2171,17 +2183,6 @@
             this.TSMI_ShowBorder.Text = "Show Border";
             this.TSMI_ShowBorder.Click += new System.EventHandler(this.TSMI_ShowBorder_Click);
             // 
-            // TEST
-            // 
-            this.TEST.Dock = System.Windows.Forms.DockStyle.Right;
-            this.TEST.Image = global::Battleship.Properties.Resources.Logo;
-            this.TEST.Location = new System.Drawing.Point(142, 0);
-            this.TEST.Name = "TEST";
-            this.TEST.Size = new System.Drawing.Size(365, 62);
-            this.TEST.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.TEST.TabIndex = 2;
-            this.TEST.TabStop = false;
-            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2205,6 +2206,7 @@
             this.TLP_GPO_Controls.ResumeLayout(false);
             this.PNL_Options.ResumeLayout(false);
             this.PNL_Options.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TEST)).EndInit();
             this.PNL_PlayerControl.ResumeLayout(false);
             this.TLP_GameInfo.ResumeLayout(false);
             this.PNL_InfoTurn.ResumeLayout(false);
@@ -2241,7 +2243,6 @@
             this.PNL_PlayerMap_Schema.ResumeLayout(false);
             this.MS_MenuPanel.ResumeLayout(false);
             this.MS_MenuPanel.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.TEST)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
