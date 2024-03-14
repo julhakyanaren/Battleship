@@ -12,6 +12,6 @@ namespace Battleship.Classes
         public static List<Button> CurrentMap = new List<Button>();
         public static bool FormClosed = true;
         public static bool ExampleCraeted = false;
-        public static int SelectedCell = 0;
+        public static Button SelectedCell = null;
     }
 }

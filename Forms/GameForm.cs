@@ -78,6 +78,7 @@ namespace Battleship
                     button.Visible = false;
                     button.MouseEnter += Button_MouseEnter;
                     button.MouseClick += Button_Click;
+                    button.MouseLeave += Button_MouseLeave;
                     MapButtons[f, b] = button;
                     button.FlatAppearance.MouseOverBackColor = Design.MouseOverColor[f];
                     if (f == 0)
@@ -105,6 +106,12 @@ namespace Battleship
             }
             TSMI_Map.Enabled = true;
         }
+
+        private void Button_MouseLeave(object sender, EventArgs e)
+        {
+            
+        }
+
         private void Button_Click(object sender, MouseEventArgs e)
         {
             if (Fight.Turn == 0)
@@ -256,6 +263,10 @@ namespace Battleship
                 case 1:
                     {
                         BS_EnemySchema_Index.Text = textID;
+                        if (selectedButton != null)
+                        {
+                            HitChanceData.SelectedCell = selectedButton;
+                        }
                         break;
                     }
                 default:
