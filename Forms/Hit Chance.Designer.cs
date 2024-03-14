@@ -58,6 +58,7 @@
             this.TLP_HC_Schema = new System.Windows.Forms.TableLayoutPanel();
             this.GB_HC_MapExample = new System.Windows.Forms.GroupBox();
             this.GB_HC_CellData = new System.Windows.Forms.GroupBox();
+            this.BS_HC_GenerateMap = new System.Windows.Forms.Button();
             this.BS_HC_RestartMap = new System.Windows.Forms.Button();
             this.BS_HC_ApplyCellData = new System.Windows.Forms.Button();
             this.CHB_HC_UseCustomCell = new System.Windows.Forms.CheckBox();
@@ -80,7 +81,8 @@
             this.TB_EnemyShips_Destroyers = new System.Windows.Forms.TextBox();
             this.L_EnemyFrigates = new System.Windows.Forms.Label();
             this.TB_EnemyShips_Frigates = new System.Windows.Forms.TextBox();
-            this.BS_HC_GenerateMap = new System.Windows.Forms.Button();
+            this.L_Info_CellState = new System.Windows.Forms.Label();
+            this.textBox1 = new System.Windows.Forms.TextBox();
             this.TLP_MC_Map_Main.SuspendLayout();
             this.PNL_MC_Map_Letters.SuspendLayout();
             this.TLP_MC_Map_Letters.SuspendLayout();
@@ -591,6 +593,8 @@
             // GB_HC_CellData
             // 
             this.GB_HC_CellData.BackColor = System.Drawing.Color.Black;
+            this.GB_HC_CellData.Controls.Add(this.L_Info_CellState);
+            this.GB_HC_CellData.Controls.Add(this.textBox1);
             this.GB_HC_CellData.Controls.Add(this.BS_HC_GenerateMap);
             this.GB_HC_CellData.Controls.Add(this.BS_HC_RestartMap);
             this.GB_HC_CellData.Controls.Add(this.BS_HC_ApplyCellData);
@@ -600,17 +604,31 @@
             this.GB_HC_CellData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.GB_HC_CellData.Location = new System.Drawing.Point(12, 12);
             this.GB_HC_CellData.Name = "GB_HC_CellData";
-            this.GB_HC_CellData.Size = new System.Drawing.Size(244, 137);
+            this.GB_HC_CellData.Size = new System.Drawing.Size(244, 195);
             this.GB_HC_CellData.TabIndex = 13;
             this.GB_HC_CellData.TabStop = false;
             this.GB_HC_CellData.Text = "Cell Data";
+            // 
+            // BS_HC_GenerateMap
+            // 
+            this.BS_HC_GenerateMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_HC_GenerateMap.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_HC_GenerateMap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.BS_HC_GenerateMap.Location = new System.Drawing.Point(14, 117);
+            this.BS_HC_GenerateMap.Name = "BS_HC_GenerateMap";
+            this.BS_HC_GenerateMap.Size = new System.Drawing.Size(98, 24);
+            this.BS_HC_GenerateMap.TabIndex = 48;
+            this.BS_HC_GenerateMap.Text = "Generate Map";
+            this.BS_HC_GenerateMap.UseVisualStyleBackColor = true;
+            this.BS_HC_GenerateMap.Visible = false;
+            this.BS_HC_GenerateMap.Click += new System.EventHandler(this.BS_HC_GenerateMap_Click);
             // 
             // BS_HC_RestartMap
             // 
             this.BS_HC_RestartMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_RestartMap.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_RestartMap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_RestartMap.Location = new System.Drawing.Point(138, 77);
+            this.BS_HC_RestartMap.Location = new System.Drawing.Point(138, 117);
             this.BS_HC_RestartMap.Name = "BS_HC_RestartMap";
             this.BS_HC_RestartMap.Size = new System.Drawing.Size(98, 24);
             this.BS_HC_RestartMap.TabIndex = 47;
@@ -623,7 +641,7 @@
             this.BS_HC_ApplyCellData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_ApplyCellData.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_ApplyCellData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_ApplyCellData.Location = new System.Drawing.Point(138, 106);
+            this.BS_HC_ApplyCellData.Location = new System.Drawing.Point(138, 146);
             this.BS_HC_ApplyCellData.Name = "BS_HC_ApplyCellData";
             this.BS_HC_ApplyCellData.Size = new System.Drawing.Size(98, 24);
             this.BS_HC_ApplyCellData.TabIndex = 46;
@@ -634,7 +652,7 @@
             // 
             this.CHB_HC_UseCustomCell.AutoSize = true;
             this.CHB_HC_UseCustomCell.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CHB_HC_UseCustomCell.Location = new System.Drawing.Point(13, 50);
+            this.CHB_HC_UseCustomCell.Location = new System.Drawing.Point(13, 90);
             this.CHB_HC_UseCustomCell.Name = "CHB_HC_UseCustomCell";
             this.CHB_HC_UseCustomCell.Size = new System.Drawing.Size(160, 25);
             this.CHB_HC_UseCustomCell.TabIndex = 45;
@@ -657,10 +675,10 @@
             this.TB_HC_ChoosenCellData.BackColor = System.Drawing.Color.Black;
             this.TB_HC_ChoosenCellData.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.TB_HC_ChoosenCellData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TB_HC_ChoosenCellData.Location = new System.Drawing.Point(87, 19);
+            this.TB_HC_ChoosenCellData.Location = new System.Drawing.Point(141, 19);
             this.TB_HC_ChoosenCellData.Name = "TB_HC_ChoosenCellData";
             this.TB_HC_ChoosenCellData.ReadOnly = true;
-            this.TB_HC_ChoosenCellData.Size = new System.Drawing.Size(149, 26);
+            this.TB_HC_ChoosenCellData.Size = new System.Drawing.Size(95, 26);
             this.TB_HC_ChoosenCellData.TabIndex = 43;
             this.TB_HC_ChoosenCellData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -684,7 +702,7 @@
             this.GB_HC_EnemyShipData.Controls.Add(this.L_EnemyFrigates);
             this.GB_HC_EnemyShipData.Controls.Add(this.TB_EnemyShips_Frigates);
             this.GB_HC_EnemyShipData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.GB_HC_EnemyShipData.Location = new System.Drawing.Point(12, 155);
+            this.GB_HC_EnemyShipData.Location = new System.Drawing.Point(12, 201);
             this.GB_HC_EnemyShipData.Name = "GB_HC_EnemyShipData";
             this.GB_HC_EnemyShipData.Size = new System.Drawing.Size(244, 132);
             this.GB_HC_EnemyShipData.TabIndex = 14;
@@ -773,7 +791,7 @@
             // 
             this.L_Info_Devive_Frigate.AutoSize = true;
             this.L_Info_Devive_Frigate.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_Info_Devive_Frigate.Location = new System.Drawing.Point(183, 26);
+            this.L_Info_Devive_Frigate.Location = new System.Drawing.Point(183, 27);
             this.L_Info_Devive_Frigate.Name = "L_Info_Devive_Frigate";
             this.L_Info_Devive_Frigate.Size = new System.Drawing.Size(18, 21);
             this.L_Info_Devive_Frigate.TabIndex = 52;
@@ -849,7 +867,7 @@
             // 
             this.L_EnemyFrigates.AutoSize = true;
             this.L_EnemyFrigates.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_EnemyFrigates.Location = new System.Drawing.Point(10, 26);
+            this.L_EnemyFrigates.Location = new System.Drawing.Point(10, 27);
             this.L_EnemyFrigates.Name = "L_EnemyFrigates";
             this.L_EnemyFrigates.Size = new System.Drawing.Size(146, 21);
             this.L_EnemyFrigates.TabIndex = 45;
@@ -867,19 +885,27 @@
             this.TB_EnemyShips_Frigates.TabIndex = 40;
             this.TB_EnemyShips_Frigates.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // BS_HC_GenerateMap
+            // L_Info_CellState
             // 
-            this.BS_HC_GenerateMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_HC_GenerateMap.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_GenerateMap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_GenerateMap.Location = new System.Drawing.Point(14, 77);
-            this.BS_HC_GenerateMap.Name = "BS_HC_GenerateMap";
-            this.BS_HC_GenerateMap.Size = new System.Drawing.Size(98, 24);
-            this.BS_HC_GenerateMap.TabIndex = 48;
-            this.BS_HC_GenerateMap.Text = "Generate Map";
-            this.BS_HC_GenerateMap.UseVisualStyleBackColor = true;
-            this.BS_HC_GenerateMap.Visible = false;
-            this.BS_HC_GenerateMap.Click += new System.EventHandler(this.BS_HC_GenerateMap_Click);
+            this.L_Info_CellState.AutoSize = true;
+            this.L_Info_CellState.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_Info_CellState.Location = new System.Drawing.Point(10, 54);
+            this.L_Info_CellState.Name = "L_Info_CellState";
+            this.L_Info_CellState.Size = new System.Drawing.Size(73, 21);
+            this.L_Info_CellState.TabIndex = 50;
+            this.L_Info_CellState.Text = "Cell State";
+            // 
+            // textBox1
+            // 
+            this.textBox1.BackColor = System.Drawing.Color.Black;
+            this.textBox1.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.textBox1.Location = new System.Drawing.Point(141, 51);
+            this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.Size = new System.Drawing.Size(95, 26);
+            this.textBox1.TabIndex = 49;
+            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // HitChance
             // 
@@ -967,5 +993,7 @@
         private System.Windows.Forms.Label L_EnemyFrigates;
         private System.Windows.Forms.Button BS_HC_RestartMap;
         private System.Windows.Forms.Button BS_HC_GenerateMap;
+        private System.Windows.Forms.Label L_Info_CellState;
+        public System.Windows.Forms.TextBox textBox1;
     }
 }

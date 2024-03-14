@@ -885,8 +885,7 @@ namespace Battleship
                 MessageBox.Show($"Message:\r\n{ex.Message}\r\n\r\nException:\r\n{ex}", "Exception Manager");
             }
         }
-
-        private void BS_HitMoreInfo_Click(object sender, EventArgs e)
+        void OpenHitChanceForm()
         {
             if (HitChanceData.FormClosed)
             {
@@ -900,6 +899,21 @@ namespace Battleship
                     HitChance hcf = new HitChance();
                     Design.OpenNewForm(hcf, 1, 6);
                 }
+            }
+        }
+        private void BS_HitMoreInfo_Click(object sender, EventArgs e)
+        {
+            OpenHitChanceForm();
+        }
+        private void GameForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.C:
+                    {
+                        OpenHitChanceForm();
+                        break;
+                    }
             }
         }
     }
