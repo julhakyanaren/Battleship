@@ -275,7 +275,6 @@
     <Compile Include="Classes\Ship.cs" />
     <Compile Include="Classes\ShipData.cs" />
     <Compile Include="Classes\Support.cs" />
-    <Compile Include="Classes\TimerData.cs" />
     <EmbeddedResource Include="Forms\GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
     </EmbeddedResource>

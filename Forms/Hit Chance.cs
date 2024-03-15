@@ -70,7 +70,7 @@ namespace Battleship.Forms
             {
                 for (int b = 0; b < HitChanceData.CurrentMap.Count; b++)
                 {
-                    await Task .Delay(20);
+                    await Task .Delay(4);
                     int x;
                     int y;
                     x = b / 10;
@@ -92,6 +92,7 @@ namespace Battleship.Forms
                 if (TLP_HC_Schema.Controls.Count == 100)
                 {
                     HitChanceData.ExampleCraeted = true;
+                    BS_HC_RestartMap.Visible = true;
                 }
             }
         }

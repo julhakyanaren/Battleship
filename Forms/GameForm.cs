@@ -105,6 +105,7 @@ namespace Battleship
                 MapButtons[1, vb].Visible = true;
             }
             TSMI_Map.Enabled = true;
+
         }
 
         private void Button_MouseLeave(object sender, EventArgs e)
@@ -408,8 +409,6 @@ namespace Battleship
                         }
                 }
             }
-            TimerData.TimerStarted = true;
-            TimerData.TimerInPause = false;
         }
         public void SetStatusTextBoxesValues()
         {
@@ -509,6 +508,7 @@ namespace Battleship
                     GenerateButtons();
                     TSMI_OpenMapEditor.Enabled = true;
                     TSMI_RestartGame.Enabled = true;
+                    HitChanceData.CanOpenForm = true;
                 }
                 catch
                 {
@@ -898,18 +898,29 @@ namespace Battleship
         }
         void OpenHitChanceForm()
         {
-            if (HitChanceData.FormClosed)
+            if (HitChanceData.CanOpenForm)
             {
-                GetEnemyMap(out int count);
-                if (count != 100)
+                if (HitChanceData.FormClosed)
                 {
-                    MessageBox.Show("Incorrect count", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    GetEnemyMap(out int count);
+                    if (count != 100)
+                    {
+                        MessageBox.Show("Incorrect count", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                    }
+                    else if (!Fight.GameStarted)
+                    {
+                        DialogResult = MessageBox.Show("The game has not started, open the selected interface?", "Game Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                        if (DialogResult == DialogResult.Yes)
+                        {
+                            HitChance hcf = new HitChance();
+                            Design.OpenNewForm(hcf, 1, 6);
+                        }
+                    }
                 }
-                else
-                {
-                    HitChance hcf = new HitChance();
-                    Design.OpenNewForm(hcf, 1, 6);
-                }
+            }
+            else
+            {
+                MessageBox.Show("Map not created", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void BS_HitMoreInfo_Click(object sender, EventArgs e)

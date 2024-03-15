@@ -9,9 +9,10 @@ namespace Battleship.Classes
 {
     public static class HitChanceData
     {
+        public static Button SelectedCell = null;
         public static List<Button> CurrentMap = new List<Button>();
         public static bool FormClosed = true;
         public static bool ExampleCraeted = false;
-        public static Button SelectedCell = null;
+        public static bool CanOpenForm = false;
     }
 }
