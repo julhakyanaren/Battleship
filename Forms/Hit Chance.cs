@@ -40,27 +40,36 @@ namespace Battleship.Forms
         }
         async void RestartMap()
         {
-            for (int i = 0; i < 2; i++)
+            if (HitChanceData.CanResetMap)
             {
-                for (int b = 0; b < 100; b++)
+                HitChanceData.CanResetMap = false;
+                for (int i = 0; i < 2; i++)
                 {
-                    switch (i)
+                    for (int b = 0; b < 100; b++)
                     {
-                        case 0:
-                            {
-                                await Task.Delay(10);
-                                exampleButtons[b].BackColor = Color.Black;
-                                break;
-                            }
-                        case 1:
-                            {
-                                await Task.Delay(10);
-                                exampleButtons[b].BackColor = HitChanceData.CurrentMap[b].BackColor;
-                                break;
-                            }
-                            
+                        switch (i)
+                        {
+                            case 0:
+                                {
+                                    await Task.Delay(10);
+                                    exampleButtons[b].BackColor = Color.Black;
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    await Task.Delay(10);
+                                    exampleButtons[b].BackColor = HitChanceData.CurrentMap[b].BackColor;
+                                    break;
+                                }
+
+                        }
                     }
-                } 
+                }
+                HitChanceData.CanResetMap = true;
+            }
+            else
+            {
+                MessageBox.Show("Example Map reset in process", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             
         }
