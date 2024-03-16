@@ -1,12 +1,6 @@
 ﻿using Battleship.Classes;
 using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -16,20 +10,27 @@ namespace Battleship.Forms
     {
         Button[] exampleButtons = new Button[100];
         ColorMethods cm = new ColorMethods();
+        Position pos = new Position();
+        Support sp = new Support();
+
+        private Button manualSelected = null;
+
+        private string shipType = null;
+        private string cellCoord = null;
+        private string mapType = null;
         public HitChance()
         {
             InitializeComponent();
         }
-
         private void HitChance_Load(object sender, EventArgs e)
         {
             HitChanceData.FormClosed = false;
             HitChanceData.ExampleCraeted = false;
+            if (!CHB_HC_UseCustomCell.Checked)
+            {
+                GetCellData(HitChanceData.SelectedCell);
+            }
         }
-        public void SetMaximumValues()
-        {
-        }
-
         private void HitChance_FormClosed(object sender, FormClosedEventArgs e)
         {
             HitChanceData.FormClosed = true;
@@ -97,6 +98,7 @@ namespace Battleship.Forms
                     button.Tag = b + 600;
                     button.Margin = new Padding(0);
                     exampleButtons[b] = button;
+                    button.MouseClick += ExmpleButton_Click;
                 }
                 if (TLP_HC_Schema.Controls.Count == 100)
                 {
@@ -106,15 +108,132 @@ namespace Battleship.Forms
             }
         }
 
+        private void ExmpleButton_Click(object sender, MouseEventArgs e)
+        {
+            if (HitChanceData.ManualMode)
+            {
+                manualSelected = sender as Button;
+                GetCellData(manualSelected);
+            }
+        }
         private void CHB_HC_UseCustomCell_CheckedChanged(object sender, EventArgs e)
         {
-            BS_HC_GenerateMap.Visible = CHB_HC_UseCustomCell.Checked;
+            if (!HitChanceData.ExampleCraeted)
+            {
+                BS_HC_GenerateMap.Visible = CHB_HC_UseCustomCell.Checked;
+                HitChanceData.ManualMode = CHB_HC_UseCustomCell.Checked;
+            }
         }
-
         private void BS_HC_GenerateMap_Click(object sender, EventArgs e)
         {
             GenerateMap();
             BS_HC_GenerateMap.Visible = false;
+        }
+        private void BS_HC_UpdateCellDAta_Click(object sender, EventArgs e)
+        {
+            if (!HitChanceData.ManualMode)
+            {
+                GetCellData(HitChanceData.SelectedCell);
+            }
+        }
+        void GetCellData(Button selectedButton)
+        {
+            if (selectedButton != null)
+            {
+                switch (Convert.ToString(cm.SetCharViaColor(1, selectedButton.BackColor)).ToUpper())
+                {
+                    case "F":
+                    case "D":
+                    case "C":
+                    case "B":
+                        {
+                            shipType = "Unknown";
+                            break;
+                        }
+                    case "E":
+                    case "N":
+                        {
+                            shipType = "Empty";
+                            break;
+                        }
+                    case "H":
+                        {
+                            shipType = "Hited ship";
+                            break;
+                        }
+                    case "S":
+                        {
+                            shipType = "Sunken ship";
+                            break;
+                        }
+                    case "M":
+                        {
+                            shipType = "Mine";
+                            break;
+                        }
+                    default:
+                        {
+                            shipType = null;
+                            break;
+                        }
+                }
+                if (shipType != null)
+                {
+                    TB_HC_CellState.Text = shipType;
+                    cellCoord = pos.GetButtonTextCoords(selectedButton, out int index);
+                    TB_HC_ChoosenCellData.Text = cellCoord;
+                    switch (index)
+                    {
+                        case 1:
+                            {
+                                mapType = $"{Options.SP_PlayerName}'s map";
+                                break;
+                            }
+                        case 2:
+                            {
+                                mapType = "Enemy Map";
+                                break;
+                            }
+                    }
+                    TB_HC_ChoosenMapType.Text = mapType;
+                }
+                else
+                {
+                    DialogResult = MessageBox.Show("Invalid cell value", "Game Manager", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Exclamation);
+                    switch (DialogResult)
+                    {
+                        case DialogResult.Retry:
+                            {
+                                GetCellData(selectedButton);
+                                break;
+                            }
+                        case DialogResult.Abort:
+                            {
+                                Close();
+                                break;
+                            }
+                    }
+                }
+            }
+        }
+        void SetShipsMaxCount()
+        {
+            TB_EnemyShips_FrigatesMax.Text = $"{ShipData.FrigateCount}";
+            TB_EnemyShips_DestroyersMax.Text = $"{ShipData.DestroyerCount}";
+            TB_EnemyShips_CruiserMax.Text = $"{ShipData.CruiserCount}";
+            TB_EnemyShips_BattleshipsMax.Text = $"{ShipData.BattleshipCount}";
+        }
+        void SetShipCurrentCount()
+        {
+            TB_EnemyShips_Frigates.Text = $"{EnemyData.FrigatesCountCurrent}";
+            TB_EnemyShips_Destroyers.Text = $"{EnemyData.DestroyersCountCurrent}";
+            TB_EnemyShips_Cruiser.Text = $"{EnemyData.CruiserCountCurrent}";
+            TB_EnemyShips_Battleships.Text = $"{EnemyData.BattleshipCountCurrent}";
+        }
+        private void BS_HC_ResetShipData_Click(object sender, EventArgs e)
+        {
+            SetShipsMaxCount();
+            SetShipCurrentCount();
         }
     }
 }

@@ -288,6 +288,7 @@
             this.Controls.Add(this.GB_OF_DevMode);
             this.Font = new System.Drawing.Font("Franklin Gothic Demi", 9F);
             this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "OptionsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;

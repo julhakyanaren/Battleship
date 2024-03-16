@@ -916,6 +916,11 @@ namespace Battleship
                             Design.OpenNewForm(hcf, 1, 6);
                         }
                     }
+                    else if (Fight.GameStarted)
+                    {
+                        HitChance hcf = new HitChance();
+                        Design.OpenNewForm(hcf, 1, 6);
+                    }
                 }
             }
             else

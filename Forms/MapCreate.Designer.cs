@@ -1809,7 +1809,7 @@
             // TSMI_MC_OpenManual
             // 
             this.TSMI_MC_OpenManual.Name = "TSMI_MC_OpenManual";
-            this.TSMI_MC_OpenManual.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_MC_OpenManual.Size = new System.Drawing.Size(136, 22);
             this.TSMI_MC_OpenManual.Text = "Open manual";
             this.TSMI_MC_OpenManual.Click += new System.EventHandler(this.TSMI_MC_OpenManual_Click);
             // 
@@ -1826,6 +1826,7 @@
             this.Controls.Add(this.TLP_MapsDivision);
             this.Font = new System.Drawing.Font("Franklin Gothic Demi", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.ForeColor = System.Drawing.Color.White;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.KeyPreview = true;
             this.MainMenuStrip = this.MS_MapCreate;

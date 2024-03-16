@@ -124,7 +124,7 @@ namespace Battleship
                                 {
                                     return 'b';
                                 }
-                            case "LightCoral":
+                            case "Red":
                                 {
                                     return 'h';
                                 }
@@ -132,7 +132,7 @@ namespace Battleship
                                 {
                                     return 's';
                                 }
-                            case "Skyblue":
+                            case "DeepSkyBlue":
                                 {
                                     return 'e';
                                 }
