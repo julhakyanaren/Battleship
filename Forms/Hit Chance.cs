@@ -126,8 +126,15 @@ namespace Battleship.Forms
         }
         private void BS_HC_GenerateMap_Click(object sender, EventArgs e)
         {
-            GenerateMap();
-            BS_HC_GenerateMap.Visible = false;
+            if (!HitChanceData.ExampleCraeted)
+            {
+                GenerateMap();
+                BS_HC_GenerateMap.Visible = false;
+            }
+            else
+            {
+                MessageBox.Show("Map already created", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
         }
         private void BS_HC_UpdateCellDAta_Click(object sender, EventArgs e)
         {
@@ -234,6 +241,69 @@ namespace Battleship.Forms
         {
             SetShipsMaxCount();
             SetShipCurrentCount();
+        }
+
+        private void TB_HC_ShotEfficiency_TextChanged(object sender, EventArgs e)
+        {
+            for (int i = 0; i < HitChanceData.EfficientyDataString.Length; i++)
+            {
+                if (TB_HC_ShotEfficiency.Text == HitChanceData.EfficientyDataString[i])
+                {
+                    TB_HC_ShotEfficiency.ForeColor = HitChanceData.EfficientyDataColor[i];
+                }
+            }
+        }
+        void SetHitProbobilityTextColor()
+        {
+            if (HitChanceData.HitProbobility == 0)
+            {
+                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[0];
+                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[0]}";
+            }
+            else if (sp.IsFloatBetween(0, 25, HitChanceData.HitProbobility, "OO"))
+            {
+                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[1];
+                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[1]}";
+            }
+            else if (sp.IsFloatBetween(25, 50, HitChanceData.HitProbobility, "IO"))
+            {
+                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[2];
+                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[2]}";
+            }
+            else if (sp.IsFloatBetween(50, 75, HitChanceData.HitProbobility, "IO"))
+            {
+                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[3];
+                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[3]}";
+            }
+            else if (sp.IsFloatBetween(75, 90, HitChanceData.HitProbobility, "IO"))
+            {
+                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[4];
+                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[4]}";
+            }
+            else if (sp.IsFloatBetween(90, 100, HitChanceData.HitProbobility, "IO"))
+            {
+                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[5];
+                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[5]}";
+            }
+            else if (HitChanceData.HitProbobility == 100)
+            {
+                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[6];
+                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[6]}";
+            }
+        }
+
+        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
+        {
+            //Delete
+            HitChanceData.HitProbobility = Convert.ToDouble(numericUpDown1.Value);
+            SetHitProbobilityTextColor();
+            TB_HC_HitProbobility.Text = HitChanceData.HitProbobility.ToString() + "%";
+            //Delete
+        }
+
+        private void TB_HC_HitProbobility_TextChanged(object sender, EventArgs e)
+        {
+            
         }
     }
 }

@@ -85,5 +85,31 @@ namespace Battleship
                     }
             }
         }
+        public bool IsFloatBetween(float min, float max, double value, string mode)
+        {
+            switch (mode)
+            {
+                case "IO":
+                    {
+                        return value >= min && value < max;
+                    }
+                case "II":
+                    {
+                        return value >= min && value <= max;
+                    }
+                case "OO":
+                    {
+                        return value > min && value < max;
+                    }
+                case "OI":
+                    {
+                        return value > min && value <= max;
+                    }
+                default:
+                    {
+                        return false;
+                    }
+            }
+        }
     }
 }
