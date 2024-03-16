@@ -45,11 +45,6 @@
             this.PNL_InfoChance = new System.Windows.Forms.Panel();
             this.BS_HitMoreInfo = new System.Windows.Forms.Button();
             this.L_Info_PressForInfo = new System.Windows.Forms.Label();
-            this.L_Info_Chance = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.L_Info_InCell = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.L_Info_HitChanceDatas = new System.Windows.Forms.Label();
             this.PNL_GameField = new System.Windows.Forms.Panel();
             this.TLP_MapsDivision = new System.Windows.Forms.TableLayoutPanel();
             this.PNL_EnemyField = new System.Windows.Forms.Panel();
@@ -366,11 +361,6 @@
             this.PNL_InfoChance.BackColor = System.Drawing.Color.Black;
             this.PNL_InfoChance.Controls.Add(this.BS_HitMoreInfo);
             this.PNL_InfoChance.Controls.Add(this.L_Info_PressForInfo);
-            this.PNL_InfoChance.Controls.Add(this.L_Info_Chance);
-            this.PNL_InfoChance.Controls.Add(this.textBox2);
-            this.PNL_InfoChance.Controls.Add(this.L_Info_InCell);
-            this.PNL_InfoChance.Controls.Add(this.textBox1);
-            this.PNL_InfoChance.Controls.Add(this.L_Info_HitChanceDatas);
             this.PNL_InfoChance.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PNL_InfoChance.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.PNL_InfoChance.Location = new System.Drawing.Point(3, 3);
@@ -381,10 +371,10 @@
             // BS_HitMoreInfo
             // 
             this.BS_HitMoreInfo.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_HitMoreInfo.Location = new System.Drawing.Point(226, 23);
+            this.BS_HitMoreInfo.Location = new System.Drawing.Point(219, 14);
             this.BS_HitMoreInfo.Margin = new System.Windows.Forms.Padding(2);
             this.BS_HitMoreInfo.Name = "BS_HitMoreInfo";
-            this.BS_HitMoreInfo.Size = new System.Drawing.Size(119, 28);
+            this.BS_HitMoreInfo.Size = new System.Drawing.Size(119, 30);
             this.BS_HitMoreInfo.TabIndex = 46;
             this.BS_HitMoreInfo.Text = "More Info";
             this.BS_HitMoreInfo.UseVisualStyleBackColor = true;
@@ -393,66 +383,12 @@
             // L_Info_PressForInfo
             // 
             this.L_Info_PressForInfo.AutoSize = true;
-            this.L_Info_PressForInfo.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_Info_PressForInfo.Location = new System.Drawing.Point(118, 26);
+            this.L_Info_PressForInfo.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.L_Info_PressForInfo.Location = new System.Drawing.Point(4, 21);
             this.L_Info_PressForInfo.Name = "L_Info_PressForInfo";
-            this.L_Info_PressForInfo.Size = new System.Drawing.Size(109, 16);
+            this.L_Info_PressForInfo.Size = new System.Drawing.Size(203, 17);
             this.L_Info_PressForInfo.TabIndex = 45;
-            this.L_Info_PressForInfo.Text = "Press \"C\" for more info";
-            // 
-            // L_Info_Chance
-            // 
-            this.L_Info_Chance.AutoSize = true;
-            this.L_Info_Chance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_Info_Chance.Location = new System.Drawing.Point(4, 33);
-            this.L_Info_Chance.Name = "L_Info_Chance";
-            this.L_Info_Chance.Size = new System.Drawing.Size(44, 17);
-            this.L_Info_Chance.TabIndex = 44;
-            this.L_Info_Chance.Text = "Chance";
-            // 
-            // textBox2
-            // 
-            this.textBox2.BackColor = System.Drawing.Color.Black;
-            this.textBox2.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.textBox2.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.textBox2.Location = new System.Drawing.Point(53, 29);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.ReadOnly = true;
-            this.textBox2.Size = new System.Drawing.Size(59, 22);
-            this.textBox2.TabIndex = 43;
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // L_Info_InCell
-            // 
-            this.L_Info_InCell.AutoSize = true;
-            this.L_Info_InCell.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_Info_InCell.Location = new System.Drawing.Point(4, 6);
-            this.L_Info_InCell.Name = "L_Info_InCell";
-            this.L_Info_InCell.Size = new System.Drawing.Size(27, 17);
-            this.L_Info_InCell.TabIndex = 42;
-            this.L_Info_InCell.Text = "Cell";
-            // 
-            // textBox1
-            // 
-            this.textBox1.BackColor = System.Drawing.Color.Black;
-            this.textBox1.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.textBox1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.textBox1.Location = new System.Drawing.Point(53, 6);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.ReadOnly = true;
-            this.textBox1.Size = new System.Drawing.Size(59, 22);
-            this.textBox1.TabIndex = 41;
-            this.textBox1.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // L_Info_HitChanceDatas
-            // 
-            this.L_Info_HitChanceDatas.AutoSize = true;
-            this.L_Info_HitChanceDatas.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_Info_HitChanceDatas.Location = new System.Drawing.Point(135, 0);
-            this.L_Info_HitChanceDatas.Name = "L_Info_HitChanceDatas";
-            this.L_Info_HitChanceDatas.Size = new System.Drawing.Size(95, 18);
-            this.L_Info_HitChanceDatas.TabIndex = 35;
-            this.L_Info_HitChanceDatas.Text = "Hit Chance Datas";
+            this.L_Info_PressForInfo.Text = "Press \"C\" for more info about Hit Chance";
             // 
             // PNL_GameField
             // 
@@ -2384,11 +2320,6 @@
         private System.Windows.Forms.ToolStripMenuItem TSMI_License;
         private System.Windows.Forms.ToolStripMenuItem TSMI_ActivateProduct;
         private System.Windows.Forms.Panel PNL_InfoTurn;
-        private System.Windows.Forms.Label L_Info_Chance;
-        public System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.Label L_Info_InCell;
-        public System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Label L_Info_HitChanceDatas;
         private System.Windows.Forms.Label L_Info_PressForInfo;
         private System.Windows.Forms.Button BS_HitMoreInfo;
         private System.Windows.Forms.Label L_Info_GameMode;

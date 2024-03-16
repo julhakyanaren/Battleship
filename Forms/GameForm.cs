@@ -37,12 +37,23 @@ namespace Battleship
             Design.SetComponentLocation(L_Info_Turn, PNL_InfoChance);
             Design.SetComponentLocation(TB_Turn, PNL_InfoChance);
             Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
-            Design.SetComponentLocation(L_Info_HitChanceDatas, PNL_InfoChance);
             Design.SetElementLocation(3, 20, TB_Turn);
             Design.SetElementLocation(3, 1, L_Info_Turn);
             Design.SetElementSize(TLP_Main, 1028, 400);
             Design.SetElementLocation(3, 20, TB_GameModeType);
             Design.SetElementLocation(3, 1, L_Info_GameMode);
+            if (Options.GameModeInt == 0)
+            {
+                L_Info_PressForInfo.Text = "Press \"C\" for more info about Hit Chance";
+                BS_HitMoreInfo.Visible = true;
+            }
+            else
+            {
+                L_Info_PressForInfo.Text = "In \"Classic\" mode, the hit chance check is not available.\r\nThe function will become available when you select the “Education” mode\r\non the home screen.";
+                L_Info_PressForInfo.Location = new Point(0, (PNL_InfoChance.Height - L_Info_PressForInfo.Height) / 2);
+                Design.SetComponentRelativelyParent(L_Info_PressForInfo, PNL_InfoChance);
+                BS_HitMoreInfo.Visible = false;
+            }
             TB_GameModeType.Text = $"{Options.GameMode} Mode";
         }
         private void GamePlayerOne_Load(object sender, EventArgs e)
@@ -78,7 +89,6 @@ namespace Battleship
                     button.Visible = false;
                     button.MouseEnter += Button_MouseEnter;
                     button.MouseClick += Button_Click;
-                    button.MouseLeave += Button_MouseLeave;
                     MapButtons[f, b] = button;
                     button.FlatAppearance.MouseOverBackColor = Design.MouseOverColor[f];
                     if (f == 0)
@@ -107,13 +117,7 @@ namespace Battleship
             TSMI_Map.Enabled = true;
 
         }
-
-        private void Button_MouseLeave(object sender, EventArgs e)
-        {
-            
-        }
-
-        private void Button_Click(object sender, MouseEventArgs e)
+        private async void Button_Click(object sender, MouseEventArgs e)
         {
             if (Fight.Turn == 0)
             {
@@ -137,7 +141,7 @@ namespace Battleship
                 }
                 while (Fight.Turn == 1)
                 {
-                    EnemyTurn();
+                    await EnemyTurn();
                 }
             }
             else
@@ -165,9 +169,42 @@ namespace Battleship
                 }
             }
         }
-        void EnemyTurn()
+        int FindTargetButtonViaIndex()
+        {
+            if (Support.StringToInt(Fight.TargetButtonTag.ToString(), out int index))
+            {
+                index -= 1551;
+                for (int b = 0; b < 100; b++)
+                {
+                    if (MapButtons[0, b].Tag.ToString() == $"{index}")
+                    {
+                        return b;
+                    }
+                }
+            }
+            return -1;
+        }
+        async Task ChangeBorderSize(int duration = 30, int steps = 4)
+        {
+            int targetIndex = FindTargetButtonViaIndex();
+            if (targetIndex != -1)
+            {
+                int defaultBorderSize = MapButtons[1, targetIndex].FlatAppearance.BorderSize;
+                int customBorderSize = defaultBorderSize * 3;
+                for (int a = 0; a <= steps; a++)
+                {
+                    MapButtons[0, targetIndex].FlatAppearance.BorderSize = customBorderSize;
+                    await Task.Delay(duration);
+                    MapButtons[0, targetIndex].FlatAppearance.BorderSize = defaultBorderSize;
+                    await Task.Delay(duration);
+                }
+                MapButtons[0, targetIndex].FlatAppearance.BorderSize = defaultBorderSize;
+            }
+        }
+        async Task EnemyTurn()
         {
             Fight.Shoot(out Fight.NewMove);
+            await ChangeBorderSize(200, 3);
             ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
             try
             {
@@ -431,8 +468,8 @@ namespace Battleship
                     index %= 100;
                     index = Convert.ToInt32($"{index % 10}{index / 10}");
                     Fight.TargetCoord = index;
-                    Fight.PlayerHited = !IsCellWhite(index, out char celChar);
-                    Fight.Turn = Fight.ReverseTurn(Fight.PlayerHited);
+                    Fight.PlayerHits = !IsCellWhite(index, out char celChar);
+                    Fight.Turn = Fight.ReverseTurn(Fight.PlayerHits);
                     if (celChar != 'e')
                     {
                         PlayerData.HitCountCurrent++;
@@ -643,7 +680,7 @@ namespace Battleship
                     {
                         Button targetButton = MapButtons[1, i];
                         targetButton.BackColor = Color.White;
-                        //targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
+                        targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
                         targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
                     }
                 }
@@ -894,34 +931,37 @@ namespace Battleship
         }
         void OpenHitChanceForm()
         {
-            if (HitChanceData.CanOpenForm)
+            if (Options.GameModeInt == 0)
             {
-                if (HitChanceData.FormClosed)
+                if (HitChanceData.CanOpenForm)
                 {
-                    GetEnemyMap(out int count);
-                    if (count != 100)
+                    if (HitChanceData.FormClosed)
                     {
-                        MessageBox.Show("Incorrect count", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                    }
-                    else if (!Fight.GameStarted)
-                    {
-                        DialogResult = MessageBox.Show("The game has not started, open the selected interface?", "Game Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                        if (DialogResult == DialogResult.Yes)
+                        GetEnemyMap(out int count);
+                        if (count != 100)
+                        {
+                            MessageBox.Show("Incorrect count", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        else if (!Fight.GameStarted)
+                        {
+                            DialogResult = MessageBox.Show("The game has not started, open the selected interface?", "Game Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (DialogResult == DialogResult.Yes)
+                            {
+                                HitChance hcf = new HitChance();
+                                Design.OpenNewForm(hcf, 1, 6);
+                            }
+                        }
+                        else if (Fight.GameStarted)
                         {
                             HitChance hcf = new HitChance();
                             Design.OpenNewForm(hcf, 1, 6);
                         }
                     }
-                    else if (Fight.GameStarted)
-                    {
-                        HitChance hcf = new HitChance();
-                        Design.OpenNewForm(hcf, 1, 6);
-                    }
                 }
-            }
-            else
-            {
-                MessageBox.Show("Map not created", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                else
+                {
+                    MessageBox.Show("Map not created", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
         private void BS_HitMoreInfo_Click(object sender, EventArgs e)

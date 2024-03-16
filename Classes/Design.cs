@@ -92,6 +92,10 @@ namespace Battleship
         {
             control.Location = new Point((panel.Width - control.Width) / 2, control.Location.Y);
         }
+        public static void SetComponentRelativelyParent(Control control, Control parent)
+        {
+            control.Location = new Point((parent.Width - control.Width) / 2, control.Location.Y);
+        }
         public static void SetTextBoxValues(TextBox textBox, int value, int minNum, int maxNum)
         {
             if (value == minNum)

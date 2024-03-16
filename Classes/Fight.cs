@@ -13,7 +13,7 @@ namespace Battleship
         public static int TargetCoord;
         public static int Turn = 0;
         public static bool FirstTurn = true;
-        public static bool PlayerHited = false;
+        public static bool PlayerHits = false;
         public static string InfoType = "Null";
         public static int SunkenShipType = 0;
         public static int FirstHitCoord = 0;
@@ -23,6 +23,7 @@ namespace Battleship
         public static char[] AllowedChars = { 'F', 'D', 'C', 'B' };
         public static bool Hited = false;
         public static int[] TargetData = { 0, 0, 0 };
+        public static int TargetButtonTag = 0;
         public static double SuccessThreshold(int difficulty)
         {
             double successThreshold = 0.0;
@@ -306,6 +307,7 @@ namespace Battleship
                 TargetData[0] = target;
                 TargetData[1] = vertical;
                 TargetData[2] = horizontal;
+                TargetButtonTag = target;
                 return target;
             }
             else
