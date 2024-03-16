@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Windows.Forms;
 
@@ -9,6 +10,9 @@ namespace Battleship
     {
         static ColorMethods cm = new ColorMethods();
         static Position pos = new Position();
+        static Support sp = new Support();
+        static Map map = new Map();
+
         public static bool GameStarted = false;
         public static int TargetCoord;
         public static int Turn = 0;
@@ -258,10 +262,22 @@ namespace Battleship
                 GenerateNearestCoords(target, 1551);
                 for (int bl = 0; bl < BlockedCoords.Count; bl++)
                 {
-                    PlayerData.Map[BlockedCoords[bl] - 100] = 'E';
+                    PlayerData.Map[BlockedCoords[bl]] = 'E';
                 }
             }
             Hited = hited;
+        }
+        static int FindCorrectIndex(int index)
+        {
+            index -= 1551;
+            for (int b = 0; b < 100; b++)
+            {
+                if (PlayerData.MapButtons[b].Tag.ToString() == $"{index}")
+                {
+                    return b;
+                }
+            }
+            return -1;
         }
         public static void Shoot(out bool successShoot)
         {
@@ -320,10 +336,11 @@ namespace Battleship
         {
             if (firstCoords != 0)
             {
-                firstCoords -= reduction;
+                int targetCoord = firstCoords - reduction;
+                firstCoords = FindCorrectIndex(firstCoords);
                 AllowedCoords.Clear();
-                BlockedCoords.Clear();
-                string position = pos.GetCellPosition(firstCoords.ToString());
+                //BlockedCoords.Clear();
+                string position = pos.GetCellPosition(targetCoord.ToString());
                 switch (position)
                 {
                     case "center":
@@ -332,36 +349,36 @@ namespace Battleship
                             AllowedCoords.Add(firstCoords + 1);
                             AllowedCoords.Add(firstCoords - 10);
                             AllowedCoords.Add(firstCoords + 10);
-                            BlockedCoords.Add(firstCoords + -11);
+                            BlockedCoords.Add(firstCoords - 11);
+                            BlockedCoords.Add(firstCoords + 11);
                             BlockedCoords.Add(firstCoords - 9);
                             BlockedCoords.Add(firstCoords + 9);
-                            BlockedCoords.Add(firstCoords - 11);
                             break;
                         }
                     case "left":
                         {
-                            AllowedCoords.Add(firstCoords - 1);
+                            AllowedCoords.Add(firstCoords - 10);
                             AllowedCoords.Add(firstCoords + 10);
                             AllowedCoords.Add(firstCoords + 1);
-                            BlockedCoords.Add(firstCoords + 9);
+                            BlockedCoords.Add(firstCoords - 9);
                             BlockedCoords.Add(firstCoords + 11);
                             break;
                         }
                     case "right":
                         {
-                            AllowedCoords.Add(firstCoords + 1);
-                            AllowedCoords.Add(firstCoords - 10);
                             AllowedCoords.Add(firstCoords - 1);
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords + 10);
                             BlockedCoords.Add(firstCoords - 11);
-                            BlockedCoords.Add(firstCoords - 9);
+                            BlockedCoords.Add(firstCoords + 9);
                             break;
                         }
                     case "top":
                         {
-                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords - 1);
                             AllowedCoords.Add(firstCoords + 1);
                             AllowedCoords.Add(firstCoords + 10);
-                            BlockedCoords.Add(firstCoords - 9);
+                            BlockedCoords.Add(firstCoords + 9);
                             BlockedCoords.Add(firstCoords + 11);
                             break;
                         }
@@ -369,8 +386,8 @@ namespace Battleship
                         {
                             AllowedCoords.Add(firstCoords - 10);
                             AllowedCoords.Add(firstCoords - 1);
-                            AllowedCoords.Add(firstCoords + 10);
-                            BlockedCoords.Add(firstCoords + 9);
+                            AllowedCoords.Add(firstCoords + 1);
+                            BlockedCoords.Add(firstCoords - 9);
                             BlockedCoords.Add(firstCoords - 11);
                             break;
                         }
@@ -383,9 +400,9 @@ namespace Battleship
                         }
                     case "corner2":
                         {
-                            AllowedCoords.Add(firstCoords - 10);
-                            AllowedCoords.Add(firstCoords + 1);
-                            BlockedCoords.Add(firstCoords -9);
+                            AllowedCoords.Add(firstCoords - 1);
+                            AllowedCoords.Add(firstCoords + 10);
+                            BlockedCoords.Add(firstCoords +9);
                             break;
                         }
                     case "corner3":
@@ -397,9 +414,9 @@ namespace Battleship
                         }
                     case "corner4":
                         {   
-                            AllowedCoords.Add(firstCoords + 10);
-                            AllowedCoords.Add(firstCoords - 1);
-                            BlockedCoords.Add(firstCoords + 9);
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords + 11);
+                            BlockedCoords.Add(firstCoords - 9);
                             break;
                         }
                 }

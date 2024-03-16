@@ -204,7 +204,7 @@ namespace Battleship
         async Task EnemyTurn()
         {
             Fight.Shoot(out Fight.NewMove);
-            await ChangeBorderSize(200, 3);
+            await ChangeBorderSize(100, 3);
             ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
             try
             {
