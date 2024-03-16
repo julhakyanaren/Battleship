@@ -93,8 +93,8 @@ namespace Battleship.Forms
                     };
                     TLP_HC_Schema.Controls.Add(button);
                     button.FlatStyle = FlatStyle.Flat;
-                    button.ForeColor = Color.Black;
-                    button.BackColor = Color.White;
+                    button.ForeColor = HitChanceData.CurrentMap[b].ForeColor;
+                    button.BackColor = HitChanceData.CurrentMap[b].BackColor;
                     button.Tag = b + 600;
                     button.Margin = new Padding(0);
                     exampleButtons[b] = button;
@@ -291,16 +291,6 @@ namespace Battleship.Forms
                 TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[6]}";
             }
         }
-
-        private void numericUpDown1_ValueChanged(object sender, EventArgs e)
-        {
-            //Delete
-            HitChanceData.HitProbobility = Convert.ToDouble(numericUpDown1.Value);
-            SetHitProbobilityTextColor();
-            TB_HC_HitProbobility.Text = HitChanceData.HitProbobility.ToString() + "%";
-            //Delete
-        }
-
         private void TB_HC_HitProbobility_TextChanged(object sender, EventArgs e)
         {
             

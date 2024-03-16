@@ -165,16 +165,12 @@ namespace Battleship
                 }
             }
         }
-        async void EnemyTurn()
+        void EnemyTurn()
         {
-            Fight.Shoot(out /*Fight.NewMove*/ Fight.Hited);
+            Fight.Shoot(out Fight.NewMove);
             ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
             try
             {
-                //await Task.Run(() =>
-                //{
-                //    FindTarget(300);
-                //});
                 UpdatePlayerMapColor(ColorMethods.PlayerMapColor);
                 Fight.Turn = Fight.ReverseTurn(Fight.Hited);
                 if (SetTurnText() == "ERROR")

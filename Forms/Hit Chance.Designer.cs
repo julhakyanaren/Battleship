@@ -82,8 +82,6 @@
             this.L_EnemyFrigates = new System.Windows.Forms.Label();
             this.TB_EnemyShips_Frigates = new System.Windows.Forms.TextBox();
             this.GB_HC_ProbabilityData = new System.Windows.Forms.GroupBox();
-            this.L_Info_About = new System.Windows.Forms.Label();
-            this.BS_HC_About = new System.Windows.Forms.Button();
             this.BS_HC_UpdateProbability = new System.Windows.Forms.Button();
             this.L_Info_HitChanceChanges = new System.Windows.Forms.Label();
             this.TB_HC_HitChanceChanges = new System.Windows.Forms.TextBox();
@@ -97,7 +95,6 @@
             this.PNL_ShipData = new System.Windows.Forms.Panel();
             this.BS_HC_ApplyCell = new System.Windows.Forms.Button();
             this.GB_HC_ShipData = new System.Windows.Forms.GroupBox();
-            this.numericUpDown1 = new System.Windows.Forms.NumericUpDown();
             this.TLP_MC_Map_Main.SuspendLayout();
             this.PNL_MC_Map_Letters.SuspendLayout();
             this.TLP_MC_Map_Letters.SuspendLayout();
@@ -109,7 +106,6 @@
             this.TLP_HC_Right.SuspendLayout();
             this.PNL_ShipData.SuspendLayout();
             this.GB_HC_ShipData.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).BeginInit();
             this.SuspendLayout();
             // 
             // TLP_MC_Map_Main
@@ -899,9 +895,6 @@
             // GB_HC_ProbabilityData
             // 
             this.GB_HC_ProbabilityData.BackColor = System.Drawing.Color.Black;
-            this.GB_HC_ProbabilityData.Controls.Add(this.numericUpDown1);
-            this.GB_HC_ProbabilityData.Controls.Add(this.L_Info_About);
-            this.GB_HC_ProbabilityData.Controls.Add(this.BS_HC_About);
             this.GB_HC_ProbabilityData.Controls.Add(this.BS_HC_UpdateProbability);
             this.GB_HC_ProbabilityData.Controls.Add(this.L_Info_HitChanceChanges);
             this.GB_HC_ProbabilityData.Controls.Add(this.TB_HC_HitChanceChanges);
@@ -918,28 +911,6 @@
             this.GB_HC_ProbabilityData.TabIndex = 15;
             this.GB_HC_ProbabilityData.TabStop = false;
             this.GB_HC_ProbabilityData.Text = "Probability Data";
-            // 
-            // L_Info_About
-            // 
-            this.L_Info_About.AutoSize = true;
-            this.L_Info_About.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_Info_About.Location = new System.Drawing.Point(11, 133);
-            this.L_Info_About.Name = "L_Info_About";
-            this.L_Info_About.Size = new System.Drawing.Size(91, 17);
-            this.L_Info_About.TabIndex = 63;
-            this.L_Info_About.Text = "More information";
-            // 
-            // BS_HC_About
-            // 
-            this.BS_HC_About.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_HC_About.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_About.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_About.Location = new System.Drawing.Point(137, 126);
-            this.BS_HC_About.Name = "BS_HC_About";
-            this.BS_HC_About.Size = new System.Drawing.Size(93, 24);
-            this.BS_HC_About.TabIndex = 62;
-            this.BS_HC_About.Text = "About";
-            this.BS_HC_About.UseVisualStyleBackColor = true;
             // 
             // BS_HC_UpdateProbability
             // 
@@ -1120,17 +1091,6 @@
             this.GB_HC_ShipData.TabStop = false;
             this.GB_HC_ShipData.Text = "Enemy ships data";
             // 
-            // numericUpDown1
-            // 
-            this.numericUpDown1.BackColor = System.Drawing.Color.Black;
-            this.numericUpDown1.DecimalPlaces = 2;
-            this.numericUpDown1.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.numericUpDown1.Location = new System.Drawing.Point(137, 155);
-            this.numericUpDown1.Name = "numericUpDown1";
-            this.numericUpDown1.Size = new System.Drawing.Size(96, 22);
-            this.numericUpDown1.TabIndex = 64;
-            this.numericUpDown1.ValueChanged += new System.EventHandler(this.numericUpDown1_ValueChanged);
-            // 
             // HitChance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 17F);
@@ -1165,7 +1125,6 @@
             this.PNL_ShipData.PerformLayout();
             this.GB_HC_ShipData.ResumeLayout(false);
             this.GB_HC_ShipData.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.numericUpDown1)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -1238,8 +1197,5 @@
         private System.Windows.Forms.Label L_Info_HitChanceChanges;
         public System.Windows.Forms.TextBox TB_HC_HitChanceChanges;
         private System.Windows.Forms.Button BS_HC_UpdateProbability;
-        private System.Windows.Forms.Label L_Info_About;
-        private System.Windows.Forms.Button BS_HC_About;
-        private System.Windows.Forms.NumericUpDown numericUpDown1;
     }
 }
