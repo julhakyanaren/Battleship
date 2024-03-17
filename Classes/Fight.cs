@@ -23,7 +23,7 @@ namespace Battleship
         public static int FirstHitCoord = 0;
         public static List<int> AllowedCoords = new List<int>();
         public static List<int> BlockedCoords = new List<int>();
-        public static bool NewMove;
+        public static bool NewMove = true;
         public static char[] AllowedChars = { 'F', 'D', 'C', 'B' };
         public static bool Hited = false;
         public static int[] TargetData = { 0, 0, 0 };
@@ -190,6 +190,8 @@ namespace Battleship
                         PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
                         successShoot = true;
                         checkedPosition = false;
+                        FirstHitCoord = FindCorrectCoord(index);
+
                         break;
                     }
                 case 'C':
@@ -215,6 +217,7 @@ namespace Battleship
                         NewMove = PlayerData.SunkenCruisersCount < sunkenCruisers;
                         PlayerData.SunkenCruisersCount = sunkenCruisers;
                         PlayerData.CruiserCountCurrent = PlayerData.CruiserCountMax - PlayerData.SunkenCruisersCount;
+                        FirstHitCoord = FindCorrectCoord(index);
                         successShoot = true;
                         checkedPosition = false;
                         break;
@@ -242,6 +245,7 @@ namespace Battleship
                         NewMove = PlayerData.SunkenBattleshipCount < sunkenBattleship;
                         PlayerData.SunkenBattleshipCount = sunkenBattleship;
                         PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
+                        FirstHitCoord = FindCorrectCoord(index);
                         successShoot = true;
                         checkedPosition = false;
                         break;
@@ -279,6 +283,11 @@ namespace Battleship
             }
             return -1;
         }
+        static int FindCorrectCoord(int index)
+        {
+            sp.StringToInt(PlayerData.MapButtons[index].Tag.ToString(), out int coord);
+            return coord;
+        }
         public static void Shoot(out bool successShoot)
         {
             bool checkedPosition = false;
@@ -292,9 +301,10 @@ namespace Battleship
                 }
                 else
                 {
-                    if (FirstHitCoord == 0)
+                    if (FirstHitCoord != 0)
                     {
-                        GenerateNearestCoords(FirstHitCoord, 1551);
+                        int newIndex = FirstHitCoord + 1551;
+                        GenerateNearestCoords(newIndex/*FirstHitCoord*/ /*1551*/);
                         Random randomShoot = new Random();
                         int nextTarget = randomShoot.Next(1, AllowedCoords.Count + 1);
                         nextTarget--;
