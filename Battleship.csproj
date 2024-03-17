@@ -277,6 +277,7 @@
     <Compile Include="Classes\Support.cs" />
     <EmbeddedResource Include="Forms\GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
+      <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Hit Chance.resx">
       <DependentUpon>Hit Chance.cs</DependentUpon>

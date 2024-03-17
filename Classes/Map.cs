@@ -6,7 +6,7 @@ namespace Battleship
 {
     public class Map
     {
-        Support Support = new Support();
+        Support support = new Support();
         ColorMethods ColorMethods = new ColorMethods();
         Position Position = new Position();
 
@@ -30,7 +30,7 @@ namespace Battleship
             {
                 case 0: //Player
                     {
-                        Button[] buttonsPlayer = Support.GetPlayerButtons(buttons);
+                        Button[] buttonsPlayer = support.GetPlayerButtons(buttons);
                         char[] mapPlayer = new char[buttonsPlayer.Length];
                         for (int i = 0; i < buttonsPlayer.Length; i++)
                         {
@@ -44,7 +44,7 @@ namespace Battleship
                     }
                 case 1: //Enemy
                     {
-                        Button[] buttonsEnemy = Support.GetEnemyButtons(buttons);
+                        Button[] buttonsEnemy = support.GetEnemyButtons(buttons);
                         char[] mapEnemy = new char[buttonsEnemy.Length];
                         for (int i = 0; i < buttonsEnemy.Length; i++)
                         {
@@ -138,6 +138,8 @@ namespace Battleship
                             map[x, y + i] = shipSymbol;
                             coord = (x * 10) + y + i;
                         }
+                        Support support = new Support();
+                        coord = support.ChangeNumbers(coord);
                         switch (shipSymbol)
                         {
                             case 'F':
@@ -161,6 +163,7 @@ namespace Battleship
                                     break;
                                 }
                         }
+                        
                     }
                     placed = true;
                 }

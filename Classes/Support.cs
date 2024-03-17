@@ -111,5 +111,11 @@ namespace Battleship
                     }
             }
         }
+        public int ChangeNumbers(int old)
+        {
+            int b = old / 10;
+            int a = old % 10;
+            return (a * 10) + b;
+        }
     }
 }

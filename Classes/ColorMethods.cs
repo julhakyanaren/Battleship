@@ -32,7 +32,7 @@ namespace Battleship
                     }
                 case 'H':
                     {
-                        return Color.LightCoral;
+                        return Color.Red;
                     }
                 case 'S':
                     {
@@ -82,7 +82,7 @@ namespace Battleship
                                 {
                                     return 'B';
                                 }
-                            case "LightCoral":
+                            case "Red":
                                 {
                                     return 'H';
                                 }
@@ -90,7 +90,7 @@ namespace Battleship
                                 {
                                     return 'S';
                                 }
-                            case "Skyblue":
+                            case "DeepSkyBlue":
                                 {
                                     return 'E';
                                 }
@@ -165,6 +165,10 @@ namespace Battleship
             for (int c = 0; c < colors.Length; c++)
             {
                 colors[c] = SetColorViaChar(inputMap[c]);
+                if (colors[c] == Color.Aqua)
+                {
+                    colors[c] = Color.DeepSkyBlue;
+                }
             }
             return colors;
         }

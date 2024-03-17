@@ -23,7 +23,7 @@ namespace Battleship
         public static int FirstHitCoord = 0;
         public static List<int> AllowedCoords = new List<int>();
         public static List<int> BlockedCoords = new List<int>();
-        public static bool NewMove = true;
+        public static bool NewMove;
         public static char[] AllowedChars = { 'F', 'D', 'C', 'B' };
         public static bool Hited = false;
         public static int[] TargetData = { 0, 0, 0 };
@@ -172,7 +172,7 @@ namespace Battleship
                         {
                             for (int d1 = 0; d1 < 2; d1++)
                             {
-                                if (PlayerData.DestroyerCoords[d0, d1] == target - 1551)
+                                if (PlayerData.DestroyerCoords[d0, d1] == index/*target - 1551*/)
                                 {
                                     PlayerData.DestroyersHited[d0, d1] = true;
                                     break;
@@ -199,7 +199,7 @@ namespace Battleship
                         {
                             for (int c1 = 0; c1 < 3; c1++)
                             {
-                                if (PlayerData.CruiserCoords[c0, c1] == target - 1551)
+                                if (PlayerData.CruiserCoords[c0, c1] == index/*target - 1551*/)
                                 {
                                     PlayerData.CruiserHited[c0, c1] = true;
                                     break;
@@ -226,7 +226,7 @@ namespace Battleship
                         {
                             for (int b1 = 0; b1 < 4; b1++)
                             {
-                                if (PlayerData.BattleshipCoords[b0, b1] == target - 1551)
+                                if (PlayerData.BattleshipCoords[b0, b1] == index/*target - 1551*/)
                                 {
                                     PlayerData.BattleshipHited[b0, b1] = true;
                                     break;
