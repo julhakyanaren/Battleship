@@ -212,6 +212,7 @@
     <Compile Include="Classes\HitChanceData.cs" />
     <Compile Include="Classes\LicenseData.cs" />
     <Compile Include="Classes\Map.cs" />
+    <Compile Include="Classes\Unused.cs" />
     <Compile Include="Forms\Hit Chance.cs">
       <SubType>Form</SubType>
     </Compile>
