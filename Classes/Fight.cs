@@ -28,6 +28,8 @@ namespace Battleship
         public static bool Hited = false;
         public static int[] TargetData = { 0, 0, 0 };
         public static int TargetButtonTag = 0;
+
+        private static bool sunkenFrigate = false;
         public static double SuccessThreshold(int difficulty)
         {
             double successThreshold = 0.0;
@@ -163,6 +165,7 @@ namespace Battleship
                         NewMove = true;
                         successShoot = true;
                         checkedPosition = false;
+                        sunkenFrigate = true;
                         break;
                     }
                 case 'D':
@@ -266,6 +269,14 @@ namespace Battleship
                 for (int bl = 0; bl < BlockedCoords.Count; bl++)
                 {
                     PlayerData.Map[BlockedCoords[bl]] = 'E';
+                }
+                if (sunkenFrigate)
+                {
+                    for (int bl = 0; bl < AllowedCoords.Count; bl++)
+                    {
+                        PlayerData.Map[AllowedCoords[bl]] = 'E';
+                    }
+                    sunkenFrigate = false;
                 }
             }
             Hited = hited;
