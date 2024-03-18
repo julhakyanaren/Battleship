@@ -191,7 +191,6 @@ namespace Battleship
                         successShoot = true;
                         checkedPosition = false;
                         FirstHitCoord = FindCorrectCoord(index);
-
                         break;
                     }
                 case 'C':
@@ -308,6 +307,7 @@ namespace Battleship
                         Random randomShoot = new Random();
                         int randomIndex = randomShoot.Next(0, AllowedCoords.Count);
                         int nextTarget = AllowedCoords[randomIndex];
+                        nextTarget = FindCorrectCoord(nextTarget) + 1551;
                         EnemyShoot(nextTarget, out successShoot, out checkedPosition);
                     }
                 }
