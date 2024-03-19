@@ -62,7 +62,7 @@ namespace Battleship
             SetScreenParametersAsMaximized();
             SetComponentCustomParamaters();
         }
-        async void GenerateButtons()
+        async Task GenerateButtons()
         {
             int[,] tags = GenerateButtonsTags();
             int x;
@@ -534,13 +534,14 @@ namespace Battleship
                 return false;
             }
         }
-        private void TSMI_StartNewGame_Click(object sender, EventArgs e)
+        private async void TSMI_StartNewGame_Click(object sender, EventArgs e)
         {
             if (PlayerData.Map == null)
             {
                 try
                 {
-                    GenerateButtons();
+                    await GenerateButtons();
+                    TSMI_Map.Enabled = true;
                     TSMI_OpenMapEditor.Enabled = true;
                     TSMI_RestartGame.Enabled = true;
                     HitChanceData.CanOpenForm = true;
@@ -877,7 +878,7 @@ namespace Battleship
                 buttons[0, b].Dispose();
                 buttons[1, b].Dispose();
             }
-            GenerateButtons();
+            await GenerateButtons();
 
         }
         private void TSMI_RestartGame_Click(object sender, EventArgs e)
