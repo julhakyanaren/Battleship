@@ -153,11 +153,6 @@
             this.TSMI_TB_GenType = new System.Windows.Forms.ToolStripTextBox();
             this.TSMI_OpenMapEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Info = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_GameInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_Difficulty = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_Difficulty_Level = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_HitChance = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_ChancePercent = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GPO_OpenManual = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_License = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ActivateProduct = new System.Windows.Forms.ToolStripMenuItem();
@@ -165,6 +160,7 @@
             this.TSMI_ShowEnemyShipsCoords = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowHitInfo = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_ShowBorder = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_GPO_Version = new System.Windows.Forms.ToolStripMenuItem();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
@@ -2000,64 +1996,19 @@
             // TSMI_Info
             // 
             this.TSMI_Info.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_GameInfo,
-            this.TSMI_GPO_OpenManual});
+            this.TSMI_GPO_OpenManual,
+            this.TSMI_GPO_Version});
             this.TSMI_Info.ForeColor = System.Drawing.Color.Black;
             this.TSMI_Info.Name = "TSMI_Info";
             this.TSMI_Info.Size = new System.Drawing.Size(38, 21);
             this.TSMI_Info.Text = "Info";
-            // 
-            // TSMI_GameInfo
-            // 
-            this.TSMI_GameInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_GameInfo.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_Difficulty,
-            this.TSMI_HitChance});
-            this.TSMI_GameInfo.ForeColor = System.Drawing.Color.Black;
-            this.TSMI_GameInfo.Name = "TSMI_GameInfo";
-            this.TSMI_GameInfo.Size = new System.Drawing.Size(139, 22);
-            this.TSMI_GameInfo.Text = "Game info";
-            // 
-            // TSMI_Difficulty
-            // 
-            this.TSMI_Difficulty.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_Difficulty.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_Difficulty_Level});
-            this.TSMI_Difficulty.Name = "TSMI_Difficulty";
-            this.TSMI_Difficulty.Size = new System.Drawing.Size(174, 22);
-            this.TSMI_Difficulty.Text = "Difficulty:";
-            // 
-            // TSMI_Difficulty_Level
-            // 
-            this.TSMI_Difficulty_Level.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_Difficulty_Level.ForeColor = System.Drawing.Color.Black;
-            this.TSMI_Difficulty_Level.Name = "TSMI_Difficulty_Level";
-            this.TSMI_Difficulty_Level.Size = new System.Drawing.Size(101, 22);
-            this.TSMI_Difficulty_Level.Text = "Level";
-            // 
-            // TSMI_HitChance
-            // 
-            this.TSMI_HitChance.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_HitChance.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_ChancePercent});
-            this.TSMI_HitChance.Name = "TSMI_HitChance";
-            this.TSMI_HitChance.Size = new System.Drawing.Size(174, 22);
-            this.TSMI_HitChance.Text = "Opponent hit chance";
-            // 
-            // TSMI_ChancePercent
-            // 
-            this.TSMI_ChancePercent.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_ChancePercent.ForeColor = System.Drawing.Color.Black;
-            this.TSMI_ChancePercent.Name = "TSMI_ChancePercent";
-            this.TSMI_ChancePercent.Size = new System.Drawing.Size(92, 22);
-            this.TSMI_ChancePercent.Text = "0%";
             // 
             // TSMI_GPO_OpenManual
             // 
             this.TSMI_GPO_OpenManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GPO_OpenManual.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_OpenManual.Name = "TSMI_GPO_OpenManual";
-            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(139, 22);
+            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GPO_OpenManual.Text = "Open manual";
             this.TSMI_GPO_OpenManual.Click += new System.EventHandler(this.TSMI_GPO_OpenManual_Click);
             // 
@@ -2118,6 +2069,13 @@
             this.TSMI_ShowBorder.Size = new System.Drawing.Size(220, 22);
             this.TSMI_ShowBorder.Text = "Show Border";
             this.TSMI_ShowBorder.Click += new System.EventHandler(this.TSMI_ShowBorder_Click);
+            // 
+            // TSMI_GPO_Version
+            // 
+            this.TSMI_GPO_Version.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_GPO_Version.Name = "TSMI_GPO_Version";
+            this.TSMI_GPO_Version.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_GPO_Version.Text = "Version";
             // 
             // GameForm
             // 
@@ -2304,11 +2262,6 @@
         private System.Windows.Forms.Label L_Info_Turn;
         public System.Windows.Forms.TextBox TB_Turn;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Info;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_GameInfo;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_Difficulty;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_HitChance;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_Difficulty_Level;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_ChancePercent;
         private System.Windows.Forms.TextBox TB_EnemyMiss;
         private System.Windows.Forms.ToolStripMenuItem TSMI_DEBUG;
         private System.Windows.Forms.ToolStripMenuItem TSMI_ShowEnemyShipsCoords;
@@ -2324,5 +2277,6 @@
         private System.Windows.Forms.Button BS_HitMoreInfo;
         private System.Windows.Forms.Label L_Info_GameMode;
         public System.Windows.Forms.TextBox TB_GameModeType;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_GPO_Version;
     }
 }

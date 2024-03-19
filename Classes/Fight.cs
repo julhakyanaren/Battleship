@@ -14,54 +14,27 @@ namespace Battleship
         static Map map = new Map();
 
         public static bool GameStarted = false;
-        public static int TargetCoord;
-        public static int Turn = 0;
         public static bool FirstTurn = true;
         public static bool PlayerHits = false;
-        public static string InfoType = "Null";
+        public static bool NewMove = true;
+        public static bool Hited = false;
+
+        public static int TargetCoord;
+        public static int Turn = 0;
         public static int SunkenShipType = 0;
         public static int FirstHitCoord = 0;
-        public static List<int> AllowedCoords = new List<int>();
-        public static List<int> BlockedCoords = new List<int>();
-        public static bool NewMove = true;
-        public static char[] AllowedChars = { 'F', 'D', 'C', 'B' };
-        public static bool Hited = false;
         public static int[] TargetData = { 0, 0, 0 };
         public static int TargetButtonTag = 0;
 
+        public static string InfoType = "Null";
+        public static char[] AllowedChars = { 'F', 'D', 'C', 'B' };
+
+        public static List<int> AllowedCoords = new List<int>();
+        public static List<int> BlockedCoords = new List<int>();
+        public static List<int> UsedCoords = new List<int>();
+        public static List<int> ForbiddenCoords = new List<int>();
+
         private static bool sunkenFrigate = false;
-        public static double SuccessThreshold(int difficulty)
-        {
-            double successThreshold = 0.0;
-            switch (difficulty)
-            {
-                case 0:
-                    {
-                        successThreshold = 0.10;
-                        break;
-                    }
-                case 1:
-                    {
-                        successThreshold = 0.25;
-                        break;
-                    }
-                case 2:
-                    {
-                        successThreshold = 0.50;
-                        break;
-                    }
-                case 3:
-                    {
-                        successThreshold = 0.75;
-                        break;
-                    }
-                default:
-                    {
-                        throw new ArgumentOutOfRangeException("Incorrect difficulty level");
-                    }
-            }
-            return successThreshold;
-        }
         public static int WhoStartGame()
         {
             Random randomStart = new Random();
@@ -116,6 +89,7 @@ namespace Battleship
             int index = 0;
             int counter = 0;
             bool incorrectValue = false;
+            bool targetInMap = true;
             for (int b = 0; b < PlayerData.MapButtons.Length; b++)
             {
                 if (PlayerData.MapButtons[b].Tag.ToString() == Convert.ToString(target - 1551))
@@ -260,6 +234,7 @@ namespace Battleship
                         successShoot = false;
                         hited = false;
                         checkedPosition = false;
+                        targetInMap = false;
                         break;
                     }
             }
@@ -278,6 +253,11 @@ namespace Battleship
                     }
                     sunkenFrigate = false;
                 }
+            }
+            if (targetInMap)
+            {
+                UsedCoords.Add(index);
+                ForbiddenCoords.Add(index);
             }
             Hited = hited;
         }
@@ -304,20 +284,59 @@ namespace Battleship
             do
             {
                 successShoot = true;
-                int target = FindShipCoord(false);
                 if (NewMove)
                 {
+                    bool correctCoord = false;
+                    int target = -1;
+                    do
+                    {
+                        if (ForbiddenCoords.Count != 0)
+                        {
+                            target = FindShipCoord(false);
+                            int targetIndex = FindCorrectIndex(target);
+                            for (int t = 0; t < ForbiddenCoords.Count; t++)
+                            {
+                                if (targetIndex != ForbiddenCoords[t])
+                                {
+                                    continue;
+                                }
+                                continue;
+                            }
+                            correctCoord = true;
+                        }
+                        else
+                        {
+                            target = FindShipCoord(false);
+                            correctCoord = true;
+                        }
+                    }
+                    while (!correctCoord);
                     EnemyShoot(target, out successShoot, out checkedPosition);
                 }
                 else
                 {
                     if (FirstHitCoord != 0)
                     {
+                        bool canShot = false;
+                        int nextTarget = -1;
                         int newIndex = FirstHitCoord + 1551;
                         GenerateNearestCoords(newIndex, 1551);
                         Random randomShoot = new Random();
                         int randomIndex = randomShoot.Next(0, AllowedCoords.Count);
-                        int nextTarget = AllowedCoords[randomIndex];
+                        do
+                        {
+                            nextTarget = AllowedCoords[randomIndex];
+                            for (int f = 0; f < ForbiddenCoords.Count; f++)
+                            {
+                                if (nextTarget != ForbiddenCoords[f])
+                                {
+                                    continue;
+                                }
+                                continue;
+                            }
+                            canShot = true;
+                        }
+                        while (!canShot);
                         nextTarget = FindCorrectCoord(nextTarget) + 1551;
                         EnemyShoot(nextTarget, out successShoot, out checkedPosition);
                     }
@@ -352,7 +371,7 @@ namespace Battleship
                 int targetCoord = firstCoords - reduction;
                 firstCoords = FindCorrectIndex(firstCoords);
                 AllowedCoords.Clear();
-                //BlockedCoords.Clear();
+                BlockedCoords.Clear();
                 string position = pos.GetCellPosition(targetCoord.ToString());
                 switch (position)
                 {
@@ -432,6 +451,10 @@ namespace Battleship
                             BlockedCoords.Add(firstCoords - 9);
                             break;
                         }
+                }
+                for (int b = 0; b < BlockedCoords.Count; b++)
+                {
+                    ForbiddenCoords.Add(BlockedCoords[b]);
                 }
             }
         }

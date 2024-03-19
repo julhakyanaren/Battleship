@@ -55,6 +55,7 @@ namespace Battleship
                 BS_HitMoreInfo.Visible = false;
             }
             TB_GameModeType.Text = $"{Options.GameMode} Mode";
+            TSMI_GPO_Version.Text = $"Version:  {DebugTools.Version}.{RunsCount}";
         }
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {
@@ -681,7 +682,7 @@ namespace Battleship
                     {
                         Button targetButton = MapButtons[1, i];
                         targetButton.BackColor = Color.White;
-                        //targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
+                        targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
                         targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
                     }
                 }
