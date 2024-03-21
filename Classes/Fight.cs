@@ -456,6 +456,16 @@ namespace Battleship
                 {
                     ForbiddenCoords.Add(BlockedCoords[b]);
                 }
+                List<int> unique = new List<int>();
+                foreach (int u in ForbiddenCoords)
+                {
+                    if (!unique.Contains(u))
+                    {
+                        unique.Add(u);
+                    }
+                }
+                ForbiddenCoords.Clear();
+                ForbiddenCoords = unique;
             }
         }
     }
