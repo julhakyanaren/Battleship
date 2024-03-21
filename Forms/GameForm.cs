@@ -110,7 +110,7 @@ namespace Battleship
             Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
             for (int vb = 0; vb < 100; vb++)
             {
-                await Task.Delay(5);
+                await Task.Delay(1);
                 MapButtons[0, vb].Visible = true;
                 //MapButtons[0, vb].Text = MapButtons[0, vb].Tag.ToString();
                 MapButtons[1, vb].Visible = true;
