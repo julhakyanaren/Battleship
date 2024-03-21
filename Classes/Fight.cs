@@ -298,11 +298,15 @@ namespace Battleship
                             {
                                 if (targetIndex != ForbiddenCoords[t])
                                 {
+                                    correctCoord = true;
                                     continue;
                                 }
-                                continue;
+                                else
+                                {
+                                    correctCoord = false;
+                                    break;
+                                }
                             }
-                            correctCoord = true;
                         }
                         else
                         {
@@ -321,23 +325,28 @@ namespace Battleship
                         int nextTarget = -1;
                         int newIndex = FirstHitCoord + 1551;
                         GenerateNearestCoords(newIndex, 1551);
-                        Random randomShoot = new Random();
-                        int randomIndex = randomShoot.Next(0, AllowedCoords.Count);
                         do
                         {
+                            Random randomShoot = new Random();
+                            int randomIndex = randomShoot.Next(0, AllowedCoords.Count);
                             nextTarget = AllowedCoords[randomIndex];
                             for (int f = 0; f < ForbiddenCoords.Count; f++)
                             {
                                 if (nextTarget != ForbiddenCoords[f])
                                 {
+                                    canShot = true;
                                     continue;
                                 }
-                                continue;
+                                else
+                                {
+                                    canShot = false;
+                                    break;
+                                }
                             }
-                            canShot = true;
                         }
                         while (!canShot);
                         nextTarget = FindCorrectCoord(nextTarget) + 1551;
+                        TargetButtonTag = nextTarget;
                         EnemyShoot(nextTarget, out successShoot, out checkedPosition);
                     }
                 }
@@ -456,17 +465,22 @@ namespace Battleship
                 {
                     ForbiddenCoords.Add(BlockedCoords[b]);
                 }
-                List<int> unique = new List<int>();
-                foreach (int u in ForbiddenCoords)
-                {
-                    if (!unique.Contains(u))
-                    {
-                        unique.Add(u);
-                    }
-                }
-                ForbiddenCoords.Clear();
-                ForbiddenCoords = unique;
+                ForbiddenCoords = UniqueInt(ForbiddenCoords);
             }
+        }
+        private static List<int> UniqueInt(List<int> disorderedList)
+        {
+            List<int> uniqueList = new List<int>();
+            foreach (int unique in disorderedList)
+            {
+                if (!uniqueList.Contains(unique))
+                {
+                    uniqueList.Add(unique);
+                }
+            }
+            disorderedList.Clear();
+            disorderedList = uniqueList;
+            return disorderedList;
         }
     }
 }
