@@ -26,6 +26,7 @@ namespace Battleship
         public static int FirstHitCoord = 0;
         public static int[] TargetData = { 0, 0, 0 };
         public static int TargetButtonTag = 0;
+        public static int FirstHitedCoord = 0;
 
         public static string InfoType = "Null";
         public static char[] AllowedChars = { 'F', 'D', 'C', 'B' };
@@ -126,7 +127,6 @@ namespace Battleship
                 case 'M':
                 case 'H':
                     {
-                        //MessageBox.Show("Checked position", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         FirstHitCoord = 0;
                         checkedPosition = true;
                         break;
@@ -242,7 +242,7 @@ namespace Battleship
                         NewMove = PlayerData.SunkenBattleshipCount < sunkenBattleship;
                         if (sunkenBattleship == 1)
                         {
-                            //SetRoundMines(1);
+                            SetRoundMines(1);
                         }
                         PlayerData.SunkenBattleshipCount = sunkenBattleship;
                         PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
