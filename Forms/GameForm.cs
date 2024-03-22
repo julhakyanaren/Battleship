@@ -120,34 +120,41 @@ namespace Battleship
         }
         private async void Button_Click(object sender, MouseEventArgs e)
         {
-            if (Fight.Turn == 0)
+            if (Fight.ForbiddenCoords.Count != 100)
             {
-                Button clickedButton = sender as Button;
-                string tagButton = clickedButton.Tag.ToString();
-                Position.GetCoordsFromTag(tagButton, out int x, out int y, out int playerID);
-                if (playerID == 2)
+                if (Fight.Turn == 0)
                 {
-                    if (Fight.GameStarted)
+                    Button clickedButton = sender as Button;
+                    string tagButton = clickedButton.Tag.ToString();
+                    Position.GetCoordsFromTag(tagButton, out int x, out int y, out int playerID);
+                    if (playerID == 2)
                     {
-                        NextTurn(tagButton);
-                        if (SetTurnText() == "ERROR")
+                        if (Fight.GameStarted)
                         {
-                            //Error_Catch
-                        }
-                        else
-                        {
-                            TB_Turn.Text = SetTurnText();
+                            NextTurn(tagButton);
+                            if (SetTurnText() == "ERROR")
+                            {
+                                //Error_Catch
+                            }
+                            else
+                            {
+                                TB_Turn.Text = SetTurnText();
+                            }
                         }
                     }
+                    while (Fight.Turn == 1)
+                    {
+                        await EnemyTurn();
+                    }
                 }
-                while (Fight.Turn == 1)
+                else
                 {
-                    await EnemyTurn();
+                    MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 }
             }
             else
             {
-                MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Game over", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         public async void FindTarget(int duration = 200)

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -19,6 +20,7 @@ namespace Battleship
         public static bool PlayerHits = false;
         public static bool NewMove = true;
         public static bool Hited = false;
+        public static bool DefinedShot = false;
 
         public static int TargetCoord;
         public static int Turn = 0;
@@ -26,7 +28,9 @@ namespace Battleship
         public static int FirstHitCoord = 0;
         public static int[] TargetData = { 0, 0, 0 };
         public static int TargetButtonTag = 0;
-        public static int FirstHitedCoord = 0;
+        public static int FirstSuccessHitCoord = 0;
+        public static int SecondSuccessHitCoord = 0;
+        public static int DefinedCoord = 0;
 
         public static string InfoType = "Null";
         public static char[] AllowedChars = { 'F', 'D', 'C', 'B' };
@@ -328,6 +332,7 @@ namespace Battleship
                 successShoot = true;
                 if (NewMove)
                 {
+                    SecondSuccessHitCoord = 0;
                     bool correctCoord = false;
                     int target = -1;
                     do
@@ -363,33 +368,99 @@ namespace Battleship
                 {
                     if (FirstHitCoord != 0)
                     {
-                        bool canShot = false;
-                        int nextTarget = -1;
-                        int newIndex = FirstHitCoord + 1551;
-                        GenerateNearestCoords(newIndex, 1551);
-                        do
+                        if (!DefinedShot)
                         {
-                            Random randomShoot = new Random();
-                            int randomIndex = randomShoot.Next(0, AllowedCoords.Count);
-                            nextTarget = AllowedCoords[randomIndex];
-                            for (int f = 0; f < ForbiddenCoords.Count; f++)
+                            bool canShot = false;
+                            int nextTarget = -1;
+                            int newIndex = FirstHitCoord + 1551;
+                            GenerateNearestCoords(newIndex, 1551);
+                            do
                             {
-                                if (nextTarget != ForbiddenCoords[f])
+                                Random randomShoot = new Random();
+                                int randomIndex = randomShoot.Next(0, AllowedCoords.Count);
+                                nextTarget = AllowedCoords[randomIndex];
+                                for (int f = 0; f < ForbiddenCoords.Count; f++)
                                 {
-                                    canShot = true;
-                                    continue;
-                                }
-                                else
-                                {
-                                    canShot = false;
-                                    break;
+                                    if (nextTarget != ForbiddenCoords[f])
+                                    {
+                                        canShot = true;
+                                        continue;
+                                    }
+                                    else
+                                    {
+                                        canShot = false;
+                                        break;
+                                    }
                                 }
                             }
+                            while (!canShot);
+                            nextTarget = FindCorrectCoord(nextTarget) + 1551;
+                            TargetButtonTag = nextTarget;
+                            FirstSuccessHitCoord = nextTarget;
+                            EnemyShoot(nextTarget, out successShoot, out checkedPosition);
+                            for (int i = 0; i < AllowedCoords.Count; i++)
+                            {
+                                if (ForbiddenCoords.Contains(AllowedCoords[i]))
+                                {
+                                    AllowedCoords.Remove(AllowedCoords[i]);
+                                }
+                            }
+                            switch (successShoot)
+                            {
+                                case true:
+                                    {
+                                        break;
+                                    }
+                                case false:
+                                    {
+                                        DefinedShot = true;
+                                        Random randDS = new Random();
+                                        bool correctCoord = false;
+                                        do
+                                        {
+                                            int randomIndex = randDS.Next(0, AllowedCoords.Count + 1);
+                                            int detectedCoord = AllowedCoords[randomIndex];
+                                            if (ForbiddenCoords.Contains(detectedCoord))
+                                            {
+                                                correctCoord = false;
+                                            }
+                                            else
+                                            {
+                                                correctCoord = true;
+                                                DefinedCoord = detectedCoord;
+                                            }
+                                        }
+                                        while (!correctCoord);
+                                        break;
+                                    }
+                            }
                         }
-                        while (!canShot);
-                        nextTarget = FindCorrectCoord(nextTarget) + 1551;
-                        TargetButtonTag = nextTarget;
-                        EnemyShoot(nextTarget, out successShoot, out checkedPosition);
+                        else
+                        {
+                            EnemyShoot(DefinedCoord, out successShoot, out checkedPosition);
+                            if (successShoot)
+                            {
+                                AllowedCoords.Remove(DefinedCoord);
+                                ForbiddenCoords.Add(DefinedCoord);
+                                Random randDS = new Random();
+                                bool correctCoord = false;
+                                do
+                                {
+                                    int randomIndex = randDS.Next(0, AllowedCoords.Count + 1);
+                                    int detectedCoord = AllowedCoords[randomIndex];
+                                    if (ForbiddenCoords.Contains(detectedCoord))
+                                    {
+                                        correctCoord = false;
+                                    }
+                                    else
+                                    {
+                                        correctCoord = true;
+                                        DefinedCoord = detectedCoord;
+                                    }
+                                }
+                                while (!correctCoord);
+                            }
+                        }
                     }
                 }
             }
