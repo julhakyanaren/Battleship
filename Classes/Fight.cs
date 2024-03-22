@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Battleship
@@ -241,7 +242,7 @@ namespace Battleship
                         NewMove = PlayerData.SunkenBattleshipCount < sunkenBattleship;
                         if (sunkenBattleship == 1)
                         {
-                            SetRoundMines(1);
+                            //SetRoundMines(1);
                         }
                         PlayerData.SunkenBattleshipCount = sunkenBattleship;
                         PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
@@ -264,20 +265,35 @@ namespace Battleship
             }
             if (!incorrectValue && successShoot && !checkedPosition)
             {
-                GenerateNearestCoords(target, 1551);
-                for (int bl = 0; bl < BlockedCoords.Count; bl++)
+                try
                 {
-                    PlayerData.Map[BlockedCoords[bl]] = 'E';
-                }
-                if (sunkenFrigate)
-                {
-                    for (int bl = 0; bl < AllowedCoords.Count; bl++)
+                    GenerateNearestCoords(target, 1551);
+                    for (int bl = 0; bl < BlockedCoords.Count; bl++)
                     {
-                        PlayerData.Map[AllowedCoords[bl]] = 'E';
-                        ForbiddenCoords.Add(AllowedCoords[bl]);
+                        PlayerData.Map[BlockedCoords[bl]] = 'E';
                     }
-                    ForbiddenCoords = UniqueInt(ForbiddenCoords);
-                    sunkenFrigate = false;
+                    if (sunkenFrigate)
+                    {
+                        for (int bl = 0; bl < AllowedCoords.Count; bl++)
+                        {
+                            PlayerData.Map[AllowedCoords[bl]] = 'E';
+                            ForbiddenCoords.Add(AllowedCoords[bl]);
+                        }
+                        ForbiddenCoords = UniqueInt(ForbiddenCoords);
+                        sunkenFrigate = false;
+                    }
+                }
+                catch (Exception ex)
+                {
+                    DialogResult dr = MessageBox.Show($"Exception:\r\n{ex}\r\n\r\nMessage:\r\n{ex.Message}\r\n\r\nContinue?", "Exception Manager", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
+                    if (dr == DialogResult.Yes)
+                    {
+                        ReverseTurn(false);
+                    }
+                    else
+                    {
+                        ReverseTurn(true);
+                    }
                 }
             }
             if (targetInMap)
@@ -516,6 +532,7 @@ namespace Battleship
                 int firstCoord = -1;
                 string orientation = null;
                 int shipSize = 5 - shipType;
+                int[] sunkenShips = new int[shipSize];
                 switch (shipSize)
                 {
                     case 2:
@@ -531,6 +548,10 @@ namespace Battleship
                                 {
                                     firstCoord = PlayerData.DestroyerCoords[s, 1];
                                     orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = PlayerData.DestroyerCoords[s, sk];
                                 }
                             }
                             break;
@@ -549,6 +570,10 @@ namespace Battleship
                                     firstCoord = PlayerData.CruiserCoords[s, 2];
                                     orientation = "V";
                                 }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = PlayerData.CruiserCoords[s, sk];
+                                }
                             }
                             break;
                         }
@@ -565,6 +590,10 @@ namespace Battleship
                                 {
                                     firstCoord = PlayerData.BattleshipCoords[s, 3];
                                     orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = PlayerData.BattleshipCoords[s, sk];
                                 }
                             }
                             break;
@@ -587,6 +616,10 @@ namespace Battleship
                                 mineTags[m] = FindCorrectIndex(mineTags[m] + 1551); 
                                 PlayerData.Map[mineTags[m]] = 'E';
                                 ForbiddenCoords.Add(mineTags[m]);
+                            }
+                            for (int sk = 0; sk < sunkenShips.Length; sk++)
+                            {
+                                PlayerData.Map[sunkenShips[sk]] = 'S';
                             }
                             ForbiddenCoords = UniqueInt(ForbiddenCoords);
                         }
