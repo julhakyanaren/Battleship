@@ -62,9 +62,10 @@ namespace Battleship
         {
             for (int d0 = 0; d0 < DestroyersHited.GetLength(0); d0++)
             {
+                DestroyersSunken[d0] = true;
                 for (int d1 = 0; d1 < DestroyersHited.GetLength(1); d1++)
                 {
-                    DestroyersSunken[d0] &= DestroyersSunken[d1];
+                    DestroyersSunken[d0] &= DestroyersHited[d0,d1];
                 }
             }
         }
@@ -72,20 +73,21 @@ namespace Battleship
         {
             for (int c0 = 0; c0 < CruiserHited.GetLength(0); c0++)
             {
-                for (int c1 = 0; c1 < CruiserHited.GetLength(0); c1++)
+                CruisersSunken[c0] = true;
+                for (int c1 = 0; c1 < CruiserHited.GetLength(1); c1++)
                 {
-                    CruisersSunken[c0] &= CruisersSunken[c1];
+                    CruisersSunken[c0] &= CruiserHited[c0,c1];
                 }
             }
         }
         public static void DoesBattleshipSunken()
         {
-            for (int b1 = 0; b1 < BattleshipHited.GetLength(0); b1++)
+            for (int b1 = 0; b1 < BattleshipHited.GetLength(1); b1++)
             {
-                BattleshipSunken[0] &= BattleshipSunken[b1];
+                BattleshipSunken[0] = true;
+                BattleshipSunken[0] &= BattleshipHited[0, b1];
             }
         }
-
         public static bool AllFrigatesSunken;
         public static bool AllDestroyersSunken;
         public static bool AllCruisersSunken;

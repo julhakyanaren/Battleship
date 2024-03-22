@@ -148,9 +148,9 @@
             this.TSMI_StartBattleShip = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_RestartGame = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Map = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_GenerateMap = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GenerationType = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_TB_GenType = new System.Windows.Forms.ToolStripTextBox();
+            this.TSMI_GenerateMap = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_OpenMapEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Info = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GPO_OpenManual = new System.Windows.Forms.ToolStripMenuItem();
@@ -1958,14 +1958,6 @@
             this.TSMI_Map.Size = new System.Drawing.Size(41, 21);
             this.TSMI_Map.Text = "Map";
             // 
-            // TSMI_GenerateMap
-            // 
-            this.TSMI_GenerateMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_GenerateMap.Name = "TSMI_GenerateMap";
-            this.TSMI_GenerateMap.Size = new System.Drawing.Size(180, 22);
-            this.TSMI_GenerateMap.Text = "Generate Map";
-            this.TSMI_GenerateMap.Click += new System.EventHandler(this.TSMI_GenerateMap_Click);
-            // 
             // TSMI_GenerationType
             // 
             this.TSMI_GenerationType.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
@@ -1975,7 +1967,7 @@
             this.TSMI_GenerationType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_TB_GenType});
             this.TSMI_GenerationType.Name = "TSMI_GenerationType";
-            this.TSMI_GenerationType.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_GenerationType.Size = new System.Drawing.Size(176, 22);
             this.TSMI_GenerationType.Text = "Map Generation type";
             this.TSMI_GenerationType.CheckedChanged += new System.EventHandler(this.TSMI_GenerationType_CheckedChanged);
             // 
@@ -1988,11 +1980,19 @@
             this.TSMI_TB_GenType.Size = new System.Drawing.Size(180, 22);
             this.TSMI_TB_GenType.Text = "Generate random map";
             // 
+            // TSMI_GenerateMap
+            // 
+            this.TSMI_GenerateMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_GenerateMap.Name = "TSMI_GenerateMap";
+            this.TSMI_GenerateMap.Size = new System.Drawing.Size(176, 22);
+            this.TSMI_GenerateMap.Text = "Generate Map";
+            this.TSMI_GenerateMap.Click += new System.EventHandler(this.TSMI_GenerateMap_Click);
+            // 
             // TSMI_OpenMapEditor
             // 
             this.TSMI_OpenMapEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_OpenMapEditor.Name = "TSMI_OpenMapEditor";
-            this.TSMI_OpenMapEditor.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_OpenMapEditor.Size = new System.Drawing.Size(176, 22);
             this.TSMI_OpenMapEditor.Text = "Open Map Editor";
             this.TSMI_OpenMapEditor.Click += new System.EventHandler(this.TSMI_OpenMapEditor_Click);
             // 
@@ -2011,14 +2011,17 @@
             this.TSMI_GPO_OpenManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GPO_OpenManual.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_OpenManual.Name = "TSMI_GPO_OpenManual";
-            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(139, 22);
+            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GPO_OpenManual.Text = "Open manual";
             this.TSMI_GPO_OpenManual.Click += new System.EventHandler(this.TSMI_GPO_OpenManual_Click);
             // 
             // TSMI_GPO_Version
             // 
+            this.TSMI_GPO_Version.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_GPO_Version.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_Version.Name = "TSMI_GPO_Version";
-            this.TSMI_GPO_Version.Size = new System.Drawing.Size(139, 22);
+            this.TSMI_GPO_Version.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_GPO_Version.Text = "Info:";
             // 
             // TSMI_License
             // 

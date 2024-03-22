@@ -145,15 +145,22 @@ namespace Battleship
                 case 'D':
                     {
                         PlayerData.Map[index] = 'H';
+                        bool canBreak = false;
                         for (int d0 = 0; d0 < 3; d0++)
                         {
                             for (int d1 = 0; d1 < 2; d1++)
                             {
-                                if (PlayerData.DestroyerCoords[d0, d1] == index/*target - 1551*/)
+                                int currentDestroyer = PlayerData.DestroyerCoords[d0, d1];
+                                if (PlayerData.DestroyerCoords[d0, d1] == index)
                                 {
                                     PlayerData.DestroyersHited[d0, d1] = true;
+                                    canBreak = true;
                                     break;
                                 }
+                            }
+                            if (canBreak)
+                            {
+                                break;
                             }
                         }
                         PlayerData.DoesDestroyerSunken();
@@ -163,6 +170,10 @@ namespace Battleship
                             sunkenDestroyers += Convert.ToInt32(PlayerData.DestroyersSunken[d]);
                         }
                         NewMove = PlayerData.SunkenDestroyersCount < sunkenDestroyers;
+                        if (sunkenDestroyers - PlayerData.SunkenDestroyersCount == 1)
+                        {
+                            SetRoundMines(3);
+                        }
                         PlayerData.SunkenDestroyersCount = sunkenDestroyers;
                         PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
                         successShoot = true;
@@ -173,15 +184,22 @@ namespace Battleship
                 case 'C':
                     {
                         PlayerData.Map[index] = 'H';
+                        bool canBreak = false;
                         for (int c0 = 0; c0 < 2; c0++)
                         {
                             for (int c1 = 0; c1 < 3; c1++)
                             {
-                                if (PlayerData.CruiserCoords[c0, c1] == index/*target - 1551*/)
+                                int curentCruiser = PlayerData.CruiserCoords[c0, c1];
+                                if (PlayerData.CruiserCoords[c0, c1] == index)
                                 {
                                     PlayerData.CruiserHited[c0, c1] = true;
+                                    canBreak = true;
                                     break;
                                 }
+                            }
+                            if (canBreak)
+                            {
+                                break;
                             }
                         }
                         PlayerData.DoesCruiserSunken();
@@ -191,6 +209,10 @@ namespace Battleship
                             sunkenCruisers += Convert.ToInt32(PlayerData.CruisersSunken[c]);
                         }
                         NewMove = PlayerData.SunkenCruisersCount < sunkenCruisers;
+                        if (sunkenCruisers - PlayerData.SunkenCruisersCount == 1)
+                        {
+                            SetRoundMines(2);
+                        }
                         PlayerData.SunkenCruisersCount = sunkenCruisers;
                         PlayerData.CruiserCountCurrent = PlayerData.CruiserCountMax - PlayerData.SunkenCruisersCount;
                         FirstHitCoord = FindCorrectCoord(index);
@@ -201,15 +223,13 @@ namespace Battleship
                 case 'B':
                     {
                         PlayerData.Map[index] = 'H';
-                        for (int b0 = 0; b0 < 1; b0++)
+                        for (int b1 = 0; b1 < 4; b1++)
                         {
-                            for (int b1 = 0; b1 < 4; b1++)
+                            int currnetBattleship = PlayerData.BattleshipCoords[0, b1];
+                            if (PlayerData.BattleshipCoords[0, b1] == index)
                             {
-                                if (PlayerData.BattleshipCoords[b0, b1] == index/*target - 1551*/)
-                                {
-                                    PlayerData.BattleshipHited[b0, b1] = true;
-                                    break;
-                                }
+                                PlayerData.BattleshipHited[0, b1] = true;
+                                break;
                             }
                         }
                         PlayerData.DoesBattleshipSunken();
@@ -219,6 +239,10 @@ namespace Battleship
                             sunkenBattleship += Convert.ToInt32(PlayerData.BattleshipSunken[b]);
                         }
                         NewMove = PlayerData.SunkenBattleshipCount < sunkenBattleship;
+                        if (sunkenBattleship == 1)
+                        {
+                            SetRoundMines(1);
+                        }
                         PlayerData.SunkenBattleshipCount = sunkenBattleship;
                         PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
                         FirstHitCoord = FindCorrectCoord(index);
@@ -250,7 +274,9 @@ namespace Battleship
                     for (int bl = 0; bl < AllowedCoords.Count; bl++)
                     {
                         PlayerData.Map[AllowedCoords[bl]] = 'E';
+                        ForbiddenCoords.Add(AllowedCoords[bl]);
                     }
+                    ForbiddenCoords = UniqueInt(ForbiddenCoords);
                     sunkenFrigate = false;
                 }
             }
@@ -481,6 +507,100 @@ namespace Battleship
             disorderedList.Clear();
             disorderedList = uniqueList;
             return disorderedList;
+        }
+        static void SetRoundMines(int shipType)
+        {
+            for (int s = 0; s < shipType; s++)
+            {
+                int[] mineTags = new int[0];
+                int firstCoord = -1;
+                string orientation = null;
+                int shipSize = 5 - shipType;
+                switch (shipSize)
+                {
+                    case 2:
+                        {
+                            if (PlayerData.DestroyersSunken[s])
+                            {
+                                if (Math.Abs(PlayerData.DestroyerCoords[s, 0] - PlayerData.DestroyerCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = PlayerData.DestroyerCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(PlayerData.DestroyerCoords[s, 0] - PlayerData.DestroyerCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = PlayerData.DestroyerCoords[s, 1];
+                                    orientation = "V";
+                                }
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (PlayerData.CruisersSunken[s])
+                            {
+                                if (Math.Abs(PlayerData.CruiserCoords[s, 0] - PlayerData.CruiserCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = PlayerData.CruiserCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(PlayerData.CruiserCoords[s, 0] - PlayerData.CruiserCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = PlayerData.CruiserCoords[s, 2];
+                                    orientation = "V";
+                                }
+                            }
+                            break;
+                        }
+                    case 4:
+                        {
+                            if (PlayerData.BattleshipSunken[s])
+                            {
+                                if (Math.Abs(PlayerData.BattleshipCoords[s, 0] - PlayerData.BattleshipCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = PlayerData.BattleshipCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(PlayerData.BattleshipCoords[s, 0] - PlayerData.BattleshipCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = PlayerData.BattleshipCoords[s, 3];
+                                    orientation = "V";
+                                }
+                            }
+                            break;
+                        }
+                }
+                if (firstCoord != -1)
+                {
+                    firstCoord = FindCorrectCoord(firstCoord);
+                    pos.GetCoordsFromTag(firstCoord.ToString(), out int x, out int y, out int id);
+                    string cellPos = pos.GetCellPosition(firstCoord.ToString());
+                    if (orientation != null)
+                    {
+                        int minesCount = ShipData.GetMineCount(cellPos, shipSize, x, y, orientation);
+                        Array.Resize(ref mineTags, minesCount);
+                        if (shipSize > 0)
+                        {
+                            mineTags = ShipData.MineTagsFill(mineTags, cellPos, shipSize, firstCoord, orientation);
+                            for (int m = 0; m < minesCount; m++)
+                            {
+                                mineTags[m] = FindCorrectIndex(mineTags[m] + 1551); 
+                                PlayerData.Map[mineTags[m]] = 'E';
+                                ForbiddenCoords.Add(mineTags[m]);
+                            }
+                            ForbiddenCoords = UniqueInt(ForbiddenCoords);
+                        }
+                        else
+                        {
+                            //Error_Catch
+                        }
+                    }
+                    else
+                    {
+                        //Error_Catch
+                    }
+                }
+            }
         }
     }
 }
