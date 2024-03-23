@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
@@ -272,6 +273,11 @@ namespace Battleship
             {
                 try
                 {
+                    if (target / 1000 == 0)
+                    {
+                        target = FindCorrectCoord(target);
+                        target += 1551;
+                    }
                     GenerateNearestCoords(target, 1551);
                     for (int bl = 0; bl < BlockedCoords.Count; bl++)
                     {
@@ -337,7 +343,6 @@ namespace Battleship
                 successShoot = true;
                 if (NewMove)
                 {
-                    SecondSuccessHitCoord = 0;
                     bool correctCoord = false;
                     int target = -1;
                     do
@@ -367,6 +372,7 @@ namespace Battleship
                         }
                     }
                     while (!correctCoord);
+                    FirstSuccessHitCoord = target;
                     EnemyShoot(target, out successShoot, out checkedPosition);
                 }
                 else if (FirstHitCoord != 0 || DefinedShot)
@@ -395,6 +401,7 @@ namespace Battleship
                                 {
                                     canShot = false;
                                     allowedCoords.Remove(allowedCoords[randomIndex]);
+                                    AllowedCoords.Remove(allowedCoords[randomIndex]);
                                     allowedCoords.Sort();
                                     break;
                                 }
@@ -430,6 +437,10 @@ namespace Battleship
                     }
                     EnemyShoot(nextTarget, out successShoot, out checkedPosition);
                     int usedTarget = nextTarget;
+                    if (nextTarget / 1000 != 0)
+                    {
+                        usedTarget = FindCorrectIndex(nextTarget);
+                    }
                     if (!successShoot)
                     {
                         PossibleTargets.Remove(usedTarget);
@@ -438,6 +449,8 @@ namespace Battleship
                     }
                     else
                     {
+                        BanForbiddenCoords(nextTarget, FirstSuccessHitCoord, out IEnumerable<int> forbiddens);
+                        ForbiddenCoords.AddRange(forbiddens);
                         PossibleTargets.Remove(usedTarget);
                         ForbiddenCoords.Add(usedTarget);
                         if (PossibleTargets.Count == 0)
@@ -450,6 +463,26 @@ namespace Battleship
                 }
             }
             while (checkedPosition);
+        }
+        private static void BanForbiddenCoords(int nextTarget, int firstSuccessHitCoord, out IEnumerable<int> forbiddens)
+        {
+            int delta = Math.Abs(nextTarget - firstSuccessHitCoord);
+            forbiddens = null;
+            switch (delta)
+            {
+                case 1:
+                    {
+                        forbiddens = PossibleTargets.Where(x => Math.Abs(x - firstSuccessHitCoord) == 10);
+                        PossibleTargets.RemoveAll(x => Math.Abs(x - firstSuccessHitCoord) == 10);
+                        break;
+                    }
+                case 10:
+                    {
+                        forbiddens = PossibleTargets.Where(x => Math.Abs(x - firstSuccessHitCoord) == 10);
+                        PossibleTargets.RemoveAll(x => Math.Abs(x - firstSuccessHitCoord) == 1);
+                        break;
+                    }
+            }
         }
         public static int FindShipCoord(bool hitStatus)
         {
@@ -570,18 +603,10 @@ namespace Battleship
         }
         private static List<int> SortUniqueInt(List<int> disorderedList)
         {
-            List<int> uniqueList = new List<int>();
-            foreach (int unique in disorderedList)
-            {
-                if (!uniqueList.Contains(unique))
-                {
-                    uniqueList.Add(unique);
-                }
-            }
-            disorderedList.Clear();
-            disorderedList = uniqueList;
-            disorderedList.Sort();
-            return disorderedList;
+            HashSet<int> unique = new HashSet<int>(disorderedList);
+            List<int> newList = new List<int>(unique);
+            newList.Sort();
+            return newList;
         }
         static void SetRoundMines(int shipType)
         {

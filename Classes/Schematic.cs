@@ -12,7 +12,7 @@ namespace Battleship
 {
     public static class Schematic
     {
-        public static string Map;
+        public static string Map = /*Debug*/"FMNMDDMNMFMMNMMMMNMMNNNNNNNNMMMMMMMMMMMBDMMCMMCMMBDMMCMMCMMBMMMCMMCMMBNNMMMMMMMMMMNMMMMNMMFMNMDDMNMF";
         public static char[] MapSchema = new char[0];
         public static string Path = "C:\\Users\\Admin\\Desktop"; // Change
         public const string FileЕxtension = "msch";

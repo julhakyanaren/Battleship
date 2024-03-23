@@ -625,6 +625,10 @@ namespace Battleship
                         char[] schematicMapEditor = Schematic.Map.ToCharArray();
                         for (int c = 0; c < schematicMapEditor.Length; c++)
                         {
+                            if (schematicMapEditor[c] == 'M')
+                            {
+                                schematicMapEditor[c] = 'E';
+                            }
                             buttonColor = ColorMethods.SetColorViaChar(schematicMapEditor[c]);
                             switch (schematicMapEditor[c])
                             {

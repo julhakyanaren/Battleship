@@ -3,6 +3,7 @@ using Battleship.Forms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -113,6 +114,11 @@ namespace Battleship
             TB_MC_CruiserCount.ForeColor = Color.Lime;
             TB_MC_BattleshipCount.ForeColor = Color.Lime;
             ShipData.ChoosenShipType = 1;
+            //Debug
+            TB_MapSchematic.ReadOnly = false;
+            BS_MC_Apply.Visible = true;
+            BS_MC_Apply.Enabled = true;
+            //Debug
         }
         int[,] GenerateButtonsTags()
         {
@@ -1396,6 +1402,7 @@ namespace Battleship
                         DialogResult = MessageBox.Show("The schematic map has been successfully created and saved.\r\n Close the map editor?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (DialogResult == DialogResult.Yes)
                         {
+                            Schematic.Map.ToUpper();
                             DebugTools.MCF.Opened = false;
                             this.Dispose();
                         }

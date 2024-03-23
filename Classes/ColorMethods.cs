@@ -9,7 +9,7 @@ namespace Battleship
     {
         Support Support = new Support();
         public Color[] PlayerMapColor = new Color[100];
-        public Color SetColorViaChar(char charter)
+        public Color SetColorViaChar(char charter, bool hitDraw = false)
         {
             charter = Convert.ToChar(charter.ToString().ToUpper());
             switch (Char.ToUpper(charter))
@@ -44,7 +44,11 @@ namespace Battleship
                     }
                 case 'E':
                     {
-                        return Color.DeepSkyBlue;
+                        if (hitDraw)
+                        {
+                            return Color.DeepSkyBlue;
+                        }
+                        return Color.White;
                     }
                 default:
                     {
@@ -164,7 +168,7 @@ namespace Battleship
             Color[] colors = new Color[inputMap.Length];
             for (int c = 0; c < colors.Length; c++)
             {
-                colors[c] = SetColorViaChar(inputMap[c]);
+                colors[c] = SetColorViaChar(inputMap[c], true);
                 if (colors[c] == Color.Aqua)
                 {
                     colors[c] = Color.DeepSkyBlue;
