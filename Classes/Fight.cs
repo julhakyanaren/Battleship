@@ -22,6 +22,7 @@ namespace Battleship
         public static bool NewMove = true;
         public static bool Hited = false;
         public static bool DefinedShot = false;
+        public static bool GuaranteedShot = false;
 
         public static int TargetCoord;
         public static int Turn = 0;
@@ -180,6 +181,8 @@ namespace Battleship
                         if (sunkenDestroyers - PlayerData.SunkenDestroyersCount == 1)
                         {
                             SetRoundMines(3);
+                            PossibleTargets.Clear();
+                            DefinedShot = false;
                         }
                         PlayerData.SunkenDestroyersCount = sunkenDestroyers;
                         PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
@@ -219,6 +222,8 @@ namespace Battleship
                         if (sunkenCruisers - PlayerData.SunkenCruisersCount == 1)
                         {
                             SetRoundMines(2);
+                            PossibleTargets.Clear();
+                            DefinedShot = false;
                         }
                         PlayerData.SunkenCruisersCount = sunkenCruisers;
                         PlayerData.CruiserCountCurrent = PlayerData.CruiserCountMax - PlayerData.SunkenCruisersCount;
@@ -249,6 +254,8 @@ namespace Battleship
                         if (sunkenBattleship == 1)
                         {
                             SetRoundMines(1);
+                            PossibleTargets.Clear();
+                            DefinedShot = false;
                         }
                         PlayerData.SunkenBattleshipCount = sunkenBattleship;
                         PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
@@ -268,6 +275,10 @@ namespace Battleship
                         targetInMap = false;
                         break;
                     }
+            }
+            if (charter == 'F' || charter == 'D' || charter == 'C' || charter == 'B')
+            {
+                string ch = charter.ToString();
             }
             if (!incorrectValue && successShoot && !checkedPosition)
             {
@@ -349,6 +360,7 @@ namespace Battleship
                     {
                         if (ForbiddenCoords.Count != 0)
                         {
+                            ForbiddenCoords.Sort();
                             target = FindShipCoord(false);
                             int targetIndex = FindCorrectIndex(target);
                             for (int t = 0; t < ForbiddenCoords.Count; t++)
@@ -356,7 +368,15 @@ namespace Battleship
                                 if (targetIndex != ForbiddenCoords[t])
                                 {
                                     correctCoord = true;
-                                    continue;
+                                    if (target < ForbiddenCoords[t])
+                                    {
+                                        correctCoord = false;
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
                                 }
                                 else
                                 {
@@ -372,8 +392,11 @@ namespace Battleship
                         }
                     }
                     while (!correctCoord);
-                    FirstSuccessHitCoord = target;
                     EnemyShoot(target, out successShoot, out checkedPosition);
+                    if (successShoot)
+                    {
+                        FirstSuccessHitCoord = target;
+                    }
                 }
                 else if (FirstHitCoord != 0 || DefinedShot)
                 {
@@ -387,6 +410,7 @@ namespace Battleship
                         List<int> allowedCoords = AllowedCoords;
                         do
                         {
+                            ForbiddenCoords.Sort();
                             Random randomShoot = new Random();
                             int randomIndex = randomShoot.Next(0, AllowedCoords.Count);
                             nextTarget = allowedCoords[randomIndex];
@@ -395,7 +419,14 @@ namespace Battleship
                                 if (nextTarget != ForbiddenCoords[f])
                                 {
                                     canShot = true;
-                                    continue;
+                                    if (nextTarget < ForbiddenCoords[f])
+                                    {
+                                        break;
+                                    }
+                                    else
+                                    {
+                                        continue;
+                                    }
                                 }
                                 else
                                 {
@@ -413,29 +444,46 @@ namespace Battleship
                     }
                     if (DefinedShot)
                     {
-                        do
+                        if (PossibleTargets.Count != 1)
                         {
-                            Random randomPT = new Random();
-                            int randomIndexPT = randomPT.Next(0, PossibleTargets.Count);
-                            nextTarget = PossibleTargets[randomIndexPT];
-                            for (int f = 0; f < ForbiddenCoords.Count; f++)
+                            do
                             {
-                                if (nextTarget != ForbiddenCoords[f])
+                                ForbiddenCoords.Sort();
+                                Random randomPT = new Random();
+                                int randomIndexPT = randomPT.Next(0, PossibleTargets.Count);
+                                nextTarget = PossibleTargets[randomIndexPT];
+                                for (int f = 0; f < ForbiddenCoords.Count; f++)
                                 {
-                                    canShot = true;
-                                    continue;
+                                    if (nextTarget != ForbiddenCoords[f])
+                                    {
+                                        canShot = true;
+                                        if (nextTarget < ForbiddenCoords[f])
+                                        {
+                                            canShot = false;
+                                            break;
+                                        }
+                                        else
+                                        {
+                                            continue;
+                                        }
+                                    }
+                                    else
+                                    {
+                                        canShot = false;
+                                        break;
+                                    }
                                 }
-                                else
-                                {
-                                    canShot = false;
-                                    break;
-                                }
-
                             }
+                            while (!canShot);
                         }
-                        while (!canShot);
+                        else
+                        {
+                            nextTarget = DefinedCoord;
+                        }
                     }
+                    //nextTarget = FindCorrectCoord(nextTarget) + 1551;
                     EnemyShoot(nextTarget, out successShoot, out checkedPosition);
+                    PossibleTargets = DeleteForbiddenCoords(PossibleTargets);
                     int usedTarget = nextTarget;
                     if (nextTarget / 1000 != 0)
                     {
@@ -449,13 +497,25 @@ namespace Battleship
                     }
                     else
                     {
-                        BanForbiddenCoords(nextTarget, FirstSuccessHitCoord, out IEnumerable<int> forbiddens);
-                        ForbiddenCoords.AddRange(forbiddens);
+                        int firstHitIndex = FindCorrectIndex(FirstSuccessHitCoord);
+                        List<int>[] listes = BannForbiddenCoords(usedTarget, firstHitIndex, PossibleTargets, ForbiddenCoords);
+                        PossibleTargets = listes[0];
+                        ForbiddenCoords = listes[1];
                         PossibleTargets.Remove(usedTarget);
                         ForbiddenCoords.Add(usedTarget);
-                        if (PossibleTargets.Count == 0)
+                        switch(PossibleTargets.Count)
                         {
-                            DefinedShot = false;
+                            case 0:
+                                {
+                                    DefinedShot = false;
+                                    break;
+                                }
+                            case 1:
+                                {
+                                    DefinedShot = true;
+                                    DefinedCoord = PossibleTargets[0];
+                                    break;
+                                }
                         }
                     }
                     ForbiddenCoords.Sort();
@@ -464,25 +524,19 @@ namespace Battleship
             }
             while (checkedPosition);
         }
-        private static void BanForbiddenCoords(int nextTarget, int firstSuccessHitCoord, out IEnumerable<int> forbiddens)
+        private static List<int>[] BannForbiddenCoords(int nextTarget, int firstHit, List<int> allowedList, List<int> forbiddenList)
         {
-            int delta = Math.Abs(nextTarget - firstSuccessHitCoord);
-            forbiddens = null;
-            switch (delta)
+            int delta = Math.Abs(nextTarget - firstHit);
+            for (int m = 0; m < allowedList.Count; m++)
             {
-                case 1:
-                    {
-                        forbiddens = PossibleTargets.Where(x => Math.Abs(x - firstSuccessHitCoord) == 10);
-                        PossibleTargets.RemoveAll(x => Math.Abs(x - firstSuccessHitCoord) == 10);
-                        break;
-                    }
-                case 10:
-                    {
-                        forbiddens = PossibleTargets.Where(x => Math.Abs(x - firstSuccessHitCoord) == 10);
-                        PossibleTargets.RemoveAll(x => Math.Abs(x - firstSuccessHitCoord) == 1);
-                        break;
-                    }
+                if (Math.Abs(allowedList[m] - firstHit) != delta)
+                {
+                    forbiddenList.Add(m);
+                    allowedList.Remove(m);
+                }
             }
+            List<int>[] listArray = {allowedList, forbiddenList};
+            return listArray;
         }
         public static int FindShipCoord(bool hitStatus)
         {
@@ -718,6 +772,18 @@ namespace Battleship
                     }
                 }
             }
+        }
+        private static List<int> DeleteForbiddenCoords(List<int> inputList)
+        {
+            HashSet<int> forbiddenSet = new HashSet<int>(ForbiddenCoords);
+            HashSet<int> convertedSet = new HashSet<int>(inputList);
+            var intersection = convertedSet.Where(x => forbiddenSet.Contains(x)).ToList();
+            foreach (var item in intersection)
+            {
+                convertedSet.Remove(item);
+            }
+            inputList = new List<int>(convertedSet);
+            return inputList;
         }
     }
 }
