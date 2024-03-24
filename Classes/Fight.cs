@@ -392,6 +392,7 @@ namespace Battleship
                         }
                     }
                     while (!correctCoord);
+                    TargetButtonTag = target;
                     EnemyShoot(target, out successShoot, out checkedPosition);
                     if (successShoot)
                     {
@@ -459,7 +460,6 @@ namespace Battleship
                                         canShot = true;
                                         if (nextTarget < ForbiddenCoords[f])
                                         {
-                                            canShot = false;
                                             break;
                                         }
                                         else
@@ -479,9 +479,11 @@ namespace Battleship
                         else
                         {
                             nextTarget = DefinedCoord;
+                            nextTarget = FindCorrectCoord(nextTarget) + 1551;
                         }
                     }
                     //nextTarget = FindCorrectCoord(nextTarget) + 1551;
+                    TargetButtonTag = nextTarget/*FindCorrectCoord(nextTarget) + 1551*/;
                     EnemyShoot(nextTarget, out successShoot, out checkedPosition);
                     PossibleTargets = DeleteForbiddenCoords(PossibleTargets);
                     int usedTarget = nextTarget;
