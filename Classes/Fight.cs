@@ -1,5 +1,7 @@
 ﻿using System;
+using System.CodeDom;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
@@ -483,8 +485,12 @@ namespace Battleship
                         }
                     }
                     //nextTarget = FindCorrectCoord(nextTarget) + 1551;
-                    TargetButtonTag = nextTarget/*FindCorrectCoord(nextTarget) + 1551*/;
+                    TargetButtonTag = nextTarget;
                     EnemyShoot(nextTarget, out successShoot, out checkedPosition);
+                    if (successShoot)
+                    {
+                        SecondSuccessHitCoord = nextTarget;
+                    }
                     PossibleTargets = DeleteForbiddenCoords(PossibleTargets);
                     int usedTarget = nextTarget;
                     if (nextTarget / 1000 != 0)
@@ -509,7 +515,13 @@ namespace Battleship
                         {
                             case 0:
                                 {
-                                    DefinedShot = false;
+                                    int firstCount = PossibleTargets.Count;
+                                    PossibleTargets = UpdatePossibleTargets(FirstHitCoord, FirstSuccessHitCoord);
+                                    int secondCount = PossibleTargets.Count;
+                                    if (firstCount == secondCount)
+                                    {
+                                        DefinedShot = false;
+                                    }
                                     break;
                                 }
                             case 1:
@@ -786,6 +798,161 @@ namespace Battleship
             }
             inputList = new List<int>(convertedSet);
             return inputList;
+        }
+        private static List<int> UpdatePossibleTargets(int firstHitCoord, int secondHitCoord)
+        {
+            firstHitCoord = FindCorrectIndex(firstHitCoord);
+            secondHitCoord = FindCorrectIndex(secondHitCoord);
+            int delta = firstHitCoord - secondHitCoord;
+            string secondCellTag = null;
+            int newTarget = 0;
+            int cyclesCount = 0;
+            try
+            {
+                secondCellTag = FindCorrectCoord(secondHitCoord).ToString();
+            }
+            catch
+            {
+                secondCellTag = null;
+            }
+            List<int> newTargetsList = new List<int>();
+            if (secondCellTag != null)
+            {
+                bool correctTarget = false;
+                do
+                {
+                    cyclesCount++;
+                    switch (pos.GetCellPosition(secondCellTag))
+                    {
+                        case "top":
+                            {
+                                if (Math.Abs(delta) == 1)
+                                {
+                                    newTarget = secondHitCoord + (-delta);
+                                }
+                                else
+                                {
+                                    newTarget = firstHitCoord + Math.Abs(delta);
+                                }
+                                break;
+                            }
+                        case "bottom":
+                            {
+                                if (Math.Abs(delta) == 1)
+                                {
+                                    newTarget = secondHitCoord + (-delta);
+                                }
+                                else
+                                {
+                                    newTarget = firstHitCoord - Math.Abs(delta);
+                                }
+                                break;
+                            }
+                        case "left":
+                            {
+                                if (Math.Abs(delta) == 10)
+                                {
+                                    newTarget = secondHitCoord + (-delta);
+                                }
+                                else
+                                {
+                                    newTarget = firstHitCoord + Math.Abs(delta);
+                                }
+                                break;
+                            }
+                        case "right":
+                            {
+                                if (Math.Abs(delta) == 10)
+                                {
+                                    newTarget = secondHitCoord + (-delta);
+                                }
+                                else
+                                {
+                                    newTarget = firstHitCoord - Math.Abs(delta);
+                                }
+                                break;
+                            }
+                        case "center":
+                            {
+                                newTarget = secondHitCoord + (-delta);
+                                break;
+                            }
+                        case "corner1":
+                            {
+                                newTarget = firstHitCoord + Math.Abs(delta);
+                                break;
+                            }
+                        case "corner2":
+                            {
+                                if (Math.Abs(delta) == 1)
+                                {
+                                    newTarget = firstHitCoord - Math.Abs(delta);
+                                }
+                                else
+                                {
+                                    newTarget = firstHitCoord + Math.Abs(delta);
+                                }
+                                break;
+                            }
+                        case "corner3":
+                            {
+                                newTarget = firstHitCoord - Math.Abs(delta);
+                                break;
+                            }
+                        case "corner4":
+                            {
+                                if (Math.Abs(delta) == 1)
+                                {
+                                    newTarget = firstHitCoord + Math.Abs(delta);
+                                }
+                                else
+                                {
+                                    newTarget = firstHitCoord - Math.Abs(delta);
+                                }
+                                break;
+                            }
+                    }
+                    newTarget = FindCorrectIndex(newTarget + 1551);
+                    ForbiddenCoords.Sort();
+                    for (int f = 0; f < ForbiddenCoords.Count; f++)
+                    {
+                        if (newTarget != ForbiddenCoords[f])
+                        {
+                            correctTarget = true;
+                            if (newTarget < ForbiddenCoords[f])
+                            {
+                                break;
+                            }
+                            continue;
+                        }
+                        else
+                        {
+                            correctTarget = false;
+                            TargetsSwap(ref firstHitCoord, ref secondHitCoord);
+                            break;
+                        }
+                    }
+                }
+                while (!correctTarget || cyclesCount <= 2);
+            }
+            else
+            {
+                newTargetsList = PossibleTargets;
+            }
+            if (cyclesCount <= 2)
+            {
+                //newTarget = FindCorrectIndex(newTarget + 1551);
+                newTargetsList.Add(newTarget);
+            }
+            else
+            {
+                newTargetsList = PossibleTargets;
+            }
+            return newTargetsList;
+        }
+        private static void TargetsSwap(ref int firstTarget, ref int secondTarget)
+        {
+            (firstTarget, secondTarget) = (secondTarget, firstTarget);
         }
     }
 }
