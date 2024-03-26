@@ -115,6 +115,13 @@ namespace Battleship
                     counter++;
                 }
             }
+            //Debug
+            if (index == 0)
+            {
+                index--;
+                index++;
+            }
+            //Debug
             successShoot = true;
             char charter = Char.ToUpper(PlayerData.Map[index]);
             bool hited = true;
@@ -288,8 +295,7 @@ namespace Battleship
                 {
                     if (target / 1000 == 0)
                     {
-                        target = FindCorrectCoord(target);
-                        target += 1551;
+                        target = FindCorrectCoord(target) + 1551;
                     }
                     GenerateNearestCoords(target, 1551);
                     for (int bl = 0; bl < BlockedCoords.Count; bl++)
@@ -434,8 +440,8 @@ namespace Battleship
                                 else
                                 {
                                     canShot = false;
-                                    allowedCoords.Remove(allowedCoords[randomIndex]);
-                                    AllowedCoords.Remove(allowedCoords[randomIndex]);
+                                    allowedCoords.Remove(nextTarget);
+                                    AllowedCoords.Remove(nextTarget);
                                     allowedCoords.Sort();
                                     break;
                                 }
@@ -480,14 +486,20 @@ namespace Battleship
                         }
                         else
                         {
+                            DefinedCoord = PossibleTargets[0];
                             nextTarget = DefinedCoord;
                             nextTarget = FindCorrectCoord(nextTarget) + 1551;
                         }
                     }
-                    //nextTarget = FindCorrectCoord(nextTarget) + 1551;
+                    //Debug
+                    if (nextTarget / 1000 == 0)
+                    {
+                        nextTarget = FindCorrectCoord(nextTarget) + 1551;
+                    }
+                    //Debug
                     TargetButtonTag = nextTarget;
                     EnemyShoot(nextTarget, out successShoot, out checkedPosition);
-                    if (successShoot)
+                    if (successShoot && SecondSuccessHitCoord == 0)
                     {
                         SecondSuccessHitCoord = nextTarget;
                     }
@@ -516,7 +528,7 @@ namespace Battleship
                             case 0:
                                 {
                                     int firstCount = PossibleTargets.Count;
-                                    PossibleTargets = UpdatePossibleTargets(FirstHitCoord, FirstSuccessHitCoord);
+                                    PossibleTargets = UpdatePossibleTargets(FirstSuccessHitCoord, SecondSuccessHitCoord);
                                     int secondCount = PossibleTargets.Count;
                                     if (firstCount == secondCount)
                                     {
@@ -805,7 +817,10 @@ namespace Battleship
             secondHitCoord = FindCorrectIndex(secondHitCoord);
             int delta = firstHitCoord - secondHitCoord;
             string secondCellTag = null;
-            int newTarget = 0;
+            if (Math.Abs(delta) % 2 == 0 || Math.Abs(delta) % 20 == 0)
+            {
+                secondHitCoord = firstHitCoord - (delta / 10);
+            }
             int cyclesCount = 0;
             try
             {
@@ -818,21 +833,24 @@ namespace Battleship
             List<int> newTargetsList = new List<int>();
             if (secondCellTag != null)
             {
-                bool correctTarget = false;
+                bool correctTargets = false;
                 do
                 {
                     cyclesCount++;
+                    newTargetsList.Clear();
                     switch (pos.GetCellPosition(secondCellTag))
                     {
                         case "top":
                             {
                                 if (Math.Abs(delta) == 1)
                                 {
-                                    newTarget = secondHitCoord + (-delta);
+                                    newTargetsList.Add(secondHitCoord + (-delta));
+                                    newTargetsList.Add(secondHitCoord + (-delta * 2));
                                 }
                                 else
                                 {
-                                    newTarget = firstHitCoord + Math.Abs(delta);
+                                    newTargetsList.Add(firstHitCoord + Math.Abs(delta));
+                                    newTargetsList.Add(firstHitCoord + Math.Abs(delta * 2));
                                 }
                                 break;
                             }
@@ -840,11 +858,13 @@ namespace Battleship
                             {
                                 if (Math.Abs(delta) == 1)
                                 {
-                                    newTarget = secondHitCoord + (-delta);
+                                    newTargetsList.Add(secondHitCoord + (-delta));
+                                    newTargetsList.Add(secondHitCoord + (-delta * 2));
                                 }
                                 else
                                 {
-                                    newTarget = firstHitCoord - Math.Abs(delta);
+                                    newTargetsList.Add(firstHitCoord - Math.Abs(delta));
+                                    newTargetsList.Add(firstHitCoord - Math.Abs(delta * 2));
                                 }
                                 break;
                             }
@@ -852,11 +872,13 @@ namespace Battleship
                             {
                                 if (Math.Abs(delta) == 10)
                                 {
-                                    newTarget = secondHitCoord + (-delta);
+                                    newTargetsList.Add(secondHitCoord + (-delta));
+                                    newTargetsList.Add(secondHitCoord + (-delta * 2));
                                 }
                                 else
                                 {
-                                    newTarget = firstHitCoord + Math.Abs(delta);
+                                    newTargetsList.Add(firstHitCoord + Math.Abs(delta));
+                                    newTargetsList.Add(firstHitCoord + Math.Abs(delta * 2));
                                 }
                                 break;
                             }
@@ -864,89 +886,98 @@ namespace Battleship
                             {
                                 if (Math.Abs(delta) == 10)
                                 {
-                                    newTarget = secondHitCoord + (-delta);
+                                    newTargetsList.Add(secondHitCoord + (-delta));
+                                    newTargetsList.Add(secondHitCoord + (-delta * 2));
                                 }
                                 else
                                 {
-                                    newTarget = firstHitCoord - Math.Abs(delta);
+                                    newTargetsList.Add(firstHitCoord - Math.Abs(delta));
+                                    newTargetsList.Add(firstHitCoord - Math.Abs(delta * 2));
                                 }
                                 break;
                             }
                         case "center":
                             {
-                                newTarget = secondHitCoord + (-delta);
+                                newTargetsList.Add(secondHitCoord + (-delta));
+                                newTargetsList.Add(secondHitCoord + (-delta * 2));
+                                if ((newTargetsList[1] % 10) > newTargetsList[0] % 10)
+                                {
+                                    newTargetsList.RemoveAt(1);
+                                }
                                 break;
                             }
                         case "corner1":
                             {
-                                newTarget = firstHitCoord + Math.Abs(delta);
+                                newTargetsList.Add(firstHitCoord + Math.Abs(delta));
+                                newTargetsList.Add(firstHitCoord + Math.Abs(delta * 2));
                                 break;
                             }
                         case "corner2":
                             {
                                 if (Math.Abs(delta) == 1)
                                 {
-                                    newTarget = firstHitCoord - Math.Abs(delta);
+                                    newTargetsList.Add(firstHitCoord - Math.Abs(delta));
+                                    newTargetsList.Add(firstHitCoord - Math.Abs(delta * 2));
                                 }
                                 else
                                 {
-                                    newTarget = firstHitCoord + Math.Abs(delta);
+                                    newTargetsList.Add(firstHitCoord + Math.Abs(delta));
+                                    newTargetsList.Add(firstHitCoord + Math.Abs(delta * 2));
                                 }
                                 break;
                             }
                         case "corner3":
                             {
-                                newTarget = firstHitCoord - Math.Abs(delta);
+                                newTargetsList.Add(firstHitCoord - Math.Abs(delta));
+                                newTargetsList.Add(firstHitCoord - Math.Abs(delta * 2));
                                 break;
                             }
                         case "corner4":
                             {
                                 if (Math.Abs(delta) == 1)
                                 {
-                                    newTarget = firstHitCoord + Math.Abs(delta);
+                                    newTargetsList.Add(firstHitCoord + Math.Abs(delta));
+                                    newTargetsList.Add(firstHitCoord + Math.Abs(delta * 2));
                                 }
                                 else
                                 {
-                                    newTarget = firstHitCoord - Math.Abs(delta);
+                                    newTargetsList.Add(firstHitCoord - Math.Abs(delta));
+                                    newTargetsList.Add(firstHitCoord - Math.Abs(delta * 2));
                                 }
                                 break;
                             }
                     }
-                    newTarget = FindCorrectIndex(newTarget + 1551);
                     ForbiddenCoords.Sort();
-                    for (int f = 0; f < ForbiddenCoords.Count; f++)
+                    newTargetsList.Sort();
+                    HashSet<int> forbidden = new HashSet<int>(ForbiddenCoords);
+                    HashSet<int> possible = new HashSet<int>(newTargetsList);
+                    var intersection = possible.Where(x => forbidden.Contains(x)).ToList();
+                    foreach (var item in intersection)
                     {
-                        if (newTarget != ForbiddenCoords[f])
-                        {
-                            correctTarget = true;
-                            if (newTarget < ForbiddenCoords[f])
-                            {
-                                break;
-                            }
-                            continue;
-                        }
-                        else
-                        {
-                            correctTarget = false;
-                            TargetsSwap(ref firstHitCoord, ref secondHitCoord);
-                            break;
-                        }
+                        possible.Remove(item);
+                    }
+                    newTargetsList = new List<int>(possible);
+                    if (newTargetsList.Count != 0)
+                    {
+                        correctTargets = true;
+                        break;
+                    }
+                    else
+                    {
+                        correctTargets = false;
+                        TargetsSwap(ref firstHitCoord, ref secondHitCoord);
+                        continue;
                     }
                 }
-                while (!correctTarget || cyclesCount <= 2);
+                while (!correctTargets || cyclesCount <= 2);
             }
             else
             {
                 newTargetsList = PossibleTargets;
             }
-            if (cyclesCount <= 2)
+            if (newTargetsList.Count == 0)
             {
-                //newTarget = FindCorrectIndex(newTarget + 1551);
-                newTargetsList.Add(newTarget);
-            }
-            else
-            {
-                newTargetsList = PossibleTargets;
+                return PossibleTargets;
             }
             return newTargetsList;
         }

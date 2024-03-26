@@ -120,13 +120,22 @@ namespace Battleship
         }
         private async void Button_Click(object sender, MouseEventArgs e)
         {
-            if (Fight.ForbiddenCoords.Count != 100)
+            Button clickedButton = sender as Button;
+            int playerID;
+            string coord = Position.GetButtonTextCoords(clickedButton, out playerID);
+            Support.StringToInt(clickedButton.Tag.ToString(), out int tagCB);
+            if (clickedButton.BackColor != Color.White)
+            {
+                if (tagCB / 100 == 2)
+                {
+                    MessageBox.Show($"Cell \"{coord}\" checked!\r\nPlease choose another cell", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                }
+            }
+            else if (Fight.ForbiddenCoords.Count != 100)
             {
                 if (Fight.Turn == 0)
                 {
-                    Button clickedButton = sender as Button;
                     string tagButton = clickedButton.Tag.ToString();
-                    Position.GetCoordsFromTag(tagButton, out int x, out int y, out int playerID);
                     if (playerID == 2)
                     {
                         if (Fight.GameStarted)
