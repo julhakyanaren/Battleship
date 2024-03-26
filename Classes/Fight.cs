@@ -34,6 +34,7 @@ namespace Battleship
         public static int TargetButtonTag = 0;
         public static int FirstSuccessHitCoord = 0;
         public static int SecondSuccessHitCoord = 0;
+        public static int ThirdSuccssHitCoord = 0;
         public static int DefinedCoord = 0;
 
         public static string InfoType = "Null";
@@ -191,7 +192,6 @@ namespace Battleship
                         {
                             SetRoundMines(3);
                             PossibleTargets.Clear();
-                            DefinedShot = false;
                         }
                         PlayerData.SunkenDestroyersCount = sunkenDestroyers;
                         PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
@@ -232,7 +232,6 @@ namespace Battleship
                         {
                             SetRoundMines(2);
                             PossibleTargets.Clear();
-                            DefinedShot = false;
                         }
                         PlayerData.SunkenCruisersCount = sunkenCruisers;
                         PlayerData.CruiserCountCurrent = PlayerData.CruiserCountMax - PlayerData.SunkenCruisersCount;
@@ -264,7 +263,6 @@ namespace Battleship
                         {
                             SetRoundMines(1);
                             PossibleTargets.Clear();
-                            DefinedShot = false;
                         }
                         PlayerData.SunkenBattleshipCount = sunkenBattleship;
                         PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
@@ -287,7 +285,7 @@ namespace Battleship
             }
             if (charter == 'F' || charter == 'D' || charter == 'C' || charter == 'B')
             {
-                string ch = charter.ToString();
+                ShipData.HitedDeckCount++;
             }
             if (!incorrectValue && successShoot && !checkedPosition)
             {
@@ -402,7 +400,7 @@ namespace Battleship
                     while (!correctCoord);
                     TargetButtonTag = target;
                     EnemyShoot(target, out successShoot, out checkedPosition);
-                    if (successShoot)
+                    if (successShoot && FirstSuccessHitCoord == 0)
                     {
                         FirstSuccessHitCoord = target;
                     }
@@ -455,12 +453,25 @@ namespace Battleship
                     {
                         if (PossibleTargets.Count != 1)
                         {
+                            int counter = -1;
                             do
                             {
+                                counter++;
                                 ForbiddenCoords.Sort();
-                                Random randomPT = new Random();
-                                int randomIndexPT = randomPT.Next(0, PossibleTargets.Count);
-                                nextTarget = PossibleTargets[randomIndexPT];
+                                PossibleTargets.Sort();
+                                if (PossibleTargets.Count == 2 && (Math.Abs(PossibleTargets[0] - PossibleTargets[1]) == 10 || Math.Abs(PossibleTargets[0] - PossibleTargets[1]) == 1))
+                                {
+                                    if (PossibleTargets.Count >= counter + 1)
+                                    {
+                                        nextTarget = PossibleTargets[counter];
+                                    }
+                                }
+                                else
+                                {
+                                    Random randomPT = new Random();
+                                    int randomIndexPT = randomPT.Next(0, PossibleTargets.Count);
+                                    nextTarget = PossibleTargets[randomIndexPT];
+                                }
                                 for (int f = 0; f < ForbiddenCoords.Count; f++)
                                 {
                                     if (nextTarget != ForbiddenCoords[f])
@@ -499,9 +510,13 @@ namespace Battleship
                     //Debug
                     TargetButtonTag = nextTarget;
                     EnemyShoot(nextTarget, out successShoot, out checkedPosition);
-                    if (successShoot && SecondSuccessHitCoord == 0)
+                    if (successShoot && SecondSuccessHitCoord == 0 && DefinedShot)
                     {
                         SecondSuccessHitCoord = nextTarget;
+                    }
+                    if (successShoot && SecondSuccessHitCoord != 0 && DefinedShot)
+                    {
+                        ThirdSuccssHitCoord = nextTarget;
                     }
                     PossibleTargets = DeleteForbiddenCoords(PossibleTargets);
                     int usedTarget = nextTarget;
@@ -562,6 +577,7 @@ namespace Battleship
                 }
             }
             List<int>[] listArray = {allowedList, forbiddenList};
+            DeleteForbiddenCoords(allowedList);
             return listArray;
         }
         public static int FindShipCoord(bool hitStatus)
@@ -786,6 +802,7 @@ namespace Battleship
                                 PlayerData.Map[sunkenShips[sk]] = 'S';
                             }
                             ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
+                            NewShotPreparing();
                         }
                         else
                         {
@@ -817,10 +834,6 @@ namespace Battleship
             secondHitCoord = FindCorrectIndex(secondHitCoord);
             int delta = firstHitCoord - secondHitCoord;
             string secondCellTag = null;
-            if (Math.Abs(delta) % 2 == 0 || Math.Abs(delta) % 20 == 0)
-            {
-                secondHitCoord = firstHitCoord - (delta / 10);
-            }
             int cyclesCount = 0;
             try
             {
@@ -984,6 +997,15 @@ namespace Battleship
         private static void TargetsSwap(ref int firstTarget, ref int secondTarget)
         {
             (firstTarget, secondTarget) = (secondTarget, firstTarget);
+        }
+        private static void NewShotPreparing()
+        {
+            FirstHitCoord = 0;
+            FirstSuccessHitCoord = 0;
+            SecondSuccessHitCoord = 0;
+            ThirdSuccssHitCoord = 0;
+            DefinedCoord = 0;
+            DefinedShot = false;
         }
     }
 }

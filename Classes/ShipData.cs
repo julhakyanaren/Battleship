@@ -13,18 +13,18 @@ namespace Battleship
 {
     public static class ShipData
     {
+        public static int HitedDeckCount = 0;
         public static int ChoosenShipType = 0;
-
         public static int FrigateCount = 4;
         public static int DestroyerCount = 3;
         public static int CruiserCount = 2;
         public static int BattleshipCount = 1;
+        public static int MaximumDeckCount = 20;
         public static int[] ShipsCount = { FrigateCount, DestroyerCount, CruiserCount, BattleshipCount };
 
         public static string Orientation = "N";
 
         public static bool MapAutoUpdate = false;
-
         public static bool AllShipPlaced = false;
 
         public static bool[] RadioButtonsState = { false, false, false, false };

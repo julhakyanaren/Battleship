@@ -120,50 +120,53 @@ namespace Battleship
         }
         private async void Button_Click(object sender, MouseEventArgs e)
         {
-            Button clickedButton = sender as Button;
-            int playerID;
-            string coord = Position.GetButtonTextCoords(clickedButton, out playerID);
-            Support.StringToInt(clickedButton.Tag.ToString(), out int tagCB);
-            if (clickedButton.BackColor != Color.White)
+            if (!Options.GameOver)
             {
-                if (tagCB / 100 == 2)
+                Button clickedButton = sender as Button;
+                int playerID;
+                string coord = Position.GetButtonTextCoords(clickedButton, out playerID);
+                Support.StringToInt(clickedButton.Tag.ToString(), out int tagCB);
+                if (clickedButton.BackColor != Color.White)
                 {
-                    MessageBox.Show($"Cell \"{coord}\" checked!\r\nPlease choose another cell", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            else if (Fight.ForbiddenCoords.Count != 100)
-            {
-                if (Fight.Turn == 0)
-                {
-                    string tagButton = clickedButton.Tag.ToString();
-                    if (playerID == 2)
+                    if (tagCB / 100 == 2)
                     {
-                        if (Fight.GameStarted)
+                        MessageBox.Show($"Cell \"{coord}\" checked!\r\nPlease choose another cell", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    }
+                }
+                else if (Fight.ForbiddenCoords.Count != 100)
+                {
+                    if (Fight.Turn == 0)
+                    {
+                        string tagButton = clickedButton.Tag.ToString();
+                        if (playerID == 2)
                         {
-                            NextTurn(tagButton);
-                            if (SetTurnText() == "ERROR")
+                            if (Fight.GameStarted)
                             {
-                                //Error_Catch
-                            }
-                            else
-                            {
-                                TB_Turn.Text = SetTurnText();
+                                NextTurn(tagButton);
+                                if (SetTurnText() == "ERROR")
+                                {
+                                    //Error_Catch
+                                }
+                                else
+                                {
+                                    TB_Turn.Text = SetTurnText();
+                                }
                             }
                         }
+                        while (Fight.Turn == 1)
+                        {
+                            await EnemyTurn();
+                        }
                     }
-                    while (Fight.Turn == 1)
+                    else
                     {
-                        await EnemyTurn();
+                        MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                     }
                 }
                 else
                 {
-                    MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    MessageBox.Show("Game over", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
-            }
-            else
-            {
-                MessageBox.Show("Game over", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         public async void FindTarget(int duration = 200)
@@ -221,25 +224,32 @@ namespace Battleship
         async Task EnemyTurn()
         {
             bool successshot = false;
-            Fight.Shoot(out successshot);
-            await ChangeBorderSize(100, 3);
-            ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
-            try
+            if (ShipData.HitedDeckCount < ShipData.MaximumDeckCount)
             {
-                UpdatePlayerMapColor(ColorMethods.PlayerMapColor);
-                Fight.Turn = Fight.ReverseTurn(Fight.Hited);
-                if (SetTurnText() == "ERROR")
+                Fight.Shoot(out successshot);
+                await ChangeBorderSize(100, 3);
+                ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
+                try
+                {
+                    UpdatePlayerMapColor(ColorMethods.PlayerMapColor);
+                    Fight.Turn = Fight.ReverseTurn(Fight.Hited);
+                    if (SetTurnText() == "ERROR")
+                    {
+                        //Error_Catch
+                    }
+                    else
+                    {
+                        TB_Turn.Text = SetTurnText();
+                    }
+                }
+                catch
                 {
                     //Error_Catch
                 }
-                else
-                {
-                    TB_Turn.Text = SetTurnText();
-                }
             }
-            catch
+            else if (ShipData.HitedDeckCount == 0)
             {
-                //Error_Catch
+                Options.GameOver = true;
             }
         }
         void UpdatePlayerMapColor(Color[] colors)

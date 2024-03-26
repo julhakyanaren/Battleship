@@ -22,5 +22,7 @@ namespace Battleship
         public static int V_Release = 0;
         public static int V_Assembly = 7;
         public static int V_Edition = 3;
+
+        public static bool GameOver = false;
     }
 }
