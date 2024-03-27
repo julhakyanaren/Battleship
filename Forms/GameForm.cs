@@ -1,6 +1,7 @@
 ﻿using Battleship.Classes;
 using Battleship.Forms;
 using System;
+using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Drawing;
 using System.Runtime.CompilerServices;
@@ -135,32 +136,42 @@ namespace Battleship
                 }
                 else if (Fight.ForbiddenCoords.Count != 100)
                 {
-                    if (Fight.Turn == 0)
+                    HashSet<int> forbidden = new HashSet<int>(Fight.ForbiddenCoords);
+                    Fight.ForbiddenCoords = new List<int>(forbidden);
+                    Fight.ForbiddenCoords.Sort();
+                    if (Fight.ForbiddenCoords.Count != 100)
                     {
-                        string tagButton = clickedButton.Tag.ToString();
-                        if (playerID == 2)
+                        if (Fight.Turn == 0)
                         {
-                            if (Fight.GameStarted)
+                            string tagButton = clickedButton.Tag.ToString();
+                            if (playerID == 2)
                             {
-                                NextTurn(tagButton);
-                                if (SetTurnText() == "ERROR")
+                                if (Fight.GameStarted)
                                 {
-                                    //Error_Catch
-                                }
-                                else
-                                {
-                                    TB_Turn.Text = SetTurnText();
+                                    NextTurn(tagButton);
+                                    if (SetTurnText() == "ERROR")
+                                    {
+                                        //Error_Catch
+                                    }
+                                    else
+                                    {
+                                        TB_Turn.Text = SetTurnText();
+                                    }
                                 }
                             }
+                            while (Fight.Turn == 1)
+                            {
+                                await EnemyTurn();
+                            }
                         }
-                        while (Fight.Turn == 1)
+                        else
                         {
-                            await EnemyTurn();
+                            MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                         }
                     }
                     else
                     {
-                        MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        MessageBox.Show("Game over", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
                 else
