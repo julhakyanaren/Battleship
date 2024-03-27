@@ -1067,5 +1067,12 @@ A:
             DefinedCoord = 0;
             DefinedShot = false;
         }
+        private static void SetHitCoords()
+        {
+            if (FirstSuccessHitCoord == 0)
+            {
+
+            }
+        }
     }
 }
