@@ -159,6 +159,7 @@ namespace Battleship
                         successShoot = true;
                         checkedPosition = false;
                         sunkenFrigate = true;
+                        NewShotPreparing();
                         break;
                     }
                 case 'D':
@@ -198,7 +199,7 @@ namespace Battleship
                         PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
                         successShoot = true;
                         checkedPosition = false;
-                        FirstHitCoord = FindCorrectCoord(index);
+                        SetHitCoords(FindCorrectCoord(index));
                         break;
                     }
                 case 'C':
@@ -236,7 +237,7 @@ namespace Battleship
                         }
                         PlayerData.SunkenCruisersCount = sunkenCruisers;
                         PlayerData.CruiserCountCurrent = PlayerData.CruiserCountMax - PlayerData.SunkenCruisersCount;
-                        FirstHitCoord = FindCorrectCoord(index);
+                        SetHitCoords(FindCorrectCoord(index));
                         successShoot = true;
                         checkedPosition = false;
                         break;
@@ -267,7 +268,7 @@ namespace Battleship
                         }
                         PlayerData.SunkenBattleshipCount = sunkenBattleship;
                         PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
-                        FirstHitCoord = FindCorrectCoord(index);
+                        SetHitCoords(FindCorrectCoord(index));
                         successShoot = true;
                         checkedPosition = false;
                         break;
@@ -360,8 +361,15 @@ A:
         }
         static int FindCorrectCoord(int index)
         {
-            sp.StringToInt(PlayerData.MapButtons[index].Tag.ToString(), out int coord);
-            return coord;
+            try
+            {
+                sp.StringToInt(PlayerData.MapButtons[index].Tag.ToString(), out int coord);
+                return coord;
+            }
+            catch
+            {
+                return -1;
+            }
         }
         public static void Shoot(out bool successShoot)
         {
@@ -470,7 +478,8 @@ A:
                             }
                             else
                             {
-
+                                DefinedShot = true;
+                                break;
                             }
                         }
                         while (!canShot);
@@ -1066,6 +1075,27 @@ A:
             ThirdSuccssHitCoord = 0;
             DefinedCoord = 0;
             DefinedShot = false;
+        }
+        private static void SetHitCoords(int currentCoord)
+        {
+            if (FirstSuccessHitCoord == 0)
+            {
+                FirstSuccessHitCoord = currentCoord;
+            }
+            else
+            {
+                if (SecondSuccessHitCoord == 0)
+                {
+                    SecondSuccessHitCoord = currentCoord;
+                }
+                else
+                {
+                    if (ThirdSuccssHitCoord == 0)
+                    {
+                        ThirdSuccssHitCoord = currentCoord;
+                    }
+                }
+            }
         }
     }
 }
