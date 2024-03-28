@@ -294,53 +294,20 @@ namespace Battleship
             }
             if (!incorrectValue && successShoot && !checkedPosition)
             {
-A:
-                try
+                GenerateNearestCoords(target, 1551);
+                for (int bl = 0; bl < BlockedCoords.Count; bl++)
                 {
-                    if (target == 1660)
-                    {
-                        string f = "Frigate";
-                    }
-                    if (target / 1000 == 0)
-                    {
-                        target = FindCorrectCoord(target) + 1551;
-                    }
-                    GenerateNearestCoords(target, 1551);
-                    for (int bl = 0; bl < BlockedCoords.Count; bl++)
-                    {
-                        PlayerData.Map[BlockedCoords[bl]] = 'E';
-                    }
-                    if (sunkenFrigate)
-                    {
-                        for (int bl = 0; bl < AllowedCoords.Count; bl++)
-                        {
-                            PlayerData.Map[AllowedCoords[bl]] = 'E';
-                            ForbiddenCoords.Add(AllowedCoords[bl]);
-                        }
-                        ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
-                        sunkenFrigate = false;
-                    }
+                    PlayerData.Map[BlockedCoords[bl]] = 'E';
                 }
-                catch (Exception ex)
+                if (sunkenFrigate)
                 {
-                    DialogResult dr = MessageBox.Show($"Exception:\r\n{ex}\r\n\r\nMessage:\r\n{ex.Message}\r\n\r\nContinue?", "Exception Manager", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
-                    switch (dr)
+                    for (int bl = 0; bl < AllowedCoords.Count; bl++)
                     {
-                        case DialogResult.Cancel:
-                            {
-                                ReverseTurn(false);
-                                break;
-                            }
-                        case DialogResult.Abort:
-                            {
-                                ReverseTurn(true);
-                                break;
-                            }
-                        default:
-                            {
-                                goto A;
-                            }
+                        PlayerData.Map[AllowedCoords[bl]] = 'E';
+                        ForbiddenCoords.Add(AllowedCoords[bl]);
                     }
+                    ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
+                    sunkenFrigate = false;
                 }
             }
             if (targetInMap)
@@ -850,7 +817,7 @@ A:
                     case "corner4":
                         {   
                             AllowedCoords.Add(firstCoords - 10);
-                            AllowedCoords.Add(firstCoords + 11);
+                            AllowedCoords.Add(firstCoords + 1);
                             BlockedCoords.Add(firstCoords - 9);
                             break;
                         }
