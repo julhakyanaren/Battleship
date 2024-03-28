@@ -237,7 +237,7 @@ namespace Battleship
             bool successshot = false;
             if (ShipData.HitedDeckCount < ShipData.MaximumDeckCount)
             {
-                Fight.Shoot(out successshot);
+                Fight.Shoot_Advanced(out successshot);
                 await ChangeBorderSize(100, 3);
                 ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
                 try

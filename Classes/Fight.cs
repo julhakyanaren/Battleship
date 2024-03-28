@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Octokit;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Windows.Forms;
@@ -18,6 +19,7 @@ namespace Battleship
         public static bool NewMove = true;
         public static bool Hited = false;
         public static bool DefinedShot = false;
+        public static bool TargetingShoot = false;
         public static bool GuaranteedShot = false;
 
         public static int TargetCoord;
@@ -182,6 +184,7 @@ namespace Battleship
                             sunkenDestroyers += Convert.ToInt32(PlayerData.DestroyersSunken[d]);
                         }
                         NewMove = PlayerData.SunkenDestroyersCount < sunkenDestroyers;
+                        TargetingShoot = true;
                         if (sunkenDestroyers - PlayerData.SunkenDestroyersCount == 1)
                         {
                             SetRoundMines(3);
@@ -224,6 +227,7 @@ namespace Battleship
                             sunkenCruisers += Convert.ToInt32(PlayerData.CruisersSunken[c]);
                         }
                         NewMove = PlayerData.SunkenCruisersCount < sunkenCruisers;
+                        TargetingShoot = true;
                         if (sunkenCruisers - PlayerData.SunkenCruisersCount == 1)
                         {
                             SetRoundMines(2);
@@ -257,6 +261,7 @@ namespace Battleship
                             sunkenBattleship += Convert.ToInt32(PlayerData.BattleshipSunken[b]);
                         }
                         NewMove = PlayerData.SunkenBattleshipCount < sunkenBattleship;
+                        TargetingShoot = true;
                         if (sunkenBattleship == 1)
                         {
                             SetRoundMines(1);
@@ -359,16 +364,96 @@ A:
         }
         static int FindCorrectCoord(int index)
         {
-            //sp.StringToInt(PlayerData.MapButtons[index].Tag.ToString(), out int coord);
-            //return coord;
-            try
+            sp.StringToInt(PlayerData.MapButtons[index].Tag.ToString(), out int coord);
+            return coord;
+        }
+        public static void Shoot_Advanced(out bool successShoot)
+        {
+            successShoot = true;
+            bool checkedPosition = false;
+            if (GuaranteedShot)
             {
-                return Convert.ToInt32(PlayerData.MapButtons[index].Tag.ToString());
+
             }
-            catch
+            else if (TargetingShoot) //Coment: Еслы первый выстрел был успешным
             {
-                return -1; 
+                bool canShot = false;
+                int possibleTarget;
+                do
+                {
+                    if (PossibleTargets.Count == 0)
+                    {
+                        GenerateNearestCoords(FirstHitCoord + 1551, 1551);
+                        PossibleTargets = AllowedCoords;
+                    }
+                    Random random = new Random();
+                    int randomIndex = random.Next(0, PossibleTargets.Count);
+                    possibleTarget = PossibleTargets[randomIndex];
+                    if (AllowedValue(possibleTarget, ForbiddenCoords))
+                    {
+                        canShot = true;
+                    }
+                    else
+                    {
+                        PossibleTargets.Remove(possibleTarget);
+                    }
+                }
+                while (!canShot);
+                TargetButtonTag = possibleTarget;
+                EnemyShoot(possibleTarget, out successShoot, out checkedPosition);
+                ForbiddenCoords.Add(FindCorrectIndex(possibleTarget));
+                switch (successShoot)
+                {
+                    case true:
+                        {
+                            PossibleTargets = UpdatePossibleCoords(FirstSuccessHitCoord, SecondSuccessHitCoord, ThirdSuccssHitCoord, PossibleTargets, true);
+                            DeleteForbiddenCoords(PossibleTargets);
+                            break;
+                        }
+                    case false:
+                        {
+                            break;
+                        }
+                }
+                PossibleTargets.Remove(possibleTarget);
+                ForbiddenCoords.Add(possibleTarget);
             }
+            else if (NewMove) //Comment: Новый ход 
+            {
+                int newTarget;
+                if (ForbiddenCoords.Count != 0)
+                {
+                    ForbiddenCoords.Sort();
+                    do
+                    {
+                        bool correctCoord = false;
+                        do
+                        {
+                            newTarget = FindShipCoord(false);
+                            if (AllowedValue(newTarget, ForbiddenCoords))
+                            {
+                                correctCoord = true;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
+                        while (!correctCoord);
+                        TargetButtonTag = newTarget;
+                        EnemyShoot(newTarget, out successShoot, out checkedPosition);
+                        ForbiddenCoords.Add(FindCorrectIndex(newTarget));
+                    }
+                    while (checkedPosition);
+                }
+                else
+                {
+                    newTarget = FindShipCoord(false);
+                    EnemyShoot(newTarget, out successShoot, out checkedPosition);
+                    ForbiddenCoords.Add(FindCorrectIndex(newTarget));
+                }
+            }
+            ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
         }
         public static void Shoot(out bool successShoot)
         {
@@ -1107,6 +1192,7 @@ A:
             ThirdSuccssHitCoord = 0;
             DefinedCoord = 0;
             DefinedShot = false;
+            TargetingShoot = false;
         }
         private static void SetHitCoords(int target)
         {
@@ -1151,6 +1237,111 @@ A:
             coordsList.Add(2 * coords[0] - coords[1]);
             coordsList.Add(coords[2] + coords[1]- coords[0]);
             return coordsList;
+        }
+        private static bool AllowedValue(int value, List<int> forbiddenValues)
+        {
+            forbiddenValues.Sort();
+            if (value >= forbiddenValues.Count / 2)
+            {
+                forbiddenValues.Reverse();
+                for (int f = forbiddenValues.Count - 1; f >= 0; f--)
+                {
+                    if (forbiddenValues[f] == value)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        if (value < forbiddenValues[f])
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+                return true;
+            }
+            else
+            {
+                for (int f = 0; f < forbiddenValues.Count; f++)
+                {
+                    if (forbiddenValues[f] == value)
+                    {
+                        return false;
+                    }
+                    else
+                    {
+                        if (value > forbiddenValues[f])
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            continue;
+                        }
+                    }
+                }
+                return true;
+            }
+        }
+        private static List<int> UpdatePossibleCoords(int firstCoord, int secondCoord, int thirdCoord, List<int> inputList, bool clearList = true)
+        {
+            List<int> updatedCoords = new List<int>();
+            string secondCellTag;
+            int delta;
+            bool[] validCoords = { false, false, false };
+            if (clearList)
+            {
+                inputList.Clear();
+            }
+            if (firstCoord != 0)
+            {
+                firstCoord = FindCorrectIndex(firstCoord + 1551);
+                validCoords[0] = true;
+            }
+            if (secondCoord != 0)
+            {
+                secondCoord = FindCorrectIndex(secondCoord + 1551);
+                validCoords[1] = true;
+            }
+            if (thirdCoord != 0)
+            {
+                thirdCoord = FindCorrectIndex(thirdCoord + 1551);
+                validCoords[2] = true;
+            }
+            if (validCoords[0] && validCoords[1])
+            {
+                delta = secondCoord - firstCoord;
+                secondCellTag = FindCorrectCoord(secondCoord).ToString();
+                if (pos.GetCellPosition(secondCellTag) != "center")
+                {
+                    updatedCoords.Add(firstCoord + delta);
+                    updatedCoords.Add(firstCoord + (2 * delta));
+                }
+                else
+                {
+                    updatedCoords.Add(firstCoord + delta);
+                    updatedCoords.Add(firstCoord + (2 * delta));
+                    updatedCoords.Add(secondCoord - delta);
+                    if (updatedCoords[updatedCoords.Count - 1] % 10 > updatedCoords[updatedCoords.Count - 2] % 10)
+                    {
+                        updatedCoords.RemoveAt(updatedCoords.Count - 1);
+                    }
+                    updatedCoords.Add(secondCoord - (2 * delta));
+                    if (updatedCoords[updatedCoords.Count - 1] % 10 > updatedCoords[updatedCoords.Count - 2] % 10)
+                    {
+                        updatedCoords.RemoveAt(updatedCoords.Count - 1);
+                    }
+                }
+                return updatedCoords;
+            }
+            else
+            {
+                return inputList;
+            }
         }
     }
 }
