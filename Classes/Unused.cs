@@ -8,6 +8,8 @@ namespace Battleship.Classes
 {
     internal class Unused
     {
+        //UNUSED 1
+
         //public static void Shoot(out bool successShoot)
         //{
         //    bool checkedPosition = false;
@@ -41,6 +43,79 @@ namespace Battleship.Classes
         //        }
         //    }
         //    while (checkedPosition);
+        //}
+
+        //UNUSED 2
+
+        //for (int t = 0; t < ForbiddenCoords.Count; t++)
+        //{
+        //    if (targetIndex != ForbiddenCoords[t])
+        //    {
+        //        correctCoord = true;
+        //        if (target < ForbiddenCoords[t])
+        //        {
+        //            correctCoord = false;
+        //            break;
+        //        }
+        //        else
+        //        {
+        //            continue;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        correctCoord = false;
+        //        break;
+        //    }
+        //}
+
+        //UNUSED 3
+
+        //for (int f = 0; f < ForbiddenCoords.Count; f++)
+        //{
+        //    if (nextTarget != ForbiddenCoords[f])
+        //    {
+        //        canShot = true;
+        //        if (nextTarget < ForbiddenCoords[f])
+        //        {
+        //            break;
+        //        }
+        //        else
+        //        {
+        //            continue;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        canShot = false;
+        //        break;
+        //    }
+        //}
+
+        // UNUSED 5
+
+        //for (int f = 0; f < ForbiddenCoords.Count; f++)
+        //{
+        //    if (nextTarget != ForbiddenCoords[f])
+        //    {
+        //        canShot = true;
+        //        if (nextTarget < ForbiddenCoords[f])
+        //        {
+        //            break;
+        //        }
+        //        else
+        //        {
+        //            continue;
+        //        }
+        //    }
+        //    else
+        //    {
+        //        canShot = false;
+        //        allowedCoords.Remove(nextTarget);
+        //        AllowedCoords.Remove(nextTarget);
+        //        allowedCoords.Sort();
+        //        break;
+        //    }
         //}
     }
 }

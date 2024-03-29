@@ -738,7 +738,8 @@ namespace Battleship
                     {
                         Button targetButton = MapButtons[1, i];
                         targetButton.BackColor = Color.White;
-                        //targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
+                        
+                        targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
                         targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
                     }
                 }
