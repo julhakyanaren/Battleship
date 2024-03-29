@@ -161,7 +161,17 @@ namespace Battleship
                             }
                             while (Fight.Turn == 1)
                             {
-                                await EnemyTurn();
+                                if (!Options.GameOver)
+                                {
+                                    await EnemyTurn();
+                                }
+                                else
+                                {
+                                    MessageBox.Show("All your ships were destroyed, and the enemy has surviving ships.\r\nYou have lost.\r\nGame over", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                                    Fight.Turn = 2;
+                                    TB_Turn.Text = SetTurnText();
+                                    TB_Turn.ForeColor = Color.Red;
+                                }
                             }
                         }
                         else
@@ -258,7 +268,7 @@ namespace Battleship
                     //Error_Catch
                 }
             }
-            else if (ShipData.HitedDeckCount == 0)
+            else if (ShipData.HitedDeckCount == 20)
             {
                 Options.GameOver = true;
             }
@@ -281,6 +291,10 @@ namespace Battleship
                 case 1:
                     {
                         return "Enemy";
+                    }
+                case 2:
+                    {
+                        return "Game Over";
                     }
                 default:
                     {
@@ -724,7 +738,7 @@ namespace Battleship
                     {
                         Button targetButton = MapButtons[1, i];
                         targetButton.BackColor = Color.White;
-                        targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
+                        //targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
                         targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
                     }
                 }
