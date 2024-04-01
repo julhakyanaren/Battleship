@@ -15,7 +15,7 @@ namespace Battleship
     {
         public static string Map;
         public static char[] MapSchema = new char[0];
-        public static string Path = "C:\\Users\\Admin\\Desktop"; // Change
+        public static string Path = "C:\\Users\\Admin\\Desktop\\Schematics"; // Change
         public const string FileЕxtension = "msch";
         public static string FileName = $"Name.{FileЕxtension}"; // Change
         public static string FilePath;

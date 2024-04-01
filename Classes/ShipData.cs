@@ -1,15 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data.Odbc;
-using System.Linq;
-using System.Net.Http.Headers;
-using System.Resources;
-using System.Runtime.ExceptionServices;
-using System.Text;
-using System.Threading.Tasks;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
-
-namespace Battleship
+﻿namespace Battleship
 {
     public static class ShipData
     {
@@ -585,12 +574,22 @@ namespace Battleship
                                 }
                             case "top":
                                 {
-                                    mineTags[0] = pos.NewTagBuilder(tag, dy: -1);
-                                    mineTags[1] = pos.NewTagBuilder(tag, dy: 2);
-                                    mineTags[2] = pos.NewTagBuilder(tag, 1, -1);
-                                    mineTags[3] = pos.NewTagBuilder(tag, dx: 1);
-                                    mineTags[4] = pos.NewTagBuilder(tag, 1, 1);
-                                    mineTags[5] = pos.NewTagBuilder(tag, 1, 2);
+                                    if (y == 8)
+                                    {
+                                        mineTags[0] = pos.NewTagBuilder(tag, dy: -1);
+                                        mineTags[1] = pos.NewTagBuilder(tag, 1, -1);
+                                        mineTags[2] = pos.NewTagBuilder(tag, dx: 1);
+                                        mineTags[3] = pos.NewTagBuilder(tag, 1, 1);
+                                    }
+                                    else
+                                    {
+                                        mineTags[0] = pos.NewTagBuilder(tag, dy: -1);
+                                        mineTags[1] = pos.NewTagBuilder(tag, 1, -1);
+                                        mineTags[2] = pos.NewTagBuilder(tag, dx: 1);
+                                        mineTags[3] = pos.NewTagBuilder(tag, 1, 1);
+                                        mineTags[4] = pos.NewTagBuilder(tag, 1, 2);
+                                        mineTags[5] = pos.NewTagBuilder(tag, dy: 2);
+                                    }
                                     return mineTags;
                                 }
                             case "left":

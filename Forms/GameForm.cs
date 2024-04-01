@@ -2,10 +2,7 @@
 using Battleship.Forms;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Drawing;
-using System.Runtime.CompilerServices;
-using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Battleship.DebugTools;
@@ -56,7 +53,10 @@ namespace Battleship
                 Fight.Turn = 2;
                 TB_Turn.Text = SetTurnText();
                 TB_Turn.ForeColor = Color.Red;
-                ShowEnemyMapAfterGame();
+                if (Information.GameOverMessages(false) == DialogResult.OK)
+                {
+                    ShowPlayerMapAfterGame();
+                }
             }
         }
         public void ShowEnemyMapAfterGame()
@@ -66,8 +66,20 @@ namespace Battleship
                 if (MapButtons[1, i].BackColor != Color.White) continue;
                 char mapChar = Char.ToLower(EnemyData.Map[i]);
                 if (mapChar == 'e' || mapChar == 'n') continue;
-                //MapButtons[1, i].BackColor = ColorMethods.SetColorViaChar(EnemyData.Map[i]);
                 MapButtons[1, i].BackColor = Color.Green;
+            }
+        }
+        public void ShowPlayerMapAfterGame()
+        {
+            for (int i = 0; i < MapButtons.GetLength(1); i++)
+            {
+                if (MapButtons[0, i].BackColor == Color.Silver ||
+                    MapButtons[0, i].BackColor == Color.DarkGray ||
+                    MapButtons[0, i].BackColor == Color.Gray ||
+                    MapButtons[0, i].BackColor == Color.DimGray)
+                {
+                    MapButtons[0, i].BackColor = Color.Green;
+                }
             }
         }
         public GameForm()
@@ -171,6 +183,27 @@ namespace Battleship
             TSMI_Map.Enabled = true;
 
         }
+        void PlayerTurn(int playerID, Button clickedButton)
+        {
+            string tagButton = clickedButton.Tag.ToString();
+            if (playerID == 2)
+            {
+                if (Fight.GameStarted)
+                {
+                    NextTurn(tagButton);
+                    ColorMethods.EnemyMapColor = ColorMethods.SetEnemyButtonsColors(EnemyData.Map);
+                    UpdateEnemyMapColor(ColorMethods.EnemyMapColor);
+                    if (SetTurnText() == "ERROR")
+                    {
+                        //Error_Catch
+                    }
+                    else
+                    {
+                        TB_Turn.Text = SetTurnText();
+                    }
+                }
+            }
+        }
         private async void Button_Click(object sender, MouseEventArgs e)
         {
             if (!Options.GameOver)
@@ -186,61 +219,39 @@ namespace Battleship
                         MessageBox.Show($"Cell \"{coord}\" checked!\r\nPlease choose another cell", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
                     }
                 }
-                else if (Fight.ForbiddenCoords.Count != 100)
+                if (Fight.ForbiddenCoords.Count != 100)
                 {
-                    HashSet<int> forbidden = new HashSet<int>(Fight.ForbiddenCoords);
-                    Fight.ForbiddenCoords = new List<int>(forbidden);
-                    Fight.ForbiddenCoords.Sort();
-                    if (Fight.ForbiddenCoords.Count != 100)
-                    {
-                        if (Fight.Turn == 0)
-                        {
-                            string tagButton = clickedButton.Tag.ToString();
-                            if (playerID == 2)
-                            {
-                                if (Fight.GameStarted)
-                                {
-                                    NextTurn(tagButton);
-                                    ColorMethods.EnemyMapColor = ColorMethods.SetEnemyButtonsColors(EnemyData.Map);
-                                    UpdateEnemyMapColor(ColorMethods.EnemyMapColor);
-                                    if (SetTurnText() == "ERROR")
-                                    {
-                                        //Error_Catch
-                                    }
-                                    else
-                                    {
-                                        TB_Turn.Text = SetTurnText();
-                                    }
-                                }
-                            }
-                            while (Fight.Turn == 1)
-                            {
-                                if (!Options.GameOver)
-                                {
-                                    await EnemyTurn();
-                                }
-                                else
-                                {
-                                    Fight.Turn = 2;
-                                    TB_Turn.Text = SetTurnText();
-                                    TB_Turn.ForeColor = Color.Red;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show("Game over", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                    }
+                    await Turn(playerID, clickedButton);
                 }
                 else
                 {
-                    MessageBox.Show("Game over", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    CoordsForcedOverwrite();
+                    await Turn(playerID, clickedButton);
                 }
+            }
+        }
+        async Task Turn(int playerID, Button clickedButton)
+        {
+            if (Fight.Turn == 0)
+            {
+                PlayerTurn(playerID, clickedButton);
+                while (Fight.Turn == 1)
+                {
+                    if (!Options.GameOver)
+                    {
+                        await EnemyTurn();
+                    }
+                    else
+                    {
+                        Fight.Turn = 2;
+                        TB_Turn.Text = SetTurnText();
+                        TB_Turn.ForeColor = Color.Red;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
             }
         }
         public async void FindTarget(int duration = 200)
@@ -1305,6 +1316,25 @@ namespace Battleship
             SetEnemyShipsTexBoxesValues();
             SetPlayerShipsTexBoxesValues();
         }
-
+        void CoordsForcedOverwrite()
+        {
+            int[] count = new int[2];
+            count[0] = Fight.ForbiddenCoords.Count;
+            Fight.ForbiddenCoords.Clear();
+            HashSet<int> forbidden = new HashSet<int>();
+            for (int i = 0; i < MapButtons.GetLength(1); i++)
+            {
+                if ((MapButtons[0, i].BackColor == Color.Red) || (MapButtons[0, i].BackColor == Color.Firebrick) || (MapButtons[0, i].BackColor == Color.DeepSkyBlue))
+                {
+                    forbidden.Add(PlayerData.Map[i]);
+                }
+            }
+            Fight.ForbiddenCoords = new List<int>(forbidden);
+            count[1] = Fight.ForbiddenCoords.Count;
+            if (count[0] == count[1])
+            {
+                MessageBox.Show("Forbidden data error", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
     }
 }

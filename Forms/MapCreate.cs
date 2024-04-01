@@ -3,6 +3,7 @@ using Battleship.Forms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -15,6 +16,12 @@ namespace Battleship
         Position pos = new Position();
         ColorMethods cm = new ColorMethods();
         Map map = new Map();
+
+        int[,] frigates = new int[4, 1];
+        int[,] destroyers = new int[3, 2];
+        int[,] cruisers = new int[2, 3];
+        int[,] battleships = new int[1, 4];
+        string schematicMap;
         public MapCreate()
         {
             InitializeComponent();
@@ -1433,14 +1440,7 @@ namespace Battleship
         }
         private void BS_AO_LoadSchematic_Click(object sender, EventArgs e)
         {
-            if (FileManager.SchematicSaveTool)
-            {
 
-            }
-            else
-            {
-                Handlers.PluginNotIncluded("\"Schematic Tools\" plugin not included", Handlers.Manager[5]);
-            }
         }
         public async void ProgressLoad()
         {
@@ -1459,17 +1459,7 @@ namespace Battleship
 
         private void BS_AO_SaveSchematic_Click(object sender, EventArgs e)
         {
-            if (FileManager.SchematicSaveTool)
-            {
-                DialogResult drSave = new DialogResult();
-                drSave = MessageBox.Show("SaveSchematic", "Schematic Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            }
-            else
-            {
-                Handlers.PluginNotIncluded("\"Schematic Tools\" plugin not included", Handlers.Manager[5]);
-            }
         }
-
         private void BS_AO_GetMap_Click(object sender, EventArgs e)
         {
             if (FileManager.SchematicSaveTool)
@@ -1729,14 +1719,7 @@ namespace Battleship
 
         private void BS_AO_UploadSchematic_Click(object sender, EventArgs e)
         {
-            if (FileManager.SchematicSaveTool)
-            {
 
-            }
-            else
-            {
-                Handlers.PluginNotIncluded("\"Schematic Tools\" plugin not included", Handlers.Manager[5]);
-            }
         }
     }
 }
