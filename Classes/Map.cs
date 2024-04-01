@@ -1,6 +1,7 @@
 ﻿using System;
-using System.Text;
+using System.Drawing;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Battleship
 {
@@ -187,20 +188,22 @@ namespace Battleship
                         {
                             map[x + i, y] = shipSymbol;
                             coord = (x + i) * 10 + y;
-                            coord = Convert.ToInt32($"{coord % 10}{coord / 10}");
+                            //coord = Convert.ToInt32($"{coord % 10}{coord / 10}");
                         }
                         else
                         {
                             map[x, y + i] = shipSymbol;
                             coord = (x * 10) + y + i;
                         }
+                        Support support = new Support();
+                        coord = support.ChangeNumbers(coord);
                         switch (shipSymbol)
                         {
                             case 'f':
                                 {
                                     if (orientation != 0)
                                     {
-                                        coord = Convert.ToInt32($"{coord % 10}{coord / 10}");
+                                        //coord = Convert.ToInt32($"{coord % 10}{coord / 10}");
                                         EnemyData.FrigateCoords[count, i] = coord;
                                     }
                                     else
@@ -318,7 +321,6 @@ namespace Battleship
                             PlayerData.FrigatesCountCurrent++;
                             break;
                         }
-
                     case 'h':
                         {
                             EnemyData.HitCountCurrent++;
@@ -341,14 +343,6 @@ namespace Battleship
                         }
                 }
             }
-            PlayerData.DestroyersCountCurrent /= 2;
-            EnemyData.DestroyersCountCurrent /= 2;
-
-            PlayerData.CruiserCountCurrent /= 3;
-            EnemyData.CruiserCountCurrent /= 3;
-
-            PlayerData.BattleshipCountCurrent /= 4;
-            EnemyData.BattleshipCountCurrent /= 4;
         }
     }
 }

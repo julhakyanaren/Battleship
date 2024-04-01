@@ -88,41 +88,6 @@ namespace Battleship
                 BattleshipSunken[0] &= BattleshipHited[0, b1];
             }
         }
-        public static bool AllFrigatesSunken;
-        public static bool AllDestroyersSunken;
-        public static bool AllCruisersSunken;
-        public static bool AllBattleshipSunken = BattleshipSunken[0];
-        public static bool[] AllShipsSunkenArray = { AllFrigatesSunken, AllDestroyersSunken, AllCruisersSunken, AllBattleshipSunken };
-
-        public static bool AllShipSunken;
-        public static void ChechFrigatesSunkenState()
-        {
-            for (int f = 0; f < FrigatesSunken.Length; f++)
-            {
-                AllFrigatesSunken &= FrigatesSunken[f];
-            }
-        }
-        public static void DestroyersSunkenState()
-        {
-            for (int d = 0; d < DestroyersSunken.Length; d++)
-            {
-                AllDestroyersSunken &= DestroyersSunken[d];
-            }
-        }
-        public static void CruiserSunkenState()
-        {
-            for (int c = 0; c < CruisersSunken.Length; c++)
-            {
-                AllCruisersSunken &= CruisersSunken[c];
-            }
-        }
-        public static void AllShipsSunkenState()
-        {
-            for (int s = 0; s < AllShipsSunkenArray.Length; s++)
-            {
-                AllShipSunken &= AllShipsSunkenArray[s];
-            }
-        }
 
         public static void ResetShipsCount()
         {
@@ -131,7 +96,7 @@ namespace Battleship
             CruiserCountCurrent = 0;
             BattleshipCountCurrent = 0;
         }
-        public static void ResetData()
+        public static void ResetDataToZero()
         {
             SunkenCountCurrent = 0;
             SunkenFrigatesCount = 0;
