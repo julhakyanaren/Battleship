@@ -20,5 +20,6 @@ namespace Battleship
         public static string FileName = $"Name.{FileЕxtension}"; // Change
         public static string FilePath;
         public static bool CorrectSchematic = false;
+
     }
 }

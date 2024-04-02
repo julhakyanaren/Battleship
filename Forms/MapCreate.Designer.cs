@@ -1095,6 +1095,7 @@
             this.BS_AO_LoadSchematic.TabIndex = 43;
             this.BS_AO_LoadSchematic.Text = "Load schematic";
             this.BS_AO_LoadSchematic.UseVisualStyleBackColor = false;
+            this.BS_AO_LoadSchematic.Visible = false;
             this.BS_AO_LoadSchematic.Click += new System.EventHandler(this.BS_AO_LoadSchematic_Click);
             // 
             // BS_AO_CheckSchematic
@@ -1809,7 +1810,7 @@
             // TSMI_MC_OpenManual
             // 
             this.TSMI_MC_OpenManual.Name = "TSMI_MC_OpenManual";
-            this.TSMI_MC_OpenManual.Size = new System.Drawing.Size(136, 22);
+            this.TSMI_MC_OpenManual.Size = new System.Drawing.Size(180, 22);
             this.TSMI_MC_OpenManual.Text = "Open manual";
             this.TSMI_MC_OpenManual.Click += new System.EventHandler(this.TSMI_MC_OpenManual_Click);
             // 

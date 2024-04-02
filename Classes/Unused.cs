@@ -319,5 +319,42 @@ namespace Battleship.Classes
         //        return true;
         //    }
         //}
+
+        // UNUSED 9
+
+        //for (int l = 0; l < firstCoords.Count; l++)
+        //{
+        //    string tag = mapButton[firstCoords[l]].Tag.ToString();
+        //    if (sp.StringToInt(tag, out int tagButton))
+        //    {
+        //        string cellPos = pos.GetCellPosition(tag);
+        //        pos.GetCoordsFromTag(tag, out int x, out int y, out int playerID);
+        //        try
+        //        {
+        //            int mineTagsSize = ShipData.GetMineCount(cellPos, ShipData.ChoosenShipType, x, y, ShipData.Orientation);
+        //            if (mineTagsSize != -1)
+        //            {
+        //                int[] mineTags = new int[mineTagsSize];
+        //                mineTags = ShipData.MineTagsFill(mineTags, cellPos, ShipData.ChoosenShipType, tagButton, ShipData.Orientation);
+        //                foreach (Button mineButton in mapButton)
+        //                {
+        //                    for (int b = 0; b < mineTags.Length; b++)
+        //                    {
+        //                        if (mineButton.Tag.ToString() == mineTags[b].ToString())
+        //                        {
+        //                            int buttonIndex = Array.IndexOf(mapButton, mineButton);
+        //                            mapButton[buttonIndex].BackColor = Color.Aqua;
+        //                            break;
+        //                        }
+        //                    }
+        //                }
+        //            }
+        //        }
+        //        catch
+        //        {
+        //            //Error_Catch
+        //        }
+        //    }
+        //}
     }
 }

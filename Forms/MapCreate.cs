@@ -5,8 +5,10 @@ using System.Collections.Generic;
 using System.Drawing;
 using System.IO;
 using System.Runtime.CompilerServices;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
 
 namespace Battleship
 {
@@ -1154,7 +1156,7 @@ namespace Battleship
         }
         private void BS_Insert_Click(object sender, EventArgs e)
         {
-                Button[] mapButton = Buttons_MC;
+            Button[] mapButton = Buttons_MC;
             Color cellColor;
             switch (ShipData.ChoosenShipType)
             {
@@ -1440,7 +1442,44 @@ namespace Battleship
         }
         private void BS_AO_LoadSchematic_Click(object sender, EventArgs e)
         {
-
+            if (!CheckLoadedMap())
+            {
+                if (MessageBox.Show("Shhematic map checked!\r\nProblems not found!\r\nAre you sure you want to use the loaded map schematic?", $"{Handlers.Manager[1]}", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    PlayerData.FrigateCoords = frigates;
+                    PlayerData.DestroyerCoords = destroyers;
+                    PlayerData.CruiserCoords = cruisers;
+                    PlayerData.BattleshipCoords = battleships;
+                    Schematic.Map = schematicMap;
+                    TB_AO_MapSchematic.Text = Schematic.Map;
+                    TB_MapSchematic.Text = Schematic.Map;
+                    TB_MC_FrigateCount.Text = "4";
+                    TB_MC_DestroyerCount.Text = "3";
+                    TB_MC_CruiserCount.Text = "2";
+                    TB_MC_BattleshipCount.Text = "1";
+                    if (MessageBox.Show("Build Map?", $"{Handlers.Manager[1]}", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    {
+                        MapBuild();
+                        TB_AO_MapSchematic.Text = Schematic.Map;
+                        TB_AO_MapSchematic.ForeColor = Color.Lime;
+                        TB_MapSchematic.Text = Schematic.Map;
+                        TB_MapSchematic.ForeColor = Color.Lime;
+                        RadioButtonsLock(1);
+                        RadioButtonsLock(2);
+                        RadioButtonsLock(3);
+                        RadioButtonsLock(4);
+                        CHB_MC_AutoUpdate.Checked = true;
+                    }
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("The schematic map has been modified and cannot be used.", $"{Handlers.Manager[7]}", MessageBoxButtons.OK, MessageBoxIcon.Stop) == DialogResult.OK)
+                {
+                    //Change
+                    this.Dispose();
+                }
+            }
         }
         public async void ProgressLoad()
         {
@@ -1456,9 +1495,9 @@ namespace Battleship
                 PNL_AO_ProgressUnit.Width = 0;
             }
         }
-
         private void BS_AO_SaveSchematic_Click(object sender, EventArgs e)
         {
+            RecordData(SFD_MapCreate, PlayerData.FrigateCoords, PlayerData.DestroyerCoords, PlayerData.CruiserCoords, PlayerData.BattleshipCoords, Schematic.Map);
         }
         private void BS_AO_GetMap_Click(object sender, EventArgs e)
         {
@@ -1575,14 +1614,6 @@ namespace Battleship
         }
         private void BS_AO_CheckSchematic_Click(object sender, EventArgs e)
         {
-            if (FileManager.SchematicSaveTool)
-            {
-
-            }
-            else
-            {
-                Handlers.PluginNotIncluded("\"Schematic Tools\" plugin not included", Handlers.Manager[5]);
-            }
         }
         private void TSMI_MC_SchematicOptions_CheckedChanged(object sender, EventArgs e)
         {
@@ -1719,7 +1750,178 @@ namespace Battleship
 
         private void BS_AO_UploadSchematic_Click(object sender, EventArgs e)
         {
+            ReadData(OFD_MapCreate, out frigates, out destroyers, out cruisers, out battleships, out schematicMap);
+            if (MessageBox.Show("Schematic map uploading competed!", $"{Handlers.Manager[1]}", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
+            {
+                BS_AO_LoadSchematic.Visible = true;
+            }
+        }
+        public void RecordData(SaveFileDialog sfd, int[,] FrigateCoords, int[,] DestroyerCoords, int[,] CruiserCoords, int[,] BattleshipCoords, string Map)
+        {
+            sfd.Filter = "Map Scheme Files (*.msch)|*.msch";
+            sfd.FileName = "MapData";
+            if (sfd.ShowDialog() == DialogResult.OK)
+            {
+                using (StreamWriter writer = new StreamWriter(sfd.FileName))
+                {
+                    for (int i = 0; i < FrigateCoords.GetLength(0); i++)
+                    {
+                        writer.WriteLine($"0x{FrigateCoords[i, 0]:X2}");
+                    }
 
+                    for (int i = 0; i < DestroyerCoords.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < DestroyerCoords.GetLength(1); j++)
+                        {
+                            writer.WriteLine($"0x{DestroyerCoords[i, j]:X2}");
+                        }
+                    }
+                    for (int i = 0; i < CruiserCoords.GetLength(0); i++)
+                    {
+                        for (int j = 0; j < CruiserCoords.GetLength(1); j++)
+                        {
+                            writer.WriteLine($"0x{CruiserCoords[i, j]:X2}");
+                        }
+                    }
+                    for (int i = 0; i < BattleshipCoords.GetLength(1); i++)
+                    {
+                        writer.WriteLine($"0x{BattleshipCoords[0, i]:X2}");
+                    }
+                    foreach (char c in Map)
+                    {
+                        writer.Write($"0x{(int)c:X2} ");
+                    }
+                }
+            }
+        }
+        public void ReadData(OpenFileDialog ofd, out int[,] frigateCoords, out int[,] destroyerCoords, out int[,] cruiserCoords, out int[,] battleshipCoords, out string schematicMap)
+        {
+            frigateCoords = new int[4, 1];
+            destroyerCoords = new int[3, 2];
+            cruiserCoords = new int[2, 3];
+            battleshipCoords = new int[1, 4];
+            schematicMap = string.Empty;
+            ofd.Filter = "Map Scheme Files (*.msch)|*.msch";
+            if (ofd.ShowDialog() == DialogResult.OK)
+            {
+                string[] lines = File.ReadAllLines(ofd.FileName);
+                int lineIndex = 0;
+                for (int i = 0; i < frigateCoords.GetLength(0); i++)
+                {
+                    frigateCoords[i, 0] = Convert.ToInt32(lines[lineIndex++].Substring(2), 16);
+                }
+                for (int i = 0; i < destroyerCoords.GetLength(0); i++)
+                {
+                    for (int j = 0; j < destroyerCoords.GetLength(1); j++)
+                    {
+                        destroyerCoords[i, j] = Convert.ToInt32(lines[lineIndex++].Substring(2), 16);
+                    }
+                }
+                for (int i = 0; i < cruiserCoords.GetLength(0); i++)
+                {
+                    for (int j = 0; j < cruiserCoords.GetLength(1); j++)
+                    {
+                        cruiserCoords[i, j] = Convert.ToInt32(lines[lineIndex++].Substring(2), 16);
+                    }
+                }
+                for (int i = 0; i < battleshipCoords.GetLength(1); i++)
+                {
+                    battleshipCoords[0, i] = Convert.ToInt32(lines[lineIndex++].Substring(2), 16);
+                }
+                string[] mapHexValues = lines[lineIndex].Split(new[] { ' ' }, StringSplitOptions.RemoveEmptyEntries);
+                foreach (string hexValue in mapHexValues)
+                {
+                    schematicMap += (char)Convert.ToInt32(hexValue.Substring(2), 16);
+                }
+            }
+        }
+        private bool CheckLoadedMap()
+        {
+            int[] correctSymbols = { 4, 6, 6, 4 };
+            char[] symbols = TB_MapSchematic.Text.ToCharArray();
+            for (int s = 0; s < symbols.Length; s++)
+            {
+                switch (Char.ToLower(symbols[s]))
+                {
+                    case 'f':
+                        {
+                            correctSymbols[0]--;
+                            break;
+                        }
+                    case 'd':
+                        {
+                            correctSymbols[1]--;
+                            break;
+                        }
+                    case 'c':
+                        {
+                            correctSymbols[2]--;
+                            break;
+                        }
+                    case 'b':
+                        {
+                            correctSymbols[3]--;
+                            break;
+                        }
+                    default:
+                        {
+                            continue;
+                        }
+                }
+            }
+            if (correctSymbols[0] + correctSymbols[1] + correctSymbols[2] + correctSymbols[3] != 0)
+            {
+                return false;
+            }
+            else
+            {
+                //Not complete!
+                return true;
+            }
+
+        }
+        private void MapBuild()
+        {
+            List<int> firstCoords = new List<int>();
+            Button[] mapButton = Buttons_MC;
+            firstCoords = CreateIndexesList(firstCoords);
+            Color buttonColor = Color.White;
+            //Unused 9
+            char[] loadedMap = Schematic.Map.ToCharArray();
+            for (int c = 0; c < loadedMap.Length; c++)
+            {
+                if (Char.ToUpper(loadedMap[c]) == 'M')
+                {
+                    (loadedMap[c]) = 'E';
+                }
+                buttonColor = cm.SetColorViaChar(loadedMap[c]);
+                Button targetButtom = Buttons_MC[c];
+                targetButtom.BackColor = buttonColor;
+            }
+        }
+        private List<int> CreateIndexesList(List<int> firstCoords)
+        {
+            firstCoords.Add(frigates[0, 0]);
+            firstCoords.Add(frigates[1, 0]);
+            firstCoords.Add(frigates[2, 0]);
+            firstCoords.Add(frigates[3, 0]);
+            firstCoords.Add(destroyers[0, 0]);
+            firstCoords.Add(destroyers[0, 1]);
+            firstCoords.Add(destroyers[1, 0]);
+            firstCoords.Add(destroyers[1, 1]);
+            firstCoords.Add(destroyers[2, 0]);
+            firstCoords.Add(destroyers[2, 1]);
+            firstCoords.Add(cruisers[0, 0]);
+            firstCoords.Add(cruisers[0, 1]);
+            firstCoords.Add(cruisers[0, 2]);
+            firstCoords.Add(cruisers[1, 0]);
+            firstCoords.Add(cruisers[1, 1]);
+            firstCoords.Add(cruisers[1, 2]);
+            firstCoords.Add(battleships[0, 0]);
+            firstCoords.Add(battleships[0, 1]);
+            firstCoords.Add(battleships[0, 2]);
+            firstCoords.Add(battleships[0, 3]);
+            return firstCoords;
         }
     }
 }
