@@ -639,10 +639,10 @@
             this.TB_HC_ChoosenMapType.BackColor = System.Drawing.Color.Black;
             this.TB_HC_ChoosenMapType.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.TB_HC_ChoosenMapType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TB_HC_ChoosenMapType.Location = new System.Drawing.Point(111, 59);
+            this.TB_HC_ChoosenMapType.Location = new System.Drawing.Point(103, 59);
             this.TB_HC_ChoosenMapType.Name = "TB_HC_ChoosenMapType";
             this.TB_HC_ChoosenMapType.ReadOnly = true;
-            this.TB_HC_ChoosenMapType.Size = new System.Drawing.Size(80, 22);
+            this.TB_HC_ChoosenMapType.Size = new System.Drawing.Size(110, 22);
             this.TB_HC_ChoosenMapType.TabIndex = 52;
             this.TB_HC_ChoosenMapType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -651,9 +651,9 @@
             this.BS_HC_UpdateCellDAta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_UpdateCellDAta.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_UpdateCellDAta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_UpdateCellDAta.Location = new System.Drawing.Point(197, 58);
+            this.BS_HC_UpdateCellDAta.Location = new System.Drawing.Point(219, 57);
             this.BS_HC_UpdateCellDAta.Name = "BS_HC_UpdateCellDAta";
-            this.BS_HC_UpdateCellDAta.Size = new System.Drawing.Size(115, 24);
+            this.BS_HC_UpdateCellDAta.Size = new System.Drawing.Size(104, 24);
             this.BS_HC_UpdateCellDAta.TabIndex = 51;
             this.BS_HC_UpdateCellDAta.Text = "Update cell data";
             this.BS_HC_UpdateCellDAta.UseVisualStyleBackColor = true;
@@ -674,10 +674,10 @@
             this.TB_HC_CellState.BackColor = System.Drawing.Color.Black;
             this.TB_HC_CellState.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.TB_HC_CellState.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TB_HC_CellState.Location = new System.Drawing.Point(111, 34);
+            this.TB_HC_CellState.Location = new System.Drawing.Point(103, 34);
             this.TB_HC_CellState.Name = "TB_HC_CellState";
             this.TB_HC_CellState.ReadOnly = true;
-            this.TB_HC_CellState.Size = new System.Drawing.Size(80, 22);
+            this.TB_HC_CellState.Size = new System.Drawing.Size(110, 22);
             this.TB_HC_CellState.TabIndex = 49;
             this.TB_HC_CellState.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -686,9 +686,9 @@
             this.BS_HC_GenerateMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_GenerateMap.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_GenerateMap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_GenerateMap.Location = new System.Drawing.Point(197, 8);
+            this.BS_HC_GenerateMap.Location = new System.Drawing.Point(219, 9);
             this.BS_HC_GenerateMap.Name = "BS_HC_GenerateMap";
-            this.BS_HC_GenerateMap.Size = new System.Drawing.Size(115, 25);
+            this.BS_HC_GenerateMap.Size = new System.Drawing.Size(104, 25);
             this.BS_HC_GenerateMap.TabIndex = 48;
             this.BS_HC_GenerateMap.Text = "Generate Map";
             this.BS_HC_GenerateMap.UseVisualStyleBackColor = true;
@@ -700,9 +700,9 @@
             this.BS_HC_RestartMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_RestartMap.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_RestartMap.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_RestartMap.Location = new System.Drawing.Point(318, 8);
+            this.BS_HC_RestartMap.Location = new System.Drawing.Point(329, 9);
             this.BS_HC_RestartMap.Name = "BS_HC_RestartMap";
-            this.BS_HC_RestartMap.Size = new System.Drawing.Size(115, 25);
+            this.BS_HC_RestartMap.Size = new System.Drawing.Size(104, 25);
             this.BS_HC_RestartMap.TabIndex = 47;
             this.BS_HC_RestartMap.Text = "Reset Map";
             this.BS_HC_RestartMap.UseVisualStyleBackColor = true;
@@ -713,11 +713,11 @@
             // 
             this.CHB_HC_UseCustomCell.AutoSize = true;
             this.CHB_HC_UseCustomCell.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CHB_HC_UseCustomCell.Location = new System.Drawing.Point(197, 35);
+            this.CHB_HC_UseCustomCell.Location = new System.Drawing.Point(219, 34);
             this.CHB_HC_UseCustomCell.Name = "CHB_HC_UseCustomCell";
-            this.CHB_HC_UseCustomCell.Size = new System.Drawing.Size(236, 21);
+            this.CHB_HC_UseCustomCell.Size = new System.Drawing.Size(122, 21);
             this.CHB_HC_UseCustomCell.TabIndex = 45;
-            this.CHB_HC_UseCustomCell.Text = "Use custom cell data from form Example Map";
+            this.CHB_HC_UseCustomCell.Text = "Use custom cell data";
             this.CHB_HC_UseCustomCell.UseVisualStyleBackColor = true;
             this.CHB_HC_UseCustomCell.CheckedChanged += new System.EventHandler(this.CHB_HC_UseCustomCell_CheckedChanged);
             // 
@@ -736,10 +736,10 @@
             this.TB_HC_ChoosenCellData.BackColor = System.Drawing.Color.Black;
             this.TB_HC_ChoosenCellData.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.TB_HC_ChoosenCellData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TB_HC_ChoosenCellData.Location = new System.Drawing.Point(111, 9);
+            this.TB_HC_ChoosenCellData.Location = new System.Drawing.Point(103, 9);
             this.TB_HC_ChoosenCellData.Name = "TB_HC_ChoosenCellData";
             this.TB_HC_ChoosenCellData.ReadOnly = true;
-            this.TB_HC_ChoosenCellData.Size = new System.Drawing.Size(80, 22);
+            this.TB_HC_ChoosenCellData.Size = new System.Drawing.Size(110, 22);
             this.TB_HC_ChoosenCellData.TabIndex = 43;
             this.TB_HC_ChoosenCellData.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1060,9 +1060,9 @@
             this.BS_HC_ApplyCell.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_ApplyCell.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_ApplyCell.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_ApplyCell.Location = new System.Drawing.Point(318, 58);
+            this.BS_HC_ApplyCell.Location = new System.Drawing.Point(329, 57);
             this.BS_HC_ApplyCell.Name = "BS_HC_ApplyCell";
-            this.BS_HC_ApplyCell.Size = new System.Drawing.Size(115, 24);
+            this.BS_HC_ApplyCell.Size = new System.Drawing.Size(104, 24);
             this.BS_HC_ApplyCell.TabIndex = 54;
             this.BS_HC_ApplyCell.Text = "Apply cell Data";
             this.BS_HC_ApplyCell.UseVisualStyleBackColor = true;

@@ -147,42 +147,49 @@ namespace Battleship.Forms
         {
             if (selectedButton != null)
             {
-                switch (Convert.ToString(cm.SetCharViaColor(1, selectedButton.BackColor)).ToUpper())
+                if (selectedButton.BackColor == Color.Green)
                 {
-                    case "F":
-                    case "D":
-                    case "C":
-                    case "B":
-                        {
-                            shipType = "Unknown";
-                            break;
-                        }
-                    case "E":
-                    case "N":
-                        {
-                            shipType = "Empty";
-                            break;
-                        }
-                    case "H":
-                        {
-                            shipType = "Hited ship";
-                            break;
-                        }
-                    case "S":
-                        {
-                            shipType = "Sunken ship";
-                            break;
-                        }
-                    case "M":
-                        {
-                            shipType = "Mine";
-                            break;
-                        }
-                    default:
-                        {
-                            shipType = null;
-                            break;
-                        }
+                    shipType = "Undiscovered ship";
+                }
+                else
+                {
+                    switch (Convert.ToString(cm.SetCharViaColor(1, selectedButton.BackColor)).ToUpper())
+                    {
+                        case "F":
+                        case "D":
+                        case "C":
+                        case "B":
+                            {
+                                shipType = "Unknown";
+                                break;
+                            }
+                        case "E":
+                        case "N":
+                            {
+                                shipType = "Empty";
+                                break;
+                            }
+                        case "H":
+                            {
+                                shipType = "Hited ship";
+                                break;
+                            }
+                        case "S":
+                            {
+                                shipType = "Sunken ship";
+                                break;
+                            }
+                        case "M":
+                            {
+                                shipType = "Mine";
+                                break;
+                            }
+                        default:
+                            {
+                                shipType = null;
+                                break;
+                            }
+                    }
                 }
                 if (shipType != null)
                 {
