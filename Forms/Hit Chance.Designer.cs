@@ -95,6 +95,7 @@
             this.PNL_ShipData = new System.Windows.Forms.Panel();
             this.BS_HC_ApplyCell = new System.Windows.Forms.Button();
             this.GB_HC_ShipData = new System.Windows.Forms.GroupBox();
+            this.BS_HC_ResetProbability = new System.Windows.Forms.Button();
             this.TLP_MC_Map_Main.SuspendLayout();
             this.PNL_MC_Map_Letters.SuspendLayout();
             this.TLP_MC_Map_Letters.SuspendLayout();
@@ -895,6 +896,7 @@
             // GB_HC_ProbabilityData
             // 
             this.GB_HC_ProbabilityData.BackColor = System.Drawing.Color.Black;
+            this.GB_HC_ProbabilityData.Controls.Add(this.BS_HC_ResetProbability);
             this.GB_HC_ProbabilityData.Controls.Add(this.BS_HC_UpdateProbability);
             this.GB_HC_ProbabilityData.Controls.Add(this.L_Info_HitChanceChanges);
             this.GB_HC_ProbabilityData.Controls.Add(this.TB_HC_HitChanceChanges);
@@ -917,7 +919,7 @@
             this.BS_HC_UpdateProbability.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_UpdateProbability.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_UpdateProbability.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_UpdateProbability.Location = new System.Drawing.Point(14, 303);
+            this.BS_HC_UpdateProbability.Location = new System.Drawing.Point(14, 154);
             this.BS_HC_UpdateProbability.Name = "BS_HC_UpdateProbability";
             this.BS_HC_UpdateProbability.Size = new System.Drawing.Size(216, 24);
             this.BS_HC_UpdateProbability.TabIndex = 61;
@@ -928,7 +930,7 @@
             // 
             this.L_Info_HitChanceChanges.AutoSize = true;
             this.L_Info_HitChanceChanges.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_Info_HitChanceChanges.Location = new System.Drawing.Point(11, 163);
+            this.L_Info_HitChanceChanges.Location = new System.Drawing.Point(11, 181);
             this.L_Info_HitChanceChanges.Name = "L_Info_HitChanceChanges";
             this.L_Info_HitChanceChanges.Size = new System.Drawing.Size(100, 17);
             this.L_Info_HitChanceChanges.TabIndex = 50;
@@ -939,7 +941,7 @@
             this.TB_HC_HitChanceChanges.BackColor = System.Drawing.Color.Black;
             this.TB_HC_HitChanceChanges.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.TB_HC_HitChanceChanges.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TB_HC_HitChanceChanges.Location = new System.Drawing.Point(14, 183);
+            this.TB_HC_HitChanceChanges.Location = new System.Drawing.Point(14, 201);
             this.TB_HC_HitChanceChanges.Multiline = true;
             this.TB_HC_HitChanceChanges.Name = "TB_HC_HitChanceChanges";
             this.TB_HC_HitChanceChanges.ReadOnly = true;
@@ -1091,6 +1093,18 @@
             this.GB_HC_ShipData.TabStop = false;
             this.GB_HC_ShipData.Text = "Enemy ships data";
             // 
+            // BS_HC_ResetProbability
+            // 
+            this.BS_HC_ResetProbability.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_HC_ResetProbability.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_HC_ResetProbability.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.BS_HC_ResetProbability.Location = new System.Drawing.Point(14, 124);
+            this.BS_HC_ResetProbability.Name = "BS_HC_ResetProbability";
+            this.BS_HC_ResetProbability.Size = new System.Drawing.Size(216, 24);
+            this.BS_HC_ResetProbability.TabIndex = 62;
+            this.BS_HC_ResetProbability.Text = "Reset probobility datas";
+            this.BS_HC_ResetProbability.UseVisualStyleBackColor = true;
+            // 
             // HitChance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 17F);
@@ -1197,5 +1211,6 @@
         private System.Windows.Forms.Label L_Info_HitChanceChanges;
         public System.Windows.Forms.TextBox TB_HC_HitChanceChanges;
         private System.Windows.Forms.Button BS_HC_UpdateProbability;
+        private System.Windows.Forms.Button BS_HC_ResetProbability;
     }
 }

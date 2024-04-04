@@ -1,6 +1,9 @@
 ﻿using Battleship.Classes;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -8,7 +11,7 @@ namespace Battleship.Forms
 {
     public partial class HitChance : Form
     {
-        Button[] exampleButtons = new Button[100];
+        Button[] ExampleButtons = new Button[100];
         ColorMethods cm = new ColorMethods();
         Position pos = new Position();
         Support sp = new Support();
@@ -30,6 +33,7 @@ namespace Battleship.Forms
             {
                 GetCellData(HitChanceData.SelectedCell);
             }
+            HitChanceData.SetProbobilityArrayDefaultValues();
         }
         private void HitChance_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -53,13 +57,13 @@ namespace Battleship.Forms
                             case 0:
                                 {
                                     await Task.Delay(10);
-                                    exampleButtons[b].BackColor = Color.Black;
+                                    ExampleButtons[b].BackColor = Color.Black;
                                     break;
                                 }
                             case 1:
                                 {
                                     await Task.Delay(10);
-                                    exampleButtons[b].BackColor = HitChanceData.CurrentMap[b].BackColor;
+                                    ExampleButtons[b].BackColor = HitChanceData.CurrentMap[b].BackColor;
                                     break;
                                 }
 
@@ -96,9 +100,11 @@ namespace Battleship.Forms
                     button.ForeColor = HitChanceData.CurrentMap[b].ForeColor;
                     button.BackColor = HitChanceData.CurrentMap[b].BackColor;
                     button.Tag = b + 600;
+                    button.Tag = Convert.ToInt32($"{button.Tag.ToString()[0]}{button.Tag.ToString()[2]}{button.Tag.ToString()[1]}");
                     button.Margin = new Padding(0);
-                    exampleButtons[b] = button;
+                    ExampleButtons[b] = button;
                     button.MouseClick += ExmpleButton_Click;
+                    button.MouseEnter += ExampleButton_MouseEnter;
                 }
                 if (TLP_HC_Schema.Controls.Count == 100)
                 {
@@ -106,6 +112,14 @@ namespace Battleship.Forms
                     BS_HC_RestartMap.Visible = true;
                 }
             }
+        }
+
+        private void ExampleButton_MouseEnter(object sender, EventArgs e)
+        {
+            Button hoverButton = sender as Button;
+            int index = Array.IndexOf(ExampleButtons, hoverButton);
+            HitChanceData.HitProbobility = HitChanceData.ProbobilityArray[index];
+            TB_HC_HitProbobility.Text = $"{HitChanceData.HitProbobility} %";
         }
 
         private void ExmpleButton_Click(object sender, MouseEventArgs e)
@@ -172,6 +186,7 @@ namespace Battleship.Forms
                         case "H":
                             {
                                 shipType = "Hited ship";
+                                FindProbability(selectedButton);
                                 break;
                             }
                         case "S":
@@ -272,12 +287,12 @@ namespace Battleship.Forms
                 TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[1];
                 TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[1]}";
             }
-            else if (sp.IsFloatBetween(25, 50, HitChanceData.HitProbobility, "IO"))
+            else if (sp.IsFloatBetween(25, 5, HitChanceData.HitProbobility, "IO"))
             {
                 TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[2];
                 TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[2]}";
             }
-            else if (sp.IsFloatBetween(50, 75, HitChanceData.HitProbobility, "IO"))
+            else if (sp.IsFloatBetween(5, 75, HitChanceData.HitProbobility, "IO"))
             {
                 TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[3];
                 TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[3]}";
@@ -301,6 +316,66 @@ namespace Battleship.Forms
         private void TB_HC_HitProbobility_TextChanged(object sender, EventArgs e)
         {
             
+        }
+        private void FindProbability(Button selectedButton)
+        {
+            if (ExampleButtons[0] == null)
+            {
+                MessageBox.Show("ExampleButtons[0] not initialized", "Hit Chance Manager",MessageBoxButtons.OK,MessageBoxIcon.Error);
+            }
+            else
+            {
+                if (sp.StringToInt(selectedButton.Tag.ToString(), out int firstCoord))
+                {
+                    HitChanceData.GenerateNearestCoords(firstCoord);
+                    CheckChance();
+                }
+                else
+                {
+                    MessageBox.Show($"Parsing error {selectedButton.Tag} to type Int32", "Hit Chance Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        void CheckChance(bool resetData = true)
+        {
+            int whiteCells = 0;
+            int otherCells = 0;
+            int[] indexes = new int[8];
+            if (resetData)
+            {
+                HitChanceData.ResetDiscoveredCells();
+            }
+            for (int a = 0; a < HitChanceData.AllowedCoordsCount; a++)
+            {
+                int index = FindButtonIndexByTag(HitChanceData.AllowedCoords[a].ToString());
+                if (ExampleButtons[index].BackColor == Color.White)
+                {
+                    HitChanceData.DiscoveredCells++;
+                    whiteCells++;
+                    Array.Resize(ref indexes, indexes.Length + 1);
+                    indexes[a] = FindButtonIndexByTag(HitChanceData.AllowedCoords[a].ToString());
+                    HitChanceData.PossibleIndexes.Add(indexes[a]);
+                }
+                else
+                {
+                    HitChanceData.ForbiddenIndexes.Add(FindButtonIndexByTag(HitChanceData.AllowedCoords[a].ToString()));
+                    HitChanceData.UndiscoveredCells++;
+                    otherCells++;
+                }
+            }
+            if (whiteCells != 0)
+            {
+                double probobility = 100 / whiteCells;
+                for (int p = 0; p < indexes.Length; p++)
+                {
+                    HitChanceData.ProbobilityArray[indexes[p]] = probobility;
+                }
+            }
+        }
+        int FindButtonIndexByTag(string tag)
+        {
+            int index = Array.FindIndex(ExampleButtons, button => Equals(button.Tag.ToString(), tag.ToString()));
+            return index;
         }
     }
 }
