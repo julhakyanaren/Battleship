@@ -15,6 +15,7 @@ namespace Battleship.Classes
         public static List<Button> CurrentMap = new List<Button>();
 
         public static double[] ProbobilityArray = new double[100];
+        public static double IndependentChance = 0;
 
         public static string[] EfficientyDataString = { "Forbidden", "Very Low", "Low", "Average", "High", "Very High", "Guaranteed" };
         public static Color[] EfficientyDataColor = { Color.Firebrick, Color.Red, Color.OrangeRed, Color.DarkOrange, Color.Yellow, Color.YellowGreen, Color.Lime };

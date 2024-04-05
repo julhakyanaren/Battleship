@@ -82,6 +82,7 @@
             this.L_EnemyFrigates = new System.Windows.Forms.Label();
             this.TB_EnemyShips_Frigates = new System.Windows.Forms.TextBox();
             this.GB_HC_ProbabilityData = new System.Windows.Forms.GroupBox();
+            this.BS_HC_ResetProbability = new System.Windows.Forms.Button();
             this.BS_HC_UpdateProbability = new System.Windows.Forms.Button();
             this.L_Info_HitChanceChanges = new System.Windows.Forms.Label();
             this.TB_HC_HitChanceChanges = new System.Windows.Forms.TextBox();
@@ -95,7 +96,6 @@
             this.PNL_ShipData = new System.Windows.Forms.Panel();
             this.BS_HC_ApplyCell = new System.Windows.Forms.Button();
             this.GB_HC_ShipData = new System.Windows.Forms.GroupBox();
-            this.BS_HC_ResetProbability = new System.Windows.Forms.Button();
             this.TLP_MC_Map_Main.SuspendLayout();
             this.PNL_MC_Map_Letters.SuspendLayout();
             this.TLP_MC_Map_Letters.SuspendLayout();
@@ -914,6 +914,18 @@
             this.GB_HC_ProbabilityData.TabStop = false;
             this.GB_HC_ProbabilityData.Text = "Probability Data";
             // 
+            // BS_HC_ResetProbability
+            // 
+            this.BS_HC_ResetProbability.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_HC_ResetProbability.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_HC_ResetProbability.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.BS_HC_ResetProbability.Location = new System.Drawing.Point(14, 124);
+            this.BS_HC_ResetProbability.Name = "BS_HC_ResetProbability";
+            this.BS_HC_ResetProbability.Size = new System.Drawing.Size(216, 24);
+            this.BS_HC_ResetProbability.TabIndex = 62;
+            this.BS_HC_ResetProbability.Text = "Reset probobility datas";
+            this.BS_HC_ResetProbability.UseVisualStyleBackColor = true;
+            // 
             // BS_HC_UpdateProbability
             // 
             this.BS_HC_UpdateProbability.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
@@ -971,6 +983,7 @@
             this.TB_HC_IndependentChance.Size = new System.Drawing.Size(93, 22);
             this.TB_HC_IndependentChance.TabIndex = 47;
             this.TB_HC_IndependentChance.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_HC_IndependentChance.TextChanged += new System.EventHandler(this.TB_HC_IndependentChance_TextChanged);
             // 
             // L_Info_ShotEfficiency
             // 
@@ -1092,18 +1105,6 @@
             this.GB_HC_ShipData.TabIndex = 17;
             this.GB_HC_ShipData.TabStop = false;
             this.GB_HC_ShipData.Text = "Enemy ships data";
-            // 
-            // BS_HC_ResetProbability
-            // 
-            this.BS_HC_ResetProbability.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_HC_ResetProbability.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_ResetProbability.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_ResetProbability.Location = new System.Drawing.Point(14, 124);
-            this.BS_HC_ResetProbability.Name = "BS_HC_ResetProbability";
-            this.BS_HC_ResetProbability.Size = new System.Drawing.Size(216, 24);
-            this.BS_HC_ResetProbability.TabIndex = 62;
-            this.BS_HC_ResetProbability.Text = "Reset probobility datas";
-            this.BS_HC_ResetProbability.UseVisualStyleBackColor = true;
             // 
             // HitChance
             // 
