@@ -25,7 +25,7 @@ namespace Battleship.Classes
         public static bool ExampleCraeted = false;
         public static bool CanOpenForm = false;
         public static bool CanResetMap = true;
-        public static bool ManualMode = false;
+        public static bool ManualMode = true;
 
         public static List<float> HitChanceChanges = new List<float>();
 

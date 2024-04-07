@@ -35,6 +35,9 @@ namespace Battleship.Forms
                 GetCellData(HitChanceData.SelectedCell);
             }
             HitChanceData.SetProbobilityArrayDefaultValues();
+            GenerateMap();
+            SetShipsMaxCount();
+            SetShipCurrentCount();
         }
         private void HitChance_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -75,9 +78,7 @@ namespace Battleship.Forms
                         }
                     }
                 }
-                FindIndependentChance(out float chance);
-                HitChanceData.IndependentChance = (float)Math.Round(chance, 4) * 100;
-                TB_HC_IndependentChance.Text = HitChanceData.IndependentChance.ToString();
+                UpdateProbabilityData();
                 HitChanceData.CanResetMap = true;
             }
             else
@@ -123,9 +124,7 @@ namespace Battleship.Forms
                     HitChanceData.ExampleCraeted = true;
                     BS_HC_RestartMap.Visible = true;
                 }
-                FindIndependentChance(out float chance);
-                HitChanceData.IndependentChance = (float)Math.Round(chance, 4) * 100;
-                TB_HC_IndependentChance.Text = HitChanceData.IndependentChance.ToString();
+                UpdateProbabilityData();
             }
         }
 
@@ -140,7 +139,7 @@ namespace Battleship.Forms
             Button hoverButton = sender as Button;
             int index = Array.IndexOf(ExampleButtons, hoverButton);
             HitChanceData.HitProbobility = HitChanceData.ProbobilityArray[index];
-            TB_HC_HitProbobility.Text = $"{HitChanceData.HitProbobility} %";
+            TB_HC_HitProbobility.Text = HitChanceData.HitProbobility.ToString("F2") + "%";
             hoverButton.FlatAppearance.BorderSize = 2;
             hoverButton.FlatAppearance.BorderColor = Color.DarkOrange;
         }
@@ -157,20 +156,7 @@ namespace Battleship.Forms
         {
             if (!HitChanceData.ExampleCraeted)
             {
-                BS_HC_GenerateMap.Visible = CHB_HC_UseCustomCell.Checked;
                 HitChanceData.ManualMode = CHB_HC_UseCustomCell.Checked;
-            }
-        }
-        private void BS_HC_GenerateMap_Click(object sender, EventArgs e)
-        {
-            if (!HitChanceData.ExampleCraeted)
-            {
-                GenerateMap();
-                BS_HC_GenerateMap.Visible = false;
-            }
-            else
-            {
-                MessageBox.Show("Map already created", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void BS_HC_UpdateCellDAta_Click(object sender, EventArgs e)
@@ -179,6 +165,10 @@ namespace Battleship.Forms
             {
                 GetCellData(HitChanceData.SelectedCell);
             }
+        }
+        private void BS_HC_UpdateProbability_Click(object sender, EventArgs e)
+        {
+            UpdateProbabilityData();
         }
         void GetCellData(Button selectedButton)
         {
@@ -409,6 +399,7 @@ namespace Battleship.Forms
             float hitedCells = 0;
             for (int b = 0; b < ExampleButtons.Length; b++)
             {
+                string example = ExampleButtons[b].BackColor.Name.ToString();
                 switch (ExampleButtons[b].BackColor.Name.ToString())
                 {
                     case "White":
@@ -417,14 +408,15 @@ namespace Battleship.Forms
                             break;
                         }
                     case "Red":
-                    case "FireBrick":
+                    case "Firebrick":
                         {
                             hitedCells++;
                             break;
                         }
                 }
             }
-            chance = (20.0f - hitedCells) / whiteCells;
+            hitedCells = 20 - hitedCells;
+            chance = hitedCells / whiteCells;
         }
         void SetBasicProbobility(Button inputButton, int index)
         {
@@ -441,7 +433,7 @@ namespace Battleship.Forms
                         HitChanceData.ProbobilityArray[index] = 0;
                         break;
                     }
-                case "FireBrick":
+                case "Firebrick":
                     {
                         HitChanceData.ProbobilityArray[index] = 0;
                         break;
@@ -451,7 +443,11 @@ namespace Battleship.Forms
 
         private void TB_HC_IndependentChance_TextChanged(object sender, EventArgs e)
         {
-            if (HitChanceData.IndependentChance == 0)
+            if (TB_HC_IndependentChance.Text == "No moves available")
+            {
+                TB_HC_IndependentChance.ForeColor = Color.DeepSkyBlue;
+            }
+            else if (HitChanceData.IndependentChance == 0)
             {
                 TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[0];
             }
@@ -479,6 +475,33 @@ namespace Battleship.Forms
             {
                 TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[6];
             }
+        }
+        void UpdateProbabilityData()
+        {
+            FindIndependentChance(out float chance);
+            HitChanceData.IndependentChance = (float)Math.Round(chance, 4) * 100;
+            if (chance != Math.Abs(float.PositiveInfinity))
+            {
+                TB_HC_IndependentChance.Text = HitChanceData.IndependentChance.ToString("F2") + "%";
+            }
+            else
+            {
+                TB_HC_IndependentChance.Text = "No moves available";
+            }
+        }
+
+        private void TB_EnemyShips_Frigates_TextChanged(object sender, EventArgs e)
+        {
+            TextBox zeroValue_TB = sender as TextBox;
+            if (zeroValue_TB.Text == "0")
+            {
+                zeroValue_TB.ForeColor = Color.Red;
+            }
+        }
+
+        private void TB_HC_IndependentEfficity_TextChanged(object sender, EventArgs e)
+        {
+            SetHitProbobilityTextColor(HitChanceData.IndependentChance, TB_HC_IndependentChance, TB_HC_IndependentEfficity);
         }
     }
 }

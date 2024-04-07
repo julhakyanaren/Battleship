@@ -559,7 +559,6 @@ namespace Battleship
                             TargetButtonTag = nextTarget;
                             EnemyShoot(nextTarget, out successShoot, out checkedPosition);
                             PossibleTargets = DeleteForbiddenCoords(PossibleTargets); //Check Method
-                            PossibleTargets = DeleteForbiddenCoords(PossibleTargets); //Check Method
                             int usedTarget = nextTarget;
                             if (nextTarget / 1000 != 0)
                             {
@@ -763,49 +762,6 @@ namespace Battleship
                 convertedSet.Remove(item);
             }
             inputList = new List<int>(convertedSet);
-            //if (inputList.Count == 1)
-            //{
-            //    coords[0] = FindCorrectIndex(FirstSuccessHitCoord + 1551, codeIndex: "Fight 766");
-            //    coords[1] = FindCorrectIndex(SecondSuccessHitCoord + 1551, codeIndex: "Fight 767");
-            //    int delta = Math.Abs(coords[0] - coords[1]);
-            //    if (coords[0] < coords[1])
-            //    {
-            //        delta = -delta;
-            //    }
-            //    inputList.Clear();
-            //    inputList.Add(coords[1] - delta);
-            //    inputList.Add(coords[0] + delta);
-            //    if (Math.Abs(delta) == 1)
-            //    {
-            //        for (int i = inputList.Count - 1; i >=0; i--)
-            //        {
-            //            if (inputList[i] / 10 != coords[i] / 10)
-            //            {
-            //                inputList.RemoveAt(i);
-            //            }
-            //        }
-            //    }
-            //    else if (Math.Abs(delta) == 10)
-            //    {
-            //        for (int i = inputList.Count - 1; i >= 0; i--)
-            //        {
-            //            if (inputList[i] % 10 != coords[i] % 10)
-            //            {
-            //                inputList.RemoveAt(i);
-            //            }
-            //        }
-            //    }
-            //}
-            //if (inputList.Count != 0)
-            //{
-            //    for (int i = 0; i < inputList.Count; i++)
-            //    {
-            //        if (inputList[i] > 99 || inputList[i] < 0)
-            //        {
-            //            inputList.RemoveAt(i);
-            //        }
-            //    }
-            //}
             return inputList;
         }
         private static List<int> UpdatePossibleTargets(int firstHitCoord, int secondHitCoord)
@@ -889,8 +845,8 @@ namespace Battleship
                                     }
                                     else
                                     {
-                                        newTargetsList.Add(firstHitCoord + Math.Abs(delta));
-                                        newTargetsList.Add(firstHitCoord + Math.Abs(delta * 2));
+                                        newTargetsList.Add(firstHitCoord + delta);
+                                        newTargetsList.Add(firstHitCoord + (delta * 2));
                                     }
                                     break;
                                 }
@@ -1076,10 +1032,6 @@ namespace Battleship
                 do
                 {
                     int delta = hitCoords[0] - hitCoords[1];
-                    if (hitCoords[0] > hitCoords[1])
-                    {
-                        delta = -delta;
-                    }
                     nextCoords.Add(hitCoords[0] + delta);
                     nextCoords.Add(hitCoords[0] + (2 * delta));
                     if (nextCoords[1] % 10 > nextCoords[1] % 10)
@@ -1096,7 +1048,10 @@ namespace Battleship
                         nextCoords.Clear();
                         continue;
                     }
-                    correctCoords = true;
+                    if (nextCoords.Count != 0)
+                    {
+                        correctCoords = true;
+                    }
                 }
                 while (!correctCoords);
                 HashSet<int> forbidden = new HashSet<int>(ForbiddenCoords);
