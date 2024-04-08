@@ -147,6 +147,7 @@ namespace Battleship
                         successShoot = true;
                         checkedPosition = false;
                         sunkenFrigate = true;
+                        NewShotPreparing();
                         break;
                     }
                 case 'D':
@@ -194,6 +195,7 @@ namespace Battleship
                         PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
                         successShoot = true;
                         checkedPosition = false;
+
                         break;
                     }
                 case 'C':
@@ -239,6 +241,7 @@ namespace Battleship
                         }
                         PlayerData.SunkenCruisersCount = sunkenCruisers;
                         PlayerData.CruiserCountCurrent = PlayerData.CruiserCountMax - PlayerData.SunkenCruisersCount;
+
                         successShoot = true;
                         checkedPosition = false;
                         break;
@@ -277,6 +280,7 @@ namespace Battleship
                         }
                         PlayerData.SunkenBattleshipCount = sunkenBattleship;
                         PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
+
                         successShoot = true;
                         checkedPosition = false;
                         break;
@@ -499,6 +503,7 @@ namespace Battleship
                                 nextTarget = FindCorrectCoord(nextTarget) + 1551;
                                 PossibleTargets = AllowedCoords;
                             }
+
                             if (DefinedShot)
                             {
                                 if (PossibleTargets.Count != 1)
@@ -1376,6 +1381,27 @@ namespace Battleship
             if (!isFrigate)
             {
                 EnemyData.AllowedCoords.Clear();
+            }
+        }
+        private static void SetHitCoords(int currentCoord)
+        {
+            if (FirstSuccessHitCoord == 0)
+            {
+                FirstSuccessHitCoord = currentCoord;
+            }
+            else
+            {
+                if (SecondSuccessHitCoord == 0)
+                {
+                    SecondSuccessHitCoord = currentCoord;
+                }
+                else
+                {
+                    if (ThirdSuccssHitCoord == 0)
+                    {
+                        ThirdSuccssHitCoord = currentCoord;
+                    }
+                }
             }
         }
     }
