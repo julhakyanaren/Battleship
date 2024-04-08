@@ -1,13 +1,9 @@
-﻿using System;
-using System.CodeDom;
+﻿using Octokit;
+using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Diagnostics;
-using System.Diagnostics.Eventing.Reader;
+using System.Drawing.Drawing2D;
 using System.Linq;
-using System.Reflection;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
 using System.Windows.Forms;
 
 namespace Battleship
@@ -25,6 +21,7 @@ namespace Battleship
         public static bool NewMove = true;
         public static bool Hited = false;
         public static bool DefinedShot = false;
+        public static bool TargetingShoot = false;
         public static bool GuaranteedShot = false;
 
         public static int TargetCoord;
@@ -98,7 +95,6 @@ namespace Battleship
         }
         public static void EnemyShoot(int target, out bool successShoot, out bool checkedPosition)
         {
-            Button targetButton;
             int index = 0;
             int counter = 0;
             bool incorrectValue = false;
@@ -107,9 +103,7 @@ namespace Battleship
             {
                 if (PlayerData.MapButtons[b].Tag.ToString() == Convert.ToString(target - 1551))
                 {
-                    targetButton = PlayerData.MapButtons[b];
                     index = counter;
-                    counter = 0;
                     break;
                 }
                 else
@@ -117,13 +111,6 @@ namespace Battleship
                     counter++;
                 }
             }
-            //Debug
-            if (index == 0)
-            {
-                index--;
-                index++;
-            }
-            //Debug
             successShoot = true;
             char charter = Char.ToUpper(PlayerData.Map[index]);
             bool hited = true;
@@ -135,6 +122,7 @@ namespace Battleship
                     {
                         FirstHitCoord = 0;
                         PlayerData.Map[index] = 'M';
+                        EnemyData.MissedShotsCount++;
                         NewMove = true;
                         successShoot = false;
                         hited = false;
@@ -190,16 +178,24 @@ namespace Battleship
                             sunkenDestroyers += Convert.ToInt32(PlayerData.DestroyersSunken[d]);
                         }
                         NewMove = PlayerData.SunkenDestroyersCount < sunkenDestroyers;
+                        TargetingShoot = true;
                         if (sunkenDestroyers - PlayerData.SunkenDestroyersCount == 1)
                         {
-                            SetRoundMines(3);
+                            PlayerData.DestroyersCountCurrent--;
+                            SetRoundMinesInPlayerMap(3);
                             PossibleTargets.Clear();
+                            NewShotPreparing();
+                        }
+                        else
+                        {
+                            FirstHitCoord = FindCorrectCoord(index);
+                            SetHitCoords(index);
                         }
                         PlayerData.SunkenDestroyersCount = sunkenDestroyers;
                         PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
                         successShoot = true;
                         checkedPosition = false;
-                        SetHitCoords(FindCorrectCoord(index));
+
                         break;
                     }
                 case 'C':
@@ -230,14 +226,22 @@ namespace Battleship
                             sunkenCruisers += Convert.ToInt32(PlayerData.CruisersSunken[c]);
                         }
                         NewMove = PlayerData.SunkenCruisersCount < sunkenCruisers;
+                        TargetingShoot = true;
                         if (sunkenCruisers - PlayerData.SunkenCruisersCount == 1)
                         {
-                            SetRoundMines(2);
+                            PlayerData.CruiserCountCurrent--;
+                            SetRoundMinesInPlayerMap(2);
                             PossibleTargets.Clear();
+                            NewShotPreparing();
+                        }
+                        else
+                        {
+                            FirstHitCoord = FindCorrectCoord(index);
+                            SetHitCoords(index);
                         }
                         PlayerData.SunkenCruisersCount = sunkenCruisers;
                         PlayerData.CruiserCountCurrent = PlayerData.CruiserCountMax - PlayerData.SunkenCruisersCount;
-                        SetHitCoords(FindCorrectCoord(index));
+
                         successShoot = true;
                         checkedPosition = false;
                         break;
@@ -261,14 +265,22 @@ namespace Battleship
                             sunkenBattleship += Convert.ToInt32(PlayerData.BattleshipSunken[b]);
                         }
                         NewMove = PlayerData.SunkenBattleshipCount < sunkenBattleship;
+                        TargetingShoot = true;
                         if (sunkenBattleship == 1)
                         {
-                            SetRoundMines(1);
+                            PlayerData.BattleshipCountCurrent--;
+                            SetRoundMinesInPlayerMap(1);
                             PossibleTargets.Clear();
+                            NewShotPreparing();
+                        }
+                        else
+                        {
+                            FirstHitCoord = FindCorrectCoord(index);
+                            SetHitCoords(index);
                         }
                         PlayerData.SunkenBattleshipCount = sunkenBattleship;
                         PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
-                        SetHitCoords(FindCorrectCoord(index));
+
                         successShoot = true;
                         checkedPosition = false;
                         break;
@@ -288,56 +300,24 @@ namespace Battleship
             if (charter == 'F' || charter == 'D' || charter == 'C' || charter == 'B')
             {
                 ShipData.HitedDeckCount++;
+                EnemyData.HitCountCurrent++;
             }
             if (!incorrectValue && successShoot && !checkedPosition)
             {
-A:
-                try
+                GenerateNearestCoords(target, 1551);
+                for (int bl = 0; bl < BlockedCoords.Count; bl++)
                 {
-                    if (target == 1660)
-                    {
-                        string f = "Frigate";
-                    }
-                    if (target / 1000 == 0)
-                    {
-                        target = FindCorrectCoord(target) + 1551;
-                    }
-                    GenerateNearestCoords(target, 1551);
-                    for (int bl = 0; bl < BlockedCoords.Count; bl++)
-                    {
-                        PlayerData.Map[BlockedCoords[bl]] = 'E';
-                    }
-                    if (sunkenFrigate)
-                    {
-                        for (int bl = 0; bl < AllowedCoords.Count; bl++)
-                        {
-                            PlayerData.Map[AllowedCoords[bl]] = 'E';
-                            ForbiddenCoords.Add(AllowedCoords[bl]);
-                        }
-                        ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
-                        sunkenFrigate = false;
-                    }
+                    PlayerData.Map[BlockedCoords[bl]] = 'E';
                 }
-                catch (Exception ex)
+                if (sunkenFrigate)
                 {
-                    DialogResult dr = MessageBox.Show($"Exception:\r\n{ex}\r\n\r\nMessage:\r\n{ex.Message}\r\n\r\nContinue?", "Exception Manager", MessageBoxButtons.AbortRetryIgnore, MessageBoxIcon.Error);
-                    switch (dr)
+                    for (int bl = 0; bl < AllowedCoords.Count; bl++)
                     {
-                        case DialogResult.Cancel:
-                            {
-                                ReverseTurn(false);
-                                break;
-                            }
-                        case DialogResult.Abort:
-                            {
-                                ReverseTurn(true);
-                                break;
-                            }
-                        default:
-                            {
-                                goto A;
-                            }
+                        PlayerData.Map[AllowedCoords[bl]] = 'E';
+                        ForbiddenCoords.Add(AllowedCoords[bl]);
                     }
+                    ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
+                    sunkenFrigate = false;
                 }
             }
             if (targetInMap)
@@ -347,272 +327,295 @@ A:
             }
             Hited = hited;
         }
-        static int FindCorrectIndex(int index)
+        static int FindCorrectIndex(int index, bool enemyMap = false, string codeIndex = "null")
         {
             index -= 1551;
-            for (int b = 0; b < 100; b++)
+            if (!enemyMap)
             {
-                if (PlayerData.MapButtons[b].Tag.ToString() == $"{index}")
+                for (int b = 0; b < 100; b++)
                 {
-                    return b;
+                    if (PlayerData.MapButtons[b].Tag.ToString() == $"{index}")
+                    {
+                        return b;
+                    }
+                }
+            }
+            else
+            {
+                for (int b = 0; b < 100; b++)
+                {
+                    if (EnemyData.MapButtons[b].Tag.ToString() == $"{index}")
+                    {
+                        return b;
+                    }
                 }
             }
             return -1;
         }
-        static int FindCorrectCoord(int index)
+        internal static int FindCorrectCoord(int index, bool enemyMap = false)
         {
+            int coord = -1;
             try
             {
-                sp.StringToInt(PlayerData.MapButtons[index].Tag.ToString(), out int coord);
-                return coord;
+                if (!enemyMap)
+                {
+                    sp.StringToInt(PlayerData.MapButtons[index].Tag.ToString(), out coord);
+                }
+                else
+                {
+                    sp.StringToInt(EnemyData.MapButtons[index].Tag.ToString(), out coord);
+                }
+                if (coord == -1)
+                {
+                    MessageBox.Show("Incorrect Coord");
+                }
             }
             catch
             {
-                return -1;
+                coord = -1;
             }
+            return coord;
         }
+        //Unused 6
         public static void Shoot(out bool successShoot)
         {
             int newFoundTarget = -1;
             bool checkedPosition = false;
-            do
+            successShoot = true;
+            if (GuaranteedShot)
             {
-                if (DefinedShot)
+                TargetButtonTag = DefinedCoord;
+                EnemyShoot(DefinedCoord, out successShoot, out checkedPosition);
+                GuaranteedShot = !successShoot;
+            }
+            else
+            {
+                if (ThirdSuccssHitCoord != 0)
                 {
-                    NewMove = false;
-                }
-                successShoot = true;
-                if (NewMove)
-                {
-                    bool correctCoord = false;
-                    int target = -1;
-                    do
+                    List<int> lastcoords = FindLastCoord();
+                    DeleteForbiddenCoords(lastcoords);
+                    PossibleTargets.Clear();
+                    PossibleTargets = DeleteForbiddenCoords(lastcoords);
+                    if (PossibleTargets.Count != 0)
                     {
-                        if (ForbiddenCoords.Count != 0)
+                        Random randLastCoord = new Random();
+                        int randomItem = randLastCoord.Next(0, PossibleTargets.Count);
+                        int lastTarget = PossibleTargets[randomItem];
+                        lastTarget = FindCorrectCoord(lastTarget) + 1551;
+                        TargetButtonTag = lastTarget;
+                        EnemyShoot(lastTarget, out successShoot, out checkedPosition);
+                        try
                         {
-                            ForbiddenCoords.Sort();
-                            target = FindShipCoord(false);
-                            if (target == 1660)
+                            if (!successShoot)
                             {
-
-                            }
-                            int targetIndex = FindCorrectIndex(target);
-                            for (int t = 0; t < ForbiddenCoords.Count; t++)
-                            {
-                                if (targetIndex != ForbiddenCoords[t])
-                                {
-                                    correctCoord = true;
-                                    if (target < ForbiddenCoords[t])
-                                    {
-                                        correctCoord = false;
-                                        break;
-                                    }
-                                    else
-                                    {
-                                        continue;
-                                    }
-                                }
-                                else
-                                {
-                                    correctCoord = false;
-                                    break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            target = FindShipCoord(false);
-                            correctCoord = true;
-                        }
-                    }
-                    while (!correctCoord);
-                    newFoundTarget = target;
-                    TargetButtonTag = target;
-                    EnemyShoot(target, out successShoot, out checkedPosition);
-                    if (successShoot && FirstSuccessHitCoord == 0)
-                    {
-                        FirstSuccessHitCoord = target;
-                    }
-                }
-                else if (FirstHitCoord != 0 || DefinedShot)
-                {
-                    bool canShot = false;
-                    int nextTarget = -1;
-                    int newIndex = -1;
-                    newIndex = FirstHitCoord + 1551;
-                    if (!DefinedShot)
-                    {
-                        GenerateNearestCoords(newIndex, 1551);
-                        List<int> allowedCoords = AllowedCoords;
-                        do
-                        {
-                            if (allowedCoords.Count > 0)
-                            {
-                                ForbiddenCoords.Sort();
-                                Random randomShoot = new Random();
-                                int randomIndex = randomShoot.Next(0, AllowedCoords.Count);
-                                nextTarget = allowedCoords[randomIndex];
-                                for (int f = 0; f < ForbiddenCoords.Count; f++)
-                                {
-                                    if (nextTarget != ForbiddenCoords[f])
-                                    {
-                                        canShot = true;
-                                        if (nextTarget < ForbiddenCoords[f])
-                                        {
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            continue;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        canShot = false;
-                                        allowedCoords.Remove(nextTarget);
-                                        AllowedCoords.Remove(nextTarget);
-                                        allowedCoords.Sort();
-                                        break;
-                                    }
-                                }
+                                PossibleTargets.Remove(FindCorrectIndex(lastTarget, codeIndex: "Fight 405"));
+                                DefinedCoord = FindCorrectCoord(PossibleTargets[0]) + 1551;
+                                GuaranteedShot = true;
                             }
                             else
                             {
-                                DefinedShot = true;
-                                break;
+                                GuaranteedShot = false;
                             }
                         }
-                        while (!canShot);
-                        nextTarget = FindCorrectCoord(nextTarget) + 1551;
-                        PossibleTargets = AllowedCoords;
-                    }
-                    if (DefinedShot)
-                    {
-                        if (PossibleTargets.Count != 1)
+                        catch (Exception ex)
                         {
-                            int counter = -1;
-                            do
-                            {
-                                counter++;
-                                ForbiddenCoords.Sort();
-                                PossibleTargets.Sort();
-                                if (PossibleTargets.Count == 2 && (Math.Abs(PossibleTargets[0] - PossibleTargets[1]) == 10 || Math.Abs(PossibleTargets[0] - PossibleTargets[1]) == 1))
-                                {
-                                    if (PossibleTargets.Count >= counter + 1)
-                                    {
-                                        nextTarget = PossibleTargets[counter];
-                                    }
-                                }
-                                else
-                                {
-                                    if (PossibleTargets.Count > 0)
-                                    {
-                                        Random randomPT = new Random();
-                                        int randomIndexPT = randomPT.Next(0, PossibleTargets.Count);
-                                        nextTarget = PossibleTargets[randomIndexPT];
-                                    }
-                                    else
-                                    {
 
-                                    }
-                                }
-                                for (int f = 0; f < ForbiddenCoords.Count; f++)
-                                {
-                                    if (nextTarget != ForbiddenCoords[f])
-                                    {
-                                        canShot = true;
-                                        if (nextTarget < ForbiddenCoords[f])
-                                        {
-                                            break;
-                                        }
-                                        else
-                                        {
-                                            continue;
-                                        }
-                                    }
-                                    else
-                                    {
-                                        canShot = false;
-                                        break;
-                                    }
-                                }
-                            }
-                            while (!canShot);
                         }
-                        else
-                        {
-                            DefinedCoord = PossibleTargets[0];
-                            nextTarget = DefinedCoord;
-                            nextTarget = FindCorrectCoord(nextTarget) + 1551;
-                        }
-                    }
-                    //Debug
-                    if (nextTarget / 1000 == 0)
-                    {
-                        nextTarget = FindCorrectCoord(nextTarget) + 1551;
-                    }
-                    //Debug
-                    TargetButtonTag = nextTarget;
-                    EnemyShoot(nextTarget, out successShoot, out checkedPosition);
-                    if (successShoot && SecondSuccessHitCoord == 0 && DefinedShot)
-                    {
-                        SecondSuccessHitCoord = nextTarget;
-                    }
-                    if (successShoot && SecondSuccessHitCoord != 0 && DefinedShot)
-                    {
-                        ThirdSuccssHitCoord = nextTarget;
-                    }
-                    PossibleTargets = DeleteForbiddenCoords(PossibleTargets);
-                    int usedTarget = nextTarget;
-                    if (nextTarget / 1000 != 0)
-                    {
-                        usedTarget = FindCorrectIndex(nextTarget);
-                    }
-                    if (!successShoot)
-                    {
-                        PossibleTargets.Remove(usedTarget);
-                        ForbiddenCoords.Add(usedTarget);
-                        DefinedShot = true;
                     }
                     else
                     {
-                        int firstHitIndex = -1;
-                        if (FirstSuccessHitCoord != 0)
+                        MessageBox.Show("Incorrect hit data", "Data Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else
+                {
+                    do
+                    {
+                        if (DefinedShot)
                         {
-                            firstHitIndex = FindCorrectIndex(FirstSuccessHitCoord);
+                            NewMove = false;
                         }
-                        firstHitIndex = FindCorrectIndex(newFoundTarget);
-                        List<int>[] listes = BannForbiddenCoords(usedTarget, firstHitIndex, PossibleTargets, ForbiddenCoords);
-                        PossibleTargets = listes[0];
-                        ForbiddenCoords = listes[1];
-                        PossibleTargets.Remove(usedTarget);
-                        ForbiddenCoords.Add(usedTarget);
-                        switch(PossibleTargets.Count)
+                        if (NewMove)
                         {
-                            case 0:
+                            bool correctCoord = false;
+                            int target = -1;
+                            do
+                            {
+                                if (ForbiddenCoords.Count != 0)
                                 {
-                                    int firstCount = PossibleTargets.Count;
-                                    PossibleTargets = UpdatePossibleTargets(FirstSuccessHitCoord, SecondSuccessHitCoord);
-                                    int secondCount = PossibleTargets.Count;
-                                    if (firstCount == secondCount)
+                                    ForbiddenCoords.Sort();
+                                    target = FindShipCoord(false);
+                                    int targetIndex = FindCorrectIndex(target, codeIndex:"Fight 442");
+                                    //Unused 2
+                                    correctCoord = !ForbiddenCoords.Contains(targetIndex);
+                                }
+                                else
+                                {
+                                    target = FindShipCoord(false);
+                                    correctCoord = true;
+                                }
+                            }
+                            while (!correctCoord);
+                            newFoundTarget = target;
+                            TargetButtonTag = target;
+                            EnemyShoot(target, out successShoot, out checkedPosition);
+                        }
+                        else if (FirstHitCoord != 0 || DefinedShot)
+                        {
+                            bool canShot = false;
+                            int nextTarget = -1;
+                            int newIndex = -1;
+                            newIndex = FirstHitCoord + 1551;
+                            if (!DefinedShot)
+                            {
+                                GenerateNearestCoords(newIndex, 1551);
+                                List<int> allowedCoords = AllowedCoords;
+                                do
+                                {
+                                    if (allowedCoords.Count > 0)
                                     {
-                                        DefinedShot = false;
+                                        ForbiddenCoords.Sort();
+                                        Random randomShoot = new Random();
+                                        int randomIndex = randomShoot.Next(0, AllowedCoords.Count);
+                                        nextTarget = allowedCoords[randomIndex];
+                                        //Unused 4
+                                        if (ForbiddenCoords.Contains(nextTarget))
+                                        {
+                                            canShot = false;
+                                            allowedCoords.Remove(nextTarget);
+                                            AllowedCoords.Remove(nextTarget);
+                                            allowedCoords.Sort();
+                                        }
+                                        else
+                                        {
+                                            canShot = true;
+                                        }
                                     }
-                                    break;
+                                    else
+                                    {
+                                        GenerateSecondPossibleCoords(PossibleTargets);
+                                        PossibleTargets = SortUniqueInt(PossibleTargets);
+                                        allowedCoords = PossibleTargets;
+                                        continue;
+                                    }
                                 }
-                            case 1:
+                                while (!canShot);
+                                nextTarget = FindCorrectCoord(nextTarget) + 1551;
+                                PossibleTargets = AllowedCoords;
+                            }
+
+                            if (DefinedShot)
+                            {
+                                if (PossibleTargets.Count != 1)
                                 {
-                                    DefinedShot = true;
-                                    DefinedCoord = PossibleTargets[0];
-                                    break;
+                                    int counter = -1;
+                                    do
+                                    {
+                                        counter++;
+                                        ForbiddenCoords.Sort();
+                                        PossibleTargets.Sort();
+                                        if (PossibleTargets.Count == 2 && (Math.Abs(PossibleTargets[0] - PossibleTargets[1]) == 10 || Math.Abs(PossibleTargets[0] - PossibleTargets[1]) == 1))
+                                        {
+                                            if (PossibleTargets.Count >= counter + 1)
+                                            {
+                                                nextTarget = PossibleTargets[counter];
+                                            }
+                                        }
+                                        else
+                                        {
+                                            if (PossibleTargets.Count > 0)
+                                            {
+                                                Random randomPT = new Random();
+                                                int randomIndexPT = randomPT.Next(0, PossibleTargets.Count);
+                                                nextTarget = PossibleTargets[randomIndexPT];
+                                            }
+                                            else
+                                            {
+                                                GenerateSecondPossibleCoords(PossibleTargets);
+                                                if (PossibleTargets.Count == 0)
+                                                {
+                                                    NewMove = true;
+                                                }
+                                                else
+                                                {
+                                                    Random randomPT = new Random();
+                                                    int randomIndexPT = randomPT.Next(0, PossibleTargets.Count);
+                                                    nextTarget = PossibleTargets[randomIndexPT];
+                                                    break;
+                                                }
+                                            }
+                                        }
+                                        canShot = !ForbiddenCoords.Contains(nextTarget);
+                                        //Unused 3
+                                    }
+                                    while (!canShot);
                                 }
+                                else
+                                {
+                                    DefinedCoord = PossibleTargets[0];
+                                    nextTarget = DefinedCoord;
+                                    nextTarget = FindCorrectCoord(nextTarget) + 1551;
+                                }
+                            }
+                            if (nextTarget / 1000 == 0)
+                            {
+                                nextTarget = FindCorrectCoord(nextTarget) + 1551;
+                            }
+                            TargetButtonTag = nextTarget;
+                            EnemyShoot(nextTarget, out successShoot, out checkedPosition);
+                            PossibleTargets = DeleteForbiddenCoords(PossibleTargets); //Check Method
+                            int usedTarget = nextTarget;
+                            if (nextTarget / 1000 != 0)
+                            {
+                                usedTarget = FindCorrectIndex(nextTarget, codeIndex: "Fight 565");
+                            }
+                            if (!successShoot)
+                            {
+                                PossibleTargets.Remove(usedTarget);
+                                ForbiddenCoords.Add(usedTarget);
+                                DefinedShot = true;
+                            }
+                            else
+                            {
+                                int firstHitIndex = -1;
+                                if (FirstSuccessHitCoord != 0)
+                                {
+                                    firstHitIndex = FindCorrectIndex(FirstSuccessHitCoord + 1551, codeIndex: "Fight 578");
+                                }
+                                firstHitIndex = FindCorrectIndex(newFoundTarget, codeIndex: "Fight 580");
+                                List<int>[] listes = BannForbiddenCoords(usedTarget, firstHitIndex, PossibleTargets, ForbiddenCoords);
+                                PossibleTargets = listes[0];
+                                ForbiddenCoords = listes[1];
+                                PossibleTargets.Remove(usedTarget);
+                                ForbiddenCoords.Add(usedTarget);
+                                switch (PossibleTargets.Count)
+                                {
+                                    case 0:
+                                        {
+                                            int firstCount = PossibleTargets.Count;
+                                            PossibleTargets = UpdatePossibleTargets(FirstSuccessHitCoord, SecondSuccessHitCoord);
+                                            int secondCount = PossibleTargets.Count;
+                                            if (firstCount == secondCount)
+                                            {
+                                                DefinedShot = false;
+                                            }
+                                            break;
+                                        }
+                                    case 1:
+                                        {
+                                            DefinedShot = true;
+                                            DefinedCoord = PossibleTargets[0];
+                                            break;
+                                        }
+                                }
+                            }
+                            ForbiddenCoords.Sort();
+                            PossibleTargets.Sort();
                         }
                     }
-                    ForbiddenCoords.Sort();
-                    PossibleTargets.Sort();
+                    while (checkedPosition);
                 }
             }
-            while (checkedPosition);
         }
         private static List<int>[] BannForbiddenCoords(int nextTarget, int firstHit, List<int> allowedList, List<int> forbiddenList)
         {
@@ -654,7 +657,7 @@ A:
             if (firstCoords != 0)
             {
                 int targetCoord = firstCoords - reduction;
-                firstCoords = FindCorrectIndex(firstCoords);
+                firstCoords = FindCorrectIndex(firstCoords, codeIndex: "Fight 655");
                 AllowedCoords.Clear();
                 BlockedCoords.Clear();
                 string position = pos.GetCellPosition(targetCoord.ToString());
@@ -732,7 +735,7 @@ A:
                     case "corner4":
                         {   
                             AllowedCoords.Add(firstCoords - 10);
-                            AllowedCoords.Add(firstCoords + 11);
+                            AllowedCoords.Add(firstCoords + 1);
                             BlockedCoords.Add(firstCoords - 9);
                             break;
                         }
@@ -753,120 +756,9 @@ A:
             newList.Sort();
             return newList;
         }
-        static void SetRoundMines(int shipType)
-        {
-            for (int s = 0; s < shipType; s++)
-            {
-                int[] mineTags = new int[0];
-                int firstCoord = -1;
-                string orientation = null;
-                int shipSize = 5 - shipType;
-                int[] sunkenShips = new int[shipSize];
-                switch (shipSize)
-                {
-                    case 2:
-                        {
-                            if (PlayerData.DestroyersSunken[s])
-                            {
-                                if (Math.Abs(PlayerData.DestroyerCoords[s, 0] - PlayerData.DestroyerCoords[s, 1]) == 1)
-                                {
-                                    firstCoord = PlayerData.DestroyerCoords[s, 0];
-                                    orientation = "H";
-                                }
-                                else if (Math.Abs(PlayerData.DestroyerCoords[s, 0] - PlayerData.DestroyerCoords[s, 1]) == 10)
-                                {
-                                    firstCoord = PlayerData.DestroyerCoords[s, 1];
-                                    orientation = "V";
-                                }
-                                for (int sk = 0; sk < shipSize; sk++)
-                                {
-                                    sunkenShips[sk] = PlayerData.DestroyerCoords[s, sk];
-                                }
-                            }
-                            break;
-                        }
-                    case 3:
-                        {
-                            if (PlayerData.CruisersSunken[s])
-                            {
-                                if (Math.Abs(PlayerData.CruiserCoords[s, 0] - PlayerData.CruiserCoords[s, 1]) == 1)
-                                {
-                                    firstCoord = PlayerData.CruiserCoords[s, 0];
-                                    orientation = "H";
-                                }
-                                else if (Math.Abs(PlayerData.CruiserCoords[s, 0] - PlayerData.CruiserCoords[s, 1]) == 10)
-                                {
-                                    firstCoord = PlayerData.CruiserCoords[s, 2];
-                                    orientation = "V";
-                                }
-                                for (int sk = 0; sk < shipSize; sk++)
-                                {
-                                    sunkenShips[sk] = PlayerData.CruiserCoords[s, sk];
-                                }
-                            }
-                            break;
-                        }
-                    case 4:
-                        {
-                            if (PlayerData.BattleshipSunken[s])
-                            {
-                                if (Math.Abs(PlayerData.BattleshipCoords[s, 0] - PlayerData.BattleshipCoords[s, 1]) == 1)
-                                {
-                                    firstCoord = PlayerData.BattleshipCoords[s, 0];
-                                    orientation = "H";
-                                }
-                                else if (Math.Abs(PlayerData.BattleshipCoords[s, 0] - PlayerData.BattleshipCoords[s, 1]) == 10)
-                                {
-                                    firstCoord = PlayerData.BattleshipCoords[s, 3];
-                                    orientation = "V";
-                                }
-                                for (int sk = 0; sk < shipSize; sk++)
-                                {
-                                    sunkenShips[sk] = PlayerData.BattleshipCoords[s, sk];
-                                }
-                            }
-                            break;
-                        }
-                }
-                if (firstCoord != -1)
-                {
-                    firstCoord = FindCorrectCoord(firstCoord);
-                    pos.GetCoordsFromTag(firstCoord.ToString(), out int x, out int y, out int id);
-                    string cellPos = pos.GetCellPosition(firstCoord.ToString());
-                    if (orientation != null)
-                    {
-                        int minesCount = ShipData.GetMineCount(cellPos, shipSize, x, y, orientation);
-                        Array.Resize(ref mineTags, minesCount);
-                        if (shipSize > 0)
-                        {
-                            mineTags = ShipData.MineTagsFill(mineTags, cellPos, shipSize, firstCoord, orientation);
-                            for (int m = 0; m < minesCount; m++)
-                            {
-                                mineTags[m] = FindCorrectIndex(mineTags[m] + 1551); 
-                                PlayerData.Map[mineTags[m]] = 'E';
-                                ForbiddenCoords.Add(mineTags[m]);
-                            }
-                            for (int sk = 0; sk < sunkenShips.Length; sk++)
-                            {
-                                PlayerData.Map[sunkenShips[sk]] = 'S';
-                            }
-                            ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
-                            NewShotPreparing();
-                        }
-                        else
-                        {
-                            //Error_Catch
-                        }
-                    }
-                    else
-                    {
-                        //Error_Catch
-                    }
-                }
-            }
-        }
         private static List<int> DeleteForbiddenCoords(List<int> inputList)
         {
+            int[] coords = new int[2];
             HashSet<int> forbiddenSet = new HashSet<int>(ForbiddenCoords);
             HashSet<int> convertedSet = new HashSet<int>(inputList);
             var intersection = convertedSet.Where(x => forbiddenSet.Contains(x)).ToList();
@@ -880,11 +772,11 @@ A:
         private static List<int> UpdatePossibleTargets(int firstHitCoord, int secondHitCoord)
         {
             List<int> newTargetsList = new List<int>();
-            firstHitCoord = FindCorrectIndex(firstHitCoord);
-            secondHitCoord = FindCorrectIndex(secondHitCoord);
-            int thirdHitCoord = FindCorrectIndex(ThirdSuccssHitCoord);
+            firstHitCoord = FindCorrectIndex(firstHitCoord + 1551, codeIndex: "Fight 769");
+            secondHitCoord = FindCorrectIndex(secondHitCoord + 1551, codeIndex: "Fight 770");
+            int thirdHitCoord = FindCorrectIndex(ThirdSuccssHitCoord, codeIndex: "Fight 771");
             int delta = 0;
-            if (thirdHitCoord != 0)
+            if (ThirdSuccssHitCoord != 0)
             {
                 delta = secondHitCoord - thirdHitCoord;
                 newTargetsList.Add(thirdHitCoord + delta);
@@ -958,8 +850,8 @@ A:
                                     }
                                     else
                                     {
-                                        newTargetsList.Add(firstHitCoord + Math.Abs(delta));
-                                        newTargetsList.Add(firstHitCoord + Math.Abs(delta * 2));
+                                        newTargetsList.Add(firstHitCoord + delta);
+                                        newTargetsList.Add(firstHitCoord + (delta * 2));
                                     }
                                     break;
                                 }
@@ -1075,6 +967,421 @@ A:
             ThirdSuccssHitCoord = 0;
             DefinedCoord = 0;
             DefinedShot = false;
+            TargetingShoot = false;
+        }
+        private static void SetHitCoords(int target)
+        {
+            target = FindCorrectCoord(target);
+            if (target > 0)
+            {
+                if (FirstSuccessHitCoord == 0)
+                {
+                    FirstSuccessHitCoord = target;
+                }
+                else
+                {
+                    if (SecondSuccessHitCoord == 0)
+                    {
+                        SecondSuccessHitCoord = target;
+                    }
+                    else
+                    {
+                        if (ThirdSuccssHitCoord == 0)
+                        {
+                            ThirdSuccssHitCoord = target;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Incorrect success hit data", "Data Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private static List<int> FindLastCoord()
+        {
+            int[] coords  = new int[3];
+            List<int> coordsList = new List<int>();
+            coords[0] = FindCorrectIndex(FirstSuccessHitCoord + 1551, codeIndex: "Fight 999");
+            coords[1] = FindCorrectIndex(SecondSuccessHitCoord + 1551, codeIndex: "Fight 1000");
+            coords[2] = FindCorrectIndex(ThirdSuccssHitCoord + 1551, codeIndex: "Fight 1001");
+            int max = coords.Max();
+            int min = coords.Min();
+            int absDelta = Math.Abs(FindCorrectIndex(FirstSuccessHitCoord + 1551, codeIndex: "Fight 1004-1") - FindCorrectIndex(SecondSuccessHitCoord + 1551, codeIndex: "Fight 1004-2"));
+            if (Math.Abs(max - min) > (2 * absDelta))
+            {
+                coordsList.Add(min + absDelta);
+                coordsList.Add(min - absDelta);
+            }
+            else
+            {
+                if (coords[2] - coords[1] != coords[1] - coords[0])
+                {
+                    TargetsSwap(ref coords[0], ref coords[1]);
+                }
+                coordsList.Add(2 * coords[0] - coords[1]);
+                coordsList.Add(coords[2] + coords[1] - coords[0]);
+            }
+            return coordsList;
+        }
+        //Unused 8
+        //Unused 7
+        private static List<int> GenerateSecondPossibleCoords(List<int> nextCoords)
+        {
+            if (FirstSuccessHitCoord + SecondSuccessHitCoord != 0)
+            {
+                bool correctCoords = false;
+                int[] hitCoords = new int[2];
+                hitCoords[0] = FindCorrectIndex(FirstSuccessHitCoord + 1551, codeIndex: "Fight 1029");
+                hitCoords[1] = FindCorrectIndex(SecondSuccessHitCoord + 1551, codeIndex: "Fight 1030");
+                do
+                {
+                    int delta = hitCoords[0] - hitCoords[1];
+                    nextCoords.Add(hitCoords[0] + delta);
+                    nextCoords.Add(hitCoords[0] + (2 * delta));
+                    if (nextCoords[1] % 10 > nextCoords[1] % 10)
+                    {
+                        nextCoords.Remove(nextCoords[1]);
+                    }
+                    HashSet<int> hitSet = new HashSet<int>(hitCoords);
+                    HashSet<int> newSet = new HashSet<int>(nextCoords);
+                    var hitsIntersection = newSet.Where(x => hitSet.Contains(x)).ToList();
+                    foreach (var item in hitsIntersection)
+                    {
+                        TargetsSwap(ref hitCoords[0], ref hitCoords[1]);
+                        correctCoords = false;
+                        nextCoords.Clear();
+                        continue;
+                    }
+                    if (nextCoords.Count != 0)
+                    {
+                        correctCoords = true;
+                    }
+                }
+                while (!correctCoords);
+                HashSet<int> forbidden = new HashSet<int>(ForbiddenCoords);
+                HashSet<int> possible = new HashSet<int>(nextCoords);
+                var forbiddenIntersection = possible.Where(x => forbidden.Contains(x)).ToList();
+                foreach (var item in forbiddenIntersection)
+                {
+                    possible.Remove(item);
+                }
+                nextCoords = new List<int>(possible);
+                return nextCoords;
+            }
+            else
+            {
+                return nextCoords;
+            }
+
+        }
+        static void SetRoundMinesInPlayerMap(int shipType)
+        {
+            for (int s = 0; s < shipType; s++)
+            {
+                int[] mineTags = new int[0];
+                int firstCoord = -1;
+                string orientation = null;
+                int shipSize = 5 - shipType;
+                int[] sunkenShips = new int[shipSize];
+                switch (shipSize)
+                {
+                    case 2:
+                        {
+                            if (PlayerData.DestroyersSunken[s])
+                            {
+                                if (Math.Abs(PlayerData.DestroyerCoords[s, 0] - PlayerData.DestroyerCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = PlayerData.DestroyerCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(PlayerData.DestroyerCoords[s, 0] - PlayerData.DestroyerCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = PlayerData.DestroyerCoords[s, 1];
+                                    orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = PlayerData.DestroyerCoords[s, sk];
+                                }
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (PlayerData.CruisersSunken[s])
+                            {
+                                if (Math.Abs(PlayerData.CruiserCoords[s, 0] - PlayerData.CruiserCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = PlayerData.CruiserCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(PlayerData.CruiserCoords[s, 0] - PlayerData.CruiserCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = PlayerData.CruiserCoords[s, 2];
+                                    orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = PlayerData.CruiserCoords[s, sk];
+                                }
+                            }
+                            break;
+                        }
+                    case 4:
+                        {
+                            if (PlayerData.BattleshipSunken[s])
+                            {
+                                if (Math.Abs(PlayerData.BattleshipCoords[s, 0] - PlayerData.BattleshipCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = PlayerData.BattleshipCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(PlayerData.BattleshipCoords[s, 0] - PlayerData.BattleshipCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = PlayerData.BattleshipCoords[s, 3];
+                                    orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = PlayerData.BattleshipCoords[s, sk];
+                                }
+                            }
+                            break;
+                        }
+                }
+                if (firstCoord != -1)
+                {
+                    firstCoord = FindCorrectCoord(firstCoord);
+                    pos.GetCoordsFromTag(firstCoord.ToString(), out int x, out int y, out int id);
+                    string cellPos = pos.GetCellPosition(firstCoord.ToString());
+                    if (orientation != null)
+                    {
+                        int minesCount = ShipData.GetMineCount(cellPos, shipSize, x, y, orientation);
+                        Array.Resize(ref mineTags, minesCount);
+                        if (shipSize > 0)
+                        {
+                            mineTags = ShipData.MineTagsFill(mineTags, cellPos, shipSize, firstCoord, orientation);
+                            for (int m = 0; m < minesCount; m++)
+                            {
+                                mineTags[m] = FindCorrectIndex(mineTags[m] + 1551, codeIndex: "Fight 1162");
+                                PlayerData.Map[mineTags[m]] = 'E';
+                                ForbiddenCoords.Add(mineTags[m]);
+                            }
+                            for (int sk = 0; sk < sunkenShips.Length; sk++)
+                            {
+                                PlayerData.Map[sunkenShips[sk]] = 'S';
+                            }
+                            ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
+                        }
+                        else
+                        {
+                            //Error_Catch
+                        }
+                    }
+                    else
+                    {
+                        //Error_Catch
+                    }
+                }
+            }
+        }
+        internal static void SetRoundMinesInEnemyMap(int shipType)
+        {
+            for (int s = 0; s < shipType; s++)
+            {
+                int[] mineTags = new int[0];
+                int firstCoord = -1;
+                string orientation = null;
+                int shipSize = 5 - shipType;
+                int[] sunkenShips = new int[shipSize];
+                switch (shipSize)
+                {
+                    case 2:
+                        {
+                            if (EnemyData.DestroyersSunken[s])
+                            {
+                                if (Math.Abs(EnemyData.DestroyerCoords[s, 0] - EnemyData.DestroyerCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = EnemyData.DestroyerCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(EnemyData.DestroyerCoords[s, 0] - EnemyData.DestroyerCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = EnemyData.DestroyerCoords[s, 1];
+                                    orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = EnemyData.DestroyerCoords[s, sk];
+                                }
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (EnemyData.CruisersSunken[s])
+                            {
+                                if (Math.Abs(EnemyData.CruiserCoords[s, 0] - EnemyData.CruiserCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = EnemyData.CruiserCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(EnemyData.CruiserCoords[s, 0] - EnemyData.CruiserCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = EnemyData.CruiserCoords[s, 2];
+                                    orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = EnemyData.CruiserCoords[s, sk];
+                                }
+                            }
+                            break;
+                        }
+                    case 4:
+                        {
+                            if (EnemyData.BattleshipSunken[s])
+                            {
+                                if (Math.Abs(EnemyData.BattleshipCoords[s, 0] - EnemyData.BattleshipCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = EnemyData.BattleshipCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(EnemyData.BattleshipCoords[s, 0] - EnemyData.BattleshipCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = EnemyData.BattleshipCoords[s, 3];
+                                    orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = EnemyData.BattleshipCoords[s, sk];
+                                }
+                            }
+                            break;
+                        }
+                }
+                if (firstCoord != -1)
+                {
+                    firstCoord = FindCorrectCoord(firstCoord, true);
+                    pos.GetCoordsFromTag(firstCoord.ToString(), out int x, out int y, out int id);
+                    string cellPos = pos.GetCellPosition(firstCoord.ToString());
+                    if (orientation != null)
+                    {
+                        int minesCount = ShipData.GetMineCount(cellPos, shipSize, x, y, orientation);
+                        Array.Resize(ref mineTags, minesCount);
+                        if (shipSize > 0)
+                        {
+                            mineTags = ShipData.MineTagsFill(mineTags, cellPos, shipSize, firstCoord, orientation);
+                            for (int m = 0; m < minesCount; m++)
+                            {
+                                mineTags[m] = FindCorrectIndex(mineTags[m] + 1551, true, codeIndex: "Fight 1273");
+                                EnemyData.Map[mineTags[m]] = 'M';
+                            }
+                            for (int sk = 0; sk < sunkenShips.Length; sk++)
+                            {
+                                EnemyData.Map[sunkenShips[sk]] = 'S';
+                            }
+                        }
+                        else
+                        {
+                            //Error_Catch
+                        }
+                    }
+                    else
+                    {
+                        //Error_Catch
+                    }
+                }
+            }
+        }
+        internal static void GenerateBlockedCoords(string position, int firstCoord, bool isFrigate = false)
+        {
+            EnemyData.AllowedCoords.Clear();
+            EnemyData.BlockedCoords.Clear();
+            switch (position)
+            {
+                case "center":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 1);
+                        EnemyData.AllowedCoords.Add(firstCoord + 1);
+                        EnemyData.AllowedCoords.Add(firstCoord - 10);
+                        EnemyData.AllowedCoords.Add(firstCoord + 10);
+                        EnemyData.BlockedCoords.Add(firstCoord - 11);
+                        EnemyData.BlockedCoords.Add(firstCoord + 11);
+                        EnemyData.BlockedCoords.Add(firstCoord - 9);
+                        EnemyData.BlockedCoords.Add(firstCoord + 9);
+                        break;
+                    }
+                case "left":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 10);
+                        EnemyData.AllowedCoords.Add(firstCoord + 10);
+                        EnemyData.AllowedCoords.Add(firstCoord + 1);
+                        EnemyData.BlockedCoords.Add(firstCoord - 9);
+                        EnemyData.BlockedCoords.Add(firstCoord + 11);
+                        break;
+                    }
+                case "right":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 1);
+                        EnemyData.AllowedCoords.Add(firstCoord - 10);
+                        EnemyData.AllowedCoords.Add(firstCoord + 10);
+                        EnemyData.BlockedCoords.Add(firstCoord - 11);
+                        EnemyData.BlockedCoords.Add(firstCoord + 9);
+                        break;
+                    }
+                case "top":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 1);
+                        EnemyData.AllowedCoords.Add(firstCoord + 1);
+                        EnemyData.AllowedCoords.Add(firstCoord + 10);
+                        EnemyData.BlockedCoords.Add(firstCoord + 9);
+                        EnemyData.BlockedCoords.Add(firstCoord + 11);
+                        break;
+                    }
+                case "bottom":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 10);
+                        EnemyData.AllowedCoords.Add(firstCoord - 1);
+                        EnemyData.AllowedCoords.Add(firstCoord + 1);
+                        EnemyData.BlockedCoords.Add(firstCoord - 9);
+                        EnemyData.BlockedCoords.Add(firstCoord - 11);
+                        break;
+                    }
+                case "corner1":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord + 10);
+                        EnemyData.AllowedCoords.Add(firstCoord + 1);
+                        EnemyData.BlockedCoords.Add(firstCoord + 11);
+                        break;
+                    }
+                case "corner2":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 1);
+                        EnemyData.AllowedCoords.Add(firstCoord + 10);
+                        EnemyData.BlockedCoords.Add(firstCoord + 9);
+                        break;
+                    }
+                case "corner3":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 10);
+                        EnemyData.AllowedCoords.Add(firstCoord - 1);
+                        EnemyData.BlockedCoords.Add(firstCoord - 11);
+                        break;
+                    }
+                case "corner4":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 10);
+                        EnemyData.AllowedCoords.Add(firstCoord + 1);
+                        EnemyData.BlockedCoords.Add(firstCoord - 9);
+                        break;
+                    }
+            }
+            if (!isFrigate)
+            {
+                EnemyData.AllowedCoords.Clear();
+            }
         }
         private static void SetHitCoords(int currentCoord)
         {

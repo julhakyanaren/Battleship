@@ -1,6 +1,10 @@
 ﻿using Battleship.Classes;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
@@ -8,7 +12,7 @@ namespace Battleship.Forms
 {
     public partial class HitChance : Form
     {
-        Button[] exampleButtons = new Button[100];
+        Button[] ExampleButtons = new Button[100];
         ColorMethods cm = new ColorMethods();
         Position pos = new Position();
         Support sp = new Support();
@@ -30,6 +34,10 @@ namespace Battleship.Forms
             {
                 GetCellData(HitChanceData.SelectedCell);
             }
+            HitChanceData.SetProbobilityArrayDefaultValues();
+            GenerateMap();
+            SetShipsMaxCount();
+            SetShipCurrentCount();
         }
         private void HitChance_FormClosed(object sender, FormClosedEventArgs e)
         {
@@ -53,19 +61,24 @@ namespace Battleship.Forms
                             case 0:
                                 {
                                     await Task.Delay(10);
-                                    exampleButtons[b].BackColor = Color.Black;
+                                    ExampleButtons[b].BackColor = Color.Black;
                                     break;
                                 }
                             case 1:
                                 {
                                     await Task.Delay(10);
-                                    exampleButtons[b].BackColor = HitChanceData.CurrentMap[b].BackColor;
+                                    ExampleButtons[b].BackColor = HitChanceData.CurrentMap[b].BackColor;
+                                    if (ExampleButtons[b].BackColor == Color.DeepSkyBlue)
+                                    {
+                                        HitChanceData.ProbobilityArray[b] = 0;
+                                    }
                                     break;
                                 }
 
                         }
                     }
                 }
+                UpdateProbabilityData();
                 HitChanceData.CanResetMap = true;
             }
             else
@@ -95,17 +108,40 @@ namespace Battleship.Forms
                     button.FlatStyle = FlatStyle.Flat;
                     button.ForeColor = HitChanceData.CurrentMap[b].ForeColor;
                     button.BackColor = HitChanceData.CurrentMap[b].BackColor;
+                    SetBasicProbobility(button, b);
                     button.Tag = b + 600;
+                    button.Tag = Convert.ToInt32($"{button.Tag.ToString()[0]}{button.Tag.ToString()[2]}{button.Tag.ToString()[1]}");
                     button.Margin = new Padding(0);
-                    exampleButtons[b] = button;
+                    button.FlatAppearance.BorderSize = 1;
+                    button.FlatAppearance.BorderColor = Color.Black;
+                    ExampleButtons[b] = button;
                     button.MouseClick += ExmpleButton_Click;
+                    button.MouseEnter += ExampleButton_MouseEnter;
+                    button.MouseLeave += ExampleButton_MouseLeave;
                 }
                 if (TLP_HC_Schema.Controls.Count == 100)
                 {
                     HitChanceData.ExampleCraeted = true;
                     BS_HC_RestartMap.Visible = true;
                 }
+                UpdateProbabilityData();
             }
+        }
+
+        private void ExampleButton_MouseLeave(object sender, EventArgs e)
+        {
+            Button leaveButton = sender as Button;
+            leaveButton.FlatAppearance.BorderSize = 1;
+            leaveButton.FlatAppearance.BorderColor = Color.Black;
+        }
+        private void ExampleButton_MouseEnter(object sender, EventArgs e)
+        {
+            Button hoverButton = sender as Button;
+            int index = Array.IndexOf(ExampleButtons, hoverButton);
+            HitChanceData.HitProbobility = HitChanceData.ProbobilityArray[index];
+            TB_HC_HitProbobility.Text = HitChanceData.HitProbobility.ToString("F2") + "%";
+            hoverButton.FlatAppearance.BorderSize = 2;
+            hoverButton.FlatAppearance.BorderColor = Color.DarkOrange;
         }
 
         private void ExmpleButton_Click(object sender, MouseEventArgs e)
@@ -120,20 +156,7 @@ namespace Battleship.Forms
         {
             if (!HitChanceData.ExampleCraeted)
             {
-                BS_HC_GenerateMap.Visible = CHB_HC_UseCustomCell.Checked;
                 HitChanceData.ManualMode = CHB_HC_UseCustomCell.Checked;
-            }
-        }
-        private void BS_HC_GenerateMap_Click(object sender, EventArgs e)
-        {
-            if (!HitChanceData.ExampleCraeted)
-            {
-                GenerateMap();
-                BS_HC_GenerateMap.Visible = false;
-            }
-            else
-            {
-                MessageBox.Show("Map already created", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
         private void BS_HC_UpdateCellDAta_Click(object sender, EventArgs e)
@@ -143,46 +166,58 @@ namespace Battleship.Forms
                 GetCellData(HitChanceData.SelectedCell);
             }
         }
+        private void BS_HC_UpdateProbability_Click(object sender, EventArgs e)
+        {
+            UpdateProbabilityData();
+        }
         void GetCellData(Button selectedButton)
         {
             if (selectedButton != null)
             {
-                switch (Convert.ToString(cm.SetCharViaColor(1, selectedButton.BackColor)).ToUpper())
+                if (selectedButton.BackColor == Color.Green)
                 {
-                    case "F":
-                    case "D":
-                    case "C":
-                    case "B":
-                        {
-                            shipType = "Unknown";
-                            break;
-                        }
-                    case "E":
-                    case "N":
-                        {
-                            shipType = "Empty";
-                            break;
-                        }
-                    case "H":
-                        {
-                            shipType = "Hited ship";
-                            break;
-                        }
-                    case "S":
-                        {
-                            shipType = "Sunken ship";
-                            break;
-                        }
-                    case "M":
-                        {
-                            shipType = "Mine";
-                            break;
-                        }
-                    default:
-                        {
-                            shipType = null;
-                            break;
-                        }
+                    shipType = "Undiscovered ship";
+                }
+                else
+                {
+                    switch (Convert.ToString(cm.SetCharViaColor(1, selectedButton.BackColor)).ToUpper())
+                    {
+                        case "F":
+                        case "D":
+                        case "C":
+                        case "B":
+                            {
+                                shipType = "Unknown";
+                                break;
+                            }
+                        case "E":
+                        case "N":
+                            {
+                                shipType = "Empty";
+                                break;
+                            }
+                        case "H":
+                            {
+                                shipType = "Hited ship";
+                                FindProbability(selectedButton);
+                                break;
+                            }
+                        case "S":
+                            {
+                                shipType = "Sunken ship";
+                                break;
+                            }
+                        case "M":
+                            {
+                                shipType = "Mine";
+                                break;
+                            }
+                        default:
+                            {
+                                shipType = null;
+                                break;
+                            }
+                    }
                 }
                 if (shipType != null)
                 {
@@ -253,47 +288,220 @@ namespace Battleship.Forms
                 }
             }
         }
-        void SetHitProbobilityTextColor()
+        void SetHitProbobilityTextColor(double chance, TextBox probobility_TB, TextBox efficiency_TB)
         {
-            if (HitChanceData.HitProbobility == 0)
+            if (chance == 0)
             {
-                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[0];
-                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[0]}";
+                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[0];
+                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[0]}";
             }
-            else if (sp.IsFloatBetween(0, 25, HitChanceData.HitProbobility, "OO"))
+            else if (sp.IsFloatBetween(0, 25, chance, "OO"))
             {
-                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[1];
-                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[1]}";
+                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[1];
+                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[1]}";
             }
-            else if (sp.IsFloatBetween(25, 50, HitChanceData.HitProbobility, "IO"))
+            else if (sp.IsFloatBetween(25, 5, chance, "IO"))
             {
-                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[2];
-                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[2]}";
+                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[2];
+                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[2]}";
             }
-            else if (sp.IsFloatBetween(50, 75, HitChanceData.HitProbobility, "IO"))
+            else if (sp.IsFloatBetween(5, 75, chance, "IO"))
             {
-                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[3];
-                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[3]}";
+                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[3];
+                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[3]}";
             }
-            else if (sp.IsFloatBetween(75, 90, HitChanceData.HitProbobility, "IO"))
+            else if (sp.IsFloatBetween(75, 90, chance, "IO"))
             {
-                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[4];
-                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[4]}";
+                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[4];
+                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[4]}";
             }
-            else if (sp.IsFloatBetween(90, 100, HitChanceData.HitProbobility, "IO"))
+            else if (sp.IsFloatBetween(90, 100, chance, "IO"))
             {
-                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[5];
-                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[5]}";
+                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[5];
+                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[5]}";
             }
-            else if (HitChanceData.HitProbobility == 100)
+            else if (chance == 100)
             {
-                TB_HC_HitProbobility.ForeColor = HitChanceData.EfficientyDataColor[6];
-                TB_HC_ShotEfficiency.Text = $"{HitChanceData.EfficientyDataString[6]}";
+                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[6];
+                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[6]}";
             }
         }
         private void TB_HC_HitProbobility_TextChanged(object sender, EventArgs e)
         {
-            
+            SetHitProbobilityTextColor(HitChanceData.HitProbobility, TB_HC_HitProbobility, TB_HC_ShotEfficiency);
+        }
+        private void FindProbability(Button selectedButton)
+        {
+            if (ExampleButtons[0] == null)
+            {
+                if (HitChanceData.ExampleCraeted)
+                {
+                    MessageBox.Show("ExampleButtons[0] not initialized", "Hit Chance Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else
+            {
+                if (sp.StringToInt(selectedButton.Tag.ToString(), out int firstCoord))
+                {
+                    HitChanceData.GenerateNearestCoords(firstCoord);
+                    CheckChance();
+                }
+                else
+                {
+                    MessageBox.Show($"Parsing error {selectedButton.Tag} to type Int32", "Hit Chance Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        void CheckChance(bool resetData = true)
+        {
+            int whiteCells = 0;
+            int otherCells = 0;
+            int[] indexes = new int[8];
+            if (resetData)
+            {
+                HitChanceData.ResetDiscoveredCells();
+            }
+            for (int a = 0; a < HitChanceData.AllowedCoordsCount; a++)
+            {
+                int index = FindButtonIndexByTag(HitChanceData.AllowedCoords[a].ToString());
+                if (ExampleButtons[index].BackColor == Color.White)
+                {
+                    HitChanceData.DiscoveredCells++;
+                    whiteCells++;
+                    Array.Resize(ref indexes, indexes.Length + 1);
+                    indexes[a] = FindButtonIndexByTag(HitChanceData.AllowedCoords[a].ToString());
+                    HitChanceData.PossibleIndexes.Add(indexes[a]);
+                }
+                else
+                {
+                    HitChanceData.ForbiddenIndexes.Add(FindButtonIndexByTag(HitChanceData.AllowedCoords[a].ToString()));
+                    HitChanceData.UndiscoveredCells++;
+                    otherCells++;
+                }
+            }
+            if (whiteCells != 0)
+            {
+                double probobility = 100 / whiteCells;
+                for (int p = 0; p < indexes.Length; p++)
+                {
+                    HitChanceData.ProbobilityArray[indexes[p]] = probobility;
+                }
+            }
+        }
+        int FindButtonIndexByTag(string tag)
+        {
+            int index = Array.FindIndex(ExampleButtons, button => Equals(button.Tag.ToString(), tag.ToString()));
+            return index;
+        }
+        void FindIndependentChance(out float chance)
+        {
+            float whiteCells = 0;
+            float hitedCells = 0;
+            for (int b = 0; b < ExampleButtons.Length; b++)
+            {
+                string example = ExampleButtons[b].BackColor.Name.ToString();
+                switch (ExampleButtons[b].BackColor.Name.ToString())
+                {
+                    case "White":
+                        {
+                            whiteCells++;
+                            break;
+                        }
+                    case "Red":
+                    case "Firebrick":
+                        {
+                            hitedCells++;
+                            break;
+                        }
+                }
+            }
+            hitedCells = 20 - hitedCells;
+            chance = hitedCells / whiteCells;
+        }
+        void SetBasicProbobility(Button inputButton, int index)
+        {
+            string colorName = inputButton.BackColor.Name.ToString();
+            switch (colorName)
+            {
+                case "DeepSkyBlue":
+                    {
+                        HitChanceData.ProbobilityArray[index] = 0;
+                        break;
+                    }
+                case "Red":
+                    {
+                        HitChanceData.ProbobilityArray[index] = 0;
+                        break;
+                    }
+                case "Firebrick":
+                    {
+                        HitChanceData.ProbobilityArray[index] = 0;
+                        break;
+                    }
+            }
+        }
+
+        private void TB_HC_IndependentChance_TextChanged(object sender, EventArgs e)
+        {
+            if (TB_HC_IndependentChance.Text == "No moves available")
+            {
+                TB_HC_IndependentChance.ForeColor = Color.DeepSkyBlue;
+            }
+            else if (HitChanceData.IndependentChance == 0)
+            {
+                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[0];
+            }
+            else if (sp.IsFloatBetween(0, 25, HitChanceData.IndependentChance, "OO"))
+            {
+                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[1];
+            }
+            else if (sp.IsFloatBetween(25, 5, HitChanceData.IndependentChance, "IO"))
+            {
+                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[2];
+            }
+            else if (sp.IsFloatBetween(5, 75, HitChanceData.IndependentChance, "IO"))
+            {
+                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[3];
+            }
+            else if (sp.IsFloatBetween(75, 90, HitChanceData.IndependentChance, "IO"))
+            {
+                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[4];
+            }
+            else if (sp.IsFloatBetween(90, 100, HitChanceData.IndependentChance, "IO"))
+            {
+                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[5];
+            }
+            else if (HitChanceData.IndependentChance == 100)
+            {
+                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[6];
+            }
+        }
+        void UpdateProbabilityData()
+        {
+            FindIndependentChance(out float chance);
+            HitChanceData.IndependentChance = (float)Math.Round(chance, 4) * 100;
+            if (chance != Math.Abs(float.PositiveInfinity))
+            {
+                TB_HC_IndependentChance.Text = HitChanceData.IndependentChance.ToString("F2") + "%";
+            }
+            else
+            {
+                TB_HC_IndependentChance.Text = "No moves available";
+            }
+        }
+
+        private void TB_EnemyShips_Frigates_TextChanged(object sender, EventArgs e)
+        {
+            TextBox zeroValue_TB = sender as TextBox;
+            if (zeroValue_TB.Text == "0")
+            {
+                zeroValue_TB.ForeColor = Color.Red;
+            }
+        }
+
+        private void TB_HC_IndependentEfficity_TextChanged(object sender, EventArgs e)
+        {
+            SetHitProbobilityTextColor(HitChanceData.IndependentChance, TB_HC_IndependentChance, TB_HC_IndependentEfficity);
         }
     }
 }

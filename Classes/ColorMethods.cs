@@ -9,52 +9,77 @@ namespace Battleship
     {
         Support Support = new Support();
         public Color[] PlayerMapColor = new Color[100];
-        public Color SetColorViaChar(char charter, bool hitDraw = false)
+        public Color[] EnemyMapColor = new Color[100];
+        public Color SetColorViaChar(char charter, bool hitDraw = false, bool enemyMapDraw = false)
         {
             charter = Convert.ToChar(charter.ToString().ToUpper());
-            switch (Char.ToUpper(charter))
+            if (!enemyMapDraw)
             {
-                case 'F':
-                    {
-                        return Color.Silver;
-                    }
-                case 'D':
-                    {
-                        return Color.DarkGray;
-                    }
-                case 'C':
-                    {
-                        return Color.Gray;
-                    }
-                case 'B':
-                    {
-                        return Color.DimGray;
-                    }
-                case 'H':
-                    {
-                        return Color.Red;
-                    }
-                case 'S':
-                    {
-                        return Color.Firebrick;
-                    }
-                case 'M':
-                    {
-                        return Color.Aqua;
-                    }
-                case 'E':
-                    {
-                        if (hitDraw)
+                switch (Char.ToUpper(charter))
+                {
+                    case 'F':
                         {
-                            return Color.DeepSkyBlue;
+                            return Color.Silver;
                         }
-                        return Color.White;
-                    }
-                default:
-                    {
-                        return Color.White;
-                    }
-
+                    case 'D':
+                        {
+                            return Color.DarkGray;
+                        }
+                    case 'C':
+                        {
+                            return Color.Gray;
+                        }
+                    case 'B':
+                        {
+                            return Color.DimGray;
+                        }
+                    case 'H':
+                        {
+                            return Color.Red;
+                        }
+                    case 'S':
+                        {
+                            return Color.Firebrick;
+                        }
+                    case 'M':
+                        {
+                            return Color.Aqua;
+                        }
+                    case 'E':
+                        {
+                            if (hitDraw)
+                            {
+                                return Color.DeepSkyBlue;
+                            }
+                            return Color.White;
+                        }
+                    default:
+                        {
+                            return Color.White;
+                        }
+                }
+            }
+            else
+            {
+                switch (Char.ToUpper(charter))
+                {
+                    case 'H':
+                        {
+                            return Color.Red;
+                        }
+                    case 'S':
+                        {
+                            return Color.Firebrick;
+                        }
+                    case 'M':
+                        {
+                            return Color.Aqua;
+                        }
+                    default:
+                        {
+                            return Color.White;
+                        }
+                }
             }
         }
         public char SetCharViaColor(int index, Color buttonBackColor)
@@ -176,9 +201,18 @@ namespace Battleship
             }
             return colors;
         }
-        public Color CellCollor(Button selectedButton)
+        public Color[] SetEnemyButtonsColors(char[] inputMap)
         {
-            return selectedButton.BackColor;
+            Color[] colors = new Color[inputMap.Length];
+            for (int c = 0; c < colors.Length; c++)
+            {
+                colors[c] = SetColorViaChar(inputMap[c], false, true);
+                if (colors[c] == Color.Aqua)
+                {
+                    colors[c] = Color.DeepSkyBlue;
+                }
+            }
+            return colors;
         }
     }
 }

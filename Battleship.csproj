@@ -271,6 +271,7 @@
     <Compile Include="Forms\ProductActivation.Designer.cs">
       <DependentUpon>ProductActivation.cs</DependentUpon>
     </Compile>
+    <Compile Include="Classes\Information.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Schematic.cs" />
     <Compile Include="Classes\Ship.cs" />

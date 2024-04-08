@@ -2104,7 +2104,8 @@
             this.TSMI_GPO_OpenManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GPO_OpenManual.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_OpenManual.Name = "TSMI_GPO_OpenManual";
-            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(179, 26);
+            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(180, 22);
+
             this.TSMI_GPO_OpenManual.Text = "Open manual";
             this.TSMI_GPO_OpenManual.Click += new System.EventHandler(this.TSMI_GPO_OpenManual_Click);
             // 
@@ -2113,7 +2114,7 @@
             this.TSMI_GPO_Version.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GPO_Version.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_Version.Name = "TSMI_GPO_Version";
-            this.TSMI_GPO_Version.Size = new System.Drawing.Size(179, 26);
+            this.TSMI_GPO_Version.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GPO_Version.Text = "Info:";
             // 
             // TSMI_License
