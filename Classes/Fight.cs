@@ -1383,26 +1383,5 @@ namespace Battleship
                 EnemyData.AllowedCoords.Clear();
             }
         }
-        private static void SetHitCoords(int currentCoord)
-        {
-            if (FirstSuccessHitCoord == 0)
-            {
-                FirstSuccessHitCoord = currentCoord;
-            }
-            else
-            {
-                if (SecondSuccessHitCoord == 0)
-                {
-                    SecondSuccessHitCoord = currentCoord;
-                }
-                else
-                {
-                    if (ThirdSuccssHitCoord == 0)
-                    {
-                        ThirdSuccssHitCoord = currentCoord;
-                    }
-                }
-            }
-        }
     }
 }
