@@ -5,6 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Forms.DataVisualization.Charting;
 
 namespace Battleship
 {
@@ -32,6 +33,7 @@ namespace Battleship
         public static int HitCountCurrent = 0;
         public static int SunkenCountCurrent = 0;
         public static int MissedShotsCount = 0;
+        public static int WhiteCellsCount = 0;
 
         public static int[] ShipsCount = { FrigatesCountCurrent, DestroyersCountCurrent, CruiserCountCurrent, BattleshipCountCurrent };
         
@@ -59,6 +61,8 @@ namespace Battleship
 
         public static List<int> BlockedCoords = new List<int>();
         public static List<int> AllowedCoords = new List<int>();
+
+        public static Dictionary<int, double> IndependentChances = new Dictionary<int, double>();
 
         public static Button[] MapButtons = new Button[100];
         public static void DoesDestroyerSunken()
@@ -110,6 +114,14 @@ namespace Battleship
             HitedDestroyersCount = 0;
             HitedDestroyersCount = 0;
             MissedShotsCount = 0;
+        }
+        public static void AddIndependentChance()
+        {
+            if (!Options.GameOver)
+            {
+                double newChance = Math.Round((double)(20 - ShipData.HitedDeckCount) / (double)WhiteCellsCount, 5);
+                IndependentChances.Add(IndependentChances.Count + 1, newChance);
+            }
         }
     }
 }

@@ -240,6 +240,7 @@ namespace Battleship
                     if (!Options.GameOver)
                     {
                         await EnemyTurn();
+
                     }
                     else
                     {
@@ -347,10 +348,16 @@ namespace Battleship
         }
         void UpdateEnemyMapColor(Color[] colors)
         {
+            EnemyData.WhiteCellsCount = 0;
             for (int mc = 0; mc < colors.Length; mc++)
             {
                 MapButtons[1, mc].BackColor = ColorMethods.EnemyMapColor[mc];
+                if (ColorMethods.EnemyMapColor[mc] == Color.White)
+                {
+                    EnemyData.WhiteCellsCount++;
+                }
             }
+            EnemyData.AddIndependentChance();
         }
         string SetTurnText()
         {

@@ -17,7 +17,7 @@ namespace Battleship.Classes
         public static double[] ProbobilityArray = new double[100];
         public static double IndependentChance = 0;
 
-        public static string[] EfficientyDataString = { "Forbidden", "Very Low", "Low", "Average", "High", "Very High", "Guaranteed" };
+        public static string[] EfficientyDataString = { "Forbidden", "Very Low", "Low", "Average", "High", "Very High", "Guaranted" };
         public static Color[] EfficientyDataColor = { Color.Firebrick, Color.Red, Color.OrangeRed, Color.DarkOrange, Color.Yellow, Color.YellowGreen, Color.Lime };
         public static double HitProbobility = 0.0f;
         
@@ -26,6 +26,7 @@ namespace Battleship.Classes
         public static bool CanOpenForm = false;
         public static bool CanResetMap = true;
         public static bool ManualMode = true;
+        public static bool ShowNoveNumber = true;
 
         public static List<float> HitChanceChanges = new List<float>();
 
@@ -38,6 +39,7 @@ namespace Battleship.Classes
         public static int BlockedCoordsCount = 0;
         public static int UndiscoveredCells;
         public static int DiscoveredCells;
+        public static int DecimalPlacesCount = 1;
 
         public static void GenerateNearestCoords(int firstCoord)
         {
@@ -152,6 +154,127 @@ namespace Battleship.Classes
             {
                 ProbobilityArray[p] = 0.0f;
             }
+        }
+        public static List<int> GetNeighbourIndexes(int firstCoord)
+        {
+            List<int> indexes = new List<int>();
+            if (firstCoord != 0)
+            {
+                string position = Position.GetCellPosition(firstCoord.ToString());
+                bool correctPos = true;
+                switch (position)
+                {
+                    case "center":
+                        {
+                            indexes.Add(firstCoord - 1);
+                            indexes.Add(firstCoord + 1);
+                            indexes.Add(firstCoord - 10);
+                            indexes.Add(firstCoord + 10);
+                            break;
+                        }
+                    case "left":
+                        {
+                            indexes.Add(firstCoord - 1);
+                            indexes.Add(firstCoord + 1);
+                            indexes.Add(firstCoord + 10);
+                            break;
+                        }
+                    case "right":
+                        {
+                            indexes.Add(firstCoord - 1);
+                            indexes.Add(firstCoord + 1);
+                            indexes.Add(firstCoord - 10);
+                            break;
+                        }
+                    case "top":
+                        {
+                            indexes.Add(firstCoord - 10);
+                            indexes.Add(firstCoord + 10);
+                            indexes.Add(firstCoord + 1);
+                            break;
+                        }
+                    case "bottom":
+                        {
+                            indexes.Add(firstCoord - 10);
+                            indexes.Add(firstCoord + 10);
+                            indexes.Add(firstCoord - 1);
+                            break;
+                        }
+                    case "corner1":
+                        {
+                            indexes.Add(firstCoord + 10);
+                            indexes.Add(firstCoord + 1);
+                            break;
+                        }
+                    case "corner2":
+                        {
+                            indexes.Add(firstCoord - 10);
+                            indexes.Add(firstCoord + 1);
+                            break;
+                        }
+                    case "corner3":
+                        {
+                            indexes.Add(firstCoord - 10);
+                            indexes.Add(firstCoord - 1);
+                            break;
+                        }
+                    case "corner4":
+                        {
+                            indexes.Add(firstCoord - 1);
+                            indexes.Add(firstCoord + 10);
+                            break;
+                        }
+                    default:
+                        {
+                            correctPos = false;
+                            break;
+                        }
+                }
+                if (!correctPos)
+                {
+                    indexes = null;
+                }
+            }
+            else
+            {
+                indexes = null;
+            }
+            return indexes;
+        }
+        public static List<int> DeleteOutLineCoords(List<int> coordsList, int firstCoord, char line)
+        {
+            switch (Char.ToLower(line))
+            {
+                case 'r': //Row
+                    {
+                        for (int r = 0; r < coordsList.Count; r++)
+                        {
+                            if (coordsList[r] / 10 != firstCoord / 10)
+                            {
+                                coordsList.RemoveAt(r);
+                            }
+                        }
+                        break;
+                    }
+                case 'c': //Column
+                    {
+                        for (int c = 0; c < coordsList.Count; c++)
+                        {
+                            if (coordsList[c] % 10 != firstCoord % 10)
+                            {
+                                coordsList.RemoveAt(c);
+                            }
+                        }
+                        break;
+                    }
+                default:
+                    {
+                        MessageBox.Show("Unknown Line Index");
+                        return coordsList;
+                    }
+            }
+            coordsList.RemoveAll(x => x >= 100 || x < 0);
+            return coordsList;
         }
     }
 }
