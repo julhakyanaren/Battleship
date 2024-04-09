@@ -126,6 +126,8 @@ namespace Battleship
         {
             SetScreenParametersAsMaximized();
             SetComponentCustomParamaters();
+            //DEBUG TEST
+            //DEBUG TEST
         }
         async Task GenerateButtons()
         {
@@ -253,26 +255,6 @@ namespace Battleship
             else
             {
                 MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-        }
-        public async void FindTarget(int duration = 200)
-        {
-            int access = 0;
-            for (int a = 0; a < Fight.TargetData.Length; a++)
-            {
-                access += Fight.TargetData[a];
-            }
-            if (access != 0)
-            {
-                for (int i = 0; i <= Fight.TargetData[1] - 74; i++)
-                {
-                    await Task.Delay(duration);
-                    if (Math.Abs(i - Fight.TargetData[1]) * 10 + Fight.TargetData[2] < MapButtons.GetLength(1))
-                    {
-                        MapButtons[0, Math.Abs(i - Fight.TargetData[1]) * 10 + Fight.TargetData[2]].FlatAppearance.BorderColor = Color.Orange;
-                    }
-                    MapButtons[0, Math.Abs(Fight.TargetData[1] - 74) * 10 + i].FlatAppearance.BorderColor = Color.Orange;
-                }
             }
         }
         int FindTargetButtonViaIndex()
@@ -966,69 +948,10 @@ namespace Battleship
 
             }
         }
-        private void TSMI_ShowEnemyShipsCoords_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (DebugTools.DebugMode)
-                {
-                    string f_coords = "Frigates:\r\n";
-                    string d_coords = "Destroyers:\r\n";
-                    string c_coords = "Cruisers:\r\n";
-                    string b_coords = "Battleships\r\n";
-                    for (int f = 0; f < 4; f++)
-                    {
-                        f_coords += $"{EnemyData.FrigateCoords[f, 0]}\t";
-                        f_coords += Position.TextCoordThrowIndex(EnemyData.FrigateCoords[f, 0]) + "\r\n";
-                    }
-                    for (int d0 = 0; d0 < 3; d0++)
-                    {
-                        for (int d1 = 0; d1 < 2; d1++)
-                        {
-                            d_coords += $"{EnemyData.DestroyerCoords[d0, d1]}\t";
-                            d_coords += Position.TextCoordThrowIndex(EnemyData.DestroyerCoords[d0,d1]) + "\r\n";
-                        }
-                        d_coords += "////\r\n";
-                    }
-                    for (int c0 = 0; c0 < 2; c0++)
-                    {
-                        for (int c1 = 0; c1 < 3; c1++)
-                        {
-                            c_coords += $"{EnemyData.CruiserCoords[c0, c1]}\t";
-                            c_coords += Position.TextCoordThrowIndex(EnemyData.CruiserCoords[c0, c1]) + "\r\n";
-                        }
-                        c_coords += "////\r\n";
-                    }
-                    for (int b = 0; b < 4; b++)
-                    {
-                        b_coords += $"{EnemyData.BattleshipCoords[0, b]}\t";
-                        b_coords += Position.TextCoordThrowIndex(EnemyData.BattleshipCoords[0, b]) + "\r\n";
-                    }
-                    string message = $"{f_coords}\r\n{d_coords}\r\n{c_coords}\r\n{b_coords}";
-                    MessageBox.Show($"{message}", "Battleship Debug", MessageBoxButtons.OK, MessageBoxIcon.Information);
-                }
-            }
-            catch(Exception ex1)
-            {
-                MessageBox.Show($"{ex1}", "Exception",MessageBoxButtons.OK, MessageBoxIcon.Stop);
-            }
-        }
         private void TSMI_GPO_OpenManual_Click(object sender, EventArgs e)
         {
             ManualInfo mi = new ManualInfo();
             mi.Show();
-        }
-        public async void ShowHitInfo()
-        {
-            HitStatus hs = new HitStatus();
-            hs.Show();
-            await Task.Delay(2000);
-            hs.Hide();
-            hs.Dispose();
-        }
-        private void TSMI_ShowHitInfo_Click(object sender, EventArgs e)
-        {
-            ShowHitInfo();
         }
         private void TB_PlayerFrigate_TextChanged(object sender, EventArgs e)
         {
@@ -1203,10 +1126,6 @@ namespace Battleship
         {
             RestartGame();
         }
-        private void TSMI_ShowBorder_Click(object sender, EventArgs e)
-        {
-            FindTarget(10);
-        }
         private void TSMI_OpenMapEditor_Click(object sender, EventArgs e)
         {
             DialogResult = MessageBox.Show("Open 'Map Editor'", "Map Editor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
@@ -1218,16 +1137,6 @@ namespace Battleship
                     Design.OpenNewForm(MCF, 1, 6);
                 }
             }
-        }
-        private void TSMI_ActivateProduct_Click(object sender, EventArgs e)
-        {
-            DialogResult = MessageBox.Show("Open product activation manager", "Security Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (DialogResult == DialogResult.Yes)
-            {
-                ProductActivation paf = new ProductActivation();
-                Design.OpenNewForm(paf, 1, 3);
-            }
-
         }
         void GetEnemyMap(out int count)
         {

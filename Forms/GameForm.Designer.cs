@@ -155,12 +155,8 @@
             this.TSMI_Info = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GPO_OpenManual = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GPO_Version = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_License = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_ActivateProduct = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_DEBUG = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_ShowEnemyShipsCoords = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_ShowHitInfo = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_ShowBorder = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Diagnostics = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_Open_DiagnosticForm = new System.Windows.Forms.ToolStripMenuItem();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
@@ -1870,15 +1866,14 @@
             // MS_MenuPanel
             // 
             this.MS_MenuPanel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.MS_MenuPanel.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.MS_MenuPanel.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MS_MenuPanel.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.MS_MenuPanel.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_File,
             this.TSMI_Game,
             this.TSMI_Map,
             this.TSMI_Info,
-            this.TSMI_License,
-            this.TSMI_DEBUG});
+            this.TSMI_Diagnostics});
             this.MS_MenuPanel.Location = new System.Drawing.Point(0, 0);
             this.MS_MenuPanel.Name = "MS_MenuPanel";
             this.MS_MenuPanel.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -1900,7 +1895,7 @@
             this.TSMI_AllwaysOnTop.CheckOnClick = true;
             this.TSMI_AllwaysOnTop.ForeColor = System.Drawing.Color.Black;
             this.TSMI_AllwaysOnTop.Name = "TSMI_AllwaysOnTop";
-            this.TSMI_AllwaysOnTop.Size = new System.Drawing.Size(143, 22);
+            this.TSMI_AllwaysOnTop.Size = new System.Drawing.Size(180, 22);
             this.TSMI_AllwaysOnTop.Text = "Allways on top";
             this.TSMI_AllwaysOnTop.CheckedChanged += new System.EventHandler(this.TSMI_AllwaysOnTop_CheckedChanged);
             // 
@@ -2011,7 +2006,7 @@
             this.TSMI_GPO_OpenManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GPO_OpenManual.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_OpenManual.Name = "TSMI_GPO_OpenManual";
-            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(139, 22);
+            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GPO_OpenManual.Text = "Open manual";
             this.TSMI_GPO_OpenManual.Click += new System.EventHandler(this.TSMI_GPO_OpenManual_Click);
             // 
@@ -2020,66 +2015,23 @@
             this.TSMI_GPO_Version.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GPO_Version.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_Version.Name = "TSMI_GPO_Version";
-            this.TSMI_GPO_Version.Size = new System.Drawing.Size(139, 22);
+            this.TSMI_GPO_Version.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GPO_Version.Text = "Info:";
             // 
-            // TSMI_License
+            // TSMI_Diagnostics
             // 
-            this.TSMI_License.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_ActivateProduct});
-            this.TSMI_License.ForeColor = System.Drawing.Color.Black;
-            this.TSMI_License.Name = "TSMI_License";
-            this.TSMI_License.Size = new System.Drawing.Size(56, 21);
-            this.TSMI_License.Text = "License";
+            this.TSMI_Diagnostics.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_Open_DiagnosticForm});
+            this.TSMI_Diagnostics.Name = "TSMI_Diagnostics";
+            this.TSMI_Diagnostics.Size = new System.Drawing.Size(76, 21);
+            this.TSMI_Diagnostics.Text = "Diagnostics";
             // 
-            // TSMI_ActivateProduct
+            // TSMI_Open_DiagnosticForm
             // 
-            this.TSMI_ActivateProduct.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_ActivateProduct.ForeColor = System.Drawing.Color.Black;
-            this.TSMI_ActivateProduct.Name = "TSMI_ActivateProduct";
-            this.TSMI_ActivateProduct.Size = new System.Drawing.Size(163, 22);
-            this.TSMI_ActivateProduct.Text = "Product activation";
-            this.TSMI_ActivateProduct.Click += new System.EventHandler(this.TSMI_ActivateProduct_Click);
-            // 
-            // TSMI_DEBUG
-            // 
-            this.TSMI_DEBUG.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_ShowEnemyShipsCoords,
-            this.TSMI_ShowHitInfo,
-            this.TSMI_ShowBorder});
-            this.TSMI_DEBUG.Font = new System.Drawing.Font("Franklin Gothic Medium", 9.75F, System.Drawing.FontStyle.Italic, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TSMI_DEBUG.ForeColor = System.Drawing.Color.Maroon;
-            this.TSMI_DEBUG.Name = "TSMI_DEBUG";
-            this.TSMI_DEBUG.Size = new System.Drawing.Size(59, 21);
-            this.TSMI_DEBUG.Text = "DEBUG";
-            this.TSMI_DEBUG.Visible = false;
-            // 
-            // TSMI_ShowEnemyShipsCoords
-            // 
-            this.TSMI_ShowEnemyShipsCoords.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_ShowEnemyShipsCoords.ForeColor = System.Drawing.Color.Maroon;
-            this.TSMI_ShowEnemyShipsCoords.Name = "TSMI_ShowEnemyShipsCoords";
-            this.TSMI_ShowEnemyShipsCoords.Size = new System.Drawing.Size(220, 22);
-            this.TSMI_ShowEnemyShipsCoords.Text = "Show Enemy ships coords";
-            this.TSMI_ShowEnemyShipsCoords.Click += new System.EventHandler(this.TSMI_ShowEnemyShipsCoords_Click);
-            // 
-            // TSMI_ShowHitInfo
-            // 
-            this.TSMI_ShowHitInfo.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_ShowHitInfo.ForeColor = System.Drawing.Color.Maroon;
-            this.TSMI_ShowHitInfo.Name = "TSMI_ShowHitInfo";
-            this.TSMI_ShowHitInfo.Size = new System.Drawing.Size(220, 22);
-            this.TSMI_ShowHitInfo.Text = "Show Hit Info";
-            this.TSMI_ShowHitInfo.Click += new System.EventHandler(this.TSMI_ShowHitInfo_Click);
-            // 
-            // TSMI_ShowBorder
-            // 
-            this.TSMI_ShowBorder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_ShowBorder.ForeColor = System.Drawing.Color.Maroon;
-            this.TSMI_ShowBorder.Name = "TSMI_ShowBorder";
-            this.TSMI_ShowBorder.Size = new System.Drawing.Size(220, 22);
-            this.TSMI_ShowBorder.Text = "Show Border";
-            this.TSMI_ShowBorder.Click += new System.EventHandler(this.TSMI_ShowBorder_Click);
+            this.TSMI_Open_DiagnosticForm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_Open_DiagnosticForm.Name = "TSMI_Open_DiagnosticForm";
+            this.TSMI_Open_DiagnosticForm.Size = new System.Drawing.Size(198, 22);
+            this.TSMI_Open_DiagnosticForm.Text = "Open diagnostic manager";
             // 
             // GameForm
             // 
@@ -2267,20 +2219,16 @@
         public System.Windows.Forms.TextBox TB_Turn;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Info;
         private System.Windows.Forms.TextBox TB_EnemyMiss;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_DEBUG;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_ShowEnemyShipsCoords;
         private System.Windows.Forms.ToolStripMenuItem TSMI_GPO_OpenManual;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_ShowHitInfo;
         private System.Windows.Forms.ToolStripMenuItem TSMI_RestartGame;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_ShowBorder;
         private System.Windows.Forms.ToolStripMenuItem TSMI_OpenMapEditor;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_License;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_ActivateProduct;
         private System.Windows.Forms.Panel PNL_InfoTurn;
         private System.Windows.Forms.Label L_Info_PressForInfo;
         private System.Windows.Forms.Button BS_HitMoreInfo;
         private System.Windows.Forms.Label L_Info_GameMode;
         public System.Windows.Forms.TextBox TB_GameModeType;
         private System.Windows.Forms.ToolStripMenuItem TSMI_GPO_Version;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Diagnostics;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_Open_DiagnosticForm;
     }
 }

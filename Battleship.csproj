@@ -210,7 +210,6 @@
     <Compile Include="Classes\FileManager.cs" />
     <Compile Include="Classes\Handlers.cs" />
     <Compile Include="Classes\HitChanceData.cs" />
-    <Compile Include="Classes\LicenseData.cs" />
     <Compile Include="Classes\Map.cs" />
     <Compile Include="Classes\Unused.cs" />
     <Compile Include="Forms\Hit Chance.cs">
@@ -218,12 +217,6 @@
     </Compile>
     <Compile Include="Forms\Hit Chance.Designer.cs">
       <DependentUpon>Hit Chance.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Forms\HitStatus.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\HitStatus.Designer.cs">
-      <DependentUpon>HitStatus.cs</DependentUpon>
     </Compile>
     <Compile Include="Forms\ManualInfo.cs">
       <SubType>Form</SubType>
@@ -265,12 +258,6 @@
     <Compile Include="Forms\PlayerOptions.Designer.cs">
       <DependentUpon>PlayerOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Forms\ProductActivation.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="Forms\ProductActivation.Designer.cs">
-      <DependentUpon>ProductActivation.cs</DependentUpon>
-    </Compile>
     <Compile Include="Classes\Information.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\Schematic.cs" />
@@ -283,9 +270,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\Hit Chance.resx">
       <DependentUpon>Hit Chance.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\HitStatus.resx">
-      <DependentUpon>HitStatus.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\ManualInfo.resx">
       <DependentUpon>ManualInfo.cs</DependentUpon>
@@ -301,9 +285,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Forms\PlayerOptions.resx">
       <DependentUpon>PlayerOptions.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Forms\ProductActivation.resx">
-      <DependentUpon>ProductActivation.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
