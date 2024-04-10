@@ -121,8 +121,10 @@ namespace Battleship
             if (!Options.GameOver)
             {
                 double newChance = Math.Round((double)(20 - HitedDecksCount) / (double)WhiteCellsCount, 5);
-                IndependentChances.Add(IndependentChances.Count + 1, newChance);
-
+                if (!double.IsNaN(newChance))
+                {
+                    IndependentChances.Add(IndependentChances.Count + 1, newChance);
+                }
             }
         }
     }

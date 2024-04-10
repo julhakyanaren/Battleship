@@ -2022,6 +2022,7 @@
             // 
             this.TSMI_Diagnostics.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_Open_DiagnosticForm});
+            this.TSMI_Diagnostics.ForeColor = System.Drawing.Color.Black;
             this.TSMI_Diagnostics.Name = "TSMI_Diagnostics";
             this.TSMI_Diagnostics.Size = new System.Drawing.Size(76, 21);
             this.TSMI_Diagnostics.Text = "Diagnostics";

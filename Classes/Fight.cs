@@ -579,8 +579,7 @@ namespace Battleship
                     DefinedShot = true;
                 }
             }
-            ForbiddenCoords.SortUnique();
-
+            ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
         }
         public static int FindShipCoord(bool hitStatus)
         {
@@ -1069,12 +1068,6 @@ namespace Battleship
             {
                 EnemyData.AllowedCoords.Clear();
             }
-        }
-        public static void SortUnique<T>(this List<T> list)
-        {
-            HashSet<T> unique = new HashSet<T>(list);
-            list = new List<T>(unique);
-            list.Sort();
         }
         //Unused 6
         //Unused 8
