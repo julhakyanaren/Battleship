@@ -608,5 +608,14 @@ namespace Battleship.Forms
         {
             ShowIndependentChances();
         }
+
+        private void BS_HC_ShowChart_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Open chart now?", "Game Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+            {
+                ChartForm chrtf = new ChartForm();
+                Design.OpenNewForm(chrtf, 1, 6);
+            }
+        }
     }
 }

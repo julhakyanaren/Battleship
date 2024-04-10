@@ -330,7 +330,7 @@ namespace Battleship
             }
             Hited = hited;
         }
-        static int FindCorrectIndex(int index, bool enemyMap = false, string codeIndex = "null")
+        static int FindCorrectIndex(int index, bool enemyMap = false)
         {
             index -= 1551;
             if (!enemyMap)
@@ -398,7 +398,7 @@ namespace Battleship
                     {
                         ForbiddenCoords.Sort();
                         target = FindShipCoord(false);
-                        int targetIndex = FindCorrectIndex(target, codeIndex: "Fight 663");
+                        int targetIndex = FindCorrectIndex(target);
                         correctCoord = !ForbiddenCoords.Contains(targetIndex);
                     }
                     else
@@ -410,6 +410,7 @@ namespace Battleship
                 while (!correctCoord);
                 TargetButtonTag = target;
                 EnemyShoot(target, out successShoot, out checkedPosition);
+                ForbiddenCoords.Add(FindCorrectIndex(target));
             }
             else if (SuccessShoots[0] && !SuccessShoots[1] && !SuccessShoots[2])
             {
@@ -440,10 +441,11 @@ namespace Battleship
                 secondTarget = FindCorrectCoord(secondTarget) + 1551;
                 TargetButtonTag = secondTarget;
                 EnemyShoot(secondTarget, out successShoot, out checkedPosition);
+                ForbiddenCoords.Add(FindCorrectIndex(secondTarget));
                 if (!successShoot)
                 {
-                    FirstCheckedCoords.Add(FindCorrectIndex(secondTarget, codeIndex: "Fight 682"));
-                    PossibleTargets.Remove(FindCorrectIndex(secondTarget, codeIndex: "Fight 683"));
+                    FirstCheckedCoords.Add(FindCorrectIndex(secondTarget));
+                    PossibleTargets.Remove(FindCorrectIndex(secondTarget));
                     DefinedShot = true;
                 }
             }
@@ -454,8 +456,8 @@ namespace Battleship
                 List<int> nextCoords = new List<int>();
                 if (SecondCheckedCoords.Count == 0)
                 {
-                    indexes[0] = FindCorrectIndex(FirstSuccessHitCoord + 1551, codeIndex: "Fight 690");
-                    indexes[1] = FindCorrectIndex(SecondSuccessHitCoord + 1551, codeIndex: "Fight 691");
+                    indexes[0] = FindCorrectIndex(FirstSuccessHitCoord + 1551);
+                    indexes[1] = FindCorrectIndex(SecondSuccessHitCoord + 1551);
                     int delta = indexes[0] - indexes[1];
                     char lineChar = 'n';
                     switch (delta)
@@ -496,6 +498,7 @@ namespace Battleship
                 else
                 {
                     PossibleTargets.RemoveAll(coord => SecondCheckedCoords.Contains(coord));
+                    nextCoords = DeleteForbiddenCoords(nextCoords);
                     nextCoords = PossibleTargets;
                 }
                 Random random = new Random();
@@ -503,9 +506,10 @@ namespace Battleship
                 thirdTarget = FindCorrectCoord(nextCoords[randomIndex]) + 1551;
                 TargetButtonTag = thirdTarget;
                 EnemyShoot(thirdTarget, out successShoot, out checkedPosition);
+                ForbiddenCoords.Add(FindCorrectIndex(thirdTarget));
                 if (!successShoot)
                 {
-                    SecondCheckedCoords.Add(FindCorrectIndex(thirdTarget, codeIndex: "Fight 741"));
+                    SecondCheckedCoords.Add(FindCorrectIndex(thirdTarget));
                     DefinedShot = true;
                 }
             }
@@ -517,9 +521,9 @@ namespace Battleship
                 List<int> nextCoords = new List<int>();
                 if (ThirdCheckedCoords.Count == 0)
                 {
-                    indexes[0] = FindCorrectIndex(FirstSuccessHitCoord + 1551, codeIndex: "Fight 748");
-                    indexes[1] = FindCorrectIndex(SecondSuccessHitCoord + 1551, codeIndex: "Fight 749");
-                    indexes[2] = FindCorrectIndex(ThirdSuccssHitCoord + 1551, codeIndex: "Fight 750");
+                    indexes[0] = FindCorrectIndex(FirstSuccessHitCoord + 1551);
+                    indexes[1] = FindCorrectIndex(SecondSuccessHitCoord + 1551);
+                    indexes[2] = FindCorrectIndex(ThirdSuccssHitCoord + 1551);
                     int max = indexes.Max();
                     int min = indexes.Min();
                     int delta = indexes[0] - indexes[1];
@@ -568,12 +572,15 @@ namespace Battleship
                 fourthTarget = FindCorrectCoord(nextCoords[randomIndex]) + 1551;
                 TargetButtonTag = fourthTarget;
                 EnemyShoot(fourthTarget, out successShoot, out checkedPosition);
+                ForbiddenCoords.Add(FindCorrectIndex(fourthTarget));
                 if (!successShoot)
                 {
-                    ThirdCheckedCoords.Add(FindCorrectIndex(fourthTarget, codeIndex: "Fight 741"));
+                    ThirdCheckedCoords.Add(FindCorrectIndex(fourthTarget));
                     DefinedShot = true;
                 }
             }
+            ForbiddenCoords.SortUnique();
+
         }
         public static int FindShipCoord(bool hitStatus)
         {
@@ -600,7 +607,7 @@ namespace Battleship
             if (firstCoords != 0)
             {
                 int targetCoord = firstCoords - reduction;
-                firstCoords = FindCorrectIndex(firstCoords, codeIndex: "Fight 655");
+                firstCoords = FindCorrectIndex(firstCoords);
                 AllowedCoords.Clear();
                 BlockedCoords.Clear();
                 string position = pos.GetCellPosition(targetCoord.ToString());
@@ -844,7 +851,7 @@ namespace Battleship
                             mineTags = ShipData.MineTagsFill(mineTags, cellPos, shipSize, firstCoord, orientation);
                             for (int m = 0; m < minesCount; m++)
                             {
-                                mineTags[m] = FindCorrectIndex(mineTags[m] + 1551, codeIndex: "Fight 1162");
+                                mineTags[m] = FindCorrectIndex(mineTags[m] + 1551);
                                 PlayerData.Map[mineTags[m]] = 'E';
                                 ForbiddenCoords.Add(mineTags[m]);
                             }
@@ -955,7 +962,7 @@ namespace Battleship
                             mineTags = ShipData.MineTagsFill(mineTags, cellPos, shipSize, firstCoord, orientation);
                             for (int m = 0; m < minesCount; m++)
                             {
-                                mineTags[m] = FindCorrectIndex(mineTags[m] + 1551, true, codeIndex: "Fight 1273");
+                                mineTags[m] = FindCorrectIndex(mineTags[m] + 1551, true);
                                 EnemyData.Map[mineTags[m]] = 'M';
                             }
                             for (int sk = 0; sk < sunkenShips.Length; sk++)
@@ -1062,6 +1069,12 @@ namespace Battleship
             {
                 EnemyData.AllowedCoords.Clear();
             }
+        }
+        public static void SortUnique<T>(this List<T> list)
+        {
+            HashSet<T> unique = new HashSet<T>(list);
+            list = new List<T>(unique);
+            list.Sort();
         }
         //Unused 6
         //Unused 8

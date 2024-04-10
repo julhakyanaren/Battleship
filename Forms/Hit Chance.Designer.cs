@@ -103,6 +103,7 @@
             this.GB_HC_ShipData = new System.Windows.Forms.GroupBox();
             this.L_Info_ShipsCurrentCount = new System.Windows.Forms.Label();
             this.L_Info_ShipsMaxCount = new System.Windows.Forms.Label();
+            this.BS_HC_ShowChart = new System.Windows.Forms.Button();
             this.TLP_MC_Map_Main.SuspendLayout();
             this.PNL_MC_Map_Letters.SuspendLayout();
             this.TLP_MC_Map_Letters.SuspendLayout();
@@ -878,6 +879,7 @@
             // GB_HC_ProbabilityData
             // 
             this.GB_HC_ProbabilityData.BackColor = System.Drawing.Color.Black;
+            this.GB_HC_ProbabilityData.Controls.Add(this.BS_HC_ShowChart);
             this.GB_HC_ProbabilityData.Controls.Add(this.BS_HC_IndependentChances_Update);
             this.GB_HC_ProbabilityData.Controls.Add(this.CHB_ShowMoveNumber);
             this.GB_HC_ProbabilityData.Controls.Add(this.L_DecimalPlaces_Count);
@@ -908,7 +910,7 @@
             this.BS_HC_IndependentChances_Update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_HC_IndependentChances_Update.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.BS_HC_IndependentChances_Update.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_IndependentChances_Update.Location = new System.Drawing.Point(14, 299);
+            this.BS_HC_IndependentChances_Update.Location = new System.Drawing.Point(15, 276);
             this.BS_HC_IndependentChances_Update.Name = "BS_HC_IndependentChances_Update";
             this.BS_HC_IndependentChances_Update.Size = new System.Drawing.Size(233, 24);
             this.BS_HC_IndependentChances_Update.TabIndex = 70;
@@ -923,7 +925,7 @@
             this.CHB_ShowMoveNumber.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CHB_ShowMoveNumber.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CHB_ShowMoveNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CHB_ShowMoveNumber.Location = new System.Drawing.Point(130, 275);
+            this.CHB_ShowMoveNumber.Location = new System.Drawing.Point(131, 255);
             this.CHB_ShowMoveNumber.Name = "CHB_ShowMoveNumber";
             this.CHB_ShowMoveNumber.Size = new System.Drawing.Size(117, 21);
             this.CHB_ShowMoveNumber.TabIndex = 69;
@@ -945,7 +947,7 @@
             // 
             this.L_Info_DecimalPlaces.AutoSize = true;
             this.L_Info_DecimalPlaces.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_Info_DecimalPlaces.Location = new System.Drawing.Point(130, 256);
+            this.L_Info_DecimalPlaces.Location = new System.Drawing.Point(131, 236);
             this.L_Info_DecimalPlaces.Name = "L_Info_DecimalPlaces";
             this.L_Info_DecimalPlaces.Size = new System.Drawing.Size(80, 17);
             this.L_Info_DecimalPlaces.TabIndex = 67;
@@ -955,7 +957,7 @@
             // 
             this.TRB_DecimalPlaces.Cursor = System.Windows.Forms.Cursors.Hand;
             this.TRB_DecimalPlaces.LargeChange = 1;
-            this.TRB_DecimalPlaces.Location = new System.Drawing.Point(13, 252);
+            this.TRB_DecimalPlaces.Location = new System.Drawing.Point(14, 232);
             this.TRB_DecimalPlaces.Maximum = 4;
             this.TRB_DecimalPlaces.Name = "TRB_DecimalPlaces";
             this.TRB_DecimalPlaces.RightToLeft = System.Windows.Forms.RightToLeft.No;
@@ -974,7 +976,7 @@
             this.TB_IndependentChances.Name = "TB_IndependentChances";
             this.TB_IndependentChances.ReadOnly = true;
             this.TB_IndependentChances.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
-            this.TB_IndependentChances.Size = new System.Drawing.Size(233, 84);
+            this.TB_IndependentChances.Size = new System.Drawing.Size(233, 65);
             this.TB_IndependentChances.TabIndex = 65;
             // 
             // L_Info_IndependentEfficity
@@ -1212,6 +1214,20 @@
             this.L_Info_ShipsMaxCount.TabIndex = 61;
             this.L_Info_ShipsMaxCount.Text = "Max";
             // 
+            // BS_HC_ShowChart
+            // 
+            this.BS_HC_ShowChart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BS_HC_ShowChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_HC_ShowChart.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_HC_ShowChart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.BS_HC_ShowChart.Location = new System.Drawing.Point(15, 303);
+            this.BS_HC_ShowChart.Name = "BS_HC_ShowChart";
+            this.BS_HC_ShowChart.Size = new System.Drawing.Size(233, 24);
+            this.BS_HC_ShowChart.TabIndex = 71;
+            this.BS_HC_ShowChart.Text = "View independent chance dynamic chart";
+            this.BS_HC_ShowChart.UseVisualStyleBackColor = true;
+            this.BS_HC_ShowChart.Click += new System.EventHandler(this.BS_HC_ShowChart_Click);
+            // 
             // HitChance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 17F);
@@ -1327,5 +1343,6 @@
         private System.Windows.Forms.Label L_Info_DecimalPlaces;
         private System.Windows.Forms.CheckBox CHB_ShowMoveNumber;
         private System.Windows.Forms.Button BS_HC_IndependentChances_Update;
+        private System.Windows.Forms.Button BS_HC_ShowChart;
     }
 }
