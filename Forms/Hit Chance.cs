@@ -409,7 +409,7 @@ namespace Battleship.Forms
                                     break;
                                 }
                         }
-                        HitChanceData.DeleteOutLineCoords(nextIndexes, firstIndex, lineIndex);
+                        pos.DeleteOutLineCoords(nextIndexes, firstIndex, lineIndex);
                         if (nextIndexes.Count != 0)
                         {
                             redCoordsAround = true;

@@ -241,40 +241,5 @@ namespace Battleship.Classes
             }
             return indexes;
         }
-        public static List<int> DeleteOutLineCoords(List<int> coordsList, int firstCoord, char line)
-        {
-            switch (Char.ToLower(line))
-            {
-                case 'r': //Row
-                    {
-                        for (int r = 0; r < coordsList.Count; r++)
-                        {
-                            if (coordsList[r] / 10 != firstCoord / 10)
-                            {
-                                coordsList.RemoveAt(r);
-                            }
-                        }
-                        break;
-                    }
-                case 'c': //Column
-                    {
-                        for (int c = 0; c < coordsList.Count; c++)
-                        {
-                            if (coordsList[c] % 10 != firstCoord % 10)
-                            {
-                                coordsList.RemoveAt(c);
-                            }
-                        }
-                        break;
-                    }
-                default:
-                    {
-                        MessageBox.Show("Unknown Line Index");
-                        return coordsList;
-                    }
-            }
-            coordsList.RemoveAll(x => x >= 100 || x < 0);
-            return coordsList;
-        }
     }
 }

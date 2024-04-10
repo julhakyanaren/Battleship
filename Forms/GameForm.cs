@@ -126,8 +126,6 @@ namespace Battleship
         {
             SetScreenParametersAsMaximized();
             SetComponentCustomParamaters();
-            //DEBUG TEST
-            //DEBUG TEST
         }
         async Task GenerateButtons()
         {
@@ -242,7 +240,6 @@ namespace Battleship
                     if (!Options.GameOver)
                     {
                         await EnemyTurn();
-
                     }
                     else
                     {

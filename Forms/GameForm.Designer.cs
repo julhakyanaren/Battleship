@@ -1895,7 +1895,7 @@
             this.TSMI_AllwaysOnTop.CheckOnClick = true;
             this.TSMI_AllwaysOnTop.ForeColor = System.Drawing.Color.Black;
             this.TSMI_AllwaysOnTop.Name = "TSMI_AllwaysOnTop";
-            this.TSMI_AllwaysOnTop.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_AllwaysOnTop.Size = new System.Drawing.Size(143, 22);
             this.TSMI_AllwaysOnTop.Text = "Allways on top";
             this.TSMI_AllwaysOnTop.CheckedChanged += new System.EventHandler(this.TSMI_AllwaysOnTop_CheckedChanged);
             // 
@@ -2006,7 +2006,7 @@
             this.TSMI_GPO_OpenManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GPO_OpenManual.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_OpenManual.Name = "TSMI_GPO_OpenManual";
-            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(139, 22);
             this.TSMI_GPO_OpenManual.Text = "Open manual";
             this.TSMI_GPO_OpenManual.Click += new System.EventHandler(this.TSMI_GPO_OpenManual_Click);
             // 
@@ -2015,7 +2015,7 @@
             this.TSMI_GPO_Version.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GPO_Version.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_Version.Name = "TSMI_GPO_Version";
-            this.TSMI_GPO_Version.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_GPO_Version.Size = new System.Drawing.Size(139, 22);
             this.TSMI_GPO_Version.Text = "Info:";
             // 
             // TSMI_Diagnostics
