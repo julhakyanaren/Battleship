@@ -34,6 +34,7 @@ namespace Battleship
         public static int SunkenCountCurrent = 0;
         public static int MissedShotsCount = 0;
         public static int WhiteCellsCount = 0;
+        public static int HitedDecksCount = 0;
 
         public static int[] ShipsCount = { FrigatesCountCurrent, DestroyersCountCurrent, CruiserCountCurrent, BattleshipCountCurrent };
         
@@ -119,8 +120,9 @@ namespace Battleship
         {
             if (!Options.GameOver)
             {
-                double newChance = Math.Round((double)(20 - ShipData.HitedDeckCount) / (double)WhiteCellsCount, 5);
+                double newChance = Math.Round((double)(20 - HitedDecksCount) / (double)WhiteCellsCount, 5);
                 IndependentChances.Add(IndependentChances.Count + 1, newChance);
+
             }
         }
     }

@@ -328,12 +328,23 @@ namespace Battleship
         void UpdateEnemyMapColor(Color[] colors)
         {
             EnemyData.WhiteCellsCount = 0;
+            EnemyData.HitedDecksCount = 0;
             for (int mc = 0; mc < colors.Length; mc++)
             {
                 MapButtons[1, mc].BackColor = ColorMethods.EnemyMapColor[mc];
-                if (ColorMethods.EnemyMapColor[mc] == Color.White)
+                switch (ColorMethods.EnemyMapColor[mc].Name)
                 {
-                    EnemyData.WhiteCellsCount++;
+                    case "White":
+                        {
+                            EnemyData.WhiteCellsCount++;
+                            break;
+                        }
+                    case "Red":
+                    case "Firebrick":
+                        {
+                            EnemyData.HitedDecksCount++;
+                            break;
+                        }
                 }
             }
             EnemyData.AddIndependentChance();
