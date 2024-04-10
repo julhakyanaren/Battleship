@@ -418,7 +418,8 @@ namespace Battleship
                 int firstCoord = FirstSuccessHitCoord + 1551;
                 GenerateNearestCoords(firstCoord, 1551);
                 List<int> allowedCoords = AllowedCoords;
-                allowedCoords.RemoveAll(item => FirstCheckedCoords.Contains(item));
+                allowedCoords.RemoveAll(coord => FirstCheckedCoords.Contains(coord));
+                allowedCoords.RemoveAll(coord => ForbiddenCoords.Contains(coord));
                 do
                 {
                     Random random = new Random();
@@ -490,10 +491,12 @@ namespace Battleship
                     }
                     nextCoords = pos.DeleteOutLineCoords(nextCoords, indexes[0], lineChar);
                     nextCoords = DeleteForbiddenCoords(nextCoords);
+                    PossibleTargets = nextCoords;
                 }
                 else
                 {
-                    nextCoords.RemoveAll(coord => SecondCheckedCoords.Contains(coord));
+                    PossibleTargets.RemoveAll(coord => SecondCheckedCoords.Contains(coord));
+                    nextCoords = PossibleTargets;
                 }
                 Random random = new Random();
                 int randomIndex = random.Next(nextCoords.Count);
@@ -553,10 +556,12 @@ namespace Battleship
                     }
                     nextCoords = pos.DeleteOutLineCoords(nextCoords, indexes[0], lineChar);
                     nextCoords = DeleteForbiddenCoords(nextCoords);
+                    PossibleTargets = nextCoords;
                 }
                 else
                 {
-                    nextCoords.RemoveAll(coord => ThirdCheckedCoords.Contains(coord));
+                    PossibleTargets.RemoveAll(coord => ThirdCheckedCoords.Contains(coord));
+                    nextCoords = PossibleTargets;
                 }
                 Random random = new Random();
                 int randomIndex = random.Next(nextCoords.Count);
