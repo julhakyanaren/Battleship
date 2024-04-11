@@ -33,6 +33,7 @@ namespace Battleship
         public static int HitCountCurrent = 0;
         public static int SunkenCountCurrent = 0;
         public static int MissedShotsCount = 0;
+
         public static int WhiteCellsCount = 0;
         public static int HitedDecksCount = 0;
 

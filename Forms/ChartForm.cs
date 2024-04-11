@@ -16,11 +16,13 @@ namespace Battleship.Forms
     {
         double startPoint = 1;
         double endPoint;
-        double x, y;
+        double x1, y1;
+        double x2, y2;
         double step = 0.01;
         double maxValue;
         double minValue;
         double averageValue;
+        bool enemyDataShow = false;
         int count;
         public ChartForm()
         {
@@ -36,26 +38,46 @@ namespace Battleship.Forms
         }
         async Task ChartDraw()
         {
-            ChartClear();
-            CRT_ChanceChange.Series[0].Points.AddXY(0, 20);
-            for (int i = 1; i <= EnemyData.IndependentChances.Count; i++)
+            try
             {
-                await Task.Delay(20);
-                y = EnemyData.IndependentChances[i] * 100;
-                CRT_ChanceChange.Series[0].Points.AddXY(i, y);
-                await Task.Delay(20);
-                TB_CHF_IndependentChances.Text += $"Move #{i}  {EnemyData.IndependentChances[i] * 100}%";
-                if (i != EnemyData.IndependentChances.Count)
+                ChartClear();
+                CRT_ChanceChange.Series[0].Points.AddXY(0, 20);
+                CHB_EnemyDataShow.Visible = false;
+                for (int i = 1; i <= EnemyData.IndependentChances.Count; i++)
                 {
-                    TB_CHF_IndependentChances.Text += "\r\n";
+                    await Task.Delay(20);
+                    y1 = EnemyData.IndependentChances[i] * 100;
+                    if (!double.IsNaN(y1) && !double.IsInfinity(y1))
+                    {
+                        CRT_ChanceChange.Series[0].Points.AddXY(i, y1);
+                    }
+                    if (enemyDataShow && PlayerData.IndependentChances.Count >= i)
+                    {
+                        y2 = PlayerData.IndependentChances[i] * 100;
+                        if (!double.IsNaN(y2) && !double.IsInfinity(y2))
+                        {
+                            CRT_ChanceChange.Series[1].Points.AddXY(i, y2);
+                        }
+                    }
+                    await Task.Delay(20);
+                    TB_CHF_IndependentChances.Text += $"Move #{i}  {EnemyData.IndependentChances[i] * 100}%";
+                    if (i != EnemyData.IndependentChances.Count)
+                    {
+                        TB_CHF_IndependentChances.Text += "\r\n";
+                    }
+                    TB_CHF_IndependentChances.SelectionStart = TB_CHF_IndependentChances.Text.Length;
                 }
-                TB_CHF_IndependentChances.SelectionStart = TB_CHF_IndependentChances.Text.Length;
+                minValue = EnemyData.IndependentChances.Values.Min();
+                minValue = EnemyData.IndependentChances.Values.Max();
+                GetAverage();
+                count = EnemyData.IndependentChances.Count();
+                SetTextBoxValues();
+                CHB_EnemyDataShow.Visible = true;
             }
-            minValue = EnemyData.IndependentChances.Values.Min();
-            minValue = EnemyData.IndependentChances.Values.Max();
-            GetAverage();
-            count = EnemyData.IndependentChances.Count();
-            SetTextBoxValues();
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Exception Message: \r\n{ex.Message}\r\n\r\nException {ex}", "Exception found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
         }
 
         private void BS_CHF_ChartDelete_Click(object sender, EventArgs e)
@@ -72,12 +94,19 @@ namespace Battleship.Forms
         void ChartClear()
         {
             CRT_ChanceChange.Series[0].Points.Clear();
+            CRT_ChanceChange.Series[1].Points.Clear();
             TB_CHF_AverageValue.Clear();
             TB_CHF_Count.Clear();
             TB_CHF_IndependentChances.Clear();
             TB_CHF_MaxValue.Clear();
             TB_CHF_MinValue.Clear();
         }
+
+        private void CHB_EnemyDataShow_CheckedChanged(object sender, EventArgs e)
+        {
+            enemyDataShow = CHB_EnemyDataShow.Checked;
+        }
+
         void SetTextBoxValues()
         {
             TB_CHF_MinValue.Text = $"{minValue * 100}%";

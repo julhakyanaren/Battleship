@@ -320,10 +320,27 @@ namespace Battleship
         }
         void UpdatePlayerMapColor(Color[] colors)
         {
+            PlayerData.WhiteCellsCount = 0;
+            PlayerData.HitedDecksCount = 0;
             for (int mc = 0; mc < colors.Length; mc++)
             {
                 MapButtons[0, mc].BackColor = ColorMethods.PlayerMapColor[mc];
+                switch (ColorMethods.PlayerMapColor[mc].Name)
+                {
+                    case "White":
+                        {
+                            PlayerData.WhiteCellsCount++;
+                            break;
+                        }
+                    case "Red":
+                    case "Firebrick":
+                        {
+                            PlayerData.HitedDecksCount++;
+                            break;
+                        }
+                }
             }
+            PlayerData.AddIndependentChance();
         }
         void UpdateEnemyMapColor(Color[] colors)
         {

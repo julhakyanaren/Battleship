@@ -33,6 +33,9 @@ namespace Battleship
         public static int SunkenCountCurrent = 0;
         public static int MissedShotsCount = 0;
 
+        public static int WhiteCellsCount = 0;
+        public static int HitedDecksCount = 0;
+
         public static int[] ShipsCount = { FrigatesCountCurrent, DestroyersCountCurrent, CruiserCountCurrent, BattleshipCountCurrent };
 
         public static int Score;
@@ -56,6 +59,8 @@ namespace Battleship
         public static bool[] CruisersSunken = new bool[2];
         public static bool[] BattleshipSunken = new bool[1];
         public static bool[][] ShipsSunkenArray = { FrigatesSunken, DestroyersSunken, CruisersSunken, BattleshipSunken };
+
+        public static Dictionary<int, double> IndependentChances = new Dictionary<int, double>();
 
         public static Button[] MapButtons = new Button[100];
         public static void DoesDestroyerSunken()
@@ -108,6 +113,17 @@ namespace Battleship
             HitedDestroyersCount = 0;
             HitedDestroyersCount = 0;
             MissedShotsCount = 0;
+        }
+        public static void AddIndependentChance()
+        {
+            if (!Options.GameOver)
+            {
+                double newChance = Math.Round((double)(20 - HitedDecksCount) / (double)WhiteCellsCount, 5);
+                if (!double.IsNaN(newChance))
+                {
+                    IndependentChances.Add(IndependentChances.Count + 1, newChance);
+                }
+            }
         }
     }
 }
