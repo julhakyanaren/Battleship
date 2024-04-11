@@ -34,6 +34,8 @@
             this.PNL_MenuField = new System.Windows.Forms.Panel();
             this.TLP_GPO_Controls = new System.Windows.Forms.TableLayoutPanel();
             this.PNL_Options = new System.Windows.Forms.Panel();
+            this.L_Info_TurnStatus = new System.Windows.Forms.Label();
+            this.TB_TurnStatus = new System.Windows.Forms.TextBox();
             this.L_Info_GameMode = new System.Windows.Forms.Label();
             this.TB_GameModeType = new System.Windows.Forms.TextBox();
             this.TEST = new System.Windows.Forms.PictureBox();
@@ -242,6 +244,8 @@
             // 
             // PNL_Options
             // 
+            this.PNL_Options.Controls.Add(this.L_Info_TurnStatus);
+            this.PNL_Options.Controls.Add(this.TB_TurnStatus);
             this.PNL_Options.Controls.Add(this.L_Info_GameMode);
             this.PNL_Options.Controls.Add(this.TB_GameModeType);
             this.PNL_Options.Controls.Add(this.TEST);
@@ -252,6 +256,28 @@
             this.PNL_Options.Name = "PNL_Options";
             this.PNL_Options.Size = new System.Drawing.Size(507, 62);
             this.PNL_Options.TabIndex = 1;
+            // 
+            // L_Info_TurnStatus
+            // 
+            this.L_Info_TurnStatus.AutoSize = true;
+            this.L_Info_TurnStatus.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_Info_TurnStatus.Location = new System.Drawing.Point(146, 4);
+            this.L_Info_TurnStatus.Name = "L_Info_TurnStatus";
+            this.L_Info_TurnStatus.Size = new System.Drawing.Size(40, 17);
+            this.L_Info_TurnStatus.TabIndex = 42;
+            this.L_Info_TurnStatus.Text = "Status";
+            // 
+            // TB_TurnStatus
+            // 
+            this.TB_TurnStatus.BackColor = System.Drawing.Color.Black;
+            this.TB_TurnStatus.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_TurnStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TB_TurnStatus.Location = new System.Drawing.Point(145, 32);
+            this.TB_TurnStatus.Name = "TB_TurnStatus";
+            this.TB_TurnStatus.ReadOnly = true;
+            this.TB_TurnStatus.Size = new System.Drawing.Size(138, 22);
+            this.TB_TurnStatus.TabIndex = 43;
+            this.TB_TurnStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // L_Info_GameMode
             // 
@@ -268,7 +294,7 @@
             this.TB_GameModeType.BackColor = System.Drawing.Color.Black;
             this.TB_GameModeType.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TB_GameModeType.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TB_GameModeType.Location = new System.Drawing.Point(1, 33);
+            this.TB_GameModeType.Location = new System.Drawing.Point(0, 32);
             this.TB_GameModeType.Name = "TB_GameModeType";
             this.TB_GameModeType.ReadOnly = true;
             this.TB_GameModeType.Size = new System.Drawing.Size(138, 22);
@@ -279,9 +305,9 @@
             // 
             this.TEST.Dock = System.Windows.Forms.DockStyle.Right;
             this.TEST.Image = global::Battleship.Properties.Resources.Logo;
-            this.TEST.Location = new System.Drawing.Point(142, 0);
+            this.TEST.Location = new System.Drawing.Point(289, 0);
             this.TEST.Name = "TEST";
-            this.TEST.Size = new System.Drawing.Size(365, 62);
+            this.TEST.Size = new System.Drawing.Size(218, 62);
             this.TEST.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.TEST.TabIndex = 2;
             this.TEST.TabStop = false;
@@ -2201,8 +2227,6 @@
         private System.Windows.Forms.Label L_EnemyHit;
         private System.Windows.Forms.Label L_EnemyMiss;
         private System.Windows.Forms.TableLayoutPanel TLP_GPO_Controls;
-        private System.Windows.Forms.Panel PNL_Options;
-        private System.Windows.Forms.PictureBox TEST;
         private System.Windows.Forms.MenuStrip MS_MenuPanel;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Game;
         private System.Windows.Forms.ToolStripMenuItem TSMI_StartNewGame;
@@ -2231,5 +2255,9 @@
         private System.Windows.Forms.ToolStripMenuItem TSMI_GPO_Version;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Diagnostics;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Open_DiagnosticForm;
+        private System.Windows.Forms.Panel PNL_Options;
+        private System.Windows.Forms.PictureBox TEST;
+        private System.Windows.Forms.Label L_Info_TurnStatus;
+        public System.Windows.Forms.TextBox TB_TurnStatus;
     }
 }

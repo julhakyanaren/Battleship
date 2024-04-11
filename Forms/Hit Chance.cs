@@ -518,36 +518,43 @@ namespace Battleship.Forms
             else if (HitChanceData.IndependentChance == 0)
             {
                 TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[0];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[0];
                 TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[0]}";
             }
             else if (sp.IsFloatBetween(0, 25, HitChanceData.IndependentChance, "OO"))
             {
                 TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[1];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[1];
                 TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[1]}";
             }
             else if (sp.IsFloatBetween(25, 5, HitChanceData.IndependentChance, "IO"))
             {
                 TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[2];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[2];
                 TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[2]}";
             }
             else if (sp.IsFloatBetween(5, 75, HitChanceData.IndependentChance, "IO"))
             {
                 TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[3];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[3];
                 TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[3]}";
             }
             else if (sp.IsFloatBetween(75, 90, HitChanceData.IndependentChance, "IO"))
             {
                 TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[4];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[4];
                 TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[4]}";
             }
             else if (sp.IsFloatBetween(90, 100, HitChanceData.IndependentChance, "IO"))
             {
                 TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[5];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[5];
                 TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[5]}";
             }
             else if (HitChanceData.IndependentChance == 100)
             {
                 TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[6];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[6];
                 TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[6]}";
             }
         }

@@ -3,6 +3,8 @@ using Battleship.Forms;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Media;
+using System.Reflection;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using static Battleship.DebugTools;
@@ -121,6 +123,8 @@ namespace Battleship
             }
             TB_GameModeType.Text = $"{Options.GameMode} Mode";
             TSMI_GPO_Version.Text = $"Version:  {DebugTools.Version}.{RunsCount}";
+            L_Info_TurnStatus.Location = new Point(L_Info_TurnStatus.Location.X, L_Info_GameMode.Location.Y);
+            TB_TurnStatus.Location = new Point(TB_TurnStatus.Location.X, TB_Turn.Location.Y);
         }
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {
@@ -216,7 +220,8 @@ namespace Battleship
                 {
                     if (tagCB / 100 == 2)
                     {
-                        MessageBox.Show($"Cell \"{coord}\" checked!\r\nPlease choose another cell", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        int index = Fight.FindCorrectIndex(Convert.ToInt32(clickedButton.Tag) + 1551, true);
+                        await NotAvailableMove(index, 1, 4, 0);
                     }
                 }
                 if (Fight.ForbiddenCoords.Count != 100)
@@ -251,7 +256,9 @@ namespace Battleship
             }
             else
             {
-                MessageBox.Show($"Not {Options.SP_PlayerName}'s turn ", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                SystemSounds.Exclamation.Play();
+                int index = Fight.FindCorrectIndex(Convert.ToInt32(clickedButton.Tag) + 1551, true);
+                await NotAvailableMove(index, 1, 4, 0, changeStatus: true, statusText: $"Not {Options.SP_PlayerName}'s turn");
             }
         }
         int FindTargetButtonViaIndex()
@@ -272,7 +279,11 @@ namespace Battleship
         async Task ChangeBorderSize(int duration = 30, int steps = 4)
         {
             int targetIndex = FindTargetButtonViaIndex();
-            if (targetIndex != -1)
+            if (MapButtons[0, targetIndex].BackColor == Color.Red || MapButtons[0, targetIndex].BackColor == Color.Firebrick || MapButtons[0, targetIndex].BackColor == Color.DeepSkyBlue)
+            {
+                MessageBox.Show("Incorrect Posiotion");
+            }
+            else if (targetIndex != -1)
             {
                 int defaultBorderSize = MapButtons[1, targetIndex].FlatAppearance.BorderSize;
                 int customBorderSize = defaultBorderSize * 3;
@@ -285,6 +296,33 @@ namespace Battleship
                 }
                 MapButtons[0, targetIndex].FlatAppearance.BorderSize = defaultBorderSize;
             }
+        }
+        async Task NotAvailableMove(int index,int size = 1, int steps = 5, int colorIndex = 0, int duration = 120, bool changeStatus = false, string statusText = null)
+        {
+            int defaultSize = MapButtons[1, index].FlatAppearance.BorderSize;
+            int changedSize = defaultSize + size;
+            string oldText = TB_TurnStatus.Text;
+            Color oldColor = TB_TurnStatus.ForeColor;
+            Color defaultColor = MapButtons[1, index].FlatAppearance.BorderColor;
+            Color[] changedColors = { Color.DarkRed, Color.Gold };
+            if (changeStatus)
+            {
+                TB_TurnStatus.Text = statusText;
+                TB_TurnStatus.ForeColor = Color.Red;
+            }
+            for (int i = 0; i < steps; i++)
+            {
+                await Task.Delay(duration);
+                MapButtons[1, index].FlatAppearance.BorderColor = changedColors[colorIndex];
+                MapButtons[1, index].FlatAppearance.BorderSize = changedSize;
+                await Task.Delay(duration);
+                MapButtons[1, index].FlatAppearance.BorderColor = defaultColor;
+                MapButtons[1, index].FlatAppearance.BorderSize = defaultSize;
+                MapButtons[1, index].FlatAppearance.BorderSize = defaultSize;
+                MapButtons[1, index].FlatAppearance.BorderColor = defaultColor;
+            }
+            TB_TurnStatus.Text = oldText;
+            TB_TurnStatus.ForeColor = oldColor;
         }
         async Task EnemyTurn()
         {
@@ -440,6 +478,7 @@ namespace Battleship
                         {
                             HitChanceData.SelectedCell = selectedButton;
                         }
+                        SetStatusTurnText(selectedButton);
                         break;
                     }
                 default:
@@ -1275,6 +1314,53 @@ namespace Battleship
             if (count[0] == count[1])
             {
                 MessageBox.Show("Forbidden data error", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        void SetStatusTurnText(Button selectedButton)
+        {
+            if (Fight.GameStarted)
+            {
+                if (Fight.Turn == 1)
+                {
+                    TB_TurnStatus.Text = "Move not available";
+                    TB_TurnStatus.ForeColor = Color.Red;
+                }
+                else if (Fight.Turn == 0)
+                {
+                    switch (selectedButton.BackColor.Name.ToString())
+                    {
+                        case "Red":
+                            {
+                                TB_TurnStatus.Text = "Hited ship deck";
+                                TB_TurnStatus.ForeColor = Color.Yellow;
+                                break;
+                            }
+                        case "Firebrick":
+                            {
+                                TB_TurnStatus.Text = "Sunken ship";
+                                TB_TurnStatus.ForeColor = Color.Orange;
+                                break;
+                            }
+                        case "DeepSkyBlue":
+                            {
+                                TB_TurnStatus.Text = "Enmpty cell";
+                                TB_TurnStatus.ForeColor = Color.DeepSkyBlue;
+                                break;
+                            }
+                        case "White":
+                            {
+                                TB_TurnStatus.Text = "Available move";
+                                TB_TurnStatus.ForeColor = Color.Lime;
+                                break;
+                            }
+                        case "Green":
+                            {
+                                TB_TurnStatus.Text = "Undiscovered ship";
+                                TB_TurnStatus.ForeColor = Color.Lime;
+                                break;
+                            }
+                    }
+                }
             }
         }
     }

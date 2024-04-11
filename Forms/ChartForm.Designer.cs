@@ -52,10 +52,24 @@
             this.L_Info_MaxValue = new System.Windows.Forms.Label();
             this.L_Info_CHF_IndependentChanges = new System.Windows.Forms.Label();
             this.TB_CHF_IndependentChances = new System.Windows.Forms.TextBox();
+            this.TB_Info_DrawBoth = new System.Windows.Forms.TextBox();
+            this.GB_CHF_SearchData = new System.Windows.Forms.GroupBox();
+            this.CB_CHF_SideChoose = new System.Windows.Forms.ComboBox();
+            this.L_SideChoose = new System.Windows.Forms.Label();
+            this.CB_CHF_MoveNumber = new System.Windows.Forms.ComboBox();
+            this.L_Info_MoveNumber = new System.Windows.Forms.Label();
+            this.BS_CHF_SearchData = new System.Windows.Forms.Button();
+            this.TB_CHF_HitProbobility = new System.Windows.Forms.TextBox();
+            this.L_Info_HitProbobility = new System.Windows.Forms.Label();
+            this.L_Info_DecimalPlaces = new System.Windows.Forms.Label();
+            this.TRB_CHF_DecimalPlaces = new System.Windows.Forms.TrackBar();
+            this.L_DecimalPlaces = new System.Windows.Forms.Label();
             this.TLP_CHF_Main.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CRT_ChanceChange)).BeginInit();
             this.PNL_CHF_Inspector.SuspendLayout();
             this.GB_CHF_ChartData.SuspendLayout();
+            this.GB_CHF_SearchData.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TRB_CHF_DecimalPlaces)).BeginInit();
             this.SuspendLayout();
             // 
             // TLP_CHF_Main
@@ -70,7 +84,7 @@
             this.TLP_CHF_Main.Name = "TLP_CHF_Main";
             this.TLP_CHF_Main.RowCount = 1;
             this.TLP_CHF_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 86.65158F));
-            this.TLP_CHF_Main.Size = new System.Drawing.Size(1015, 364);
+            this.TLP_CHF_Main.Size = new System.Drawing.Size(1015, 505);
             this.TLP_CHF_Main.TabIndex = 0;
             // 
             // CRT_ChanceChange
@@ -131,21 +145,23 @@
             series2.Name = "SeriesEnemy";
             this.CRT_ChanceChange.Series.Add(series1);
             this.CRT_ChanceChange.Series.Add(series2);
-            this.CRT_ChanceChange.Size = new System.Drawing.Size(741, 358);
+            this.CRT_ChanceChange.Size = new System.Drawing.Size(741, 499);
             this.CRT_ChanceChange.TabIndex = 0;
             this.CRT_ChanceChange.Text = "chart1";
             // 
             // PNL_CHF_Inspector
             // 
+            this.PNL_CHF_Inspector.Controls.Add(this.GB_CHF_SearchData);
             this.PNL_CHF_Inspector.Controls.Add(this.GB_CHF_ChartData);
             this.PNL_CHF_Inspector.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PNL_CHF_Inspector.Location = new System.Drawing.Point(750, 3);
             this.PNL_CHF_Inspector.Name = "PNL_CHF_Inspector";
-            this.PNL_CHF_Inspector.Size = new System.Drawing.Size(262, 358);
+            this.PNL_CHF_Inspector.Size = new System.Drawing.Size(262, 499);
             this.PNL_CHF_Inspector.TabIndex = 1;
             // 
             // GB_CHF_ChartData
             // 
+            this.GB_CHF_ChartData.Controls.Add(this.TB_Info_DrawBoth);
             this.GB_CHF_ChartData.Controls.Add(this.CHB_EnemyDataShow);
             this.GB_CHF_ChartData.Controls.Add(this.CHB_PlayerDataShow);
             this.GB_CHF_ChartData.Controls.Add(this.TB_CHF_Count);
@@ -165,7 +181,7 @@
             this.GB_CHF_ChartData.ForeColor = System.Drawing.Color.DeepSkyBlue;
             this.GB_CHF_ChartData.Location = new System.Drawing.Point(6, 9);
             this.GB_CHF_ChartData.Name = "GB_CHF_ChartData";
-            this.GB_CHF_ChartData.Size = new System.Drawing.Size(253, 346);
+            this.GB_CHF_ChartData.Size = new System.Drawing.Size(253, 324);
             this.GB_CHF_ChartData.TabIndex = 49;
             this.GB_CHF_ChartData.TabStop = false;
             this.GB_CHF_ChartData.Text = "Chart datas";
@@ -174,11 +190,11 @@
             // 
             this.CHB_EnemyDataShow.AutoSize = true;
             this.CHB_EnemyDataShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CHB_EnemyDataShow.Location = new System.Drawing.Point(129, 34);
+            this.CHB_EnemyDataShow.Location = new System.Drawing.Point(129, 30);
             this.CHB_EnemyDataShow.Name = "CHB_EnemyDataShow";
-            this.CHB_EnemyDataShow.Size = new System.Drawing.Size(123, 21);
+            this.CHB_EnemyDataShow.Size = new System.Drawing.Size(111, 21);
             this.CHB_EnemyDataShow.TabIndex = 78;
-            this.CHB_EnemyDataShow.Text = "Show enemy hit data";
+            this.CHB_EnemyDataShow.Text = "Show chart Enemy";
             this.CHB_EnemyDataShow.UseVisualStyleBackColor = true;
             this.CHB_EnemyDataShow.CheckedChanged += new System.EventHandler(this.CHB_EnemyDataShow_CheckedChanged);
             // 
@@ -187,14 +203,14 @@
             this.CHB_PlayerDataShow.AutoSize = true;
             this.CHB_PlayerDataShow.Checked = true;
             this.CHB_PlayerDataShow.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.CHB_PlayerDataShow.Enabled = false;
             this.CHB_PlayerDataShow.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.CHB_PlayerDataShow.Location = new System.Drawing.Point(129, 10);
             this.CHB_PlayerDataShow.Name = "CHB_PlayerDataShow";
-            this.CHB_PlayerDataShow.Size = new System.Drawing.Size(121, 21);
+            this.CHB_PlayerDataShow.Size = new System.Drawing.Size(109, 21);
             this.CHB_PlayerDataShow.TabIndex = 77;
-            this.CHB_PlayerDataShow.Text = "Show player hit data";
+            this.CHB_PlayerDataShow.Text = "Show chart Player";
             this.CHB_PlayerDataShow.UseVisualStyleBackColor = true;
+            this.CHB_PlayerDataShow.CheckedChanged += new System.EventHandler(this.CHB_PlayerDataShow_CheckedChanged);
             // 
             // TB_CHF_Count
             // 
@@ -212,7 +228,7 @@
             // 
             this.L_Info_CountValue.AutoSize = true;
             this.L_Info_CountValue.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_Info_CountValue.Location = new System.Drawing.Point(6, 139);
+            this.L_Info_CountValue.Location = new System.Drawing.Point(6, 140);
             this.L_Info_CountValue.Name = "L_Info_CountValue";
             this.L_Info_CountValue.Size = new System.Drawing.Size(37, 17);
             this.L_Info_CountValue.TabIndex = 75;
@@ -324,7 +340,7 @@
             // 
             this.L_Info_CHF_IndependentChanges.AutoSize = true;
             this.L_Info_CHF_IndependentChanges.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_Info_CHF_IndependentChanges.Location = new System.Drawing.Point(6, 184);
+            this.L_Info_CHF_IndependentChanges.Location = new System.Drawing.Point(6, 202);
             this.L_Info_CHF_IndependentChanges.Name = "L_Info_CHF_IndependentChanges";
             this.L_Info_CHF_IndependentChanges.Size = new System.Drawing.Size(147, 17);
             this.L_Info_CHF_IndependentChanges.TabIndex = 67;
@@ -336,20 +352,169 @@
             this.TB_CHF_IndependentChances.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.TB_CHF_IndependentChances.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.TB_CHF_IndependentChances.ForeColor = System.Drawing.Color.DeepSkyBlue;
-            this.TB_CHF_IndependentChances.Location = new System.Drawing.Point(3, 204);
+            this.TB_CHF_IndependentChances.Location = new System.Drawing.Point(3, 222);
             this.TB_CHF_IndependentChances.Multiline = true;
             this.TB_CHF_IndependentChances.Name = "TB_CHF_IndependentChances";
             this.TB_CHF_IndependentChances.ReadOnly = true;
             this.TB_CHF_IndependentChances.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TB_CHF_IndependentChances.Size = new System.Drawing.Size(247, 139);
+            this.TB_CHF_IndependentChances.Size = new System.Drawing.Size(247, 99);
             this.TB_CHF_IndependentChances.TabIndex = 66;
+            // 
+            // TB_Info_DrawBoth
+            // 
+            this.TB_Info_DrawBoth.BackColor = System.Drawing.Color.Black;
+            this.TB_Info_DrawBoth.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.TB_Info_DrawBoth.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.TB_Info_DrawBoth.Location = new System.Drawing.Point(129, 54);
+            this.TB_Info_DrawBoth.Name = "TB_Info_DrawBoth";
+            this.TB_Info_DrawBoth.ReadOnly = true;
+            this.TB_Info_DrawBoth.Size = new System.Drawing.Size(109, 22);
+            this.TB_Info_DrawBoth.TabIndex = 79;
+            this.TB_Info_DrawBoth.Text = "Draw Both";
+            this.TB_Info_DrawBoth.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_Info_DrawBoth.Visible = false;
+            // 
+            // GB_CHF_SearchData
+            // 
+            this.GB_CHF_SearchData.Controls.Add(this.L_DecimalPlaces);
+            this.GB_CHF_SearchData.Controls.Add(this.TRB_CHF_DecimalPlaces);
+            this.GB_CHF_SearchData.Controls.Add(this.L_Info_DecimalPlaces);
+            this.GB_CHF_SearchData.Controls.Add(this.L_Info_HitProbobility);
+            this.GB_CHF_SearchData.Controls.Add(this.TB_CHF_HitProbobility);
+            this.GB_CHF_SearchData.Controls.Add(this.BS_CHF_SearchData);
+            this.GB_CHF_SearchData.Controls.Add(this.L_Info_MoveNumber);
+            this.GB_CHF_SearchData.Controls.Add(this.CB_CHF_MoveNumber);
+            this.GB_CHF_SearchData.Controls.Add(this.L_SideChoose);
+            this.GB_CHF_SearchData.Controls.Add(this.CB_CHF_SideChoose);
+            this.GB_CHF_SearchData.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.GB_CHF_SearchData.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.GB_CHF_SearchData.Location = new System.Drawing.Point(0, 339);
+            this.GB_CHF_SearchData.Name = "GB_CHF_SearchData";
+            this.GB_CHF_SearchData.Size = new System.Drawing.Size(262, 160);
+            this.GB_CHF_SearchData.TabIndex = 50;
+            this.GB_CHF_SearchData.TabStop = false;
+            this.GB_CHF_SearchData.Text = "Search Data";
+            // 
+            // CB_CHF_SideChoose
+            // 
+            this.CB_CHF_SideChoose.BackColor = System.Drawing.Color.Black;
+            this.CB_CHF_SideChoose.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.CB_CHF_SideChoose.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.CB_CHF_SideChoose.FormattingEnabled = true;
+            this.CB_CHF_SideChoose.Items.AddRange(new object[] {
+            "Player moves data",
+            "Enemy moves data"});
+            this.CB_CHF_SideChoose.Location = new System.Drawing.Point(114, 17);
+            this.CB_CHF_SideChoose.Name = "CB_CHF_SideChoose";
+            this.CB_CHF_SideChoose.Size = new System.Drawing.Size(142, 25);
+            this.CB_CHF_SideChoose.TabIndex = 0;
+            this.CB_CHF_SideChoose.Text = "Player moves data";
+            this.CB_CHF_SideChoose.SelectedIndexChanged += new System.EventHandler(this.CB_CHF_SideChoose_SelectedIndexChanged);
+            // 
+            // L_SideChoose
+            // 
+            this.L_SideChoose.AutoSize = true;
+            this.L_SideChoose.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_SideChoose.Location = new System.Drawing.Point(6, 20);
+            this.L_SideChoose.Name = "L_SideChoose";
+            this.L_SideChoose.Size = new System.Drawing.Size(102, 17);
+            this.L_SideChoose.TabIndex = 80;
+            this.L_SideChoose.Text = "Choose data source";
+            // 
+            // CB_CHF_MoveNumber
+            // 
+            this.CB_CHF_MoveNumber.BackColor = System.Drawing.Color.Black;
+            this.CB_CHF_MoveNumber.FlatStyle = System.Windows.Forms.FlatStyle.Popup;
+            this.CB_CHF_MoveNumber.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.CB_CHF_MoveNumber.FormattingEnabled = true;
+            this.CB_CHF_MoveNumber.Items.AddRange(new object[] {
+            "0"});
+            this.CB_CHF_MoveNumber.Location = new System.Drawing.Point(114, 48);
+            this.CB_CHF_MoveNumber.Name = "CB_CHF_MoveNumber";
+            this.CB_CHF_MoveNumber.Size = new System.Drawing.Size(53, 25);
+            this.CB_CHF_MoveNumber.TabIndex = 81;
+            this.CB_CHF_MoveNumber.Text = "0";
+            // 
+            // L_Info_MoveNumber
+            // 
+            this.L_Info_MoveNumber.AutoSize = true;
+            this.L_Info_MoveNumber.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_Info_MoveNumber.Location = new System.Drawing.Point(6, 56);
+            this.L_Info_MoveNumber.Name = "L_Info_MoveNumber";
+            this.L_Info_MoveNumber.Size = new System.Drawing.Size(73, 17);
+            this.L_Info_MoveNumber.TabIndex = 82;
+            this.L_Info_MoveNumber.Text = "Move number";
+            // 
+            // BS_CHF_SearchData
+            // 
+            this.BS_CHF_SearchData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_CHF_SearchData.Location = new System.Drawing.Point(172, 47);
+            this.BS_CHF_SearchData.Margin = new System.Windows.Forms.Padding(2);
+            this.BS_CHF_SearchData.Name = "BS_CHF_SearchData";
+            this.BS_CHF_SearchData.Size = new System.Drawing.Size(84, 26);
+            this.BS_CHF_SearchData.TabIndex = 80;
+            this.BS_CHF_SearchData.Text = "Search data";
+            this.BS_CHF_SearchData.UseVisualStyleBackColor = true;
+            this.BS_CHF_SearchData.Click += new System.EventHandler(this.BS_CHF_SearchData_Click);
+            // 
+            // TB_CHF_HitProbobility
+            // 
+            this.TB_CHF_HitProbobility.BackColor = System.Drawing.Color.Black;
+            this.TB_CHF_HitProbobility.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.TB_CHF_HitProbobility.ForeColor = System.Drawing.Color.DeepSkyBlue;
+            this.TB_CHF_HitProbobility.Location = new System.Drawing.Point(114, 131);
+            this.TB_CHF_HitProbobility.Name = "TB_CHF_HitProbobility";
+            this.TB_CHF_HitProbobility.ReadOnly = true;
+            this.TB_CHF_HitProbobility.Size = new System.Drawing.Size(142, 22);
+            this.TB_CHF_HitProbobility.TabIndex = 83;
+            this.TB_CHF_HitProbobility.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
+            // L_Info_HitProbobility
+            // 
+            this.L_Info_HitProbobility.AutoSize = true;
+            this.L_Info_HitProbobility.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_Info_HitProbobility.Location = new System.Drawing.Point(6, 131);
+            this.L_Info_HitProbobility.Name = "L_Info_HitProbobility";
+            this.L_Info_HitProbobility.Size = new System.Drawing.Size(76, 17);
+            this.L_Info_HitProbobility.TabIndex = 84;
+            this.L_Info_HitProbobility.Text = "Hit probobility";
+            // 
+            // L_Info_DecimalPlaces
+            // 
+            this.L_Info_DecimalPlaces.AutoSize = true;
+            this.L_Info_DecimalPlaces.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_Info_DecimalPlaces.Location = new System.Drawing.Point(6, 89);
+            this.L_Info_DecimalPlaces.Name = "L_Info_DecimalPlaces";
+            this.L_Info_DecimalPlaces.Size = new System.Drawing.Size(80, 17);
+            this.L_Info_DecimalPlaces.TabIndex = 85;
+            this.L_Info_DecimalPlaces.Text = "Decimal Places";
+            // 
+            // TRB_CHF_DecimalPlaces
+            // 
+            this.TRB_CHF_DecimalPlaces.Location = new System.Drawing.Point(151, 80);
+            this.TRB_CHF_DecimalPlaces.Maximum = 4;
+            this.TRB_CHF_DecimalPlaces.Name = "TRB_CHF_DecimalPlaces";
+            this.TRB_CHF_DecimalPlaces.Size = new System.Drawing.Size(105, 45);
+            this.TRB_CHF_DecimalPlaces.TabIndex = 86;
+            this.TRB_CHF_DecimalPlaces.Value = 2;
+            this.TRB_CHF_DecimalPlaces.Scroll += new System.EventHandler(this.TRB_CHF_DecimalPlaces_Scroll);
+            // 
+            // L_DecimalPlaces
+            // 
+            this.L_DecimalPlaces.AutoSize = true;
+            this.L_DecimalPlaces.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.L_DecimalPlaces.Location = new System.Drawing.Point(111, 89);
+            this.L_DecimalPlaces.Name = "L_DecimalPlaces";
+            this.L_DecimalPlaces.Size = new System.Drawing.Size(15, 17);
+            this.L_DecimalPlaces.TabIndex = 87;
+            this.L_DecimalPlaces.Text = "2";
             // 
             // ChartForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(1015, 364);
+            this.ClientSize = new System.Drawing.Size(1015, 505);
             this.Controls.Add(this.TLP_CHF_Main);
             this.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.ForeColor = System.Drawing.Color.DeepSkyBlue;
@@ -365,6 +530,9 @@
             this.PNL_CHF_Inspector.ResumeLayout(false);
             this.GB_CHF_ChartData.ResumeLayout(false);
             this.GB_CHF_ChartData.PerformLayout();
+            this.GB_CHF_SearchData.ResumeLayout(false);
+            this.GB_CHF_SearchData.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.TRB_CHF_DecimalPlaces)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -390,5 +558,17 @@
         private System.Windows.Forms.Label L_Info_CountValue;
         private System.Windows.Forms.CheckBox CHB_EnemyDataShow;
         private System.Windows.Forms.CheckBox CHB_PlayerDataShow;
+        public System.Windows.Forms.TextBox TB_Info_DrawBoth;
+        private System.Windows.Forms.GroupBox GB_CHF_SearchData;
+        private System.Windows.Forms.Button BS_CHF_SearchData;
+        private System.Windows.Forms.Label L_Info_MoveNumber;
+        private System.Windows.Forms.ComboBox CB_CHF_MoveNumber;
+        private System.Windows.Forms.Label L_SideChoose;
+        private System.Windows.Forms.ComboBox CB_CHF_SideChoose;
+        private System.Windows.Forms.Label L_Info_HitProbobility;
+        public System.Windows.Forms.TextBox TB_CHF_HitProbobility;
+        private System.Windows.Forms.Label L_DecimalPlaces;
+        private System.Windows.Forms.TrackBar TRB_CHF_DecimalPlaces;
+        private System.Windows.Forms.Label L_Info_DecimalPlaces;
     }
 }

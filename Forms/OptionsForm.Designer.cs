@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(OptionsForm));
             this.GB_OF_DevMode = new System.Windows.Forms.GroupBox();
             this.BS_PO_CheckAccess = new System.Windows.Forms.Button();
             this.L_Info_OF_Access = new System.Windows.Forms.Label();
@@ -289,7 +290,9 @@
             this.Font = new System.Drawing.Font("Franklin Gothic Demi", 9F);
             this.ForeColor = System.Drawing.Color.White;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
+            this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.Margin = new System.Windows.Forms.Padding(4);
+            this.MaximizeBox = false;
             this.Name = "OptionsForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Options";

@@ -330,7 +330,7 @@ namespace Battleship
             }
             Hited = hited;
         }
-        static int FindCorrectIndex(int index, bool enemyMap = false)
+        internal static int FindCorrectIndex(int index, bool enemyMap = false)
         {
             index -= 1551;
             if (!enemyMap)
@@ -411,6 +411,9 @@ namespace Battleship
                 TargetButtonTag = target;
                 EnemyShoot(target, out successShoot, out checkedPosition);
                 ForbiddenCoords.Add(FindCorrectIndex(target));
+                FirstCheckedCoords.Clear();
+                SecondCheckedCoords.Clear();
+                ThirdCheckedCoords.Clear();
             }
             else if (SuccessShoots[0] && !SuccessShoots[1] && !SuccessShoots[2])
             {

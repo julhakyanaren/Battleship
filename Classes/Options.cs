@@ -10,7 +10,7 @@ namespace Battleship
 {
     public static class Options
     {
-        public static bool SingleplayerMode = false;
+        public static bool SingleplayerMode = true;
         public static string SP_PlayerName = "Player";
         public static int Difficulty = 0;
         public static string GameMode = "Education";

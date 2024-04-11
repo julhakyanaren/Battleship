@@ -1411,6 +1411,7 @@ namespace Battleship
                         DialogResult = MessageBox.Show("The schematic map has been successfully created and saved.\r\n Close the map editor?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                         if (DialogResult == DialogResult.Yes)
                         {
+                            ReverseCoords();
                             Schematic.Map.ToUpper();
                             DebugTools.MCF.Opened = false;
                             this.Dispose();
@@ -1922,6 +1923,43 @@ namespace Battleship
             firstCoords.Add(battleships[0, 2]);
             firstCoords.Add(battleships[0, 3]);
             return firstCoords;
+        }
+        void ReverseCoords()
+        {
+            ReverseDestroyers();
+            ReverseCruisers();
+            ReverseBattleShip();
+        }
+        void ReverseDestroyers()
+        {
+            for (int i = 0; i < PlayerData.DestroyerCoords.GetLength(0); i++)
+            {
+                int temp = PlayerData.DestroyerCoords[i, 0];
+                PlayerData.DestroyerCoords[i, 0] = PlayerData.DestroyerCoords[i, 1];
+                PlayerData.DestroyerCoords[i, 1] = temp;
+            }
+        }
+        void ReverseCruisers()
+        {
+            for (int i = 0; i < PlayerData.CruiserCoords.GetLength(0); i++)
+            {
+                int temp = PlayerData.CruiserCoords[i, 0];
+                PlayerData.CruiserCoords[i, 0] = PlayerData.CruiserCoords[i, PlayerData.CruiserCoords.GetLength(1) - 1];
+                PlayerData.CruiserCoords[i, PlayerData.CruiserCoords.GetLength(1) - 1] = temp;
+            }
+        }
+        void ReverseBattleShip()
+        {
+            int[] tempRow = new int[PlayerData.BattleshipCoords.GetLength(1)];
+            for (int j = 0; j < tempRow.Length; j++)
+            {
+                tempRow[j] = PlayerData.BattleshipCoords[0, j];
+            }
+            Array.Reverse(tempRow);
+            for (int j = 0; j < tempRow.Length; j++)
+            {
+                PlayerData.BattleshipCoords[0, j] = tempRow[j];
+            }
         }
     }
 }

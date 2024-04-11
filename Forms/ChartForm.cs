@@ -1,42 +1,72 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
 using System.Linq;
-using System.Text;
+using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Windows.Forms.DataVisualization.Charting;
-using System.Xml.Serialization;
 
 namespace Battleship.Forms
 {
     public partial class ChartForm : Form
     {
-        double startPoint = 1;
-        double endPoint;
-        double x1, y1;
-        double x2, y2;
-        double step = 0.01;
+        double y1, y2;
         double maxValue;
         double minValue;
         double averageValue;
-        bool enemyDataShow = false;
+        double foundData = 0;
+
+        bool playerChartShow = true;
+        bool enemyChartShow = false;
+        bool bothChartShow = false;
+
+        int choosenSide = 0;
+        int choosenMove = 0;
         int count;
+        int decimalPlaces = 2;
         public ChartForm()
         {
             InitializeComponent();
         }
-
-        private void ChartForm_Load(object sender, EventArgs e)
-        {
-        }
         private async void BS_CHF_ChartDraw_Click(object sender, EventArgs e)
         {
-            await ChartDraw();
+            await DrawChart();
         }
-        async Task ChartDraw()
+        async Task DrawChart()
+        {
+            if (bothChartShow)
+            {
+                await ChartDrawBoth();
+            }
+            else if (playerChartShow)
+            {
+                await ChartDrawPlayer();
+            }
+            else if (enemyChartShow)
+            {
+                await ChartDrawEnemy();
+            }
+        }
+        async Task ChartDrawEnemy()
+        {
+            try
+            {
+                await ChartClear();
+                CRT_ChanceChange.Series[1].Points.AddXY(0, 20);
+                for (int i = 1; i <= PlayerData.IndependentChances.Count; i++)
+                {
+                    await Task.Delay(40);
+                    y2 = PlayerData.IndependentChances[i] * 100;
+                    if (!double.IsNaN(y2) && !double.IsInfinity(y2))
+                    {
+                        CRT_ChanceChange.Series[1].Points.AddXY(i, y2);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Exception Message: \r\n{ex.Message}\r\n\r\nException {ex}", "Exception found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
+        async Task ChartDrawBoth()
         {
             try
             {
@@ -51,7 +81,7 @@ namespace Battleship.Forms
                     {
                         CRT_ChanceChange.Series[0].Points.AddXY(i, y1);
                     }
-                    if (enemyDataShow && PlayerData.IndependentChances.Count >= i)
+                    if (enemyChartShow && PlayerData.IndependentChances.Count >= i)
                     {
                         y2 = PlayerData.IndependentChances[i] * 100;
                         if (!double.IsNaN(y2) && !double.IsInfinity(y2))
@@ -79,34 +109,77 @@ namespace Battleship.Forms
                 MessageBox.Show($"Exception Message: \r\n{ex.Message}\r\n\r\nException {ex}", "Exception found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
         }
-
+        async Task ChartDrawPlayer()
+        {
+            try
+            {
+                await ChartClear();
+                CRT_ChanceChange.Series[0].Points.AddXY(0, 20);
+                for (int i = 1; i <= EnemyData.IndependentChances.Count; i++)
+                {
+                    await Task.Delay(20);
+                    y1 = EnemyData.IndependentChances[i] * 100;
+                    if (!double.IsNaN(y1) && !double.IsInfinity(y1))
+                    {
+                        CRT_ChanceChange.Series[0].Points.AddXY(i, y1);
+                    }
+                    await Task.Delay(20);
+                    TB_CHF_IndependentChances.Text += $"Move #{i}  {EnemyData.IndependentChances[i] * 100}%";
+                    if (i != EnemyData.IndependentChances.Count)
+                    {
+                        TB_CHF_IndependentChances.Text += "\r\n";
+                    }
+                    TB_CHF_IndependentChances.SelectionStart = TB_CHF_IndependentChances.Text.Length;
+                }
+                minValue = EnemyData.IndependentChances.Values.Min();
+                minValue = EnemyData.IndependentChances.Values.Max();
+                GetAverage();
+                count = EnemyData.IndependentChances.Count();
+                SetTextBoxValues();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Exception Message: \r\n{ex.Message}\r\n\r\nException {ex}", "Exception found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+            }
+        }
         private void BS_CHF_ChartDelete_Click(object sender, EventArgs e)
         {
             ChartClear();
             TB_CHF_IndependentChances.Clear();
         }
-
         private async void BS_CHF_ChartUpdate_Click(object sender, EventArgs e)
         {
-            ChartClear();
-            await ChartDraw();
+            await ChartClear();
+            await DrawChart();
         }
-        void ChartClear()
+        async Task ChartClear()
         {
+            await Task.Delay(10);
             CRT_ChanceChange.Series[0].Points.Clear();
             CRT_ChanceChange.Series[1].Points.Clear();
+            await Task.Delay(10);
             TB_CHF_AverageValue.Clear();
+            await Task.Delay(10);
             TB_CHF_Count.Clear();
+            await Task.Delay(10);
             TB_CHF_IndependentChances.Clear();
+            await Task.Delay(10);
             TB_CHF_MaxValue.Clear();
+            await Task.Delay(10);
             TB_CHF_MinValue.Clear();
         }
-
         private void CHB_EnemyDataShow_CheckedChanged(object sender, EventArgs e)
         {
-            enemyDataShow = CHB_EnemyDataShow.Checked;
+            enemyChartShow = CHB_EnemyDataShow.Checked;
+            bothChartShow = playerChartShow && enemyChartShow;
+            TB_Info_DrawBoth.Visible = bothChartShow;
         }
-
+        private void CHB_PlayerDataShow_CheckedChanged(object sender, EventArgs e)
+        {
+            playerChartShow = CHB_PlayerDataShow.Checked;
+            bothChartShow = playerChartShow && enemyChartShow;
+            TB_Info_DrawBoth.Visible = bothChartShow;
+        }
         void SetTextBoxValues()
         {
             TB_CHF_MinValue.Text = $"{minValue * 100}%";
@@ -114,6 +187,73 @@ namespace Battleship.Forms
             TB_CHF_AverageValue.Text = $"{averageValue * 100}%";
             TB_CHF_Count.Text = $"{count}";
         }
+
+        private void CB_CHF_SideChoose_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            CB_CHF_MoveNumber.Items.Clear();
+            choosenSide = CB_CHF_SideChoose.SelectedIndex;
+            switch (choosenSide)
+            {
+                case 0:
+                    {
+                        CB_CHF_MoveNumber.Items.Add(0);
+                        for (int i = 1;i <= PlayerData.IndependentChances.Count; i++)
+                        {
+                            CB_CHF_MoveNumber.Items.Add(i);
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        CB_CHF_MoveNumber.Items.Add(0);
+                        for (int i = 1; i <= EnemyData.IndependentChances.Count; i++)
+                        {
+                            CB_CHF_MoveNumber.Items.Add(i);
+                        }
+                        break;
+                    }
+            }
+            CB_CHF_MoveNumber.SelectedIndex = 0;
+            CB_CHF_MoveNumber.Text = "0";
+        }
+
+        private void BS_CHF_SearchData_Click(object sender, EventArgs e)
+        {
+            choosenMove = Convert.ToInt32(CB_CHF_MoveNumber.SelectedIndex);
+            if (choosenMove == 0)
+            {
+                foundData = 0.2;
+            }
+            else
+            {
+                switch (choosenSide)
+                {
+                    case 0:
+                        {
+                            foundData = PlayerData.IndependentChances[choosenMove];
+                            break;
+                        }
+                    case 1:
+                        {
+                            foundData = EnemyData.IndependentChances[choosenMove];
+                            break;
+                        }
+                }
+            }
+            TB_CHF_HitProbobility.Text = $"{Math.Round(foundData * 100, decimalPlaces)}%";
+        }
+
+        private void ChartForm_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void TRB_CHF_DecimalPlaces_Scroll(object sender, EventArgs e)
+        {
+            decimalPlaces = TRB_CHF_DecimalPlaces.Value;
+            L_DecimalPlaces.Text = decimalPlaces.ToString();
+        }
+
         void GetAverage()
         {
             double summ = 0;

@@ -126,6 +126,10 @@ namespace Battleship
                 {
                     IndependentChances.Add(IndependentChances.Count + 1, newChance);
                 }
+                if (IndependentChances[IndependentChances.Count] == 0)
+                {
+                    IndependentChances.Remove(IndependentChances.Count);
+                }
             }
         }
     }

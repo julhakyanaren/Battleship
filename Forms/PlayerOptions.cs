@@ -72,7 +72,7 @@ namespace Battleship.Forms
             }
             else if (TB_PlayerName.Text == string.Empty)
             {
-                DialogResult = MessageBox.Show("Difficulty level not selected\r\nStart game with default username?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                DialogResult = MessageBox.Show("Start game with default username?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
                 if (DialogResult == DialogResult.Yes)
                 {
                     SetOptions();

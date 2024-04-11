@@ -893,5 +893,36 @@ namespace Battleship.Classes
         //{
         //    (firstTarget, secondTarget) = (secondTarget, firstTarget);
         //}
+
+        // UNUSED 16
+        //void SetCoords()
+        //{
+        //    for (int p = 0; p < Indexes.Count; p++)
+        //    {
+        //        mapButton[Indexes[p]].BackColor = cellColor;
+        //        switch (ShipData.ChoosenShipType)
+        //        {
+        //            case 1:
+        //                {
+        //                    PlayerData.FrigateCoords[Convert.ToInt32(TB_MC_FrigateCount.Text), p] = Indexes[p];
+        //                    break;
+        //                }
+        //            case 2:
+        //                {
+        //                    PlayerData.DestroyerCoords[Convert.ToInt32(TB_MC_DestroyerCount.Text), p] = Indexes[p];
+        //                    break;
+        //                }
+        //            case 3:
+        //                {
+        //                    PlayerData.CruiserCoords[Convert.ToInt32(TB_MC_CruiserCount.Text), p] = Indexes[p];
+        //                    break;
+        //                }
+        //            case 4:
+        //                {
+        //                    PlayerData.BattleshipCoords[Convert.ToInt32(TB_MC_BattleshipCount.Text), p] = Indexes[p];
+        //                    break;
+        //                }
+        //        }
+        //    }
     }
 }
