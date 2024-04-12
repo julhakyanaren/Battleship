@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleship.Classes;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Runtime.CompilerServices;
@@ -22,6 +23,10 @@ namespace Battleship
                 tagInt %= 100;
                 x = tagInt % 10;
                 y = tagInt / 10;
+            }
+            else
+            {
+                MessageBox.Show($"Error Code: E33M9L4\r\n{tag} String type to Int32 type converting error", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public void TextCoordToPosition(string textCoord, out int halfTag)
@@ -467,7 +472,7 @@ namespace Battleship
                     }
                 default:
                     {
-                        MessageBox.Show("Unknown Line Index");
+                        MessageBox.Show($"Error Code: E42M9L4\r\n{line} is unknown line index", $"{Handlers.Manager[1]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         return coordsList;
                     }
             }

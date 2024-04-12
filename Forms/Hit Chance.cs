@@ -146,9 +146,13 @@ namespace Battleship.Forms
         {
             for (int p = 0; p < HitChanceData.ProbobilityArray.Length; p++)
             {
-                if (ExampleButtons[p].BackColor != Color.White && ExampleButtons[p].BackColor != Color.Green)
+                Button button = ExampleButtons[p];
+                if (button != null)
                 {
-                    HitChanceData.ProbobilityArray[p] = 0;
+                    if (button.BackColor != Color.White && button.BackColor != Color.Green)
+                    {
+                        HitChanceData.ProbobilityArray[p] = 0;
+                    }
                 }
             }
         }
@@ -343,7 +347,7 @@ namespace Battleship.Forms
                 }
                 else
                 {
-                    MessageBox.Show($"Parsing error {selectedButton.Tag} to type Int32", "Hit Chance Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show($"Error Code: E30M9L4\r\n{selectedButton.Tag} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }

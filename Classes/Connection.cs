@@ -4,6 +4,7 @@ using System.Linq;
 using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace Battleship.Classes
 {
@@ -25,6 +26,10 @@ namespace Battleship.Classes
                 {
                     return false;
                 }
+            }
+            else
+            {
+                MessageBox.Show($"Error Code: E35M6L1\r\nNetwork connection error", $"{Handlers.Manager[6]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return false;
         }

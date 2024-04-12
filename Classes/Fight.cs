@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleship.Classes;
+using System;
 using System.Collections.Generic;
 using System.Drawing.Drawing2D;
 using System.Linq;
@@ -82,6 +83,7 @@ namespace Battleship
         {
             if (Turn < 0)
             {
+                MessageBox.Show($"Error Code: E15M4L1\r\nUncertain next move", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return -1;
             }
             else
@@ -290,7 +292,7 @@ namespace Battleship
                     }
                 default:
                     {
-                        MessageBox.Show("Incorrect Position", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Error Code: E06M3L3\r\n{charter} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         FirstHitCoord = 0;
                         incorrectValue = true;
                         successShoot = false;
@@ -328,6 +330,10 @@ namespace Battleship
                 UsedCoords.Add(index);
                 ForbiddenCoords.Add(index);
             }
+            else
+            {
+                MessageBox.Show($"Error Code: E06M3L3\r\n{charter} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
             Hited = hited;
         }
         internal static int FindCorrectIndex(int index, bool enemyMap = false)
@@ -353,6 +359,7 @@ namespace Battleship
                     }
                 }
             }
+            MessageBox.Show($"Error Code: E37M5L5\r\nNon-existent index in data", $"{Handlers.Manager[5]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return -1;
         }
         internal static int FindCorrectCoord(int index, bool enemyMap = false)
@@ -370,11 +377,12 @@ namespace Battleship
                 }
                 if (coord == -1)
                 {
-                    MessageBox.Show("Incorrect Coord");
+                    MessageBox.Show($"Error Code: E28M9L4\r\n{index} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             catch
             {
+                MessageBox.Show($"Error Code: E36M5L5\r\nNon-existent index in data", $"{Handlers.Manager[5]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 coord = -1;
             }
             return coord;
@@ -397,13 +405,13 @@ namespace Battleship
                     if (ForbiddenCoords.Count != 0)
                     {
                         ForbiddenCoords.Sort();
-                        target = FindShipCoord(false);
+                        target = FindShipCoord();
                         int targetIndex = FindCorrectIndex(target);
                         correctCoord = !ForbiddenCoords.Contains(targetIndex);
                     }
                     else
                     {
-                        target = FindShipCoord(false);
+                        target = FindShipCoord();
                         correctCoord = true;
                     }
                 }
@@ -584,25 +592,17 @@ namespace Battleship
             }
             ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
         }
-        public static int FindShipCoord(bool hitStatus)
+        public static int FindShipCoord()
         {
-            if (!hitStatus)
-            {
-                Random randCoord = new Random();
-                int vertical = randCoord.Next(65, 75);
-                int horizontal = randCoord.Next(1,11);
-                int target = vertical * 10 + horizontal + 1000;
-                TargetData[0] = target;
-                TargetData[1] = vertical;
-                TargetData[2] = horizontal;
-                TargetButtonTag = target;
-                return target;
-            }
-            else
-            {
-                //GenerateNearestCoords();
-            }
-            return 0;
+            Random randCoord = new Random();
+            int vertical = randCoord.Next(65, 75);
+            int horizontal = randCoord.Next(1, 11);
+            int target = vertical * 10 + horizontal + 1000;
+            TargetData[0] = target;
+            TargetData[1] = vertical;
+            TargetData[2] = horizontal;
+            TargetButtonTag = target;
+            return target;
         }
         static void GenerateNearestCoords(int firstCoords, int reduction = 0)
         {
@@ -691,6 +691,11 @@ namespace Battleship
                             BlockedCoords.Add(firstCoords - 9);
                             break;
                         }
+                    default:
+                        {
+                            MessageBox.Show($"Error Code: E09M3L3\r\n{position} is incorrect position", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
                 }
                 for (int b = 0; b < BlockedCoords.Count; b++)
                 {
@@ -761,7 +766,7 @@ namespace Battleship
             }
             else
             {
-                MessageBox.Show("Incorrect success hit data", "Data Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error Code: E38M4L4\r\n{target} is incorrect target", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         static void SetRoundMinesInPlayerMap(int shipType)
@@ -838,6 +843,11 @@ namespace Battleship
                             }
                             break;
                         }
+                    default:
+                        {
+                            
+                            break;
+                        }
                 }
                 if (firstCoord != -1)
                 {
@@ -865,13 +875,16 @@ namespace Battleship
                         }
                         else
                         {
-                            //Error_Catch
+                            MessageBox.Show($"Error Code: E11M3L3\r\n{shipSize} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        //Error_Catch
+                        MessageBox.Show($"Error Code: E10M3L3\r\n{orientation} is incorrect ship position", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                }
+                else
+                {
                 }
             }
         }
@@ -949,6 +962,11 @@ namespace Battleship
                             }
                             break;
                         }
+                    default:
+                        {
+                            MessageBox.Show($"Error Code: E05M3L3\r\n{shipSize} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
                 }
                 if (firstCoord != -1)
                 {
@@ -974,13 +992,17 @@ namespace Battleship
                         }
                         else
                         {
-                            //Error_Catch
+                            MessageBox.Show($"Error Code: E06M3L3\r\n{shipSize} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     else
                     {
-                        //Error_Catch
+                        MessageBox.Show($"Error Code: E13M3L3\r\n{orientation} is incorrect ship position", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
+                }
+                else
+                {
+                   
                 }
             }
         }
@@ -1064,6 +1086,11 @@ namespace Battleship
                         EnemyData.AllowedCoords.Add(firstCoord - 10);
                         EnemyData.AllowedCoords.Add(firstCoord + 1);
                         EnemyData.BlockedCoords.Add(firstCoord - 9);
+                        break;
+                    }
+                default:
+                    {
+                        MessageBox.Show($"Error Code: E14M3L3\r\n{position} is incorrect position", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         break;
                     }
             }

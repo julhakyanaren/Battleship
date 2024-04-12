@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleship.Classes;
+using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Linq;
@@ -130,7 +131,7 @@ namespace Battleship
             }
             catch
             {
-
+                MessageBox.Show($"Error Code: E01M8L2\r\nFailed to load {newForm.Name} interface", $"{Handlers.Manager[8]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public static async void FormSwitching(Form firstForm, Form secondForm, int duration, bool dispose, int step = 1)
@@ -148,7 +149,7 @@ namespace Battleship
             }
             catch
             {
-                //Error_Catch
+                MessageBox.Show($"Error Code: E02M8L2\r\nFailed to load {firstForm.Name} interface", $"{Handlers.Manager[8]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             try
             {
@@ -161,7 +162,7 @@ namespace Battleship
             }
             catch
             {
-                //Error_Catch
+                MessageBox.Show($"Error Code: E03M8L2\r\nFailed to load {secondForm.Name} interface", $"{Handlers.Manager[8]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             try
             {
@@ -172,7 +173,7 @@ namespace Battleship
             }
             catch
             {
-                //Error_Catch
+                MessageBox.Show($"Error Code: E04M8L2\r\nFailed to delete {secondForm.Name} UI instance", $"{Handlers.Manager[8]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
     }

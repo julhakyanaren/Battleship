@@ -199,7 +199,7 @@ namespace Battleship
                     UpdateEnemyMapColor(ColorMethods.EnemyMapColor);
                     if (SetTurnText() == "ERROR")
                     {
-                        //Error_Catch
+                        MessageBox.Show($"Error Code: E16M4L1\r\nUncertain next move", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
@@ -215,23 +215,29 @@ namespace Battleship
                 Button clickedButton = sender as Button;
                 int playerID;
                 string coord = Position.GetButtonTextCoords(clickedButton, out playerID);
-                Support.StringToInt(clickedButton.Tag.ToString(), out int tagCB);
-                if (clickedButton.BackColor != Color.White)
+                if (Support.StringToInt(clickedButton.Tag.ToString(), out int tagCB))
                 {
-                    if (tagCB / 100 == 2)
+                    if (clickedButton.BackColor != Color.White)
                     {
-                        int index = Fight.FindCorrectIndex(Convert.ToInt32(clickedButton.Tag) + 1551, true);
-                        await NotAvailableMove(index, 1, 4, 0);
+                        if (tagCB / 100 == 2)
+                        {
+                            int index = Fight.FindCorrectIndex(Convert.ToInt32(clickedButton.Tag) + 1551, true);
+                            await NotAvailableMove(index, 1, 4, 0);
+                        }
                     }
-                }
-                if (Fight.ForbiddenCoords.Count != 100)
-                {
-                    await Turn(playerID, clickedButton);
+                    if (Fight.ForbiddenCoords.Count != 100)
+                    {
+                        await Turn(playerID, clickedButton);
+                    }
+                    else
+                    {
+                        CoordsForcedOverwrite();
+                        await Turn(playerID, clickedButton);
+                    }
                 }
                 else
                 {
-                    CoordsForcedOverwrite();
-                    await Turn(playerID, clickedButton);
+                    MessageBox.Show($"Error Code: E26M9L4\r\n{clickedButton.Tag} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
         }
@@ -273,6 +279,10 @@ namespace Battleship
                         return b;
                     }
                 }
+            }
+            else
+            {
+                MessageBox.Show($"Error Code: E29M9L4\r\n{index} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             return -1;
         }
@@ -339,7 +349,7 @@ namespace Battleship
                     Fight.Turn = Fight.ReverseTurn(Fight.Hited);
                     if (SetTurnText() == "ERROR")
                     {
-                        //Error_Catch
+                        MessageBox.Show($"Error Code: E17M4L1\r\nUncertain next move", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                     else
                     {
@@ -348,7 +358,7 @@ namespace Battleship
                 }
                 catch
                 {
-                    //Error_Catch
+                    MessageBox.Show($"Error Code: E18M4L3\r\nColor scheme updating error", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else if (ShipData.HitedDeckCount == 20)
@@ -809,16 +819,8 @@ namespace Battleship
                 }
                 else
                 {
-                    //Error_Catch
+                    MessageBox.Show($"Error Code: E19M9L4\r\n{buttonTag} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-            else if (Fight.Turn == 1)
-            {
-                //Enemy Shot
-            }
-            else
-            {
-                //Error_Catch
             }
         }
         public bool IsCellWhite(int index, out char cellChar)
@@ -848,7 +850,7 @@ namespace Battleship
                 }
                 catch
                 {
-                    //Error_Catch
+                    MessageBox.Show($"Error Code: E34M4L5\r\nGame map creating error", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
             else
@@ -1026,7 +1028,7 @@ namespace Battleship
             }
             else
             {
-                //Error_Catch
+                MessageBox.Show($"Error Code: E20M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             if (Fight.GameStarted && textBox.Text == "0")
             {
@@ -1056,7 +1058,7 @@ namespace Battleship
             }
             else
             {
-                //Error_Catch
+                MessageBox.Show($"Error Code: E21M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             if (Fight.GameStarted && textBox.Text == "0")
             {
@@ -1085,7 +1087,7 @@ namespace Battleship
             }
             else
             {
-                //Error_Catch
+                MessageBox.Show($"Error Code: E22M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             if (Fight.GameStarted && textBox.Text == "0")
             {
@@ -1114,7 +1116,7 @@ namespace Battleship
             }
             else
             {
-                //Error_Catch
+                MessageBox.Show($"Error Code: E23M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             if (Fight.GameStarted && textBox.Text == "0")
             {
@@ -1150,7 +1152,7 @@ namespace Battleship
             }
             else
             {
-                //Error_Catch
+                MessageBox.Show($"Error Code: E24M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private void TB_PlayerHit_TextChanged(object sender, EventArgs e)
@@ -1169,7 +1171,7 @@ namespace Battleship
             }
             else
             {
-                //Error_Catch
+                MessageBox.Show($"Error Code: E25M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public async void RestartGame() //Don't Compete

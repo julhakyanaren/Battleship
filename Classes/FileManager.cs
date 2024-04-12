@@ -48,7 +48,7 @@ namespace Battleship.Classes
                 }
                 catch (Exception ex)
                 {
-                    DialogResult dr = MessageBox.Show($"File reading error\r\nFile name: {AssemblyPath}\r\nException Message: {ex.Message}\r\nException: {ex}", "File Manager", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                    DialogResult dr = MessageBox.Show($"Error Code: E39M1L1\r\nFile reading error\r\nFile name: {AssemblyPath}\r\nException Message: {ex.Message}\r\nException: {ex}", "File Manager", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                     if (dr == DialogResult.Retry)
                     {
                         ReadAssembyData();
@@ -70,7 +70,7 @@ namespace Battleship.Classes
                 }
                 catch
                 {
-                    DialogResult dr = MessageBox.Show($"File record error\r\nFile {AssemblyPath} does not exist!", "Resource Manager", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                    DialogResult dr = MessageBox.Show($"Error Code: E40M1L1\r\nFile record error\r\nFile {AssemblyPath} does not exist!", "Resource Manager", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                     if (dr == DialogResult.Retry)
                     {
                         WriteAssemblyData();
@@ -94,7 +94,7 @@ namespace Battleship.Classes
             }
             catch
             {
-                DialogResult dr = MessageBox.Show($"File record error\r\nFile {AssemblyPath} does not exist!", "Resource Manager", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
+                DialogResult dr = MessageBox.Show($"\"Error Code: E41M1L1\\r\\nFile record error\r\nFile {AssemblyPath} does not exist!", "Resource Manager", MessageBoxButtons.RetryCancel, MessageBoxIcon.Error);
                 if (dr == DialogResult.Retry)
                 {
                     WriteAssemblyData();

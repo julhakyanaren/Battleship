@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleship.Classes;
+using System;
 using System.Drawing;
 using System.Windows.Forms;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.Window;
@@ -60,13 +61,17 @@ namespace Battleship
                 default:
                     {
                         successfull = false;
-                        break; //Incorrect
+                        break;
                     }
             }
             if (successfull)
             {
                 Maps[0] = MapPlayer;
                 Maps[1] = MapEnemy;
+            }
+            else
+            {
+                MessageBox.Show($"Error Code: E45M5L5\r\nUnknown player index", $"{Handlers.Manager[5]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         static bool HasEmptySpaceAroundShip(char[,] map, int x, int y, int shipShize, int orientation)
@@ -163,6 +168,11 @@ namespace Battleship
                                     PlayerData.BattleshipCoords[count, i] = coord;
                                     break;
                                 }
+                            default:
+                                {
+                                    MessageBox.Show($"Error Code: E07M3L3\r\n{shipSymbol} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                    break;
+                                }
                         }
                         
                     }
@@ -225,6 +235,11 @@ namespace Battleship
                             case 'b':
                                 {
                                     EnemyData.BattleshipCoords[count, i] = coord;
+                                    break;
+                                }
+                            default:
+                                {
+                                    MessageBox.Show($"Error Code: E08M3L3\r\n{shipSymbol} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                                     break;
                                 }
                         }

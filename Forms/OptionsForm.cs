@@ -35,7 +35,7 @@ namespace Battleship.Forms
         {
             if (TB_OF_DevPass.Text == DeveloperData.DevPass)
             {
-                MessageBox.Show("Developer mode on", $"{Handlers.Manager[6]}", MessageBoxButtons.OK, MessageBoxIcon.Information);
+                MessageBox.Show("Developer mode on", $"{Handlers.Manager[7]}", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 DeveloperData.DeveloperModeON = true;
             }
             else
@@ -43,11 +43,11 @@ namespace Battleship.Forms
                 DeveloperData.AttemptsCount--;
                 if (DeveloperData.AttemptsCount >= 0)
                 {
-                    DialogResult = MessageBox.Show($"Access denied!\r\nAttempts Count: {DeveloperData.AttemptsCount}", $"{Handlers.Manager[6]}", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    DialogResult = MessageBox.Show($"Access denied!\r\nAttempts Count: {DeveloperData.AttemptsCount}", $"{Handlers.Manager[7]}", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 }
                 else
                 {
-                    MessageBox.Show("Security error, the number of attempts to access the developer tools has been exceeded, the program is forced to close.", $"{Handlers.Manager[6]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    MessageBox.Show("Security error, the number of attempts to access the developer tools has been exceeded, the program is forced to close.", $"{Handlers.Manager[7]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     Environment.Exit(0);
                 }
             }
@@ -79,7 +79,7 @@ namespace Battleship.Forms
                 DeveloperData.AttemptsCount--;
                 if (DeveloperData.AttemptsCount >= 0)
                 {
-                    DialogResult = MessageBox.Show($"Access denied!\r\nAttempts Count: {DeveloperData.AttemptsCount}", $"{Handlers.Manager[6]}", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                    DialogResult = MessageBox.Show($"Access denied!\r\nAttempts Count: {DeveloperData.AttemptsCount}", $"{Handlers.Manager[7]}", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                 }
                 else
                 {
@@ -110,7 +110,7 @@ namespace Battleship.Forms
                     }
                     catch
                     {
-                        //Error_Catch
+                        MessageBox.Show($"Error Code: E47M1L5\r\nAssembly convertation error", $"{Handlers.Manager[1]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }

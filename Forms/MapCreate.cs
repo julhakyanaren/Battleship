@@ -1032,6 +1032,10 @@ namespace Battleship
                                                 }
                                             }
                                         }
+                                        else
+                                        {
+                                            MessageBox.Show($"Error Code: E31M9L4\r\n{tag} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                                        }
                                     }
                                     else
                                     {
@@ -1269,8 +1273,12 @@ namespace Battleship
                 }
                 catch
                 {
-                    //Error_Catch
+                    MessageBox.Show($"Error Code: E46M9L4\r\nShip coord convertation error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
+            }
+            else
+            {
+                MessageBox.Show($"Error Code: E32M9L4\r\n{tag} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         public void GenerateSchematic()
@@ -1445,7 +1453,7 @@ namespace Battleship
         {
             if (!CheckLoadedMap())
             {
-                if (MessageBox.Show("Shhematic map checked!\r\nProblems not found!\r\nAre you sure you want to use the loaded map schematic?", $"{Handlers.Manager[1]}", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                if (MessageBox.Show("Shhematic map checked!\r\nProblems not found!\r\nAre you sure you want to use the loaded map schematic?", $"{Handlers.Manager[3]}", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     PlayerData.FrigateCoords = frigates;
                     PlayerData.DestroyerCoords = destroyers;
@@ -1458,7 +1466,7 @@ namespace Battleship
                     TB_MC_DestroyerCount.Text = "3";
                     TB_MC_CruiserCount.Text = "2";
                     TB_MC_BattleshipCount.Text = "1";
-                    if (MessageBox.Show("Build Map?", $"{Handlers.Manager[1]}", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                    if (MessageBox.Show("Build Map?", $"{Handlers.Manager[3]}", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                     {
                         MapBuild();
                         TB_AO_MapSchematic.Text = Schematic.Map;
@@ -1752,7 +1760,7 @@ namespace Battleship
         private void BS_AO_UploadSchematic_Click(object sender, EventArgs e)
         {
             ReadData(OFD_MapCreate, out frigates, out destroyers, out cruisers, out battleships, out schematicMap);
-            if (MessageBox.Show("Schematic map uploading competed!", $"{Handlers.Manager[1]}", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
+            if (MessageBox.Show("Schematic map uploading competed!", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
             {
                 BS_AO_LoadSchematic.Visible = true;
             }

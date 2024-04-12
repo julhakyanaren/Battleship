@@ -140,6 +140,10 @@ namespace Battleship.Classes
                     AllowedCoordsCount = AllowedCoords.Count;
                     BlockedCoordsCount = BlockedCoords.Count;
                 }
+                else
+                {
+                    MessageBox.Show($"Error Code: E45M4L4\r\n{position} is incorrect position", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
             }
         }
 

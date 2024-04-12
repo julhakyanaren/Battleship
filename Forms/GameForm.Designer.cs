@@ -157,8 +157,6 @@
             this.TSMI_Info = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GPO_OpenManual = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GPO_Version = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_Diagnostics = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_Open_DiagnosticForm = new System.Windows.Forms.ToolStripMenuItem();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
@@ -1898,8 +1896,7 @@
             this.TSMI_File,
             this.TSMI_Game,
             this.TSMI_Map,
-            this.TSMI_Info,
-            this.TSMI_Diagnostics});
+            this.TSMI_Info});
             this.MS_MenuPanel.Location = new System.Drawing.Point(0, 0);
             this.MS_MenuPanel.Name = "MS_MenuPanel";
             this.MS_MenuPanel.Padding = new System.Windows.Forms.Padding(4, 2, 0, 2);
@@ -1921,7 +1918,7 @@
             this.TSMI_AllwaysOnTop.CheckOnClick = true;
             this.TSMI_AllwaysOnTop.ForeColor = System.Drawing.Color.Black;
             this.TSMI_AllwaysOnTop.Name = "TSMI_AllwaysOnTop";
-            this.TSMI_AllwaysOnTop.Size = new System.Drawing.Size(143, 22);
+            this.TSMI_AllwaysOnTop.Size = new System.Drawing.Size(180, 22);
             this.TSMI_AllwaysOnTop.Text = "Allways on top";
             this.TSMI_AllwaysOnTop.CheckedChanged += new System.EventHandler(this.TSMI_AllwaysOnTop_CheckedChanged);
             // 
@@ -2043,22 +2040,6 @@
             this.TSMI_GPO_Version.Name = "TSMI_GPO_Version";
             this.TSMI_GPO_Version.Size = new System.Drawing.Size(139, 22);
             this.TSMI_GPO_Version.Text = "Info:";
-            // 
-            // TSMI_Diagnostics
-            // 
-            this.TSMI_Diagnostics.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_Open_DiagnosticForm});
-            this.TSMI_Diagnostics.ForeColor = System.Drawing.Color.Black;
-            this.TSMI_Diagnostics.Name = "TSMI_Diagnostics";
-            this.TSMI_Diagnostics.Size = new System.Drawing.Size(76, 21);
-            this.TSMI_Diagnostics.Text = "Diagnostics";
-            // 
-            // TSMI_Open_DiagnosticForm
-            // 
-            this.TSMI_Open_DiagnosticForm.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_Open_DiagnosticForm.Name = "TSMI_Open_DiagnosticForm";
-            this.TSMI_Open_DiagnosticForm.Size = new System.Drawing.Size(198, 22);
-            this.TSMI_Open_DiagnosticForm.Text = "Open diagnostic manager";
             // 
             // GameForm
             // 
@@ -2253,8 +2234,6 @@
         private System.Windows.Forms.Label L_Info_GameMode;
         public System.Windows.Forms.TextBox TB_GameModeType;
         private System.Windows.Forms.ToolStripMenuItem TSMI_GPO_Version;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_Diagnostics;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_Open_DiagnosticForm;
         private System.Windows.Forms.Panel PNL_Options;
         private System.Windows.Forms.PictureBox TEST;
         private System.Windows.Forms.Label L_Info_TurnStatus;
