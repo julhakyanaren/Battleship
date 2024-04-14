@@ -14,11 +14,13 @@ namespace Battleship
 
         public static string ShipPlaceMode = "N";
         public static string Orientation = "Null";
+        public static string SchematicMap;
 
         public static bool CanRaplaceShip;
         public static bool IsEmptyPosition;
         public static bool ShipPlaced;
         public static bool[] DoesMapChanged = /**/{ false, false };
+        public static bool CorrectSchematic = false;
 
         public static char[] PlayerMap;
         public static char[] EnemyMap;

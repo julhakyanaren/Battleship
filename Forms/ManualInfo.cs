@@ -1,5 +1,6 @@
 ﻿using Battleship.Classes;
 using System;
+using System.Diagnostics;
 using System.Drawing;
 using System.IO;
 using System.Net;
@@ -31,6 +32,35 @@ namespace Battleship.Forms
             PB_IMB_DownloadPDF.BorderStyle = BorderStyle.None;
             PB_IMB_DownloadPDF.Image = Properties.Resources.Download_PDF;
             PB_IMB_DownloadPDF.BackColor = Color.Black;
+        }
+        void SetCustomProgressBarValue(int percentage)
+        {
+            PNL_MI_ProgressUnit.Width = PNL_MI_ProgressBar.Width * percentage / 100;
+        }
+        private void UpdateProgressBar(int percentage)
+        {
+            if (InvokeRequired)
+            {
+                Invoke(new Action<int>(UpdateProgressBar), percentage);
+            }
+            else
+            {
+                L_Info_Progress.Text = $"{percentage}% complete";
+                SetCustomProgressBarValue(percentage);
+            }
+        }
+        public void ShowPDF()
+        {
+            string filename = Application.StartupPath;
+            filename = Path.GetFullPath(Path.Combine(filename, ".\\Manual.pdf"));
+            if (File.Exists(filename))
+            {
+                Process.Start(new ProcessStartInfo(filename) { UseShellExecute = true });
+            }
+            else
+            {
+                MessageBox.Show("File not found.");
+            }
         }
         public async void DownloadPDF()
         {
@@ -67,26 +97,6 @@ namespace Battleship.Forms
                 }
             }
         }
-        private void UpdateProgressBar(int percenentage)
-        {
-            if (InvokeRequired)
-            {
-                Invoke(new Action<int>(UpdateProgressBar), percenentage);
-            }
-            else
-            {
-                L_Info_Progress.Text = $"{percenentage}% complete";
-                SetCustomProgressBarValue(percenentage);
-            }
-        }
-        public void ShowPDF()
-        {
-            string filename = Application.StartupPath;
-
-            filename = Path.GetFullPath(
-
-                Path.Combine(filename, ".\\Manual.pdf"));
-        }
         private void PB_IMB_DownloadPDF_Click(object sender, EventArgs e)
         {
             DialogResult = MessageBox.Show("Download manual?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
@@ -118,10 +128,6 @@ namespace Battleship.Forms
                     MessageBox.Show("No internet connection", "Connections Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
                 }
             }
-        }
-        void SetCustomProgressBarValue(int percentage)
-        {
-            PNL_MI_ProgressUnit.Width = PNL_MI_ProgressBar.Width * percentage / 100;
         }
     }
 }

@@ -12,8 +12,6 @@ namespace Battleship.Classes
         public static string ManualName = "Manual.pdf";
         public static string ManualSavePath;
 
-        public static bool SchematicSaveTool = true;
-
         public static string AssemblyPath = "Assembly.txt";
         public static void ReadAssembyData()
         {

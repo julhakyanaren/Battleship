@@ -28,27 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.Windows.Forms.TreeNode treeNode1 = new System.Windows.Forms.TreeNode("Included");
-            System.Windows.Forms.TreeNode treeNode2 = new System.Windows.Forms.TreeNode("Map Editor", new System.Windows.Forms.TreeNode[] {
-            treeNode1});
-            System.Windows.Forms.TreeNode treeNode3 = new System.Windows.Forms.TreeNode("Not Included");
-            System.Windows.Forms.TreeNode treeNode4 = new System.Windows.Forms.TreeNode("Schematic Tools", new System.Windows.Forms.TreeNode[] {
-            treeNode3});
-            System.Windows.Forms.TreeNode treeNode5 = new System.Windows.Forms.TreeNode("Included");
-            System.Windows.Forms.TreeNode treeNode6 = new System.Windows.Forms.TreeNode("Debug Tools", new System.Windows.Forms.TreeNode[] {
-            treeNode5});
-            System.Windows.Forms.TreeNode treeNode7 = new System.Windows.Forms.TreeNode("Not Included");
-            System.Windows.Forms.TreeNode treeNode8 = new System.Windows.Forms.TreeNode("Diagnostic Tools", new System.Windows.Forms.TreeNode[] {
-            treeNode7});
-            System.Windows.Forms.TreeNode treeNode9 = new System.Windows.Forms.TreeNode("In Process");
-            System.Windows.Forms.TreeNode treeNode10 = new System.Windows.Forms.TreeNode("AI Module", new System.Windows.Forms.TreeNode[] {
-            treeNode9});
-            System.Windows.Forms.TreeNode treeNode11 = new System.Windows.Forms.TreeNode("Plugins", new System.Windows.Forms.TreeNode[] {
-            treeNode2,
-            treeNode4,
-            treeNode6,
-            treeNode8,
-            treeNode10});
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ManualInfo));
             this.L_MI_OrientationChanger = new System.Windows.Forms.Label();
             this.TB_MI_ChangeOrientation = new System.Windows.Forms.TextBox();
@@ -69,17 +48,10 @@
             this.L_Info_Progress = new System.Windows.Forms.Label();
             this.PNL_MI_ProgressUnit = new System.Windows.Forms.Panel();
             this.PNL_MI_ProgressBar = new System.Windows.Forms.Panel();
-            this.GB_MI_Plugins = new System.Windows.Forms.GroupBox();
-            this.PNL_MI_ProgressBar_Plugins = new System.Windows.Forms.Panel();
-            this.PNL_MI_ProgressUnit_Plugins = new System.Windows.Forms.Panel();
-            this.BS_MI_CheckPlugins = new System.Windows.Forms.Button();
-            this.TV_MI_Pligins = new System.Windows.Forms.TreeView();
             this.PB_IMB_DownloadPDF = new System.Windows.Forms.PictureBox();
             this.GB_MI_MapEditor.SuspendLayout();
             this.GB_MI_ShipType.SuspendLayout();
             this.PNL_MI_ProgressBar.SuspendLayout();
-            this.GB_MI_Plugins.SuspendLayout();
-            this.PNL_MI_ProgressBar_Plugins.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).BeginInit();
             this.SuspendLayout();
             // 
@@ -163,7 +135,7 @@
             this.GB_MI_ShipType.Size = new System.Drawing.Size(244, 144);
             this.GB_MI_ShipType.TabIndex = 5;
             this.GB_MI_ShipType.TabStop = false;
-            this.GB_MI_ShipType.Text = "Map Editor";
+            this.GB_MI_ShipType.Text = "Ship type";
             // 
             // TB_ShipType_Battleship
             // 
@@ -267,9 +239,13 @@
             this.L_Info_DownloadPDF.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.L_Info_DownloadPDF.Location = new System.Drawing.Point(130, 307);
             this.L_Info_DownloadPDF.Name = "L_Info_DownloadPDF";
-            this.L_Info_DownloadPDF.Size = new System.Drawing.Size(87, 17);
+            this.L_Info_DownloadPDF.Size = new System.Drawing.Size(93, 17);
             this.L_Info_DownloadPDF.TabIndex = 6;
-            this.L_Info_DownloadPDF.Text = "Downlad Manual";
+            this.L_Info_DownloadPDF.Text = "Download Manual";
+            // 
+            // SFD_ManualInfo
+            // 
+            this.SFD_ManualInfo.Title = "Save Manual";
             // 
             // L_Info_Progress
             // 
@@ -299,114 +275,6 @@
             this.PNL_MI_ProgressBar.Size = new System.Drawing.Size(244, 22);
             this.PNL_MI_ProgressBar.TabIndex = 48;
             // 
-            // GB_MI_Plugins
-            // 
-            this.GB_MI_Plugins.Controls.Add(this.PNL_MI_ProgressBar_Plugins);
-            this.GB_MI_Plugins.Controls.Add(this.BS_MI_CheckPlugins);
-            this.GB_MI_Plugins.Controls.Add(this.TV_MI_Pligins);
-            this.GB_MI_Plugins.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.GB_MI_Plugins.ForeColor = System.Drawing.Color.Orange;
-            this.GB_MI_Plugins.Location = new System.Drawing.Point(262, 12);
-            this.GB_MI_Plugins.Name = "GB_MI_Plugins";
-            this.GB_MI_Plugins.Size = new System.Drawing.Size(254, 312);
-            this.GB_MI_Plugins.TabIndex = 49;
-            this.GB_MI_Plugins.TabStop = false;
-            this.GB_MI_Plugins.Text = "Plugins Manager";
-            // 
-            // PNL_MI_ProgressBar_Plugins
-            // 
-            this.PNL_MI_ProgressBar_Plugins.Controls.Add(this.PNL_MI_ProgressUnit_Plugins);
-            this.PNL_MI_ProgressBar_Plugins.Location = new System.Drawing.Point(3, 276);
-            this.PNL_MI_ProgressBar_Plugins.Name = "PNL_MI_ProgressBar_Plugins";
-            this.PNL_MI_ProgressBar_Plugins.Size = new System.Drawing.Size(138, 31);
-            this.PNL_MI_ProgressBar_Plugins.TabIndex = 49;
-            // 
-            // PNL_MI_ProgressUnit_Plugins
-            // 
-            this.PNL_MI_ProgressUnit_Plugins.BackColor = System.Drawing.Color.Orange;
-            this.PNL_MI_ProgressUnit_Plugins.ForeColor = System.Drawing.Color.White;
-            this.PNL_MI_ProgressUnit_Plugins.Location = new System.Drawing.Point(0, 0);
-            this.PNL_MI_ProgressUnit_Plugins.Name = "PNL_MI_ProgressUnit_Plugins";
-            this.PNL_MI_ProgressUnit_Plugins.Size = new System.Drawing.Size(10, 31);
-            this.PNL_MI_ProgressUnit_Plugins.TabIndex = 45;
-            this.PNL_MI_ProgressUnit_Plugins.Visible = false;
-            // 
-            // BS_MI_CheckPlugins
-            // 
-            this.BS_MI_CheckPlugins.BackColor = System.Drawing.Color.Black;
-            this.BS_MI_CheckPlugins.FlatAppearance.BorderColor = System.Drawing.Color.Orange;
-            this.BS_MI_CheckPlugins.FlatAppearance.BorderSize = 2;
-            this.BS_MI_CheckPlugins.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_MI_CheckPlugins.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_MI_CheckPlugins.Location = new System.Drawing.Point(147, 276);
-            this.BS_MI_CheckPlugins.Name = "BS_MI_CheckPlugins";
-            this.BS_MI_CheckPlugins.Size = new System.Drawing.Size(101, 31);
-            this.BS_MI_CheckPlugins.TabIndex = 46;
-            this.BS_MI_CheckPlugins.Text = "Check Plugins";
-            this.BS_MI_CheckPlugins.UseVisualStyleBackColor = false;
-            // 
-            // TV_MI_Pligins
-            // 
-            this.TV_MI_Pligins.BackColor = System.Drawing.Color.Black;
-            this.TV_MI_Pligins.Dock = System.Windows.Forms.DockStyle.Top;
-            this.TV_MI_Pligins.ForeColor = System.Drawing.Color.Orange;
-            this.TV_MI_Pligins.Location = new System.Drawing.Point(3, 18);
-            this.TV_MI_Pligins.Name = "TV_MI_Pligins";
-            treeNode1.BackColor = System.Drawing.Color.Black;
-            treeNode1.ForeColor = System.Drawing.Color.Lime;
-            treeNode1.Name = "TVB_MapEditor_IncludeState";
-            treeNode1.Text = "Included";
-            treeNode2.BackColor = System.Drawing.Color.Black;
-            treeNode2.Checked = true;
-            treeNode2.ForeColor = System.Drawing.Color.Orange;
-            treeNode2.Name = "TVB_MapEditor";
-            treeNode2.Text = "Map Editor";
-            treeNode2.ToolTipText = "Map Editor Plugin";
-            treeNode3.BackColor = System.Drawing.Color.Black;
-            treeNode3.ForeColor = System.Drawing.Color.Red;
-            treeNode3.Name = "TVB_SchematicTools_IncludedState";
-            treeNode3.Text = "Not Included";
-            treeNode4.BackColor = System.Drawing.Color.Black;
-            treeNode4.ForeColor = System.Drawing.Color.Orange;
-            treeNode4.Name = "TVB_SchematicTools";
-            treeNode4.Text = "Schematic Tools";
-            treeNode4.ToolTipText = "Schematic Tools Plugin";
-            treeNode5.BackColor = System.Drawing.Color.Black;
-            treeNode5.ForeColor = System.Drawing.Color.Lime;
-            treeNode5.Name = "TVB_DebugTool_IncludedState";
-            treeNode5.Text = "Included";
-            treeNode6.BackColor = System.Drawing.Color.Black;
-            treeNode6.ForeColor = System.Drawing.Color.Orange;
-            treeNode6.Name = "TVB_DebugTools";
-            treeNode6.Text = "Debug Tools";
-            treeNode6.ToolTipText = "Debug Tools Plugin";
-            treeNode7.BackColor = System.Drawing.Color.Black;
-            treeNode7.ForeColor = System.Drawing.Color.Red;
-            treeNode7.Name = "TVB_DiagnosticTools_IncludedState";
-            treeNode7.Text = "Not Included";
-            treeNode8.BackColor = System.Drawing.Color.Black;
-            treeNode8.ForeColor = System.Drawing.Color.Orange;
-            treeNode8.Name = "TVB_DiagnosticTools";
-            treeNode8.Text = "Diagnostic Tools";
-            treeNode8.ToolTipText = "Diagnostic Tools Plugin";
-            treeNode9.BackColor = System.Drawing.Color.Black;
-            treeNode9.ForeColor = System.Drawing.Color.Yellow;
-            treeNode9.Name = "TVB_AI_Module_IncludedState";
-            treeNode9.Text = "In Process";
-            treeNode10.BackColor = System.Drawing.Color.Black;
-            treeNode10.ForeColor = System.Drawing.Color.Orange;
-            treeNode10.Name = "TVB_AI_Module";
-            treeNode10.Text = "AI Module";
-            treeNode10.ToolTipText = "Fight AI Module";
-            treeNode11.BackColor = System.Drawing.Color.Black;
-            treeNode11.ForeColor = System.Drawing.Color.Orange;
-            treeNode11.Name = "TVK_Plugins";
-            treeNode11.Text = "Plugins";
-            this.TV_MI_Pligins.Nodes.AddRange(new System.Windows.Forms.TreeNode[] {
-            treeNode11});
-            this.TV_MI_Pligins.Size = new System.Drawing.Size(248, 251);
-            this.TV_MI_Pligins.TabIndex = 0;
-            // 
             // PB_IMB_DownloadPDF
             // 
             this.PB_IMB_DownloadPDF.BackColor = System.Drawing.Color.Black;
@@ -428,8 +296,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(5F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(528, 331);
-            this.Controls.Add(this.GB_MI_Plugins);
+            this.ClientSize = new System.Drawing.Size(261, 331);
             this.Controls.Add(this.PNL_MI_ProgressBar);
             this.Controls.Add(this.GB_MI_ShipType);
             this.Controls.Add(this.L_Info_Progress);
@@ -443,6 +310,7 @@
             this.Margin = new System.Windows.Forms.Padding(2, 3, 2, 3);
             this.MinimizeBox = false;
             this.Name = "ManualInfo";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Manual";
             this.Load += new System.EventHandler(this.ManualInfo_Load);
             this.GB_MI_MapEditor.ResumeLayout(false);
@@ -450,8 +318,6 @@
             this.GB_MI_ShipType.ResumeLayout(false);
             this.GB_MI_ShipType.PerformLayout();
             this.PNL_MI_ProgressBar.ResumeLayout(false);
-            this.GB_MI_Plugins.ResumeLayout(false);
-            this.PNL_MI_ProgressBar_Plugins.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.PB_IMB_DownloadPDF)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -480,10 +346,5 @@
         private System.Windows.Forms.Label L_Info_Progress;
         private System.Windows.Forms.Panel PNL_MI_ProgressUnit;
         private System.Windows.Forms.Panel PNL_MI_ProgressBar;
-        private System.Windows.Forms.GroupBox GB_MI_Plugins;
-        private System.Windows.Forms.TreeView TV_MI_Pligins;
-        private System.Windows.Forms.Panel PNL_MI_ProgressBar_Plugins;
-        private System.Windows.Forms.Panel PNL_MI_ProgressUnit_Plugins;
-        private System.Windows.Forms.Button BS_MI_CheckPlugins;
     }
 }

@@ -1918,7 +1918,7 @@
             this.TSMI_AllwaysOnTop.CheckOnClick = true;
             this.TSMI_AllwaysOnTop.ForeColor = System.Drawing.Color.Black;
             this.TSMI_AllwaysOnTop.Name = "TSMI_AllwaysOnTop";
-            this.TSMI_AllwaysOnTop.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_AllwaysOnTop.Size = new System.Drawing.Size(143, 22);
             this.TSMI_AllwaysOnTop.Text = "Allways on top";
             this.TSMI_AllwaysOnTop.CheckedChanged += new System.EventHandler(this.TSMI_AllwaysOnTop_CheckedChanged);
             // 

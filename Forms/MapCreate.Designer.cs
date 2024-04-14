@@ -84,10 +84,7 @@
             this.TLP_Example = new System.Windows.Forms.TableLayoutPanel();
             this.GB_MapSchematicOptions = new System.Windows.Forms.GroupBox();
             this.BS_AO_GetMap = new System.Windows.Forms.Button();
-            this.PNL_AO_ProgressBar = new System.Windows.Forms.Panel();
-            this.PNL_AO_ProgressUnit = new System.Windows.Forms.Panel();
             this.BS_AO_LoadSchematic = new System.Windows.Forms.Button();
-            this.BS_AO_CheckSchematic = new System.Windows.Forms.Button();
             this.BS_AO_SaveSchematic = new System.Windows.Forms.Button();
             this.BS_AO_UploadSchematic = new System.Windows.Forms.Button();
             this.L_Info_AO_MapSchematic = new System.Windows.Forms.Label();
@@ -156,7 +153,6 @@
             this.GB_Example.SuspendLayout();
             this.PNL_Example.SuspendLayout();
             this.GB_MapSchematicOptions.SuspendLayout();
-            this.PNL_AO_ProgressBar.SuspendLayout();
             this.GB_PlaceShip.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.PNL_ShipPlaceMap.SuspendLayout();
@@ -265,7 +261,7 @@
             this.BS_MC_Update.Name = "BS_MC_Update";
             this.BS_MC_Update.Size = new System.Drawing.Size(126, 31);
             this.BS_MC_Update.TabIndex = 35;
-            this.BS_MC_Update.Text = "Update Map Shematic";
+            this.BS_MC_Update.Text = "Update Map Schematic";
             this.BS_MC_Update.UseVisualStyleBackColor = false;
             this.BS_MC_Update.Click += new System.EventHandler(this.BS_MC_Update_Click);
             // 
@@ -1034,9 +1030,7 @@
             // 
             this.GB_MapSchematicOptions.BackColor = System.Drawing.Color.Black;
             this.GB_MapSchematicOptions.Controls.Add(this.BS_AO_GetMap);
-            this.GB_MapSchematicOptions.Controls.Add(this.PNL_AO_ProgressBar);
             this.GB_MapSchematicOptions.Controls.Add(this.BS_AO_LoadSchematic);
-            this.GB_MapSchematicOptions.Controls.Add(this.BS_AO_CheckSchematic);
             this.GB_MapSchematicOptions.Controls.Add(this.BS_AO_SaveSchematic);
             this.GB_MapSchematicOptions.Controls.Add(this.BS_AO_UploadSchematic);
             this.GB_MapSchematicOptions.Controls.Add(this.L_Info_AO_MapSchematic);
@@ -1049,7 +1043,6 @@
             this.GB_MapSchematicOptions.TabIndex = 9;
             this.GB_MapSchematicOptions.TabStop = false;
             this.GB_MapSchematicOptions.Text = "Map schematic options";
-            this.GB_MapSchematicOptions.VisibleChanged += new System.EventHandler(this.GB_AdvancedOptions_VisibleChanged);
             // 
             // BS_AO_GetMap
             // 
@@ -1058,29 +1051,13 @@
             this.BS_AO_GetMap.FlatAppearance.BorderSize = 2;
             this.BS_AO_GetMap.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_AO_GetMap.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_AO_GetMap.Location = new System.Drawing.Point(381, 26);
+            this.BS_AO_GetMap.Location = new System.Drawing.Point(9, 29);
             this.BS_AO_GetMap.Name = "BS_AO_GetMap";
             this.BS_AO_GetMap.Size = new System.Drawing.Size(126, 31);
             this.BS_AO_GetMap.TabIndex = 45;
             this.BS_AO_GetMap.Text = "Get map schema";
             this.BS_AO_GetMap.UseVisualStyleBackColor = false;
             this.BS_AO_GetMap.Click += new System.EventHandler(this.BS_AO_GetMap_Click);
-            // 
-            // PNL_AO_ProgressBar
-            // 
-            this.PNL_AO_ProgressBar.Controls.Add(this.PNL_AO_ProgressUnit);
-            this.PNL_AO_ProgressBar.Location = new System.Drawing.Point(6, 112);
-            this.PNL_AO_ProgressBar.Name = "PNL_AO_ProgressBar";
-            this.PNL_AO_ProgressBar.Size = new System.Drawing.Size(257, 22);
-            this.PNL_AO_ProgressBar.TabIndex = 44;
-            // 
-            // PNL_AO_ProgressUnit
-            // 
-            this.PNL_AO_ProgressUnit.BackColor = System.Drawing.Color.White;
-            this.PNL_AO_ProgressUnit.Location = new System.Drawing.Point(0, 0);
-            this.PNL_AO_ProgressUnit.Name = "PNL_AO_ProgressUnit";
-            this.PNL_AO_ProgressUnit.Size = new System.Drawing.Size(10, 22);
-            this.PNL_AO_ProgressUnit.TabIndex = 45;
             // 
             // BS_AO_LoadSchematic
             // 
@@ -1089,7 +1066,7 @@
             this.BS_AO_LoadSchematic.FlatAppearance.BorderSize = 2;
             this.BS_AO_LoadSchematic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_AO_LoadSchematic.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_AO_LoadSchematic.Location = new System.Drawing.Point(137, 63);
+            this.BS_AO_LoadSchematic.Location = new System.Drawing.Point(141, 108);
             this.BS_AO_LoadSchematic.Name = "BS_AO_LoadSchematic";
             this.BS_AO_LoadSchematic.Size = new System.Drawing.Size(126, 31);
             this.BS_AO_LoadSchematic.TabIndex = 43;
@@ -1098,21 +1075,6 @@
             this.BS_AO_LoadSchematic.Visible = false;
             this.BS_AO_LoadSchematic.Click += new System.EventHandler(this.BS_AO_LoadSchematic_Click);
             // 
-            // BS_AO_CheckSchematic
-            // 
-            this.BS_AO_CheckSchematic.BackColor = System.Drawing.Color.Black;
-            this.BS_AO_CheckSchematic.FlatAppearance.BorderColor = System.Drawing.Color.White;
-            this.BS_AO_CheckSchematic.FlatAppearance.BorderSize = 2;
-            this.BS_AO_CheckSchematic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_AO_CheckSchematic.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_AO_CheckSchematic.Location = new System.Drawing.Point(6, 63);
-            this.BS_AO_CheckSchematic.Name = "BS_AO_CheckSchematic";
-            this.BS_AO_CheckSchematic.Size = new System.Drawing.Size(126, 31);
-            this.BS_AO_CheckSchematic.TabIndex = 42;
-            this.BS_AO_CheckSchematic.Text = "Check schematic";
-            this.BS_AO_CheckSchematic.UseVisualStyleBackColor = false;
-            this.BS_AO_CheckSchematic.Click += new System.EventHandler(this.BS_AO_CheckSchematic_Click);
-            // 
             // BS_AO_SaveSchematic
             // 
             this.BS_AO_SaveSchematic.BackColor = System.Drawing.Color.Black;
@@ -1120,7 +1082,7 @@
             this.BS_AO_SaveSchematic.FlatAppearance.BorderSize = 2;
             this.BS_AO_SaveSchematic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_AO_SaveSchematic.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_AO_SaveSchematic.Location = new System.Drawing.Point(137, 26);
+            this.BS_AO_SaveSchematic.Location = new System.Drawing.Point(141, 29);
             this.BS_AO_SaveSchematic.Name = "BS_AO_SaveSchematic";
             this.BS_AO_SaveSchematic.Size = new System.Drawing.Size(126, 31);
             this.BS_AO_SaveSchematic.TabIndex = 41;
@@ -1136,7 +1098,7 @@
             this.BS_AO_UploadSchematic.FlatAppearance.BorderSize = 2;
             this.BS_AO_UploadSchematic.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_AO_UploadSchematic.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_AO_UploadSchematic.Location = new System.Drawing.Point(6, 26);
+            this.BS_AO_UploadSchematic.Location = new System.Drawing.Point(9, 108);
             this.BS_AO_UploadSchematic.Name = "BS_AO_UploadSchematic";
             this.BS_AO_UploadSchematic.Size = new System.Drawing.Size(126, 31);
             this.BS_AO_UploadSchematic.TabIndex = 40;
@@ -1148,7 +1110,7 @@
             // 
             this.L_Info_AO_MapSchematic.AutoSize = true;
             this.L_Info_AO_MapSchematic.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.L_Info_AO_MapSchematic.Location = new System.Drawing.Point(271, 43);
+            this.L_Info_AO_MapSchematic.Location = new System.Drawing.Point(276, 9);
             this.L_Info_AO_MapSchematic.Name = "L_Info_AO_MapSchematic";
             this.L_Info_AO_MapSchematic.Size = new System.Drawing.Size(82, 17);
             this.L_Info_AO_MapSchematic.TabIndex = 39;
@@ -1159,12 +1121,12 @@
             this.TB_AO_MapSchematic.BackColor = System.Drawing.Color.Black;
             this.TB_AO_MapSchematic.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TB_AO_MapSchematic.ForeColor = System.Drawing.Color.White;
-            this.TB_AO_MapSchematic.Location = new System.Drawing.Point(274, 63);
+            this.TB_AO_MapSchematic.Location = new System.Drawing.Point(274, 29);
             this.TB_AO_MapSchematic.Multiline = true;
             this.TB_AO_MapSchematic.Name = "TB_AO_MapSchematic";
             this.TB_AO_MapSchematic.ReadOnly = true;
             this.TB_AO_MapSchematic.ScrollBars = System.Windows.Forms.ScrollBars.Both;
-            this.TB_AO_MapSchematic.Size = new System.Drawing.Size(234, 76);
+            this.TB_AO_MapSchematic.Size = new System.Drawing.Size(234, 110);
             this.TB_AO_MapSchematic.TabIndex = 38;
             this.TB_AO_MapSchematic.TextChanged += new System.EventHandler(this.TB_AO_MapSchematic_TextChanged);
             // 
@@ -1810,7 +1772,7 @@
             // TSMI_MC_OpenManual
             // 
             this.TSMI_MC_OpenManual.Name = "TSMI_MC_OpenManual";
-            this.TSMI_MC_OpenManual.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_MC_OpenManual.Size = new System.Drawing.Size(136, 22);
             this.TSMI_MC_OpenManual.Text = "Open manual";
             this.TSMI_MC_OpenManual.Click += new System.EventHandler(this.TSMI_MC_OpenManual_Click);
             // 
@@ -1864,7 +1826,6 @@
             this.PNL_Example.ResumeLayout(false);
             this.GB_MapSchematicOptions.ResumeLayout(false);
             this.GB_MapSchematicOptions.PerformLayout();
-            this.PNL_AO_ProgressBar.ResumeLayout(false);
             this.GB_PlaceShip.ResumeLayout(false);
             this.GB_PlaceShip.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -1982,9 +1943,6 @@
         private System.Windows.Forms.Label L_Info_AO_MapSchematic;
         public System.Windows.Forms.TextBox TB_AO_MapSchematic;
         private System.Windows.Forms.Button BS_AO_SaveSchematic;
-        private System.Windows.Forms.Button BS_AO_CheckSchematic;
-        private System.Windows.Forms.Panel PNL_AO_ProgressBar;
-        private System.Windows.Forms.Panel PNL_AO_ProgressUnit;
         private System.Windows.Forms.Button BS_AO_LoadSchematic;
         public System.Windows.Forms.TextBox TB_Status;
         private System.Windows.Forms.Label L_Info_Status;

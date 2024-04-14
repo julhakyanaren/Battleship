@@ -905,7 +905,7 @@ namespace Battleship
             {
                 try
                 {
-                    if (!Schematic.CorrectSchematic)
+                    if (!Data.CorrectSchematic)
                     {
                         DialogResult = MessageBox.Show("Schematic map not complete generation not possible", "Map Editor", MessageBoxButtons.OK, MessageBoxIcon.Stop);
                         if (DialogResult == DialogResult.OK)
@@ -917,7 +917,7 @@ namespace Battleship
                     {
                         int[] ships = { 0, 0, 0, 0 };
                         Color buttonColor = Color.White;
-                        char[] schematicMapEditor = Schematic.Map.ToCharArray();
+                        char[] schematicMapEditor = Data.SchematicMap.ToCharArray();
                         for (int c = 0; c < schematicMapEditor.Length; c++)
                         {
                             if (schematicMapEditor[c] == 'M')
