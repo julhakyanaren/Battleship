@@ -62,7 +62,7 @@ namespace Battleship.Forms
                 MessageBox.Show("File not found.");
             }
         }
-        public async void DownloadPDF()
+        public async Task DownloadPDF()
         {
             SFD_ManualInfo.Filter = "PDF|*.pdf";
             SFD_ManualInfo.FileName = FileManager.ManualName;
@@ -71,7 +71,7 @@ namespace Battleship.Forms
                 string savePath = SFD_ManualInfo.FileName;
                 using (HttpClient httpClient = new HttpClient())
                 {
-                    var response = httpClient.GetAsync(FileManager.ManualUrl).Result;
+                    var response = await httpClient.GetAsync(FileManager.ManualUrl);
                     var totalBytes = response.Content.Headers.ContentLength ?? -1;
                     var readBytes = 0;
                     using (FileStream fileStream = new FileStream(savePath, FileMode.Create, FileAccess.Write, FileShare.None))
@@ -88,8 +88,8 @@ namespace Battleship.Forms
                                 readBytes += bytesRead;
                                 if (totalBytes > 0)
                                 {
-                                    int percenentage = (int)((double)readBytes / totalBytes * 100);
-                                    UpdateProgressBar(percenentage);
+                                    int percentage = (int)((double)readBytes / totalBytes * 100);
+                                    UpdateProgressBar(percentage);
                                 }
                             }
                         }
@@ -97,7 +97,7 @@ namespace Battleship.Forms
                 }
             }
         }
-        private void PB_IMB_DownloadPDF_Click(object sender, EventArgs e)
+        private async void PB_IMB_DownloadPDF_Click(object sender, EventArgs e)
         {
             DialogResult = MessageBox.Show("Download manual?", "File Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
             if (DialogResult == DialogResult.Yes)
@@ -106,7 +106,7 @@ namespace Battleship.Forms
                 {
                     try
                     {
-                        DownloadPDF();
+                        await DownloadPDF();
                     }
                     catch (Exception ex)
                     {
