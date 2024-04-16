@@ -107,13 +107,6 @@ namespace Battleship.Forms
                     try
                     {
                         await DownloadPDF();
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show($"Occurred due to a file download error. Code:{ex.HResult}");
-                    }
-                    finally
-                    {
                         DialogResult = MessageBox.Show("Manual download completed", "File Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         if (DialogResult == DialogResult.OK)
                         {
@@ -121,6 +114,10 @@ namespace Battleship.Forms
                             L_Info_DownloadPDF.Text = "0% complete";
                             ShowPDF();
                         }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show($"Occurred due to a file download error. Code:{ex.HResult}");
                     }
                 }
                 else

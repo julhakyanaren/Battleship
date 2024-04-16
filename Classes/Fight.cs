@@ -1,7 +1,6 @@
 ﻿using Battleship.Classes;
 using System;
 using System.Collections.Generic;
-using System.Drawing.Drawing2D;
 using System.Linq;
 using System.Windows.Forms;
 
@@ -20,7 +19,6 @@ namespace Battleship
         public static bool NewMove = true;
         public static bool Hited = false;
         public static bool DefinedShot = false;
-        public static bool TargetingShoot = false;
         public static bool GuaranteedShot = false;
 
         public static bool[] SuccessShoots = { false, false, false };
@@ -52,32 +50,7 @@ namespace Battleship
         public static int WhoStartGame()
         {
             Random randomStart = new Random();
-            int number = randomStart.Next(1, 101);
-            double numberDouble = Math.Sqrt(number);
-            bool perfectSqrt = (numberDouble == (int)numberDouble);
-            switch (Options.Difficulty)
-            {
-                case 0:
-                    {
-                        return 0;
-                    }
-                case 1:
-                    {
-                        return Convert.ToInt32(!perfectSqrt);
-                    }
-                case 2:
-                    {
-                        return randomStart.Next(0, 2);
-                    }
-                case 3:
-                    {
-                        return Convert.ToInt32(perfectSqrt);
-                    }
-                default:
-                    {
-                        return -1;
-                    }
-            }
+            return randomStart.Next(0, 2);
         }
         public static int ReverseTurn(bool hited)
         {
@@ -90,11 +63,11 @@ namespace Battleship
             {
                 if (!hited)
                 {
-                    return Convert.ToInt32(!Convert.ToBoolean(Fight.Turn));
+                    return Convert.ToInt32(!Convert.ToBoolean(Turn));
                 }
                 else
                 {
-                    return Convert.ToInt32(Convert.ToBoolean(Fight.Turn));
+                    return Convert.ToInt32(Convert.ToBoolean(Turn));
                 }
             }
         }
@@ -183,7 +156,6 @@ namespace Battleship
                             sunkenDestroyers += Convert.ToInt32(PlayerData.DestroyersSunken[d]);
                         }
                         NewMove = PlayerData.SunkenDestroyersCount < sunkenDestroyers;
-                        TargetingShoot = true;
                         if (sunkenDestroyers - PlayerData.SunkenDestroyersCount == 1)
                         {
                             PlayerData.DestroyersCountCurrent--;
@@ -231,7 +203,6 @@ namespace Battleship
                             sunkenCruisers += Convert.ToInt32(PlayerData.CruisersSunken[c]);
                         }
                         NewMove = PlayerData.SunkenCruisersCount < sunkenCruisers;
-                        TargetingShoot = true;
                         if (sunkenCruisers - PlayerData.SunkenCruisersCount == 1)
                         {
                             PlayerData.CruiserCountCurrent--;
@@ -270,7 +241,6 @@ namespace Battleship
                             sunkenBattleship += Convert.ToInt32(PlayerData.BattleshipSunken[b]);
                         }
                         NewMove = PlayerData.SunkenBattleshipCount < sunkenBattleship;
-                        TargetingShoot = true;
                         if (sunkenBattleship == 1)
                         {
                             PlayerData.BattleshipCountCurrent--;
@@ -387,7 +357,6 @@ namespace Battleship
             }
             return coord;
         }
-
         public static void Shoot(out bool successShoot)
         {
             bool checkedPosition;
@@ -735,7 +704,6 @@ namespace Battleship
             SuccessShoots = new[] { false, false, false };
             DefinedCoord = 0;
             DefinedShot = false;
-            TargetingShoot = false;
         }
         private static void SetHitCoords(int target)
         {

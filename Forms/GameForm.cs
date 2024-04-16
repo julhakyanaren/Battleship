@@ -592,7 +592,7 @@ namespace Battleship
                 }
             }
         }
-        public void StartBattleShip()
+        public async void StartBattleShip()
         {
             GenerateEnemyRandomMap();
             for (int i = 0; i < MapButtons.GetLength(1); i++)
@@ -626,6 +626,7 @@ namespace Battleship
                         {
                             TB_Turn.Text = "Enemy";
                             Fight.FirstTurn = false;
+                            await EnemyTurn();
                             break;
                         }
                     default:
