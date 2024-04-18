@@ -8,10 +8,8 @@ namespace Battleship
 {
     public static class Fight
     {
-        static ColorMethods cm = new ColorMethods();
         static Position pos = new Position();
         static Support sp = new Support();
-        static Map map = new Map();
 
         public static bool GameStarted = false;
         public static bool FirstTurn = true;
@@ -20,21 +18,17 @@ namespace Battleship
         public static bool Hited = false;
         public static bool DefinedShot = false;
         public static bool GuaranteedShot = false;
-
         public static bool[] SuccessShoots = { false, false, false };
 
         public static int TargetCoord;
         public static int Turn = 0;
-        public static int SunkenShipType = 0;
         public static int FirstHitCoord = 0;
-        public static int[] TargetData = { 0, 0, 0 };
         public static int TargetButtonTag = 0;
         public static int FirstSuccessHitCoord = 0;
         public static int SecondSuccessHitCoord = 0;
         public static int ThirdSuccssHitCoord = 0;
         public static int DefinedCoord = 0;
-
-        public static string InfoType = "Null";
+        public static int[] TargetData = { 0, 0, 0 };
 
         public static List<int> AllowedCoords = new List<int>();
         public static List<int> BlockedCoords = new List<int>();
@@ -165,7 +159,7 @@ namespace Battleship
                         }
                         else
                         {
-                            FirstHitCoord = FindCorrectCoord(index);
+                            FirstHitCoord = FindCorrectTagCoord(index);
                             SetHitCoords(index);
                         }
                         PlayerData.SunkenDestroyersCount = sunkenDestroyers;
@@ -212,7 +206,7 @@ namespace Battleship
                         }
                         else
                         {
-                            FirstHitCoord = FindCorrectCoord(index);
+                            FirstHitCoord = FindCorrectTagCoord(index);
                             SetHitCoords(index);
                         }
                         PlayerData.SunkenCruisersCount = sunkenCruisers;
@@ -250,12 +244,11 @@ namespace Battleship
                         }
                         else
                         {
-                            FirstHitCoord = FindCorrectCoord(index);
+                            FirstHitCoord = FindCorrectTagCoord(index);
                             SetHitCoords(index);
                         }
                         PlayerData.SunkenBattleshipCount = sunkenBattleship;
                         PlayerData.BattleshipCountCurrent = PlayerData.BattleshipCountMax - PlayerData.SunkenBattleshipCount;
-
                         successShoot = true;
                         checkedPosition = false;
                         break;
@@ -291,7 +284,7 @@ namespace Battleship
                         PlayerData.Map[AllowedCoords[bl]] = 'E';
                         ForbiddenCoords.Add(AllowedCoords[bl]);
                     }
-                    ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
+                    ForbiddenCoords.SortUnique();
                     sunkenFrigate = false;
                 }
             }
@@ -309,30 +302,18 @@ namespace Battleship
         internal static int FindCorrectIndex(int index, bool enemyMap = false)
         {
             index -= 1551;
-            if (!enemyMap)
+            Button[] targetMap = !enemyMap ? PlayerData.MapButtons : EnemyData.MapButtons;
+            for (int b = 0; b < 100; b++)
             {
-                for (int b = 0; b < 100; b++)
+                if (targetMap[b].Tag.ToString() == $"{index}")
                 {
-                    if (PlayerData.MapButtons[b].Tag.ToString() == $"{index}")
-                    {
-                        return b;
-                    }
-                }
-            }
-            else
-            {
-                for (int b = 0; b < 100; b++)
-                {
-                    if (EnemyData.MapButtons[b].Tag.ToString() == $"{index}")
-                    {
-                        return b;
-                    }
+                    return b;
                 }
             }
             MessageBox.Show($"Error Code: E37M5L5\r\nNon-existent index in data", $"{Handlers.Manager[5]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             return -1;
         }
-        internal static int FindCorrectCoord(int index, bool enemyMap = false)
+        internal static int FindCorrectTagCoord(int index, bool enemyMap = false)
         {
             int coord = -1;
             try
@@ -418,7 +399,7 @@ namespace Battleship
                 }
                 while (!canShot);
                 PossibleTargets = AllowedCoords;
-                secondTarget = FindCorrectCoord(secondTarget) + 1551;
+                secondTarget = FindCorrectTagCoord(secondTarget) + 1551;
                 TargetButtonTag = secondTarget;
                 EnemyShoot(secondTarget, out successShoot, out checkedPosition);
                 ForbiddenCoords.Add(FindCorrectIndex(secondTarget));
@@ -483,7 +464,7 @@ namespace Battleship
                 }
                 Random random = new Random();
                 int randomIndex = random.Next(nextCoords.Count);
-                thirdTarget = FindCorrectCoord(nextCoords[randomIndex]) + 1551;
+                thirdTarget = FindCorrectTagCoord(nextCoords[randomIndex]) + 1551;
                 TargetButtonTag = thirdTarget;
                 EnemyShoot(thirdTarget, out successShoot, out checkedPosition);
                 ForbiddenCoords.Add(FindCorrectIndex(thirdTarget));
@@ -549,7 +530,7 @@ namespace Battleship
                 }
                 Random random = new Random();
                 int randomIndex = random.Next(nextCoords.Count);
-                fourthTarget = FindCorrectCoord(nextCoords[randomIndex]) + 1551;
+                fourthTarget = FindCorrectTagCoord(nextCoords[randomIndex]) + 1551;
                 TargetButtonTag = fourthTarget;
                 EnemyShoot(fourthTarget, out successShoot, out checkedPosition);
                 ForbiddenCoords.Add(FindCorrectIndex(fourthTarget));
@@ -559,7 +540,7 @@ namespace Battleship
                     DefinedShot = true;
                 }
             }
-            ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
+            ForbiddenCoords.SortUnique();
         }
         public static int FindShipCoord()
         {
@@ -670,15 +651,15 @@ namespace Battleship
                 {
                     ForbiddenCoords.Add(BlockedCoords[b]);
                 }
-                ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
+                ForbiddenCoords.SortUnique();
                 AllowedCoords.Sort();
                 BlockedCoords.Sort();
             }
         }
-        private static List<int> SortUniqueInt(List<int> disorderedList)
+        public static List<T> SortUnique<T>(this List<T> disorderedList) where T : IComparable<T>
         {
-            HashSet<int> unique = new HashSet<int>(disorderedList);
-            List<int> newList = new List<int>(unique);
+            HashSet<T> unique = new HashSet<T>(disorderedList);
+            List<T> newList = new List<T>(unique);
             newList.Sort();
             return newList;
         }
@@ -707,7 +688,7 @@ namespace Battleship
         }
         private static void SetHitCoords(int target)
         {
-            target = FindCorrectCoord(target);
+            target = FindCorrectTagCoord(target);
             if (target > 0)
             {
                 if (FirstSuccessHitCoord == 0)
@@ -819,7 +800,7 @@ namespace Battleship
                 }
                 if (firstCoord != -1)
                 {
-                    firstCoord = FindCorrectCoord(firstCoord);
+                    firstCoord = FindCorrectTagCoord(firstCoord);
                     pos.GetCoordsFromTag(firstCoord.ToString(), out int x, out int y, out int id);
                     string cellPos = pos.GetCellPosition(firstCoord.ToString());
                     if (orientation != null)
@@ -839,7 +820,7 @@ namespace Battleship
                             {
                                 PlayerData.Map[sunkenShips[sk]] = 'S';
                             }
-                            ForbiddenCoords = SortUniqueInt(ForbiddenCoords);
+                            ForbiddenCoords.SortUnique();
                         }
                         else
                         {
@@ -938,7 +919,7 @@ namespace Battleship
                 }
                 if (firstCoord != -1)
                 {
-                    firstCoord = FindCorrectCoord(firstCoord, true);
+                    firstCoord = FindCorrectTagCoord(firstCoord, true);
                     pos.GetCoordsFromTag(firstCoord.ToString(), out int x, out int y, out int id);
                     string cellPos = pos.GetCellPosition(firstCoord.ToString());
                     if (orientation != null)
@@ -1076,5 +1057,6 @@ namespace Battleship
         //Unused 13
         //Unused 14
         //Unused 15
+        //Unused 16
     }
 }

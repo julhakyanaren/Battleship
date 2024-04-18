@@ -46,19 +46,15 @@ namespace Battleship
         public static int[,] DestroyerCoords = new int[3, 2];
         public static int[,] CruiserCoords = new int[2, 3];
         public static int[,] BattleshipCoords = new int[1,4];
-        public static int[][,] ShipsCoords = {FrigateCoords, DestroyerCoords, CruiserCoords, BattleshipCoords };
 
         public static bool[,] FrigatesHited = new bool[4,1];
         public static bool[,] DestroyersHited = new bool[3, 2];
         public static bool[,] CruiserHited = new bool[2, 3];
         public static bool[,] BattleshipHited = new bool[1, 4];
-        public static bool[][,] ShipsHited = {FrigatesHited, DestroyersHited, CruiserHited, BattleshipHited };
 
-        public static bool[] FrigatesSunken = { FrigatesHited[0, 0], FrigatesHited[1, 0], FrigatesHited[2, 0], FrigatesHited[3, 0] };
         public static bool[] DestroyersSunken = new bool[3];
         public static bool[] CruisersSunken = new bool[2];
         public static bool[] BattleshipSunken = new bool[1];
-        public static bool[][] ShipsSunkenArray = { FrigatesSunken, DestroyersSunken, CruisersSunken, BattleshipSunken };
 
         public static Dictionary<int, double> IndependentChances = new Dictionary<int, double>();
 
@@ -93,7 +89,6 @@ namespace Battleship
                 BattleshipSunken[0] &= BattleshipHited[0, b1];
             }
         }
-
         public static void ResetShipsCount()
         {
             FrigatesCountCurrent = 0;

@@ -792,7 +792,7 @@ namespace Battleship
                     }
                     if (hitedShip)
                     {
-                        string position = Position.GetCellPosition(Fight.FindCorrectCoord(index, true).ToString());
+                        string position = Position.GetCellPosition(Fight.FindCorrectTagCoord(index, true).ToString());
                         Fight.GenerateBlockedCoords(position, index);
                         for (int bl = 0; bl < EnemyData.BlockedCoords.Count; bl++)
                         {
@@ -802,7 +802,7 @@ namespace Battleship
                     }
                     if (sunkenFrigate)
                     {
-                        string position = Position.GetCellPosition(Fight.FindCorrectCoord(index, true).ToString());
+                        string position = Position.GetCellPosition(Fight.FindCorrectTagCoord(index, true).ToString());
                         Fight.GenerateBlockedCoords(position, index, true);
                         List<int> forbiddenCoords = new List<int>();
                         forbiddenCoords.AddRange(EnemyData.BlockedCoords);
