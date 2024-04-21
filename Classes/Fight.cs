@@ -35,7 +35,7 @@ namespace Battleship
         public static List<int> UsedCoords = new List<int>();
         public static List<int> ForbiddenCoords = new List<int>();
         public static List<int> PossibleTargets = new List<int>();
-        public static List<int> UnusedCoods = new List<int>();
+        public static List<int> UnusedCoords = new List<int>();
 
         public static List<int> FirstCheckedCoords = new List<int>();
         public static List<int> SecondCheckedCoords = new List<int>();
@@ -595,10 +595,10 @@ namespace Battleship
         }
         internal static void SetUnusedCoord()
         {
-            UnusedCoods.Clear();
+            UnusedCoords.Clear();
             for (int u = 0; u < 100; u++)
             {
-                UnusedCoods.Add(u);
+                UnusedCoords.Add(u);
             }
         }
         public static void EnemyShoot(int target, out bool successShoot, out bool checkedPosition)
@@ -836,39 +836,28 @@ namespace Battleship
             if (NewMove)
             {
                 bool correctCoord = false;
-                int target;
+                int target = -1;
                 int targetIndex;
                 do
                 {
                     if (ForbiddenCoords.Count != 0)
                     {
-                        if (ForbiddenCoords.Count < 50)
+                        ForbiddenCoords = ForbiddenCoords.SortUnique();
+                        UnusedCoords = DeleteForbiddenCoords(UnusedCoords);
+                        Random randomTarget = new Random();
+                        int unusedIndex = randomTarget.Next(0, UnusedCoords.Count);
+                        targetIndex = UnusedCoords[unusedIndex];
+                        if (!ForbiddenCoords.Contains(targetIndex))
                         {
-                            ForbiddenCoords = ForbiddenCoords.SortUnique();
-                            target = FindShipCoord();
-                            targetIndex = FindCorrectIndex(target);
-                            correctCoord = !ForbiddenCoords.Contains(targetIndex);
+                            target = FindCorrectTagCoord(targetIndex) + 1551;
+                            TargetData[0] = target;
+                            TargetData[1] = (target - 1000) / 10;
+                            TargetData[2] = (target - 1000) % 10;
+                            correctCoord = true;
                         }
                         else
                         {
-                            ForbiddenCoords = ForbiddenCoords.SortUnique();
-                            UnusedCoods.RemoveAll(coord => ForbiddenCoords.Contains(coord));
-                            Random randomTarget = new Random();
-                            int unusedIndex = randomTarget.Next(0, UnusedCoods.Count);
-                            targetIndex = UnusedCoods[unusedIndex];
-                            target = FindCorrectTagCoord(targetIndex) + 1551;
-                            if (!ForbiddenCoords.Contains(targetIndex))
-                            {
-                                TargetData[0] = target;
-                                TargetData[1] = (target - 1000) / 10;
-                                TargetData[2] = (target - 1000) % 10;
-                                TargetButtonTag = target;
-                                correctCoord = true;
-                            }
-                            else
-                            {
-                                continue;
-                            }
+                            continue;
                         }
                     }
                     else
@@ -880,15 +869,18 @@ namespace Battleship
                 while (!correctCoord);
                 TargetButtonTag = target;
                 EnemyShoot(target, out successShoot, out checkedPosition);
-                ForbiddenCoords.Add(FindCorrectIndex(target));
-                FirstCheckedCoords.Clear();
-                SecondCheckedCoords.Clear();
-                ThirdCheckedCoords.Clear();
+                if (!checkedPosition)
+                {
+                    ForbiddenCoords.Add(FindCorrectIndex(target));
+                    FirstCheckedCoords.Clear();
+                    SecondCheckedCoords.Clear();
+                    ThirdCheckedCoords.Clear();
+                }
             }
             else if (SuccessShoots[0] && !SuccessShoots[1] && !SuccessShoots[2])
             {
-                int secondTarget = -1;
                 bool canShot = false;
+                int secondTarget = -1;
                 int firstCoord = FirstSuccessHitCoord + 1551;
                 GenerateNearestCoords(firstCoord, 1551);
                 List<int> allowedCoords = AllowedCoords;

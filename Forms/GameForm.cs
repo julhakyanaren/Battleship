@@ -130,7 +130,7 @@ namespace Battleship
         {
             SetScreenParametersAsMaximized();
             SetComponentCustomParamaters();
-            if (Fight.UnusedCoods.Count == 0)
+            if (Fight.UnusedCoords.Count == 0)
             {
                 Fight.SetUnusedCoord();
             }
