@@ -130,6 +130,10 @@ namespace Battleship
         {
             SetScreenParametersAsMaximized();
             SetComponentCustomParamaters();
+            if (Fight.UnusedCoods.Count == 0)
+            {
+                Fight.SetUnusedCoord();
+            }
         }
         async Task GenerateButtons()
         {
@@ -309,11 +313,11 @@ namespace Battleship
         }
         async Task NotAvailableMove(int index,int size = 1, int steps = 5, int colorIndex = 0, int duration = 120, bool changeStatus = false, string statusText = null)
         {
-            int defaultSize = MapButtons[1, index].FlatAppearance.BorderSize;
+            int defaultSize = 1;
             int changedSize = defaultSize + size;
             string oldText = TB_TurnStatus.Text;
             Color oldColor = TB_TurnStatus.ForeColor;
-            Color defaultColor = MapButtons[1, index].FlatAppearance.BorderColor;
+            Color defaultColor = Color.Black;
             Color[] changedColors = { Color.DarkRed, Color.Gold };
             if (changeStatus)
             {
@@ -620,12 +624,14 @@ namespace Battleship
                         {
                             TB_Turn.Text = Options.SP_PlayerName;
                             Fight.FirstTurn = false;
+                            Fight.Turn = 0;
                             break;
                         }
                     case 1:
                         {
                             TB_Turn.Text = "Enemy";
-                            Fight.FirstTurn = false;
+                            Fight.FirstTurn = true;
+                            Fight.Turn = 1;
                             await EnemyTurn();
                             break;
                         }
@@ -984,6 +990,7 @@ namespace Battleship
                         //targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
                         targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
                     }
+
                 }
                 else
                 {

@@ -35,6 +35,7 @@ namespace Battleship
         public static List<int> UsedCoords = new List<int>();
         public static List<int> ForbiddenCoords = new List<int>();
         public static List<int> PossibleTargets = new List<int>();
+        public static List<int> UnusedCoods = new List<int>();
 
         public static List<int> FirstCheckedCoords = new List<int>();
         public static List<int> SecondCheckedCoords = new List<int>();
@@ -65,29 +66,551 @@ namespace Battleship
                 }
             }
         }
-        public static void EnemyShoot(int target, out bool successShoot, out bool checkedPosition)
+        internal static int FindCorrectIndex(int index, bool enemyMap = false)
         {
-            int index = 0;
-            int counter = 0;
-            bool incorrectValue = false;
-            bool targetInMap = true;
-            for (int b = 0; b < PlayerData.MapButtons.Length; b++)
+            index -= 1551;
+            Button[] targetMap = !enemyMap ? PlayerData.MapButtons : EnemyData.MapButtons;
+            for (int b = 0; b < 100; b++)
             {
-                if (PlayerData.MapButtons[b].Tag.ToString() == Convert.ToString(target - 1551))
+                if (targetMap[b].Tag.ToString() == $"{index}")
                 {
-                    index = counter;
-                    break;
+                    return b;
+                }
+            }
+            MessageBox.Show($"Error Code: E37M5L5\r\nNon-existent index in data", $"{Handlers.Manager[5]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            return -1;
+        }
+        internal static int FindCorrectTagCoord(int index, bool enemyMap = false)
+        {
+            int coord = -1;
+            try
+            {
+                if (!enemyMap)
+                {
+                    sp.StringToInt(PlayerData.MapButtons[index].Tag.ToString(), out coord);
                 }
                 else
                 {
-                    counter++;
+                    sp.StringToInt(EnemyData.MapButtons[index].Tag.ToString(), out coord);
+                }
+                if (coord == -1)
+                {
+                    MessageBox.Show($"Error Code: E28M9L4\r\n{index} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+            catch
+            {
+                MessageBox.Show($"Error Code: E36M5L5\r\nNon-existent index in data", $"{Handlers.Manager[5]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                coord = -1;
+            }
+            return coord;
+        }
+        public static int FindShipCoord()
+        {
+            Random randCoord = new Random();
+            int vertical = randCoord.Next(65, 75);
+            int horizontal = randCoord.Next(1, 11);
+            int target = vertical * 10 + horizontal + 1000;
+            TargetData[0] = target;
+            TargetData[1] = vertical;
+            TargetData[2] = horizontal;
+            TargetButtonTag = target;
+            return target;
+        }
+        private static void NewShotPreparing()
+        {
+            FirstHitCoord = 0;
+            FirstSuccessHitCoord = 0;
+            SecondSuccessHitCoord = 0;
+            ThirdSuccssHitCoord = 0;
+            SuccessShoots = new[] { false, false, false };
+            DefinedCoord = 0;
+            DefinedShot = false;
+        }
+        public static List<T> SortUnique<T>(this List<T> disorderedList) where T : IComparable<T>
+        {
+            HashSet<T> unique = new HashSet<T>(disorderedList);
+            List<T> newList = new List<T>(unique);
+            newList.Sort();
+            return newList;
+        }
+        static void SetRoundMinesInPlayerMap(int shipType)
+        {
+            for (int s = 0; s < shipType; s++)
+            {
+                int[] mineTags = new int[0];
+                int firstCoord = -1;
+                string orientation = null;
+                int shipSize = 5 - shipType;
+                int[] sunkenShips = new int[shipSize];
+                switch (shipSize)
+                {
+                    case 2:
+                        {
+                            if (PlayerData.DestroyersSunken[s])
+                            {
+                                if (Math.Abs(PlayerData.DestroyerCoords[s, 0] - PlayerData.DestroyerCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = PlayerData.DestroyerCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(PlayerData.DestroyerCoords[s, 0] - PlayerData.DestroyerCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = PlayerData.DestroyerCoords[s, 1];
+                                    orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = PlayerData.DestroyerCoords[s, sk];
+                                }
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (PlayerData.CruisersSunken[s])
+                            {
+                                if (Math.Abs(PlayerData.CruiserCoords[s, 0] - PlayerData.CruiserCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = PlayerData.CruiserCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(PlayerData.CruiserCoords[s, 0] - PlayerData.CruiserCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = PlayerData.CruiserCoords[s, 2];
+                                    orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = PlayerData.CruiserCoords[s, sk];
+                                }
+                            }
+                            break;
+                        }
+                    case 4:
+                        {
+                            if (PlayerData.BattleshipSunken[s])
+                            {
+                                if (Math.Abs(PlayerData.BattleshipCoords[s, 0] - PlayerData.BattleshipCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = PlayerData.BattleshipCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(PlayerData.BattleshipCoords[s, 0] - PlayerData.BattleshipCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = PlayerData.BattleshipCoords[s, 3];
+                                    orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = PlayerData.BattleshipCoords[s, sk];
+                                }
+                            }
+                            break;
+                        }
+                }
+                if (firstCoord != -1)
+                {
+                    firstCoord = FindCorrectTagCoord(firstCoord);
+                    pos.GetCoordsFromTag(firstCoord.ToString(), out int x, out int y, out int id);
+                    string cellPos = pos.GetCellPosition(firstCoord.ToString());
+                    if (orientation != null)
+                    {
+                        int minesCount = ShipData.GetMineCount(cellPos, shipSize, x, y, orientation);
+                        Array.Resize(ref mineTags, minesCount);
+                        if (shipSize > 0)
+                        {
+                            mineTags = ShipData.MineTagsFill(mineTags, cellPos, shipSize, firstCoord, orientation);
+                            for (int m = 0; m < minesCount; m++)
+                            {
+                                mineTags[m] = FindCorrectIndex(mineTags[m] + 1551);
+                                PlayerData.Map[mineTags[m]] = 'E';
+                                ForbiddenCoords.Add(mineTags[m]);
+                            }
+                            for (int sk = 0; sk < sunkenShips.Length; sk++)
+                            {
+                                PlayerData.Map[sunkenShips[sk]] = 'S';
+                            }
+                            ForbiddenCoords = ForbiddenCoords.SortUnique();
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Error Code: E11M3L3\r\n{shipSize} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Error Code: E10M3L3\r\n{orientation} is incorrect ship position", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        internal static void SetRoundMinesInEnemyMap(int shipType)
+        {
+            for (int s = 0; s < shipType; s++)
+            {
+                int[] mineTags = new int[0];
+                int firstCoord = -1;
+                string orientation = null;
+                int shipSize = 5 - shipType;
+                int[] sunkenShips = new int[shipSize];
+                switch (shipSize)
+                {
+                    case 2:
+                        {
+                            if (EnemyData.DestroyersSunken[s])
+                            {
+                                if (Math.Abs(EnemyData.DestroyerCoords[s, 0] - EnemyData.DestroyerCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = EnemyData.DestroyerCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(EnemyData.DestroyerCoords[s, 0] - EnemyData.DestroyerCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = EnemyData.DestroyerCoords[s, 1];
+                                    orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = EnemyData.DestroyerCoords[s, sk];
+                                }
+                            }
+                            break;
+                        }
+                    case 3:
+                        {
+                            if (EnemyData.CruisersSunken[s])
+                            {
+                                if (Math.Abs(EnemyData.CruiserCoords[s, 0] - EnemyData.CruiserCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = EnemyData.CruiserCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(EnemyData.CruiserCoords[s, 0] - EnemyData.CruiserCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = EnemyData.CruiserCoords[s, 2];
+                                    orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = EnemyData.CruiserCoords[s, sk];
+                                }
+                            }
+                            break;
+                        }
+                    case 4:
+                        {
+                            if (EnemyData.BattleshipSunken[s])
+                            {
+                                if (Math.Abs(EnemyData.BattleshipCoords[s, 0] - EnemyData.BattleshipCoords[s, 1]) == 1)
+                                {
+                                    firstCoord = EnemyData.BattleshipCoords[s, 0];
+                                    orientation = "H";
+                                }
+                                else if (Math.Abs(EnemyData.BattleshipCoords[s, 0] - EnemyData.BattleshipCoords[s, 1]) == 10)
+                                {
+                                    firstCoord = EnemyData.BattleshipCoords[s, 3];
+                                    orientation = "V";
+                                }
+                                for (int sk = 0; sk < shipSize; sk++)
+                                {
+                                    sunkenShips[sk] = EnemyData.BattleshipCoords[s, sk];
+                                }
+                            }
+                            break;
+                        }
+                }
+                if (firstCoord != -1)
+                {
+                    firstCoord = FindCorrectTagCoord(firstCoord, true);
+                    pos.GetCoordsFromTag(firstCoord.ToString(), out int x, out int y, out int id);
+                    string cellPos = pos.GetCellPosition(firstCoord.ToString());
+                    if (orientation != null)
+                    {
+                        int minesCount = ShipData.GetMineCount(cellPos, shipSize, x, y, orientation);
+                        Array.Resize(ref mineTags, minesCount);
+                        if (shipSize > 0)
+                        {
+                            mineTags = ShipData.MineTagsFill(mineTags, cellPos, shipSize, firstCoord, orientation);
+                            for (int m = 0; m < minesCount; m++)
+                            {
+                                mineTags[m] = FindCorrectIndex(mineTags[m] + 1551, true);
+                                EnemyData.Map[mineTags[m]] = 'M';
+                            }
+                            for (int sk = 0; sk < sunkenShips.Length; sk++)
+                            {
+                                EnemyData.Map[sunkenShips[sk]] = 'S';
+                            }
+                        }
+                        else
+                        {
+                            MessageBox.Show($"Error Code: E06M3L3\r\n{shipSize} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show($"Error Code: E13M3L3\r\n{orientation} is incorrect ship position", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+        }
+        private static void SetHitCoords(int target)
+        {
+            target = FindCorrectTagCoord(target);
+            if (target > 0)
+            {
+                if (FirstSuccessHitCoord == 0)
+                {
+                    FirstSuccessHitCoord = target;
+                    SuccessShoots[0] = true;
+                }
+                else
+                {
+                    if (SecondSuccessHitCoord == 0)
+                    {
+                        SecondSuccessHitCoord = target;
+                        SuccessShoots[1] = true;
+                    }
+                    else
+                    {
+                        if (ThirdSuccssHitCoord == 0)
+                        {
+                            ThirdSuccssHitCoord = target;
+                            SuccessShoots[2] = true;
+                        }
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Error Code: E38M4L4\r\n{target} is incorrect target", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        static void GenerateNearestCoords(int firstCoords, int reduction = 0)
+        {
+            if (firstCoords != 0)
+            {
+                int targetCoord = firstCoords - reduction;
+                firstCoords = FindCorrectIndex(firstCoords);
+                AllowedCoords.Clear();
+                BlockedCoords.Clear();
+                string position = pos.GetCellPosition(targetCoord.ToString());
+                switch (position)
+                {
+                    case "center":
+                        {
+                            AllowedCoords.Add(firstCoords - 1);
+                            AllowedCoords.Add(firstCoords + 1);
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords + 10);
+                            BlockedCoords.Add(firstCoords - 11);
+                            BlockedCoords.Add(firstCoords + 11);
+                            BlockedCoords.Add(firstCoords - 9);
+                            BlockedCoords.Add(firstCoords + 9);
+                            break;
+                        }
+                    case "left":
+                        {
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords + 10);
+                            AllowedCoords.Add(firstCoords + 1);
+                            BlockedCoords.Add(firstCoords - 9);
+                            BlockedCoords.Add(firstCoords + 11);
+                            break;
+                        }
+                    case "right":
+                        {
+                            AllowedCoords.Add(firstCoords - 1);
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords + 10);
+                            BlockedCoords.Add(firstCoords - 11);
+                            BlockedCoords.Add(firstCoords + 9);
+                            break;
+                        }
+                    case "top":
+                        {
+                            AllowedCoords.Add(firstCoords - 1);
+                            AllowedCoords.Add(firstCoords + 1);
+                            AllowedCoords.Add(firstCoords + 10);
+                            BlockedCoords.Add(firstCoords + 9);
+                            BlockedCoords.Add(firstCoords + 11);
+                            break;
+                        }
+                    case "bottom":
+                        {
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords - 1);
+                            AllowedCoords.Add(firstCoords + 1);
+                            BlockedCoords.Add(firstCoords - 9);
+                            BlockedCoords.Add(firstCoords - 11);
+                            break;
+                        }
+                    case "corner1":
+                        {
+                            AllowedCoords.Add(firstCoords + 10);
+                            AllowedCoords.Add(firstCoords + 1);
+                            BlockedCoords.Add(firstCoords + 11);
+                            break;
+                        }
+                    case "corner2":
+                        {
+                            AllowedCoords.Add(firstCoords - 1);
+                            AllowedCoords.Add(firstCoords + 10);
+                            BlockedCoords.Add(firstCoords + 9);
+                            break;
+                        }
+                    case "corner3":
+                        {
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords - 1);
+                            BlockedCoords.Add(firstCoords - 11);
+                            break;
+                        }
+                    case "corner4":
+                        {
+                            AllowedCoords.Add(firstCoords - 10);
+                            AllowedCoords.Add(firstCoords + 1);
+                            BlockedCoords.Add(firstCoords - 9);
+                            break;
+                        }
+                    default:
+                        {
+                            MessageBox.Show($"Error Code: E09M3L3\r\n{position} is incorrect position", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                            break;
+                        }
+                }
+                for (int b = 0; b < BlockedCoords.Count; b++)
+                {
+                    ForbiddenCoords.Add(BlockedCoords[b]);
+                }
+                ForbiddenCoords = ForbiddenCoords.SortUnique();
+                AllowedCoords.Sort();
+                BlockedCoords.Sort();
+            }
+        }
+        internal static void GenerateBlockedCoords(string position, int firstCoord, bool isFrigate = false)
+        {
+            EnemyData.AllowedCoords.Clear();
+            EnemyData.BlockedCoords.Clear();
+            switch (position)
+            {
+                case "center":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 1);
+                        EnemyData.AllowedCoords.Add(firstCoord + 1);
+                        EnemyData.AllowedCoords.Add(firstCoord - 10);
+                        EnemyData.AllowedCoords.Add(firstCoord + 10);
+                        EnemyData.BlockedCoords.Add(firstCoord - 11);
+                        EnemyData.BlockedCoords.Add(firstCoord + 11);
+                        EnemyData.BlockedCoords.Add(firstCoord - 9);
+                        EnemyData.BlockedCoords.Add(firstCoord + 9);
+                        break;
+                    }
+                case "left":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 10);
+                        EnemyData.AllowedCoords.Add(firstCoord + 10);
+                        EnemyData.AllowedCoords.Add(firstCoord + 1);
+                        EnemyData.BlockedCoords.Add(firstCoord - 9);
+                        EnemyData.BlockedCoords.Add(firstCoord + 11);
+                        break;
+                    }
+                case "right":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 1);
+                        EnemyData.AllowedCoords.Add(firstCoord - 10);
+                        EnemyData.AllowedCoords.Add(firstCoord + 10);
+                        EnemyData.BlockedCoords.Add(firstCoord - 11);
+                        EnemyData.BlockedCoords.Add(firstCoord + 9);
+                        break;
+                    }
+                case "top":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 1);
+                        EnemyData.AllowedCoords.Add(firstCoord + 1);
+                        EnemyData.AllowedCoords.Add(firstCoord + 10);
+                        EnemyData.BlockedCoords.Add(firstCoord + 9);
+                        EnemyData.BlockedCoords.Add(firstCoord + 11);
+                        break;
+                    }
+                case "bottom":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 10);
+                        EnemyData.AllowedCoords.Add(firstCoord - 1);
+                        EnemyData.AllowedCoords.Add(firstCoord + 1);
+                        EnemyData.BlockedCoords.Add(firstCoord - 9);
+                        EnemyData.BlockedCoords.Add(firstCoord - 11);
+                        break;
+                    }
+                case "corner1":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord + 10);
+                        EnemyData.AllowedCoords.Add(firstCoord + 1);
+                        EnemyData.BlockedCoords.Add(firstCoord + 11);
+                        break;
+                    }
+                case "corner2":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 1);
+                        EnemyData.AllowedCoords.Add(firstCoord + 10);
+                        EnemyData.BlockedCoords.Add(firstCoord + 9);
+                        break;
+                    }
+                case "corner3":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 10);
+                        EnemyData.AllowedCoords.Add(firstCoord - 1);
+                        EnemyData.BlockedCoords.Add(firstCoord - 11);
+                        break;
+                    }
+                case "corner4":
+                    {
+                        EnemyData.AllowedCoords.Add(firstCoord - 10);
+                        EnemyData.AllowedCoords.Add(firstCoord + 1);
+                        EnemyData.BlockedCoords.Add(firstCoord - 9);
+                        break;
+                    }
+                default:
+                    {
+                        MessageBox.Show($"Error Code: E14M3L3\r\n{position} is incorrect position", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        break;
+                    }
+            }
+            if (!isFrigate)
+            {
+                EnemyData.AllowedCoords.Clear();
+            }
+        }
+        private static List<int> DeleteForbiddenCoords(List<int> inputList)
+        {
+            HashSet<int> forbiddenSet = new HashSet<int>(ForbiddenCoords);
+            HashSet<int> convertedSet = new HashSet<int>(inputList);
+            var intersection = convertedSet.Where(x => forbiddenSet.Contains(x)).ToList();
+            foreach (var item in intersection)
+            {
+                convertedSet.Remove(item);
+            }
+            inputList = new List<int>(convertedSet);
+            return inputList;
+        }
+        internal static void SetUnusedCoord()
+        {
+            UnusedCoods.Clear();
+            for (int u = 0; u < 100; u++)
+            {
+                UnusedCoods.Add(u);
+            }
+        }
+        public static void EnemyShoot(int target, out bool successShoot, out bool checkedPosition)
+        {
             successShoot = true;
-            char charter = Char.ToUpper(PlayerData.Map[index]);
-            bool hited = true;
             checkedPosition = false;
-            switch (charter)
+            bool incorrectValue = false;
+            bool hited = true;
+            bool targetInMap = true;
+            int index = FindCorrectIndex(target);
+            char targetChar = Char.ToUpper(PlayerData.Map[index]);
+            switch (targetChar)
             {
                 case 'N':
                 case 'E':
@@ -166,7 +689,6 @@ namespace Battleship
                         PlayerData.DestroyersCountCurrent = PlayerData.DestroyersCountMax - PlayerData.SunkenDestroyersCount;
                         successShoot = true;
                         checkedPosition = false;
-
                         break;
                     }
                 case 'C':
@@ -211,7 +733,6 @@ namespace Battleship
                         }
                         PlayerData.SunkenCruisersCount = sunkenCruisers;
                         PlayerData.CruiserCountCurrent = PlayerData.CruiserCountMax - PlayerData.SunkenCruisersCount;
-
                         successShoot = true;
                         checkedPosition = false;
                         break;
@@ -255,7 +776,7 @@ namespace Battleship
                     }
                 default:
                     {
-                        MessageBox.Show($"Error Code: E06M3L3\r\n{charter} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show($"Error Code: E06M3L3\r\n{targetChar} is incorrect ship type", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                         FirstHitCoord = 0;
                         incorrectValue = true;
                         successShoot = false;
@@ -265,7 +786,7 @@ namespace Battleship
                         break;
                     }
             }
-            if (charter == 'F' || charter == 'D' || charter == 'C' || charter == 'B')
+            if (targetChar == 'F' || targetChar == 'D' || targetChar == 'C' || targetChar == 'B')
             {
                 ShipData.HitedDeckCount++;
                 EnemyData.HitCountCurrent++;
@@ -273,20 +794,25 @@ namespace Battleship
             if (!incorrectValue && successShoot && !checkedPosition)
             {
                 GenerateNearestCoords(target, 1551);
-                for (int bl = 0; bl < BlockedCoords.Count; bl++)
+                HashSet<int> forbiddenHashSet = new HashSet<int>(ForbiddenCoords);
+                foreach (int coord in BlockedCoords)
                 {
-                    PlayerData.Map[BlockedCoords[bl]] = 'E';
+                    PlayerData.Map[coord] = 'E';
+                }
+                for (int b = 0; b < BlockedCoords.Count; b++)
+                {
+                    forbiddenHashSet.Add(BlockedCoords[b]);
                 }
                 if (sunkenFrigate)
                 {
-                    for (int bl = 0; bl < AllowedCoords.Count; bl++)
+                    foreach (int coord in AllowedCoords)
                     {
-                        PlayerData.Map[AllowedCoords[bl]] = 'E';
-                        ForbiddenCoords.Add(AllowedCoords[bl]);
+                        PlayerData.Map[coord] = 'E';
+                        forbiddenHashSet.Add(coord);
                     }
-                    ForbiddenCoords.SortUnique();
                     sunkenFrigate = false;
                 }
+                ForbiddenCoords = new List<int>(forbiddenHashSet);
             }
             if (targetInMap)
             {
@@ -295,49 +821,10 @@ namespace Battleship
             }
             else
             {
-                MessageBox.Show($"Error Code: E06M3L3\r\n{charter} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show($"Error Code: E06M3L3\r\n{targetChar} the target is outside the map", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
             Hited = hited;
-        }
-        internal static int FindCorrectIndex(int index, bool enemyMap = false)
-        {
-            index -= 1551;
-            Button[] targetMap = !enemyMap ? PlayerData.MapButtons : EnemyData.MapButtons;
-            for (int b = 0; b < 100; b++)
-            {
-                if (targetMap[b].Tag.ToString() == $"{index}")
-                {
-                    return b;
-                }
-            }
-            MessageBox.Show($"Error Code: E37M5L5\r\nNon-existent index in data", $"{Handlers.Manager[5]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            return -1;
-        }
-        internal static int FindCorrectTagCoord(int index, bool enemyMap = false)
-        {
-            int coord = -1;
-            try
-            {
-                if (!enemyMap)
-                {
-                    sp.StringToInt(PlayerData.MapButtons[index].Tag.ToString(), out coord);
-                }
-                else
-                {
-                    sp.StringToInt(EnemyData.MapButtons[index].Tag.ToString(), out coord);
-                }
-                if (coord == -1)
-                {
-                    MessageBox.Show($"Error Code: E28M9L4\r\n{index} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-            catch
-            {
-                MessageBox.Show($"Error Code: E36M5L5\r\nNon-existent index in data", $"{Handlers.Manager[5]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                coord = -1;
-            }
-            return coord;
-        }
+        }        
         public static void Shoot(out bool successShoot)
         {
             bool checkedPosition;
@@ -350,19 +837,44 @@ namespace Battleship
             {
                 bool correctCoord = false;
                 int target;
+                int targetIndex;
                 do
                 {
                     if (ForbiddenCoords.Count != 0)
                     {
-                        ForbiddenCoords.Sort();
-                        target = FindShipCoord();
-                        int targetIndex = FindCorrectIndex(target);
-                        correctCoord = !ForbiddenCoords.Contains(targetIndex);
+                        if (ForbiddenCoords.Count < 50)
+                        {
+                            ForbiddenCoords = ForbiddenCoords.SortUnique();
+                            target = FindShipCoord();
+                            targetIndex = FindCorrectIndex(target);
+                            correctCoord = !ForbiddenCoords.Contains(targetIndex);
+                        }
+                        else
+                        {
+                            ForbiddenCoords = ForbiddenCoords.SortUnique();
+                            UnusedCoods.RemoveAll(coord => ForbiddenCoords.Contains(coord));
+                            Random randomTarget = new Random();
+                            int unusedIndex = randomTarget.Next(0, UnusedCoods.Count);
+                            targetIndex = UnusedCoods[unusedIndex];
+                            target = FindCorrectTagCoord(targetIndex) + 1551;
+                            if (!ForbiddenCoords.Contains(targetIndex))
+                            {
+                                TargetData[0] = target;
+                                TargetData[1] = (target - 1000) / 10;
+                                TargetData[2] = (target - 1000) % 10;
+                                TargetButtonTag = target;
+                                correctCoord = true;
+                            }
+                            else
+                            {
+                                continue;
+                            }
+                        }
                     }
                     else
                     {
                         target = FindShipCoord();
-                        correctCoord = true;
+                        correctCoord = true;                        
                     }
                 }
                 while (!correctCoord);
@@ -540,523 +1052,8 @@ namespace Battleship
                     DefinedShot = true;
                 }
             }
-            ForbiddenCoords.SortUnique();
+            ForbiddenCoords = ForbiddenCoords.SortUnique();
         }
-        public static int FindShipCoord()
-        {
-            Random randCoord = new Random();
-            int vertical = randCoord.Next(65, 75);
-            int horizontal = randCoord.Next(1, 11);
-            int target = vertical * 10 + horizontal + 1000;
-            TargetData[0] = target;
-            TargetData[1] = vertical;
-            TargetData[2] = horizontal;
-            TargetButtonTag = target;
-            return target;
-        }
-        static void GenerateNearestCoords(int firstCoords, int reduction = 0)
-        {
-            if (firstCoords != 0)
-            {
-                int targetCoord = firstCoords - reduction;
-                firstCoords = FindCorrectIndex(firstCoords);
-                AllowedCoords.Clear();
-                BlockedCoords.Clear();
-                string position = pos.GetCellPosition(targetCoord.ToString());
-                switch (position)
-                {
-                    case "center":
-                        {
-                            AllowedCoords.Add(firstCoords - 1);
-                            AllowedCoords.Add(firstCoords + 1);
-                            AllowedCoords.Add(firstCoords - 10);
-                            AllowedCoords.Add(firstCoords + 10);
-                            BlockedCoords.Add(firstCoords - 11);
-                            BlockedCoords.Add(firstCoords + 11);
-                            BlockedCoords.Add(firstCoords - 9);
-                            BlockedCoords.Add(firstCoords + 9);
-                            break;
-                        }
-                    case "left":
-                        {
-                            AllowedCoords.Add(firstCoords - 10);
-                            AllowedCoords.Add(firstCoords + 10);
-                            AllowedCoords.Add(firstCoords + 1);
-                            BlockedCoords.Add(firstCoords - 9);
-                            BlockedCoords.Add(firstCoords + 11);
-                            break;
-                        }
-                    case "right":
-                        {
-                            AllowedCoords.Add(firstCoords - 1);
-                            AllowedCoords.Add(firstCoords - 10);
-                            AllowedCoords.Add(firstCoords + 10);
-                            BlockedCoords.Add(firstCoords - 11);
-                            BlockedCoords.Add(firstCoords + 9);
-                            break;
-                        }
-                    case "top":
-                        {
-                            AllowedCoords.Add(firstCoords - 1);
-                            AllowedCoords.Add(firstCoords + 1);
-                            AllowedCoords.Add(firstCoords + 10);
-                            BlockedCoords.Add(firstCoords + 9);
-                            BlockedCoords.Add(firstCoords + 11);
-                            break;
-                        }
-                    case "bottom":
-                        {
-                            AllowedCoords.Add(firstCoords - 10);
-                            AllowedCoords.Add(firstCoords - 1);
-                            AllowedCoords.Add(firstCoords + 1);
-                            BlockedCoords.Add(firstCoords - 9);
-                            BlockedCoords.Add(firstCoords - 11);
-                            break;
-                        }
-                    case "corner1":
-                        {
-                            AllowedCoords.Add(firstCoords + 10);
-                            AllowedCoords.Add(firstCoords + 1);
-                            BlockedCoords.Add(firstCoords + 11);
-                            break;
-                        }
-                    case "corner2":
-                        {
-                            AllowedCoords.Add(firstCoords - 1);
-                            AllowedCoords.Add(firstCoords + 10);
-                            BlockedCoords.Add(firstCoords +9);
-                            break;
-                        }
-                    case "corner3":
-                        {
-                            AllowedCoords.Add(firstCoords - 10);
-                            AllowedCoords.Add(firstCoords - 1);
-                            BlockedCoords.Add(firstCoords - 11);
-                            break;
-                        }
-                    case "corner4":
-                        {   
-                            AllowedCoords.Add(firstCoords - 10);
-                            AllowedCoords.Add(firstCoords + 1);
-                            BlockedCoords.Add(firstCoords - 9);
-                            break;
-                        }
-                    default:
-                        {
-                            MessageBox.Show($"Error Code: E09M3L3\r\n{position} is incorrect position", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                        }
-                }
-                for (int b = 0; b < BlockedCoords.Count; b++)
-                {
-                    ForbiddenCoords.Add(BlockedCoords[b]);
-                }
-                ForbiddenCoords.SortUnique();
-                AllowedCoords.Sort();
-                BlockedCoords.Sort();
-            }
-        }
-        public static List<T> SortUnique<T>(this List<T> disorderedList) where T : IComparable<T>
-        {
-            HashSet<T> unique = new HashSet<T>(disorderedList);
-            List<T> newList = new List<T>(unique);
-            newList.Sort();
-            return newList;
-        }
-        private static List<int> DeleteForbiddenCoords(List<int> inputList)
-        {
-            int[] coords = new int[2];
-            HashSet<int> forbiddenSet = new HashSet<int>(ForbiddenCoords);
-            HashSet<int> convertedSet = new HashSet<int>(inputList);
-            var intersection = convertedSet.Where(x => forbiddenSet.Contains(x)).ToList();
-            foreach (var item in intersection)
-            {
-                convertedSet.Remove(item);
-            }
-            inputList = new List<int>(convertedSet);
-            return inputList;
-        }
-        private static void NewShotPreparing()
-        {
-            FirstHitCoord = 0;
-            FirstSuccessHitCoord = 0;
-            SecondSuccessHitCoord = 0;
-            ThirdSuccssHitCoord = 0;
-            SuccessShoots = new[] { false, false, false };
-            DefinedCoord = 0;
-            DefinedShot = false;
-        }
-        private static void SetHitCoords(int target)
-        {
-            target = FindCorrectTagCoord(target);
-            if (target > 0)
-            {
-                if (FirstSuccessHitCoord == 0)
-                {
-                    FirstSuccessHitCoord = target;
-                    SuccessShoots[0] = true;
-                }
-                else
-                {
-                    if (SecondSuccessHitCoord == 0)
-                    {
-                        SecondSuccessHitCoord = target;
-                        SuccessShoots[1] = true;
-                    }
-                    else
-                    {
-                        if (ThirdSuccssHitCoord == 0)
-                        {
-                            ThirdSuccssHitCoord = target;
-                            SuccessShoots[2] = true;
-                        }
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show($"Error Code: E38M4L4\r\n{target} is incorrect target", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        static void SetRoundMinesInPlayerMap(int shipType)
-        {
-            for (int s = 0; s < shipType; s++)
-            {
-                int[] mineTags = new int[0];
-                int firstCoord = -1;
-                string orientation = null;
-                int shipSize = 5 - shipType;
-                int[] sunkenShips = new int[shipSize];
-                switch (shipSize)
-                {
-                    case 2:
-                        {
-                            if (PlayerData.DestroyersSunken[s])
-                            {
-                                if (Math.Abs(PlayerData.DestroyerCoords[s, 0] - PlayerData.DestroyerCoords[s, 1]) == 1)
-                                {
-                                    firstCoord = PlayerData.DestroyerCoords[s, 0];
-                                    orientation = "H";
-                                }
-                                else if (Math.Abs(PlayerData.DestroyerCoords[s, 0] - PlayerData.DestroyerCoords[s, 1]) == 10)
-                                {
-                                    firstCoord = PlayerData.DestroyerCoords[s, 1];
-                                    orientation = "V";
-                                }
-                                for (int sk = 0; sk < shipSize; sk++)
-                                {
-                                    sunkenShips[sk] = PlayerData.DestroyerCoords[s, sk];
-                                }
-                            }
-                            break;
-                        }
-                    case 3:
-                        {
-                            if (PlayerData.CruisersSunken[s])
-                            {
-                                if (Math.Abs(PlayerData.CruiserCoords[s, 0] - PlayerData.CruiserCoords[s, 1]) == 1)
-                                {
-                                    firstCoord = PlayerData.CruiserCoords[s, 0];
-                                    orientation = "H";
-                                }
-                                else if (Math.Abs(PlayerData.CruiserCoords[s, 0] - PlayerData.CruiserCoords[s, 1]) == 10)
-                                {
-                                    firstCoord = PlayerData.CruiserCoords[s, 2];
-                                    orientation = "V";
-                                }
-                                for (int sk = 0; sk < shipSize; sk++)
-                                {
-                                    sunkenShips[sk] = PlayerData.CruiserCoords[s, sk];
-                                }
-                            }
-                            break;
-                        }
-                    case 4:
-                        {
-                            if (PlayerData.BattleshipSunken[s])
-                            {
-                                if (Math.Abs(PlayerData.BattleshipCoords[s, 0] - PlayerData.BattleshipCoords[s, 1]) == 1)
-                                {
-                                    firstCoord = PlayerData.BattleshipCoords[s, 0];
-                                    orientation = "H";
-                                }
-                                else if (Math.Abs(PlayerData.BattleshipCoords[s, 0] - PlayerData.BattleshipCoords[s, 1]) == 10)
-                                {
-                                    firstCoord = PlayerData.BattleshipCoords[s, 3];
-                                    orientation = "V";
-                                }
-                                for (int sk = 0; sk < shipSize; sk++)
-                                {
-                                    sunkenShips[sk] = PlayerData.BattleshipCoords[s, sk];
-                                }
-                            }
-                            break;
-                        }
-                    default:
-                        {
-                            
-                            break;
-                        }
-                }
-                if (firstCoord != -1)
-                {
-                    firstCoord = FindCorrectTagCoord(firstCoord);
-                    pos.GetCoordsFromTag(firstCoord.ToString(), out int x, out int y, out int id);
-                    string cellPos = pos.GetCellPosition(firstCoord.ToString());
-                    if (orientation != null)
-                    {
-                        int minesCount = ShipData.GetMineCount(cellPos, shipSize, x, y, orientation);
-                        Array.Resize(ref mineTags, minesCount);
-                        if (shipSize > 0)
-                        {
-                            mineTags = ShipData.MineTagsFill(mineTags, cellPos, shipSize, firstCoord, orientation);
-                            for (int m = 0; m < minesCount; m++)
-                            {
-                                mineTags[m] = FindCorrectIndex(mineTags[m] + 1551);
-                                PlayerData.Map[mineTags[m]] = 'E';
-                                ForbiddenCoords.Add(mineTags[m]);
-                            }
-                            for (int sk = 0; sk < sunkenShips.Length; sk++)
-                            {
-                                PlayerData.Map[sunkenShips[sk]] = 'S';
-                            }
-                            ForbiddenCoords.SortUnique();
-                        }
-                        else
-                        {
-                            MessageBox.Show($"Error Code: E11M3L3\r\n{shipSize} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Error Code: E10M3L3\r\n{orientation} is incorrect ship position", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                }
-            }
-        }
-        internal static void SetRoundMinesInEnemyMap(int shipType)
-        {
-            for (int s = 0; s < shipType; s++)
-            {
-                int[] mineTags = new int[0];
-                int firstCoord = -1;
-                string orientation = null;
-                int shipSize = 5 - shipType;
-                int[] sunkenShips = new int[shipSize];
-                switch (shipSize)
-                {
-                    case 2:
-                        {
-                            if (EnemyData.DestroyersSunken[s])
-                            {
-                                if (Math.Abs(EnemyData.DestroyerCoords[s, 0] - EnemyData.DestroyerCoords[s, 1]) == 1)
-                                {
-                                    firstCoord = EnemyData.DestroyerCoords[s, 0];
-                                    orientation = "H";
-                                }
-                                else if (Math.Abs(EnemyData.DestroyerCoords[s, 0] - EnemyData.DestroyerCoords[s, 1]) == 10)
-                                {
-                                    firstCoord = EnemyData.DestroyerCoords[s, 1];
-                                    orientation = "V";
-                                }
-                                for (int sk = 0; sk < shipSize; sk++)
-                                {
-                                    sunkenShips[sk] = EnemyData.DestroyerCoords[s, sk];
-                                }
-                            }
-                            break;
-                        }
-                    case 3:
-                        {
-                            if (EnemyData.CruisersSunken[s])
-                            {
-                                if (Math.Abs(EnemyData.CruiserCoords[s, 0] - EnemyData.CruiserCoords[s, 1]) == 1)
-                                {
-                                    firstCoord = EnemyData.CruiserCoords[s, 0];
-                                    orientation = "H";
-                                }
-                                else if (Math.Abs(EnemyData.CruiserCoords[s, 0] - EnemyData.CruiserCoords[s, 1]) == 10)
-                                {
-                                    firstCoord = EnemyData.CruiserCoords[s, 2];
-                                    orientation = "V";
-                                }
-                                for (int sk = 0; sk < shipSize; sk++)
-                                {
-                                    sunkenShips[sk] = EnemyData.CruiserCoords[s, sk];
-                                }
-                            }
-                            break;
-                        }
-                    case 4:
-                        {
-                            if (EnemyData.BattleshipSunken[s])
-                            {
-                                if (Math.Abs(EnemyData.BattleshipCoords[s, 0] - EnemyData.BattleshipCoords[s, 1]) == 1)
-                                {
-                                    firstCoord = EnemyData.BattleshipCoords[s, 0];
-                                    orientation = "H";
-                                }
-                                else if (Math.Abs(EnemyData.BattleshipCoords[s, 0] - EnemyData.BattleshipCoords[s, 1]) == 10)
-                                {
-                                    firstCoord = EnemyData.BattleshipCoords[s, 3];
-                                    orientation = "V";
-                                }
-                                for (int sk = 0; sk < shipSize; sk++)
-                                {
-                                    sunkenShips[sk] = EnemyData.BattleshipCoords[s, sk];
-                                }
-                            }
-                            break;
-                        }
-                    default:
-                        {
-                            MessageBox.Show($"Error Code: E05M3L3\r\n{shipSize} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                            break;
-                        }
-                }
-                if (firstCoord != -1)
-                {
-                    firstCoord = FindCorrectTagCoord(firstCoord, true);
-                    pos.GetCoordsFromTag(firstCoord.ToString(), out int x, out int y, out int id);
-                    string cellPos = pos.GetCellPosition(firstCoord.ToString());
-                    if (orientation != null)
-                    {
-                        int minesCount = ShipData.GetMineCount(cellPos, shipSize, x, y, orientation);
-                        Array.Resize(ref mineTags, minesCount);
-                        if (shipSize > 0)
-                        {
-                            mineTags = ShipData.MineTagsFill(mineTags, cellPos, shipSize, firstCoord, orientation);
-                            for (int m = 0; m < minesCount; m++)
-                            {
-                                mineTags[m] = FindCorrectIndex(mineTags[m] + 1551, true);
-                                EnemyData.Map[mineTags[m]] = 'M';
-                            }
-                            for (int sk = 0; sk < sunkenShips.Length; sk++)
-                            {
-                                EnemyData.Map[sunkenShips[sk]] = 'S';
-                            }
-                        }
-                        else
-                        {
-                            MessageBox.Show($"Error Code: E06M3L3\r\n{shipSize} is incorrect ship size", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    else
-                    {
-                        MessageBox.Show($"Error Code: E13M3L3\r\n{orientation} is incorrect ship position", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else
-                {
-                   
-                }
-            }
-        }
-        internal static void GenerateBlockedCoords(string position, int firstCoord, bool isFrigate = false)
-        {
-            EnemyData.AllowedCoords.Clear();
-            EnemyData.BlockedCoords.Clear();
-            switch (position)
-            {
-                case "center":
-                    {
-                        EnemyData.AllowedCoords.Add(firstCoord - 1);
-                        EnemyData.AllowedCoords.Add(firstCoord + 1);
-                        EnemyData.AllowedCoords.Add(firstCoord - 10);
-                        EnemyData.AllowedCoords.Add(firstCoord + 10);
-                        EnemyData.BlockedCoords.Add(firstCoord - 11);
-                        EnemyData.BlockedCoords.Add(firstCoord + 11);
-                        EnemyData.BlockedCoords.Add(firstCoord - 9);
-                        EnemyData.BlockedCoords.Add(firstCoord + 9);
-                        break;
-                    }
-                case "left":
-                    {
-                        EnemyData.AllowedCoords.Add(firstCoord - 10);
-                        EnemyData.AllowedCoords.Add(firstCoord + 10);
-                        EnemyData.AllowedCoords.Add(firstCoord + 1);
-                        EnemyData.BlockedCoords.Add(firstCoord - 9);
-                        EnemyData.BlockedCoords.Add(firstCoord + 11);
-                        break;
-                    }
-                case "right":
-                    {
-                        EnemyData.AllowedCoords.Add(firstCoord - 1);
-                        EnemyData.AllowedCoords.Add(firstCoord - 10);
-                        EnemyData.AllowedCoords.Add(firstCoord + 10);
-                        EnemyData.BlockedCoords.Add(firstCoord - 11);
-                        EnemyData.BlockedCoords.Add(firstCoord + 9);
-                        break;
-                    }
-                case "top":
-                    {
-                        EnemyData.AllowedCoords.Add(firstCoord - 1);
-                        EnemyData.AllowedCoords.Add(firstCoord + 1);
-                        EnemyData.AllowedCoords.Add(firstCoord + 10);
-                        EnemyData.BlockedCoords.Add(firstCoord + 9);
-                        EnemyData.BlockedCoords.Add(firstCoord + 11);
-                        break;
-                    }
-                case "bottom":
-                    {
-                        EnemyData.AllowedCoords.Add(firstCoord - 10);
-                        EnemyData.AllowedCoords.Add(firstCoord - 1);
-                        EnemyData.AllowedCoords.Add(firstCoord + 1);
-                        EnemyData.BlockedCoords.Add(firstCoord - 9);
-                        EnemyData.BlockedCoords.Add(firstCoord - 11);
-                        break;
-                    }
-                case "corner1":
-                    {
-                        EnemyData.AllowedCoords.Add(firstCoord + 10);
-                        EnemyData.AllowedCoords.Add(firstCoord + 1);
-                        EnemyData.BlockedCoords.Add(firstCoord + 11);
-                        break;
-                    }
-                case "corner2":
-                    {
-                        EnemyData.AllowedCoords.Add(firstCoord - 1);
-                        EnemyData.AllowedCoords.Add(firstCoord + 10);
-                        EnemyData.BlockedCoords.Add(firstCoord + 9);
-                        break;
-                    }
-                case "corner3":
-                    {
-                        EnemyData.AllowedCoords.Add(firstCoord - 10);
-                        EnemyData.AllowedCoords.Add(firstCoord - 1);
-                        EnemyData.BlockedCoords.Add(firstCoord - 11);
-                        break;
-                    }
-                case "corner4":
-                    {
-                        EnemyData.AllowedCoords.Add(firstCoord - 10);
-                        EnemyData.AllowedCoords.Add(firstCoord + 1);
-                        EnemyData.BlockedCoords.Add(firstCoord - 9);
-                        break;
-                    }
-                default:
-                    {
-                        MessageBox.Show($"Error Code: E14M3L3\r\n{position} is incorrect position", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        break;
-                    }
-            }
-            if (!isFrigate)
-            {
-                EnemyData.AllowedCoords.Clear();
-            }
-        }
-        //Unused 6
-        //Unused 8
-        //Unused 7
-        //Unused 10
-        //Unused 11
-        //Unused 12
-        //Unused 13
-        //Unused 14
-        //Unused 15
-        //Unused 16
+        //Unused [6-8], [10-16]
     }
 }
