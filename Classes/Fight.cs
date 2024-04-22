@@ -943,19 +943,20 @@ namespace Battleship
                             }
                         case 1:
                             {
-                                nextCoords.Add(indexes[1] - Math.Abs(delta));
-                                nextCoords.Add(indexes[0] + Math.Abs(delta));
+                                nextCoords.Add(indexes[0] + delta);
+                                nextCoords.Add(indexes[1] - delta);
                                 lineChar = 'r';
                                 break;
                             }
                         case 10:
                             {
-                                nextCoords.Add(indexes[1] - Math.Abs(delta));
                                 nextCoords.Add(indexes[0] + delta);
+                                nextCoords.Add(indexes[1] - delta);
                                 lineChar = 'c';
                                 break;
                             }
                     }
+
                     nextCoords = pos.DeleteOutLineCoords(nextCoords, indexes[0], lineChar);
                     nextCoords = DeleteForbiddenCoords(nextCoords);
                     PossibleTargets = nextCoords;
