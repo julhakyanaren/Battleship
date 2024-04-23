@@ -11,6 +11,7 @@ namespace Battleship.Classes
     public static class HitChanceData
     {
         static Position Position = new Position();
+
         public static Button SelectedCell = null;
         public static List<Button> CurrentMap = new List<Button>();
 
@@ -21,8 +22,9 @@ namespace Battleship.Classes
 
         public static string[] RelativelyStrings = { "Forbidden", "Low", "Average", "High", "Guaranted" };        
         public static string[] IndependenStrings = { "Forbidden", "Very Low", "Low", "Average", "High", "Very High", "Guaranted" };
+        public static Color[] RelativelyColors = { Color.Firebrick, Color.OrangeRed, Color.DarkOrange, Color.YellowGreen, Color.Lime };
         public static Color[] IndependentColors = { Color.Firebrick, Color.Red, Color.OrangeRed, Color.DarkOrange, Color.Yellow, Color.YellowGreen, Color.Lime };
-        public static Color[] RelativelyColors = { Color.Firebrick, Color.OrangeRed, Color.DarkOrange, Color.Yellow, Color.Lime };
+      
         
         public static bool FormClosed = true;
         public static bool ExampleCraeted = false;
