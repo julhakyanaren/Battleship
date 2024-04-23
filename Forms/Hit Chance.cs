@@ -126,7 +126,6 @@ namespace Battleship.Forms
                 UpdateProbabilityData();
             }
         }
-
         private void ExampleButton_MouseLeave(object sender, EventArgs e)
         {
             Button leaveButton = sender as Button;
@@ -275,54 +274,93 @@ namespace Battleship.Forms
             SetShipsMaxCount();
             SetShipCurrentCount();
         }
-
         private void TB_HC_ShotEfficiency_TextChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < HitChanceData.EfficientyDataString.Length; i++)
+            for (int i = 0; i < HitChanceData.RelativelyStrings.Length; i++)
             {
-                if (TB_HC_ShotEfficiency.Text == HitChanceData.EfficientyDataString[i])
+                if (TB_HC_ShotEfficiency.Text == HitChanceData.RelativelyStrings[i])
                 {
-                    TB_HC_ShotEfficiency.ForeColor = HitChanceData.EfficientyDataColor[i];
+                    TB_HC_ShotEfficiency.ForeColor = HitChanceData.RelativelyColors[i];
                 }
             }
         }
         void SetHitProbobilityTextColor(double chance, TextBox probobility_TB, TextBox efficiency_TB)
         {
-            if (chance == 0)
+            switch (chance)
             {
-                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[0];
-                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[0]}";
+                case 0:
+                    {
+                        probobility_TB.ForeColor = HitChanceData.RelativelyColors[0];
+                        efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[0]}";
+                        break;
+                    }
+                case 25:
+                    {
+                        probobility_TB.ForeColor = HitChanceData.RelativelyColors[1];
+                        efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[1]}";
+                        break;
+                    }
+                case 50:
+                    {
+                        probobility_TB.ForeColor = HitChanceData.RelativelyColors[3];
+                        efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[3]}";
+                        break;
+                    }
+                case 100:
+                    {
+                        probobility_TB.ForeColor = HitChanceData.RelativelyColors[4];
+                        efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[4]}";
+                        break;
+                    }
+                default:
+                    {
+                        if (Math.Round(chance, 0) == 33)
+                        {
+                            probobility_TB.ForeColor = HitChanceData.RelativelyColors[2];
+                            efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[2]}";
+                            break;
+                        }
+                        else
+                        {
+                            break;
+                        }
+                    }
             }
-            else if (sp.IsFloatBetween(0, 25, chance, "OO"))
-            {
-                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[1];
-                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[1]}";
-            }
-            else if (sp.IsFloatBetween(25, 5, chance, "IO"))
-            {
-                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[2];
-                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[2]}";
-            }
-            else if (sp.IsFloatBetween(5, 75, chance, "IO"))
-            {
-                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[3];
-                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[3]}";
-            }
-            else if (sp.IsFloatBetween(75, 90, chance, "IO"))
-            {
-                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[4];
-                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[4]}";
-            }
-            else if (sp.IsFloatBetween(90, 100, chance, "IO"))
-            {
-                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[5];
-                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[5]}";
-            }
-            else if (chance == 100)
-            {
-                probobility_TB.ForeColor = HitChanceData.EfficientyDataColor[6];
-                efficiency_TB.Text = $"{HitChanceData.EfficientyDataString[6]}";
-            }
+            //if (chance == 0)
+            //{
+            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[0];
+            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[0]}";
+            //}
+            //else if (sp.IsFloatBetween(0, 25, chance, "OO"))
+            //{
+            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[1];
+            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[1]}";
+            //}
+            //else if (sp.IsFloatBetween(25, 50, chance, "IO"))
+            //{
+            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[2];
+            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[2]}";
+            //}
+            //else if (sp.IsFloatBetween(50, 75, chance, "IO"))
+            //{
+            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[3];
+            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[3]}";
+            //}
+            //else if (sp.IsFloatBetween(75, 90, chance, "IO"))
+            //{
+            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[4];
+            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[4]}";
+            //}
+            //else if (sp.IsFloatBetween(90, 100, chance, "IO"))
+            //{
+            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[5];
+            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[5]}";
+            //}
+            //else if (chance == 100)
+            //{
+            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[6];
+            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[6]}";
+            //}
         }
         private void TB_HC_HitProbobility_TextChanged(object sender, EventArgs e)
         {
@@ -512,7 +550,6 @@ namespace Battleship.Forms
                     }
             }
         }
-
         private void TB_HC_IndependentChance_TextChanged(object sender, EventArgs e)
         {
             if (TB_HC_IndependentChance.Text == "No moves available")
@@ -521,45 +558,45 @@ namespace Battleship.Forms
             }
             else if (HitChanceData.IndependentChance == 0)
             {
-                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[0];
-                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[0];
-                TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[0]}";
+                TB_HC_IndependentChance.ForeColor = HitChanceData.IndependentColors[0];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.IndependentColors[0];
+                TB_HC_IndependentEfficity.Text = $"{HitChanceData.IndependenStrings[0]}";
             }
             else if (sp.IsFloatBetween(0, 25, HitChanceData.IndependentChance, "OO"))
             {
-                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[1];
-                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[1];
-                TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[1]}";
+                TB_HC_IndependentChance.ForeColor = HitChanceData.IndependentColors[1];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.IndependentColors[1];
+                TB_HC_IndependentEfficity.Text = $"{HitChanceData.IndependenStrings[1]}";
             }
             else if (sp.IsFloatBetween(25, 5, HitChanceData.IndependentChance, "IO"))
             {
-                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[2];
-                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[2];
-                TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[2]}";
+                TB_HC_IndependentChance.ForeColor = HitChanceData.IndependentColors[2];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.IndependentColors[2];
+                TB_HC_IndependentEfficity.Text = $"{HitChanceData.IndependenStrings[2]}";
             }
             else if (sp.IsFloatBetween(5, 75, HitChanceData.IndependentChance, "IO"))
             {
-                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[3];
-                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[3];
-                TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[3]}";
+                TB_HC_IndependentChance.ForeColor = HitChanceData.IndependentColors[3];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.IndependentColors[3];
+                TB_HC_IndependentEfficity.Text = $"{HitChanceData.IndependenStrings[3]}";
             }
             else if (sp.IsFloatBetween(75, 90, HitChanceData.IndependentChance, "IO"))
             {
-                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[4];
-                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[4];
-                TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[4]}";
+                TB_HC_IndependentChance.ForeColor = HitChanceData.IndependentColors[4];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.IndependentColors[4];
+                TB_HC_IndependentEfficity.Text = $"{HitChanceData.IndependenStrings[4]}";
             }
             else if (sp.IsFloatBetween(90, 100, HitChanceData.IndependentChance, "IO"))
             {
-                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[5];
-                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[5];
-                TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[5]}";
+                TB_HC_IndependentChance.ForeColor = HitChanceData.IndependentColors[5];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.IndependentColors[5];
+                TB_HC_IndependentEfficity.Text = $"{HitChanceData.IndependenStrings[5]}";
             }
             else if (HitChanceData.IndependentChance == 100)
             {
-                TB_HC_IndependentChance.ForeColor = HitChanceData.EfficientyDataColor[6];
-                TB_HC_IndependentEfficity.ForeColor = HitChanceData.EfficientyDataColor[6];
-                TB_HC_IndependentEfficity.Text = $"{HitChanceData.EfficientyDataString[6]}";
+                TB_HC_IndependentChance.ForeColor = HitChanceData.IndependentColors[6];
+                TB_HC_IndependentEfficity.ForeColor = HitChanceData.IndependentColors[6];
+                TB_HC_IndependentEfficity.Text = $"{HitChanceData.IndependenStrings[6]}";
             }
         }
         void UpdateProbabilityData()
@@ -619,7 +656,6 @@ namespace Battleship.Forms
         {
             ShowIndependentChances();
         }
-
         private void BS_HC_ShowChart_Click(object sender, EventArgs e)
         {
             if (MessageBox.Show("Open chart now?", "Game Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
