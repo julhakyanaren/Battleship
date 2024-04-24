@@ -334,41 +334,6 @@ namespace Battleship.Forms
                         }
                     }
             }
-            //if (chance == 0)
-            //{
-            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[0];
-            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[0]}";
-            //}
-            //else if (sp.IsFloatBetween(0, 25, chance, "OO"))
-            //{
-            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[1];
-            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[1]}";
-            //}
-            //else if (sp.IsFloatBetween(25, 50, chance, "IO"))
-            //{
-            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[2];
-            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[2]}";
-            //}
-            //else if (sp.IsFloatBetween(50, 75, chance, "IO"))
-            //{
-            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[3];
-            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[3]}";
-            //}
-            //else if (sp.IsFloatBetween(75, 90, chance, "IO"))
-            //{
-            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[4];
-            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[4]}";
-            //}
-            //else if (sp.IsFloatBetween(90, 100, chance, "IO"))
-            //{
-            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[5];
-            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[5]}";
-            //}
-            //else if (chance == 100)
-            //{
-            //    probobility_TB.ForeColor = HitChanceData.IndependentColors[6];
-            //    efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[6]}";
-            //}
         }
         private void TB_HC_HitProbobility_TextChanged(object sender, EventArgs e)
         {

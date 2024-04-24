@@ -79,6 +79,7 @@
             this.L_EnemyFrigates = new System.Windows.Forms.Label();
             this.TB_EnemyShips_Frigates = new System.Windows.Forms.TextBox();
             this.GB_HC_ProbabilityData = new System.Windows.Forms.GroupBox();
+            this.BS_HC_ShowChart = new System.Windows.Forms.Button();
             this.BS_HC_IndependentChances_Update = new System.Windows.Forms.Button();
             this.CHB_ShowMoveNumber = new System.Windows.Forms.CheckBox();
             this.L_DecimalPlaces_Count = new System.Windows.Forms.Label();
@@ -103,7 +104,6 @@
             this.GB_HC_ShipData = new System.Windows.Forms.GroupBox();
             this.L_Info_ShipsCurrentCount = new System.Windows.Forms.Label();
             this.L_Info_ShipsMaxCount = new System.Windows.Forms.Label();
-            this.BS_HC_ShowChart = new System.Windows.Forms.Button();
             this.TLP_MC_Map_Main.SuspendLayout();
             this.PNL_MC_Map_Letters.SuspendLayout();
             this.TLP_MC_Map_Letters.SuspendLayout();
@@ -904,6 +904,20 @@
             this.GB_HC_ProbabilityData.TabStop = false;
             this.GB_HC_ProbabilityData.Text = "Probability Data";
             // 
+            // BS_HC_ShowChart
+            // 
+            this.BS_HC_ShowChart.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BS_HC_ShowChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_HC_ShowChart.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_HC_ShowChart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.BS_HC_ShowChart.Location = new System.Drawing.Point(15, 303);
+            this.BS_HC_ShowChart.Name = "BS_HC_ShowChart";
+            this.BS_HC_ShowChart.Size = new System.Drawing.Size(233, 24);
+            this.BS_HC_ShowChart.TabIndex = 71;
+            this.BS_HC_ShowChart.Text = "View independent chance dynamic chart";
+            this.BS_HC_ShowChart.UseVisualStyleBackColor = true;
+            this.BS_HC_ShowChart.Click += new System.EventHandler(this.BS_HC_ShowChart_Click);
+            // 
             // BS_HC_IndependentChances_Update
             // 
             this.BS_HC_IndependentChances_Update.Cursor = System.Windows.Forms.Cursors.Hand;
@@ -1079,7 +1093,6 @@
             this.TB_HC_ShotEfficiency.ReadOnly = true;
             this.TB_HC_ShotEfficiency.Size = new System.Drawing.Size(82, 22);
             this.TB_HC_ShotEfficiency.TabIndex = 45;
-            this.TB_HC_ShotEfficiency.Text = "Forbidden";
             this.TB_HC_ShotEfficiency.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TB_HC_ShotEfficiency.TextChanged += new System.EventHandler(this.TB_HC_ShotEfficiency_TextChanged);
             // 
@@ -1093,7 +1106,6 @@
             this.TB_HC_HitProbobility.ReadOnly = true;
             this.TB_HC_HitProbobility.Size = new System.Drawing.Size(82, 22);
             this.TB_HC_HitProbobility.TabIndex = 45;
-            this.TB_HC_HitProbobility.Text = "0%";
             this.TB_HC_HitProbobility.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.TB_HC_HitProbobility.TextChanged += new System.EventHandler(this.TB_HC_HitProbobility_TextChanged);
             // 
@@ -1213,20 +1225,6 @@
             this.L_Info_ShipsMaxCount.Size = new System.Drawing.Size(28, 17);
             this.L_Info_ShipsMaxCount.TabIndex = 61;
             this.L_Info_ShipsMaxCount.Text = "Max";
-            // 
-            // BS_HC_ShowChart
-            // 
-            this.BS_HC_ShowChart.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BS_HC_ShowChart.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_HC_ShowChart.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_ShowChart.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_ShowChart.Location = new System.Drawing.Point(15, 303);
-            this.BS_HC_ShowChart.Name = "BS_HC_ShowChart";
-            this.BS_HC_ShowChart.Size = new System.Drawing.Size(233, 24);
-            this.BS_HC_ShowChart.TabIndex = 71;
-            this.BS_HC_ShowChart.Text = "View independent chance dynamic chart";
-            this.BS_HC_ShowChart.UseVisualStyleBackColor = true;
-            this.BS_HC_ShowChart.Click += new System.EventHandler(this.BS_HC_ShowChart_Click);
             // 
             // HitChance
             // 
