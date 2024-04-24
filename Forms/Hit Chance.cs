@@ -21,9 +21,17 @@ namespace Battleship.Forms
 
         private string shipType = null;
         private string cellCoord = null;
+        private double[] probobilityArray = new double[100];
         public HitChance()
         {
             InitializeComponent();
+        }
+        public void SetProbobilityArrayDefaultValues()
+        {
+            for (int p = 0; p < probobilityArray.Length; p++)
+            {
+                probobilityArray[p] = 0.0f;
+            }
         }
         private void HitChance_Load(object sender, EventArgs e)
         {
@@ -33,7 +41,7 @@ namespace Battleship.Forms
             {
                 GetCellData(HitChanceData.SelectedCell);
             }
-            HitChanceData.SetProbobilityArrayDefaultValues();
+            SetProbobilityArrayDefaultValues();
             GenerateMap();
             SetShipsMaxCount();
             SetShipCurrentCount();
@@ -69,7 +77,7 @@ namespace Battleship.Forms
                                     ExampleButtons[b].BackColor = HitChanceData.CurrentMap[b].BackColor;
                                     if (ExampleButtons[b].BackColor == Color.DeepSkyBlue)
                                     {
-                                        HitChanceData.ProbobilityArray[b] = 0;
+                                        probobilityArray[b] = 0;
                                     }
                                     break;
                                 }
@@ -84,7 +92,7 @@ namespace Battleship.Forms
             {
                 MessageBox.Show("Example Map reset in process", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
-            
+
         }
         async void GenerateMap()
         {
@@ -92,7 +100,7 @@ namespace Battleship.Forms
             {
                 for (int b = 0; b < HitChanceData.CurrentMap.Count; b++)
                 {
-                    await Task .Delay(4);
+                    await Task.Delay(4);
                     int x;
                     int y;
                     x = b / 10;
@@ -136,21 +144,21 @@ namespace Battleship.Forms
         {
             Button hoverButton = sender as Button;
             int index = Array.IndexOf(ExampleButtons, hoverButton);
-            HitChanceData.HitProbobility = HitChanceData.ProbobilityArray[index];
+            HitChanceData.HitProbobility = probobilityArray[index];
             TB_HC_HitProbobility.Text = HitChanceData.HitProbobility.ToString("F2") + "%";
             hoverButton.FlatAppearance.BorderSize = 2;
             hoverButton.FlatAppearance.BorderColor = Color.DarkOrange;
         }
         void CheckProbobilityArray()
         {
-            for (int p = 0; p < HitChanceData.ProbobilityArray.Length; p++)
+            for (int p = 0; p < probobilityArray.Length; p++)
             {
                 Button button = ExampleButtons[p];
                 if (button != null)
                 {
                     if (button.BackColor != Color.White && button.BackColor != Color.Green)
                     {
-                        HitChanceData.ProbobilityArray[p] = 0;
+                        probobilityArray[p] = 0;
                     }
                 }
             }
@@ -389,7 +397,7 @@ namespace Battleship.Forms
                 }
             }
         }
-        void CheckChance(int firstIndex, bool resetData = true)
+        void CheckChance(int firstIndex)
         {
             firstIndex = FindButtonIndexByTag(firstIndex.ToString());
             HitChanceData.PossibleIndexes.Clear();
@@ -401,16 +409,11 @@ namespace Battleship.Forms
             int currentIndex = 0;
             List<int> nextIndexes = new List<int>();
             List<int> indexList = new List<int>();
-            if (resetData)
-            {
-                HitChanceData.ResetDiscoveredCells();
-            }
-            for (int a = 0; a < HitChanceData.AllowedCoordsCount; a++)
+            for (int a = 0; a < HitChanceData.AllowedCoords.Count; a++)
             {
                 int index = FindButtonIndexByTag(HitChanceData.AllowedCoords[a].ToString());
                 if (ExampleButtons[index].BackColor == Color.White || ExampleButtons[index].BackColor == Color.Red)
                 {
-                    HitChanceData.DiscoveredCells++;
                     whiteCells++;
                     currentIndex = FindButtonIndexByTag(HitChanceData.AllowedCoords[a].ToString());
                     indexList.Add(currentIndex);
@@ -476,7 +479,7 @@ namespace Battleship.Forms
                             //probobility = 100 / whiteIndexes; //uncomment
                             for (int i = 0; i < nextIndexes.Count; i++)
                             {
-                                HitChanceData.ProbobilityArray[nextIndexes[i]] = probobility;
+                                probobilityArray[nextIndexes[i]] = probobility;
                             }
                         }
                     }
@@ -484,7 +487,6 @@ namespace Battleship.Forms
                 else
                 {
                     HitChanceData.ForbiddenIndexes.Add(FindButtonIndexByTag(HitChanceData.AllowedCoords[a].ToString()));
-                    HitChanceData.UndiscoveredCells++;
                     otherCells++;
                 }
             }
@@ -493,7 +495,7 @@ namespace Battleship.Forms
                 probobility = 100 / whiteCells;
                 for (int p = 0; p < indexList.Count; p++)
                 {
-                    HitChanceData.ProbobilityArray[indexList[p]] = probobility;
+                    probobilityArray[indexList[p]] = probobility;
                 }
             }
             CheckProbobilityArray();
@@ -535,17 +537,17 @@ namespace Battleship.Forms
             {
                 case "DeepSkyBlue":
                     {
-                        HitChanceData.ProbobilityArray[index] = 0;
+                        probobilityArray[index] = 0;
                         break;
                     }
                 case "Red":
                     {
-                        HitChanceData.ProbobilityArray[index] = 0;
+                        probobilityArray[index] = 0;
                         break;
                     }
                 case "Firebrick":
                     {
-                        HitChanceData.ProbobilityArray[index] = 0;
+                        probobilityArray[index] = 0;
                         break;
                     }
             }

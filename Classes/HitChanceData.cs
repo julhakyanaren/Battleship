@@ -17,7 +17,6 @@ namespace Battleship.Classes
 
         public static double HitProbobility = 0.0f;
 
-        public static double[] ProbobilityArray = new double[100];
         public static double IndependentChance = 0;
 
         public static string[] RelativelyStrings = { "Forbidden", "Low", "Average", "High", "Guaranted" };        
@@ -33,10 +32,6 @@ namespace Battleship.Classes
         public static bool ManualMode = true;
         public static bool ShowNoveNumber = true;
 
-        public static int AllowedCoordsCount = 0;
-        public static int BlockedCoordsCount = 0;
-        public static int UndiscoveredCells;
-        public static int DiscoveredCells;
         public static int DecimalPlacesCount = 1;
 
         public static List<int> AllowedCoords = new List<int>();
@@ -142,25 +137,11 @@ namespace Battleship.Classes
                 {
                     AllowedCoords.Sort();
                     BlockedCoords.Sort();
-                    AllowedCoordsCount = AllowedCoords.Count;
-                    BlockedCoordsCount = BlockedCoords.Count;
                 }
                 else
                 {
                     MessageBox.Show($"Error Code: E45M4L4\r\n{position} is incorrect position", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
-            }
-        }
-        public static void ResetDiscoveredCells()
-        {
-            UndiscoveredCells = 0;
-            DiscoveredCells = 0;
-        }
-        public static void SetProbobilityArrayDefaultValues()
-        {
-            for (int p = 0; p < ProbobilityArray.Length; p++)
-            {
-                ProbobilityArray[p] = 0.0f;
             }
         }
     }
