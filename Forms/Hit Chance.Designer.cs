@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(HitChance));
-            this.TLP_MC_Map_Main = new System.Windows.Forms.TableLayoutPanel();
+            this.TLP_HC_Map_Main = new System.Windows.Forms.TableLayoutPanel();
             this.PNL_MC_Map_Empty = new System.Windows.Forms.Panel();
             this.PNL_MC_Map_Letters = new System.Windows.Forms.Panel();
             this.TLP_MC_Map_Letters = new System.Windows.Forms.TableLayoutPanel();
@@ -58,7 +58,7 @@
             this.PNL_MC_Map_Schema = new System.Windows.Forms.Panel();
             this.TLP_HC_Schema = new System.Windows.Forms.TableLayoutPanel();
             this.GB_HC_MapExample = new System.Windows.Forms.GroupBox();
-            this.BS_HC_UpdateCellDAta = new System.Windows.Forms.Button();
+            this.BS_HC_UpdateCellData = new System.Windows.Forms.Button();
             this.L_Info_CellState = new System.Windows.Forms.Label();
             this.TB_HC_CellState = new System.Windows.Forms.TextBox();
             this.BS_HC_RestartMap = new System.Windows.Forms.Button();
@@ -104,7 +104,7 @@
             this.GB_HC_ShipData = new System.Windows.Forms.GroupBox();
             this.L_Info_ShipsCurrentCount = new System.Windows.Forms.Label();
             this.L_Info_ShipsMaxCount = new System.Windows.Forms.Label();
-            this.TLP_MC_Map_Main.SuspendLayout();
+            this.TLP_HC_Map_Main.SuspendLayout();
             this.PNL_MC_Map_Letters.SuspendLayout();
             this.TLP_MC_Map_Letters.SuspendLayout();
             this.PNL_MC_Map_Numbers.SuspendLayout();
@@ -118,24 +118,24 @@
             this.GB_HC_ShipData.SuspendLayout();
             this.SuspendLayout();
             // 
-            // TLP_MC_Map_Main
+            // TLP_HC_Map_Main
             // 
-            this.TLP_MC_Map_Main.BackColor = System.Drawing.Color.Black;
-            this.TLP_MC_Map_Main.ColumnCount = 2;
-            this.TLP_MC_Map_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89F));
-            this.TLP_MC_Map_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11F));
-            this.TLP_MC_Map_Main.Controls.Add(this.PNL_MC_Map_Empty, 1, 1);
-            this.TLP_MC_Map_Main.Controls.Add(this.PNL_MC_Map_Letters, 0, 1);
-            this.TLP_MC_Map_Main.Controls.Add(this.PNL_MC_Map_Numbers, 1, 0);
-            this.TLP_MC_Map_Main.Controls.Add(this.PNL_MC_Map_Schema, 0, 0);
-            this.TLP_MC_Map_Main.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.TLP_MC_Map_Main.Location = new System.Drawing.Point(3, 18);
-            this.TLP_MC_Map_Main.Name = "TLP_MC_Map_Main";
-            this.TLP_MC_Map_Main.RowCount = 2;
-            this.TLP_MC_Map_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89F));
-            this.TLP_MC_Map_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
-            this.TLP_MC_Map_Main.Size = new System.Drawing.Size(425, 382);
-            this.TLP_MC_Map_Main.TabIndex = 1;
+            this.TLP_HC_Map_Main.BackColor = System.Drawing.Color.Black;
+            this.TLP_HC_Map_Main.ColumnCount = 2;
+            this.TLP_HC_Map_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 89F));
+            this.TLP_HC_Map_Main.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 11F));
+            this.TLP_HC_Map_Main.Controls.Add(this.PNL_MC_Map_Empty, 1, 1);
+            this.TLP_HC_Map_Main.Controls.Add(this.PNL_MC_Map_Letters, 0, 1);
+            this.TLP_HC_Map_Main.Controls.Add(this.PNL_MC_Map_Numbers, 1, 0);
+            this.TLP_HC_Map_Main.Controls.Add(this.PNL_MC_Map_Schema, 0, 0);
+            this.TLP_HC_Map_Main.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.TLP_HC_Map_Main.Location = new System.Drawing.Point(3, 18);
+            this.TLP_HC_Map_Main.Name = "TLP_HC_Map_Main";
+            this.TLP_HC_Map_Main.RowCount = 2;
+            this.TLP_HC_Map_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89F));
+            this.TLP_HC_Map_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
+            this.TLP_HC_Map_Main.Size = new System.Drawing.Size(425, 382);
+            this.TLP_HC_Map_Main.TabIndex = 1;
             // 
             // PNL_MC_Map_Empty
             // 
@@ -623,7 +623,7 @@
             // 
             // GB_HC_MapExample
             // 
-            this.GB_HC_MapExample.Controls.Add(this.TLP_MC_Map_Main);
+            this.GB_HC_MapExample.Controls.Add(this.TLP_HC_Map_Main);
             this.GB_HC_MapExample.Dock = System.Windows.Forms.DockStyle.Fill;
             this.GB_HC_MapExample.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.GB_HC_MapExample.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
@@ -634,19 +634,19 @@
             this.GB_HC_MapExample.TabStop = false;
             this.GB_HC_MapExample.Text = "Map Example";
             // 
-            // BS_HC_UpdateCellDAta
+            // BS_HC_UpdateCellData
             // 
-            this.BS_HC_UpdateCellDAta.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.BS_HC_UpdateCellDAta.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.BS_HC_UpdateCellDAta.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_HC_UpdateCellDAta.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.BS_HC_UpdateCellDAta.Location = new System.Drawing.Point(205, 57);
-            this.BS_HC_UpdateCellDAta.Name = "BS_HC_UpdateCellDAta";
-            this.BS_HC_UpdateCellDAta.Size = new System.Drawing.Size(110, 24);
-            this.BS_HC_UpdateCellDAta.TabIndex = 51;
-            this.BS_HC_UpdateCellDAta.Text = "Update cell data";
-            this.BS_HC_UpdateCellDAta.UseVisualStyleBackColor = true;
-            this.BS_HC_UpdateCellDAta.Click += new System.EventHandler(this.BS_HC_UpdateCellDAta_Click);
+            this.BS_HC_UpdateCellData.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.BS_HC_UpdateCellData.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.BS_HC_UpdateCellData.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.BS_HC_UpdateCellData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.BS_HC_UpdateCellData.Location = new System.Drawing.Point(205, 57);
+            this.BS_HC_UpdateCellData.Name = "BS_HC_UpdateCellData";
+            this.BS_HC_UpdateCellData.Size = new System.Drawing.Size(110, 24);
+            this.BS_HC_UpdateCellData.TabIndex = 51;
+            this.BS_HC_UpdateCellData.Text = "Update cell data";
+            this.BS_HC_UpdateCellData.UseVisualStyleBackColor = true;
+            this.BS_HC_UpdateCellData.Click += new System.EventHandler(this.BS_HC_UpdateCellData_Click);
             // 
             // L_Info_CellState
             // 
@@ -1133,7 +1133,7 @@
             this.PNL_ShipData.Controls.Add(this.TB_HC_Status);
             this.PNL_ShipData.Controls.Add(this.BS_HC_ApplyCell);
             this.PNL_ShipData.Controls.Add(this.BS_HC_RestartMap);
-            this.PNL_ShipData.Controls.Add(this.BS_HC_UpdateCellDAta);
+            this.PNL_ShipData.Controls.Add(this.BS_HC_UpdateCellData);
             this.PNL_ShipData.Controls.Add(this.CHB_HC_UseCustomCell);
             this.PNL_ShipData.Controls.Add(this.L_Info_CellState);
             this.PNL_ShipData.Controls.Add(this.TB_HC_CellState);
@@ -1246,7 +1246,7 @@
             this.Text = "Hit Chance";
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.HitChance_FormClosed);
             this.Load += new System.EventHandler(this.HitChance_Load);
-            this.TLP_MC_Map_Main.ResumeLayout(false);
+            this.TLP_HC_Map_Main.ResumeLayout(false);
             this.PNL_MC_Map_Letters.ResumeLayout(false);
             this.TLP_MC_Map_Letters.ResumeLayout(false);
             this.PNL_MC_Map_Numbers.ResumeLayout(false);
@@ -1267,7 +1267,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TableLayoutPanel TLP_MC_Map_Main;
+        private System.Windows.Forms.TableLayoutPanel TLP_HC_Map_Main;
         private System.Windows.Forms.Panel PNL_MC_Map_Empty;
         private System.Windows.Forms.Panel PNL_MC_Map_Letters;
         private System.Windows.Forms.TableLayoutPanel TLP_MC_Map_Letters;
@@ -1314,7 +1314,7 @@
         private System.Windows.Forms.Button BS_HC_RestartMap;
         private System.Windows.Forms.Label L_Info_CellState;
         public System.Windows.Forms.TextBox TB_HC_CellState;
-        private System.Windows.Forms.Button BS_HC_UpdateCellDAta;
+        private System.Windows.Forms.Button BS_HC_UpdateCellData;
         private System.Windows.Forms.Button BS_HC_ResetShipData;
         private System.Windows.Forms.GroupBox GB_HC_ProbabilityData;
         private System.Windows.Forms.TableLayoutPanel TLP_HC_Right;
