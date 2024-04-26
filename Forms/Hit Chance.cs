@@ -306,8 +306,7 @@ namespace Battleship.Forms
                 if (shipType != null)
                 {
                     TB_HC_CellState.Text = shipType;
-                    cellCoord = pos.GetButtonTextCoords(selectedButton, out int index);
-                    TB_HC_ChoosenCellData.Text = cellCoord;
+                    TB_HC_ChoosenCellData.Text = pos.GetButtonTextCoords(selectedButton, out int index);
                 }
                 else
                 {
@@ -327,51 +326,28 @@ namespace Battleship.Forms
                     }
                 }
             }
-        } //In process
+        }
         void SetBasicProbobility(Button inputButton, int index)
         {
             string colorName = inputButton.BackColor.Name.ToString();
-            switch (colorName)
+            if (colorName == "DeepSkyBlue" || colorName == "Red" || colorName == "Firebrick")
             {
-                case "DeepSkyBlue":
-                    {
-                        probobilityArray[index] = 0;
-                        break;
-                    }
-                case "Red":
-                    {
-                        probobilityArray[index] = 0;
-                        break;
-                    }
-                case "Firebrick":
-                    {
-                        probobilityArray[index] = 0;
-                        break;
-                    }
+                probobilityArray[index] = 0;
             }
         }
-        private void ExmpleButton_Click(object sender, MouseEventArgs e)
+        void SetShipsMaxCount()
         {
-            if (HitChanceData.ManualMode)
-            {
-                manualSelected = sender as Button;
-                GetCellData(manualSelected);
-            }
+            TB_EnemyShips_FrigatesMax.Text = $"{ShipData.FrigateCount}";
+            TB_EnemyShips_DestroyersMax.Text = $"{ShipData.DestroyerCount}";
+            TB_EnemyShips_CruisersMax.Text = $"{ShipData.CruiserCount}";
+            TB_EnemyShips_BattleshipsMax.Text = $"{ShipData.BattleshipCount}";
         }
-        private void ExampleButton_MouseLeave(object sender, EventArgs e)
+        void SetShipCurrentCount()
         {
-            Button leaveButton = sender as Button;
-            leaveButton.FlatAppearance.BorderSize = 1;
-            leaveButton.FlatAppearance.BorderColor = Color.Black;
-        }
-        private void ExampleButton_MouseEnter(object sender, EventArgs e)
-        {
-            Button hoverButton = sender as Button;
-            int index = Array.IndexOf(exampleButtons, hoverButton);
-            HitChanceData.HitProbobility = probobilityArray[index];
-            TB_HC_HitProbobility.Text = HitChanceData.HitProbobility.ToString("F2") + "%";
-            hoverButton.FlatAppearance.BorderSize = 2;
-            hoverButton.FlatAppearance.BorderColor = Color.DarkOrange;
+            TB_EnemyShips_Frigates.Text = $"{EnemyData.FrigatesCountCurrent}";
+            TB_EnemyShips_Destroyers.Text = $"{EnemyData.DestroyersCountCurrent}";
+            TB_EnemyShips_Cruisers.Text = $"{EnemyData.CruiserCountCurrent}";
+            TB_EnemyShips_Battleships.Text = $"{EnemyData.BattleshipCountCurrent}";
         }
         async void GenerateMap()
         {
@@ -380,10 +356,8 @@ namespace Battleship.Forms
                 for (int b = 0; b < HitChanceData.CurrentMap.Count; b++)
                 {
                     await Task.Delay(4);
-                    int x;
-                    int y;
-                    x = b / 10;
-                    y = (b % 10 - 1) * 60 + 1;
+                    int x = b / 10;
+                    int y = (b % 10 - 1) *60 + 1;
                     Button button = new Button
                     {
                         Name = $"BS_HC_Example_{b}",
@@ -395,15 +369,15 @@ namespace Battleship.Forms
                     button.ForeColor = HitChanceData.CurrentMap[b].ForeColor;
                     button.BackColor = HitChanceData.CurrentMap[b].BackColor;
                     SetBasicProbobility(button, b);
-                    button.Tag = b + 600;
-                    button.Tag = Convert.ToInt32($"{button.Tag.ToString()[0]}{button.Tag.ToString()[2]}{button.Tag.ToString()[1]}");
-                    button.Margin = new Padding(0);
                     button.FlatAppearance.BorderSize = 1;
                     button.FlatAppearance.BorderColor = Color.Black;
-                    exampleButtons[b] = button;
+                    button.Margin = new Padding(0);
+                    button.Tag = b + 600;
+                    button.Tag = Convert.ToInt32($"{button.Tag.ToString()[0]}{button.Tag.ToString()[2]}{button.Tag.ToString()[1]}");
                     button.MouseClick += ExmpleButton_Click;
                     button.MouseEnter += ExampleButton_MouseEnter;
                     button.MouseLeave += ExampleButton_MouseLeave;
+                    exampleButtons[b] = button;
                 }
                 if (TLP_HC_Schema.Controls.Count == 100)
                 {
@@ -413,19 +387,28 @@ namespace Battleship.Forms
                 UpdateProbabilityData();
             }
         }
-        void SetShipsMaxCount()
+        private void ExmpleButton_Click(object sender, MouseEventArgs e)
         {
-            TB_EnemyShips_FrigatesMax.Text = $"{ShipData.FrigateCount}";
-            TB_EnemyShips_DestroyersMax.Text = $"{ShipData.DestroyerCount}";
-            TB_EnemyShips_CruiserMax.Text = $"{ShipData.CruiserCount}";
-            TB_EnemyShips_BattleshipsMax.Text = $"{ShipData.BattleshipCount}";
+            if (HitChanceData.ManualMode)
+            {
+                manualSelected = sender as Button;
+                GetCellData(manualSelected);
+            }
         }
-        void SetShipCurrentCount()
+        private void ExampleButton_MouseEnter(object sender, EventArgs e)
         {
-            TB_EnemyShips_Frigates.Text = $"{EnemyData.FrigatesCountCurrent}";
-            TB_EnemyShips_Destroyers.Text = $"{EnemyData.DestroyersCountCurrent}";
-            TB_EnemyShips_Cruiser.Text = $"{EnemyData.CruiserCountCurrent}";
-            TB_EnemyShips_Battleships.Text = $"{EnemyData.BattleshipCountCurrent}";
+            Button hoverButton = sender as Button;
+            int index = Array.IndexOf(exampleButtons, hoverButton);
+            HitChanceData.HitProbobility = probobilityArray[index];
+            TB_HC_HitProbobility.Text = HitChanceData.HitProbobility.ToString("F2") + "%";
+            hoverButton.FlatAppearance.BorderSize = 2;
+            hoverButton.FlatAppearance.BorderColor = Color.DarkOrange;
+        }
+        private void ExampleButton_MouseLeave(object sender, EventArgs e)
+        {
+            Button leaveButton = sender as Button;
+            leaveButton.FlatAppearance.BorderSize = 1;
+            leaveButton.FlatAppearance.BorderColor = Color.Black;
         }
         private void HitChance_Load(object sender, EventArgs e)
         {
@@ -448,7 +431,7 @@ namespace Battleship.Forms
         {
             await RestartMap();
         }
-        private void CHB_HC_UseCustomCell_CheckedChanged(object sender, EventArgs e)
+        private void CHB_HC_UseCustomCell_CheckedChanged(object sender, EventArgs e) //In process
         {
             if (!HitChanceData.ExampleCraeted)
             {

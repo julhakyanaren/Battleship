@@ -67,13 +67,13 @@
             this.TB_HC_ChoosenCellData = new System.Windows.Forms.TextBox();
             this.BS_HC_ResetShipData = new System.Windows.Forms.Button();
             this.TB_EnemyShips_BattleshipsMax = new System.Windows.Forms.TextBox();
-            this.TB_EnemyShips_CruiserMax = new System.Windows.Forms.TextBox();
+            this.TB_EnemyShips_CruisersMax = new System.Windows.Forms.TextBox();
             this.TB_EnemyShips_DestroyersMax = new System.Windows.Forms.TextBox();
             this.TB_EnemyShips_FrigatesMax = new System.Windows.Forms.TextBox();
             this.L_EnemyBattleships = new System.Windows.Forms.Label();
             this.TB_EnemyShips_Battleships = new System.Windows.Forms.TextBox();
             this.L_EnemyCruisers = new System.Windows.Forms.Label();
-            this.TB_EnemyShips_Cruiser = new System.Windows.Forms.TextBox();
+            this.TB_EnemyShips_Cruisers = new System.Windows.Forms.TextBox();
             this.L_EnemyDestroyers = new System.Windows.Forms.Label();
             this.TB_EnemyShips_Destroyers = new System.Windows.Forms.TextBox();
             this.L_EnemyFrigates = new System.Windows.Forms.Label();
@@ -748,17 +748,17 @@
             this.TB_EnemyShips_BattleshipsMax.TabIndex = 59;
             this.TB_EnemyShips_BattleshipsMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // TB_EnemyShips_CruiserMax
+            // TB_EnemyShips_CruisersMax
             // 
-            this.TB_EnemyShips_CruiserMax.BackColor = System.Drawing.Color.Black;
-            this.TB_EnemyShips_CruiserMax.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_EnemyShips_CruiserMax.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TB_EnemyShips_CruiserMax.Location = new System.Drawing.Point(189, 77);
-            this.TB_EnemyShips_CruiserMax.Name = "TB_EnemyShips_CruiserMax";
-            this.TB_EnemyShips_CruiserMax.ReadOnly = true;
-            this.TB_EnemyShips_CruiserMax.Size = new System.Drawing.Size(52, 22);
-            this.TB_EnemyShips_CruiserMax.TabIndex = 58;
-            this.TB_EnemyShips_CruiserMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_EnemyShips_CruisersMax.BackColor = System.Drawing.Color.Black;
+            this.TB_EnemyShips_CruisersMax.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_EnemyShips_CruisersMax.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TB_EnemyShips_CruisersMax.Location = new System.Drawing.Point(189, 77);
+            this.TB_EnemyShips_CruisersMax.Name = "TB_EnemyShips_CruisersMax";
+            this.TB_EnemyShips_CruisersMax.ReadOnly = true;
+            this.TB_EnemyShips_CruisersMax.Size = new System.Drawing.Size(52, 22);
+            this.TB_EnemyShips_CruisersMax.TabIndex = 58;
+            this.TB_EnemyShips_CruisersMax.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // TB_EnemyShips_DestroyersMax
             // 
@@ -817,18 +817,18 @@
             this.L_EnemyCruisers.TabIndex = 49;
             this.L_EnemyCruisers.Text = "Enemy Cruisers count";
             // 
-            // TB_EnemyShips_Cruiser
+            // TB_EnemyShips_Cruisers
             // 
-            this.TB_EnemyShips_Cruiser.BackColor = System.Drawing.Color.Black;
-            this.TB_EnemyShips_Cruiser.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.TB_EnemyShips_Cruiser.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TB_EnemyShips_Cruiser.Location = new System.Drawing.Point(133, 77);
-            this.TB_EnemyShips_Cruiser.Name = "TB_EnemyShips_Cruiser";
-            this.TB_EnemyShips_Cruiser.ReadOnly = true;
-            this.TB_EnemyShips_Cruiser.Size = new System.Drawing.Size(52, 22);
-            this.TB_EnemyShips_Cruiser.TabIndex = 48;
-            this.TB_EnemyShips_Cruiser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_EnemyShips_Cruiser.TextChanged += new System.EventHandler(this.TB_EnemyShips_Frigates_TextChanged);
+            this.TB_EnemyShips_Cruisers.BackColor = System.Drawing.Color.Black;
+            this.TB_EnemyShips_Cruisers.Font = new System.Drawing.Font("Franklin Gothic Demi", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
+            this.TB_EnemyShips_Cruisers.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TB_EnemyShips_Cruisers.Location = new System.Drawing.Point(133, 77);
+            this.TB_EnemyShips_Cruisers.Name = "TB_EnemyShips_Cruisers";
+            this.TB_EnemyShips_Cruisers.ReadOnly = true;
+            this.TB_EnemyShips_Cruisers.Size = new System.Drawing.Size(52, 22);
+            this.TB_EnemyShips_Cruisers.TabIndex = 48;
+            this.TB_EnemyShips_Cruisers.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.TB_EnemyShips_Cruisers.TextChanged += new System.EventHandler(this.TB_EnemyShips_Frigates_TextChanged);
             // 
             // L_EnemyDestroyers
             // 
@@ -1186,14 +1186,14 @@
             this.GB_HC_ShipData.Controls.Add(this.L_Info_ShipsCurrentCount);
             this.GB_HC_ShipData.Controls.Add(this.L_Info_ShipsMaxCount);
             this.GB_HC_ShipData.Controls.Add(this.L_EnemyFrigates);
-            this.GB_HC_ShipData.Controls.Add(this.TB_EnemyShips_Cruiser);
+            this.GB_HC_ShipData.Controls.Add(this.TB_EnemyShips_Cruisers);
             this.GB_HC_ShipData.Controls.Add(this.L_EnemyDestroyers);
             this.GB_HC_ShipData.Controls.Add(this.L_EnemyCruisers);
             this.GB_HC_ShipData.Controls.Add(this.BS_HC_ResetShipData);
             this.GB_HC_ShipData.Controls.Add(this.TB_EnemyShips_Destroyers);
             this.GB_HC_ShipData.Controls.Add(this.TB_EnemyShips_DestroyersMax);
             this.GB_HC_ShipData.Controls.Add(this.TB_EnemyShips_FrigatesMax);
-            this.GB_HC_ShipData.Controls.Add(this.TB_EnemyShips_CruiserMax);
+            this.GB_HC_ShipData.Controls.Add(this.TB_EnemyShips_CruisersMax);
             this.GB_HC_ShipData.Controls.Add(this.TB_EnemyShips_BattleshipsMax);
             this.GB_HC_ShipData.Controls.Add(this.TB_EnemyShips_Battleships);
             this.GB_HC_ShipData.Controls.Add(this.TB_EnemyShips_Frigates);
@@ -1305,9 +1305,9 @@
         private System.Windows.Forms.Label L_EnemyBattleships;
         public System.Windows.Forms.TextBox TB_EnemyShips_Battleships;
         private System.Windows.Forms.Label L_EnemyCruisers;
-        public System.Windows.Forms.TextBox TB_EnemyShips_Cruiser;
+        public System.Windows.Forms.TextBox TB_EnemyShips_Cruisers;
         public System.Windows.Forms.TextBox TB_EnemyShips_BattleshipsMax;
-        public System.Windows.Forms.TextBox TB_EnemyShips_CruiserMax;
+        public System.Windows.Forms.TextBox TB_EnemyShips_CruisersMax;
         public System.Windows.Forms.TextBox TB_EnemyShips_DestroyersMax;
         public System.Windows.Forms.TextBox TB_EnemyShips_FrigatesMax;
         private System.Windows.Forms.Label L_EnemyFrigates;
