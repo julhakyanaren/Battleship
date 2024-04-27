@@ -82,7 +82,6 @@
             this.BS_HC_ShowChart = new System.Windows.Forms.Button();
             this.BS_HC_IndependentChances_Update = new System.Windows.Forms.Button();
             this.CHB_ShowMoveNumber = new System.Windows.Forms.CheckBox();
-            this.L_DecimalPlaces_Count = new System.Windows.Forms.Label();
             this.L_Info_DecimalPlaces = new System.Windows.Forms.Label();
             this.TRB_DecimalPlaces = new System.Windows.Forms.TrackBar();
             this.TB_IndependentChances = new System.Windows.Forms.TextBox();
@@ -805,7 +804,7 @@
             this.TB_EnemyShips_Battleships.Size = new System.Drawing.Size(52, 22);
             this.TB_EnemyShips_Battleships.TabIndex = 50;
             this.TB_EnemyShips_Battleships.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_EnemyShips_Battleships.TextChanged += new System.EventHandler(this.TB_EnemyShips_Frigates_TextChanged);
+            this.TB_EnemyShips_Battleships.TextChanged += new System.EventHandler(this.EnemyShips_TB_TextChanged);
             // 
             // L_EnemyCruisers
             // 
@@ -828,7 +827,7 @@
             this.TB_EnemyShips_Cruisers.Size = new System.Drawing.Size(52, 22);
             this.TB_EnemyShips_Cruisers.TabIndex = 48;
             this.TB_EnemyShips_Cruisers.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_EnemyShips_Cruisers.TextChanged += new System.EventHandler(this.TB_EnemyShips_Frigates_TextChanged);
+            this.TB_EnemyShips_Cruisers.TextChanged += new System.EventHandler(this.EnemyShips_TB_TextChanged);
             // 
             // L_EnemyDestroyers
             // 
@@ -851,7 +850,7 @@
             this.TB_EnemyShips_Destroyers.Size = new System.Drawing.Size(52, 22);
             this.TB_EnemyShips_Destroyers.TabIndex = 46;
             this.TB_EnemyShips_Destroyers.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_EnemyShips_Destroyers.TextChanged += new System.EventHandler(this.TB_EnemyShips_Frigates_TextChanged);
+            this.TB_EnemyShips_Destroyers.TextChanged += new System.EventHandler(this.EnemyShips_TB_TextChanged);
             // 
             // L_EnemyFrigates
             // 
@@ -874,7 +873,7 @@
             this.TB_EnemyShips_Frigates.Size = new System.Drawing.Size(52, 22);
             this.TB_EnemyShips_Frigates.TabIndex = 40;
             this.TB_EnemyShips_Frigates.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_EnemyShips_Frigates.TextChanged += new System.EventHandler(this.TB_EnemyShips_Frigates_TextChanged);
+            this.TB_EnemyShips_Frigates.TextChanged += new System.EventHandler(this.EnemyShips_TB_TextChanged);
             // 
             // GB_HC_ProbabilityData
             // 
@@ -882,7 +881,6 @@
             this.GB_HC_ProbabilityData.Controls.Add(this.BS_HC_ShowChart);
             this.GB_HC_ProbabilityData.Controls.Add(this.BS_HC_IndependentChances_Update);
             this.GB_HC_ProbabilityData.Controls.Add(this.CHB_ShowMoveNumber);
-            this.GB_HC_ProbabilityData.Controls.Add(this.L_DecimalPlaces_Count);
             this.GB_HC_ProbabilityData.Controls.Add(this.L_Info_DecimalPlaces);
             this.GB_HC_ProbabilityData.Controls.Add(this.TRB_DecimalPlaces);
             this.GB_HC_ProbabilityData.Controls.Add(this.TB_IndependentChances);
@@ -939,23 +937,13 @@
             this.CHB_ShowMoveNumber.CheckState = System.Windows.Forms.CheckState.Checked;
             this.CHB_ShowMoveNumber.Cursor = System.Windows.Forms.Cursors.Hand;
             this.CHB_ShowMoveNumber.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CHB_ShowMoveNumber.Location = new System.Drawing.Point(131, 255);
+            this.CHB_ShowMoveNumber.Location = new System.Drawing.Point(133, 255);
             this.CHB_ShowMoveNumber.Name = "CHB_ShowMoveNumber";
             this.CHB_ShowMoveNumber.Size = new System.Drawing.Size(117, 21);
             this.CHB_ShowMoveNumber.TabIndex = 69;
             this.CHB_ShowMoveNumber.Text = "Show move number";
             this.CHB_ShowMoveNumber.UseVisualStyleBackColor = true;
             this.CHB_ShowMoveNumber.CheckedChanged += new System.EventHandler(this.CHB_ShowMoveNumber_CheckedChanged);
-            // 
-            // L_DecimalPlaces_Count
-            // 
-            this.L_DecimalPlaces_Count.AutoSize = true;
-            this.L_DecimalPlaces_Count.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_DecimalPlaces_Count.Location = new System.Drawing.Point(226, 256);
-            this.L_DecimalPlaces_Count.Name = "L_DecimalPlaces_Count";
-            this.L_DecimalPlaces_Count.Size = new System.Drawing.Size(15, 17);
-            this.L_DecimalPlaces_Count.TabIndex = 68;
-            this.L_DecimalPlaces_Count.Text = "1";
             // 
             // L_Info_DecimalPlaces
             // 
@@ -1337,7 +1325,6 @@
         public System.Windows.Forms.TextBox TB_IndependentChances;
         private System.Windows.Forms.TrackBar TRB_DecimalPlaces;
         private System.Windows.Forms.Label L_Info_IndependentChanges;
-        private System.Windows.Forms.Label L_DecimalPlaces_Count;
         private System.Windows.Forms.Label L_Info_DecimalPlaces;
         private System.Windows.Forms.CheckBox CHB_ShowMoveNumber;
         private System.Windows.Forms.Button BS_HC_IndependentChances_Update;

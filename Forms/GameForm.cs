@@ -185,7 +185,6 @@ namespace Battleship
             {
                 await Task.Delay(1);
                 MapButtons[0, vb].Visible = true;
-                //MapButtons[0, vb].Text = MapButtons[0, vb].Tag.ToString();
                 MapButtons[1, vb].Visible = true;
             }
             TSMI_Map.Enabled = true;
@@ -986,8 +985,7 @@ namespace Battleship
                     {
                         Button targetButton = MapButtons[1, i];
                         targetButton.BackColor = Color.White;
-                        
-                        //targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
+                        targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
                         targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
                     }
 

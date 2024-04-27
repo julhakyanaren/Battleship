@@ -431,7 +431,7 @@ namespace Battleship.Forms
         {
             await RestartMap();
         }
-        private void CHB_HC_UseCustomCell_CheckedChanged(object sender, EventArgs e) //In process
+        private void CHB_HC_UseCustomCell_CheckedChanged(object sender, EventArgs e)
         {
             if (!HitChanceData.ExampleCraeted)
             {
@@ -454,15 +454,22 @@ namespace Battleship.Forms
             SetShipsMaxCount();
             SetShipCurrentCount();
         }
-        private void TB_HC_ShotEfficiency_TextChanged(object sender, EventArgs e)
+        private void EnemyShips_TB_TextChanged(object sender, EventArgs e)
         {
-            for (int i = 0; i < HitChanceData.RelativelyStrings.Length; i++)
+            TextBox zeroValue_TB = sender as TextBox;
+            if (zeroValue_TB.Text == "0")
             {
-                if (TB_HC_ShotEfficiency.Text == HitChanceData.RelativelyStrings[i])
-                {
-                    TB_HC_ShotEfficiency.ForeColor = HitChanceData.RelativelyColors[i];
-                }
+                zeroValue_TB.ForeColor = Color.Red;
             }
+        }
+        private void CHB_ShowMoveNumber_CheckedChanged(object sender, EventArgs e)
+        {
+            HitChanceData.ShowNoveNumber = CHB_ShowMoveNumber.Checked;
+        }
+        private void TRB_DecimalPlaces_Scroll(object sender, EventArgs e)
+        {
+            HitChanceData.DecimalPlacesCount = TRB_DecimalPlaces.Value;
+            L_Info_DecimalPlaces.Text = $"L_Info_DecimalPlaces:     {HitChanceData.DecimalPlacesCount}";
         }
         void SetHitProbobilityTextColor(double chance, TextBox probobility_TB, TextBox efficiency_TB)
         {
@@ -498,18 +505,41 @@ namespace Battleship.Forms
                         {
                             probobility_TB.ForeColor = HitChanceData.RelativelyColors[2];
                             efficiency_TB.Text = $"{HitChanceData.RelativelyStrings[2]}";
-                            break;
                         }
-                        else
-                        {
-                            break;
-                        }
+                        break;
                     }
             }
         }
         private void TB_HC_HitProbobility_TextChanged(object sender, EventArgs e)
         {
             SetHitProbobilityTextColor(HitChanceData.HitProbobility, TB_HC_HitProbobility, TB_HC_ShotEfficiency);
+        }
+        private void TB_HC_ShotEfficiency_TextChanged(object sender, EventArgs e)
+        {
+            TB_HC_ShotEfficiency.ForeColor = HitChanceData.RelativelyColors[Array.IndexOf(HitChanceData.RelativelyStrings, TB_HC_ShotEfficiency.Text)];
+        }
+        void ShowIndependentChances()
+        {
+            TB_IndependentChances.Clear();
+            for (int i = 1; i <= EnemyData.IndependentChances.Count; i++)
+            {
+                if (HitChanceData.ShowNoveNumber)
+                {
+                    TB_IndependentChances.Text += $"Move #{i}:  {Math.Round(EnemyData.IndependentChances[i] * 100, HitChanceData.DecimalPlacesCount)}%";
+                }
+                else
+                {
+                    TB_IndependentChances.Text += $"{Math.Round(EnemyData.IndependentChances[i] * 100, HitChanceData.DecimalPlacesCount)}%";
+                }
+                if (i != EnemyData.IndependentChances.Count)
+                {
+                    TB_IndependentChances.Text += "\r\n";
+                }
+            }
+        }
+        private void BS_HC_IndependentChances_Update_Click(object sender, EventArgs e)
+        {
+            ShowIndependentChances();
         }
         private void TB_HC_IndependentChance_TextChanged(object sender, EventArgs e)
         {
@@ -529,13 +559,13 @@ namespace Battleship.Forms
                 TB_HC_IndependentEfficity.ForeColor = HitChanceData.IndependentColors[1];
                 TB_HC_IndependentEfficity.Text = $"{HitChanceData.IndependenStrings[1]}";
             }
-            else if (sp.IsFloatBetween(25, 5, HitChanceData.IndependentChance, "IO"))
+            else if (sp.IsFloatBetween(25, 50, HitChanceData.IndependentChance, "IO"))
             {
                 TB_HC_IndependentChance.ForeColor = HitChanceData.IndependentColors[2];
                 TB_HC_IndependentEfficity.ForeColor = HitChanceData.IndependentColors[2];
                 TB_HC_IndependentEfficity.Text = $"{HitChanceData.IndependenStrings[2]}";
             }
-            else if (sp.IsFloatBetween(5, 75, HitChanceData.IndependentChance, "IO"))
+            else if (sp.IsFloatBetween(50, 75, HitChanceData.IndependentChance, "IO"))
             {
                 TB_HC_IndependentChance.ForeColor = HitChanceData.IndependentColors[3];
                 TB_HC_IndependentEfficity.ForeColor = HitChanceData.IndependentColors[3];
@@ -560,49 +590,9 @@ namespace Battleship.Forms
                 TB_HC_IndependentEfficity.Text = $"{HitChanceData.IndependenStrings[6]}";
             }
         }
-        private void TB_EnemyShips_Frigates_TextChanged(object sender, EventArgs e)
-        {
-            TextBox zeroValue_TB = sender as TextBox;
-            if (zeroValue_TB.Text == "0")
-            {
-                zeroValue_TB.ForeColor = Color.Red;
-            }
-        }
         private void TB_HC_IndependentEfficity_TextChanged(object sender, EventArgs e)
         {
             SetHitProbobilityTextColor(HitChanceData.IndependentChance, TB_HC_IndependentChance, TB_HC_IndependentEfficity);
-        }
-        private void TRB_DecimalPlaces_Scroll(object sender, EventArgs e)
-        {
-            HitChanceData.DecimalPlacesCount = TRB_DecimalPlaces.Value;
-            L_DecimalPlaces_Count.Text = HitChanceData.DecimalPlacesCount.ToString();
-        }
-        private void CHB_ShowMoveNumber_CheckedChanged(object sender, EventArgs e)
-        {
-            HitChanceData.ShowNoveNumber = CHB_ShowMoveNumber.Checked;
-        }
-        void ShowIndependentChances()
-        {
-            TB_IndependentChances.Clear();
-            for (int i = 1; i <= EnemyData.IndependentChances.Count; i++)
-            {
-                if (HitChanceData.ShowNoveNumber)
-                {
-                    TB_IndependentChances.Text += $"Move #{i}:  {Math.Round(EnemyData.IndependentChances[i] * 100, HitChanceData.DecimalPlacesCount)}%";
-                }
-                else
-                {
-                    TB_IndependentChances.Text += $"{Math.Round(EnemyData.IndependentChances[i] * 100, HitChanceData.DecimalPlacesCount)}%";
-                }
-                if (i != EnemyData.IndependentChances.Count)
-                {
-                    TB_IndependentChances.Text += "\r\n";
-                }
-            }
-        }
-        private void BS_HC_IndependentChances_Update_Click(object sender, EventArgs e)
-        {
-            ShowIndependentChances();
         }
         private void BS_HC_ShowChart_Click(object sender, EventArgs e)
         {
