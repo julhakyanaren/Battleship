@@ -263,7 +263,6 @@
     <Compile Include="Forms\PlayerOptions.Designer.cs">
       <DependentUpon>PlayerOptions.cs</DependentUpon>
     </Compile>
-    <Compile Include="Classes\Information.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Classes\ShipData.cs" />
     <Compile Include="Classes\Support.cs" />
@@ -302,6 +301,7 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <None Include="ClassDiagram1.cd" />
     <None Include="Diagramm.cd" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">

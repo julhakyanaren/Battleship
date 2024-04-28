@@ -17,88 +17,92 @@ namespace Battleship
         Map Map = new Map();
         Support Support = new Support();
         ColorMethods ColorMethods = new ColorMethods();
+
+        public Button[,] MapButtons = new Button[2, 100];
+
         public bool[,] ShipsSunken = new bool [2, 4];
         public bool[] AllShipSunken = {false, false};
-        void SetShipsSunkenToZero()
-        {
-            ShipsSunken[0, 0] = false; //Player Frigates
-            ShipsSunken[0, 1] = false; //Player Destroyers
-            ShipsSunken[0, 2] = false; //Player Cruisers
-            ShipsSunken[0, 3] = false; //Player Battleships
-
-            ShipsSunken[1, 0] = false; //Enemy Frigates
-            ShipsSunken[1, 1] = false; //Enemy Destroyers
-            ShipsSunken[1, 2] = false; //Enemy Cruisers
-            ShipsSunken[1, 3] = false; //Enemy Battleships
-        }
-        void CheckShipsSunkenState()
-        {
-            for (int s0 = 0; s0 < ShipsSunken.GetLength(0); s0++)
-            {
-                AllShipSunken[s0] = true;
-                for (int p = 0; p < ShipsSunken.GetLength(1); p++)
-                {
-                    AllShipSunken[s0] &= ShipsSunken[s0, p];
-                }
-            }
-            if (AllShipSunken[0])
-            {
-                //Player Lose
-                if (Information.GameOverMessages(true) == DialogResult.OK)
-                {
-                    ShowEnemyMapAfterGame();
-                }
-            }
-            else if (AllShipSunken[1])
-            {
-                //Player Win
-                Fight.Turn = 2;
-                TB_Turn.Text = SetTurnText();
-                TB_Turn.ForeColor = Color.Red;
-                if (Information.GameOverMessages(false) == DialogResult.OK)
-                {
-                    ShowPlayerMapAfterGame();
-                }
-            }
-        }
-        public void ShowEnemyMapAfterGame()
-        {
-            for (int i = 0; i < MapButtons.GetLength(1); i++)
-            {
-                if (MapButtons[1, i].BackColor != Color.White) continue;
-                char mapChar = Char.ToLower(EnemyData.Map[i]);
-                if (mapChar == 'e' || mapChar == 'n') continue;
-                MapButtons[1, i].BackColor = Color.Green;
-            }
-        }
-        public void ShowPlayerMapAfterGame()
-        {
-            for (int i = 0; i < MapButtons.GetLength(1); i++)
-            {
-                if (MapButtons[0, i].BackColor == Color.Silver ||
-                    MapButtons[0, i].BackColor == Color.DarkGray ||
-                    MapButtons[0, i].BackColor == Color.Gray ||
-                    MapButtons[0, i].BackColor == Color.DimGray)
-                {
-                    MapButtons[0, i].BackColor = Color.Green;
-                }
-            }
-        }
         public GameForm()
         {
             InitializeComponent();
         }
-        public Button[,] MapButtons = new Button[2, 100];
-        void SetScreenParametersAsMaximized()
+        private void SetFormAllwaysOnTop(object sender, EventArgs e)
         {
-            WindowState = FormWindowState.Maximized;
-            int width = Width;
-            int height = Height;
-            Width = width;
-            Height = height;
-            Location = new Point(0, 0);
-            MaximizeBox = false;
-        }
+            TopMost = TSMI_AllwaysOnTop.Checked;
+        }//
+        int[,] GenerateButtonsTags()
+        {
+            int tag;
+            int index;
+            int[,] tags = new int[2, 100];
+            for (int f = 1; f <= 2; f++)
+            {
+                for (int i = 0; i < 10; i++)
+                {
+                    for (int j = 0; j < 10; j++)
+                    {
+                        tag = Convert.ToInt32(Convert.ToString($"{f}{j}{i}"));
+                        index = Convert.ToInt32(Convert.ToString($"{i}{j}"));
+                        tags[f - 1, index] = tag;
+                    }
+                }
+            }
+            return tags;
+        }//
+        async Task GenerateButtons()
+        {
+            int[,] tags = GenerateButtonsTags();
+            int x;
+            int y;
+            string[] nameTamplate = { "BS_GPO_PC", "BS_GPO_EC" };
+            TableLayoutPanel[] tlp = { TLP_PlayerSchema, TLP_EnemySchema };
+            for (int f = 0; f < 2; f++)
+            {
+                for (int b = 0; b < 100; b++)
+                {
+                    x = b / 10;
+                    y = (b % 10 - 1) * 60 + 1;
+                    Button button = new Button
+                    {
+                        Name = /*nameTamplate[0] +*/ tags[f, b].ToString(),
+                        Location = new Point(x, y),
+                        Dock = DockStyle.Fill
+                    };
+                    tlp[f].Controls.Add(button);
+                    button.FlatStyle = FlatStyle.Flat;
+                    button.ForeColor = Color.Black;
+                    button.BackColor = Color.White;
+                    button.Tag = tags[f, b];
+                    button.Margin = new Padding(0);
+                    button.Visible = false;
+                    button.MouseEnter += CellEnter;
+                    button.MouseClick += ClickOnCell;
+                    MapButtons[f, b] = button;
+                    button.FlatAppearance.MouseOverBackColor = Design.MouseOverColor[f];
+                    if (f == 0)
+                    {
+                        PlayerData.MapButtons[b] = button;
+                    }
+                    else
+                    {
+                        EnemyData.MapButtons[b] = button;
+                    }
+                }
+            }
+            for (int id = 0; id < MapButtons.GetLength(0); id++)
+            {
+                Map.SetShipCharViaColor(id, MapButtons);
+            }
+            Array.Resize(ref PlayerData.Map, MapButtons.GetLength(1));
+            Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
+            for (int vb = 0; vb < 100; vb++)
+            {
+                await Task.Delay(1);
+                MapButtons[0, vb].Visible = true;
+                MapButtons[1, vb].Visible = true;
+            }
+            TSMI_Map.Enabled = true;
+        }//
         public void SetComponentCustomParamaters()
         {
             Design.SetComponentLocation(L_Info_Turn, PNL_InfoChance);
@@ -128,246 +132,130 @@ namespace Battleship
         }
         private void GamePlayerOne_Load(object sender, EventArgs e)
         {
-            SetScreenParametersAsMaximized();
             SetComponentCustomParamaters();
             if (Fight.UnusedCoords.Count == 0)
             {
                 Fight.SetUnusedCoord();
             }
         }
-        async Task GenerateButtons()
+        private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            int[,] tags = GenerateButtonsTags();
-            int x;
-            int y;
-            string[] nameTamplate = { "BS_GPO_PC", "BS_GPO_EC" };
-            TableLayoutPanel[] tlp = { TLP_PlayerSchema, TLP_EnemySchema };
-            for (int f = 0; f < 2; f++)
-            {
-                for (int b = 0; b < 100; b++)
-                {
-                    x = b / 10;
-                    y = (b % 10 - 1) * 60 + 1;
-                    Button button = new Button
-                    {
-                        Name = /*nameTamplate[0] +*/ tags[f, b].ToString(),
-                        Location = new Point(x, y),
-                        Dock = DockStyle.Fill
-                    };
-                    tlp[f].Controls.Add(button);
-                    button.FlatStyle = FlatStyle.Flat;
-                    button.ForeColor = Color.Black;
-                    button.BackColor = Color.White;
-                    button.Tag = tags[f, b];
-                    button.Margin = new Padding(0);
-                    button.Visible = false;
-                    button.MouseEnter += Button_MouseEnter;
-                    button.MouseClick += Button_Click;
-                    MapButtons[f, b] = button;
-                    button.FlatAppearance.MouseOverBackColor = Design.MouseOverColor[f];
-                    if (f == 0)
-                    {
-                        PlayerData.MapButtons[b] = button;
-                    }
-                    else
-                    {
-                        EnemyData.MapButtons[b] = button;
-                    }
-                }
-            }
-            for (int id = 0; id < MapButtons.GetLength(0); id++)
-            {
-                Map.SetShipCharViaColor(id, MapButtons);
-            }
-            Array.Resize(ref PlayerData.Map, MapButtons.GetLength(1));
-            Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
-            for (int vb = 0; vb < 100; vb++)
-            {
-                await Task.Delay(1);
-                MapButtons[0, vb].Visible = true;
-                MapButtons[1, vb].Visible = true;
-            }
-            TSMI_Map.Enabled = true;
-
+            Environment.Exit(0);
         }
-        void PlayerTurn(int playerID, Button clickedButton)
+        DialogResult GameOverMessages(bool playerLose)
         {
-            string tagButton = clickedButton.Tag.ToString();
-            if (playerID == 2)
+            if (playerLose)
             {
-                if (Fight.GameStarted)
-                {
-                    NextTurn(tagButton);
-                    ColorMethods.EnemyMapColor = ColorMethods.SetEnemyButtonsColors(EnemyData.Map);
-                    UpdateEnemyMapColor(ColorMethods.EnemyMapColor);
-                    if (SetTurnText() == "ERROR")
-                    {
-                        MessageBox.Show($"Error Code: E16M4L1\r\nUncertain next move", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                    else
-                    {
-                        TB_Turn.Text = SetTurnText();
-                    }
-                }
-            }
-        }
-        private async void Button_Click(object sender, MouseEventArgs e)
-        {
-            if (!Options.GameOver)
-            {
-                Button clickedButton = sender as Button;
-                int playerID;
-                string coord = Position.GetButtonTextCoords(clickedButton, out playerID);
-                if (Support.StringToInt(clickedButton.Tag.ToString(), out int tagCB))
-                {
-                    if (clickedButton.BackColor != Color.White)
-                    {
-                        if (tagCB / 100 == 2)
-                        {
-                            int index = Fight.FindCorrectIndex(Convert.ToInt32(clickedButton.Tag) + 1551, true);
-                            await NotAvailableMove(index, 1, 4, 0);
-                        }
-                    }
-                    if (Fight.ForbiddenCoords.Count != 100)
-                    {
-                        await Turn(playerID, clickedButton);
-                    }
-                    else
-                    {
-                        CoordsForcedOverwrite();
-                        await Turn(playerID, clickedButton);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show($"Error Code: E26M9L4\r\n{clickedButton.Tag} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        async Task Turn(int playerID, Button clickedButton)
-        {
-            if (Fight.Turn == 0)
-            {
-                PlayerTurn(playerID, clickedButton);
-                while (Fight.Turn == 1)
-                {
-                    if (!Options.GameOver)
-                    {
-                        await EnemyTurn();
-                    }
-                    else
-                    {
-                        Fight.Turn = 2;
-                        TB_Turn.Text = SetTurnText();
-                        TB_Turn.ForeColor = Color.Red;
-                    }
-                }
+                return MessageBox.Show("All your ships are destroyed, and the enemy has surviving ships.\r\nGame over. You lose!", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
             else
             {
-                SystemSounds.Exclamation.Play();
-                int index = Fight.FindCorrectIndex(Convert.ToInt32(clickedButton.Tag) + 1551, true);
-                await NotAvailableMove(index, 1, 4, 0, changeStatus: true, statusText: $"Not {Options.SP_PlayerName}'s turn");
+                return MessageBox.Show("All enemy ships are destroyed, and you have surviving ships.\r\nGame over. You Win!", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }
-        int FindTargetButtonViaIndex()
+        public void ShowPlayerMapAfterGame()
         {
-            if (Support.StringToInt(Fight.TargetButtonTag.ToString(), out int index))
+            for (int i = 0; i < MapButtons.GetLength(1); i++)
             {
-                index -= 1551;
-                for (int b = 0; b < 100; b++)
+                if (MapButtons[0, i].BackColor == Color.Silver ||
+                    MapButtons[0, i].BackColor == Color.DarkGray ||
+                    MapButtons[0, i].BackColor == Color.Gray ||
+                    MapButtons[0, i].BackColor == Color.DimGray)
                 {
-                    if (MapButtons[0, b].Tag.ToString() == $"{index}")
+                    MapButtons[0, i].BackColor = Color.Green;
+                }
+            }
+        }
+        public void ShowEnemyMapAfterGame()
+        {
+            for (int i = 0; i < MapButtons.GetLength(1); i++)
+            {
+                if (MapButtons[1, i].BackColor != Color.White)
+                {
+                    continue;
+                }
+                char mapChar = Char.ToLower(EnemyData.Map[i]);
+                if (mapChar == 'e' || mapChar == 'n')
+                {
+                    continue;
+                }
+                MapButtons[1, i].BackColor = Color.Green;
+            }
+        }
+        string SetTurnText()
+        {
+            switch (Fight.Turn)
+            {
+                case 0:
                     {
-                        return b;
+                        return Options.SP_PlayerName;
                     }
-                }
-            }
-            else
-            {
-                MessageBox.Show($"Error Code: E29M9L4\r\n{index} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return -1;
-        }
-        async Task ChangeBorderSize(int duration = 30, int steps = 4)
-        {
-            int targetIndex = FindTargetButtonViaIndex();
-            if (MapButtons[0, targetIndex].BackColor == Color.Red || MapButtons[0, targetIndex].BackColor == Color.Firebrick || MapButtons[0, targetIndex].BackColor == Color.DeepSkyBlue)
-            {
-                MessageBox.Show("Incorrect Posiotion");
-            }
-            else if (targetIndex != -1)
-            {
-                int defaultBorderSize = MapButtons[1, targetIndex].FlatAppearance.BorderSize;
-                int customBorderSize = defaultBorderSize * 3;
-                for (int a = 0; a <= steps; a++)
-                {
-                    MapButtons[0, targetIndex].FlatAppearance.BorderSize = customBorderSize;
-                    await Task.Delay(duration);
-                    MapButtons[0, targetIndex].FlatAppearance.BorderSize = defaultBorderSize;
-                    await Task.Delay(duration);
-                }
-                MapButtons[0, targetIndex].FlatAppearance.BorderSize = defaultBorderSize;
-            }
-        }
-        async Task NotAvailableMove(int index,int size = 1, int steps = 5, int colorIndex = 0, int duration = 120, bool changeStatus = false, string statusText = null)
-        {
-            int defaultSize = 1;
-            int changedSize = defaultSize + size;
-            string oldText = TB_TurnStatus.Text;
-            Color oldColor = TB_TurnStatus.ForeColor;
-            Color defaultColor = Color.Black;
-            Color[] changedColors = { Color.DarkRed, Color.Gold };
-            if (changeStatus)
-            {
-                TB_TurnStatus.Text = statusText;
-                TB_TurnStatus.ForeColor = Color.Red;
-            }
-            for (int i = 0; i < steps; i++)
-            {
-                await Task.Delay(duration);
-                MapButtons[1, index].FlatAppearance.BorderColor = changedColors[colorIndex];
-                MapButtons[1, index].FlatAppearance.BorderSize = changedSize;
-                await Task.Delay(duration);
-                MapButtons[1, index].FlatAppearance.BorderColor = defaultColor;
-                MapButtons[1, index].FlatAppearance.BorderSize = defaultSize;
-                MapButtons[1, index].FlatAppearance.BorderSize = defaultSize;
-                MapButtons[1, index].FlatAppearance.BorderColor = defaultColor;
-            }
-            TB_TurnStatus.Text = oldText;
-            TB_TurnStatus.ForeColor = oldColor;
-        }
-        async Task EnemyTurn()
-        {
-            bool successshot = false;
-            if (ShipData.HitedDeckCount < ShipData.MaximumDeckCount)
-            {
-                Fight.Shoot(out successshot);
-                await ChangeBorderSize(100, 3);
-                ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
-                try
-                {
-                    UpdatePlayerMapColor(ColorMethods.PlayerMapColor);
-                    SetAllShipsTextBoxesValues();
-                    Fight.Turn = Fight.ReverseTurn(Fight.Hited);
-                    if (SetTurnText() == "ERROR")
+                case 1:
                     {
-                        MessageBox.Show($"Error Code: E17M4L1\r\nUncertain next move", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        return "Enemy";
                     }
-                    else
+                case 2:
                     {
-                        TB_Turn.Text = SetTurnText();
+                        return "Game Over";
                     }
-                }
-                catch
-                {
-                    MessageBox.Show($"Error Code: E18M4L3\r\nColor scheme updating error", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
+                default:
+                    {
+                        return "ERROR";
+                    }
             }
-            else if (ShipData.HitedDeckCount == 20)
+        }
+        void CheckShipsSunkenState()
+        {
+            for (int s0 = 0; s0 < ShipsSunken.GetLength(0); s0++)
             {
-                Options.GameOver = true;
+                AllShipSunken[s0] = true;
+                for (int p = 0; p < ShipsSunken.GetLength(1); p++)
+                {
+                    AllShipSunken[s0] &= ShipsSunken[s0, p];
+                }
             }
+            if (AllShipSunken[0])
+            {
+                //Player Lose
+                if (GameOverMessages(true) == DialogResult.OK)
+                {
+                    ShowEnemyMapAfterGame();
+                }
+            }
+            else if (AllShipSunken[1])
+            {
+                //Player Win
+                Fight.Turn = 2;
+                TB_Turn.Text = SetTurnText();
+                TB_Turn.ForeColor = Color.Red;
+                if (GameOverMessages(false) == DialogResult.OK)
+                {
+                    ShowPlayerMapAfterGame();
+                }
+            }
+        }
+        void SetPlayerShipsTexBoxesValues()
+        {
+            TB_PlayerFrigate.Text = PlayerData.FrigatesCountCurrent.ToString();
+            TB_PlayerDestroyer.Text = PlayerData.DestroyersCountCurrent.ToString();
+            TB_PlayerCruiser.Text = PlayerData.CruiserCountCurrent.ToString();
+            TB_PlayerBattleship.Text = PlayerData.BattleshipCountCurrent.ToString();
+            TB_PlayerHit.Text = PlayerData.HitCountCurrent.ToString();
+            TB_PlayerMiss.Text = PlayerData.MissedShotsCount.ToString();
+        }
+        void SetEnemyShipsTexBoxesValues()
+        {
+            TB_EnemyFrigate.Text = EnemyData.FrigatesCountCurrent.ToString();
+            TB_EnemyDestroyer.Text = EnemyData.DestroyersCountCurrent.ToString();
+            TB_EnemyCruiser.Text = EnemyData.CruiserCountCurrent.ToString();
+            TB_EnemyBattleship.Text = EnemyData.BattleshipCountCurrent.ToString();
+            TB_EnemyHit.Text = EnemyData.HitCountCurrent.ToString();
+            TB_EnemyMiss.Text = EnemyData.MissedShotsCount.ToString();
+        }
+        void SetAllShipsTextBoxesValues()
+        {
+            SetEnemyShipsTexBoxesValues();
+            SetPlayerShipsTexBoxesValues();
         }
         void UpdatePlayerMapColor(Color[] colors)
         {
@@ -417,230 +305,172 @@ namespace Battleship
             }
             EnemyData.AddIndependentChance();
         }
-        string SetTurnText()
+        private void Frigates_TB_Change(object sender, EventArgs e)
         {
-            switch (Fight.Turn)
+            TextBox textBox = sender as TextBox;
+            if (Support.StringToInt(textBox.Text, out int value))
             {
-                case 0:
-                    {
-                        return Options.SP_PlayerName;
-                    }
-                case 1:
-                    {
-                        return "Enemy";
-                    }
-                case 2:
-                    {
-                        return "Game Over";
-                    }
-                default:
-                    {
-                        return "ERROR";
-                    }
+                Design.SetTextBoxValues(textBox, value, 0, 4);
             }
-        }
-        private async void Button_MouseEnter(object sender, EventArgs e)
-        {
-            await Task.Delay(0);
-            Button selectedButton = sender as Button;
-            string tagButton = Support.GetTagFromButton(selectedButton);
-            Position.GetCoordsFromTag(tagButton, out int x, out int y, out int playerID);
-            string textID = Position.GetButtonTextCoords(selectedButton, out playerID);
-            int index = playerID - 1;
-            Button[] targetButtons = new Button[MapButtons.GetLength(1)];
-            string cellPosition = Position.GetCellPosition(tagButton);
-            switch (index)
+            else
             {
-                case 0:
-                    {
-                        targetButtons = Support.GetPlayerButtons(MapButtons);
-                        BS_PlayerSchema_Index.Text = textID;
-                        bool orientationChanged = false;
-                        PlayerData.Map = Data.TargetButtonsToCharArray(targetButtons, playerID);
-                        if (Data.ShipPlaceMode == "Frigate")
+                MessageBox.Show($"Error Code: E20M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (Fight.GameStarted && textBox.Text == "0")
+            {
+                switch (textBox.Name)
+                {
+                    case "TB_PlayerFrigate":
                         {
-                            Data.Orientation = "N";
+                            ShipsSunken[0, 0] = true;
+                            break;
                         }
-                        else
+                    case "TB_EnemyFrigate":
                         {
-                            if (ModifierKeys == Keys.Shift)
-                            {
-                                Data.Orientation = "V";
-                                orientationChanged = true;
-                            }
-                            else
-                            {
-                                Data.Orientation = "H";
-                                orientationChanged = true;
-                            }
+                            ShipsSunken[1, 0] = true;
+                            break;
                         }
-                        if (orientationChanged)
-                        {
+                }
+                CheckShipsSunkenState();
+            }
 
-                        }
-                        if (Position.IsValidShipPosition(cellPosition, Data.ShipPlaceMode, Data.Orientation, tagButton))
+        }
+        private void Destroyers_TB_Change(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (Support.StringToInt(textBox.Text, out int value))
+            {
+                Design.SetTextBoxValues(textBox, value, 0, 3);
+            }
+            else
+            {
+                MessageBox.Show($"Error Code: E21M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (Fight.GameStarted && textBox.Text == "0")
+            {
+                switch (textBox.Name)
+                {
+                    case "TB_PlayerDestroyer":
                         {
-
-                        }
-                        break;
-                    }
-                case 1:
-                    {
-                        BS_EnemySchema_Index.Text = textID;
-                        if (selectedButton != null)
-                        {
-                            HitChanceData.SelectedCell = selectedButton;
-                        }
-                        SetStatusTurnText(selectedButton);
-                        break;
-                    }
-                default:
-                    {
-                        BS_EnemySchema_Index = null;
-                        BS_PlayerSchema_Index = null;
-                        break;
-                    }
-            }
-        }
-        int[,] GenerateButtonsTags()
-        {
-            int tag;
-            int index;
-            int[,] tags = new int[2, 100];
-            for (int f = 1; f <= 2; f++)
-            {
-                for (int i = 0; i < 10; i++)
-                {
-                    for (int j = 0; j < 10; j++)
-                    {
-                        tag = Convert.ToInt32(Convert.ToString($"{f}{j}{i}"));
-                        index = Convert.ToInt32(Convert.ToString($"{i}{j}"));
-                        tags[f - 1, index] = tag;
-                    }
-                }
-            }
-            return tags;
-        }
-        private void GamePlayerOne_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            Environment.Exit(0);
-        }
-        public void GeneratePlayerRandomMap()
-        {
-            ResetPlayerMap(false, MapButtons);
-            char[,] playerMap = Map.GeneratePlayerMap(MapButtons);
-            Button[] playerButtons = Support.GetPlayerButtons(MapButtons);
-            SetPlayerButtonsColors(playerButtons, playerMap);
-        }
-        public void GenerateEnemyRandomMap()
-        {
-            ResetEnemyMap(MapButtons);
-            char[,] enemyMap = Map.GenerateEnemyMap(MapButtons);
-            Button[] enemyButtons = Support.GetEnemyButtons(MapButtons);
-            SetEnemyButtonsColors(enemyButtons, enemyMap);
-        }
-        public void SetPlayerButtonsColors(Button[] playerButtons, char[,] playerMap)
-        {
-            PlayerData.ResetShipsCount();
-            char[] map = Support.CharArrayRedimension(playerMap);
-            Color[] colors = ColorMethods.SetButtonColors(map);
-            for (int b = 0; b < playerButtons.Length; b++)
-            {
-                playerButtons[b].BackColor = colors[b];
-            }
-            Map.SetShipsCountThrowMap(map);
-            PlayerData.DestroyersCountCurrent /= 2;
-            PlayerData.CruiserCountCurrent /= 3;
-            PlayerData.BattleshipCountCurrent /= 4;
-            PlayerData.Map = map;
-            TB_PlayerFrigate.Text = $"{PlayerData.FrigatesCountCurrent}";
-            TB_PlayerDestroyer.Text = $"{PlayerData.DestroyersCountCurrent}";
-            TB_PlayerCruiser.Text = $"{PlayerData.CruiserCountCurrent}";
-            TB_PlayerBattleship.Text = $"{PlayerData.BattleshipCountCurrent}";
-        }
-        public void SetEnemyButtonsColors(Button[] enemyButtons, char[,] enemyMap)
-        {
-            EnemyData.ResetShipsCount();
-            char[] map = Support.CharArrayRedimension(enemyMap);
-            Color[] colors = ColorMethods.SetButtonColors(map);
-            for (int b = 0; b < enemyButtons.Length; b++)
-            {
-                enemyButtons[b].BackColor = colors[b];
-            }
-            Map.SetShipsCountThrowMap(map);
-            EnemyData.DestroyersCountCurrent /= 2;
-            EnemyData.CruiserCountCurrent /= 3;
-            EnemyData.BattleshipCountCurrent /= 4;
-            TB_EnemyFrigate.Text = $"{EnemyData.FrigatesCountCurrent}";
-            TB_EnemyDestroyer.Text = $"{EnemyData.DestroyersCountCurrent}";
-            TB_EnemyCruiser.Text = $"{EnemyData.CruiserCountCurrent}";
-            TB_EnemyBattleship.Text = $"{EnemyData.BattleshipCountCurrent}";
-        }
-        public void ResetEnemyMap(Button[,] buttons)
-        {
-            Button[] enemyButtons = Support.GetEnemyButtons(buttons);
-            for (int b = 0; b < enemyButtons.Length; b++)
-            {
-                enemyButtons[b].BackColor = Color.White;
-            }
-        }
-        public void ResetPlayerMap(bool gameStarted, Button[,] buttons)
-        {
-            if (!gameStarted)
-            {
-                Button[] playerButtons = Support.GetPlayerButtons(buttons);
-                for (int b = 0; b < playerButtons.Length; b++)
-                {
-                    playerButtons[b].BackColor = Color.White;
-                }
-            }
-        }
-        public async void StartBattleShip()
-        {
-            GenerateEnemyRandomMap();
-            for (int i = 0; i < MapButtons.GetLength(1); i++)
-            {
-                Button targetButton = MapButtons[1, i];
-                Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
-                EnemyData.Map[i] = ColorMethods.SetCharViaColor(1, targetButton.BackColor);
-                if (PlayerData.Map[i] == 'N')
-                {
-                    PlayerData.Map[i] = 'E';
-                }
-                if (EnemyData.Map[i] == 'n')
-                {
-                    EnemyData.Map[i] = 'e';
-                }
-            }
-            Fight.GameStarted = true;
-            Data.ResetDataToZero();
-            int turn = Fight.WhoStartGame();
-            if (Fight.FirstTurn)
-            {
-                switch (turn)
-                {
-                    case 0:
-                        {
-                            TB_Turn.Text = Options.SP_PlayerName;
-                            Fight.FirstTurn = false;
-                            Fight.Turn = 0;
+                            ShipsSunken[0, 1] = true;
                             break;
                         }
-                    case 1:
+                    case "TB_EnemyDestroyer":
                         {
-                            TB_Turn.Text = "Enemy";
-                            Fight.FirstTurn = true;
-                            Fight.Turn = 1;
-                            await EnemyTurn();
-                            break;
-                        }
-                    default:
-                        {
-                            TB_Turn.Clear();
-                            TB_Turn.Text = "Error";
+                            ShipsSunken[1, 1] = true;
                             break;
                         }
                 }
+                CheckShipsSunkenState();
+            }
+        }
+        private void Cruisers_TB_Change(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (Support.StringToInt(textBox.Text, out int value))
+            {
+                Design.SetTextBoxValues(textBox, value, 0, 2);
+            }
+            else
+            {
+                MessageBox.Show($"Error Code: E22M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (Fight.GameStarted && textBox.Text == "0")
+            {
+                switch (textBox.Name)
+                {
+                    case "TB_PlayerCruiser":
+                        {
+                            ShipsSunken[0, 2] = true;
+                            break;
+                        }
+                    case "TB_EnemyCruiser":
+                        {
+                            ShipsSunken[1, 2] = true;
+                            break;
+                        }
+                }
+                CheckShipsSunkenState();
+            }
+        }
+        private void Battleships_TB_Change(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (Support.StringToInt(textBox.Text, out int value))
+            {
+                Design.SetTextBoxValues(textBox, value, 0, 1);
+            }
+            else
+            {
+                MessageBox.Show($"Error Code: E23M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            if (Fight.GameStarted && textBox.Text == "0")
+            {
+                switch (textBox.Name)
+                {
+                    case "TB_PlayerBattleship":
+                        {
+                            ShipsSunken[0, 3] = true;
+                            break;
+                        }
+                    case "TB_EnemyBattleship":
+                        {
+                            ShipsSunken[1, 3] = true;
+                            break;
+                        }
+                }
+                CheckShipsSunkenState();
+            }
+        }
+        private void Miss_TB_Change(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (Support.StringToInt(textBox.Text, out int value))
+            {
+                if (value > 0)
+                {
+                    textBox.ForeColor = Color.Red;
+                }
+                else
+                {
+                    textBox.ForeColor = Color.Lime;
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Error Code: E24M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private void Hit_TB_Change(object sender, EventArgs e)
+        {
+            TextBox textBox = sender as TextBox;
+            if (Support.StringToInt(textBox.Text, out int value))
+            {
+                if (value < 0)
+                {
+                    textBox.ForeColor = Color.Red;
+                }
+                else
+                {
+                    textBox.ForeColor = Color.Lime;
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Error Code: E25M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        public bool IsCellWhite(int index, out char cellChar)
+        {
+            if (EnemyData.Map[index] == 'e')
+            {
+                cellChar = 'e';
+                return true;
+            }
+            else
+            {
+                cellChar = EnemyData.Map[index];
+                return false;
             }
         }
         public void NextTurn(string buttonTag)
@@ -829,17 +659,431 @@ namespace Battleship
                 }
             }
         }
-        public bool IsCellWhite(int index, out char cellChar)
+        async Task NotAvailableMove(int index, int size = 1, int steps = 5, int colorIndex = 0, int duration = 120, bool changeStatus = false, string statusText = null)
         {
-            if (EnemyData.Map[index] == 'e')
+            int defaultSize = 1;
+            int changedSize = defaultSize + size;
+            string oldText = TB_TurnStatus.Text;
+            Color oldColor = TB_TurnStatus.ForeColor;
+            Color defaultColor = Color.Black;
+            Color[] changedColors = { Color.DarkRed, Color.Gold };
+            if (changeStatus)
             {
-                cellChar = 'e';
-                return true;
+                TB_TurnStatus.Text = statusText;
+                TB_TurnStatus.ForeColor = Color.Red;
+            }
+            for (int i = 0; i < steps; i++)
+            {
+                await Task.Delay(duration);
+                MapButtons[1, index].FlatAppearance.BorderColor = changedColors[colorIndex];
+                MapButtons[1, index].FlatAppearance.BorderSize = changedSize;
+                await Task.Delay(duration);
+                MapButtons[1, index].FlatAppearance.BorderColor = defaultColor;
+                MapButtons[1, index].FlatAppearance.BorderSize = defaultSize;
+                MapButtons[1, index].FlatAppearance.BorderSize = defaultSize;
+                MapButtons[1, index].FlatAppearance.BorderColor = defaultColor;
+            }
+            TB_TurnStatus.Text = oldText;
+            TB_TurnStatus.ForeColor = oldColor;
+        }
+        int FindTargetButtonViaIndex()
+        {
+            if (Support.StringToInt(Fight.TargetButtonTag.ToString(), out int index))
+            {
+                index -= 1551;
+                for (int b = 0; b < 100; b++)
+                {
+                    if (MapButtons[0, b].Tag.ToString() == $"{index}")
+                    {
+                        return b;
+                    }
+                }
             }
             else
             {
-                cellChar = EnemyData.Map[index];
-                return false;
+                MessageBox.Show($"Error Code: E29M9L4\r\n{index} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return -1;
+        }
+        async Task ChangeBorderSize(int duration = 30, int steps = 4)
+        {
+            int targetIndex = FindTargetButtonViaIndex();
+            if (MapButtons[0, targetIndex].BackColor == Color.Red || MapButtons[0, targetIndex].BackColor == Color.Firebrick || MapButtons[0, targetIndex].BackColor == Color.DeepSkyBlue)
+            {
+                MessageBox.Show("Incorrect Posiotion");
+            }
+            else if (targetIndex != -1)
+            {
+                int defaultBorderSize = MapButtons[1, targetIndex].FlatAppearance.BorderSize;
+                int customBorderSize = defaultBorderSize * 3;
+                for (int a = 0; a <= steps; a++)
+                {
+                    MapButtons[0, targetIndex].FlatAppearance.BorderSize = customBorderSize;
+                    await Task.Delay(duration);
+                    MapButtons[0, targetIndex].FlatAppearance.BorderSize = defaultBorderSize;
+                    await Task.Delay(duration);
+                }
+                MapButtons[0, targetIndex].FlatAppearance.BorderSize = defaultBorderSize;
+            }
+        }
+        void PlayerTurn(int playerID, Button clickedButton)
+        {
+            string tagButton = clickedButton.Tag.ToString();
+            if (playerID == 2)
+            {
+                if (Fight.GameStarted)
+                {
+                    NextTurn(tagButton);
+                    ColorMethods.EnemyMapColor = ColorMethods.SetEnemyButtonsColors(EnemyData.Map);
+                    UpdateEnemyMapColor(ColorMethods.EnemyMapColor);
+                    if (SetTurnText() == "ERROR")
+                    {
+                        MessageBox.Show($"Error Code: E16M4L1\r\nUncertain next move", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        TB_Turn.Text = SetTurnText();
+                    }
+                }
+            }
+        }
+        async Task EnemyTurn()
+        {
+            bool successshot = false;
+            if (ShipData.HitedDeckCount < ShipData.MaximumDeckCount)
+            {
+                Fight.Shoot(out successshot);
+                await ChangeBorderSize(100, 3);
+                ColorMethods.PlayerMapColor = ColorMethods.SetButtonColors(PlayerData.Map);
+                try
+                {
+                    UpdatePlayerMapColor(ColorMethods.PlayerMapColor);
+                    SetAllShipsTextBoxesValues();
+                    Fight.Turn = Fight.ReverseTurn(Fight.Hited);
+                    if (SetTurnText() == "ERROR")
+                    {
+                        MessageBox.Show($"Error Code: E17M4L1\r\nUncertain next move", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                    else
+                    {
+                        TB_Turn.Text = SetTurnText();
+                    }
+                }
+                catch
+                {
+                    MessageBox.Show($"Error Code: E18M4L3\r\nColor scheme updating error", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+            else if (ShipData.HitedDeckCount == 20)
+            {
+                Options.GameOver = true;
+            }
+        }
+        async Task Turn(int playerID, Button clickedButton)
+        {
+            if (Fight.Turn == 0)
+            {
+                PlayerTurn(playerID, clickedButton);
+                while (Fight.Turn == 1)
+                {
+                    if (!Options.GameOver)
+                    {
+                        await EnemyTurn();
+                    }
+                    else
+                    {
+                        Fight.Turn = 2;
+                        TB_Turn.Text = SetTurnText();
+                        TB_Turn.ForeColor = Color.Red;
+                    }
+                }
+            }
+            else
+            {
+                SystemSounds.Exclamation.Play();
+                int index = Fight.FindCorrectIndex(Convert.ToInt32(clickedButton.Tag) + 1551, true);
+                await NotAvailableMove(index, 1, 4, 0, changeStatus: true, statusText: $"Not {Options.SP_PlayerName}'s turn");
+            }
+        }        
+        void CoordsForcedOverwrite()
+        {
+            int[] count = new int[2];
+            count[0] = Fight.ForbiddenCoords.Count;
+            Fight.ForbiddenCoords.Clear();
+            HashSet<int> forbidden = new HashSet<int>();
+            for (int i = 0; i < MapButtons.GetLength(1); i++)
+            {
+                if ((MapButtons[0, i].BackColor == Color.Red) || (MapButtons[0, i].BackColor == Color.Firebrick) || (MapButtons[0, i].BackColor == Color.DeepSkyBlue))
+                {
+                    forbidden.Add(PlayerData.Map[i]);
+                }
+            }
+            Fight.ForbiddenCoords = new List<int>(forbidden);
+            count[1] = Fight.ForbiddenCoords.Count;
+            if (count[0] == count[1])
+            {
+                MessageBox.Show("Forbidden data error", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+        private async void ClickOnCell(object sender, MouseEventArgs e)
+        {
+            if (!Options.GameOver)
+            {
+                Button clickedButton = sender as Button;
+                int playerID;
+                string coord = Position.GetButtonTextCoords(clickedButton, out playerID);
+                if (Support.StringToInt(clickedButton.Tag.ToString(), out int tagCB))
+                {
+                    if (clickedButton.BackColor != Color.White)
+                    {
+                        if (tagCB / 100 == 2)
+                        {
+                            int index = Fight.FindCorrectIndex(Convert.ToInt32(clickedButton.Tag) + 1551, true);
+                            await NotAvailableMove(index, 1, 4, 0);
+                        }
+                    }
+                    if (Fight.ForbiddenCoords.Count != 100)
+                    {
+                        await Turn(playerID, clickedButton);
+                    }
+                    else
+                    {
+                        CoordsForcedOverwrite();
+                        await Turn(playerID, clickedButton);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Error Code: E26M9L4\r\n{clickedButton.Tag} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }               
+        void SetStatusTurnText(Button selectedButton)
+        {
+            if (Fight.GameStarted)
+            {
+                if (Fight.Turn == 1)
+                {
+                    TB_TurnStatus.Text = "Move not available";
+                    TB_TurnStatus.ForeColor = Color.Red;
+                }
+                else if (Fight.Turn == 0)
+                {
+                    switch (selectedButton.BackColor.Name.ToString())
+                    {
+                        case "Red":
+                            {
+                                TB_TurnStatus.Text = "Hited ship deck";
+                                TB_TurnStatus.ForeColor = Color.Yellow;
+                                break;
+                            }
+                        case "Firebrick":
+                            {
+                                TB_TurnStatus.Text = "Sunken ship";
+                                TB_TurnStatus.ForeColor = Color.Orange;
+                                break;
+                            }
+                        case "DeepSkyBlue":
+                            {
+                                TB_TurnStatus.Text = "Enmpty cell";
+                                TB_TurnStatus.ForeColor = Color.DeepSkyBlue;
+                                break;
+                            }
+                        case "White":
+                            {
+                                TB_TurnStatus.Text = "Available move";
+                                TB_TurnStatus.ForeColor = Color.Lime;
+                                break;
+                            }
+                        case "Green":
+                            {
+                                TB_TurnStatus.Text = "Undiscovered ship";
+                                TB_TurnStatus.ForeColor = Color.Lime;
+                                break;
+                            }
+                    }
+                }
+            }
+        }
+        private async void CellEnter(object sender, EventArgs e)
+        {
+            await Task.Delay(0);
+            Button selectedButton = sender as Button;
+            string tagButton = Support.GetTagFromButton(selectedButton);
+            Position.GetCoordsFromTag(tagButton, out int x, out int y, out int playerID);
+            string textID = Position.GetButtonTextCoords(selectedButton, out playerID);
+            int index = playerID - 1;
+            Button[] targetButtons = new Button[MapButtons.GetLength(1)];
+            string cellPosition = Position.GetCellPosition(tagButton);
+            switch (index)
+            {
+                case 0:
+                    {
+                        targetButtons = Support.GetPlayerButtons(MapButtons);
+                        BS_PlayerSchema_Index.Text = textID;
+                        bool orientationChanged = false;
+                        PlayerData.Map = Data.TargetButtonsToCharArray(targetButtons, playerID);
+                        if (Data.ShipPlaceMode == "Frigate")
+                        {
+                            Data.Orientation = "N";
+                        }
+                        else
+                        {
+                            if (ModifierKeys == Keys.Shift)
+                            {
+                                Data.Orientation = "V";
+                                orientationChanged = true;
+                            }
+                            else
+                            {
+                                Data.Orientation = "H";
+                                orientationChanged = true;
+                            }
+                        }
+                        if (orientationChanged)
+                        {
+
+                        }
+                        if (Position.IsValidShipPosition(cellPosition, Data.ShipPlaceMode, Data.Orientation, tagButton))
+                        {
+
+                        }
+                        break;
+                    }
+                case 1:
+                    {
+                        BS_EnemySchema_Index.Text = textID;
+                        if (selectedButton != null)
+                        {
+                            HitChanceData.SelectedCell = selectedButton;
+                        }
+                        SetStatusTurnText(selectedButton);
+                        break;
+                    }
+                default:
+                    {
+                        BS_EnemySchema_Index = null;
+                        BS_PlayerSchema_Index = null;
+                        break;
+                    }
+            }
+        }
+        public void SetPlayerButtonsColors(Button[] playerButtons, char[,] playerMap)
+        {
+            PlayerData.ResetShipsCount();
+            char[] map = Support.CharArrayRedimension(playerMap);
+            Color[] colors = ColorMethods.SetButtonColors(map);
+            for (int b = 0; b < playerButtons.Length; b++)
+            {
+                playerButtons[b].BackColor = colors[b];
+            }
+            Map.SetShipsCountThrowMap(map);
+            PlayerData.DestroyersCountCurrent /= 2;
+            PlayerData.CruiserCountCurrent /= 3;
+            PlayerData.BattleshipCountCurrent /= 4;
+            PlayerData.Map = map;
+            TB_PlayerFrigate.Text = $"{PlayerData.FrigatesCountCurrent}";
+            TB_PlayerDestroyer.Text = $"{PlayerData.DestroyersCountCurrent}";
+            TB_PlayerCruiser.Text = $"{PlayerData.CruiserCountCurrent}";
+            TB_PlayerBattleship.Text = $"{PlayerData.BattleshipCountCurrent}";
+        }
+        public void SetEnemyButtonsColors(Button[] enemyButtons, char[,] enemyMap)
+        {
+            EnemyData.ResetShipsCount();
+            char[] map = Support.CharArrayRedimension(enemyMap);
+            Color[] colors = ColorMethods.SetButtonColors(map);
+            for (int b = 0; b < enemyButtons.Length; b++)
+            {
+                enemyButtons[b].BackColor = colors[b];
+            }
+            Map.SetShipsCountThrowMap(map);
+            EnemyData.DestroyersCountCurrent /= 2;
+            EnemyData.CruiserCountCurrent /= 3;
+            EnemyData.BattleshipCountCurrent /= 4;
+            TB_EnemyFrigate.Text = $"{EnemyData.FrigatesCountCurrent}";
+            TB_EnemyDestroyer.Text = $"{EnemyData.DestroyersCountCurrent}";
+            TB_EnemyCruiser.Text = $"{EnemyData.CruiserCountCurrent}";
+            TB_EnemyBattleship.Text = $"{EnemyData.BattleshipCountCurrent}";
+        }
+        public void ResetPlayerMap(bool gameStarted, Button[,] buttons)
+        {
+            if (!gameStarted)
+            {
+                Button[] playerButtons = Support.GetPlayerButtons(buttons);
+                for (int b = 0; b < playerButtons.Length; b++)
+                {
+                    playerButtons[b].BackColor = Color.White;
+                }
+            }
+        }
+        public void ResetEnemyMap(Button[,] buttons)
+        {
+            Button[] enemyButtons = Support.GetEnemyButtons(buttons);
+            for (int b = 0; b < enemyButtons.Length; b++)
+            {
+                enemyButtons[b].BackColor = Color.White;
+            }
+        }
+        public void GeneratePlayerRandomMap()
+        {
+            ResetPlayerMap(false, MapButtons);
+            char[,] playerMap = Map.GeneratePlayerMap(MapButtons);
+            Button[] playerButtons = Support.GetPlayerButtons(MapButtons);
+            SetPlayerButtonsColors(playerButtons, playerMap);
+        }
+        public void GenerateEnemyRandomMap()
+        {
+            ResetEnemyMap(MapButtons);
+            char[,] enemyMap = Map.GenerateEnemyMap(MapButtons);
+            Button[] enemyButtons = Support.GetEnemyButtons(MapButtons);
+            SetEnemyButtonsColors(enemyButtons, enemyMap);
+        }
+        public async void StartBattleShip()
+        {
+            GenerateEnemyRandomMap();
+            for (int i = 0; i < MapButtons.GetLength(1); i++)
+            {
+                Button targetButton = MapButtons[1, i];
+                Array.Resize(ref EnemyData.Map, MapButtons.GetLength(1));
+                EnemyData.Map[i] = ColorMethods.SetCharViaColor(1, targetButton.BackColor);
+                if (PlayerData.Map[i] == 'N')
+                {
+                    PlayerData.Map[i] = 'E';
+                }
+                if (EnemyData.Map[i] == 'n')
+                {
+                    EnemyData.Map[i] = 'e';
+                }
+            }
+            Fight.GameStarted = true;
+            Data.ResetDataToZero();
+            int turn = Fight.WhoStartGame();
+            if (Fight.FirstTurn)
+            {
+                switch (turn)
+                {
+                    case 0:
+                        {
+                            TB_Turn.Text = Options.SP_PlayerName;
+                            Fight.FirstTurn = false;
+                            Fight.Turn = 0;
+                            break;
+                        }
+                    case 1:
+                        {
+                            TB_Turn.Text = "Enemy";
+                            Fight.FirstTurn = true;
+                            Fight.Turn = 1;
+                            await EnemyTurn();
+                            break;
+                        }
+                    default:
+                        {
+                            TB_Turn.Clear();
+                            TB_Turn.Text = "Error";
+                            break;
+                        }
+                }
             }
         }
         private async void TSMI_StartNewGame_Click(object sender, EventArgs e)
@@ -873,7 +1117,7 @@ namespace Battleship
                 targetButton.BackColor = Color.White;
                 targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
             }
-        }
+        }        
         private void TSMI_GenerationType_CheckedChanged(object sender, EventArgs e)
         {
             switch (TSMI_GenerationType.Checked)
@@ -890,6 +1134,21 @@ namespace Battleship
                         Data.RandomMap = false;
                         break;
                     }
+            }
+        }
+        private void TB_Turn_TextChanged(object sender, EventArgs e)
+        {
+            if (TB_Turn.Text == "Enemy")
+            {
+                TB_Turn.ForeColor = Color.Firebrick;
+            }
+            else if (TB_Turn.Text == Options.SP_PlayerName)
+            {
+                TB_Turn.ForeColor = Color.Lime;
+            }
+            else
+            {
+                TB_Turn.ForeColor = Design.DefaultForeColor;
             }
         }
         private async void TSMI_GenerateMap_Click(object sender, EventArgs e)
@@ -978,7 +1237,6 @@ namespace Battleship
                 if (DialogResult == DialogResult.Yes)
                 {
                     StartBattleShip();
-                    SetShipsSunkenToZero();
                     SetAllShipsTextBoxesValues();
                     //SET ENEMY BUTTON COLOR TO WHITE
                     for (int i = 0; i < MapButtons.GetLength(1); i++)
@@ -1000,216 +1258,6 @@ namespace Battleship
                 Fight.GameStarted = false;
             }
         }
-        private void TSMI_AllwaysOnTop_CheckedChanged(object sender, EventArgs e)
-        {
-            TopMost = TSMI_AllwaysOnTop.Checked;
-        }
-        private void TB_Turn_TextChanged(object sender, EventArgs e)
-        {
-            if (TB_Turn.Text == "Enemy")
-            {
-                TB_Turn.ForeColor = Color.Firebrick;
-            }
-            else if (TB_Turn.Text == Options.SP_PlayerName)
-            {
-                TB_Turn.ForeColor = Color.Lime;
-            }
-            else
-            {
-                TB_Turn.ForeColor = Design.DefaultForeColor;
-
-            }
-        }
-        private void TSMI_GPO_OpenManual_Click(object sender, EventArgs e)
-        {
-            ManualInfo mi = new ManualInfo();
-            mi.Show();
-        }
-        private void TB_PlayerFrigate_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            if (Support.StringToInt(textBox.Text, out int value))
-            {
-                Design.SetTextBoxValues(textBox, value, 0, 4);
-            }
-            else
-            {
-                MessageBox.Show($"Error Code: E20M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            if (Fight.GameStarted && textBox.Text == "0")
-            {
-                switch (textBox.Name)
-                {
-                    case "TB_PlayerFrigate":
-                        {
-                            ShipsSunken[0, 0] = true;
-                            break;
-                        }
-                    case "TB_EnemyFrigate":
-                        {
-                            ShipsSunken[1, 0] = true;
-                            break;
-                        }
-                }
-                CheckShipsSunkenState();
-            }
-
-        }
-        private void TB_PlayerDestroyer_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            if (Support.StringToInt(textBox.Text, out int value))
-            {
-                Design.SetTextBoxValues(textBox, value, 0, 3);
-            }
-            else
-            {
-                MessageBox.Show($"Error Code: E21M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            if (Fight.GameStarted && textBox.Text == "0")
-            {
-                switch (textBox.Name)
-                {
-                    case "TB_PlayerDestroyer":
-                        {
-                            ShipsSunken[0, 1] = true;
-                            break;
-                        }
-                    case "TB_EnemyDestroyer":
-                        {
-                            ShipsSunken[1, 1] = true;
-                            break;
-                        }
-                }
-                CheckShipsSunkenState();
-            }
-        }
-        private void TB_EnemyCruiser_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            if (Support.StringToInt(textBox.Text, out int value))
-            {
-                Design.SetTextBoxValues(textBox, value, 0, 2);
-            }
-            else
-            {
-                MessageBox.Show($"Error Code: E22M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            if (Fight.GameStarted && textBox.Text == "0")
-            {
-                switch (textBox.Name)
-                {
-                    case "TB_PlayerCruiser":
-                        {
-                            ShipsSunken[0, 2] = true;
-                            break;
-                        }
-                    case "TB_EnemyCruiser":
-                        {
-                            ShipsSunken[1, 2] = true;
-                            break;
-                        }
-                }
-                CheckShipsSunkenState();
-            }
-        }
-        private void TB_PlayerBattleship_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            if (Support.StringToInt(textBox.Text, out int value))
-            {
-                Design.SetTextBoxValues(textBox, value, 0, 1);
-            }
-            else
-            {
-                MessageBox.Show($"Error Code: E23M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            if (Fight.GameStarted && textBox.Text == "0")
-            {
-                switch (textBox.Name)
-                {
-                    case "TB_PlayerBattleship":
-                        {
-                            ShipsSunken[0, 3] = true;
-                            break;
-                        }
-                    case "TB_EnemyBattleship":
-                        {
-                            ShipsSunken[1, 3] = true;
-                            break;
-                        }
-                }
-                CheckShipsSunkenState();
-            }
-        }
-        private void TB_EnemyMiss_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            if (Support.StringToInt(textBox.Text, out int value))
-            {
-                if (value > 0)
-                {
-                    textBox.ForeColor = Color.Red;
-                }
-                else
-                {
-                    textBox.ForeColor = Color.Lime;
-                }
-            }
-            else
-            {
-                MessageBox.Show($"Error Code: E24M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        private void TB_PlayerHit_TextChanged(object sender, EventArgs e)
-        {
-            TextBox textBox = sender as TextBox;
-            if (Support.StringToInt(textBox.Text, out int value))
-            {
-                if (value < 0)
-                {
-                    textBox.ForeColor = Color.Red;
-                }
-                else
-                {
-                    textBox.ForeColor = Color.Lime;
-                }
-            }
-            else
-            {
-                MessageBox.Show($"Error Code: E25M9L4\r\n{textBox.Text} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-        }
-        public async void RestartGame() //Don't Compete
-        {
-            Button[,] buttons = MapButtons;
-            for (int b = 0; b < buttons.GetLength(1); b++)
-            {
-                await Task.Delay(0);
-                buttons[0, b].BackColor = PNL_PlayerMap_Schema.BackColor;
-                buttons[1, b].BackColor = PNL_EnemyMap_Schema.BackColor;
-                buttons[0, b].Dispose();
-                buttons[1, b].Dispose();
-            }
-            await GenerateButtons();
-
-        }
-        private void TSMI_RestartGame_Click(object sender, EventArgs e)
-        {
-            RestartGame();
-        }
-        private void TSMI_OpenMapEditor_Click(object sender, EventArgs e)
-        {
-            DialogResult = MessageBox.Show("Open 'Map Editor'", "Map Editor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            if (DialogResult == DialogResult.OK)
-            {
-                MapCreate MCF = new MapCreate();
-                if (!DebugTools.MCF.Opened)
-                {
-                    Design.OpenNewForm(MCF, 1, 6);
-                }
-            }
-        }
         void GetEnemyMap(out int count)
         {
             count = 0;
@@ -1224,7 +1272,6 @@ namespace Battleship
                     }
                 }
                 count = HitChanceData.CurrentMap.Count;
-                
             }
             catch (Exception ex)
             {
@@ -1266,10 +1313,6 @@ namespace Battleship
                 }
             }
         }
-        private void BS_HitMoreInfo_Click(object sender, EventArgs e)
-        {
-            OpenHitChanceForm();
-        }
         private void GameForm_KeyDown(object sender, KeyEventArgs e)
         {
             switch (e.KeyCode)
@@ -1281,95 +1324,44 @@ namespace Battleship
                     }
             }
         }
-        void SetPlayerShipsTexBoxesValues()
+        private void BS_HitMoreInfo_Click(object sender, EventArgs e)
         {
-            TB_PlayerFrigate.Text = PlayerData.FrigatesCountCurrent.ToString();
-            TB_PlayerDestroyer.Text = PlayerData.DestroyersCountCurrent.ToString();
-            TB_PlayerCruiser.Text = PlayerData.CruiserCountCurrent.ToString();
-            TB_PlayerBattleship.Text = PlayerData.BattleshipCountCurrent.ToString();
-            TB_PlayerHit.Text = PlayerData.HitCountCurrent.ToString();
-            TB_PlayerMiss.Text = PlayerData.MissedShotsCount.ToString();
+            OpenHitChanceForm();
         }
-        void SetEnemyShipsTexBoxesValues()
+        private void TSMI_GPO_OpenManual_Click(object sender, EventArgs e)
         {
-            TB_EnemyFrigate.Text = EnemyData.FrigatesCountCurrent.ToString();
-            TB_EnemyDestroyer.Text = EnemyData.DestroyersCountCurrent.ToString();
-            TB_EnemyCruiser.Text = EnemyData.CruiserCountCurrent.ToString();
-            TB_EnemyBattleship.Text = EnemyData.BattleshipCountCurrent.ToString();
-            TB_EnemyHit.Text = EnemyData.HitCountCurrent.ToString();
-            TB_EnemyMiss.Text = EnemyData.MissedShotsCount.ToString();
+            ManualInfo mi = new ManualInfo();
+            mi.Show();
         }
-        void SetAllShipsTextBoxesValues()
+        private void TSMI_OpenMapEditor_Click(object sender, EventArgs e)
         {
-            SetEnemyShipsTexBoxesValues();
-            SetPlayerShipsTexBoxesValues();
-        }
-        void CoordsForcedOverwrite()
-        {
-            int[] count = new int[2];
-            count[0] = Fight.ForbiddenCoords.Count;
-            Fight.ForbiddenCoords.Clear();
-            HashSet<int> forbidden = new HashSet<int>();
-            for (int i = 0; i < MapButtons.GetLength(1); i++)
+            DialogResult = MessageBox.Show("Open 'Map Editor'", "Map Editor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
+            if (DialogResult == DialogResult.OK)
             {
-                if ((MapButtons[0, i].BackColor == Color.Red) || (MapButtons[0, i].BackColor == Color.Firebrick) || (MapButtons[0, i].BackColor == Color.DeepSkyBlue))
+                MapCreate MCF = new MapCreate();
+                if (!DebugTools.MCF.Opened)
                 {
-                    forbidden.Add(PlayerData.Map[i]);
+                    Design.OpenNewForm(MCF, 1, 6);
                 }
             }
-            Fight.ForbiddenCoords = new List<int>(forbidden);
-            count[1] = Fight.ForbiddenCoords.Count;
-            if (count[0] == count[1])
-            {
-                MessageBox.Show("Forbidden data error", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
         }
-        void SetStatusTurnText(Button selectedButton)
+      
+        public async void RestartGame() //Don't Compete
         {
-            if (Fight.GameStarted)
+            Button[,] buttons = MapButtons;
+            for (int b = 0; b < buttons.GetLength(1); b++)
             {
-                if (Fight.Turn == 1)
-                {
-                    TB_TurnStatus.Text = "Move not available";
-                    TB_TurnStatus.ForeColor = Color.Red;
-                }
-                else if (Fight.Turn == 0)
-                {
-                    switch (selectedButton.BackColor.Name.ToString())
-                    {
-                        case "Red":
-                            {
-                                TB_TurnStatus.Text = "Hited ship deck";
-                                TB_TurnStatus.ForeColor = Color.Yellow;
-                                break;
-                            }
-                        case "Firebrick":
-                            {
-                                TB_TurnStatus.Text = "Sunken ship";
-                                TB_TurnStatus.ForeColor = Color.Orange;
-                                break;
-                            }
-                        case "DeepSkyBlue":
-                            {
-                                TB_TurnStatus.Text = "Enmpty cell";
-                                TB_TurnStatus.ForeColor = Color.DeepSkyBlue;
-                                break;
-                            }
-                        case "White":
-                            {
-                                TB_TurnStatus.Text = "Available move";
-                                TB_TurnStatus.ForeColor = Color.Lime;
-                                break;
-                            }
-                        case "Green":
-                            {
-                                TB_TurnStatus.Text = "Undiscovered ship";
-                                TB_TurnStatus.ForeColor = Color.Lime;
-                                break;
-                            }
-                    }
-                }
+                await Task.Delay(0);
+                buttons[0, b].BackColor = PNL_PlayerMap_Schema.BackColor;
+                buttons[1, b].BackColor = PNL_EnemyMap_Schema.BackColor;
+                buttons[0, b].Dispose();
+                buttons[1, b].Dispose();
             }
+            await GenerateButtons();
+        }
+        private void TSMI_RestartGame_Click(object sender, EventArgs e)
+        {
+            RestartGame();
         }
     }
 }

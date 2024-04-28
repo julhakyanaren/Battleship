@@ -513,7 +513,7 @@
             this.TB_EnemyFrigate.TabIndex = 15;
             this.TB_EnemyFrigate.Text = "0";
             this.TB_EnemyFrigate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_EnemyFrigate.TextChanged += new System.EventHandler(this.TB_PlayerFrigate_TextChanged);
+            this.TB_EnemyFrigate.TextChanged += new System.EventHandler(this.Frigates_TB_Change);
             // 
             // TB_EnemyCruiser
             // 
@@ -528,7 +528,7 @@
             this.TB_EnemyCruiser.TabIndex = 14;
             this.TB_EnemyCruiser.Text = "0";
             this.TB_EnemyCruiser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_EnemyCruiser.TextChanged += new System.EventHandler(this.TB_EnemyCruiser_TextChanged);
+            this.TB_EnemyCruiser.TextChanged += new System.EventHandler(this.Cruisers_TB_Change);
             // 
             // TB_EnemyDestroyer
             // 
@@ -543,7 +543,7 @@
             this.TB_EnemyDestroyer.TabIndex = 13;
             this.TB_EnemyDestroyer.Text = "0";
             this.TB_EnemyDestroyer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_EnemyDestroyer.TextChanged += new System.EventHandler(this.TB_PlayerDestroyer_TextChanged);
+            this.TB_EnemyDestroyer.TextChanged += new System.EventHandler(this.Destroyers_TB_Change);
             // 
             // TB_EnemyBattleship
             // 
@@ -558,7 +558,7 @@
             this.TB_EnemyBattleship.TabIndex = 9;
             this.TB_EnemyBattleship.Text = "0";
             this.TB_EnemyBattleship.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_EnemyBattleship.TextChanged += new System.EventHandler(this.TB_PlayerBattleship_TextChanged);
+            this.TB_EnemyBattleship.TextChanged += new System.EventHandler(this.Battleships_TB_Change);
             // 
             // TB_EnemyMiss
             // 
@@ -573,7 +573,7 @@
             this.TB_EnemyMiss.TabIndex = 7;
             this.TB_EnemyMiss.Text = "0";
             this.TB_EnemyMiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_EnemyMiss.TextChanged += new System.EventHandler(this.TB_EnemyMiss_TextChanged);
+            this.TB_EnemyMiss.TextChanged += new System.EventHandler(this.Miss_TB_Change);
             // 
             // TB_EnemyHit
             // 
@@ -588,7 +588,7 @@
             this.TB_EnemyHit.TabIndex = 6;
             this.TB_EnemyHit.Text = "0";
             this.TB_EnemyHit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_EnemyHit.TextChanged += new System.EventHandler(this.TB_PlayerHit_TextChanged);
+            this.TB_EnemyHit.TextChanged += new System.EventHandler(this.Hit_TB_Change);
             // 
             // L_EnemyBattleship
             // 
@@ -1231,7 +1231,7 @@
             this.TB_PlayerFrigate.TabIndex = 15;
             this.TB_PlayerFrigate.Text = "0";
             this.TB_PlayerFrigate.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_PlayerFrigate.TextChanged += new System.EventHandler(this.TB_PlayerFrigate_TextChanged);
+            this.TB_PlayerFrigate.TextChanged += new System.EventHandler(this.Frigates_TB_Change);
             // 
             // TB_PlayerCruiser
             // 
@@ -1246,7 +1246,7 @@
             this.TB_PlayerCruiser.TabIndex = 14;
             this.TB_PlayerCruiser.Text = "0";
             this.TB_PlayerCruiser.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_PlayerCruiser.TextChanged += new System.EventHandler(this.TB_EnemyCruiser_TextChanged);
+            this.TB_PlayerCruiser.TextChanged += new System.EventHandler(this.Cruisers_TB_Change);
             // 
             // TB_PlayerDestroyer
             // 
@@ -1261,7 +1261,7 @@
             this.TB_PlayerDestroyer.TabIndex = 13;
             this.TB_PlayerDestroyer.Text = "0";
             this.TB_PlayerDestroyer.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_PlayerDestroyer.TextChanged += new System.EventHandler(this.TB_PlayerDestroyer_TextChanged);
+            this.TB_PlayerDestroyer.TextChanged += new System.EventHandler(this.Destroyers_TB_Change);
             // 
             // TB_PlayerBattleship
             // 
@@ -1276,7 +1276,7 @@
             this.TB_PlayerBattleship.TabIndex = 9;
             this.TB_PlayerBattleship.Text = "0";
             this.TB_PlayerBattleship.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_PlayerBattleship.TextChanged += new System.EventHandler(this.TB_PlayerBattleship_TextChanged);
+            this.TB_PlayerBattleship.TextChanged += new System.EventHandler(this.Battleships_TB_Change);
             // 
             // TB_PlayerMiss
             // 
@@ -1291,7 +1291,7 @@
             this.TB_PlayerMiss.TabIndex = 7;
             this.TB_PlayerMiss.Text = "0";
             this.TB_PlayerMiss.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_PlayerMiss.TextChanged += new System.EventHandler(this.TB_EnemyMiss_TextChanged);
+            this.TB_PlayerMiss.TextChanged += new System.EventHandler(this.Miss_TB_Change);
             // 
             // TB_PlayerHit
             // 
@@ -1306,7 +1306,7 @@
             this.TB_PlayerHit.TabIndex = 6;
             this.TB_PlayerHit.Text = "0";
             this.TB_PlayerHit.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.TB_PlayerHit.TextChanged += new System.EventHandler(this.TB_PlayerHit_TextChanged);
+            this.TB_PlayerHit.TextChanged += new System.EventHandler(this.Hit_TB_Change);
             // 
             // L_PlayerBattleship
             // 
@@ -1920,7 +1920,7 @@
             this.TSMI_AllwaysOnTop.Name = "TSMI_AllwaysOnTop";
             this.TSMI_AllwaysOnTop.Size = new System.Drawing.Size(143, 22);
             this.TSMI_AllwaysOnTop.Text = "Allways on top";
-            this.TSMI_AllwaysOnTop.CheckedChanged += new System.EventHandler(this.TSMI_AllwaysOnTop_CheckedChanged);
+            this.TSMI_AllwaysOnTop.CheckedChanged += new System.EventHandler(this.SetFormAllwaysOnTop);
             // 
             // TSMI_Game
             // 
@@ -2058,7 +2058,7 @@
             this.Name = "GameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Battleship";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GamePlayerOne_FormClosing);
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameForm_FormClosing);
             this.Load += new System.EventHandler(this.GamePlayerOne_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
             this.TLP_Main.ResumeLayout(false);
