@@ -137,6 +137,7 @@ namespace Battleship
             {
                 Fight.SetUnusedCoord();
             }
+            Text = $"Battleship  {DebugTools.Version}.{DebugTools.RunsCount}";
         }
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
@@ -196,6 +197,7 @@ namespace Battleship
                     }
                 case 2:
                     {
+                        Options.GameOver = true;
                         return "Game Over";
                     }
                 default:
@@ -686,25 +688,6 @@ namespace Battleship
             TB_TurnStatus.Text = oldText;
             TB_TurnStatus.ForeColor = oldColor;
         }
-        int FindTargetButtonViaIndex()
-        {
-            if (Support.StringToInt(Fight.TargetButtonTag.ToString(), out int index))
-            {
-                index -= 1551;
-                for (int b = 0; b < 100; b++)
-                {
-                    if (MapButtons[0, b].Tag.ToString() == $"{index}")
-                    {
-                        return b;
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show($"Error Code: E29M9L4\r\n{index} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-            }
-            return -1;
-        }
         async Task ChangeBorderSize(int duration = 30, int steps = 4)
         {
             int targetIndex = FindTargetButtonViaIndex();
@@ -725,6 +708,25 @@ namespace Battleship
                 }
                 MapButtons[0, targetIndex].FlatAppearance.BorderSize = defaultBorderSize;
             }
+        }
+        int FindTargetButtonViaIndex()
+        {
+            if (Support.StringToInt(Fight.TargetButtonTag.ToString(), out int index))
+            {
+                index -= 1551;
+                for (int b = 0; b < 100; b++)
+                {
+                    if (MapButtons[0, b].Tag.ToString() == $"{index}")
+                    {
+                        return b;
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show($"Error Code: E29M9L4\r\n{index} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+            return -1;
         }
         void PlayerTurn(int playerID, Button clickedButton)
         {
@@ -815,49 +817,16 @@ namespace Battleship
             {
                 if ((MapButtons[0, i].BackColor == Color.Red) || (MapButtons[0, i].BackColor == Color.Firebrick) || (MapButtons[0, i].BackColor == Color.DeepSkyBlue))
                 {
-                    forbidden.Add(PlayerData.Map[i]);
+                    forbidden.Add(i);
                 }
             }
             Fight.ForbiddenCoords = new List<int>(forbidden);
             count[1] = Fight.ForbiddenCoords.Count;
             if (count[0] == count[1])
             {
-                MessageBox.Show("Forbidden data error", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Forbidden coords data error", "Battleship", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
-        private async void ClickOnCell(object sender, MouseEventArgs e)
-        {
-            if (!Options.GameOver)
-            {
-                Button clickedButton = sender as Button;
-                int playerID;
-                string coord = Position.GetButtonTextCoords(clickedButton, out playerID);
-                if (Support.StringToInt(clickedButton.Tag.ToString(), out int tagCB))
-                {
-                    if (clickedButton.BackColor != Color.White)
-                    {
-                        if (tagCB / 100 == 2)
-                        {
-                            int index = Fight.FindCorrectIndex(Convert.ToInt32(clickedButton.Tag) + 1551, true);
-                            await NotAvailableMove(index, 1, 4, 0);
-                        }
-                    }
-                    if (Fight.ForbiddenCoords.Count != 100)
-                    {
-                        await Turn(playerID, clickedButton);
-                    }
-                    else
-                    {
-                        CoordsForcedOverwrite();
-                        await Turn(playerID, clickedButton);
-                    }
-                }
-                else
-                {
-                    MessageBox.Show($"Error Code: E26M9L4\r\n{clickedButton.Tag} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }               
         void SetStatusTurnText(Button selectedButton)
         {
             if (Fight.GameStarted)
@@ -904,6 +873,44 @@ namespace Battleship
                     }
                 }
             }
+            else
+            {
+                TB_TurnStatus.Text = "The map has not yet been built";
+                TB_TurnStatus.ForeColor = Color.OrangeRed;
+            }
+        }
+        private async void ClickOnCell(object sender, MouseEventArgs e)
+        {
+            if (!Options.GameOver)
+            {
+                Button clickedButton = sender as Button;
+                int playerID;
+                string coord = Position.GetButtonTextCoords(clickedButton, out playerID);
+                if (Support.StringToInt(clickedButton.Tag.ToString(), out int tagCB))
+                {
+                    if (clickedButton.BackColor != Color.White)
+                    {
+                        if (tagCB / 100 == 2)
+                        {
+                            int index = Fight.FindCorrectIndex(Convert.ToInt32(clickedButton.Tag) + 1551, true);
+                            await NotAvailableMove(index, 1, 4, 0);
+                        }
+                    }
+                    if (Fight.ForbiddenCoords.Count != 100)
+                    {
+                        await Turn(playerID, clickedButton);
+                    }
+                    else
+                    {
+                        CoordsForcedOverwrite();
+                        await Turn(playerID, clickedButton);
+                    }
+                }
+                else
+                {
+                    MessageBox.Show($"Error Code: E26M9L4\r\n{clickedButton.Tag} String type to Int32 type converting error", $"{Handlers.Manager[9]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
         }
         private async void CellEnter(object sender, EventArgs e)
         {
@@ -914,40 +921,13 @@ namespace Battleship
             string textID = Position.GetButtonTextCoords(selectedButton, out playerID);
             int index = playerID - 1;
             Button[] targetButtons = new Button[MapButtons.GetLength(1)];
-            string cellPosition = Position.GetCellPosition(tagButton);
             switch (index)
             {
                 case 0:
                     {
                         targetButtons = Support.GetPlayerButtons(MapButtons);
                         BS_PlayerSchema_Index.Text = textID;
-                        bool orientationChanged = false;
                         PlayerData.Map = Data.TargetButtonsToCharArray(targetButtons, playerID);
-                        if (Data.ShipPlaceMode == "Frigate")
-                        {
-                            Data.Orientation = "N";
-                        }
-                        else
-                        {
-                            if (ModifierKeys == Keys.Shift)
-                            {
-                                Data.Orientation = "V";
-                                orientationChanged = true;
-                            }
-                            else
-                            {
-                                Data.Orientation = "H";
-                                orientationChanged = true;
-                            }
-                        }
-                        if (orientationChanged)
-                        {
-
-                        }
-                        if (Position.IsValidShipPosition(cellPosition, Data.ShipPlaceMode, Data.Orientation, tagButton))
-                        {
-
-                        }
                         break;
                     }
                 case 1:
@@ -1238,15 +1218,13 @@ namespace Battleship
                 {
                     StartBattleShip();
                     SetAllShipsTextBoxesValues();
-                    //SET ENEMY BUTTON COLOR TO WHITE
                     for (int i = 0; i < MapButtons.GetLength(1); i++)
                     {
                         Button targetButton = MapButtons[1, i];
                         targetButton.BackColor = Color.White;
-                        targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
+                        //targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
                         targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
                     }
-
                 }
                 else
                 {
@@ -1344,8 +1322,7 @@ namespace Battleship
                     Design.OpenNewForm(MCF, 1, 6);
                 }
             }
-        }
-      
+        }     
         public async void RestartGame() //Don't Compete
         {
             Button[,] buttons = MapButtons;

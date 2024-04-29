@@ -148,7 +148,6 @@
             this.TSMI_Game = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_StartNewGame = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_StartBattleShip = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_RestartGame = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Map = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GenerationType = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_TB_GenType = new System.Windows.Forms.ToolStripTextBox();
@@ -157,6 +156,7 @@
             this.TSMI_Info = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GPO_OpenManual = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GPO_Version = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_RestartGame = new System.Windows.Forms.ToolStripMenuItem();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
@@ -259,7 +259,7 @@
             // 
             this.L_Info_TurnStatus.AutoSize = true;
             this.L_Info_TurnStatus.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.L_Info_TurnStatus.Location = new System.Drawing.Point(146, 4);
+            this.L_Info_TurnStatus.Location = new System.Drawing.Point(112, 4);
             this.L_Info_TurnStatus.Name = "L_Info_TurnStatus";
             this.L_Info_TurnStatus.Size = new System.Drawing.Size(40, 17);
             this.L_Info_TurnStatus.TabIndex = 42;
@@ -270,10 +270,10 @@
             this.TB_TurnStatus.BackColor = System.Drawing.Color.Black;
             this.TB_TurnStatus.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
             this.TB_TurnStatus.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TB_TurnStatus.Location = new System.Drawing.Point(145, 32);
+            this.TB_TurnStatus.Location = new System.Drawing.Point(115, 32);
             this.TB_TurnStatus.Name = "TB_TurnStatus";
             this.TB_TurnStatus.ReadOnly = true;
-            this.TB_TurnStatus.Size = new System.Drawing.Size(138, 22);
+            this.TB_TurnStatus.Size = new System.Drawing.Size(168, 22);
             this.TB_TurnStatus.TabIndex = 43;
             this.TB_TurnStatus.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -295,7 +295,7 @@
             this.TB_GameModeType.Location = new System.Drawing.Point(0, 32);
             this.TB_GameModeType.Name = "TB_GameModeType";
             this.TB_GameModeType.ReadOnly = true;
-            this.TB_GameModeType.Size = new System.Drawing.Size(138, 22);
+            this.TB_GameModeType.Size = new System.Drawing.Size(109, 22);
             this.TB_GameModeType.TabIndex = 41;
             this.TB_GameModeType.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
@@ -1939,7 +1939,7 @@
             this.TSMI_StartNewGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_StartNewGame.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartNewGame.Name = "TSMI_StartNewGame";
-            this.TSMI_StartNewGame.Size = new System.Drawing.Size(153, 22);
+            this.TSMI_StartNewGame.Size = new System.Drawing.Size(180, 22);
             this.TSMI_StartNewGame.Text = "Start new game";
             this.TSMI_StartNewGame.Click += new System.EventHandler(this.TSMI_StartNewGame_Click);
             // 
@@ -1949,19 +1949,9 @@
             this.TSMI_StartBattleShip.Enabled = false;
             this.TSMI_StartBattleShip.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartBattleShip.Name = "TSMI_StartBattleShip";
-            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(153, 22);
+            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(180, 22);
             this.TSMI_StartBattleShip.Text = "Start Battleship";
             this.TSMI_StartBattleShip.Click += new System.EventHandler(this.TSMI_StartBattleShip_Click);
-            // 
-            // TSMI_RestartGame
-            // 
-            this.TSMI_RestartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_RestartGame.Enabled = false;
-            this.TSMI_RestartGame.ForeColor = System.Drawing.Color.Black;
-            this.TSMI_RestartGame.Name = "TSMI_RestartGame";
-            this.TSMI_RestartGame.Size = new System.Drawing.Size(153, 22);
-            this.TSMI_RestartGame.Text = "Restart game";
-            this.TSMI_RestartGame.Click += new System.EventHandler(this.TSMI_RestartGame_Click);
             // 
             // TSMI_Map
             // 
@@ -2041,6 +2031,16 @@
             this.TSMI_GPO_Version.Size = new System.Drawing.Size(139, 22);
             this.TSMI_GPO_Version.Text = "Info:";
             // 
+            // TSMI_RestartGame
+            // 
+            this.TSMI_RestartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_RestartGame.Enabled = false;
+            this.TSMI_RestartGame.ForeColor = System.Drawing.Color.Black;
+            this.TSMI_RestartGame.Name = "TSMI_RestartGame";
+            this.TSMI_RestartGame.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_RestartGame.Text = "Restart game";
+            this.TSMI_RestartGame.Click += new System.EventHandler(this.TSMI_RestartGame_Click);
+            // 
             // GameForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -2058,6 +2058,7 @@
             this.Name = "GameForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "Battleship";
+            this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.GameForm_FormClosing);
             this.Load += new System.EventHandler(this.GamePlayerOne_Load);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.GameForm_KeyDown);
@@ -2226,7 +2227,6 @@
         private System.Windows.Forms.ToolStripMenuItem TSMI_Info;
         private System.Windows.Forms.TextBox TB_EnemyMiss;
         private System.Windows.Forms.ToolStripMenuItem TSMI_GPO_OpenManual;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_RestartGame;
         private System.Windows.Forms.ToolStripMenuItem TSMI_OpenMapEditor;
         private System.Windows.Forms.Panel PNL_InfoTurn;
         private System.Windows.Forms.Label L_Info_PressForInfo;
@@ -2238,5 +2238,6 @@
         private System.Windows.Forms.PictureBox TEST;
         private System.Windows.Forms.Label L_Info_TurnStatus;
         public System.Windows.Forms.TextBox TB_TurnStatus;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_RestartGame;
     }
 }
