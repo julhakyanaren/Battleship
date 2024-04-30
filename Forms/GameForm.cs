@@ -1018,6 +1018,121 @@ namespace Battleship
             Button[] enemyButtons = Support.GetEnemyButtons(MapButtons);
             SetEnemyButtonsColors(enemyButtons, enemyMap);
         }
+        private void TB_Turn_TextChanged(object sender, EventArgs e)
+        {
+            if (TB_Turn.Text == "Enemy")
+            {
+                TB_Turn.ForeColor = Color.Firebrick;
+            }
+            else if (TB_Turn.Text == Options.SP_PlayerName)
+            {
+                TB_Turn.ForeColor = Color.Lime;
+            }
+            else
+            {
+                TB_Turn.ForeColor = Design.DefaultForeColor;
+            }
+        }
+        private void TSMI_GenerationType_CheckedChanged(object sender, EventArgs e)
+        {
+            switch (TSMI_GenerationType.Checked)
+            {
+                case true:
+                    {
+                        TSMI_TB_GenType.Text = "Generate random map";
+                        break;
+                    }
+                case false:
+                    {
+                        TSMI_TB_GenType.Text = "Generate with schematic";
+                        break;
+                    }
+            }
+            Data.RandomMap = TSMI_GenerationType.Checked;
+        }
+        void GetEnemyMap(out int count)
+        {
+            count = 0;
+            try
+            {
+                HitChanceData.CurrentMap.Clear();
+                foreach (Control ctrl in TLP_EnemySchema.Controls)
+                {
+                    if (ctrl is Button)
+                    {
+                        HitChanceData.CurrentMap.Add((Button)ctrl);
+                    }
+                }
+                count = HitChanceData.CurrentMap.Count;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show($"Message:\r\n{ex.Message}\r\n\r\nException:\r\n{ex}", "Exception Manager");
+            }
+        }
+        void OpenHitChanceForm()
+        {
+            if (Options.GameModeInt == 0)
+            {
+                if (HitChanceData.CanOpenForm)
+                {
+                    if (HitChanceData.FormClosed)
+                    {
+                        GetEnemyMap(out int count);
+                        if (count != 100)
+                        {
+                            MessageBox.Show("   ", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
+                        }
+                        else if (!Fight.GameStarted)
+                        {
+                            DialogResult = MessageBox.Show("The game has not started, open the selected interface?", "Game Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                            if (DialogResult == DialogResult.Yes)
+                            {
+                                HitChance hcf = new HitChance();
+                                Design.OpenNewForm(hcf, 1, 6);
+                            }
+                        }
+                        else if (Fight.GameStarted)
+                        {
+                            HitChance hcf = new HitChance();
+                            Design.OpenNewForm(hcf, 1, 6);
+                        }
+                    }
+                }
+                else
+                {
+                    MessageBox.Show("Map not created", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                }
+            }
+        }
+        private void GameForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.C:
+                    {
+                        OpenHitChanceForm();
+                        break;
+                    }
+            }
+        }
+        private void BS_HitMoreInfo_Click(object sender, EventArgs e)
+        {
+            OpenHitChanceForm();
+        }
+        private void TSMI_GF_OpenManual_Click(object sender, EventArgs e)
+        {
+            ManualInfo mi = new ManualInfo();
+            mi.Show();
+        }
+        private void TSMI_OpenMapEditor_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Open 'Map Editor'?", "Map Editor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question) == DialogResult.OK && !MCF.Opened)
+            {
+                MapCreate MCF = new MapCreate();
+                Design.OpenNewForm(MCF, 1, 6);
+            }
+        }
         public async void StartBattleShip()
         {
             GenerateEnemyRandomMap();
@@ -1097,40 +1212,7 @@ namespace Battleship
                 targetButton.BackColor = Color.White;
                 targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
             }
-        }        
-        private void TSMI_GenerationType_CheckedChanged(object sender, EventArgs e)
-        {
-            switch (TSMI_GenerationType.Checked)
-            {
-                case true:
-                    {
-                        TSMI_TB_GenType.Text = "Generate random map";
-                        Data.RandomMap = true;
-                        break;
-                    }
-                case false:
-                    {
-                        TSMI_TB_GenType.Text = "Generate with schematic";
-                        Data.RandomMap = false;
-                        break;
-                    }
-            }
-        }
-        private void TB_Turn_TextChanged(object sender, EventArgs e)
-        {
-            if (TB_Turn.Text == "Enemy")
-            {
-                TB_Turn.ForeColor = Color.Firebrick;
-            }
-            else if (TB_Turn.Text == Options.SP_PlayerName)
-            {
-                TB_Turn.ForeColor = Color.Lime;
-            }
-            else
-            {
-                TB_Turn.ForeColor = Design.DefaultForeColor;
-            }
-        }
+        }                        
         private async void TSMI_GenerateMap_Click(object sender, EventArgs e)
         {
             bool playerMapCreated = true;
@@ -1235,103 +1317,19 @@ namespace Battleship
             {
                 Fight.GameStarted = false;
             }
-        }
-        void GetEnemyMap(out int count)
-        {
-            count = 0;
-            try
-            {
-                HitChanceData.CurrentMap.Clear();
-                foreach (Control ctrl in TLP_EnemySchema.Controls)
-                {
-                    if (ctrl is Button)
-                    {
-                        HitChanceData.CurrentMap.Add((Button)ctrl);
-                    }
-                }
-                count = HitChanceData.CurrentMap.Count;
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show($"Message:\r\n{ex.Message}\r\n\r\nException:\r\n{ex}", "Exception Manager");
-            }
-        }
-        void OpenHitChanceForm()
-        {
-            if (Options.GameModeInt == 0)
-            {
-                if (HitChanceData.CanOpenForm)
-                {
-                    if (HitChanceData.FormClosed)
-                    {
-                        GetEnemyMap(out int count);
-                        if (count != 100)
-                        {
-                            MessageBox.Show("Incorrect count", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Exclamation);
-                        }
-                        else if (!Fight.GameStarted)
-                        {
-                            DialogResult = MessageBox.Show("The game has not started, open the selected interface?", "Game Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                            if (DialogResult == DialogResult.Yes)
-                            {
-                                HitChance hcf = new HitChance();
-                                Design.OpenNewForm(hcf, 1, 6);
-                            }
-                        }
-                        else if (Fight.GameStarted)
-                        {
-                            HitChance hcf = new HitChance();
-                            Design.OpenNewForm(hcf, 1, 6);
-                        }
-                    }
-                }
-                else
-                {
-                    MessageBox.Show("Map not created", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                }
-            }
-        }
-        private void GameForm_KeyDown(object sender, KeyEventArgs e)
-        {
-            switch (e.KeyCode)
-            {
-                case Keys.C:
-                    {
-                        OpenHitChanceForm();
-                        break;
-                    }
-            }
-        }
-        private void BS_HitMoreInfo_Click(object sender, EventArgs e)
-        {
-            OpenHitChanceForm();
-        }
-        private void TSMI_GPO_OpenManual_Click(object sender, EventArgs e)
-        {
-            ManualInfo mi = new ManualInfo();
-            mi.Show();
-        }
-        private void TSMI_OpenMapEditor_Click(object sender, EventArgs e)
-        {
-            DialogResult = MessageBox.Show("Open 'Map Editor'", "Map Editor", MessageBoxButtons.OKCancel, MessageBoxIcon.Question);
-            if (DialogResult == DialogResult.OK)
-            {
-                MapCreate MCF = new MapCreate();
-                if (!DebugTools.MCF.Opened)
-                {
-                    Design.OpenNewForm(MCF, 1, 6);
-                }
-            }
-        }     
+        }             
         public async void RestartGame() //Don't Compete
         {
             Button[,] buttons = MapButtons;
-            for (int b = 0; b < buttons.GetLength(1); b++)
+            for (int b = buttons.GetLength(1) - 1; b >= 0; b--)
             {
+                await Task.Delay(1);
+                buttons[0, b].BackColor = Color.Black;
                 await Task.Delay(0);
-                buttons[0, b].BackColor = PNL_PlayerMap_Schema.BackColor;
-                buttons[1, b].BackColor = PNL_EnemyMap_Schema.BackColor;
                 buttons[0, b].Dispose();
+                await Task.Delay(1);
+                buttons[1, b].BackColor = Color.Black;
+                await Task.Delay(0);
                 buttons[1, b].Dispose();
             }
             await GenerateButtons();

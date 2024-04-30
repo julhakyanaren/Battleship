@@ -148,15 +148,15 @@
             this.TSMI_Game = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_StartNewGame = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_StartBattleShip = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_RestartGame = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Map = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GenerationType = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_TB_GenType = new System.Windows.Forms.ToolStripTextBox();
             this.TSMI_GenerateMap = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_OpenMapEditor = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_Info = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_GPO_OpenManual = new System.Windows.Forms.ToolStripMenuItem();
+            this.TSMI_GF_OpenManual = new System.Windows.Forms.ToolStripMenuItem();
             this.TSMI_GPO_Version = new System.Windows.Forms.ToolStripMenuItem();
-            this.TSMI_RestartGame = new System.Windows.Forms.ToolStripMenuItem();
             this.TLP_Main.SuspendLayout();
             this.PNL_MenuField.SuspendLayout();
             this.TLP_GPO_Controls.SuspendLayout();
@@ -1953,6 +1953,15 @@
             this.TSMI_StartBattleShip.Text = "Start Battleship";
             this.TSMI_StartBattleShip.Click += new System.EventHandler(this.TSMI_StartBattleShip_Click);
             // 
+            // TSMI_RestartGame
+            // 
+            this.TSMI_RestartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_RestartGame.ForeColor = System.Drawing.Color.Black;
+            this.TSMI_RestartGame.Name = "TSMI_RestartGame";
+            this.TSMI_RestartGame.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_RestartGame.Text = "Restart game";
+            this.TSMI_RestartGame.Click += new System.EventHandler(this.TSMI_RestartGame_Click);
+            // 
             // TSMI_Map
             // 
             this.TSMI_Map.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
@@ -2007,39 +2016,29 @@
             // TSMI_Info
             // 
             this.TSMI_Info.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.TSMI_GPO_OpenManual,
+            this.TSMI_GF_OpenManual,
             this.TSMI_GPO_Version});
             this.TSMI_Info.ForeColor = System.Drawing.Color.Black;
             this.TSMI_Info.Name = "TSMI_Info";
             this.TSMI_Info.Size = new System.Drawing.Size(38, 21);
             this.TSMI_Info.Text = "Info";
             // 
-            // TSMI_GPO_OpenManual
+            // TSMI_GF_OpenManual
             // 
-            this.TSMI_GPO_OpenManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_GPO_OpenManual.ForeColor = System.Drawing.Color.Black;
-            this.TSMI_GPO_OpenManual.Name = "TSMI_GPO_OpenManual";
-            this.TSMI_GPO_OpenManual.Size = new System.Drawing.Size(139, 22);
-            this.TSMI_GPO_OpenManual.Text = "Open manual";
-            this.TSMI_GPO_OpenManual.Click += new System.EventHandler(this.TSMI_GPO_OpenManual_Click);
+            this.TSMI_GF_OpenManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_GF_OpenManual.ForeColor = System.Drawing.Color.Black;
+            this.TSMI_GF_OpenManual.Name = "TSMI_GF_OpenManual";
+            this.TSMI_GF_OpenManual.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_GF_OpenManual.Text = "Open manual";
+            this.TSMI_GF_OpenManual.Click += new System.EventHandler(this.TSMI_GF_OpenManual_Click);
             // 
             // TSMI_GPO_Version
             // 
             this.TSMI_GPO_Version.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GPO_Version.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_Version.Name = "TSMI_GPO_Version";
-            this.TSMI_GPO_Version.Size = new System.Drawing.Size(139, 22);
+            this.TSMI_GPO_Version.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GPO_Version.Text = "Info:";
-            // 
-            // TSMI_RestartGame
-            // 
-            this.TSMI_RestartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.TSMI_RestartGame.Enabled = false;
-            this.TSMI_RestartGame.ForeColor = System.Drawing.Color.Black;
-            this.TSMI_RestartGame.Name = "TSMI_RestartGame";
-            this.TSMI_RestartGame.Size = new System.Drawing.Size(180, 22);
-            this.TSMI_RestartGame.Text = "Restart game";
-            this.TSMI_RestartGame.Click += new System.EventHandler(this.TSMI_RestartGame_Click);
             // 
             // GameForm
             // 
@@ -2226,7 +2225,7 @@
         public System.Windows.Forms.TextBox TB_Turn;
         private System.Windows.Forms.ToolStripMenuItem TSMI_Info;
         private System.Windows.Forms.TextBox TB_EnemyMiss;
-        private System.Windows.Forms.ToolStripMenuItem TSMI_GPO_OpenManual;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_GF_OpenManual;
         private System.Windows.Forms.ToolStripMenuItem TSMI_OpenMapEditor;
         private System.Windows.Forms.Panel PNL_InfoTurn;
         private System.Windows.Forms.Label L_Info_PressForInfo;
