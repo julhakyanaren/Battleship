@@ -1638,7 +1638,7 @@ namespace Battleship
         private bool CheckShipsCount()
         {
             int[] correctSymbols = { 4, 6, 6, 4 };
-            char[] symbols = TB_MapSchematic.Text.ToCharArray();
+            char[] symbols = TB_AO_MapSchematic.Text.ToCharArray();
             for (int s = 0; s < symbols.Length; s++)
             {
                 switch (Char.ToLower(symbols[s]))
@@ -1691,7 +1691,7 @@ namespace Battleship
                 }
                 if (validCoords[0])
                 {
-                    for (int c = 0; c < cruisers.GetLength(1); c++)
+                    for (int c = 0; c < cruisers.GetLength(0); c++)
                     {
                         int[] delta =
                         {
@@ -1713,9 +1713,9 @@ namespace Battleship
                         {
                                 Math.Abs(battleships[0, 0] - battleships[0, 1]),
                                 Math.Abs(battleships[0, 1] - battleships[0, 2]),
-                                Math.Abs(battleships[0, 2] - battleships[0, 3])
+                                Math.Abs(battleships[0, 2] - battleships[0, 3]),
                             };
-                        if (delta[0] == delta[1] && delta[2] == delta[3] && delta[0] == delta[3])
+                        if (delta[0] == delta[1] && delta[1] == delta[2] && delta[0] == delta[2])
                         {
                             validCoords[2] &= (delta[0] == 1 || delta[0] == 10);
                         }
@@ -1774,6 +1774,7 @@ namespace Battleship
             if (MessageBox.Show("The schematic map has been modified and cannot be used.", $"{Handlers.Manager[7]}", MessageBoxButtons.OK, MessageBoxIcon.Stop) == DialogResult.OK)
             {
                 Dispose();
+                DebugTools.MCF.Opened = false;
             }
         }
         private List<int> CreateIndexesList(List<int> firstCoords)
@@ -1909,6 +1910,7 @@ namespace Battleship
             if (MessageBox.Show("Schematic map uploading competed!", $"{Handlers.Manager[3]}", MessageBoxButtons.OK, MessageBoxIcon.Information) == DialogResult.OK)
             {
                 BS_AO_LoadSchematic.Visible = true;
+                TB_AO_MapSchematic.Text = schematicMap;
             }
         }
         private void BS_AO_GetMap_Click(object sender, EventArgs e)

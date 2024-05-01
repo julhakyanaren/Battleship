@@ -1939,7 +1939,7 @@
             this.TSMI_StartNewGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_StartNewGame.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartNewGame.Name = "TSMI_StartNewGame";
-            this.TSMI_StartNewGame.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_StartNewGame.Size = new System.Drawing.Size(153, 22);
             this.TSMI_StartNewGame.Text = "Start new game";
             this.TSMI_StartNewGame.Click += new System.EventHandler(this.TSMI_StartNewGame_Click);
             // 
@@ -1949,7 +1949,7 @@
             this.TSMI_StartBattleShip.Enabled = false;
             this.TSMI_StartBattleShip.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartBattleShip.Name = "TSMI_StartBattleShip";
-            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(153, 22);
             this.TSMI_StartBattleShip.Text = "Start Battleship";
             this.TSMI_StartBattleShip.Click += new System.EventHandler(this.TSMI_StartBattleShip_Click);
             // 
@@ -1958,7 +1958,7 @@
             this.TSMI_RestartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_RestartGame.ForeColor = System.Drawing.Color.Black;
             this.TSMI_RestartGame.Name = "TSMI_RestartGame";
-            this.TSMI_RestartGame.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_RestartGame.Size = new System.Drawing.Size(153, 22);
             this.TSMI_RestartGame.Text = "Restart game";
             this.TSMI_RestartGame.Click += new System.EventHandler(this.TSMI_RestartGame_Click);
             // 
@@ -2028,7 +2028,7 @@
             this.TSMI_GF_OpenManual.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GF_OpenManual.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GF_OpenManual.Name = "TSMI_GF_OpenManual";
-            this.TSMI_GF_OpenManual.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_GF_OpenManual.Size = new System.Drawing.Size(139, 22);
             this.TSMI_GF_OpenManual.Text = "Open manual";
             this.TSMI_GF_OpenManual.Click += new System.EventHandler(this.TSMI_GF_OpenManual_Click);
             // 
@@ -2037,7 +2037,7 @@
             this.TSMI_GPO_Version.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GPO_Version.ForeColor = System.Drawing.Color.Black;
             this.TSMI_GPO_Version.Name = "TSMI_GPO_Version";
-            this.TSMI_GPO_Version.Size = new System.Drawing.Size(180, 22);
+            this.TSMI_GPO_Version.Size = new System.Drawing.Size(139, 22);
             this.TSMI_GPO_Version.Text = "Info:";
             // 
             // GameForm

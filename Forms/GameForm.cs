@@ -1153,6 +1153,9 @@ namespace Battleship
             Fight.GameStarted = true;
             Data.ResetDataToZero();
             int turn = Fight.WhoStartGame();
+            //
+            turn = 1;
+            //
             if (Fight.FirstTurn)
             {
                 switch (turn)
@@ -1169,7 +1172,19 @@ namespace Battleship
                             TB_Turn.Text = "Enemy";
                             Fight.FirstTurn = true;
                             Fight.Turn = 1;
-                            await EnemyTurn();
+                            while (Fight.Turn == 1)
+                            {
+                                if (!Options.GameOver)
+                                {
+                                    await EnemyTurn();
+                                }
+                                else
+                                {
+                                    Fight.Turn = 2;
+                                    TB_Turn.Text = SetTurnText();
+                                    TB_Turn.ForeColor = Color.Red;
+                                }
+                            }
                             break;
                         }
                     default:
