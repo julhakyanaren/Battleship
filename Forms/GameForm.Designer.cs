@@ -1939,7 +1939,7 @@
             this.TSMI_StartNewGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_StartNewGame.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartNewGame.Name = "TSMI_StartNewGame";
-            this.TSMI_StartNewGame.Size = new System.Drawing.Size(153, 22);
+            this.TSMI_StartNewGame.Size = new System.Drawing.Size(180, 22);
             this.TSMI_StartNewGame.Text = "Start new game";
             this.TSMI_StartNewGame.Click += new System.EventHandler(this.TSMI_StartNewGame_Click);
             // 
@@ -1949,17 +1949,20 @@
             this.TSMI_StartBattleShip.Enabled = false;
             this.TSMI_StartBattleShip.ForeColor = System.Drawing.Color.Black;
             this.TSMI_StartBattleShip.Name = "TSMI_StartBattleShip";
-            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(153, 22);
+            this.TSMI_StartBattleShip.Size = new System.Drawing.Size(180, 22);
             this.TSMI_StartBattleShip.Text = "Start Battleship";
+            this.TSMI_StartBattleShip.Visible = false;
             this.TSMI_StartBattleShip.Click += new System.EventHandler(this.TSMI_StartBattleShip_Click);
             // 
             // TSMI_RestartGame
             // 
             this.TSMI_RestartGame.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_RestartGame.Enabled = false;
             this.TSMI_RestartGame.ForeColor = System.Drawing.Color.Black;
             this.TSMI_RestartGame.Name = "TSMI_RestartGame";
-            this.TSMI_RestartGame.Size = new System.Drawing.Size(153, 22);
+            this.TSMI_RestartGame.Size = new System.Drawing.Size(180, 22);
             this.TSMI_RestartGame.Text = "Restart game";
+            this.TSMI_RestartGame.Visible = false;
             this.TSMI_RestartGame.Click += new System.EventHandler(this.TSMI_RestartGame_Click);
             // 
             // TSMI_Map

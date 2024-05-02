@@ -1567,31 +1567,40 @@ namespace Battleship
         {
             for (int i = 0; i < PlayerData.DestroyerCoords.GetLength(0); i++)
             {
-                int temp = PlayerData.DestroyerCoords[i, 0];
-                PlayerData.DestroyerCoords[i, 0] = PlayerData.DestroyerCoords[i, 1];
-                PlayerData.DestroyerCoords[i, 1] = temp;
+                if (Math.Abs(PlayerData.DestroyerCoords[i, 0] - PlayerData.DestroyerCoords[i, 1]) == 10)
+                {
+                    int temp = PlayerData.DestroyerCoords[i, 0];
+                    PlayerData.DestroyerCoords[i, 0] = PlayerData.DestroyerCoords[i, 1];
+                    PlayerData.DestroyerCoords[i, 1] = temp;
+                }
             }
         }
         void ReverseCruisers()
         {
             for (int i = 0; i < PlayerData.CruiserCoords.GetLength(0); i++)
             {
-                int temp = PlayerData.CruiserCoords[i, 0];
-                PlayerData.CruiserCoords[i, 0] = PlayerData.CruiserCoords[i, PlayerData.CruiserCoords.GetLength(1) - 1];
-                PlayerData.CruiserCoords[i, PlayerData.CruiserCoords.GetLength(1) - 1] = temp;
+                if (Math.Abs(PlayerData.CruiserCoords[i, 0] - PlayerData.CruiserCoords[i, 1]) == 10)
+                {
+                    int temp = PlayerData.CruiserCoords[i, 0];
+                    PlayerData.CruiserCoords[i, 0] = PlayerData.CruiserCoords[i, PlayerData.CruiserCoords.GetLength(1) - 1];
+                    PlayerData.CruiserCoords[i, PlayerData.CruiserCoords.GetLength(1) - 1] = temp;
+                }
             }
         }
         void ReverseBattleShip()
         {
-            int[] tempRow = new int[PlayerData.BattleshipCoords.GetLength(1)];
-            for (int j = 0; j < tempRow.Length; j++)
+            if (Math.Abs(PlayerData.BattleshipCoords[0, 0] - PlayerData.BattleshipCoords[0, 1]) == 10)
             {
-                tempRow[j] = PlayerData.BattleshipCoords[0, j];
-            }
-            Array.Reverse(tempRow);
-            for (int j = 0; j < tempRow.Length; j++)
-            {
-                PlayerData.BattleshipCoords[0, j] = tempRow[j];
+                int[] tempRow = new int[PlayerData.BattleshipCoords.GetLength(1)];
+                for (int j = 0; j < tempRow.Length; j++)
+                {
+                    tempRow[j] = PlayerData.BattleshipCoords[0, j];
+                }
+                Array.Reverse(tempRow);
+                for (int j = 0; j < tempRow.Length; j++)
+                {
+                    PlayerData.BattleshipCoords[0, j] = tempRow[j];
+                }
             }
         }
         public bool AllShipsTypeAreCorrect(char[] symbols)
@@ -1982,6 +1991,11 @@ namespace Battleship
         {
             ManualInfo manualInfo = new ManualInfo();
             manualInfo.Show();
+        }
+
+        private void PNL_MC_Status_Paint(object sender, PaintEventArgs e)
+        {
+
         }
         //Checked
     }

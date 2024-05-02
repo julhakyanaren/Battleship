@@ -1199,9 +1199,13 @@ namespace Battleship
                 targetButton.BackColor = Color.White;
                 targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
             }
+            TSMI_RestartGame.Visible = true;
+            TSMI_Map.Enabled = false;
+            TSMI_StartBattleShip.Visible = false;
         }
         private async void TSMI_StartNewGame_Click(object sender, EventArgs e)
         {
+            TSMI_StartNewGame.Enabled = false;
             if (PlayerData.Map == null)
             {
                 try
@@ -1211,10 +1215,13 @@ namespace Battleship
                     TSMI_OpenMapEditor.Enabled = true;
                     TSMI_RestartGame.Enabled = true;
                     HitChanceData.CanOpenForm = true;
+                    TSMI_StartNewGame.Visible = false;
+                    TSMI_StartBattleShip.Visible = true;
                 }
                 catch
                 {
                     MessageBox.Show($"Error Code: E34M4L5\r\nGame map creating error", $"{Handlers.Manager[4]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    TSMI_StartNewGame.Enabled = true;
                 }
             }
             else
@@ -1222,7 +1229,7 @@ namespace Battleship
                 MessageBox.Show("Maps allready created!", "Game Manager", MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
         }                        
-        private async void TSMI_GenerateMap_Click(object sender, EventArgs e)
+        private void TSMI_GenerateMap_Click(object sender, EventArgs e)
         {
             bool playerMapCreated = true;
             if (Data.RandomMap == true)
@@ -1230,7 +1237,6 @@ namespace Battleship
                 try
                 {
                     GeneratePlayerRandomMap();
-                    await Task.Delay(1);
                 }
                 catch
                 {
@@ -1253,13 +1259,10 @@ namespace Battleship
                     {
                         int[] ships = { 0, 0, 0, 0 };
                         Color buttonColor = Color.White;
+                        Data.SchematicMap = Data.SchematicMap.Replace('M', 'E');
                         char[] schematicMapEditor = Data.SchematicMap.ToCharArray();
                         for (int c = 0; c < schematicMapEditor.Length; c++)
                         {
-                            if (schematicMapEditor[c] == 'M')
-                            {
-                                schematicMapEditor[c] = 'E';
-                            }
                             buttonColor = ColorMethods.SetColorViaChar(schematicMapEditor[c]);
                             switch (schematicMapEditor[c])
                             {
@@ -1284,8 +1287,8 @@ namespace Battleship
                                         break;
                                     }
                             }
-                            Button targetButtom = MapButtons[0, c];
-                            targetButtom.BackColor = buttonColor;
+                            Button targetButton = MapButtons[0, c];
+                            targetButton.BackColor = buttonColor;
                             Array.Resize(ref PlayerData.Map, schematicMapEditor.Length);
                             PlayerData.Map[c] = ColorMethods.SetCharViaColor(0, buttonColor);
                         }
@@ -1304,8 +1307,7 @@ namespace Battleship
             }
             if (playerMapCreated)
             {
-                DialogResult = MessageBox.Show("Start fight?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (DialogResult == DialogResult.Yes)
+                if (MessageBox.Show("Start fight?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
                 {
                     StartBattleShip();
                     SetAllShipsTextBoxesValues();
@@ -1316,6 +1318,9 @@ namespace Battleship
                         //targetButton.Text = $"\"{EnemyData.Map[i]}\" - {i}";
                         targetButton.FlatAppearance.MouseOverBackColor = Color.Orange;
                     }
+                    TSMI_RestartGame.Visible = true;
+                    TSMI_Map.Enabled = false;
+                    TSMI_StartBattleShip.Visible = false;
                 }
                 else
                 {
@@ -1327,7 +1332,7 @@ namespace Battleship
                 Fight.GameStarted = false;
             }
         }             
-        public async void RestartGame() //Don't Compete
+        async Task ResetMapVisual()
         {
             Button[,] buttons = MapButtons;
             for (int b = buttons.GetLength(1) - 1; b >= 0; b--)
@@ -1342,6 +1347,17 @@ namespace Battleship
                 buttons[1, b].Dispose();
             }
             await GenerateButtons();
+        }
+        void ResetMapFunctional()
+        {
+            TSMI_RestartGame.Visible = false;
+            TSMI_StartBattleShip.Visible = true;
+            TSMI_StartBattleShip.Enabled = true;
+        }
+        public async void RestartGame()
+        {            
+            await ResetMapVisual();
+            ResetMapFunctional();
         }
         private void TSMI_RestartGame_Click(object sender, EventArgs e)
         {

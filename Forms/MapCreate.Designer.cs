@@ -226,6 +226,7 @@
             this.PNL_MC_Status.Name = "PNL_MC_Status";
             this.PNL_MC_Status.Size = new System.Drawing.Size(480, 129);
             this.PNL_MC_Status.TabIndex = 1;
+            this.PNL_MC_Status.Paint += new System.Windows.Forms.PaintEventHandler(this.PNL_MC_Status_Paint);
             // 
             // L_Info_MapSchematic
             // 
