@@ -199,7 +199,30 @@ namespace Battleship.Forms
             }
             CB_CHF_MoveNumber.SelectedIndex = 0;
             CB_CHF_MoveNumber.Text = "0";
-        }        
+        }
+
+        private void ChartForm_Load(object sender, EventArgs e)
+        {
+            if (PlayerData.IndependentChances.Count + EnemyData.IndependentChances.Count != 0)
+            {
+                if (EnemyData.IndependentChances.Count != 0)
+                {
+                    CHB_EnemyDataShow.Visible = true;
+                }
+                if (PlayerData.IndependentChances.Count != 0)
+                {
+                    CHB_PlayerDataShow.Visible = true;
+                }
+            }
+            else
+            {
+                if (MessageBox.Show("No data available for chart\r\nDo you want to stay in this interface?", "Game Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
+                {
+                    Dispose();
+                }
+            }
+        }
+
         private void BS_CHF_SearchData_Click(object sender, EventArgs e)
         {
             choosenMove = Convert.ToInt32(CB_CHF_MoveNumber.SelectedIndex);

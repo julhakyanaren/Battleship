@@ -1987,7 +1987,7 @@
             this.TSMI_GenerationType.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.TSMI_TB_GenType});
             this.TSMI_GenerationType.Name = "TSMI_GenerationType";
-            this.TSMI_GenerationType.Size = new System.Drawing.Size(176, 22);
+            this.TSMI_GenerationType.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GenerationType.Text = "Map Generation type";
             this.TSMI_GenerationType.CheckedChanged += new System.EventHandler(this.TSMI_GenerationType_CheckedChanged);
             // 
@@ -2004,7 +2004,7 @@
             // 
             this.TSMI_GenerateMap.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_GenerateMap.Name = "TSMI_GenerateMap";
-            this.TSMI_GenerateMap.Size = new System.Drawing.Size(176, 22);
+            this.TSMI_GenerateMap.Size = new System.Drawing.Size(180, 22);
             this.TSMI_GenerateMap.Text = "Generate Map";
             this.TSMI_GenerateMap.Click += new System.EventHandler(this.TSMI_GenerateMap_Click);
             // 
@@ -2012,7 +2012,7 @@
             // 
             this.TSMI_OpenMapEditor.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.TSMI_OpenMapEditor.Name = "TSMI_OpenMapEditor";
-            this.TSMI_OpenMapEditor.Size = new System.Drawing.Size(176, 22);
+            this.TSMI_OpenMapEditor.Size = new System.Drawing.Size(180, 22);
             this.TSMI_OpenMapEditor.Text = "Open Map Editor";
             this.TSMI_OpenMapEditor.Click += new System.EventHandler(this.TSMI_OpenMapEditor_Click);
             // 

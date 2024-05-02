@@ -345,6 +345,7 @@
             this.CHB_EnemyDataShow.TabIndex = 78;
             this.CHB_EnemyDataShow.Text = "Show chart Enemy";
             this.CHB_EnemyDataShow.UseVisualStyleBackColor = true;
+            this.CHB_EnemyDataShow.Visible = false;
             this.CHB_EnemyDataShow.CheckedChanged += new System.EventHandler(this.CHB_EnemyDataShow_CheckedChanged);
             // 
             // CHB_PlayerDataShow
@@ -359,6 +360,7 @@
             this.CHB_PlayerDataShow.TabIndex = 77;
             this.CHB_PlayerDataShow.Text = "Show chart Player";
             this.CHB_PlayerDataShow.UseVisualStyleBackColor = true;
+            this.CHB_PlayerDataShow.Visible = false;
             this.CHB_PlayerDataShow.CheckedChanged += new System.EventHandler(this.CHB_PlayerDataShow_CheckedChanged);
             // 
             // TB_CHF_Count
@@ -526,6 +528,7 @@
             this.Name = "ChartForm";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Chance changing";
+            this.Load += new System.EventHandler(this.ChartForm_Load);
             this.TLP_CHF_Main.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.CRT_ChanceChange)).EndInit();
             this.PNL_CHF_Inspector.ResumeLayout(false);

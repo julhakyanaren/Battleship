@@ -111,7 +111,6 @@ namespace Battleship.Forms
                 Design.FormSwitching(this, mf, 1, false, 8);
             }
         }
-
         private void CB_GameMode_SelectedIndexChanged(object sender, EventArgs e)
         {
             switch (CB_GameMode.SelectedIndex)
@@ -134,7 +133,6 @@ namespace Battleship.Forms
                     }
             }
         }
-
         private void CHB_MoreInfo_CheckedChanged(object sender, EventArgs e)
         {
             L_GameModeText.Visible = CHB_MoreInfo.Checked;

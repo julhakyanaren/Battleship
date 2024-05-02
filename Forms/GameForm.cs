@@ -1350,18 +1350,22 @@ namespace Battleship
         }
         void ResetMapFunctional()
         {
-            TSMI_RestartGame.Visible = false;
-            TSMI_StartBattleShip.Visible = true;
-            TSMI_StartBattleShip.Enabled = true;
+            PlayerData.IndependentChances.Clear();
+            EnemyData.IndependentChances.Clear();
+            Fight.ForbiddenCoords.Clear();
+            Fight.UnusedCoords.Clear();
+            Fight.SetUnusedCoord();
         }
-        public async void RestartGame()
-        {            
+        public async Task RestartGame()
+        {
+            TSMI_RestartGame.Enabled = false;
             await ResetMapVisual();
             ResetMapFunctional();
+            TSMI_Map.Enabled = true;
         }
-        private void TSMI_RestartGame_Click(object sender, EventArgs e)
+        private async void TSMI_RestartGame_Click(object sender, EventArgs e)
         {
-            RestartGame();
+           await RestartGame();
         }
     }
 }
