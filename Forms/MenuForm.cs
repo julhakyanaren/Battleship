@@ -28,42 +28,33 @@ namespace Battleship
                 DebugTools.AlreadyRun = true;
             }
             L_Info_Version.Text = $"Version: {DebugTools.Version}.{DebugTools.RunsCount}";
-            int x = L_Info_Version.Location.X;
+            int x = (PB_MF_MainLogo.Size.Width - L_Info_Version.Size.Width) / 2;
             int y = L_Info_Version.Location.Y;
-            x = (PB_MF_MainLogo.Size.Width - L_Info_Version.Size.Width) / 2;
             L_Info_Version.Location = new Point(x, y);
         }
         private void MenuForm_Load(object sender, EventArgs e)
         {
-            /**/
             Design.ChangeControlElementsForeColor(this, Design.DefaultForeColor, DefaultBackColor);
-            /**/
             SetElementsParameters();
         }
-        private void PB_Button_NewGame_Click(object sender, EventArgs e)
+        private void MenuForm_FormClosing(object sender, FormClosingEventArgs e)
         {
-            DialogResult dr = new DialogResult();
-            dr = MessageBox.Show("Start new game ?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            switch (dr)
+            if (Opacity == 1)
             {
-                case DialogResult.Yes:
-                    {
-                        PlayerOptions PO = new PlayerOptions();
-                        Design.FormSwitching(this, PO, 1, false, 8);
-                        break;
-                    }
-                case DialogResult.No:
-                    {
-                        break;
-                    }
+                if (MessageBox.Show("Are you sure you want to close program ?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
+                {
+                    Environment.Exit(0);
+                }
+                else
+                {
+                    e.Cancel = true;
+                }
             }
-        }
-
+        }        
         private void PB_Button_NewGame_MouseDown(object sender, MouseEventArgs e)
         {
             PB_Button_NewGame.Image = Properties.Resources.NewGame_MouseDown;
         }
-
         private void PB_Button_NewGame_MouseUp(object sender, MouseEventArgs e)
         {
             PB_Button_NewGame.Image = Properties.Resources.NewGame_MouseUp;
@@ -83,33 +74,50 @@ namespace Battleship
         private void PB_Button_About_MouseUp(object sender, MouseEventArgs e)
         {
             PB_Button_About.Image = Properties.Resources.About_MouseUp;
+        }        
+        private void PB_Button_NewGame_Click(object sender, EventArgs e)
+        {
+            DialogResult dr = new DialogResult();
+            dr = MessageBox.Show("Start new game in \"Classic Mode\" with default username?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            switch (dr)
+            {
+                case DialogResult.Yes:
+                    {
+                        Options.GameMode = "Classic";
+                        Options.GameModeInt = 1;
+                        GameForm GF = new GameForm();
+                        Design.FormSwitching(this, GF, 1, false, 8);                        
+                        break;
+                    }
+                case DialogResult.No:
+                    {
+                        PlayerOptions PO = new PlayerOptions();
+                        Design.FormSwitching(this, PO, 1, false, 8);
+                        break;
+                    }
+            }
+            //Unused 19
+        }
+        private void PB_Button_Options_Click(object sender, EventArgs e)
+        {
+            if (Options.V_Stage == 0/*3*/)
+            {
+                OptionsForm optionsForm = new OptionsForm();
+                Design.FormSwitching(this, optionsForm, 1, false, 8);
+            }
+            else
+            {
+                PlayerOptions PO = new PlayerOptions();
+                Design.FormSwitching(this, PO, 1, false, 8);
+            }
         }
         private void PB_Button_About_Click(object sender, EventArgs e)
         {
-            DialogResult = MessageBox.Show("Opern manual ?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            if (DialogResult == DialogResult.Yes)
+            if (MessageBox.Show("Open manual ?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question) == DialogResult.Yes)
             {
                 ManualInfo mi = new ManualInfo();
                 Design.OpenNewForm(mi, 1, 10);
             }
-        }
-
-        private void MenuForm_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (Opacity == 1)
-            {
-                DialogResult = MessageBox.Show("Are you sure you want to close programm ?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (DialogResult == DialogResult.Yes)
-                {
-                    Environment.Exit(0);
-                }
-            }
-        }
-
-        private void PB_Button_Options_Click(object sender, EventArgs e)
-        {
-            OptionsForm optionsForm = new OptionsForm();
-            Design.FormSwitching(this, optionsForm, 1, false, 8);
         }
     }
 }
