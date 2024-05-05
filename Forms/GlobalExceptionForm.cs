@@ -25,8 +25,7 @@ namespace Battleship.Forms
         }
         public void DisplayExceptionData(Exception ex)
         {
-            date = DateTime.UtcNow;
-            TB_GE_DateTime.Text = DateTime.UtcNow.ToString("dd.MM.yyyy HH.mm.ss");
+            TB_GE_DateTime.Text = date.ToString("dd.MM.yyyy HH.mm.ss") + " UTC (0)";
             TB_GE_Type.Text = ex.GetType().Name;
             TB_GE_StackTrace.Text = ex.StackTrace.ToString();
             TB_GE_Info.Text = ex.ToString();
