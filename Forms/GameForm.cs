@@ -1065,7 +1065,7 @@ namespace Battleship
                 }
                 count = HitChanceData.CurrentMap.Count;
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MessageBox.Show($"Message:\r\n{ex.Message}\r\n\r\nException:\r\n{ex}", "Exception Manager");
             }

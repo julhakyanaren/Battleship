@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleship.Forms;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -16,7 +17,15 @@ namespace Battleship
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new MenuForm());
+            GlobalExceptionForm gef = new GlobalExceptionForm();
+            try
+            {
+                Application.Run(new MenuForm());
+            }
+            catch(Exception globalEx)
+            {
+                gef.DisplayExceptionData(globalEx);
+            }
         }
     }
 }

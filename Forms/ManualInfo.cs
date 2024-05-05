@@ -115,7 +115,7 @@ namespace Battleship.Forms
                             ShowPDF();
                         }
                     }
-                    catch (Exception ex)
+                    catch (System.Exception ex)
                     {
                         MessageBox.Show($"Occurred due to a file download error. Code:{ex.HResult}");
                     }

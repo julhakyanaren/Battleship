@@ -86,7 +86,7 @@ namespace Battleship.Forms
                 count = EnemyData.IndependentChances.Count();
                 SetTextBoxValues();
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MessageBox.Show($"Exception Message: \r\n{ex.Message}\r\n\r\nException {ex}", "Exception found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
@@ -107,7 +107,7 @@ namespace Battleship.Forms
                     }
                 }
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MessageBox.Show($"Exception Message: \r\n{ex.Message}\r\n\r\nException {ex}", "Exception found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
@@ -121,7 +121,7 @@ namespace Battleship.Forms
                 Task enemyDraw = ChartDrawEnemy();
                 await Task.WhenAll(playerDraw, enemyDraw);
             }
-            catch (Exception ex)
+            catch (System.Exception ex)
             {
                 MessageBox.Show($"Exception Message: \r\n{ex.Message}\r\n\r\nException {ex}", "Exception found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
             }
