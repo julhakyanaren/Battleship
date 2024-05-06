@@ -1067,7 +1067,10 @@ namespace Battleship
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show($"Message:\r\n{ex.Message}\r\n\r\nException:\r\n{ex}", "Exception Manager");
+                Handlers.GlobalEX = ex;
+                Handlers.IsLocalEX = true;
+                GlobalExceptionForm gef = new GlobalExceptionForm();
+                gef.Show();
             }
         }
         void OpenHitChanceForm()

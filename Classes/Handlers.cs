@@ -31,5 +31,7 @@ namespace Battleship.Classes
             "Critical",
             "Blocked"
             };
+        public static Exception GlobalEX;
+        public static bool IsLocalEX = false;
     }
 }

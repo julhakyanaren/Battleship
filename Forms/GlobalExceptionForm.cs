@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleship.Classes;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -22,6 +23,7 @@ namespace Battleship.Forms
         private void GlobalExceptionForm_Load(object sender, EventArgs e)
         {
             date= DateTime.UtcNow;
+            DisplayExceptionData(Handlers.GlobalEX);
         }
         public void DisplayExceptionData(Exception ex)
         {
@@ -51,16 +53,27 @@ namespace Battleship.Forms
             lines[3] = $"Exception Message:\r\n\r\n{TB_GE_Message.Text}\r\n\r\n";
             lines[4] = $"Method Data\r\n\r\n";
             lines[5] = $"Class:\t{TB_GE_Class.Text}";
-            lines[6] = $"Method name:\t {TB_GE_Method.Text}";
-            lines[7] = $"Method access modifier:\t{TB_GE_Access.Text}";
-            lines[8] = $"Is Method Static\t{TB_GE_IsStatic}";
+            lines[6] = $"Method name:\t\t\t {TB_GE_Method.Text}";
+            lines[7] = $"Method access modifier:\t\t\t{TB_GE_Access.Text}";
+            lines[8] = $"Is Method Static\t\t\t{TB_GE_IsStatic}";
             isEmpty = false;
-            for (int l = 0; l < lines.Length; l++)
+            foreach (Control item in Controls)
             {
-                if (lines[l] != "")
+                if (item is TextBox textBox)
                 {
-                    isEmpty = true;
-                    break;
+                    if (textBox.Text == "")
+                    {
+                        isEmpty = true;
+                        break;
+                    }
+                    else
+                    {
+                        continue;
+                    }
+                }
+                else
+                {
+                    continue;
                 }
             }
             if (!isEmpty)
@@ -74,7 +87,6 @@ namespace Battleship.Forms
                 }
             }
         }
-
         private void BS_GE_SaveData_Click(object sender, EventArgs e)
         {
             bool recorded = true;

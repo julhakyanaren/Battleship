@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Battleship.Classes;
+using System;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
@@ -88,7 +89,10 @@ namespace Battleship.Forms
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show($"Exception Message: \r\n{ex.Message}\r\n\r\nException {ex}", "Exception found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Handlers.GlobalEX = ex;
+                Handlers.IsLocalEX = true;
+                GlobalExceptionForm gef = new GlobalExceptionForm();
+                gef.Show();
             }
         }
         async Task ChartDrawEnemy()
@@ -109,7 +113,10 @@ namespace Battleship.Forms
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show($"Exception Message: \r\n{ex.Message}\r\n\r\nException {ex}", "Exception found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Handlers.GlobalEX = ex;
+                Handlers.IsLocalEX = true;
+                GlobalExceptionForm gef = new GlobalExceptionForm();
+                gef.Show();
             }
         }
         async Task ChartDrawBoth()
@@ -123,7 +130,10 @@ namespace Battleship.Forms
             }
             catch (System.Exception ex)
             {
-                MessageBox.Show($"Exception Message: \r\n{ex.Message}\r\n\r\nException {ex}", "Exception found", MessageBoxButtons.OK, MessageBoxIcon.Stop);
+                Handlers.GlobalEX = ex;
+                Handlers.IsLocalEX = true;
+                GlobalExceptionForm gef = new GlobalExceptionForm();
+                gef.Show();
             }
         }
         async Task DrawChart()

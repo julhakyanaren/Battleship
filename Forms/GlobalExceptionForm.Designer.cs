@@ -150,7 +150,6 @@
             this.BS_GE_SaveData.TabIndex = 48;
             this.BS_GE_SaveData.Text = "Save Exception Data";
             this.BS_GE_SaveData.UseVisualStyleBackColor = true;
-            this.BS_GE_SaveData.Visible = false;
             this.BS_GE_SaveData.Click += new System.EventHandler(this.BS_GE_SaveData_Click);
             // 
             // TB_GE_DateTime
