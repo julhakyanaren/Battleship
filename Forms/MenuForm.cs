@@ -17,7 +17,22 @@ namespace Battleship
         public MenuForm()
         {
             InitializeComponent();
+            KeyDown += MenuForm_KeyDown;
         }
+        private void MenuForm_KeyDown(object sender, KeyEventArgs e)
+        {
+            keyBuffer.Add(e.KeyCode);
+            if (keyBuffer.Count > secretCode.Length)
+                keyBuffer.RemoveAt(0);
+            if (keyBuffer.SequenceEqual(secretCode))
+            {
+                OptionsForm optionsForm = new OptionsForm();
+                optionsForm.Show();
+            }
+        }
+
+        private readonly List<Keys> keyBuffer = new List<Keys>();
+        private readonly Keys[] secretCode = new Keys[] { Keys.I, Keys.D, Keys.D, Keys.Q, Keys.D };
         public void SetElementsParameters()
         {
             if (!DebugTools.AlreadyRun)
@@ -77,9 +92,7 @@ namespace Battleship
         }        
         private void PB_Button_NewGame_Click(object sender, EventArgs e)
         {
-            DialogResult dr = new DialogResult();
-            dr = MessageBox.Show("Start new game in \"Classic Mode\" with default username?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-            switch (dr)
+            switch (MessageBox.Show("Start new game in \"Classic Mode\" with default username?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
             {
                 case DialogResult.Yes:
                     {
@@ -89,27 +102,13 @@ namespace Battleship
                         Design.FormSwitching(this, GF, 1, false, 8);                        
                         break;
                     }
-                case DialogResult.No:
-                    {
-                        PlayerOptions PO = new PlayerOptions();
-                        Design.FormSwitching(this, PO, 1, false, 8);
-                        break;
-                    }
             }
             //Unused 19
         }
         private void PB_Button_Options_Click(object sender, EventArgs e)
         {
-            if (Options.V_Stage == 0/*3*/)
-            {
-                OptionsForm optionsForm = new OptionsForm();
-                Design.FormSwitching(this, optionsForm, 1, false, 8);
-            }
-            else
-            {
-                PlayerOptions PO = new PlayerOptions();
-                Design.FormSwitching(this, PO, 1, false, 8);
-            }
+            PlayerOptions PO = new PlayerOptions();
+            Design.FormSwitching(this, PO, 1, false, 8);
         }
         private void PB_Button_About_Click(object sender, EventArgs e)
         {
