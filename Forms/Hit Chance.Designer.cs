@@ -103,6 +103,8 @@
             this.GB_HC_ShipData = new System.Windows.Forms.GroupBox();
             this.L_Info_ShipsCurrentCount = new System.Windows.Forms.Label();
             this.L_Info_ShipsMaxCount = new System.Windows.Forms.Label();
+            this.MS_HC_Main = new System.Windows.Forms.MenuStrip();
+            this.TSMI_HC_ShowCalculation = new System.Windows.Forms.ToolStripMenuItem();
             this.TLP_HC_Map_Main.SuspendLayout();
             this.PNL_MC_Map_Letters.SuspendLayout();
             this.TLP_MC_Map_Letters.SuspendLayout();
@@ -115,6 +117,7 @@
             this.TLP_HC_Right.SuspendLayout();
             this.PNL_ShipData.SuspendLayout();
             this.GB_HC_ShipData.SuspendLayout();
+            this.MS_HC_Main.SuspendLayout();
             this.SuspendLayout();
             // 
             // TLP_HC_Map_Main
@@ -133,14 +136,14 @@
             this.TLP_HC_Map_Main.RowCount = 2;
             this.TLP_HC_Map_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 89F));
             this.TLP_HC_Map_Main.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 11F));
-            this.TLP_HC_Map_Main.Size = new System.Drawing.Size(425, 382);
+            this.TLP_HC_Map_Main.Size = new System.Drawing.Size(425, 384);
             this.TLP_HC_Map_Main.TabIndex = 1;
             // 
             // PNL_MC_Map_Empty
             // 
             this.PNL_MC_Map_Empty.BackColor = System.Drawing.Color.Black;
             this.PNL_MC_Map_Empty.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PNL_MC_Map_Empty.Location = new System.Drawing.Point(381, 342);
+            this.PNL_MC_Map_Empty.Location = new System.Drawing.Point(381, 344);
             this.PNL_MC_Map_Empty.Name = "PNL_MC_Map_Empty";
             this.PNL_MC_Map_Empty.Size = new System.Drawing.Size(41, 37);
             this.PNL_MC_Map_Empty.TabIndex = 3;
@@ -150,7 +153,7 @@
             this.PNL_MC_Map_Letters.BackColor = System.Drawing.Color.White;
             this.PNL_MC_Map_Letters.Controls.Add(this.TLP_MC_Map_Letters);
             this.PNL_MC_Map_Letters.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PNL_MC_Map_Letters.Location = new System.Drawing.Point(3, 342);
+            this.PNL_MC_Map_Letters.Location = new System.Drawing.Point(3, 344);
             this.PNL_MC_Map_Letters.Name = "PNL_MC_Map_Letters";
             this.PNL_MC_Map_Letters.Size = new System.Drawing.Size(372, 37);
             this.PNL_MC_Map_Letters.TabIndex = 2;
@@ -364,7 +367,7 @@
             this.PNL_MC_Map_Numbers.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PNL_MC_Map_Numbers.Location = new System.Drawing.Point(381, 3);
             this.PNL_MC_Map_Numbers.Name = "PNL_MC_Map_Numbers";
-            this.PNL_MC_Map_Numbers.Size = new System.Drawing.Size(41, 333);
+            this.PNL_MC_Map_Numbers.Size = new System.Drawing.Size(41, 335);
             this.PNL_MC_Map_Numbers.TabIndex = 1;
             // 
             // TLP_MC_Numbers
@@ -405,7 +408,7 @@
             this.TLP_MC_Numbers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TLP_MC_Numbers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TLP_MC_Numbers.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TLP_MC_Numbers.Size = new System.Drawing.Size(41, 333);
+            this.TLP_MC_Numbers.Size = new System.Drawing.Size(41, 335);
             this.TLP_MC_Numbers.TabIndex = 1;
             // 
             // BS_HC_Map_1
@@ -572,7 +575,7 @@
             this.BS_HC_Map_10.ForeColor = System.Drawing.Color.White;
             this.BS_HC_Map_10.Location = new System.Drawing.Point(3, 300);
             this.BS_HC_Map_10.Name = "BS_HC_Map_10";
-            this.BS_HC_Map_10.Size = new System.Drawing.Size(35, 30);
+            this.BS_HC_Map_10.Size = new System.Drawing.Size(35, 32);
             this.BS_HC_Map_10.TabIndex = 16;
             this.BS_HC_Map_10.Tag = "N9";
             this.BS_HC_Map_10.Text = "10";
@@ -585,7 +588,7 @@
             this.PNL_MC_Map_Schema.Dock = System.Windows.Forms.DockStyle.Fill;
             this.PNL_MC_Map_Schema.Location = new System.Drawing.Point(3, 3);
             this.PNL_MC_Map_Schema.Name = "PNL_MC_Map_Schema";
-            this.PNL_MC_Map_Schema.Size = new System.Drawing.Size(372, 333);
+            this.PNL_MC_Map_Schema.Size = new System.Drawing.Size(372, 335);
             this.PNL_MC_Map_Schema.TabIndex = 0;
             // 
             // TLP_HC_Schema
@@ -617,7 +620,7 @@
             this.TLP_HC_Schema.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TLP_HC_Schema.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
             this.TLP_HC_Schema.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 10F));
-            this.TLP_HC_Schema.Size = new System.Drawing.Size(372, 333);
+            this.TLP_HC_Schema.Size = new System.Drawing.Size(372, 335);
             this.TLP_HC_Schema.TabIndex = 1;
             // 
             // GB_HC_MapExample
@@ -628,7 +631,7 @@
             this.GB_HC_MapExample.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.GB_HC_MapExample.Location = new System.Drawing.Point(3, 3);
             this.GB_HC_MapExample.Name = "GB_HC_MapExample";
-            this.GB_HC_MapExample.Size = new System.Drawing.Size(431, 403);
+            this.GB_HC_MapExample.Size = new System.Drawing.Size(431, 405);
             this.GB_HC_MapExample.TabIndex = 12;
             this.GB_HC_MapExample.TabStop = false;
             this.GB_HC_MapExample.Text = "Map Example";
@@ -895,7 +898,7 @@
             this.GB_HC_ProbabilityData.Controls.Add(this.TB_HC_ShotEfficiency);
             this.GB_HC_ProbabilityData.Controls.Add(this.TB_HC_HitProbobility);
             this.GB_HC_ProbabilityData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.GB_HC_ProbabilityData.Location = new System.Drawing.Point(5, 3);
+            this.GB_HC_ProbabilityData.Location = new System.Drawing.Point(5, 33);
             this.GB_HC_ProbabilityData.Name = "GB_HC_ProbabilityData";
             this.GB_HC_ProbabilityData.Size = new System.Drawing.Size(270, 332);
             this.GB_HC_ProbabilityData.TabIndex = 15;
@@ -1104,7 +1107,7 @@
             this.TLP_HC_Right.Controls.Add(this.GB_HC_MapExample, 0, 0);
             this.TLP_HC_Right.Controls.Add(this.PNL_ShipData, 0, 1);
             this.TLP_HC_Right.Dock = System.Windows.Forms.DockStyle.Right;
-            this.TLP_HC_Right.Location = new System.Drawing.Point(281, 0);
+            this.TLP_HC_Right.Location = new System.Drawing.Point(281, 25);
             this.TLP_HC_Right.Name = "TLP_HC_Right";
             this.TLP_HC_Right.RowCount = 2;
             this.TLP_HC_Right.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 81.31635F));
@@ -1112,7 +1115,7 @@
             this.TLP_HC_Right.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TLP_HC_Right.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.TLP_HC_Right.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
-            this.TLP_HC_Right.Size = new System.Drawing.Size(437, 504);
+            this.TLP_HC_Right.Size = new System.Drawing.Size(437, 506);
             this.TLP_HC_Right.TabIndex = 16;
             // 
             // PNL_ShipData
@@ -1128,7 +1131,7 @@
             this.PNL_ShipData.Controls.Add(this.L_Info_HC_ChoosenCell);
             this.PNL_ShipData.Controls.Add(this.TB_HC_ChoosenCellData);
             this.PNL_ShipData.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.PNL_ShipData.Location = new System.Drawing.Point(3, 412);
+            this.PNL_ShipData.Location = new System.Drawing.Point(3, 414);
             this.PNL_ShipData.Name = "PNL_ShipData";
             this.PNL_ShipData.Size = new System.Drawing.Size(431, 89);
             this.PNL_ShipData.TabIndex = 13;
@@ -1187,7 +1190,7 @@
             this.GB_HC_ShipData.Controls.Add(this.TB_EnemyShips_Frigates);
             this.GB_HC_ShipData.Controls.Add(this.L_EnemyBattleships);
             this.GB_HC_ShipData.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
-            this.GB_HC_ShipData.Location = new System.Drawing.Point(5, 341);
+            this.GB_HC_ShipData.Location = new System.Drawing.Point(5, 371);
             this.GB_HC_ShipData.Name = "GB_HC_ShipData";
             this.GB_HC_ShipData.Size = new System.Drawing.Size(270, 160);
             this.GB_HC_ShipData.TabIndex = 17;
@@ -1214,19 +1217,41 @@
             this.L_Info_ShipsMaxCount.TabIndex = 61;
             this.L_Info_ShipsMaxCount.Text = "Max";
             // 
+            // MS_HC_Main
+            // 
+            this.MS_HC_Main.BackColor = System.Drawing.Color.Black;
+            this.MS_HC_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.TSMI_HC_ShowCalculation});
+            this.MS_HC_Main.Location = new System.Drawing.Point(0, 0);
+            this.MS_HC_Main.Name = "MS_HC_Main";
+            this.MS_HC_Main.Size = new System.Drawing.Size(718, 25);
+            this.MS_HC_Main.TabIndex = 0;
+            this.MS_HC_Main.Text = "menuStrip1";
+            // 
+            // TSMI_HC_ShowCalculation
+            // 
+            this.TSMI_HC_ShowCalculation.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
+            this.TSMI_HC_ShowCalculation.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
+            this.TSMI_HC_ShowCalculation.Name = "TSMI_HC_ShowCalculation";
+            this.TSMI_HC_ShowCalculation.Size = new System.Drawing.Size(155, 21);
+            this.TSMI_HC_ShowCalculation.Text = "Show probability calculation";
+            this.TSMI_HC_ShowCalculation.Click += new System.EventHandler(this.TSMI_HC_ShowCalculation_Click);
+            // 
             // HitChance
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.Black;
-            this.ClientSize = new System.Drawing.Size(718, 504);
+            this.ClientSize = new System.Drawing.Size(718, 531);
             this.Controls.Add(this.GB_HC_ShipData);
             this.Controls.Add(this.TLP_HC_Right);
             this.Controls.Add(this.GB_HC_ProbabilityData);
+            this.Controls.Add(this.MS_HC_Main);
             this.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
             this.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(188)))), ((int)(((byte)(222)))), ((int)(((byte)(233)))));
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedSingle;
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MainMenuStrip = this.MS_HC_Main;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.MinimizeBox = false;
             this.Name = "HitChance";
@@ -1249,7 +1274,10 @@
             this.PNL_ShipData.PerformLayout();
             this.GB_HC_ShipData.ResumeLayout(false);
             this.GB_HC_ShipData.PerformLayout();
+            this.MS_HC_Main.ResumeLayout(false);
+            this.MS_HC_Main.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -1329,5 +1357,7 @@
         private System.Windows.Forms.CheckBox CHB_ShowMoveNumber;
         private System.Windows.Forms.Button BS_HC_IndependentChances_Update;
         private System.Windows.Forms.Button BS_HC_ShowChart;
+        private System.Windows.Forms.MenuStrip MS_HC_Main;
+        private System.Windows.Forms.ToolStripMenuItem TSMI_HC_ShowCalculation;
     }
 }

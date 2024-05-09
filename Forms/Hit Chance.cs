@@ -16,6 +16,8 @@ namespace Battleship.Forms
         Position pos = new Position();
         Support sp = new Support();
 
+
+
         private string shipType = null;
         private string cellCoord = null;
         private double[] probobilityArray = new double[100];
@@ -601,6 +603,12 @@ namespace Battleship.Forms
                 ChartForm chrtf = new ChartForm();
                 Design.OpenNewForm(chrtf, 1, 6);
             }
+        }
+
+        private void TSMI_HC_ShowCalculation_Click(object sender, EventArgs e)
+        {
+            CalculationForm cf = new CalculationForm();
+            cf.Show();
         }
     }
 }

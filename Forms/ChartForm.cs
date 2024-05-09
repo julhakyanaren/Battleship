@@ -1,6 +1,7 @@
 ﻿using Battleship.Classes;
 using System;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Security.Cryptography;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -18,6 +19,8 @@ namespace Battleship.Forms
         bool playerChartShow = true;
         bool enemyChartShow = false;
         bool bothChartShow = false;
+
+        bool canDraw = true;
 
         int choosenSide = 0;
         int choosenMove = 0;
@@ -45,19 +48,26 @@ namespace Battleship.Forms
         }
         async Task ChartClear()
         {
-            await Task.Delay(10);
-            CRT_ChanceChange.Series[0].Points.Clear();
-            CRT_ChanceChange.Series[1].Points.Clear();
-            await Task.Delay(10);
-            TB_CHF_MaxValue.Clear();
-            await Task.Delay(10);
-            TB_CHF_MinValue.Clear();
-            await Task.Delay(10);
-            TB_CHF_AverageValue.Clear();
-            await Task.Delay(10);
-            TB_CHF_Count.Clear();
-            await Task.Delay(10);
-            TB_CHF_IndependentChances.Clear();
+            if (canDraw)
+            {
+                await Task.Delay(10);
+                CRT_ChanceChange.Series[0].Points.Clear();
+                CRT_ChanceChange.Series[1].Points.Clear();
+                await Task.Delay(10);
+                TB_CHF_MaxValue.Clear();
+                await Task.Delay(10);
+                TB_CHF_MinValue.Clear();
+                await Task.Delay(10);
+                TB_CHF_AverageValue.Clear();
+                await Task.Delay(10);
+                TB_CHF_Count.Clear();
+                await Task.Delay(10);
+                TB_CHF_IndependentChances.Clear();
+            }
+            else
+            {
+                MessageBox.Show("Chart is empty!", "Data Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
         async Task ChartDrawPlayer()
         {
@@ -138,17 +148,24 @@ namespace Battleship.Forms
         }
         async Task DrawChart()
         {
-            if (bothChartShow)
+            if (canDraw)
             {
-                await ChartDrawBoth();
+                if (bothChartShow)
+                {
+                    await ChartDrawBoth();
+                }
+                else if (playerChartShow)
+                {
+                    await ChartDrawPlayer();
+                }
+                else if (enemyChartShow)
+                {
+                    await ChartDrawEnemy();
+                }
             }
-            else if (playerChartShow)
+            else
             {
-                await ChartDrawPlayer();
-            }
-            else if (enemyChartShow)
-            {
-                await ChartDrawEnemy();
+                MessageBox.Show("Can't found any data", "Data Manager", MessageBoxButtons.OK, MessageBoxIcon.Error);
             }
         }
         private async void BS_CHF_ChartDraw_Click(object sender, EventArgs e)
@@ -229,6 +246,11 @@ namespace Battleship.Forms
                 if (MessageBox.Show("No data available for chart\r\nDo you want to stay in this interface?", "Game Manager", MessageBoxButtons.YesNo, MessageBoxIcon.Question) != DialogResult.Yes)
                 {
                     Dispose();
+                }
+                else
+                {
+                    BS_CHF_ChartUpdate.Visible = false;
+                    canDraw = false;
                 }
             }
         }
