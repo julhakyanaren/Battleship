@@ -53,7 +53,7 @@
             this.BS_CF_Close.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BS_CF_Close.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_CF_Close.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_CF_Close.ForeColor = System.Drawing.Color.Gold;
+            this.BS_CF_Close.ForeColor = System.Drawing.Color.Aqua;
             this.BS_CF_Close.Location = new System.Drawing.Point(294, 165);
             this.BS_CF_Close.Name = "BS_CF_Close";
             this.BS_CF_Close.Size = new System.Drawing.Size(84, 25);
@@ -72,7 +72,7 @@
             this.TB_CF_Formula.BackColor = System.Drawing.Color.Black;
             this.TB_CF_Formula.BorderStyle = System.Windows.Forms.BorderStyle.None;
             this.TB_CF_Formula.Font = new System.Drawing.Font("Albion", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.TB_CF_Formula.ForeColor = System.Drawing.Color.Gold;
+            this.TB_CF_Formula.ForeColor = System.Drawing.Color.Aqua;
             this.TB_CF_Formula.Location = new System.Drawing.Point(12, 24);
             this.TB_CF_Formula.Multiline = true;
             this.TB_CF_Formula.Name = "TB_CF_Formula";
@@ -96,7 +96,7 @@
             // 
             this.TB_CF_MaxDecks.BackColor = System.Drawing.Color.Black;
             this.TB_CF_MaxDecks.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.TB_CF_MaxDecks.ForeColor = System.Drawing.Color.Gold;
+            this.TB_CF_MaxDecks.ForeColor = System.Drawing.Color.Aqua;
             this.TB_CF_MaxDecks.Location = new System.Drawing.Point(130, 66);
             this.TB_CF_MaxDecks.Name = "TB_CF_MaxDecks";
             this.TB_CF_MaxDecks.ReadOnly = true;
@@ -139,7 +139,7 @@
             // 
             this.TB_CF_HitedDecks.BackColor = System.Drawing.Color.Black;
             this.TB_CF_HitedDecks.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.TB_CF_HitedDecks.ForeColor = System.Drawing.Color.Gold;
+            this.TB_CF_HitedDecks.ForeColor = System.Drawing.Color.Aqua;
             this.TB_CF_HitedDecks.Location = new System.Drawing.Point(130, 94);
             this.TB_CF_HitedDecks.Name = "TB_CF_HitedDecks";
             this.TB_CF_HitedDecks.ReadOnly = true;
@@ -152,7 +152,7 @@
             // 
             this.TB_CF_Chance.BackColor = System.Drawing.Color.Black;
             this.TB_CF_Chance.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.TB_CF_Chance.ForeColor = System.Drawing.Color.Gold;
+            this.TB_CF_Chance.ForeColor = System.Drawing.Color.Aqua;
             this.TB_CF_Chance.Location = new System.Drawing.Point(308, 94);
             this.TB_CF_Chance.Name = "TB_CF_Chance";
             this.TB_CF_Chance.ReadOnly = true;
@@ -165,7 +165,7 @@
             // 
             this.TB_CF_Undiscovered.BackColor = System.Drawing.Color.Black;
             this.TB_CF_Undiscovered.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.TB_CF_Undiscovered.ForeColor = System.Drawing.Color.Gold;
+            this.TB_CF_Undiscovered.ForeColor = System.Drawing.Color.Aqua;
             this.TB_CF_Undiscovered.Location = new System.Drawing.Point(308, 66);
             this.TB_CF_Undiscovered.Name = "TB_CF_Undiscovered";
             this.TB_CF_Undiscovered.ReadOnly = true;
@@ -178,7 +178,7 @@
             // 
             this.CB_DataSelector.BackColor = System.Drawing.Color.Black;
             this.CB_DataSelector.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.CB_DataSelector.ForeColor = System.Drawing.Color.Gold;
+            this.CB_DataSelector.ForeColor = System.Drawing.Color.Aqua;
             this.CB_DataSelector.FormattingEnabled = true;
             this.CB_DataSelector.Items.AddRange(new object[] {
             "Player Map",
@@ -205,7 +205,7 @@
             this.BS_CF_Update.Cursor = System.Windows.Forms.Cursors.Hand;
             this.BS_CF_Update.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.BS_CF_Update.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(204)));
-            this.BS_CF_Update.ForeColor = System.Drawing.Color.Gold;
+            this.BS_CF_Update.ForeColor = System.Drawing.Color.Aqua;
             this.BS_CF_Update.Location = new System.Drawing.Point(204, 165);
             this.BS_CF_Update.Name = "BS_CF_Update";
             this.BS_CF_Update.Size = new System.Drawing.Size(84, 25);
@@ -227,7 +227,7 @@
             // NUD_DecimalPlaces
             // 
             this.NUD_DecimalPlaces.BackColor = System.Drawing.Color.Black;
-            this.NUD_DecimalPlaces.ForeColor = System.Drawing.Color.Gold;
+            this.NUD_DecimalPlaces.ForeColor = System.Drawing.Color.Aqua;
             this.NUD_DecimalPlaces.Location = new System.Drawing.Point(316, 137);
             this.NUD_DecimalPlaces.Maximum = new decimal(new int[] {
             5,
@@ -262,7 +262,7 @@
             this.Controls.Add(this.TB_CF_Formula);
             this.Controls.Add(this.BS_CF_Close);
             this.Font = new System.Drawing.Font("Franklin Gothic Medium Cond", 9.75F);
-            this.ForeColor = System.Drawing.Color.Gold;
+            this.ForeColor = System.Drawing.Color.Aqua;
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.None;
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "CalculationForm";

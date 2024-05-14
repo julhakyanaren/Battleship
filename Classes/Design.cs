@@ -25,7 +25,6 @@ namespace Battleship
             Color.FromArgb(255, 128, 128)
         };
         public static Color[] BorderColor = { Color.Orange, Color.Black };
-
         public static Color[] MouseOverColorDefault =
         {
             Color.White,
@@ -33,7 +32,6 @@ namespace Battleship
         };
 
         public static Color[] ShipsColor = { Color.Silver, Color.DarkGray, Color.Gray, Color.DimGray };
-
         public static void ChangeControlElementsForeColor(Control parentControl, Color selectedForeColor, Color selectedBackColor)
         {
             foreach (Control control in parentControl.Controls)

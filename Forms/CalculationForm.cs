@@ -22,9 +22,21 @@ namespace Battleship.Forms
         {
             InitializeComponent();
         }
+        private void CB_DataSelector_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            dataSource = CB_DataSelector.SelectedIndex;
+        }
+        private void NUD_DecimalPlaces_ValueChanged(object sender, EventArgs e)
+        {
+            decimalPlaces = Convert.ToInt32(NUD_DecimalPlaces.Value);
+        }
+        void UpdateTextValue()
+        {
+            TB_CF_Formula.Text = $"({maxDecks}     -     {hited})     /     {white}     =     " + chance.ToString($"F{decimalPlaces}") + "%";
+        }
         void UpdateData()
-        {            
-            TB_CF_MaxDecks.Text = "20";
+        {
+            TB_CF_MaxDecks.Text =  $"{maxDecks}";
             switch (dataSource)
             {
                 case 0:
@@ -50,27 +62,11 @@ namespace Battleship.Forms
             chance *= 100;
             TB_CF_Chance.Text = chance.ToString($"F{decimalPlaces}")+ "%";
             UpdateTextValue();
-
-        }
-        void UpdateTextValue()
-        {
-            TB_CF_Formula.Text = $"({maxDecks}     -     {hited})     /     {white}     =     " + chance.ToString($"F{decimalPlaces}") + "%";
-        }
+        }        
         private void CalculationForm_Load(object sender, EventArgs e)
         {
             UpdateData();
-        }
-
-        private void CB_DataSelector_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            dataSource = CB_DataSelector.SelectedIndex;
-        }
-
-        private void NUD_DecimalPlaces_ValueChanged(object sender, EventArgs e)
-        {
-            decimalPlaces = Convert.ToInt32(NUD_DecimalPlaces.Value);
-        }
-
+        }        
         private void BS_CF_Update_Click(object sender, EventArgs e)
         {
             UpdateData();
