@@ -34,7 +34,7 @@ namespace Battleship.Classes
                             Options.V_StageName = stage;
                         }
                         DebugTools.Version = $"{Options.V_StageName} ";
-                        for (int p = 1; p < parts.Length-1; p++)
+                        for (int p = 1; p < parts.Length - 1; p++)
                         {
                             DebugTools.Version += parts[p];
                             if (p < parts.Length - 2)

@@ -1,14 +1,11 @@
-﻿using Battleship.Classes;
-using Battleship.Forms;
+﻿using Battleship.Forms;
 using System;
 using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Reflection;
+using Battleship.Classes;
 
 namespace Battleship
 {
@@ -35,6 +32,8 @@ namespace Battleship
         private readonly Keys[] secretCode = new Keys[] { Keys.I, Keys.D, Keys.D, Keys.Q, Keys.D };
         public void SetElementsParameters()
         {
+            Assembly assembly = Assembly.GetExecutingAssembly();
+            Options.AppVersion = assembly.GetName().Version.ToString();
             if (!DebugTools.AlreadyRun)
             {
                 FileManager.ReadAssembyData();
@@ -42,7 +41,8 @@ namespace Battleship
                 FileManager.WriteAssemblyData();
                 DebugTools.AlreadyRun = true;
             }
-            L_Info_Version.Text = $"Version: {DebugTools.Version}.{DebugTools.RunsCount}";
+            //L_Info_Version.Text = $"Version: {DebugTools.Version}.{DebugTools.RunsCount}";
+            L_Info_Version.Text = $"Version: {Options.AppVersion}";
             int x = (PB_MF_MainLogo.Size.Width - L_Info_Version.Size.Width) / 2;
             int y = L_Info_Version.Location.Y;
             L_Info_Version.Location = new Point(x, y);

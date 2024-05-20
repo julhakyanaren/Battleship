@@ -15,6 +15,7 @@ namespace Battleship
         public static int Difficulty = 0;
         public static string GameMode = "Education";
         public static int GameModeInt = 0;
+        public static string AppVersion;
 
         public static string[] Stages = { "InDev", "Alpha", "Beta", "Pre-Release", "Release", "Debug" };
         public static int V_Stage;
