@@ -110,7 +110,7 @@ namespace Battleship.Forms
                     }
                     catch
                     {
-                        MessageBox.Show($"Error Code: E47M1L5\r\nAssembly convertation error", $"{Handlers.Manager[1]}", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        /*MessageBox.Show($"Error Code: E47M1L5\r\nAssembly convertation error", $"{Handlers.Manager[1]}", MessageBoxButtons.OK, MessageBoxIcon.Error)*/;
                     }
                 }
             }

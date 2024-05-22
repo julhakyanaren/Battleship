@@ -471,7 +471,7 @@ namespace Battleship.Forms
         private void TRB_DecimalPlaces_Scroll(object sender, EventArgs e)
         {
             HitChanceData.DecimalPlacesCount = TRB_DecimalPlaces.Value;
-            L_Info_DecimalPlaces.Text = $"L_Info_DecimalPlaces:     {HitChanceData.DecimalPlacesCount}";
+            L_Info_DecimalPlaces.Text = $"Decimal places:     {HitChanceData.DecimalPlacesCount}";
         }
         void SetHitProbobilityTextColor(double chance, TextBox probobility_TB, TextBox efficiency_TB)
         {
