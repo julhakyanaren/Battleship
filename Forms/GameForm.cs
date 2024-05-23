@@ -137,7 +137,7 @@ namespace Battleship
             {
                 Fight.SetUnusedCoord();
             }
-            Text = $"Battleship  {DebugTools.Version}.{DebugTools.RunsCount}";
+            //Text = $"Battleship  {DebugTools.Version}.{DebugTools.RunsCount}";
         }
         private void GameForm_FormClosing(object sender, FormClosingEventArgs e)
         {
