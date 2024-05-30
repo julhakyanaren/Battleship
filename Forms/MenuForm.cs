@@ -92,7 +92,7 @@ namespace Battleship
         }        
         private void PB_Button_NewGame_Click(object sender, EventArgs e)
         {
-            switch (MessageBox.Show("Start new game in \"Classic Mode\" with default username?", "Battleship", MessageBoxButtons.YesNo, MessageBoxIcon.Question))
+            switch (MessageBox.Show("Start new game in \"Classic Mode\" with default username?", "Battleship", MessageBoxButtons.YesNoCancel, MessageBoxIcon.Question))
             {
                 case DialogResult.Yes:
                     {
@@ -100,6 +100,12 @@ namespace Battleship
                         Options.GameModeInt = 1;
                         GameForm GF = new GameForm();
                         Design.FormSwitching(this, GF, 1, false, 8);                        
+                        break;
+                    }
+                case DialogResult.No:
+                    {
+                        PlayerOptions PO = new PlayerOptions();
+                        Design.FormSwitching(this, PO, 1, false, 8);
                         break;
                     }
             }
